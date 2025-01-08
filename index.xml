@@ -7,7 +7,624 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
-        <lastBuildDate>Wed, 08 Jan 2025 18:08:42 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 08 Jan 2025 18:09:42 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>机器人学</title>
+        <link>https://NomadJoeviolet.github.io/p/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6/</link>
+        <pubDate>Wed, 08 Jan 2025 18:09:42 +0800</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/p/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6/</guid>
+        <description>&lt;p&gt;【台大机器人学之运动学——林沛群（含课件+书籍）】https://www.bilibili.com/video/BV1v4411H7ez?vd_source=5a0790755035f26a67935abfbfcdfd5b&lt;/p&gt;
+&lt;h2 id=&#34;目录&#34;&gt;目录
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;[[#第一章 Rotation Matrix旋转矩阵|第一章 Rotation Matrix旋转矩阵]]
+&lt;ul&gt;
+&lt;li&gt;[[#第一章 Rotation Matrix旋转矩阵#旋转矩阵|旋转矩阵]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#第二章 Rotation Matrix 与转角与Transformation Matrix|第二章 Rotation Matrix 与转角与Transformation Matrix]]
+&lt;ul&gt;
+&lt;li&gt;[[#第二章 Rotation Matrix 与转角与Transformation Matrix#Fixed Angles|Fixed Angles]]
+&lt;ul&gt;
+&lt;li&gt;[[#Fixed Angles#1.由angles推算R|1.由angles推算R]]&lt;/li&gt;
+&lt;li&gt;[[#Fixed Angles#2.由R推算angles|2.由R推算angles]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#第二章 Rotation Matrix 与转角与Transformation Matrix#Euler Angles|Euler Angles]]
+&lt;ul&gt;
+&lt;li&gt;[[#Euler Angles#Z-Y-X Euler Angles .由angles推算R|Z-Y-X Euler Angles .由angles推算R]]&lt;/li&gt;
+&lt;li&gt;[[#Euler Angles#Z-Y-Z Euler Angles .由angles推算R|Z-Y-Z Euler Angles .由angles推算R]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#第二章 Rotation Matrix 与转角与Transformation Matrix#两者的旋转|两者的旋转]]&lt;/li&gt;
+&lt;li&gt;[[#第二章 Rotation Matrix 与转角与Transformation Matrix#Rotation Matrix与转角小结|Rotation Matrix与转角小结]]
+- [[#Z-Y-Z Euler Angles .由angles推算R#Angle-axis表达法|Angle-axis表达法]]
+- [[#Z-Y-Z Euler Angles .由angles推算R#Quaternion表达法|Quaternion表达法]]&lt;/li&gt;
+&lt;li&gt;[[#第二章 Rotation Matrix 与转角与Transformation Matrix#Transformation Matrix|Transformation Matrix]]
+&lt;ul&gt;
+&lt;li&gt;[[#Transformation Matrix#Mapping|Mapping]]&lt;/li&gt;
+&lt;li&gt;[[#Transformation Matrix#Operator|Operator]]&lt;/li&gt;
+&lt;li&gt;[[#Transformation Matrix#Transformation Matrix用法小结|Transformation Matrix用法小结]]&lt;/li&gt;
+&lt;li&gt;[[#Transformation Matrix#连续运算及其法则|连续运算及其法则]]&lt;/li&gt;
+&lt;li&gt;[[#Transformation Matrix#反矩阵|反矩阵]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#第三章 机械手臂的顺向运动学|第三章 机械手臂的顺向运动学]]
+&lt;ul&gt;
+&lt;li&gt;[[#第三章 机械手臂的顺向运动学#运动学与动力学|运动学与动力学]]&lt;/li&gt;
+&lt;li&gt;[[#第三章 机械手臂的顺向运动学#机械臂|机械臂]]
+&lt;ul&gt;
+&lt;li&gt;[[#机械臂#几何描述|几何描述]]&lt;/li&gt;
+&lt;li&gt;[[#机械臂#杆件上建立frame|杆件上建立frame]]&lt;/li&gt;
+&lt;li&gt;[[#机械臂#DH 表达法|DH 表达法]]&lt;/li&gt;
+&lt;li&gt;[[#机械臂#Link-Transformation|Link-Transformation]]&lt;/li&gt;
+&lt;li&gt;[[#机械臂#Example|Example]]
+&lt;ul&gt;
+&lt;li&gt;[[#Example#应用的例子|应用的例子]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#机械臂#DH表达方式小结|DH表达方式小结]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#第四章 逆向运动学|第四章 逆向运动学]]
+&lt;ul&gt;
+&lt;li&gt;[[#第四章 逆向运动学#求解的概念|求解的概念]]&lt;/li&gt;
+&lt;li&gt;[[#第四章 逆向运动学#多解问题|多解问题]]
+&lt;ul&gt;
+&lt;li&gt;[[#多解问题#Example:PUMA的多解引言|Example:PUMA的多解引言]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#第四章 逆向运动学#求解方法|求解方法]]
+&lt;ul&gt;
+&lt;li&gt;[[#求解方法#求解例题的方法|求解例题的方法]]
+&lt;ul&gt;
+&lt;li&gt;[[#求解例题的方法#几何解法|几何解法]]&lt;/li&gt;
+&lt;li&gt;[[#求解例题的方法#代数解法|代数解法]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#求解方法#Pieper&amp;rsquo;s Solution|Pieper&amp;rsquo;s Solution]]
+&lt;ul&gt;
+&lt;li&gt;[[#Pieper&amp;rsquo;s Solution#位置|位置]]&lt;/li&gt;
+&lt;li&gt;[[#Pieper&amp;rsquo;s Solution#姿态|姿态]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#第四章 逆向运动学#物件取放任务|物件取放任务]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#第五章 轨迹规划|第五章 轨迹规划]]
+&lt;ul&gt;
+&lt;li&gt;[[#第五章 轨迹规划#Joint-space下的轨迹规划|Joint-space下的轨迹规划]]&lt;/li&gt;
+&lt;li&gt;[[#第五章 轨迹规划#Cartesian-space的轨迹规划|Cartesian-space的轨迹规划]]&lt;/li&gt;
+&lt;li&gt;[[#第五章 轨迹规划#Cubic-Polynominals|Cubic-Polynominals]]&lt;/li&gt;
+&lt;li&gt;[[#第五章 轨迹规划#多端Cubic-Polynommials|多端Cubic-Polynommials]]&lt;/li&gt;
+&lt;li&gt;[[#第五章 轨迹规划#General-Cubic-Polynomials|General-Cubic-Polynomials]]
+- [[#Pieper&amp;rsquo;s Solution#关于4n个方程式的生成|关于4n个方程式的生成]]
+&lt;ul&gt;
+&lt;li&gt;[[#General-Cubic-Polynomials#路径规划示例|路径规划示例]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#第六章 Lineaar Function with Parabolic Blends|第六章 Lineaar Function with Parabolic Blends]]
+&lt;ul&gt;
+&lt;li&gt;[[#第六章 Lineaar Function with Parabolic Blends#Lineaar Function with Parabolic Blends|Lineaar Function with Parabolic Blends]]&lt;/li&gt;
+&lt;li&gt;[[#第六章 Lineaar Function with Parabolic Blends#多段Lineaar Function with Parabolic Blends|多段Lineaar Function with Parabolic Blends]]
+&lt;ul&gt;
+&lt;li&gt;[[#多段Lineaar Function with Parabolic Blends#中间段的轨迹设定|中间段的轨迹设定]]&lt;/li&gt;
+&lt;li&gt;[[#多段Lineaar Function with Parabolic Blends#头尾段的设计|头尾段的设计]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#第六章 Lineaar Function with Parabolic Blends#Lineaar Function with Parabolic Blends注解|Lineaar Function with Parabolic Blends注解]]
+&lt;ul&gt;
+&lt;li&gt;[[#Lineaar Function with Parabolic Blends注解#关于加速度|关于加速度]]&lt;/li&gt;
+&lt;li&gt;[[#Lineaar Function with Parabolic Blends注解#关于Lineaar Function with Parabolic Blends中为经过via-point的问题|关于Lineaar Function with Parabolic Blends中为经过via-point的问题]]&lt;/li&gt;
+&lt;li&gt;[[#Lineaar Function with Parabolic Blends注解#求解规划轨迹的某一时刻的位置|求解规划轨迹的某一时刻的位置]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#第六章 Lineaar Function with Parabolic Blends#Cartesian-space下轨迹几何极限|Cartesian-space下轨迹几何极限]]&lt;/li&gt;
+&lt;li&gt;[[#第六章 Lineaar Function with Parabolic Blends#Revisit the RRR Manipulator|Revisit the RRR Manipulator]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#第七章 机械臂轨迹规划实例|第七章 机械臂轨迹规划实例]]
+&lt;ul&gt;
+&lt;li&gt;[[#第七章 机械臂轨迹规划实例#Capstone example|Capstone example]]
+&lt;ul&gt;
+&lt;li&gt;[[#Capstone example#PUMA机械臂|PUMA机械臂]]&lt;/li&gt;
+&lt;li&gt;[[#Capstone example#设定|设定]]&lt;/li&gt;
+&lt;li&gt;[[#Capstone example#轨迹规划：方法：Lineaar Function with Parabolic Blends|轨迹规划：方法：Lineaar Function with Parabolic Blends]]
+&lt;ul&gt;
+&lt;li&gt;[[#轨迹规划：方法：Lineaar Function with Parabolic Blends#在Cartesian-space下的规划|在Cartesian-space下的规划]]
+&lt;ul&gt;
+&lt;li&gt;[[#在Cartesian-space下的规划#位置|位置]]&lt;/li&gt;
+&lt;li&gt;[[#在Cartesian-space下的规划#姿态|姿态]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#轨迹规划：方法：Lineaar Function with Parabolic Blends#在Joint-space下的规划|在Joint-space下的规划]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#第七章 机械臂轨迹规划实例#注解|注解]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;[[#视频的勘误|视频的勘误]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;第一章-rotation-matrix旋转矩阵&#34;&gt;第一章 Rotation Matrix旋转矩阵
+&lt;/h2&gt;&lt;h3 id=&#34;旋转矩阵&#34;&gt;旋转矩阵
+&lt;/h3&gt;&lt;p&gt;Rotation Matrix旋转矩阵的三个作用
+![[Pasted image 20241105142701.png]]&lt;/p&gt;
+&lt;p&gt;旋转作用
+![[Pasted image 20241105143357.png]]&lt;/p&gt;
+&lt;p&gt;旋转矩阵与转角
+![[Pasted image 20241105143756.png]]&lt;/p&gt;
+&lt;p&gt;拆解成【三次旋转连乘】需要注意
+1.多次旋转需要明确先后顺序
+2.&lt;strong&gt;旋转转轴&lt;/strong&gt;也需要明确定义，是对【固定不动】的旋转轴旋转，还是对【旋转的frame当下所在】的旋转轴旋转&lt;/p&gt;
+&lt;p&gt;两个拆解方式
+1.对方向【固定不动】的旋转轴旋转：Fixed angles
+2.对【旋转的frame当下所在】的旋转轴旋转：Euler angles&lt;/p&gt;
+&lt;h2 id=&#34;第二章-rotation-matrix-与转角与transformation-matrix&#34;&gt;第二章 Rotation Matrix 与转角与Transformation Matrix
+&lt;/h2&gt;&lt;p&gt;Fixed Angles，Euler Angles，mapping，operator&lt;/p&gt;
+&lt;h3 id=&#34;fixed-angles&#34;&gt;Fixed Angles
+&lt;/h3&gt;&lt;h4 id=&#34;1由angles推算r&#34;&gt;1.由angles推算R
+&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241105144652.png]]
+![[Pasted image 20241105145127.png]]
+此处是先转X，再转Y，最后转Z&lt;/p&gt;
+&lt;p&gt;旋转示例
+![[Pasted image 20241105150243.png]]
+![[Pasted image 20241106084710.png]]&lt;/p&gt;
+&lt;p&gt;转动顺序不同，最后的矩阵也不同&lt;/p&gt;
+&lt;h4 id=&#34;2由r推算angles&#34;&gt;2.由R推算angles
+&lt;/h4&gt;&lt;p&gt;已知R，推算角度angles，如何让旋转到R的姿态
+![[Pasted image 20241106085113.png]]&lt;/p&gt;
+&lt;p&gt;角度不是90度时，有唯一解
+![[Pasted image 20241106085420.png]]&lt;/p&gt;
+&lt;p&gt;注意，使用的时 &lt;strong&gt;Atan2 函数&lt;/strong&gt;，Atan2函数能判别角度所在象限，解出的角度范围为-180-+180度
+![[Pasted image 20241106085952.png]]&lt;/p&gt;
+&lt;p&gt;角度是90度时，有很多解（多解）
+这是其中的一组特解，取$\alpha=0$，方便后续计算&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241106090307.png]]&lt;/p&gt;
+&lt;h3 id=&#34;euler-angles&#34;&gt;Euler Angles
+&lt;/h3&gt;&lt;p&gt;以被转动的系统的转轴去做旋转&lt;/p&gt;
+&lt;h4 id=&#34;z-y-x-euler-angles-由angles推算r&#34;&gt;Z-Y-X Euler Angles .由angles推算R
+&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241106091748.png]]
+![[Pasted image 20241106092619.png]]
+![[Pasted image 20241106093611.png]]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;将欧拉角下的旋转可以看作Fixed angles的转动&lt;/strong&gt;
+&lt;strong&gt;不同在于，欧拉角转动顺序为Z-Y-X，Fixed Angles转动顺序为X-Y-Z&lt;/strong&gt;
+![[Pasted image 20241106100822.png]]
+欧拉角的正转=Fixed Angles的反转&lt;/p&gt;
+&lt;p&gt;欧拉角旋转也与顺序有关
+![[Pasted image 20241106094202.png]]&lt;/p&gt;
+&lt;h4 id=&#34;z-y-z-euler-angles-由angles推算r&#34;&gt;Z-Y-Z Euler Angles .由angles推算R
+&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241205151139.png]]
+反算的公式，注意多解的情况
+![[Pasted image 20241205151227.png]]
+![[Pasted image 20241205151403.png]]
+Z-Y-Z的欧拉角旋转，同样可以做到Z-Y-X欧拉角旋转同样的效果
+例子
+![[Pasted image 20241205151647.png]]&lt;/p&gt;
+&lt;h3 id=&#34;两者的旋转&#34;&gt;两者的旋转
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/zhuoqingjoking97298/article/details/122259409&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;旋转矩阵与欧拉角之间的转换_旋转矩阵转欧拉角-CSDN博客&lt;/a&gt;
+外旋，外在旋转
+![[Pasted image 20241106225626.png]]&lt;/p&gt;
+&lt;p&gt;内旋，内在旋转
+![[Pasted image 20241106225555.png]]&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241106225654.png]]&lt;/p&gt;
+&lt;h3 id=&#34;rotation-matrix与转角小结&#34;&gt;Rotation Matrix与转角小结
+&lt;/h3&gt;&lt;p&gt;![[Pasted image 20241205152335.png]]
+fixed angle与euler angles有12种表达方式
+第一个转角，3个选择
+第二个转角，2个选择（与第一个转角不同）
+第三个转角，2个选择（与第二个转角不同）
+12 = 3 * 2 * 2&lt;/p&gt;
+&lt;h5 id=&#34;angle-axis表达法&#34;&gt;Angle-axis表达法
+&lt;/h5&gt;&lt;p&gt;![[Pasted image 20241205152717.png]]&lt;/p&gt;
+&lt;h5 id=&#34;quaternion表达法&#34;&gt;Quaternion表达法
+&lt;/h5&gt;&lt;p&gt;![[Pasted image 20241205152753.png]]&lt;/p&gt;
+&lt;h3 id=&#34;transformation-matrix&#34;&gt;Transformation Matrix
+&lt;/h3&gt;&lt;h4 id=&#34;mapping&#34;&gt;Mapping
+&lt;/h4&gt;&lt;p&gt;刚体状态的表达
+![[Pasted image 20241205153237.png]]
+![[Pasted image 20241205153303.png]]
+将移动和转动整合在一起描述
+![[Pasted image 20241205153344.png]]
+![[Pasted image 20241205153516.png]]&lt;/p&gt;
+&lt;p&gt;验证其正确性
+仅有移动时
+![[Pasted image 20241205153803.png]]
+仅有转动时
+![[Pasted image 20241205153919.png]]
+移动和转动混合
+先转动使B_frame变为A_frame，再进行移动
+![[Pasted image 20241205154134.png]]
+![[Pasted image 20241205154254.png]]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;
+![[Pasted image 20241205155035.png]]&lt;/p&gt;
+&lt;h4 id=&#34;operator&#34;&gt;Operator
+&lt;/h4&gt;&lt;p&gt;$_{B}^{A}T$除了Mapping之外，也可当Operator，对向量（或点）进行移动或旋转
+&lt;strong&gt;先转动再移动&lt;/strong&gt;
+![[Pasted image 20241205155842.png]]&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241205160142.png]]
+Operator示例
+![[Pasted image 20241205161307.png]]
+相对运动，反相移动frame
+![[Pasted image 20241205161546.png]]
+![[Pasted image 20241205161902.png]]&lt;/p&gt;
+&lt;p&gt;正向，先转动，再移动
+反向理解，对frame先转动，在转动后的frame进行移动&lt;/p&gt;
+&lt;h4 id=&#34;transformation-matrix用法小结&#34;&gt;Transformation Matrix用法小结
+&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241205163326.png]]
+![[Pasted image 20241205163347.png]]&lt;/p&gt;
+&lt;h4 id=&#34;连续运算及其法则&#34;&gt;连续运算及其法则
+&lt;/h4&gt;&lt;p&gt;T的mapping
+![[Pasted image 20241205164054.png]]
+![[Pasted image 20241205164557.png]]&lt;/p&gt;
+&lt;p&gt;T中旋转：1）fixed angle 2）euler angle
+&lt;strong&gt;旋转方式不同，T的连续运算法则不同&lt;/strong&gt;
+![[Pasted image 20241205170138.png]]&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241205170555.png]]&lt;/p&gt;
+&lt;h4 id=&#34;反矩阵&#34;&gt;反矩阵
+&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241205164853.png]]&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241205165140.png]]
+![[Pasted image 20241205165738.png]]&lt;/p&gt;
+&lt;h2 id=&#34;第三章-机械手臂的顺向运动学&#34;&gt;第三章 机械手臂的顺向运动学
+&lt;/h2&gt;&lt;h3 id=&#34;运动学与动力学&#34;&gt;运动学与动力学
+&lt;/h3&gt;&lt;p&gt;运动学，讨论运动状态本身，没有连结到产生运动的力
+![[Pasted image 20241205224953.png]]
+![[Pasted image 20241205225048.png]]
+动力学，讨论力/力矩如何产生运动
+![[Pasted image 20241205225206.png]]
+目前只讨论机械臂的运动学&lt;/p&gt;
+&lt;h3 id=&#34;机械臂&#34;&gt;机械臂
+&lt;/h3&gt;&lt;h4 id=&#34;几何描述&#34;&gt;几何描述
+&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241205225328.png]]
+机械臂的描述方式
+![[Pasted image 20241205230503.png]]
+机械臂刚体部分link表示
+转轴用axis表示&lt;/p&gt;
+&lt;p&gt;描述方式
+两个转轴，一个杆
+![[Pasted image 20241206133449.png]]
+多个转轴，多个杆，还需要两个参数
+![[Pasted image 20241206134314.png]]&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241206134635.png]]&lt;/p&gt;
+&lt;h4 id=&#34;杆件上建立frame&#34;&gt;杆件上建立frame
+&lt;/h4&gt;&lt;p&gt;普通杆件
+![[Pasted image 20241206141907.png]]
+地杆（axis0-link0）
+相当于地杆是一个绝对静止的坐标系（frame）
+![[Pasted image 20241206143432.png]]
+末端杆
+![[Pasted image 20241206144557.png]]&lt;/p&gt;
+&lt;h4 id=&#34;dh-表达法&#34;&gt;DH 表达法
+&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241206144541.png]]
+Axis_i的$\alpha_i$，为顺时针转动，$\alpha_i$为负值
+x轴指向眼睛
+试想如何定义x_y坐标系的旋转，实际上z轴指向眼睛，结合之前euler-angle的内容理解&lt;/p&gt;
+&lt;h4 id=&#34;link-transformation&#34;&gt;Link-Transformation
+&lt;/h4&gt;&lt;p&gt;每次移动都是基于当前坐标系，所以是类似于Euler-Angle的操作方法
+![[Pasted image 20241206151000.png]]
+拆解每一个动作
+![[Pasted image 20241206151954.png]]
+合并为一个Transformation-Matrix
+![[Pasted image 20241206152205.png]]
+连续
+![[Pasted image 20241206152343.png]]&lt;/p&gt;
+&lt;h4 id=&#34;example&#34;&gt;Example
+&lt;/h4&gt;&lt;p&gt;z轴方向与转轴方向一致
+例1
+![[Pasted image 20241206153229.png]]
+例2
+![[Pasted image 20241206160020.png]]
+例3
+![[Pasted image 20241206155936.png]]
+例4
+![[Pasted image 20241206160534.png]]
+例5
+![[Pasted image 20241206171332.png]]
+例6
+【台大机器人学之运动学——林沛群（含课件+书籍）】https://www.bilibili.com/video/BV1v4411H7ez?p=25&amp;amp;vd_source=5a0790755035f26a67935abfbfcdfd5b&lt;/p&gt;
+&lt;p&gt;很常见的架构，前三轴移动，后三轴转动
+队内使用的2024国赛工程使用的架构
+![[Pasted image 20241206192332.png]]
+后三轴共轴，方便inverse求解
+z1，z2共平面，x共轴，方便处理
+![[Pasted image 20241206202207.png]]
+所有轴建立frame后
+![[Pasted image 20241206202329.png]]
+解算部分
+![[Pasted image 20241206203155.png]]
+![[Pasted image 20241206203235.png]]&lt;/p&gt;
+&lt;h5 id=&#34;应用的例子&#34;&gt;应用的例子
+&lt;/h5&gt;&lt;p&gt;forward kinematics正向运动学
+inverse kinematics逆向运动学
+![[Pasted image 20241206172044.png]]
+考虑具体的驱动装置，如何转换到关节的坐标系
+![[Pasted image 20241206172637.png]]&lt;/p&gt;
+&lt;p&gt;一些应用，关于轮模式和腿模式
+轮腿切换
+![[Pasted image 20241206172802.png]]
+轮腿的模式切换
+![[Pasted image 20241206172946.png]]
+中间的换算，关节和马达
+![[Pasted image 20241206173822.png]]&lt;/p&gt;
+&lt;h4 id=&#34;dh表达方式小结&#34;&gt;DH表达方式小结
+&lt;/h4&gt;&lt;p&gt;Denavit-Hartenberg表达方式
+&lt;strong&gt;注意：从上到下有严格的操作顺序&lt;/strong&gt;
+![[Pasted image 20241206185157.png]]
+![[Pasted image 20241206185309.png]]
+上面的表达方式为Craig version&lt;/p&gt;
+&lt;p&gt;另外的一个表达方式：DH表示法Standard version
+![[Pasted image 20241206185741.png]]
+![[Pasted image 20241206191938.png]]&lt;/p&gt;
+&lt;p&gt;Craig方式还要加上末端点在最后一个joit下的坐标移动
+![[Pasted image 20241206192200.png]]&lt;/p&gt;
+&lt;h2 id=&#34;第四章-逆向运动学&#34;&gt;第四章 逆向运动学
+&lt;/h2&gt;&lt;h3 id=&#34;求解的概念&#34;&gt;求解的概念
+&lt;/h3&gt;&lt;p&gt;![[Pasted image 20241206204531.png]]
+![[Pasted image 20241206205529.png]]
+![[Pasted image 20241206205539.png]]
+![[Pasted image 20241206205554.png]&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241206210124.png]]
+![[Pasted image 20241206211803.png]]&lt;/p&gt;
+&lt;h3 id=&#34;多解问题&#34;&gt;多解问题
+&lt;/h3&gt;&lt;p&gt;![[Pasted image 20241207193421.png]]
+非线性方程
+![[Pasted image 20241207193444.png]]&lt;/p&gt;
+&lt;h4 id=&#34;examplepuma的多解引言&#34;&gt;Example:PUMA的多解引言
+&lt;/h4&gt;&lt;p&gt;[[机器人学#第三章 机械手臂的顺向运动学#Example]]例6&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241207193651.png]]
+![[Pasted image 20241207193926.png]]
+![[Pasted image 20241207194830.png]]&lt;/p&gt;
+&lt;h3 id=&#34;求解方法&#34;&gt;求解方法
+&lt;/h3&gt;&lt;p&gt;![[Pasted image 20241207195952.png]]&lt;/p&gt;
+&lt;h4 id=&#34;求解例题的方法&#34;&gt;求解例题的方法
+&lt;/h4&gt;&lt;h5 id=&#34;几何解法&#34;&gt;几何解法
+&lt;/h5&gt;&lt;p&gt;![[Pasted image 20241207200424.png]]
+有了$\Phi$角，和目标x，y，反解角度
+![[Pasted image 20241207200456.png]]
+![[Pasted image 20241207201241.png]]&lt;/p&gt;
+&lt;p&gt;具体运算的例子
+![[Pasted image 20241207201647.png]]&lt;/p&gt;
+&lt;h5 id=&#34;代数解法&#34;&gt;代数解法
+&lt;/h5&gt;&lt;p&gt;![[Pasted image 20241209110024.png]]
+![[Pasted image 20241209110310.png]]
+![[Pasted image 20241209112718.png]]
+![[Pasted image 20241209113138.png]]&lt;/p&gt;
+&lt;h4 id=&#34;piepers-solution&#34;&gt;Pieper&amp;rsquo;s Solution
+&lt;/h4&gt;&lt;p&gt;【台大机器人学之运动学——林沛群（含课件+书籍）】https://www.bilibili.com/video/BV1v4411H7ez?p=30&amp;amp;vd_source=5a0790755035f26a67935abfbfcdfd5b&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241209113820.png]]&lt;/p&gt;
+&lt;h5 id=&#34;位置&#34;&gt;位置
+&lt;/h5&gt;&lt;p&gt;$\theta_1$是基座yaw轴旋转角度
+![[Pasted image 20241209115724.png]]
+joint0 -&amp;gt; joint1 只有$\theta$角的旋转，$\alpha$的旋转为0，没有a和d的位移
+所以joint0 -&amp;gt; joint1 只有坐标系的旋转，有$x^2+y^2+z^2=g_1^2+g_2^2+g_3^2$
+![[Pasted image 20241209120126.png]]
+![[Pasted image 20241209121335.png]]
+![[Pasted image 20241209121928.png]]
+一层一层，分离变量去求解&lt;/p&gt;
+&lt;h5 id=&#34;姿态&#34;&gt;姿态
+&lt;/h5&gt;&lt;p&gt;最后的姿态$_6^0R=_3^0R &lt;em&gt;_6^3R$，反解位置时已经得出$R_3^0$，则在末端的姿态下需要的转动为$_6^3R=_3^0R^{-1}&lt;/em&gt;_6^{0}R$
+![[Pasted image 20241209130853.png]]
+![[Pasted image 20241209130835.png]]
+相当于是在将x-y-z的三个坐标系，换到一个Euler-Angle的x-y-z坐标系中，每次的转动是在绕Euler-Angle的x轴，y轴，z轴，需要进行一定的矫正&lt;/p&gt;
+&lt;p&gt;[[机器人学#Z-Y-Z Euler Angles .由angles推算R]]
+![[Pasted image 20241209132708.png]]
+第6个坐标系的y轴有误，应该是画反了&lt;/p&gt;
+&lt;p&gt;其他人的笔记参考
+![[Pasted image 20241210170822.png]]&lt;/p&gt;
+&lt;h3 id=&#34;物件取放任务&#34;&gt;物件取放任务
+&lt;/h3&gt;&lt;p&gt;![[Pasted image 20241209145556.png]]
+![[Pasted image 20241209145736.png]]
+![[Pasted image 20241209150257.png]]
+![[Pasted image 20241209150443.png]]
+![[Pasted image 20241209151114.png]]
+![[Pasted image 20241209151504.png]]&lt;/p&gt;
+&lt;h2 id=&#34;第五章-轨迹规划&#34;&gt;第五章 轨迹规划
+&lt;/h2&gt;&lt;p&gt;引言
+![[Pasted image 20241209153623.png]]
+轨迹
+最好的轨迹是连续的
+![[Pasted image 20241209214452.png]]
+在轨迹的点上加上姿态的要求
+![[Pasted image 20241209215002.png]]&lt;/p&gt;
+&lt;h3 id=&#34;joint-space下的轨迹规划&#34;&gt;Joint-space下的轨迹规划
+&lt;/h3&gt;&lt;p&gt;【台大机器人学之运动学——林沛群（含课件+书籍）】https://www.bilibili.com/video/BV1v4411H7ez?p=34&amp;amp;vd_source=5a0790755035f26a67935abfbfcdfd5b&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;本质就是对关节的旋转角度做规划&lt;/strong&gt;
+3个自由度的移动，3个自由度的转动
+![[Pasted image 20241209215316.png]]
+![[Pasted image 20241209220007.png]]
+![[Pasted image 20241209220509.png]]
+换到$D_x,D_y,D_z$下，主要是检测轨迹中手臂有没有撞到什么东西&lt;/p&gt;
+&lt;h3 id=&#34;cartesian-space的轨迹规划&#34;&gt;Cartesian-space的轨迹规划
+&lt;/h3&gt;&lt;p&gt;计算量大，许多个笛卡尔坐标系的坐标点要IK（逆解算）
+![[Pasted image 20241209221710.png]]
+![[Pasted image 20241209222334.png]]&lt;/p&gt;
+&lt;h3 id=&#34;cubic-polynominals&#34;&gt;Cubic-Polynominals
+&lt;/h3&gt;&lt;p&gt;要保证前后的位置和速度相连
+![[Pasted image 20241210162158.png]]
+更高次的轨迹规划
+![[Pasted image 20241210162306.png]]&lt;/p&gt;
+&lt;p&gt;位置条件两个方程，加上求导后的速度条件提供两个方程
+![[Pasted image 20241210162844.png]]
+![[Pasted image 20241210165344.png]]&lt;/p&gt;
+&lt;p&gt;如何选择速度条件
+（1）前后速度变号处的（角度增加，后面变为减少）
+![[Pasted image 20241210165736.png]]&lt;/p&gt;
+&lt;p&gt;例子
+![[Pasted image 20241210170446.png]]&lt;/p&gt;
+&lt;h3 id=&#34;多端cubic-polynommials&#34;&gt;多端Cubic-Polynommials
+&lt;/h3&gt;&lt;p&gt;让加速度也连续
+放弃在前后速度变号处的via-point的速度为零以及速度取平均的方式，改为让加速度也连续
+![[Pasted image 20241210170441.png]]
+![[Pasted image 20241210171907.png]]
+![[Pasted image 20241210172123.png]]
+![[Pasted image 20241210172242.png]]&lt;/p&gt;
+&lt;h3 id=&#34;general-cubic-polynomials&#34;&gt;General-Cubic-Polynomials
+&lt;/h3&gt;&lt;p&gt;所有点的位置，速度，加速度连续
+![[Pasted image 20241210231911.png]]
+n+1个点，n条线段需要规划，有4n个未知数，所以需要4n个方程&lt;/p&gt;
+&lt;h5 id=&#34;关于4n个方程式的生成&#34;&gt;关于4n个方程式的生成
+&lt;/h5&gt;&lt;p&gt;（1）位置条件，对于n段的规划，每一段的两个端点都是有一个边界条件，有2n个方程
+（2）速度条件，有n-1个via-point，每个point有速度和加速度连续的条件
+前一个规划的末端求导等于后一段规划的起始求导
+前一段的函数，后一段的函数，连续
+n-1个via-point速度连续，有n-1个方程
+n-1个via-point加速度连续，有n-1个方程
+（3）对初始点和末端点的起始条件设定&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241210232905.png]]
+（3）对起始点和末端点的起始条件设定
+![[Pasted image 20241210234441.png]]&lt;/p&gt;
+&lt;h4 id=&#34;路径规划示例&#34;&gt;路径规划示例
+&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241211001214.png]]
+在Cartesian-space下的路径规划
+![[Pasted image 20241211001200.png]]
+![[Pasted image 20241211001718.png]]
+对x，y，$\theta$三个数做关于t的规划
+![[Pasted image 20241211001910.png]]
+![[Pasted image 20241211002009.png]]&lt;/p&gt;
+&lt;p&gt;在Joint-space下做轨迹规划并求解
+![[Pasted image 20241211093307.png]]
+![[Pasted image 20241211093614.png]]
+![[Pasted image 20241211093709.png]]
+![[Pasted image 20241211094033.png]]&lt;/p&gt;
+&lt;h2 id=&#34;第六章-lineaar-function-with-parabolic-blends&#34;&gt;第六章 Lineaar Function with Parabolic Blends
+&lt;/h2&gt;&lt;h3 id=&#34;lineaar-function-with-parabolic-blends&#34;&gt;Lineaar Function with Parabolic Blends
+&lt;/h3&gt;&lt;p&gt;缓加速，匀速，缓减速
+![[Pasted image 20241211144239.png]]
+![[Pasted image 20241211144847.png]]
+2式有错误，应该是角度的二阶导
+![[Pasted image 20241211145423.png]]
+![[Pasted image 20241211150115.png]]
+![[Pasted image 20241211150627.png]]&lt;/p&gt;
+&lt;h3 id=&#34;多段lineaar-function-with-parabolic-blends&#34;&gt;多段Lineaar Function with Parabolic Blends
+&lt;/h3&gt;&lt;p&gt;![[Pasted image 20241211151907.png]]
+![[Pasted image 20241211151921.png]]
+![[Pasted image 20241211151945.png]]
+注意这里对时间的定义
+![[Pasted image 20241211152050.png]]&lt;/p&gt;
+&lt;h4 id=&#34;中间段的轨迹设定&#34;&gt;中间段的轨迹设定
+&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241211152727.png]]
+速度
+![[Pasted image 20241211225332.png]]
+加速度
+![[Pasted image 20241211225315.png]]&lt;/p&gt;
+&lt;h4 id=&#34;头尾段的设计&#34;&gt;头尾段的设计
+&lt;/h4&gt;&lt;p&gt;头需要往后移一点
+![[Pasted image 20241211153733.png]]
+尾需要往前移一点
+![[Pasted image 20241211154740.png]]&lt;/p&gt;
+&lt;h3 id=&#34;lineaar-function-with-parabolic-blends注解&#34;&gt;Lineaar Function with Parabolic Blends注解
+&lt;/h3&gt;&lt;p&gt;【台大机器人学之运动学——林沛群（含课件+书籍）】https://www.bilibili.com/video/BV1v4411H7ez?p=45&amp;amp;vd_source=5a0790755035f26a67935abfbfcdfd5b&lt;/p&gt;
+&lt;h4 id=&#34;关于加速度&#34;&gt;关于加速度
+&lt;/h4&gt;&lt;p&gt;考虑实际中的多个因素的分析，针对加速度
+![[Pasted image 20241211160106.png]]
+要考虑每个关节所需要的力，科氏力，重力（动力学部分）
+![[Pasted image 20241211160322.png]]
+电机提供扭矩，提供力
+状态的维持（重力），关节高速旋转（向心力，科氏力），加速度的加减（M），都需要电机提供力
+如果维持一个状态的重力过大，电机就可能没有足够的力去运动，去做旋转&lt;/p&gt;
+&lt;h4 id=&#34;关于lineaar-function-with-parabolic-blends中为经过via-point的问题&#34;&gt;关于Lineaar Function with Parabolic Blends中为经过via-point的问题
+&lt;/h4&gt;&lt;p&gt;如果必须严格通过via-point的话（在via-point上要执行一些工作），在via-point附近添加几个点，让原来必须经过的via-point在直线上
+![[Pasted image 20241211162003.png]]&lt;/p&gt;
+&lt;h4 id=&#34;求解规划轨迹的某一时刻的位置&#34;&gt;求解规划轨迹的某一时刻的位置
+&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241211162923.png]]&lt;/p&gt;
+&lt;h3 id=&#34;cartesian-space下轨迹几何极限&#34;&gt;Cartesian-space下轨迹几何极限
+&lt;/h3&gt;&lt;p&gt;![[Pasted image 20241211165237.png]]&lt;/p&gt;
+&lt;h3 id=&#34;revisit-the-rrr-manipulator&#34;&gt;Revisit the RRR Manipulator
+&lt;/h3&gt;&lt;p&gt;![[Pasted image 20241211170132.png]]
+![[Pasted image 20241211175012.png]]
+![[Pasted image 20241211175927.png]]&lt;/p&gt;
+&lt;h2 id=&#34;第七章-机械臂轨迹规划实例&#34;&gt;第七章 机械臂轨迹规划实例
+&lt;/h2&gt;&lt;h3 id=&#34;capstone-example&#34;&gt;Capstone example
+&lt;/h3&gt;&lt;h4 id=&#34;puma机械臂&#34;&gt;PUMA机械臂
+&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241211192247.png]]
+![[Pasted image 20241211192338.png]]
+![[Pasted image 20241211193907.png]]&lt;/p&gt;
+&lt;h4 id=&#34;设定&#34;&gt;设定
+&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241211212219.png]]
+![[Pasted image 20241211213101.png]]
+从cup的坐标系转换到手臂末端的坐标系
+注意$^6_CT^{-1}$，在$^6T$坐标系下沿着Z轴移动206
+导致$^0_6T_i$的Transformation-Matrix的移动向量的x，y，z与C相对于World-Frame的不同
+![[Pasted image 20241211213343.png]]
+![[Pasted image 20241211224115.png]]&lt;/p&gt;
+&lt;h4 id=&#34;轨迹规划方法lineaar-function-with-parabolic-blends&#34;&gt;轨迹规划：方法：Lineaar Function with Parabolic Blends
+&lt;/h4&gt;&lt;h5 id=&#34;在cartesian-space下的规划&#34;&gt;在Cartesian-space下的规划
+&lt;/h5&gt;&lt;p&gt;![[Pasted image 20241211225442.png]]
+![[Pasted image 20241212174427.png]]
+由此去求出加速度
+![[Pasted image 20241212173712.png]]
+![[Pasted image 20241212174827.png]]&lt;/p&gt;
+&lt;p&gt;做IK逆运算时
+![[Pasted image 20241212175110.png]]
+找出该点的(x,y,z)坐标，由此求出前三轴的姿态
+这也是前面轨迹规划时，找机械臂末端点求解的点
+![[Pasted image 20241212175121.png]]
+前三轴的轨迹规划是在规划位置
+后三轴的轨迹规划是在规划最后的末端点的姿态&lt;/p&gt;
+&lt;h6 id=&#34;位置-1&#34;&gt;位置
+&lt;/h6&gt;&lt;p&gt;![[Pasted image 20241212175050.png]]
+![[Pasted image 20241212180157.png]]
+![[Pasted image 20241212180626.png]]&lt;/p&gt;
+&lt;h6 id=&#34;姿态-1&#34;&gt;姿态
+&lt;/h6&gt;&lt;p&gt;![[Pasted image 20241212181758.png]]
+有R3的姿态，但要开始姿态的转换，需要先转到与R4同方向的姿态&lt;/p&gt;
+&lt;p&gt;逆向求解Euler-angle的Z-Y-Z   $\alpha$ ,$\beta$,$\gamma$&lt;br&gt;
+![[Pasted image 20241213140036.png]]&lt;/p&gt;
+&lt;p&gt;Euler-angle的Z-Y-Z   $\alpha$ ,$\beta$,$\gamma$   去对应4，5，6转轴的$\theta_1$,$\theta_2$,$\theta_3$
+![[Pasted image 20241213140130.png]]
+![[Pasted image 20241213140728.png]]
+![[Pasted image 20241213140835.png]]
+![[Pasted image 20241213141202.png]]
+![[Pasted image 20241213141354.png]]
+![[Pasted image 20241213141508.png]]&lt;/p&gt;
+&lt;h5 id=&#34;在joint-space下的规划&#34;&gt;在Joint-space下的规划
+&lt;/h5&gt;&lt;p&gt;![[Pasted image 20241213143801.png]]
+![[Pasted image 20241213144521.png]]
+![[Pasted image 20241213144642.png]]
+![[Pasted image 20241213144742.png]]
+![[Pasted image 20241213145339.png]]&lt;/p&gt;
+&lt;h3 id=&#34;注解&#34;&gt;注解
+&lt;/h3&gt;&lt;p&gt;主要内容：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;刚体运动状态的描述&lt;/li&gt;
+&lt;li&gt;顺向运动学&lt;/li&gt;
+&lt;li&gt;逆向运动学&lt;/li&gt;
+&lt;li&gt;轨迹规划
+![[Pasted image 20241213194945.png]]
+轨迹规划可拓展
+![[Pasted image 20241213195805.png]]
+![[Pasted image 20241213200018.png]]
+![[Pasted image 20241213203641.png]]
+![[Pasted image 20241213204605.png]]&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;冗余自由度的作用
+![[Pasted image 20241213204710.png]]&lt;/p&gt;
+&lt;p&gt;完结撒花&lt;/p&gt;
+&lt;h2 id=&#34;视频的勘误&#34;&gt;视频的勘误
+&lt;/h2&gt;&lt;p&gt;繁体到简体翻译 目前投影片错误皆已修正，但因影片处理较费时，麻烦大家先对照勘误表。如果还有其他错误敬请指教。
+“4-4 物件取放任务”：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;影片13:43-15:03桌子座标标示原点错误，长度250应由桌子原点起算。可以参考7:55-13:42的标示方法。（投影片在p28, 30, 31）&lt;/li&gt;
+&lt;li&gt;影片16:18-17:21 r=1.68498214e5修正为168813.18。（投影片 p33）&lt;/li&gt;
+&lt;li&gt;后三轴Euler angle的计算还有其他细节须注意，请见下方补充。
+关于本週教材及作业内容，Example及Quiz中的手臂构型由于后三轴相交于一点，得以独立拆解成两部分计算，可注意以下几点： 【前三轴】 手臂IK本身具有多重解且计算细节多，建议搭配FK确认是计算错误抑或只是求到另一组解。
+以教材中的Example来说，前三轴共有四组解：(21.8, -52.2, 2.5), (21.8, 47.1, 164.0), (201.7, 126.9, 15.2), (201.7, -121.1, 151.3)，关于这四组解的构型，可以参考投影片p7，或者影片“4-2_多重解1”1:34-4:42。
+至于Quiz部分请依照题目要求的角度限制作答。关于不同解法的补充如下：&lt;/li&gt;
+&lt;li&gt;Pieper’s solution Pieper’s solution方程式较複杂且非线性程度高，建议使用MATLAB或其他软体计算。以MATLAB的solve为例，因其对非线性方程式之处理能力较有限，建议参考影片“4-2_多重解 3 Example 2”9:22-end或投影片 p18，将三角函数用subs指令替换成多项式，进行后续计算。 另外，由于列式时将部分距离及三角函数取平方，可能会算出反向距离的解，请搭配FK确认排除。&lt;/li&gt;
+&lt;li&gt;几何法 使用几何法则须想像出手臂到达该点的姿态，才能列出所有的可行解。列式时请注意手臂的offset项&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>C&amp;C&#43;&#43; const</title>
         <link>https://NomadJoeviolet.github.io/p/cc-const/</link>
         <pubDate>Wed, 08 Jan 2025 18:08:42 +0800</pubDate>
@@ -308,14 +925,6 @@ b.使用static修饰局部变量可以在函数调用之间保持局部变量的
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
-        </item>
-        <item>
-        <title>测试</title>
-        <link>https://NomadJoeviolet.github.io/p/%E6%B5%8B%E8%AF%95/</link>
-        <pubDate>Wed, 08 Jan 2025 18:08:42 +0800</pubDate>
-        
-        <guid>https://NomadJoeviolet.github.io/p/%E6%B5%8B%E8%AF%95/</guid>
-        <description></description>
         </item>
         <item>
         <title>归档</title>
