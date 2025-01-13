@@ -7,7 +7,56 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
-        <lastBuildDate>Wed, 08 Jan 2025 18:08:42 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/tags/cc++/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 13 Jan 2025 16:17:46 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/tags/cc++/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>C&#43;&#43; 的名字修饰（符号修饰）</title>
+        <link>https://NomadJoeviolet.github.io/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/</link>
+        <pubDate>Mon, 13 Jan 2025 16:17:46 +0800</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/</guid>
+        <description>&lt;p&gt;【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b
+&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/ArsenalfanInECNU/p/18499811&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;extern &amp;ldquo;c&amp;quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/it_is_me_a/article/details/81979537&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C++&amp;ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/helena1993/article/details/124149052&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_46606290/article/details/119973574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;符号修饰&#34;&gt;符号修饰
+&lt;/h2&gt;&lt;p&gt;在C/C++中，一个程序要运行起来，需要经历以下几个阶段：预处理、编译、汇编、链接。&lt;/p&gt;
+&lt;p&gt;名字修饰（Name Mangling）是一种在&lt;code&gt;编译&lt;/code&gt;过程中，将函数、变量的名称重新改编的机制，简单来说就是编译器为了区分各个函数，将函数通过一定算法，重新修饰为一个全局唯一的名称。&lt;/p&gt;
+&lt;p&gt;由于C++和C的名字修饰规则不同（&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/helena1993/article/details/124149052&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;不同操作系统下的编译器的名字修饰方式也会不同&lt;/a&gt;），导致C++可以支持函数重载，而C不支持函数重载&lt;/p&gt;
+&lt;p&gt;可以简单理解，c++中支持函数重载，c语言不支持函数重载，这造成了c++和c语言的函数名解析不同（名字修饰/符号修饰）。c语言函数名就是函数名，c++的函数名是函数名+参数组合起来的。&lt;/p&gt;
+&lt;h4 id=&#34;c与c符号修饰的实例&#34;&gt;C与C++符号修饰的实例
+&lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/ArsenalfanInECNU/p/18499811&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;extern &amp;ldquo;c&amp;quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园&lt;/a&gt;
+（直接copy自该博客）&lt;/p&gt;
+&lt;p&gt;比如，函数&lt;code&gt;void func(double a)&lt;/code&gt; 在&lt;code&gt;C&lt;/code&gt;和&lt;code&gt;C++&lt;/code&gt;中的编译阶段函数名称会被解析成什么呢？&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;C&lt;/code&gt;语言中，由于没有名称修饰，所以在编译时函数名称仍然是&lt;code&gt;func&lt;/code&gt;，不会因为参数类型或数量而改变。&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;C++&lt;/code&gt;中，由于名称修饰的存在，函数名称在编译阶段会被编译器转换成一个包含函数原型信息的唯一标识符。通常会涉及函数返回类型、参数类型以及参数数量。以&lt;code&gt;GCC(GNU Compiler Collection)&lt;/code&gt;为例，&lt;code&gt;func(double a)&lt;/code&gt;会被转换成&lt;code&gt;_Z4funcd&lt;/code&gt; ，这里：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;_Z&lt;/code&gt;：是&lt;code&gt;GCC&lt;/code&gt;用来表示修饰名称的前缀&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;4&lt;/code&gt;：表示函数名称&lt;code&gt;func&lt;/code&gt;的的字符数&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;d&lt;/code&gt;：是double类型的编码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因此，&lt;strong&gt;用c++的方式去寻找c语言的符号是无法寻找到的&lt;/strong&gt;。&lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt;为何可以做到？&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt;的作用就是修改了符号表的生成方式，将c++符号的生成方式换成了c的生成方式。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;即
+c库中生成的符号是c编译器的符号， 因此c语言可以直接链接。而c++程序需要使用&lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt;让编译器使用c的符号命名方式去进行链接，这样才能找到对应的符号。&lt;/p&gt;
+&lt;h2 id=&#34;extern-c&#34;&gt;extern &amp;ldquo;C&amp;rdquo;
+&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_46606290/article/details/119973574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;看这一篇就够了
+看实例&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;cpp调用c，cpp编译时会有C++的符号修饰，导致链接C库的函数找不到，需要用extern &amp;ldquo;C&amp;quot;告诉g++编译器以C语言的风格进行编译&lt;/li&gt;
+&lt;li&gt;c调用cpp（不涉及C++的类和成员函数），设计一个C的接口，接口的实现在cpp中，接口函数内部去使用C++的特性&lt;/li&gt;
+&lt;li&gt;c中调用c++成员函数，需要一个接口函数&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>C&amp;C&#43;&#43; const</title>
         <link>https://NomadJoeviolet.github.io/p/cc-const/</link>
         <pubDate>Wed, 08 Jan 2025 18:08:42 +0800</pubDate>
