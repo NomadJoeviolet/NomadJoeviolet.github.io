@@ -96,14 +96,14 @@ BSS段在程序执行前会被系统自动清0，所以未初始化的全局变�
         <pubDate>Mon, 13 Jan 2025 16:17:46 +0800</pubDate>
         
         <guid>https://NomadJoeviolet.github.io/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/</guid>
-        <description>&lt;p&gt;【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b
-&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/ArsenalfanInECNU/p/18499811&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;extern &amp;ldquo;c&amp;quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园&lt;/a&gt;
-&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/it_is_me_a/article/details/81979537&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;C++&amp;ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客&lt;/a&gt;
-&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/helena1993/article/details/124149052&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客&lt;/a&gt;
-&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_46606290/article/details/119973574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <description>&lt;p&gt;【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/ArsenalfanInECNU/p/18499811&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;extern &amp;ldquo;c&amp;quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/it_is_me_a/article/details/81979537&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C++&amp;ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/helena1993/article/details/124149052&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_46606290/article/details/119973574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;符号修饰&#34;&gt;符号修饰
 &lt;/h2&gt;&lt;p&gt;在C/C++中，一个程序要运行起来，需要经历以下几个阶段：预处理、编译、汇编、链接。&lt;/p&gt;

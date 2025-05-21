@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园 C++&ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客 C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客 C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
 <title>C&#43;&#43; 的名字修饰（符号修饰）</title>
 
 <link rel='canonical' href='https://NomadJoeviolet.github.io/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/'>
 
 <link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="C++ 的名字修饰（符号修饰）">
-<meta property='og:description' content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园 C++&ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客 C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客 C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客\n">
+<meta property='og:description' content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/'>
 <meta property='og:site_name' content='Nomad_violet'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&amp;C&#43;&#43;' /><meta property='article:published_time' content='2025-01-13T16:17:46&#43;08:00'/><meta property='article:modified_time' content='2025-01-13T16:17:46&#43;08:00'/>
 <meta name="twitter:title" content="C++ 的名字修饰（符号修饰）">
-<meta name="twitter:description" content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园 C++&ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客 C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客 C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客\n">
+<meta name="twitter:description" content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -336,14 +336,14 @@
     <section class="article-content">
     
     
-    <p>【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b
-<a class="link" href="https://www.cnblogs.com/ArsenalfanInECNU/p/18499811"  target="_blank" rel="noopener"
-    >extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园</a>
-<a class="link" href="https://blog.csdn.net/it_is_me_a/article/details/81979537"  target="_blank" rel="noopener"
-    >C++&ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客</a>
-<a class="link" href="https://blog.csdn.net/helena1993/article/details/124149052"  target="_blank" rel="noopener"
-    >C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客</a>
-<a class="link" href="https://blog.csdn.net/m0_46606290/article/details/119973574"  target="_blank" rel="noopener"
+    <p>【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b</p>
+<p><a class="link" href="https://www.cnblogs.com/ArsenalfanInECNU/p/18499811"  target="_blank" rel="noopener"
+    >extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园</a></p>
+<p><a class="link" href="https://blog.csdn.net/it_is_me_a/article/details/81979537"  target="_blank" rel="noopener"
+    >C++&ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客</a></p>
+<p><a class="link" href="https://blog.csdn.net/helena1993/article/details/124149052"  target="_blank" rel="noopener"
+    >C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客</a></p>
+<p><a class="link" href="https://blog.csdn.net/m0_46606290/article/details/119973574"  target="_blank" rel="noopener"
     >C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客</a></p>
 <h2 id="符号修饰">符号修饰
 </h2><p>在C/C++中，一个程序要运行起来，需要经历以下几个阶段：预处理、编译、汇编、链接。</p>
