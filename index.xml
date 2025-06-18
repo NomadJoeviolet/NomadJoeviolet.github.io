@@ -8,11 +8,11 @@
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
         <lastBuildDate>Wed, 18 Jun 2025 19:52:33 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>STM32DMA_IDLE_IT</title>
-        <link>https://NomadJoeviolet.github.io/p/stm32dma_idle_it/</link>
+        <title>STM32——DMA使用与空闲中断</title>
+        <link>https://NomadJoeviolet.github.io/p/stm32dma%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/</link>
         <pubDate>Wed, 18 Jun 2025 19:52:33 +0800</pubDate>
         
-        <guid>https://NomadJoeviolet.github.io/p/stm32dma_idle_it/</guid>
+        <guid>https://NomadJoeviolet.github.io/p/stm32dma%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/</guid>
         <description>&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://shequ.stmicroelectronics.cn/thread-637349-1-1.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;STM32 hal库串口空闲中断最新用法 - STM32团队 ST意法半导体中文论坛&lt;/a&gt;
 （非常详细）&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/as480133937/article/details/104927922&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
