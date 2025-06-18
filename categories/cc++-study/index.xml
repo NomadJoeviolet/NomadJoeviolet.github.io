@@ -7,7 +7,90 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
-        <lastBuildDate>Mon, 13 Jan 2025 16:17:46 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/categories/cc++-study/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 13 Jan 2025 16:24:31 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/categories/cc++-study/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>C&amp;C&#43;&#43; Statiic</title>
+        <link>https://NomadJoeviolet.github.io/p/cc-statiic/</link>
+        <pubDate>Mon, 13 Jan 2025 16:24:31 +0800</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/p/cc-statiic/</guid>
+        <description>&lt;p&gt;基于菜鸟教程写的个人笔记&lt;/p&gt;
+&lt;h2 id=&#34;static定义&#34;&gt;static定义
+&lt;/h2&gt;&lt;p&gt;static是C/C++中常用的修饰符，控制变量的存储方式和可见性&lt;/p&gt;
+&lt;h2 id=&#34;static-前置-空间分配&#34;&gt;static-前置-空间分配
+&lt;/h2&gt;&lt;p&gt;在函数内部定义的变量，当程序执行到其定义处时没编译器会为它在栈上分配空间，函数在栈上分配的空间再次函数结束时会释放掉&lt;/p&gt;
+&lt;p&gt;如果想将函数中此变量的值保存至下一次调用：&lt;/p&gt;
+&lt;p&gt;（1）将该变量定义为全局变量，但带来许多缺点，例如破坏了此变量的访问范围（在此函数中定义的变量，不仅仅只受此函数的控制）&lt;/p&gt;
+&lt;p&gt;（2）使用static关键词修饰&lt;/p&gt;
+&lt;h2 id=&#34;静态数据的存储&#34;&gt;静态数据的存储
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;全局（静态）存储区&lt;/strong&gt;：分为 DATA 段和 BSS 段
+DATA 段（全局初始化区）存放初始化的全局变量和静态变量
+BSS 段（全局未初始化区）存放未初始化的全局变量和静态变量
+程序运行结束时自动释放
+BSS段在程序执行前会被系统自动清0，所以未初始化的全局变量和静态变量在程序执行之前已经为0。&lt;strong&gt;存储在静态数据区的变量会在程序刚开始运行时就完成初始化，也是唯一的一次初始化。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在 C++ 中 static 的内部实现机制：静态数据成员要在程序一开始运行时就必须存在。因为函数在程序运行中被调用，所以静态数据成员不能在任何函数内分配空间和初始化。&lt;/p&gt;
+&lt;h2 id=&#34;在cc中static的作用&#34;&gt;在C/C++中static的作用
+&lt;/h2&gt;&lt;h3 id=&#34;general&#34;&gt;General
+&lt;/h3&gt;&lt;p&gt;（1）在修饰变量时，static修饰的静态局部变量&lt;strong&gt;只执行初始化一次&lt;/strong&gt;，而且延长了局部变量的生命周期，直到程序运行结束以后才释放
+（2）static修饰全局变量的时候，这个全局变量只能在本文件中访问，不能被其他文件调用，即使是extern外部声明也不可以
+（3）static 修饰的变量存放在全局数据区的静态变量区，包括全局静态变量和局部静态变量，都在全局数据区分配内存。初始化的时候自动初始化为 0
+（4）static修饰一个函数，则这个函数的只能在本文件中调用，不能被其他文件调用
+（5）不想被释放的时候，可以使用static修饰。比如修饰函数中存放在栈空间的数组。如果不想让这个数组在函数调用结束释放可以使用 static 修饰
+（6）考虑到数据安全性（当程序想要使用全局变量的时候应该先考虑使用 static）&lt;/p&gt;
+&lt;h3 id=&#34;关于静态变量与普通变量&#34;&gt;关于静态变量与普通变量
+&lt;/h3&gt;&lt;h4 id=&#34;静态全局变量&#34;&gt;静态全局变量
+&lt;/h4&gt;&lt;p&gt;（1）静态变量都在全局数据区分配内存
+（2）未经初始化的静态全局变量会被程序自动初始化为0
+（3）静态全局变量在声明它的整个文件都是可见的，而在文件之外是不可见的&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;（1）全局变量和全局静态变量的区别&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1）全局变量是不显式用 static 修饰的全局变量，全局变量默认是有外部链接性的，作用域是整个工程，在一个文件内定义的全局变量，在另一个文件中，通过 extern 全局变量名的声明，就可以使用全局变量。&lt;/li&gt;
+&lt;li&gt;2）全局静态变量是显式用 static 修饰的全局变量，作用域是声明此变量所在的文件，其他的文件即使用 extern 声明也不能使用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;静态局部变量&#34;&gt;静态局部变量
+&lt;/h4&gt;&lt;p&gt;（1）该变量在全局数据区分配内存
+（2）静态局部变量在程序执行到该对象的声明处时被首次初始化，及以后的函数调用不会再进行初始化
+（3）静态局部变量一般在声明处初始化，如果没有显示初始化，会被程序自动初始化为0
+（4）它始终驻留在全局数据区，直到程序运行结束。但其作用域为局部作用域，当定义它的函数或语句块结束时，其作用域随之结束&lt;/p&gt;
+&lt;p&gt;一般程序把新产生的动态数据存放在堆区，函数内部的自动变量存放在栈区。自动变量一般会随着函数的退出而释放空间，静态数据（即使是函数内部的静态局部变量）也存放在全局数据区。全局数据区的数据并不会因为函数的退出而释放空间。&lt;/p&gt;
+&lt;h2 id=&#34;static用法&#34;&gt;static用法
+&lt;/h2&gt;&lt;h3 id=&#34;在c中&#34;&gt;在C++中
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;static在类中的作用&lt;/strong&gt;：
+被 static 修饰的变量、被 static 修饰的方法统一属于类的静态资源，是类实例之间共享的，换言之，一处变、处处变&lt;/p&gt;
+&lt;p&gt;在 C++ 中，静态成员是属于整个类的而不是某个对象，静态成员变量只存储一份供所有对象共用。所以在所有对象中都可以共享它。使用静态成员变量实现多个对象之间的数据共享不会破坏隐藏的原则，保证了安全性还可以节省内存&lt;/p&gt;
+&lt;p&gt;静态成员的定义或声明要加个关键 static。静态成员可以通过双冒号来使用
+即 &amp;lt;类名&amp;gt;::&amp;lt;静态成员名&amp;gt;&lt;/p&gt;
+&lt;p&gt;结论：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;不能通过类名来调用类的非静态成员函数，可以通过类的对象调用静态成员函数和非静态成员函数&lt;/li&gt;
+&lt;li&gt;类的静态成员函数不可以使用类的非静态函数&lt;/li&gt;
+&lt;li&gt;在类的非静态成员函数中可以使用类的静态成员（函数，变量），非静态成员函数在调用静态成员变量时，静态成员变量必须在使用前初始化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;因为静态成员函数属于整个类，在类实例化对象之前就已经分配空间了，而类的非静态成员函数必须在类实例化对象后才有内存空间&lt;/p&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;类的静态成员变量必须先初始化再使用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;一些解释：
+1）静态方法能不能引用非静态资源？不能，实例化对象的时候才会产生的东西，对于初始化后就存在的静态资源来说，根本不认识它。
+2）静态方法里面能不能引用静态资源？可以，因为都是类初始化的时候加载的，大家相互都认识。
+3）非静态方法里面能不能引用静态资源？可以，非静态方法就是实例方法，那是实例化对象之后才产生的，那么属于类的内容它都认识&lt;/p&gt;
+&lt;p&gt;Summary:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;（1）静态成员函数中不能调用非静态成员&lt;/li&gt;
+&lt;li&gt;（2）非静态成员函数中可以调用静态成员。因为静态成员属于类本身，在类的对象产生之前就已经存在了，所以在非静态成员函数中是可以调用静态成员的&lt;/li&gt;
+&lt;li&gt;（3）静态成员变量使用前必须先初始化(如 int MyClass::m_nNumber = 0;)，否则会在 linker 时出错
+&lt;strong&gt;静态数据成员&lt;/strong&gt;
+（1）静态数据成员可以实现多个对象之间的数据共享，它是类的所有对象的共享成员，它在内存中只占一份空间，如果改变它的值，则各对象中这个数据成员的值都被改变
+（2）静态数据成员是在程序开始运行时被分配空间，到程序结束之后才释放，只要类中指定了静态数据成员，即使不定义对象，也会为静态数据成员分配空间
+（3）静态数据成员可以被初始化，但是只能在类体外进行初始化，若未对静态数据成员赋初值，则编译器会自动为其初始化为 0
+（4）静态数据成员既可以通过对象名引用，也可以通过类名引用
+&lt;strong&gt;静态成员函数&lt;/strong&gt;
+（1）静态成员函数和静态数据成员一样，他们都属于类的静态成员，而不是对象成员
+（2）非静态成员函数有 this 指针，而静态成员函数没有 this 指针
+（3）静态成员函数主要用来f访问静态数据成员而不能访问非静态成员&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>C&#43;&#43; 的名字修饰（符号修饰）</title>
         <link>https://NomadJoeviolet.github.io/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/</link>
         <pubDate>Mon, 13 Jan 2025 16:17:46 +0800</pubDate>
