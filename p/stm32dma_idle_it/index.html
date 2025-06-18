@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="STM32 hal库串口空闲中断最新用法 - STM32团队 ST意法半导体中文论坛 （非常详细）【STM32】 DMA原理，步骤超细详解，一文看懂DMA-CSDN博客 STM32CubeIDE HAL库DMA与UART不定长数据接收实现：空闲中断详解-物联沃-IOTWORD物联网 STM32 hal库串口空闲中断最新用法_stm32hal库串口空闲中断-CSDN博客 HAL库 串口空闲中断+DMA接收不定长数据 详解及踩坑_hal库串口空闲中断-CSDN博客\n">
+<title>STM32DMA_IDLE_IT</title>
+
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/stm32dma_idle_it/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="STM32DMA_IDLE_IT">
+<meta property='og:description' content="STM32 hal库串口空闲中断最新用法 - STM32团队 ST意法半导体中文论坛 （非常详细）【STM32】 DMA原理，步骤超细详解，一文看懂DMA-CSDN博客 STM32CubeIDE HAL库DMA与UART不定长数据接收实现：空闲中断详解-物联沃-IOTWORD物联网 STM32 hal库串口空闲中断最新用法_stm32hal库串口空闲中断-CSDN博客 HAL库 串口空闲中断+DMA接收不定长数据 详解及踩坑_hal库串口空闲中断-CSDN博客\n">
+<meta property='og:url' content='https://NomadJoeviolet.github.io/p/stm32dma_idle_it/'>
+<meta property='og:site_name' content='Nomad_violet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='DMA空闲中断' /><meta property='article:published_time' content='2025-06-18T19:52:33&#43;08:00'/><meta property='article:modified_time' content='2025-06-18T19:52:33&#43;08:00'/>
+<meta name="twitter:title" content="STM32DMA_IDLE_IT">
+<meta name="twitter:description" content="STM32 hal库串口空闲中断最新用法 - STM32团队 ST意法半导体中文论坛 （非常详细）【STM32】 DMA原理，步骤超细详解，一文看懂DMA-CSDN博客 STM32CubeIDE HAL库DMA与UART不定长数据接收实现：空闲中断详解-物联沃-IOTWORD物联网 STM32 hal库串口空闲中断最新用法_stm32hal库串口空闲中断-CSDN博客 HAL库 串口空闲中断+DMA接收不定长数据 详解及踩坑_hal库串口空闲中断-CSDN博客\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu6061761693284197515.png" width="300"
+                            height="200" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Nomad_violet</a></h1>
+            <h2 class="site-description">to feel,to experience</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://www.bilibili.com/'
+                        target="_blank"
+                        title="Biliili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#dma">DMA</a>
+      <ol>
+        <li><a href="#usart发送">USART发送</a>
+          <ol>
+            <li><a href="#usart的dma发送">USART的DMA发送</a></li>
+            <li><a href="#dma发送注意事项">DMA发送注意事项</a></li>
+          </ol>
+        </li>
+        <li><a href="#usart接收">USART接收</a>
+          <ol>
+            <li><a href="#usart的dma接收">USART的DMA接收</a></li>
+            <li><a href="#dma接收注意事项">DMA接收注意事项</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#hal库usart使用dma">HAL库USART使用DMA</a>
+      <ol>
+        <li><a href="#dma发送">DMA发送</a></li>
+        <li><a href="#dma接收">DMA接收</a></li>
+        <li><a href="#dma模式">DMA模式</a>
+          <ol>
+            <li><a href="#normal模式">normal模式</a></li>
+            <li><a href="#circular模式">circular模式</a></li>
+            <li><a href="#说明">说明</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#空闲中断">空闲中断</a>
+      <ol>
+        <li><a href="#空闲中断定义">空闲中断定义</a></li>
+        <li><a href="#hal库自带的空闲中断实现">HAL库自带的空闲中断实现</a>
+          <ol>
+            <li><a href="#接收过半中断的处理">接收过半中断的处理</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#dma空闲中断的实现接收不定长数据">DMA+空闲中断的实现接收不定长数据</a>
+      <ol>
+        <li><a href="#方式1">方式1</a>
+          <ol>
+            <li><a href="#前置内容">前置内容</a></li>
+            <li><a href="#代码实现">代码实现</a></li>
+            <li><a href="#关于normal和circular在方式1的空闲中断实现的区别">关于normal和circular在方式1的空闲中断实现的区别</a></li>
+          </ol>
+        </li>
+        <li><a href="#方式2">方式2</a>
+          <ol>
+            <li><a href="#代码实现-1">代码实现</a></li>
+            <li><a href="#关于normal和circular在方式2下的空闲中断实现的区别">关于normal和circular在方式2下的空闲中断实现的区别</a></li>
+          </ol>
+        </li>
+        <li><a href="#方式3">方式3</a>
+          <ol>
+            <li><a href="#实现原理">实现原理</a></li>
+            <li><a href="#原理总结">原理总结</a></li>
+            <li><a href="#代码实现-2">代码实现</a></li>
+            <li><a href="#实验检验">实验检验</a></li>
+          </ol>
+        </li>
+        <li><a href="#方式4">方式4</a>
+          <ol>
+            <li><a href="#代码实现-3">代码实现</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%9F%BA%E4%BA%8Ehal%E5%BA%93%E7%9A%84stm32%E5%BC%80%E5%8F%91/" >
+                基于HAL库的STM32开发
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/stm32dma_idle_it/">STM32DMA_IDLE_IT</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-06-18</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p><a class="link" href="https://shequ.stmicroelectronics.cn/thread-637349-1-1.html"  target="_blank" rel="noopener"
+    >STM32 hal库串口空闲中断最新用法 - STM32团队 ST意法半导体中文论坛</a>
+（非常详细）<a class="link" href="https://blog.csdn.net/as480133937/article/details/104927922"  target="_blank" rel="noopener"
+    >【STM32】 DMA原理，步骤超细详解，一文看懂DMA-CSDN博客</a>
+<a class="link" href="https://www.iotword.com/25305.html"  target="_blank" rel="noopener"
+    >STM32CubeIDE HAL库DMA与UART不定长数据接收实现：空闲中断详解-物联沃-IOTWORD物联网</a>
+<a class="link" href="https://blog.csdn.net/qq_47159466/article/details/124542339"  target="_blank" rel="noopener"
+    >STM32 hal库串口空闲中断最新用法_stm32hal库串口空闲中断-CSDN博客</a>
+<a class="link" href="https://blog.csdn.net/soledade/article/details/129030082"  target="_blank" rel="noopener"
+    >HAL库 串口空闲中断+DMA接收不定长数据 详解及踩坑_hal库串口空闲中断-CSDN博客</a></p>
+<h2 id="dma">DMA
+</h2><p>DMA，全称为<code>Direct Memory Access</code>，直接内存访问，本质是将传输数据从一个内存空间搬运至另一个内存空间，可以用来提供外设和内存，内存和外设之间的高速数据传输</p>
+<h3 id="usart发送">USART发送
+</h3><p>在普通的轮询<code>USART</code>中，CPU一直在等待外设发送数据，外设每发送一字节，CPU就从内存中移动一字节数据到外设的寄存器</p>
+<p>在中断的<code>USART</code>中，外设每从寄存器中发送一字节数据，就会触发一次发送数据寄存器空中断，使CPU回来将数据从内存搬运至外设的寄存器中</p>
+<h4 id="usart的dma发送">USART的DMA发送
+</h4><p>没有DMA的话，CPU会作为数据发送的中转站，而使用DMA的话，整个数据传输过程不需要CPU的参与，由DMA代理执行，DMA负责将内存数据搬运至外设的传输寄存器</p>
+<p>在整个数据发送过半时会触发一个传输过半中断，所有数据传输完成后会调用传输完成中断回调函数（<code>HAL_UART_TxCpltCallback</code>）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UART_Transmit_DMA</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">pData</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>HAL_UART_Transmit_DMA</code>的传输完成中断回调函数<code>HAL_UART_TxCpltCallback</code>以及传输过半中断回调函数<code>HAL_UART_TxHalfCpltCallback</code></p>
+<h4 id="dma发送注意事项">DMA发送注意事项
+</h4><p>在传输的过程中，当传输一半的数据后，半传输标志(HTIF)被置1，当设置了允许半传输中断位(HTIE)时，将产生一个中断请求。在数据传输结束后，传输完成标志(TCIF)被置1，当设置了允许传输完成中断位 (TCIE)时，将产生一个中断请求</p>
+<p>会触发的三个中断，传输完成中断，传输过半中断，错误中断
+在<code>stm32f1xx_hal_uart.c</code>的<code>HAL_UART_Transmit_DMA</code>函数中可以查看到</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UART_Transmit_DMA</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">pData</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>  
+</span></span><span class="line"><span class="cl">	  <span class="p">.</span>
+</span></span><span class="line"><span class="cl">	  <span class="p">.</span>
+</span></span><span class="line"><span class="cl">	  <span class="p">.</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Set the UART DMA transfer complete callback */</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmatx</span><span class="o">-&gt;</span><span class="n">XferCpltCallback</span> <span class="o">=</span> <span class="n">UART_DMATransmitCplt</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Set the UART DMA Half transfer complete callback */</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmatx</span><span class="o">-&gt;</span><span class="n">XferHalfCpltCallback</span> <span class="o">=</span> <span class="n">UART_DMATxHalfCplt</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Set the DMA error callback */</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmatx</span><span class="o">-&gt;</span><span class="n">XferErrorCallback</span> <span class="o">=</span> <span class="n">UART_DMAError</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">	  <span class="p">.</span>
+</span></span><span class="line"><span class="cl">	  <span class="p">.</span>
+</span></span><span class="line"><span class="cl">	  <span class="p">.</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="usart接收">USART接收
+</h3><p>在普通的轮询<code>USART</code>中，CPU一直在询问外设是否接收完数据，外设接收一字节数据，该位数据由CPU从外设的接收数据寄存器运进内存，CPU再次询问外设是否接收完数据，再运，直至整个数据结束完成</p>
+<p>而在中断<code>USART</code>中，外设每接收一字节数据，触发一次数据接收寄存器非空中断，CPU过来将数据从寄存器搬运至内存，所有数据接收完成后，会调用接收完成中断回调函数（<code>HAL_UART_RxCpltCallback</code>）</p>
+<h4 id="usart的dma接收">USART的DMA接收
+</h4><p>没有DMA的话，CPU会作为数据转运的中转站，而使用DMA的话，整个数据转运过程不需要CPU的参与，由DMA代理执行</p>
+<p>在整个数据接收过半时会触发一个传输过半中断，所有数据接收完成后会调用传输完成中断回调函数（<code>HAL_UART_RxCpltCallback</code>）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UART_Receive_DMA</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">pData</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>HAL_UART_Receive_DMA</code>的接收完成中断回调函数<code>HAL_UART_RxCpltCallback</code>以及接收过半中断回调函数<code>HAL_UART_RxHalfCpltCallback</code></p>
+<h4 id="dma接收注意事项">DMA接收注意事项
+</h4><p>同DMA发送，类比即可</p>
+<h2 id="hal库usart使用dma">HAL库USART使用DMA
+</h2><p>如果<code>USART</code>串口的DMA出现错误，会调用<code>HAL_UART_ErrorCallback</code></p>
+<h3 id="dma发送">DMA发送
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UART_Transmit_DMA</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">pData</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>会触发中断</p>
+<ol>
+<li><code>HAL_UART_TxCpltCallback</code></li>
+<li><code>HAL_UART_TxHalfCpltCallback</code></li>
+</ol>
+<h3 id="dma接收">DMA接收
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UART_Receive_DMA</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">pData</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>会触发的中断</p>
+<ol>
+<li><code>HAL_UART_RxCpltCallback</code></li>
+<li><code>HAL_UART_RxHalfCpltCallback</code></li>
+</ol>
+<h3 id="dma模式">DMA模式
+</h3><h4 id="normal模式">normal模式
+</h4><p>以接收为例
+单次接收，接收至数据上限，完成整个固定数据接收后停止，再次接收需要再次开启<code>HAL_UART_Receive_DMA</code>
+，需要软件显式重启，触发接收过半和接收完成中断</p>
+<p>summary：单次传输，完成后停止，需要软件显式重启，接收过半和接收完成中断</p>
+<h4 id="circular模式">circular模式
+</h4><p>以接收为例
+无限循环，接收至数据上限一半，触发接收过半中断，接受至数据上限，触发接收完成中断，同时会硬件自动重启，接收完成中断会调用``</p>
+<p>summary：无限循环，硬件自动重启，接收过半和接收完成中断</p>
+<h4 id="说明">说明
+</h4><h2 id="空闲中断">空闲中断
+</h2><h3 id="空闲中断定义">空闲中断定义
+</h3><p><strong>空闲中断（IDLE Interrupt）</strong> 是UART通信中的一种特殊中断类型，它在检测到UART接收线路<strong>连续空闲超过1个字节传输时间</strong>时触发的中断。&ldquo;空闲&quot;指线路保持<strong>逻辑1状态</strong>（高电平），线上无数据传输</p>
+<h3 id="hal库自带的空闲中断实现">HAL库自带的空闲中断实现
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//在阻塞模式下接收一定数量的数据，直到接收到预期数量的数据或发生空闲事件。 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UARTEx_ReceiveToIdle</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">pData</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="o">*</span><span class="n">RxLen</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">Timeout</span><span class="p">);</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//在中断模式下接收一定数量的数据，直到接收到预期数量的数据或发生空闲事件。 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UARTEx_ReceiveToIdle_IT</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">pData</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">);</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//在DMA模式下接收一定数量的数据，直到接收到预期数量的数据或发生空闲事件。 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">pData</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">);</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//使用空闲中断时的接收回调函数 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">HAL_UARTEx_RxEventCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在触发空闲中断，接收完成中断都会调用<code>HAL_UARTEx_RxEventCallback</code>回调函数，需要注意的是在<code>F103c8t6</code>单片机上，使用<code>HAL_UARTEx_ReceiveToIdle_DMA</code>时，接收过半中断也会去调用该回调函数</p>
+<h4 id="接收过半中断的处理">接收过半中断的处理
+</h4><p><a class="link" href="https://www.iotword.com/25305.html"  target="_blank" rel="noopener"
+    >STM32CubeIDE HAL库DMA与UART不定长数据接收实现：空闲中断详解-物联沃-IOTWORD物联网</a>
+<code>HAL_UARTEx_RecceiveToIdle_DMA</code>会调用<code>UART_Start_Receive_DMA(huart, pData, Size)</code>函数，该函数会把DMA中断传输完成，半传输，传输错误全部开启</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">__HAL_DMA_ENABLE_IT</span><span class="p">(</span><span class="n">DMA_IT_TC</span> <span class="o">|</span> <span class="n">DMA_IT_HC</span> <span class="o">|</span> <span class="n">DMA_IT_TE</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>UART_Start_Receive_DMA(huart, pData, Size)</code> 设置接收数组缓存到达数组一半时会执行下面的回调函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Set the UART DMA Half transfer complete callback */</span>  
+</span></span><span class="line"><span class="cl">  <span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="o">-&gt;</span><span class="n">XferHalfCpltCallback</span> <span class="o">=</span> <span class="n">UART_DMARxHalfCplt</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>而<code>UART_DMARxHalfCplt</code>会调用<code>HAL_UARTEx_RxEventCallback</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">UART_DMARxHalfCplt</span><span class="p">(</span><span class="n">DMA_HandleTypeDef</span> <span class="o">*</span><span class="n">hdma</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>  
+</span></span><span class="line"><span class="cl">  <span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span> <span class="o">=</span> <span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="p">)((</span><span class="n">DMA_HandleTypeDef</span> <span class="o">*</span><span class="p">)</span><span class="n">hdma</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Parent</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Initialize type of RxEvent that correspond to RxEvent callback execution;  
+</span></span></span><span class="line"><span class="cl"><span class="cm">     In this case, Rx Event type is Half Transfer */</span>  <span class="n">huart</span><span class="o">-&gt;</span><span class="n">RxEventType</span> <span class="o">=</span> <span class="n">HAL_UART_RXEVENT_HT</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Check current reception Mode :  
+</span></span></span><span class="line"><span class="cl"><span class="cm">     If Reception till IDLE event has been selected : use Rx Event callback */</span>  <span class="k">if</span> <span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">ReceptionType</span> <span class="o">==</span> <span class="n">HAL_UART_RECEPTION_TOIDLE</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>  
+</span></span><span class="line"><span class="cl"><span class="cp">#if (USE_HAL_UART_REGISTER_CALLBACKS == 1)  
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cm">/*Call registered Rx Event callback*/</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">huart</span><span class="o">-&gt;</span><span class="nf">RxEventCallback</span><span class="p">(</span><span class="n">huart</span><span class="p">,</span> <span class="n">huart</span><span class="o">-&gt;</span><span class="n">RxXferSize</span> <span class="o">/</span> <span class="mi">2U</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl"><span class="cp">#else  
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cm">/*Call legacy weak Rx Event callback*/</span>  
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UARTEx_RxEventCallback</span><span class="p">(</span><span class="n">huart</span><span class="p">,</span> <span class="n">huart</span><span class="o">-&gt;</span><span class="n">RxXferSize</span> <span class="o">/</span> <span class="mi">2U</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl"><span class="cp">#endif </span><span class="cm">/* USE_HAL_UART_REGISTER_CALLBACKS */</span><span class="cp">  
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>  <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="cm">/* In other cases : use Rx Half Complete callback */</span>  
+</span></span><span class="line"><span class="cl"><span class="cp">#if (USE_HAL_UART_REGISTER_CALLBACKS == 1)  
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cm">/*Call registered Rx Half complete callback*/</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">huart</span><span class="o">-&gt;</span><span class="nf">RxHalfCpltCallback</span><span class="p">(</span><span class="n">huart</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl"><span class="cp">#else  
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cm">/*Call legacy weak Rx Half complete callback*/</span>  
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UART_RxHalfCpltCallback</span><span class="p">(</span><span class="n">huart</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl"><span class="cp">#endif </span><span class="cm">/* USE_HAL_UART_REGISTER_CALLBACKS */</span><span class="cp">  
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>  <span class="p">}</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>为了避免接收过半中断的调用，需要使用下面的语句</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">__HAL_DMA_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hdma_usart1_rx</span><span class="p">,</span><span class="n">DMA_IT_HT</span><span class="p">);</span><span class="c1">//关闭dma接收半满中断函数，这样我们在接收一组数据时就不会触发半满中断，dma就可以正常接收一组数据
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>另外在<code>UART_DMAReceiveCplt</code>函数中也调用了<code>HAL_UARTEx_RxEventCallback</code>函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">UART_DMAReceiveCplt</span><span class="p">(</span><span class="n">DMA_HandleTypeDef</span> <span class="o">*</span><span class="n">hdma</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="dma空闲中断的实现接收不定长数据">DMA+空闲中断的实现接收不定长数据
+</h2><h3 id="方式1">方式1
+</h3><p>自定义DMA+空闲中断</p>
+<h4 id="前置内容">前置内容
+</h4><p>需要自己写的宏定义</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define __HAL_DMA_SET_COUNTERT(__HANDLE__,__COUNTER__)  ((__HANDLE__)-&gt;Instance-&gt;CNDTR = (uint16_t)(__COUNTER__))
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">//重新设定计数值
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//用法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">__HAL_DMA_SET_COUNTERT</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">,</span><span class="n">rxBufferLen</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>用到的宏定义</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">__HAL_DMA_GET_COUNTER</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//获取剩余未传输的计数值
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>用到的关于中断的操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">__HAL_DMA_DISABLE</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">)</span><span class="c1">//关闭DMA
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">__HAL_DMA_ENABLE</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">)</span><span class="c1">//开启DMA
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//清除空闲标志位
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">__HAL_UART_CLEAR_IDLEFLAG</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//开启空闲中断
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">__HAL_UART_ENABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span> <span class="p">,</span> <span class="n">UART_IT_IDLE</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//关闭空闲中断
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">__HAL_UART_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="n">UART_IT_IDLE</span> <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="代码实现">代码实现
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define rxBufferLen 10
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">uint8_t</span> <span class="n">rxBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">];</span>  
+</span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">txBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">UART_InitDMAReceive</span><span class="p">()</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="nf">__HAL_UART_CLEAR_IDLEFLAG</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">);</span><span class="c1">//清除空闲中断标志位
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">__HAL_UART_ENABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span> <span class="p">,</span> <span class="n">UART_IT_IDLE</span> <span class="p">);</span><span class="c1">//使能空闲中断  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">HAL_UART_Receive_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">rxBuffer</span><span class="p">,</span> <span class="n">rxBufferLen</span><span class="p">);</span><span class="c1">//开启DMA接收
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>需要关闭DMA才能重设DMA的COUNTER</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//自定义的DMA空闲中断回调函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">UART_DMAIdleCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">)</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">huart</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">huart1</span> <span class="p">)</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">__HAL_DMA_DISABLE</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">);</span><span class="c1">//失能DMA
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">datalen</span> <span class="o">=</span> <span class="n">rxBufferLen</span> <span class="o">-</span> <span class="nf">__HAL_DMA_GET_COUNTER</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">datalen</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">            <span class="kt">char</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">rxBuffer</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">txBuffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">temp</span> <span class="o">&gt;=</span> <span class="sc">&#39;a&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">temp</span> <span class="o">&lt;=</span> <span class="sc">&#39;z&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="n">temp</span><span class="o">-</span><span class="mi">32</span><span class="o">:</span><span class="n">temp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_UART_Transmit_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">txBuffer</span><span class="p">,</span><span class="n">datalen</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">__HAL_DMA_SET_COUNTERT</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">,</span><span class="n">rxBufferLen</span><span class="p">);</span><span class="c1">//重置DMA计数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">__HAL_DMA_ENABLE</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">);</span><span class="c1">//使能DMA 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">USART1_IRQHandler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* USER CODE BEGIN USART1_IRQn 0 */</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* USER CODE END USART1_IRQn 0 */</span>  <span class="nf">HAL_UART_IRQHandler</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* USER CODE BEGIN USART1_IRQn 1 */</span> 
+</span></span><span class="line"><span class="cl">  <span class="c1">//触发空闲中断后，会进入中断请求处理函数 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nf">__HAL_UART_GET_FLAG</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span> <span class="p">,</span> <span class="n">UART_FLAG_IDLE</span><span class="p">)</span> <span class="o">!=</span> <span class="n">RESET</span> <span class="p">)</span> <span class="p">{</span><span class="c1">//在此判断是否为空闲中断
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">__HAL_UART_CLEAR_IDLEFLAG</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">);</span><span class="c1">//清除空闲中断标志位
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">__HAL_UART_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="n">UART_IT_IDLE</span><span class="p">);</span><span class="c1">//失能空闲中断
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">UART_DMAIdleCallback</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">);</span><span class="c1">//调用自定义中断回调函数 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">__HAL_UART_ENABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="n">UART_IT_IDLE</span><span class="p">);</span><span class="c1">//使能空闲中断  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* USER CODE END USART1_IRQn 1 */</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="关于normal和circular在方式1的空闲中断实现的区别">关于normal和circular在方式1的空闲中断实现的区别
+</h4><h5 id="normal模式-1">normal模式
+</h5><p>在上述空闲中断实现中，如果使用<code>normal</code>模式，需要注意接收的数据一定不能超过<code>rxBufferLen</code>，一旦超过，<code>DMA</code>接收就会终止</p>
+<p>执行流程是，触发空闲中断，进入<code>USART1_IRQHandler</code>，再进入自定义空闲中断，在里面重新设置了<code>DMA</code>的计数值（指针也会重新设置，重新指向<code>rxBuffer[0]</code>），最开始开启的<code>HAL_UART_Receive_DMA</code>始终没有接收完 完整的数据，就不会关闭，一直接收</p>
+<p>但如果接收的数据超过<code>rxBufferLen</code>，会触发接收过半和接收完成中断（对应回调函数没使用，约等于空函数），同时<code>HAL_UART_Receive_DMA</code>会结束，需要软件显式重启</p>
+<p>例如：<code>rxBufferlen=10</code>，发送<code>12345678910</code>，会回复<code>1234567891</code>，随后<code>DMA</code>终止，再发送数据无回复</p>
+<h5 id="circular模式-1">circular模式
+</h5><p>在上述空闲中断实现中，如果使用<code>circular</code>模式，则接收的数据可以超过<code>rxBufferLen</code>，超过后，<code>DMA</code>接收会自动重启</p>
+<p>执行流程是，触发空闲中断，进入<code>USART1_IRQHandler</code>，再进入自定义空闲中断，在里面重新设置了<code>DMA</code>的计数值（指针也会重新设置，重新指向<code>rxBuffer[0]</code>），就算接收数据超过<code>rxBufferLen</code>，<code>HAL_UART_Receive_DMA</code>也会重新启动</p>
+<p>但是需要注意，如果达到<code>rxBufferLen</code>,会触发接收过半和接收完成中断，然后硬件重启，重新回到<code>rxBufferLen[0]</code>的位置读数据，直至发生空闲中断</p>
+<p>例如：<code>rxBufferlen=10</code>，发送<code>12345678910</code>，会回复<code>0</code>，随后<code>DMA</code>仍然正常工作</p>
+<h3 id="方式2">方式2
+</h3><p>使用<code>HAL</code>库提供的空闲中断，使用<code>normal</code>模式</p>
+<p>该方式下的空闲中断回调函数为<code>HAL_UARTEx_RxEventCallback</code>
+，需要注意接收过半中断也会调用<code>HAL_UARTEx_RxEventCallback</code>的问题，在每次开启<code>HAL_UARTEx_ReceiveToIdle_DMA</code>后都需要关闭接收过半中断</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">__HAL_DMA_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hdma_usart1_rx</span><span class="p">,</span><span class="n">DMA_IT_HT</span><span class="p">);</span><span class="c1">//关闭dma接收半满中断函数，这样我们在接收一组数据时就不会触发半满中断，dma就可以正常接收一组数据
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>当接收数据超过<code>rxBufferLen</code>时，接收完成中断函数会调用<code>HAL_UARTEx_RxEventCallback</code>回调函数，然后重新开启接收</p>
+<p>例如：<code>rxBufferLen=10</code>，接收<code>12345678910</code>，发送<code>1234567891</code>（就是因为接收完成中断导致），后面<code>DMA</code>空闲中断接收正常开启</p>
+<h4 id="代码实现-1">代码实现
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Init_IdleDMA</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span><span class="c1">//初始化，开启DMA空闲中断接收
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">rxBuffer</span><span class="p">,</span> <span class="n">rxBufferLen</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="nf">__HAL_DMA_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hdma_usart1_rx</span><span class="p">,</span> <span class="n">DMA_IT_HT</span><span class="p">);</span><span class="c1">//关闭f103板子DMA的接收过半中断  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_UARTEx_RxEventCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span> <span class="p">{</span><span class="c1">//接收完成和接收过半，空闲中断都会调用该中断回调函数  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">huart</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">huart1</span> <span class="p">)</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">memcpy</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">,</span> <span class="n">rxBuffer</span><span class="p">,</span> <span class="n">Size</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">txBuffer</span><span class="p">,</span> <span class="n">Size</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">rxBuffer</span><span class="p">,</span> <span class="n">rxBufferLen</span><span class="p">);</span><span class="c1">//normal模式，接受一次后需要重新开启  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">__HAL_DMA_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hdma_usart1_rx</span><span class="p">,</span> <span class="n">DMA_IT_HT</span><span class="p">);</span><span class="c1">//关闭f103板子DMA的接收过半中断  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="关于normal和circular在方式2下的空闲中断实现的区别">关于normal和circular在方式2下的空闲中断实现的区别
+</h4><h5 id="normal模式-2">normal模式
+</h5><p>方式2中，在数据接收过半，接收完成，空闲时会触发对应中断，最后调用<code>HAL_UARTEx_RxEventCallback</code>回调函数，在回调函数中软件显式重启<code>HAL_UARTEx_ReceiveToIdle_DMA</code></p>
+<h5 id="circular模式-2">circular模式
+</h5><p>方式2中，若使用<code>circular</code>模式，则数据会一直积累，到达<code>rxBufferLen</code>时，会硬件重启，同时也会有数据接收过半，接收完成，空闲时会触发对应中断，最后调用<code>HAL_UARTEx_RxEventCallback</code>回调函数</p>
+<p>例如：
+(1)关闭接收过半中断
+<code>rxBufferLen=10</code>，接收<code>123</code>，发送<code>123</code>，
+再接收<code>456</code>，发送<code>123456</code>，
+再接收<code>78910</code>，会先发送<code>1234567891</code>（接收完成），再发送<code>0</code>（空闲中断），
+再接收<code>111213</code>，发送<code>0111213</code></p>
+<p>(2)未关闭接收过半中断
+<code>rxBufferLen=10</code>，接收<code>123</code>，发送<code>123</code>，
+再接收<code>123</code>，会先发送<code>12312</code>（接收过半中断），再发送<code>123123</code>空闲中断，
+再接收<code>12345</code>，会先发送<code>1231231234</code>（接收完成中断），再发送<code>5</code>空闲中断</p>
+<h3 id="方式3">方式3
+</h3><p>使用<code>HAL</code>库提供的空闲中断，但是使用<code>circular</code>模式实现</p>
+<p>在<code>circuar</code>要想实现一帧一帧不定长数据的接收主要需要考虑的就是如何实现在接收完一帧后让<code>DMA</code>的计数值重置</p>
+<h4 id="实现原理">实现原理
+</h4><h5 id="关闭">关闭
+</h5><p>要实现<code>DMA</code>计数值的重置，需要使用<code>HAL_UART_DMAStop(&amp;huart1)</code>函数将DMA关闭</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UART_DMAStop</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>  
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">dmarequest</span> <span class="o">=</span> <span class="mh">0x00U</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* The Lock is not implemented on this API to allow the user application  
+</span></span></span><span class="line"><span class="cl"><span class="cm">     to call the HAL UART API under callbacks HAL_UART_TxCpltCallback() / HAL_UART_RxCpltCallback():     when calling HAL_DMA_Abort() API the DMA TX/RX Transfer complete interrupt is generated     and the correspond call back is executed HAL_UART_TxCpltCallback() / HAL_UART_RxCpltCallback()     */</span>  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Stop UART DMA Tx request if ongoing */</span>  <span class="n">dmarequest</span> <span class="o">=</span> <span class="nf">HAL_IS_BIT_SET</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">Instance</span><span class="o">-&gt;</span><span class="n">CR3</span><span class="p">,</span> <span class="n">USART_CR3_DMAT</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">((</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">gState</span> <span class="o">==</span> <span class="n">HAL_UART_STATE_BUSY_TX</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">dmarequest</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="nf">ATOMIC_CLEAR_BIT</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">Instance</span><span class="o">-&gt;</span><span class="n">CR3</span><span class="p">,</span> <span class="n">USART_CR3_DMAT</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Abort the UART DMA Tx channel */</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmatx</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">      <span class="nf">HAL_DMA_Abort</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmatx</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">    <span class="nf">UART_EndTxTransfer</span><span class="p">(</span><span class="n">huart</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Stop UART DMA Rx request if ongoing */</span>  
+</span></span><span class="line"><span class="cl">  <span class="n">dmarequest</span> <span class="o">=</span> <span class="nf">HAL_IS_BIT_SET</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">Instance</span><span class="o">-&gt;</span><span class="n">CR3</span><span class="p">,</span> <span class="n">USART_CR3_DMAR</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">((</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">RxState</span> <span class="o">==</span> <span class="n">HAL_UART_STATE_BUSY_RX</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">dmarequest</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="nf">ATOMIC_CLEAR_BIT</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">Instance</span><span class="o">-&gt;</span><span class="n">CR3</span><span class="p">,</span> <span class="n">USART_CR3_DMAR</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Abort the UART DMA Rx channel */</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">      <span class="nf">HAL_DMA_Abort</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">    <span class="nf">UART_EndRxTransfer</span><span class="p">(</span><span class="n">huart</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">HAL_OK</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中会调用<code>HAL_DMA_Abort(huart-&gt;hdmatx)</code>，但都不会重置DMA的计数值</p>
+<h5 id="开启">开启
+</h5><p>在关闭<code>DMA</code>后，需要<code>HAL_UARTEx_ReceiveToIdle_DMA(&amp;huart1, (uint8_t*)rxBuffer, rxBufferLen)</code>重新开启<code>DMA</code>以及空闲中断</p>
+<p>在<code>HAL_UARTEx_ReceiveToIdle_DMA</code>中，会进行判断<code>if (huart-&gt;RxState == HAL_UART_STATE_READY) </code>，判断<code>RxState</code>是否为<code>HAL_UART_STATE_READY</code>，如果是，则说明<code>uart</code>没有开启，但是是在预备状态，随后会去调用<code>UART_Start_Receive_DMA(huart, pData, Size)</code>开启<code>uart</code>以及<code>DMA</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">pData</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>  
+</span></span><span class="line"><span class="cl">  <span class="n">HAL_StatusTypeDef</span> <span class="n">status</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Check that a Rx process is not already ongoing */</span>  
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">RxState</span> <span class="o">==</span> <span class="n">HAL_UART_STATE_READY</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">((</span><span class="n">pData</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">Size</span> <span class="o">==</span> <span class="mi">0U</span><span class="p">))</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">HAL_ERROR</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Set Reception type to reception till IDLE Event*/</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">huart</span><span class="o">-&gt;</span><span class="n">ReceptionType</span> <span class="o">=</span> <span class="n">HAL_UART_RECEPTION_TOIDLE</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">huart</span><span class="o">-&gt;</span><span class="n">RxEventType</span> <span class="o">=</span> <span class="n">HAL_UART_RXEVENT_TC</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="n">status</span> <span class="o">=</span>  <span class="nf">UART_Start_Receive_DMA</span><span class="p">(</span><span class="n">huart</span><span class="p">,</span> <span class="n">pData</span><span class="p">,</span> <span class="n">Size</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Check Rx process has been successfully started */</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">ReceptionType</span> <span class="o">==</span> <span class="n">HAL_UART_RECEPTION_TOIDLE</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">      <span class="nf">__HAL_UART_CLEAR_IDLEFLAG</span><span class="p">(</span><span class="n">huart</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">      <span class="nf">ATOMIC_SET_BIT</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">Instance</span><span class="o">-&gt;</span><span class="n">CR1</span><span class="p">,</span> <span class="n">USART_CR1_IDLEIE</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">      <span class="cm">/* In case of errors already pending when reception is started,  
+</span></span></span><span class="line"><span class="cl"><span class="cm">         Interrupts may have already been raised and lead to reception abortion.         (Overrun error for instance).         In such case Reception Type has been reset to HAL_UART_RECEPTION_STANDARD. */</span>      <span class="n">status</span> <span class="o">=</span> <span class="n">HAL_ERROR</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">status</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">HAL_BUSY</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在<code>UART_Start_Receive_DMA</code>中会将<code>uart</code>的<code>RxState</code>设置为<code>HAL_UART_STATE_BUSY_RX</code>，中间还会去调用<code>HAL_DMA_Start_IT</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">UART_Start_Receive_DMA</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">pData</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>  
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="o">*</span><span class="n">tmp</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">huart</span><span class="o">-&gt;</span><span class="n">pRxBuffPtr</span> <span class="o">=</span> <span class="n">pData</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  <span class="n">huart</span><span class="o">-&gt;</span><span class="n">RxXferSize</span> <span class="o">=</span> <span class="n">Size</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">huart</span><span class="o">-&gt;</span><span class="n">ErrorCode</span> <span class="o">=</span> <span class="n">HAL_UART_ERROR_NONE</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  <span class="n">huart</span><span class="o">-&gt;</span><span class="n">RxState</span> <span class="o">=</span> <span class="n">HAL_UART_STATE_BUSY_RX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="p">......</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">HAL_DMA_Start_IT</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="o">&amp;</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">Instance</span><span class="o">-&gt;</span><span class="n">DR</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="o">*</span><span class="p">)</span><span class="n">tmp</span><span class="p">,</span> <span class="n">Size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">......</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在<code>HAL_DMA_Start_IT</code>会调用<code>DMA_SetConfig</code>去对<code>DMA</code>计数值等进行重置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_DMA_Start_IT</span><span class="p">(</span><span class="n">DMA_HandleTypeDef</span> <span class="o">*</span><span class="n">hdma</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">SrcAddress</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">DstAddress</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">DataLength</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="p">......</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Configure the source, destination address and the data length &amp; clear flags*/</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">DMA_SetConfig</span><span class="p">(</span><span class="n">hdma</span><span class="p">,</span> <span class="n">SrcAddress</span><span class="p">,</span> <span class="n">DstAddress</span><span class="p">,</span> <span class="n">DataLength</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">......</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="原理总结">原理总结
+</h4><p>1.<code>HAL_UARTEx_ReceiveToIdle_DMA</code>如果判断出<code>huart-&gt;RxState == HAL_UART_STATE_READY</code>会调用<code>UART_Start_Receive_DMA</code></p>
+<p>2.<code>UART_Start_Receive_DMA</code>会调用<code>HAL_DMA_Start_IT</code>，同时会将<code>RxState</code>修改为<code>BUSY</code>
+<code>huart-&gt;RxState = HAL_UART_STATE_BUSY_RX</code></p>
+<p>3.<code>HAL_DMA_Start_IT</code>会调用<code>DMA_SetConfig</code>进行<code>DMA</code>计数值等的重置</p>
+<p>而使用<code>HAL_UART_DMAStop</code>可以保证在回调函数处理数据时停止<code>DMA</code>接收，保证数据不会被覆盖，同时可以将<code>huart-&gt;RxState</code>状态设置为<code>HAL_UART_STATE_READY</code>，随后再次开启<code>DMA</code>空闲中断接收就能重置<code>DMA</code>计数值</p>
+<p>从而实现非定长数据的接收</p>
+<h4 id="代码实现-2">代码实现
+</h4><p>同样注意，需要关闭接收过半中断</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define rxBufferLen 512
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">uint8_t</span> <span class="n">rxBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">];</span>  
+</span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">txBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">Init_IdleDMA</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">rxBuffer</span><span class="p">,</span> <span class="n">rxBufferLen</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="nf">__HAL_DMA_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hdma_usart1_rx</span><span class="p">,</span> <span class="n">DMA_IT_HT</span><span class="p">);</span><span class="c1">//关闭DMA的接收过半中断  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//回调函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">HAL_UARTEx_RxEventCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span> <span class="p">{</span><span class="c1">//接收完成和接收过半，空闲中断都会调用该中断回调函数  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">huart</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">huart1</span> <span class="p">)</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_UART_DMAStop</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">);</span><span class="c1">//不会改变DMA的计数值 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">memcpy</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">,</span> <span class="n">rxBuffer</span><span class="p">,</span> <span class="n">Size</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">txBuffer</span><span class="p">,</span> <span class="n">Size</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">memset</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Size</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">rxBuffer</span><span class="p">,</span> <span class="n">rxBufferLen</span><span class="p">);</span><span class="c1">//如果是normal模式，接受一次后需要重新开启，如果关闭了DMA，也需要重新启动  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">__HAL_DMA_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hdma_usart1_rx</span><span class="p">,</span> <span class="n">DMA_IT_HT</span><span class="p">);</span><span class="c1">//关闭f103板子DMA的接收过半中断  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="实验检验">实验检验
+</h4><p>我们设置<code>cnt_i</code>去记录<code>AL_UART_DMAStop(&amp;huart1)</code>前后以及<code>HAL_UARTEx_ReceiveToIdle_DMA(&amp;huart1, (uint8_t*)rxBuffer, rxBufferLen)</code>前后的<code>DMA</code>计数值变化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define rxBufferLen 512
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">uint8_t</span> <span class="n">rxBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">];</span>  
+</span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">txBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Init_IdleDMA</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">rxBuffer</span><span class="p">,</span> <span class="n">rxBufferLen</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="nf">__HAL_DMA_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hdma_usart1_rx</span><span class="p">,</span> <span class="n">DMA_IT_HT</span><span class="p">);</span><span class="c1">//关闭DMA的接收过半中断  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_UARTEx_RxEventCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span> <span class="p">{</span><span class="c1">//接收完成和接收过半，空闲中断都会调用该中断回调函数  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">huart</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">huart1</span> <span class="p">)</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="kt">uint32_t</span> <span class="n">cnt_1</span> <span class="o">=</span> <span class="nf">__HAL_DMA_GET_COUNTER</span><span class="p">(</span><span class="n">huart1</span><span class="p">.</span><span class="n">hdmarx</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_UART_DMAStop</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">);</span><span class="c1">//不会改变DMA的计数值  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">uint32_t</span> <span class="n">cnt_2</span> <span class="o">=</span> <span class="nf">__HAL_DMA_GET_COUNTER</span><span class="p">(</span><span class="n">huart1</span><span class="p">.</span><span class="n">hdmarx</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="nf">memcpy</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">,</span> <span class="n">rxBuffer</span><span class="p">,</span> <span class="n">Size</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">txBuffer</span><span class="p">,</span> <span class="n">Size</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">memset</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Size</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">rxBuffer</span><span class="p">,</span> <span class="n">rxBufferLen</span><span class="p">);</span><span class="c1">//如果是normal模式，接受一次后需要重新开启，如果关闭了DMA，也需要重新启动  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">__HAL_DMA_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hdma_usart1_rx</span><span class="p">,</span> <span class="n">DMA_IT_HT</span><span class="p">);</span><span class="c1">//关闭f103板子DMA的接收过半中断  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  
+</span></span><span class="line"><span class="cl">        <span class="kt">uint32_t</span> <span class="n">cnt_3</span> <span class="o">=</span> <span class="nf">__HAL_DMA_GET_COUNTER</span><span class="p">(</span><span class="n">huart1</span><span class="p">.</span><span class="n">hdmarx</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="nf">sprintf</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">,</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">cnt_1=%d cnt_2=%d cnt_3=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">cnt_1</span><span class="p">,</span><span class="n">cnt_2</span><span class="p">,</span><span class="n">cnt_3</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">txBuffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">),</span> <span class="mi">10</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>实验结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输入：123456789101112131415161718192021
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">输出：123456789101112131415161718192021  
+</span></span><span class="line"><span class="cl">cnt_1=479 cnt_2=479 cnt_3=512
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>证明我们在重启<code>DMA</code>空闲中断时实现了<code>DMA</code>计数值重置</p>
+<h3 id="方式4">方式4
+</h3><p>再仔细想一想，在<code>circuar</code>要想实现一帧一帧不定长数据的接收主要需要考虑的就是如何实现在接收完一帧后让<code>DMA</code>的计数值重置，也就是说没有必要为此使用<code>HAL_UART_DMAStop</code>再重启<code>DMA</code>空闲中断接收</p>
+<p>如何优化呢，结合方式1的实现就可以得到答案</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">__HAL_DMA_DISABLE</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">);</span><span class="c1">//需要关闭DMA才能重设DMA的COUNTER  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">__HAL_DMA_SET_COUNTERT</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">,</span><span class="n">rxBufferLen</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">__HAL_DMA_ENABLE</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">);</span><span class="c1">//需要关闭DMA才能重设DMA的COUNTER
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="代码实现-3">代码实现
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define __HAL_DMA_SET_COUNTERT(__HANDLE__,__COUNTER__)  ((__HANDLE__)-&gt;Instance-&gt;CNDTR = (uint16_t)(__COUNTER__))  
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">//重新设定计数值  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define rxBufferLen 512
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">uint8_t</span> <span class="n">rxBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">];</span>  
+</span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">txBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Init_IdleDMA</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">rxBuffer</span><span class="p">,</span> <span class="n">rxBufferLen</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="nf">__HAL_DMA_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hdma_usart1_rx</span><span class="p">,</span> <span class="n">DMA_IT_HT</span><span class="p">);</span><span class="c1">//关闭DMA的接收过半中断  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_UARTEx_RxEventCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">huart</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">huart1</span> <span class="p">)</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">__HAL_DMA_DISABLE</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">);</span><span class="c1">//需要关闭DMA才能重设DMA的COUNTER  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">__HAL_DMA_SET_COUNTERT</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">,</span><span class="n">rxBufferLen</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">memcpy</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">,</span> <span class="n">rxBuffer</span><span class="p">,</span> <span class="n">Size</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">txBuffer</span><span class="p">,</span> <span class="n">Size</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="nf">__HAL_DMA_ENABLE</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="p">);</span><span class="c1">//需要关闭DMA才能重设DMA的COUNTER  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/dma%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/">DMA空闲中断</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Nomad
+    </section>
+    
+    <section class="powerby">
+        
+            experience <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
