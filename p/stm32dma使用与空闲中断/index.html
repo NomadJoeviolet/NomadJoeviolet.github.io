@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="STM32 hal库串口空闲中断最新用法 - STM32团队 ST意法半导体中文论坛 （非常详细）【STM32】 DMA原理，步骤超细详解，一文看懂DMA-CSDN博客 STM32CubeIDE HAL库DMA与UART不定长数据接收实现：空闲中断详解-物联沃-IOTWORD物联网 STM32 hal库串口空闲中断最新用法_stm32hal库串口空闲中断-CSDN博客 HAL库 串口空闲中断+DMA接收不定长数据 详解及踩坑_hal库串口空闲中断-CSDN博客\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="STM32 hal库串口空闲中断最新用法 - STM32团队 ST意法半导体中文论坛\n（非常详细）【STM32】 DMA原理，步骤超细详解，一文看懂DMA-CSDN博客\n">
 <title>STM32——DMA使用与空闲中断</title>
 
 <link rel='canonical' href='https://NomadJoeviolet.github.io/p/stm32dma%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/'>
 
 <link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="STM32——DMA使用与空闲中断">
-<meta property='og:description' content="STM32 hal库串口空闲中断最新用法 - STM32团队 ST意法半导体中文论坛 （非常详细）【STM32】 DMA原理，步骤超细详解，一文看懂DMA-CSDN博客 STM32CubeIDE HAL库DMA与UART不定长数据接收实现：空闲中断详解-物联沃-IOTWORD物联网 STM32 hal库串口空闲中断最新用法_stm32hal库串口空闲中断-CSDN博客 HAL库 串口空闲中断+DMA接收不定长数据 详解及踩坑_hal库串口空闲中断-CSDN博客\n">
+<meta property='og:description' content="STM32 hal库串口空闲中断最新用法 - STM32团队 ST意法半导体中文论坛\n（非常详细）【STM32】 DMA原理，步骤超细详解，一文看懂DMA-CSDN博客\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/stm32dma%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/'>
 <meta property='og:site_name' content='Nomad_violet'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='DMA空闲中断' /><meta property='article:published_time' content='2025-06-18T19:52:33&#43;08:00'/><meta property='article:modified_time' content='2025-06-18T19:52:33&#43;08:00'/>
 <meta name="twitter:title" content="STM32——DMA使用与空闲中断">
-<meta name="twitter:description" content="STM32 hal库串口空闲中断最新用法 - STM32团队 ST意法半导体中文论坛 （非常详细）【STM32】 DMA原理，步骤超细详解，一文看懂DMA-CSDN博客 STM32CubeIDE HAL库DMA与UART不定长数据接收实现：空闲中断详解-物联沃-IOTWORD物联网 STM32 hal库串口空闲中断最新用法_stm32hal库串口空闲中断-CSDN博客 HAL库 串口空闲中断+DMA接收不定长数据 详解及踩坑_hal库串口空闲中断-CSDN博客\n">
+<meta name="twitter:description" content="STM32 hal库串口空闲中断最新用法 - STM32团队 ST意法半导体中文论坛\n（非常详细）【STM32】 DMA原理，步骤超细详解，一文看懂DMA-CSDN博客\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -396,14 +396,14 @@
     
     
     <p><a class="link" href="https://shequ.stmicroelectronics.cn/thread-637349-1-1.html"  target="_blank" rel="noopener"
-    >STM32 hal库串口空闲中断最新用法 - STM32团队 ST意法半导体中文论坛</a>
-（非常详细）<a class="link" href="https://blog.csdn.net/as480133937/article/details/104927922"  target="_blank" rel="noopener"
-    >【STM32】 DMA原理，步骤超细详解，一文看懂DMA-CSDN博客</a>
-<a class="link" href="https://www.iotword.com/25305.html"  target="_blank" rel="noopener"
-    >STM32CubeIDE HAL库DMA与UART不定长数据接收实现：空闲中断详解-物联沃-IOTWORD物联网</a>
-<a class="link" href="https://blog.csdn.net/qq_47159466/article/details/124542339"  target="_blank" rel="noopener"
-    >STM32 hal库串口空闲中断最新用法_stm32hal库串口空闲中断-CSDN博客</a>
-<a class="link" href="https://blog.csdn.net/soledade/article/details/129030082"  target="_blank" rel="noopener"
+    >STM32 hal库串口空闲中断最新用法 - STM32团队 ST意法半导体中文论坛</a></p>
+<p>（非常详细）<a class="link" href="https://blog.csdn.net/as480133937/article/details/104927922"  target="_blank" rel="noopener"
+    >【STM32】 DMA原理，步骤超细详解，一文看懂DMA-CSDN博客</a></p>
+<p><a class="link" href="https://www.iotword.com/25305.html"  target="_blank" rel="noopener"
+    >STM32CubeIDE HAL库DMA与UART不定长数据接收实现：空闲中断详解-物联沃-IOTWORD物联网</a></p>
+<p><a class="link" href="https://blog.csdn.net/qq_47159466/article/details/124542339"  target="_blank" rel="noopener"
+    >STM32 hal库串口空闲中断最新用法_stm32hal库串口空闲中断-CSDN博客</a></p>
+<p><a class="link" href="https://blog.csdn.net/soledade/article/details/129030082"  target="_blank" rel="noopener"
     >HAL库 串口空闲中断+DMA接收不定长数据 详解及踩坑_hal库串口空闲中断-CSDN博客</a></p>
 <h2 id="dma">DMA
 </h2><p>DMA，全称为<code>Direct Memory Access</code>，直接内存访问，本质是将传输数据从一个内存空间搬运至另一个内存空间，可以用来提供外设和内存，内存和外设之间的高速数据传输</p>
@@ -627,6 +627,8 @@
 </span><span class="lnt">28
 </span><span class="lnt">29
 </span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">UART_DMARxHalfCplt</span><span class="p">(</span><span class="n">DMA_HandleTypeDef</span> <span class="o">*</span><span class="n">hdma</span><span class="p">)</span>  
@@ -634,10 +636,12 @@
 </span></span><span class="line"><span class="cl">  <span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span> <span class="o">=</span> <span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="p">)((</span><span class="n">DMA_HandleTypeDef</span> <span class="o">*</span><span class="p">)</span><span class="n">hdma</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Parent</span><span class="p">;</span>  
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="cm">/* Initialize type of RxEvent that correspond to RxEvent callback execution;  
-</span></span></span><span class="line"><span class="cl"><span class="cm">     In this case, Rx Event type is Half Transfer */</span>  <span class="n">huart</span><span class="o">-&gt;</span><span class="n">RxEventType</span> <span class="o">=</span> <span class="n">HAL_UART_RXEVENT_HT</span><span class="p">;</span>  
+</span></span></span><span class="line"><span class="cl"><span class="cm">     In this case, Rx Event type is Half Transfer */</span>  
+</span></span><span class="line"><span class="cl">     <span class="n">huart</span><span class="o">-&gt;</span><span class="n">RxEventType</span> <span class="o">=</span> <span class="n">HAL_UART_RXEVENT_HT</span><span class="p">;</span>  
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="cm">/* Check current reception Mode :  
-</span></span></span><span class="line"><span class="cl"><span class="cm">     If Reception till IDLE event has been selected : use Rx Event callback */</span>  <span class="k">if</span> <span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">ReceptionType</span> <span class="o">==</span> <span class="n">HAL_UART_RECEPTION_TOIDLE</span><span class="p">)</span>  
+</span></span></span><span class="line"><span class="cl"><span class="cm">     If Reception till IDLE event has been selected : use Rx Event callback */</span>  
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">ReceptionType</span> <span class="o">==</span> <span class="n">HAL_UART_RECEPTION_TOIDLE</span><span class="p">)</span>  
 </span></span><span class="line"><span class="cl">  <span class="p">{</span>  
 </span></span><span class="line"><span class="cl"><span class="cp">#if (USE_HAL_UART_REGISTER_CALLBACKS == 1)  
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cm">/*Call registered Rx Event callback*/</span>  
@@ -964,6 +968,7 @@
 </span><span class="lnt">31
 </span><span class="lnt">32
 </span><span class="lnt">33
+</span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UART_DMAStop</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">)</span>  
@@ -971,7 +976,8 @@
 </span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">dmarequest</span> <span class="o">=</span> <span class="mh">0x00U</span><span class="p">;</span>  
 </span></span><span class="line"><span class="cl">  <span class="cm">/* The Lock is not implemented on this API to allow the user application  
 </span></span></span><span class="line"><span class="cl"><span class="cm">     to call the HAL UART API under callbacks HAL_UART_TxCpltCallback() / HAL_UART_RxCpltCallback():     when calling HAL_DMA_Abort() API the DMA TX/RX Transfer complete interrupt is generated     and the correspond call back is executed HAL_UART_TxCpltCallback() / HAL_UART_RxCpltCallback()     */</span>  
-</span></span><span class="line"><span class="cl">  <span class="cm">/* Stop UART DMA Tx request if ongoing */</span>  <span class="n">dmarequest</span> <span class="o">=</span> <span class="nf">HAL_IS_BIT_SET</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">Instance</span><span class="o">-&gt;</span><span class="n">CR3</span><span class="p">,</span> <span class="n">USART_CR3_DMAT</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Stop UART DMA Tx request if ongoing */</span>  
+</span></span><span class="line"><span class="cl">  <span class="n">dmarequest</span> <span class="o">=</span> <span class="nf">HAL_IS_BIT_SET</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">Instance</span><span class="o">-&gt;</span><span class="n">CR3</span><span class="p">,</span> <span class="n">USART_CR3_DMAT</span><span class="p">);</span>  
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">((</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">gState</span> <span class="o">==</span> <span class="n">HAL_UART_STATE_BUSY_TX</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">dmarequest</span><span class="p">)</span>  
 </span></span><span class="line"><span class="cl">  <span class="p">{</span>  
 </span></span><span class="line"><span class="cl">    <span class="nf">ATOMIC_CLEAR_BIT</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">Instance</span><span class="o">-&gt;</span><span class="n">CR3</span><span class="p">,</span> <span class="n">USART_CR3_DMAT</span><span class="p">);</span>  
