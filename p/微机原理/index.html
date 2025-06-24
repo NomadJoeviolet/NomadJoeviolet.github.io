@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="常见名词 CPU，中央处理单元，Central Processing Unit ALU，算术逻辑单元，Arithmetic and Logic Units CU，控制单元，控制器，Control Unit CPU通常由中央处理单元，算术逻辑单元，寄存器组三部分组成 EU，执行单元，Execution Unit BIU，总线接口单元，Bus Interface Unit\n">
+<title>微机原理</title>
+
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="微机原理">
+<meta property='og:description' content="常见名词 CPU，中央处理单元，Central Processing Unit ALU，算术逻辑单元，Arithmetic and Logic Units CU，控制单元，控制器，Control Unit CPU通常由中央处理单元，算术逻辑单元，寄存器组三部分组成 EU，执行单元，Execution Unit BIU，总线接口单元，Bus Interface Unit\n">
+<meta property='og:url' content='https://NomadJoeviolet.github.io/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/'>
+<meta property='og:site_name' content='Nomad_violet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='微机原理' /><meta property='article:published_time' content='2025-06-24T23:16:11&#43;08:00'/><meta property='article:modified_time' content='2025-06-24T23:16:11&#43;08:00'/>
+<meta name="twitter:title" content="微机原理">
+<meta name="twitter:description" content="常见名词 CPU，中央处理单元，Central Processing Unit ALU，算术逻辑单元，Arithmetic and Logic Units CU，控制单元，控制器，Control Unit CPU通常由中央处理单元，算术逻辑单元，寄存器组三部分组成 EU，执行单元，Execution Unit BIU，总线接口单元，Bus Interface Unit\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu6061761693284197515.png" width="300"
+                            height="200" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Nomad_violet</a></h1>
+            <h2 class="site-description">to feel,to experience</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://www.bilibili.com/'
+                        target="_blank"
+                        title="Biliili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#微型计算机系统">微型计算机系统</a></li>
+        <li><a href="#计算机中的数制与编码">计算机中的数制与编码</a></li>
+        <li><a href="#有符号二进制数的表示">有符号二进制数的表示</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#cpu中央处理单元">CPU中央处理单元</a>
+          <ol>
+            <li><a href="#微处理器主要性能指标">微处理器主要性能指标</a></li>
+            <li><a href="#cu控制单元">CU控制单元</a></li>
+            <li><a href="#eu执行单元">EU执行单元</a></li>
+            <li><a href="#biu总线接口单元">BIU总线接口单元</a></li>
+            <li><a href="#cpu程序执行步骤">CPU程序执行步骤</a></li>
+            <li><a href="#工作时序">工作时序</a></li>
+          </ol>
+        </li>
+        <li><a href="#80888086-cpu">8088/8086 CPU</a>
+          <ol>
+            <li></li>
+            <li><a href="#80888086指令流水线">8088/8086指令流水线</a></li>
+            <li><a href="#80888086内存分段">8088/8086内存分段</a></li>
+            <li><a href="#80888086内部寄存器">8088/8086内部寄存器</a></li>
+            <li><a href="#8088外部引脚及其功能">8088外部引脚及其功能</a></li>
+          </ol>
+        </li>
+        <li><a href="#80888086结构功能">8088/8086结构功能</a></li>
+        <li><a href="#总线">总线</a>
+          <ol>
+            <li><a href="#总线定义">总线定义</a></li>
+            <li><a href="#总线特点">总线特点</a></li>
+            <li><a href="#总线分类">总线分类</a></li>
+            <li><a href="#总线结构">总线结构</a></li>
+            <li><a href="#总线基本功能">总线基本功能</a></li>
+            <li><a href="#常用系统总线和外设总线标准">常用系统总线和外设总线标准</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#对于每个指令">对于每个指令</a></li>
+      </ol>
+    </li>
+    <li><a href="#寻址方式">寻址方式</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#立即寻址immediate-addressing">立即寻址（Immediate Addressing）</a></li>
+            <li><a href="#直接寻址direct-addressing">直接寻址（Direct Addressing）</a></li>
+            <li><a href="#寄存器寻址register-addressing">寄存器寻址（Register Addressing）</a></li>
+            <li><a href="#寄存器间接寻址register-indirect-addressing">寄存器间接寻址（Register Indirect Addressing）</a></li>
+            <li><a href="#寄存器相对寻址">寄存器相对寻址</a></li>
+            <li><a href="#基址-变址寻址">基址-变址寻址</a></li>
+            <li><a href="#基址-变址-相对寻址">基址-变址-相对寻址</a></li>
+            <li><a href="#隐含寻址">隐含寻址</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#堆栈段">堆栈段</a></li>
+    <li><a href="#数据传送指令">数据传送指令</a>
+      <ol>
+        <li><a href="#一般传送指令mov">一般传送指令MOV</a></li>
+        <li><a href="#堆栈操作指令push和pop">堆栈操作指令PUSH和POP</a></li>
+        <li><a href="#交换指令xchg">交换指令XCHG</a></li>
+        <li><a href="#输入输出指令in和out">输入/输出指令IN和OUT</a></li>
+        <li><a href="#取偏移地址指令lea-load-effect-address">取偏移地址指令LEA （Load Effect Address）</a></li>
+      </ol>
+    </li>
+    <li><a href="#算数运算指令">算数运算指令</a>
+      <ol>
+        <li><a href="#乘法指令">乘法指令</a></li>
+        <li><a href="#除法指令">除法指令</a></li>
+        <li><a href="#算数移位指令">算数移位指令</a>
+          <ol>
+            <li><a href="#非循环移位">非循环移位</a></li>
+            <li><a href="#循环移位">循环移位</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#基本输入输出方式">基本输入输出方式</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#中断响应过程">中断响应过程</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#1计数器8253">1.计数器8253</a>
+          <ol>
+            <li><a href="#特殊引脚">特殊引脚</a></li>
+            <li><a href="#编程方式">编程方式</a></li>
+            <li><a href="#工作方式">工作方式</a></li>
+            <li><a href="#小结">小结</a></li>
+          </ol>
+        </li>
+        <li><a href="#2可编程并行接口8255">2.可编程并行接口8255</a>
+          <ol>
+            <li><a href="#三个端口">三个端口</a></li>
+            <li><a href="#工作方式-1">工作方式</a></li>
+            <li><a href="#控制字">控制字</a></li>
+          </ol>
+        </li>
+        <li><a href="#3da转换芯片dac0832">3.DA转换芯片DAC0832</a>
+          <ol>
+            <li><a href="#工作方式-2">工作方式</a></li>
+          </ol>
+        </li>
+        <li><a href="#4ad转换芯片adc0809">4.AD转换芯片ADC0809</a></li>
+        <li><a href="#5可编程中断控制器8259a">5.可编程中断控制器8259A</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" >
+                自动化课程学习
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/">微机原理</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-06-24</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="常见名词">常见名词
+</h1><p>CPU，中央处理单元，Central Processing Unit
+ALU，算术逻辑单元，Arithmetic and Logic Units
+CU，控制单元，控制器，Control Unit
+CPU通常由中央处理单元，算术逻辑单元，寄存器组三部分组成
+EU，执行单元，Execution Unit
+BIU，总线接口单元，Bus Interface Unit</p>
+<p>PC，程序计数器，Program Counter
+IR，指令寄存器，Instruction Register
+GR，通用寄存器，General Register</p>
+<p>注意$IO$端口和$IO$接口不是同一个东西</p>
+<p><a class="link" href="https://blog.csdn.net/qq_34801169/article/details/102782643"  target="_blank" rel="noopener"
+    >操作系统知识：程序计数器（pc）、指令寄存器（IR）、通用寄存器（GR）、状态寄存器（SR）、程序状态字PSW_pc和ir-CSDN博客</a></p>
+<h1 id="特殊运算符和指令">特殊运算符和指令
+</h1><p><code>PTR</code>用来指定存储器操作数的字长
+<code>Byte PTR[BX]</code></p>
+<p>所有单操作数指令要求操作数不能是立即数，如果是存储器操作数，需要指定字长</p>
+<h1 id="微型计算机基础概论">微型计算机基础概论
+</h1><h3 id="微型计算机系统">微型计算机系统
+</h3><p>微型计算机系统 由 硬件系统 和 软件系统 组成
+<strong>硬件系统</strong>
+硬件系统 由 微型计算机（主机） 和 外设组成</p>
+<ol>
+<li>微型计算机（主机）由 微处理器（CPU），存储器 ，IO接口 ，总线 组成</li>
+<li>外设 就包括键盘，鼠标，显示器，硬盘等</li>
+</ol>
+<p><strong>软件系统</strong>
+软件系统 由 系统软件 和 应用软件 构成</p>
+<p><strong>微型计算机运行流程</strong>
+微机运行的基本流程为，程序存储在存储器中，按程序流程自动连续取出指令并执行；自动连续的实现是程序计数器 PC 的自增；步骤可概括为取指令、译码、执行。修改 PC 指针的值，可实现程序的顺序执行、跳转、循环、过程调用和中断服务等功能。</p>
+<h3 id="计算机中的数制与编码">计算机中的数制与编码
+</h3><p>十进制<code>D</code>，二进制<code>B</code>，十六进制<code>H</code>，八进制<code>O</code></p>
+<h3 id="有符号二进制数的表示">有符号二进制数的表示
+</h3><p>最高位是符号位，0表示正号，1表示负号</p>
+<p><strong>原码</strong>
+数值部分保持不变，最高位是符号位
+<strong>反码</strong>
+正数的反码与正数的原码一样
+负数的反码 等于 负数原码 数值部分 按位取反
+<strong>补码</strong>
+正数的补码与正数的反码和原码一样
+负数的补码 的符号位 与 负数原码一致，数值部分等于 负数原码 数值部分取反后再加1</p>
+<p>特殊数<code>-128</code>的补码表示为<code>10000000</code></p>
+<h1 id="微处理器与总线">微处理器与总线
+</h1><h3 id="cpu中央处理单元">CPU中央处理单元
+</h3><p><code>CPU</code>是微型计算机的运算和指挥控制中心
+一般由<code>ALU（运算器）</code>，<code>CU（控制单元）</code>，<code>寄存器组</code>组成
+CPU内还有两个独立部件：EU（执行单元）和BIU（总线接口单元）
+<img src="/%e5%be%ae%e6%9c%ba%e5%8e%9f%e7%90%86-80888086CPU%e5%86%85%e9%83%a8%e7%bb%93%e6%9e%84.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+>
+<img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8%E7%BB%93%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png"
+	width="1160"
+	height="683"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8%E7%BB%93%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE_hu5700801025308735065.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8%E7%BB%93%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE_hu8790980325570178500.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="169"
+		data-flex-basis="407px"
+	
+></p>
+<h4 id="微处理器主要性能指标">微处理器主要性能指标
+</h4><p>CPU的字长/位数，及其一次性能处理的位数
+CPU主频，指的是CPU时钟频率</p>
+<h4 id="cu控制单元">CU控制单元
+</h4><p>控制器的作用是控制程序的执行，是整个系统的指挥中心
+具备以下功能</p>
+<ol>
+<li>指令控制</li>
+<li>时序控制</li>
+<li>操作控制</li>
+</ol>
+<h4 id="eu执行单元">EU执行单元
+</h4><p>EU负责分析指令（指令译码），执行指令
+在工作时不断从BIU的指令队列取指令</p>
+<h4 id="biu总线接口单元">BIU总线接口单元
+</h4><p>BIU主要功能是负责CPU与存储器，IO接口之间的信息传送
+BIU可以负责取指令，取操作数，写结果
+BIU内部有一个指令队列和地址加法器
+地址加法器能产生20位的物理地址</p>
+<h4 id="cpu程序执行步骤">CPU程序执行步骤
+</h4><ol>
+<li>从存储器取出下一条指令</li>
+<li>指令译码</li>
+<li>如果指令需要，从存储器中读取操作数</li>
+<li>执行指令（算术逻辑运算，IO操作，数据传输等）</li>
+<li>如果需要，写入存储器
+核心步骤，取指令，译码指令，执行指令</li>
+</ol>
+<h4 id="工作时序">工作时序
+</h4><ol>
+<li>时钟周期：每个时钟脉冲持续的时间</li>
+<li>总线周期：通过总线进行一次读或写操作的过程称为一个总线周期，一个总线周期包含多个时钟周期</li>
+<li>指令周期：执行一条指令所需的时间，一个指令周期包含多个总线周期
+一个基本的总线周期由四个时钟周期构成，若内存或 IO 接口速度较慢，则还会在 T3 后插入 Tw 等待周期。</li>
+</ol>
+<p>写操作为例的总线周期
+包含4个时钟周期（T1,T2,T3,T4）
+T1地址输出，T2缓存，T3和T4数据输出</p>
+<h3 id="80888086-cpu">8088/8086 CPU
+</h3><h5 id="8088与8086处理器的区别">8088与8086处理器的区别
+</h5><p>8088 外部数据线为8根（8086为16根），为准16位CPU，16 位数据要分两次传送；（ 注意：8088和8086均为16位处理 器，内部数据线均为16位，且地址总线均为20位）
+<img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8088%E4%B8%8E8086%E5%A4%84%E7%90%86%E5%99%A8%E5%8C%BA%E5%88%AB.png"
+	width="993"
+	height="487"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8088%E4%B8%8E8086%E5%A4%84%E7%90%86%E5%99%A8%E5%8C%BA%E5%88%AB_hu5053405734855977721.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8088%E4%B8%8E8086%E5%A4%84%E7%90%86%E5%99%A8%E5%8C%BA%E5%88%AB_hu9370541274539670867.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="203"
+		data-flex-basis="489px"
+	
+>
+指令预取队列：8088为4字节，8086为6字节</p>
+<p>两者均有两种工作模式，最小工作模式和最大工作模式</p>
+<h4 id="80888086指令流水线">8088/8086指令流水线
+</h4><p>采用EU（执行单元）和BIU（总线接口单元）并行工作，可同时取指令，执行指令，分析指令
+<img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-80888086%E6%8C%87%E4%BB%A4%E6%B5%81%E6%B0%B4%E7%BA%BF.png"
+	width="1136"
+	height="386"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-80888086%E6%8C%87%E4%BB%A4%E6%B5%81%E6%B0%B4%E7%BA%BF_hu15710173565322608804.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-80888086%E6%8C%87%E4%BB%A4%E6%B5%81%E6%B0%B4%E7%BA%BF_hu11775171834208968470.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="294"
+		data-flex-basis="706px"
+	
+></p>
+<h5 id="补充-流水线技术">补充-流水线技术
+</h5><p><img src="/%e5%be%ae%e6%9c%ba%e5%8e%9f%e7%90%86-%e4%ba%94%e9%98%b6%e6%ae%b5%e6%b5%81%e6%b0%b4%e7%ba%bf.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+>
+在指令执行过程中，有几类指令相关影响流水线中指令的执行，使得指令不能在预先设定的执行周期中执行，造成流水线断流
+<strong>相关问题</strong>
+结构相关；数据相关；控制相关</p>
+<h6 id="结构相关">结构相关
+</h6><p>当CPU的硬件结构不能够同时支持几条指令的执行时，这几条指令将发生结构相关，比如流水线同时访问同一个存储器</p>
+<h6 id="数据相关">数据相关
+</h6><p>一条指令的执行需要上一条或者上几条指令的执行结果时
+，会造成流水线的断流现象。</p>
+<p>所以，当发生数据相关时，需要尽可能早的把上一条或上几条指令的执行结果 交给相关指令作为操作数。这就需要“内部前推</p>
+<h6 id="控制相关">控制相关
+</h6><p>当指令执行到分支指令或者跳转指令时，将产生控制相关，此时会产生流水线断流。
+解决方法：</p>
+<ol>
+<li>阻塞流水线直到确定走向</li>
+<li>预测分支是否发生，并给予该预测执行指令</li>
+</ol>
+<h4 id="80888086内存分段">8088/8086内存分段
+</h4><p>8088/8086<strong>内部结构为16位</strong>，为了增大内存管理能力使其能产生20位的物理地址，采用了分段管理方法</p>
+<p>段首地址即段基地址
+20位物理地址=段基地址 * 16+段偏移地址
+<img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-808880086%E5%86%85%E5%AD%98%E5%88%86%E6%AE%B5.png"
+	width="1014"
+	height="415"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-808880086%E5%86%85%E5%AD%98%E5%88%86%E6%AE%B5_hu14263394686829289510.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-808880086%E5%86%85%E5%AD%98%E5%88%86%E6%AE%B5_hu15358846135240444311.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="244"
+		data-flex-basis="586px"
+	
+></p>
+<h4 id="80888086内部寄存器">8088/8086内部寄存器
+</h4><p>8088/8086内部寄存器分为   通用寄存器（8个），段寄存器（4个），控制寄存器（2个）
+<img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-80888086%E5%86%85%E9%83%A8%E5%AF%84%E5%AD%98%E5%99%A8.png"
+	width="747"
+	height="706"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-80888086%E5%86%85%E9%83%A8%E5%AF%84%E5%AD%98%E5%99%A8_hu13494009740208978098.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-80888086%E5%86%85%E9%83%A8%E5%AF%84%E5%AD%98%E5%99%A8_hu11349535306249906087.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="105"
+		data-flex-basis="253px"
+	
+></p>
+<h5 id="通用寄存器">通用寄存器
+</h5><p>通用寄存器包括 数据寄存器，地址指针寄存器，变址寄存器</p>
+<h6 id="数据寄存器">数据寄存器
+</h6><ul>
+<li>AX（Accumulator）：累加器，常用于存放算术逻辑运算中的操作数，另外所有的IO指令都是用累加器与外设接口传送信息</li>
+<li>BX（Base）：基址寄存器，常用来存放访问内存时的<strong>偏移地址</strong>（一般和DS一起用DS:[BX]）</li>
+<li>CX（Count）：计数寄存器，在循环和串操作指令中用作计数器</li>
+<li>DX（Data）：数据寄存器，在寄存器间接寻址的IO指令中存放IO端口地址</li>
+</ul>
+<p>都可拆分为H，L两个8位寄存器</p>
+<p>在做双字节乘除法运算时，DX与AX可以合起来存一个双字长的数（32位），DX存高16位，AX存低16位</p>
+<h6 id="地址指针寄存器">地址指针寄存器
+</h6><ul>
+<li>SP（Stack Pointer）：堆栈指针寄存器，常用来存放 栈顶偏移地址</li>
+<li>BP（Base Pointer）：基址指针寄存器，一般也用来存放访问内存时的<strong>偏移地址</strong>（一般和SS一起用SS:[BP]）</li>
+</ul>
+<p>BX和BP区别: (1)作为通用寄存器，二者均可用于存放数据；(2)作为基址寄存器，用BX表示 所寻找的数据在 数据段 ；用BP则表示数据在 堆栈段</p>
+<h6 id="变址寄存器">变址寄存器
+</h6><ul>
+<li>SI（Source Index）：源变址寄存器</li>
+<li>DI（Destination Index）：目的变址寄存器</li>
+</ul>
+<h5 id="段寄存器">段寄存器
+</h5><p>段寄存器，用于存放段基址，即段起始地址的高16位</p>
+<ul>
+<li>CS（Code Segment）：代码段寄存器</li>
+<li>SS（Stack Segment）：堆栈段寄存器</li>
+<li>DS（Data Segment）：数据段寄存器</li>
+<li>ES（Extra Segment）：附加数据段寄存器</li>
+</ul>
+<h5 id="控制寄存器">控制寄存器
+</h5><ul>
+<li>IP（Instruction Pointer）：指令指针寄存器，其内容为下一条要执行指令的偏移地址（CS段中）</li>
+</ul>
+<h6 id="标志寄存器"><strong>标志寄存器</strong>
+</h6><ul>
+<li>FLAGS：状态寄存器，16位寄存器
+<img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8.png"
+	width="1050"
+	height="196"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8_hu11152031068871006802.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8_hu152377642170095446.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="535"
+		data-flex-basis="1285px"
+	
+>
+<strong>状态标志位</strong></li>
+<li>CF（Carry Flag）：进位标志位，进行加减运算时，若最高位向前有进位错位，则CF=1</li>
+<li>PF（Parity Flag）：奇偶标志位，运算结果低8位中1的个数为偶数，PF=1</li>
+<li>AF（Auxiliary Carry Flag）：辅助进位标志位，加减法运算，D3向D4进位时，AF=1</li>
+<li>ZF（Zero Flag）：零标志位，运算结果为0时，ZF=1</li>
+<li>SF（Sign Flag）：当运算结果最高位为1时，SF=1</li>
+<li>OF（Overflow Flag）：当算术结果超出了 <code>带符号数</code>的范围时，即溢出时，OF=1</li>
+</ul>
+<p><strong>控制标志位</strong></p>
+<ul>
+<li>TF（Trap Flag）：陷井标志位，也叫跟踪标志位。TF=1时，使CPU处于单步执行指令的工作方式</li>
+<li>IF（Interrupt Enable Flag）：中断允许标志位。IF=1使CPU可以响应可屏蔽中断请求</li>
+<li>DF（Direction Flag）：方向标志位。在数据串操作时确定操作的方向</li>
+</ul>
+<p>IF=1，允许响应可屏蔽中断请求，对应指令：STI
+IF=0，禁止响应可屏蔽中断请求，对应指令：CLI</p>
+<p>DF=0，串操作指令中的地址是增加方向，对应指令：CLD
+DF=1，串操作指令中的地址是减少方向，对应指令：STD</p>
+<p>TF=1，CPU按跟踪方式（单步方式）执行程序</p>
+<h4 id="8088外部引脚及其功能">8088外部引脚及其功能
+</h4><p>最小模式下的引脚描述
+<img src="/%e5%be%ae%e6%9c%ba%e5%8e%9f%e7%90%86-8088%e5%be%ae%e5%a4%84%e7%90%86%e5%99%a8%e5%bc%95%e8%84%9a%e6%8f%8f%e8%bf%b0.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+>
+按功能对引脚进行划分：</p>
+<ol>
+<li>基础工作引脚：$Vcc,GND,CLK(4.77Mhz)$</li>
+<li>地址总线：${AD}<em>0-{AD}<em>7,A_8-A</em>{15},A</em>{16}-A_{19}$</li>
+<li>数据总线：${AD}_0-{AD}_7$</li>
+<li>模式控制引脚：$MN/\overline{MX}$</li>
+<li>读写控制引脚：$IO/\overline M,\overline{RD},\overline{WR}$</li>
+<li>中断控制引脚：$INTR,NMI,INTA$</li>
+<li>复位：$RESET$</li>
+<li>总线保持请求/响应：$HOLD,HLDA$</li>
+<li>地址锁存信号：$ALE$</li>
+<li>外部就绪信号：$READY$</li>
+<li>测试信号输入：$\overline {TEST}$</li>
+<li>数据传输方向控制：$DT/\overline R$</li>
+<li>数据允许信号：$\overline {DEN}$</li>
+<li>系统状态输出：$\overline{{SS}_0}$（与$IO/\overline M,DT/\overline R$合作）</li>
+</ol>
+<h5 id="各引脚具体功能">各引脚具体功能
+</h5><ol>
+<li>
+<p>$A_{16}-A_{19}/S_3-S_6$：地址，状态复用的引脚，三态输出。（分时复用）状态信号中$S_6$恒等于0，$S_5$指示中断允许标志位$IF$的状态，$S_4,S_5$组合指示CPU正在使用的段寄存器</p>
+</li>
+<li>
+<p>$A_8-A_{15}$：8位地址信号，三态输出</p>
+</li>
+<li>
+<p>${AD}<em>{0}-{AD}</em>{7}$：地址，数据分时复用的双向信号线，三态。当$ALE=1$时，这些引脚上传输的是地址信号，当$\overline {DEN}=0$时，这些引脚上传输的是数据信号</p>
+</li>
+<li>
+<p>$IO/\overline M$：输入输出/存储器控制信号，三态。该引脚是用来区分当前操作是访问存储器还是访问$IO$端口</p>
+</li>
+<li>
+<p>$\overline {WR}$：写信号输出，三态。当此引脚输出为低电平时，表示CPU正在对存储器或IO端口进行写操作</p>
+</li>
+<li>
+<p>$DT/\overline {R}$：数据传送方向控制信号，三态。高电平时，CPU向存储器或IO端口发送数据；低电平时，CPU从存储器或IO接口接收数据</p>
+</li>
+<li>
+<p>$\overline {DEN}$：数据允许信号，三态。该信号有效时，表示 数据总线 上具有有效信号。它在每次 访问内存或IO接口以及在中断响应期间有效，常用作数据总线驱动信号</p>
+</li>
+<li>
+<p>$ALE$：地址锁存信号，三态输出，高电平有效。它为高电平时，表示CPU地址线上有有效地址</p>
+</li>
+<li>
+<p>$\overline {RD}$：读选通信号，三态输出，低电平有效。其有效时，表示CPU正在对存储器或IO接口进行读操作</p>
+</li>
+<li>
+<p>$READY$：外部同步控制输入信号，高电平有效。它是由被访问的内存或IO设备所发出的响应信号。它为高电平时，表示存储器或IO设备已经准备好，CPU可以进行数据传送 。CPU在T3的周期采样$READY$信号，若其为低，CPU自动插入等待周期$T_w$</p>
+</li>
+<li>
+<p>$INTR$ ：可屏蔽中断请求输入信号，高电平有效。CPU在每条指令的最后一个周期采样该信号，以决定是否进入中断响应周期</p>
+</li>
+<li>
+<p>$\overline {TEST}$：测试信号输入引脚</p>
+</li>
+<li>
+<p>$NMI$：非屏蔽中断请求输入信号，上升沿触发。这个引脚上的中断请求信号不能用让软件屏蔽，CPU在当前指令</p>
+</li>
+<li>
+<p>$RESET$：系统复位输入信号，高电平有效。</p>
+</li>
+<li>
+<p>$\overline {INTA}$：中断响应信号输出，低电平有效，此信号是CPU对中断请求信号$INTR$ 的响应。             在响应过程中，CPU在$\overline {INTA}$上连续输出两个负脉冲用作外部中断的中断向量码的读选通信号</p>
+</li>
+<li>
+<p>$HOLD$：总线保持请求信号输入，高电平有效。当某一总线主控设备要占用系统总线时，通过此引脚向CPU提出请求</p>
+</li>
+<li>
+<p>$HLDA$：总线保持响应信号输出，高电平有效。这是CPU对$HOLD$请求的响应信号。CPU收到$HOLD$信号后，就会对其做出响应，一方面会使CPU的所有三态输出的地址信号，数据信号和对应的控制信号变为高阻态；同时输出一个有效的$HLDA$，表示CPU已放弃对总线的控制。当CPU检测到$HOLD$信号变低后，就立即使$HLDA$变低，同时恢复对总线的控制</p>
+</li>
+<li>
+<p>${SS}_0$：系统状态信号输出</p>
+</li>
+<li>
+<p>$CLK$： 时钟信号输入引脚</p>
+</li>
+<li>
+<p>$Vcc$：5V电源输入引脚</p>
+</li>
+<li>
+<p>$GND$：地线</p>
+</li>
+</ol>
+<h3 id="80888086结构功能">8088/8086结构功能
+</h3><p>外部结构
+<img src="/%e5%be%ae%e6%9c%ba%e5%8e%9f%e7%90%86-80888086%e5%a4%96%e9%83%a8%e7%bb%93%e6%9e%84.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="总线">总线
+</h3><h4 id="总线定义">总线定义
+</h4><p>总线是传输信号或信息的公共路径，是遵循同一技术规范的连接与操作方式</p>
+<h4 id="总线特点">总线特点
+</h4><p>公共性，可同时挂在多个设备</p>
+<h4 id="总线分类">总线分类
+</h4><p>按传送的信息类型分类</p>
+<ol>
+<li>数据总线（Data Bus）</li>
+<li>地址总线（Address Bus）</li>
+<li>控制总线（Control Bus）</li>
+</ol>
+<p>按总线的层次结构划分</p>
+<ol>
+<li>前端总线</li>
+<li>系统总线</li>
+<li>外设总线</li>
+</ol>
+<h4 id="总线结构">总线结构
+</h4><p>单总线结构，多总线结构</p>
+<h4 id="总线基本功能">总线基本功能
+</h4><p>总线上任意时刻只能允许一对设备进行信息交换</p>
+<ul>
+<li>总线传输同步：协调通信双方的传输操作</li>
+<li>总线仲裁控制：避免多个设备同时使用总线造成的冲突，确定总线上哪个设备可以占用总线传输数据</li>
+<li>出错处理：检错和处理</li>
+<li>总线驱动：增加驱动能力</li>
+</ul>
+<h5 id="总线的数据传送">总线的数据传送
+</h5><h6 id="1同步定时的传输方式">1.同步定时的传输方式
+</h6><p>用公共的时钟统一各部件数据发送和接收的时机 （严格按节拍进行，不需要握手信号，效率高）</p>
+<h6 id="2异步定时的传输方式">2.异步定时的传输方式
+</h6><p>用控制和状态信号协调各部件数据发送和接收的时机（应答式）</p>
+<h6 id="3半同步定时的传输方式">3.半同步定时的传输方式
+</h6><p>允许不同速度的部件协同工作，主控设备可以根据从设备的状态延长总线 时钟周期，但总线周期一定是时钟周期的整数倍</p>
+<h4 id="常用系统总线和外设总线标准">常用系统总线和外设总线标准
+</h4><p>常用的系统总线标准包括：ISA 总线、PCI 总线、PCIE 总线、AGP 总线
+常用的外设总线标准包括：SATA 总线、USB 总线、RS485 总线、IDE 总线、RS232 总线</p>
+<h1 id="指令系统">指令系统
+</h1><p>指令：控制计算机完成指定操作并能够被计算机所识别的命令。 指令系统：一台计算机能够识别的所有指令的集合称为该机的指令系统</p>
+<p>指令格式： <code>操作码 操作数1，操作数2</code>
+操作数数量：零操作数指令，单操作数指令，双操作数指令</p>
+<p>指令中操作数类型：立即操作数，寄存器操作数，存储器操作数
+寄存器操作数的指令执行速度&gt; 立即数操作数&gt; 存储器操作数</p>
+<p>CISC（Complex Instruction Set Computer），复杂指令系统计算机
+RISC（Reduced Instruction Set Computer），精简指令系统计算机</p>
+<p>指令性指令是CPU中实际存在的可执行的语句。指示性语句是用于说明程序结构，变量等的语句，后者在编译过程中执行，编译完成后不再存在</p>
+<h3 id="对于每个指令">对于每个指令
+</h3><ol>
+<li>指令码的含义</li>
+<li>指令对操作数的要求</li>
+<li>指令对标志位的影响</li>
+<li>指令的功能</li>
+</ol>
+<h2 id="寻址方式">寻址方式
+</h2><h4 id="立即寻址immediate-addressing">立即寻址（Immediate Addressing）
+</h4><p>源操作数是立即数，立即数存放在代码段
+<code>MOV AX,3102H</code></p>
+<h4 id="直接寻址direct-addressing">直接寻址（Direct Addressing）
+</h4><p>操作数是存储器操作数，存放的地址由指令直接给出
+<code>MOV AX,[3102H]</code></p>
+<h4 id="寄存器寻址register-addressing">寄存器寻址（Register Addressing）
+</h4><p>操作数为CPU内部寄存器
+<code>MOV AX,BX</code></p>
+<h4 id="寄存器间接寻址register-indirect-addressing">寄存器间接寻址（Register Indirect Addressing）
+</h4><p>寄存器存放的不是数据本身，而是存放数据的偏移地址
+寄存器间接寻址方式中 存放操作数偏移地址 的寄存器只允许是 $SI,DI,BX,BP$，它们也被称为间址寄存器</p>
+<ul>
+<li>选择$SI,DI,BX$作为间址寄存器时，操作数在数据段，段基址由$DS$决定</li>
+<li>选择$BP$作为间址寄存器，则操作数在堆栈段，段基地址由$SS$决定
+允许段重设
+<code>MOV AX,[BX]</code>
+<code>MOV AX,ES:[SI]</code></li>
+</ul>
+<h4 id="寄存器相对寻址">寄存器相对寻址
+</h4><p>操作数在内存中的偏址地址由间址寄存器的值加上一个8位或16位的偏移量
+<code>MOV AX,DATA[BX]</code>
+<code>MOV AX,[BX+DATA]</code></p>
+<h4 id="基址-变址寻址">基址-变址寻址
+</h4><p>基址-变址寻址方式由一个基址寄存器存的值和一个变址寄存器存的值 相加得到偏移地址</p>
+<ul>
+<li>不允许出现两个基址寄存器</li>
+<li>不允许出现两个变址寄存器
+<code>MOV AX,[BX][SI]</code>
+<code>MOV AX,[SI][BX]</code>
+<code>MOV AX,[BX+SI]</code></li>
+</ul>
+<h4 id="基址-变址-相对寻址">基址-变址-相对寻址
+</h4><p>所寻地址在内存中，偏移地址由一个基址寄存器、一个变址寄存器和数值偏移 量相加给出。其它规定同“基址-变址寻址”
+<code>MOV AX,DATA[SI][BX]</code>
+<code>MOV AX,[BX+DATA][SI]</code>
+<code>MOV AX,[BX+SI+DATA]</code>
+<code>MOV AX,[BX+SI]DATA</code>
+<code>MOV AX,[BX]DATA[SI]</code></p>
+<h4 id="隐含寻址">隐含寻址
+</h4><p>指令中隐含了部分固定的操作数的地址
+<code>MUL BL</code>
+把AL与BL相乘的乘积放入AX</p>
+<h2 id="堆栈段">堆栈段
+</h2><p>规定由SS指示堆栈段的段基址，堆栈的最低地址
+堆栈指针SP始终指向堆栈的顶部（栈顶）。堆栈的最高地址叫栈底
+<img src="/%e5%be%ae%e6%9c%ba%e5%8e%9f%e7%90%86-%e5%a0%86%e6%a0%88%e6%ae%b5.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+>
+栈的压入指令
+<code>PUSH src</code>
+栈的弹出指令
+<code>POP dest</code></p>
+<p>操作原则</p>
+<ol>
+<li>操作数为1个字，且只能是寄存器或存储器操作</li>
+<li>存放数据从高地址向低地址方向增长</li>
+<li>堆栈段位置由SS决定，SP指向栈顶</li>
+<li>PUSH压入过程为先减SP再压数据</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">SP-2 -&gt; SP
+</span></span><span class="line"><span class="cl">src高8位-&gt;[SP+1]
+</span></span><span class="line"><span class="cl">src低8位-&gt;[SP]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>POP弹出过程为先弹数据再加SP</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[SP]-&gt;dest低8位
+</span></span><span class="line"><span class="cl">[SP+1]-&gt;dest高8位
+</span></span><span class="line"><span class="cl">SP+2-&gt;SP
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>堆栈主要用途：保护现场</p>
+<h2 id="数据传送指令">数据传送指令
+</h2><p>数据传送指令的执行均不影响标志位</p>
+<h3 id="一般传送指令mov">一般传送指令MOV
+</h3><p><code>MOV dest,src</code>
+对操作数要求：</p>
+<ol>
+<li>两个操作数字长相同</li>
+<li>两个操作数不能同时为存储器操作数</li>
+<li>不能用立即数直接给段寄存器赋值</li>
+<li>两个操作数不能同时为段寄存器</li>
+<li>IP和CS只作为MOV的源操作数，不做目标操作数</li>
+<li>FLAGS整体不能作为操作数</li>
+</ol>
+<p>两个操作数不能同时为存储器操作数，原因是存储器不能确定字长，是在存储器中取1个字节还是多个字节，没有限定</p>
+<h3 id="堆栈操作指令push和pop">堆栈操作指令PUSH和POP
+</h3><p><code>PUSH src</code>
+<code>POP dest</code>
+操作数为1个字，且只能是寄存器或存储器操作，不能是立即数</p>
+<h3 id="交换指令xchg">交换指令XCHG
+</h3><p>功能：交换源地址与目标地址中的内容
+<code>XCHG OPRD1,OPRD2</code></p>
+<h3 id="输入输出指令in和out">输入/输出指令IN和OUT
+</h3><p>功能：对输入/输出端口进行读写
+输入指令IN用于从IO端口读数据到累加器AL（AX）中
+输出指令OUT用于把累加器AL（AX）的内容写到IO端口
+IO端口寻址</p>
+<ol>
+<li>直接寻址：指令中的IO端口地址为8位</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">IN AL/AX,port
+</span></span><span class="line"><span class="cl">OUT port,AL/AX
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>寄存器间接寻址：端口地址为16位，由DX寄存器指定</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">IN AL/AX,DX 
+</span></span><span class="line"><span class="cl">OUT DX,AL/AX
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>操作原则</p>
+<ol>
+<li>只有AL或AX可以与I/O端口进行数据交换</li>
+<li>IO端口地址可以是8位立即数指向的地址（即直接寻址）或由DX保存的16 位地址（即间接寻址）
+当端口地址是16位时，只能用DX取给定端口地址</li>
+</ol>
+<h3 id="取偏移地址指令lea-load-effect-address">取偏移地址指令LEA （Load Effect Address）
+</h3><p>功能：将存储器操作数的16位偏移地址送到指定寄存器
+<code>LEA reg16, mem </code>
+操作原则</p>
+<ol>
+<li>源操作数必须是存储器操作数，如：
+<code>LEA BX, BUFFER</code>
+<code>LEA BX, [SI]</code></li>
+<li>目标操作数必须是16位通用寄存器，最好使用间址寄存器（BX, SI, DI, BP）
+源操作数必须是存储器操作数</li>
+</ol>
+<h2 id="算数运算指令">算数运算指令
+</h2><p>不带进位和带进位的加减指令
+无符号和有符号的乘除指令</p>
+<p>算术运算指令的执行会影响状态标志位
+乘法指令执行结果为相乘数的双倍字长
+除法指令被除数是除数的双倍字长</p>
+<h3 id="乘法指令">乘法指令
+</h3><p>乘法指令采用隐含寻址，隐含了存放被乘数的累加器AL或AX，以及存放结果的AX或AX，DX</p>
+<p>无符号乘法指令
+<code>MUL BYTE PTR[BX]</code>
+有符号乘法指令
+<code>IMUL OPRD</code></p>
+<h3 id="除法指令">除法指令
+</h3><p><code>DIV OPRD</code>
+如果$OPRD$是单字节数
+意思是$AX/OPRD$
+结果：AL=商，AH=余数
+如果$OPRD$是双字节数
+意思是$DX,AX/OPRD$
+结果：AX=商，DX=余数</p>
+<h3 id="算数移位指令">算数移位指令
+</h3><h4 id="非循环移位">非循环移位
+</h4><p>算数移位，逻辑移位
+左移，右移</p>
+<h4 id="循环移位">循环移位
+</h4><p>分为带进位移位和不带进位移位</p>
+<h1 id="存储器">存储器
+</h1><p>RAM（Random-Acess Memory）一般可分为SRAM（静态RAM），DRAM（动态RAM）
+ROM（Read Only Memory）一般可分为 掩膜ROM，一次性可写ROM，EPROM，EEPROM，闪速存储器Flash</p>
+<p>高位地址，选通芯片
+低位地址，选芯片的读写单元</p>
+<p>译码，将输入的一组高位地址信号通过变换，产生一个有效的输出信号，用于选中某一个存储器芯片，从而确定了该存储器芯片在内存的地址范围</p>
+<p><strong>全地址译码</strong>
+用全部高位地址信号作为译码信号，使得存储器芯片的每一个单元都占据一个唯一的内存地址
+<strong>部分地址译码</strong>
+用部分高位地址信号作为译码信号，使得被选中存储器芯片占有几组不同的地址范围</p>
+<p><strong>Cache高速缓冲器</strong>
+Cache高速缓冲存储器，Cache是构成内存储器的部件之一，设置Cahce的原因是内存的速度与处理器的工作速度不匹配</p>
+<p>微机中的存储器系统</p>
+<ol>
+<li>Cache存储器系统</li>
+<li>虚拟存储器系统
+<strong>Cache存储系统</strong>
+Cache存储系统主要有Cache高速缓冲器和主内存构成，有硬件系统负责管理</li>
+</ol>
+<h1 id="io系统">IO系统
+</h1><p><strong>输入输出系统</strong>
+在计算机系统中，通常把处理器和主存储器之外的部分统称为输入/输出系统， 包括输入/输出设备、输入/输出接口和输入/输出软件</p>
+<p><strong>IO接口</strong>
+IO接口就是外设连接到系统总线上的一组逻辑电路的总称</p>
+<p><strong>IO端口</strong>
+端口是接口电路中用于缓存数据及控制信息的部件
+CPU与I/O接口进行通信实际上是通过I/O接口内部的一组寄存器实现的，这些寄存器通常称为I/O端口（I/O Port）。它包括3种类型：<strong>数据端口、状态端口和命令（控制）端口</strong></p>
+<p><strong>IO端口编址方式</strong>
+分为统一编址和独立编址</p>
+<ol>
+<li>I/O端口与内存单元统一编址，指令及控制信号统一，内存地址资源减少</li>
+<li>I/O端口独立编址，内存地址资源充分利用，使用不同的控制信号，能够应用于端口的指令较少</li>
+</ol>
+<p>输入接口需要具备数据控制能力，一般采用三态门接口，防止外设的输入影响数据总线，如74LS244</p>
+<p>输出接口需要具备数据锁存能力，一般采用锁存器接口，如74LS273</p>
+<h4 id="基本输入输出方式">基本输入输出方式
+</h4><p>1.无条件传送方式</p>
+<p>2.查询方式</p>
+<p>3.中断方式</p>
+<p>4.直接存储器存取方式（DMA）</p>
+<h1 id="中断">中断
+</h1><p>CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引起CPU暂时 中断正在运行的程序，转去执行一段特殊的服务程序(称为中断服务程序或 中断处理程序)，以处理该事件，该事件处理完后又返回被中断的程序继续 执行，这一过程称为中断
+<img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-%E4%B8%AD%E6%96%AD%E4%B8%80%E8%88%AC%E8%BF%87%E7%A8%8B.png"
+	width="664"
+	height="790"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-%E4%B8%AD%E6%96%AD%E4%B8%80%E8%88%AC%E8%BF%87%E7%A8%8B_hu8553328482153604593.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-%E4%B8%AD%E6%96%AD%E4%B8%80%E8%88%AC%E8%BF%87%E7%A8%8B_hu8640506032818885660.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="84"
+		data-flex-basis="201px"
+	
+></p>
+<h4 id="中断响应过程">中断响应过程
+</h4><h5 id="可屏蔽外部中断响应过程">可屏蔽外部中断响应过程
+</h5><p>通过两个连续的中断响应总线周期获取中断类型码
+获取中断向量后并调用中断，服务程序</p>
+<h5 id="内部中断响应过程">内部中断响应过程
+</h5><p>无中断响应总线周期
+中断类型码固定或由指令（INT n）给出</p>
+<h1 id="主要芯片">主要芯片
+</h1><h3 id="1计数器8253">1.计数器8253
+</h3><p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8253%E8%AE%A1%E6%97%B6%E5%99%A8.png"
+	width="1571"
+	height="1022"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8253%E8%AE%A1%E6%97%B6%E5%99%A8_hu7755516545594645311.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8253%E8%AE%A1%E6%97%B6%E5%99%A8_hu11752557453604915962.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="153"
+		data-flex-basis="368px"
+	
+></p>
+<h4 id="特殊引脚">特殊引脚
+</h4><ol>
+<li>CLK——时钟脉冲输入</li>
+<li>GATE——门控信号输入</li>
+<li>OUT——定时输出</li>
+</ol>
+<h4 id="编程方式">编程方式
+</h4><ol>
+<li>控制字直接写入控制寄存器</li>
+<li>计数值写入对应计数器</li>
+</ol>
+<h4 id="工作方式">工作方式
+</h4><p>总览</p>
+<ol>
+<li>16位减法计数，计数值减为0时输出相应控制信号</li>
+<li>输出控制信号的形式可通过软件设置</li>
+</ol>
+<h5 id="方式0计数结束中断">方式0——计数结束中断
+</h5><p>软件启动，不自动重复计数
+计时结束输出高电平，输出可以用作中断请求信号</p>
+<p>不自动重复计数是指   <strong>每写入一次计数初值只计数一个周期</strong></p>
+<h5 id="方式1可重复触发的单稳态触发器">方式1——可重复触发的单稳态触发器
+</h5><p>硬件启动，不自动重复计数
+但是可以通过GATE重复触发计数，当GATE出现上升沿时，下一个CLK的下降沿开始计数
+计数结束后，OUT端输出高电平</p>
+<h5 id="方式2频率发生器">方式2——频率发生器
+</h5><p>既可以软件启动，也可以硬件启动
+自动重复计数，OUT端输出N-1个时钟周期的高电平，1个时钟周期的低电平</p>
+<h5 id="方式3方波发生器">方式3——方波发生器
+</h5><p>软硬件启动，自动重复计数
+输出对称方波（连续方波）
+N为偶数，完全对称，N为奇数，正脉冲会长一点</p>
+<h5 id="方式4软件触发选通">方式4——软件触发选通
+</h5><p>软件启动，不自动重复计数
+计数结束输出一个CLK宽度的低电平</p>
+<h5 id="方式5硬件触发选通">方式5——硬件触发选通
+</h5><p>硬件启动，不自动重复计数
+波形与方式4一致，计数结束输出一个CLK宽度的低电平</p>
+<h4 id="小结">小结
+</h4><p>需要两个写脉冲——两次写操作</p>
+<ol>
+<li>第一次写脉冲写入控制字</li>
+<li>第二次写脉冲写入计数初值</li>
+</ol>
+<p>能输出连续波形的只有方式2和方式3</p>
+<h3 id="2可编程并行接口8255">2.可编程并行接口8255
+</h3><p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8255.png"
+	width="1102"
+	height="758"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8255_hu13140301037335165003.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8255_hu378289627695085032.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="145"
+		data-flex-basis="348px"
+	
+></p>
+<h4 id="三个端口">三个端口
+</h4><p>A口：支持0，1，2工作方式
+B口：支持0，1工作方式
+C口，支持0工作方式</p>
+<h4 id="工作方式-1">工作方式
+</h4><h5 id="方式0基本输入输出方式">方式0——基本输入输出方式
+</h5><h5 id="方式1选通工作方式">方式1——选通工作方式
+</h5><p>方式1输出接口A</p>
+<p>$\overline {OBF}$：接口输出缓冲器满信号，告诉外设可以从该端口读走信号
+$\overline {ACK}$：外设从端口取走数据，发出响应信号
+外设取走信号后，发出$\overline {ACK}$响应信号，同时使$\overline {OBF}=1$，同时还会产生一个有效的$INTR$信号</p>
+<p>方式1输入接口A</p>
+<p>$\overline {{STB}_A}$：外设写入
+${{IBF}_A}$：当输入缓冲器满后，接口发出的高电平有效信号</p>
+<h5 id="方式2双向传送方式">方式2——双向传送方式
+</h5><p>可以既作为输入口，又作为输出口
+只有A口可以工作在此模式下，当A口工作在方式2时，B口可以工作在方式0或1</p>
+<h4 id="控制字">控制字
+</h4><p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8255%E5%B9%B6%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%8E%A7%E5%88%B6%E5%AD%97.png"
+	width="1179"
+	height="789"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8255%E5%B9%B6%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%8E%A7%E5%88%B6%E5%AD%97_hu14765288225054634413.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8255%E5%B9%B6%E8%A1%8C%E6%8E%A5%E5%8F%A3%E6%8E%A7%E5%88%B6%E5%AD%97_hu8589257034260744238.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="149"
+		data-flex-basis="358px"
+	
+>
+方式控制字：用于确定3个端口的工作方式及数据传送方向
+位控制字：仅用于C端口，可设置C口某位的初始状态（高低电平）</p>
+<p>D7=1，方式控制字
+D7=0，位控制字</p>
+<h3 id="3da转换芯片dac0832">3.DA转换芯片DAC0832
+</h3><p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-DAC0832.png"
+	width="1176"
+	height="806"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-DAC0832_hu14063487422228576702.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-DAC0832_hu4722366844357209555.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="145"
+		data-flex-basis="350px"
+	
+>
+差动输出，双缓冲</p>
+<h4 id="工作方式-2">工作方式
+</h4><h5 id="单缓冲工作方式">单缓冲工作方式
+</h5><p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-DAC0832%E5%8D%95%E7%BC%93%E5%86%B2%E6%96%B9%E5%BC%8F.png"
+	width="673"
+	height="402"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-DAC0832%E5%8D%95%E7%BC%93%E5%86%B2%E6%96%B9%E5%BC%8F_hu11514619749141126763.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-DAC0832%E5%8D%95%E7%BC%93%E5%86%B2%E6%96%B9%E5%BC%8F_hu4258811121347970124.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="167"
+		data-flex-basis="401px"
+	
+></p>
+<h5 id="双缓冲工作方式">双缓冲工作方式
+</h5><p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-DAC0832%E5%8F%8C%E7%BC%93%E5%86%B2%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F.png"
+	width="500"
+	height="878"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-DAC0832%E5%8F%8C%E7%BC%93%E5%86%B2%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F_hu11817361872452783474.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-DAC0832%E5%8F%8C%E7%BC%93%E5%86%B2%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F_hu12455462119672804061.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="56"
+		data-flex-basis="136px"
+	
+></p>
+<h3 id="4ad转换芯片adc0809">4.AD转换芯片ADC0809
+</h3><h3 id="5可编程中断控制器8259a">5.可编程中断控制器8259A
+</h3><p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259A.png"
+	width="1053"
+	height="724"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259A_hu10206134159472984562.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259A_hu7535512307012891829.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="145"
+		data-flex-basis="349px"
+	
+></p>
+<h5 id="特殊引脚-1">特殊引脚
+</h5><p>$INT$：接CPU的中断请求引脚
+$\overline {INTA}$：接CPU的中断响应引脚
+$A0$：8259A内部寄存器选择信号
+$CAS0-CAS2$：多个8259级联引脚时使用，级联控制线
+$\overline {SP}$：在非缓冲模式下，用来指定8259A是从片还是主片，$\overline {SP}$=1的8259是主片</p>
+<h5 id="内部结构">内部结构
+</h5><p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.png"
+	width="1102"
+	height="712"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84_hu8084468173589079257.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84_hu6595531071189504617.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="154"
+		data-flex-basis="371px"
+	
+></p>
+<h5 id="工作过程">工作过程
+</h5><p><img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259A%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.png"
+	width="1081"
+	height="719"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259A%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B_hu4638044446882469720.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259A%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B_hu17404546974619976441.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="150"
+		data-flex-basis="360px"
+	
+></p>
+<h5 id="工作方式-3">工作方式
+</h5><h6 id="中断优先方式与中断嵌套">中断优先方式与中断嵌套
+</h6><p>（1）固定优先级方式
+（2）循环优先级方式</p>
+<h6 id="屏蔽中断源的方式">屏蔽中断源的方式
+</h6><p>普通屏蔽方式：对IMR某位置1，则屏蔽该位对应的中断请求</p>
+<h6 id="级联工作方式">级联工作方式
+</h6><p>（1）主片、从片有不同的地址
+（2）主片、从片分别进行编程</p>
+<h5 id="8259a的编程">8259A的编程
+</h5><h6 id="初始化编程">初始化编程
+</h6><p>初始化命令字ICW1（初始化字）：单片/多片级联、电平/边沿触发
+初始化命令字ICW2（中断向量码）：给CPU提供中断向量
+<img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259AICW1&amp;2.png"
+	width="1098"
+	height="787"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259AICW1&amp;2_hu10199151641521457777.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259AICW1&amp;2_hu10928153089286359980.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="139"
+		data-flex-basis="334px"
+	
+>
+注意：例如，写入ICW1，端口地址为20H，写入ICW2时，端口地址为21H</p>
+<p>初始化命令字ICW3（级联控制字）：指出哪个引脚进行了级联
+<img src="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259AICW3.png"
+	width="933"
+	height="617"
+	srcset="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259AICW3_hu4193772609768098813.png 480w, /p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8259AICW3_hu14172121435931954740.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="151"
+		data-flex-basis="362px"
+	
+>
+初始化命令字ICW4（中断结束方式字）：给出8259A结束中断处理的方式</p>
+<h6 id="操作方式编程">操作方式编程
+</h6><p>操作命令字OCW1（中断屏蔽字）：某位为1则该引脚中断被屏蔽
+操作命令字OCW2（中断结束和优先级循环）：指定优先级顺序和中断结束方式
+操作命令字OCW3（屏蔽方式和状态读出控制字）：设置特殊屏蔽、查询方式</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/">微机原理</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Nomad
+    </section>
+    
+    <section class="powerby">
+        
+            experience <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
