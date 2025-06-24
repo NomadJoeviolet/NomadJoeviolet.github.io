@@ -7,7 +7,74 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
-        <lastBuildDate>Tue, 24 Jun 2025 22:44:59 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 24 Jun 2025 23:11:52 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Post</title>
+        <link>https://NomadJoeviolet.github.io/p/post/</link>
+        <pubDate>Tue, 24 Jun 2025 23:11:52 +0800</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/p/post/</guid>
+        <description>&lt;h3 id=&#34;stm32f103c8t6-的-can-控制器和-can-收发器&#34;&gt;STM32F103C8T6 的 CAN 控制器和 CAN 收发器
+&lt;/h3&gt;&lt;h4 id=&#34;1-can-控制器&#34;&gt;1. &lt;strong&gt;CAN 控制器&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;STM32F103C8T6 内置 CAN 控制器&lt;/strong&gt;：该芯片内置了 bxCAN（Basic Extended CAN）控制器，支持 CAN 2.0A 和 2.0B 协议&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;数据帧的封装与解析&lt;/li&gt;
+&lt;li&gt;错误检测与处理&lt;/li&gt;
+&lt;li&gt;总线仲裁&lt;/li&gt;
+&lt;li&gt;位定时与同步&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;引脚&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;CAN_RX&lt;/code&gt;（PA11）：接收数据&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CAN_TX&lt;/code&gt;（PA12）：发送数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-can-收发器&#34;&gt;2. &lt;strong&gt;CAN 收发器&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;STM32F103C8T6 没有内置 CAN 收发器&lt;/strong&gt;：CAN 收发器负责将 CAN 控制器的逻辑信号转换为 CAN 总线的差分信号（&lt;code&gt;CAN_H&lt;/code&gt; 和 &lt;code&gt;CAN_L&lt;/code&gt;），反之亦然&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;需要外接 CAN 收发器&lt;/strong&gt;：常见的 CAN 收发器包括 TJA1050、MCP2551 等&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;将 CAN 控制器的逻辑信号转换为差分信号&lt;/li&gt;
+&lt;li&gt;提供电气隔离（部分型号）&lt;/li&gt;
+&lt;li&gt;保护 CAN 控制器免受总线电气干扰&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CAN 控制器&lt;/strong&gt;：STM32F103C8T6 内置了 CAN 控制器，支持 CAN 2.0A 和 2.0B 协议&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CAN 收发器&lt;/strong&gt;：STM32F103C8T6 没有内置 CAN 收发器，需外接（如 TJA1050 或 MCP2551）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;连接方式&#34;&gt;连接方式
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CAN 控制器&lt;/strong&gt;：通过 &lt;code&gt;CAN_RX&lt;/code&gt;（PA11）和 &lt;code&gt;CAN_TX&lt;/code&gt;（PA12）与 CAN 收发器连接。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CAN 收发器&lt;/strong&gt;：将 &lt;code&gt;CAN_H&lt;/code&gt; 和 &lt;code&gt;CAN_L&lt;/code&gt; 连接到 CAN 总线&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;示例电路&#34;&gt;示例电路
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;STM32F103C8T6&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PA11&lt;/code&gt;（CAN_RX） → CAN 收发器的 &lt;code&gt;RXD&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PA12&lt;/code&gt;（CAN_TX） → CAN 收发器的 &lt;code&gt;TXD&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CAN 收发器&lt;/strong&gt;（如 TJA1050）：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;CAN_H&lt;/code&gt; 和 &lt;code&gt;CAN_L&lt;/code&gt; 连接到 CAN 总线&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;总结-1&#34;&gt;总结
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;STM32F103C8T6 内置 CAN 控制器&lt;/strong&gt;，但需外接 &lt;strong&gt;CAN 收发器&lt;/strong&gt; 才能实现完整的 CAN 通信功能&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>STM32————ADC模块</title>
         <link>https://NomadJoeviolet.github.io/p/stm32adc%E6%A8%A1%E5%9D%97/</link>
         <pubDate>Tue, 24 Jun 2025 22:44:59 +0800</pubDate>
