@@ -7,20 +7,28 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
-        <lastBuildDate>Wed, 18 Jun 2025 19:52:33 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>DMA空闲中断</title>
-        <link>https://NomadJoeviolet.github.io/tags/dma%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/</link>
-        <pubDate>Wed, 18 Jun 2025 19:52:33 +0800</pubDate>
+        <lastBuildDate>Tue, 24 Jun 2025 22:44:59 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ADC模块</title>
+        <link>https://NomadJoeviolet.github.io/tags/adc%E6%A8%A1%E5%9D%97/</link>
+        <pubDate>Tue, 24 Jun 2025 22:44:59 +0800</pubDate>
         
-        <guid>https://NomadJoeviolet.github.io/tags/dma%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/</guid>
+        <guid>https://NomadJoeviolet.github.io/tags/adc%E6%A8%A1%E5%9D%97/</guid>
         <description></description>
         </item>
         <item>
         <title>C&amp;C&#43;&#43;</title>
         <link>https://NomadJoeviolet.github.io/tags/cc&#43;&#43;/</link>
-        <pubDate>Mon, 13 Jan 2025 16:24:31 +0800</pubDate>
+        <pubDate>Tue, 24 Jun 2025 22:30:22 +0800</pubDate>
         
         <guid>https://NomadJoeviolet.github.io/tags/cc&#43;&#43;/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>DMA空闲中断</title>
+        <link>https://NomadJoeviolet.github.io/tags/dma%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/</link>
+        <pubDate>Wed, 18 Jun 2025 19:52:33 +0800</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/tags/dma%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/</guid>
         <description></description>
         </item>
         

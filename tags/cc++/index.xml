@@ -7,7 +7,365 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
-        <lastBuildDate>Mon, 13 Jan 2025 16:24:31 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/tags/cc++/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 24 Jun 2025 22:30:22 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/tags/cc++/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Post</title>
+        <link>https://NomadJoeviolet.github.io/p/post/</link>
+        <pubDate>Tue, 24 Jun 2025 22:30:22 +0800</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/p/post/</guid>
+        <description>&lt;p&gt;视频推荐：
+【c/cpp程序编译过程】https://www.bilibili.com/video/BV1JM4m127y7?vd_source=5a0790755035f26a67935abfbfcdfd5b&lt;/p&gt;
+&lt;p&gt;文章推荐：
+&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/618037867&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;详解C/C++代码的预处理、编译、汇编、链接全过程 - 知乎 (zhihu.com)&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/suxia/p/14214982.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C++ 预编译，编译，汇编，链接 - Suarezz - 博客园 (cnblogs.com)&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/88255667#:~:text=C/C&amp;#43;&amp;#43;%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B%201%201.%E9%A2%84%E5%A4%84%E7%90%86%20%28Preprocessing%29%20%E9%A2%84%E5%A4%84%E7%90%86%E7%94%A8%E4%BA%8E%E5%B0%86%E6%89%80%E6%9C%89%E7%9A%84#include%20%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BB%A5%E5%8F%8A%E5%AE%8F%E5%AE%9A%E4%B9%89%E6%9B%BF%E6%8D%A2%E6%88%90%E5%85%B6%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%86%85%E5%AE%B9%20%EF%BC%8C%E9%A2%84%E5%A4%84%E7%90%86%E4%B9%8B%E5%90%8E%E5%BE%97%E5%88%B0%E7%9A%84%E4%BB%8D%E7%84%B6%E6%98%AF%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%8C%E4%BD%86%E6%96%87%E4%BB%B6%E4%BD%93%E7%A7%AF%E4%BC%9A%E5%A4%A7%E5%BE%88%E5%A4%9A%E3%80%82%20...,%E6%88%90%E6%9C%80%E7%BB%88%E7%9A%84%20%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%20%28executable%20file%29%E3%80%82%20...%205%205.%E6%95%B0%E6%8D%AE%E5%92%8C%E6%8C%87%E4%BB%A4%20&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C/C++编译链接 - 知乎 (zhihu.com)&lt;/a&gt;(进阶)&lt;/p&gt;
+&lt;h2 id=&#34;关于编译器与不同系统的文件&#34;&gt;关于编译器与不同系统的文件
+&lt;/h2&gt;&lt;p&gt;一般编译器可以分为前端和后端，前端主要负责 语义分析，后端主要负责 代码生成&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;/th&gt;
+          &lt;th&gt;Linux&lt;/th&gt;
+          &lt;th&gt;macOS&lt;/th&gt;
+          &lt;th&gt;Windows&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;可执行文件&lt;/td&gt;
+          &lt;td&gt;.out或/&lt;/td&gt;
+          &lt;td&gt;.out或/&lt;/td&gt;
+          &lt;td&gt;.exe&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;目标文件&lt;/td&gt;
+          &lt;td&gt;.o&lt;/td&gt;
+          &lt;td&gt;.o&lt;/td&gt;
+          &lt;td&gt;.obj&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;静态库&lt;/td&gt;
+          &lt;td&gt;.a&lt;/td&gt;
+          &lt;td&gt;.a&lt;/td&gt;
+          &lt;td&gt;.lib&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;动态库&lt;/td&gt;
+          &lt;td&gt;.so&lt;/td&gt;
+          &lt;td&gt;.dylib&lt;/td&gt;
+          &lt;td&gt;.dll&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/C&amp;amp;C&amp;#43;&amp;#43;%20%e7%bc%96%e8%af%91%e8%bf%87%e7%a8%8b-%e7%bc%96%e8%af%91%e6%b5%81%e7%a8%8b%e7%ae%80%e5%9b%be.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;GCC&lt;/code&gt;负责编译，生成各类库和目标文件，然后调用外部链接器进行链接然后生成可执行文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;LLVM&lt;/code&gt;同时有编译器和链接器（例如：&lt;code&gt;armclang&lt;/code&gt;和&lt;code&gt;armlink&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;运行程序的运行阶段，是让加载器将最后生成的可执行文件放到内存中&lt;/p&gt;
+&lt;h2 id=&#34;gccgnugcc与g&#34;&gt;GCC、GNU、gcc与g++
+&lt;/h2&gt;&lt;p&gt;GNU：一个操作系统，具体内容不重要，感兴趣可以参考：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://link.zhihu.com/?target=https%3A//blog.csdn.net/qq_43617936/article/details/104504992&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GCC、GNU到底啥意思？_一只杨阳羊的博客-CSDN博客​blog.csdn.net/qq_43617936/article/details/104504992&lt;img src=&#34;https://pica.zhimg.com/v2-b75437690db0fe8938d0fd10bf83821e_180x120.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GCC&lt;/strong&gt;：GNU Compiler Collection（GNU&lt;a class=&#34;link&#34; href=&#34;https://zhida.zhihu.com/search?content_id=225473028&amp;amp;content_type=Article&amp;amp;match_order=1&amp;amp;q=%E7%BC%96%E8%AF%91%E5%99%A8%E9%9B%86%E5%90%88&amp;amp;zhida_source=entity&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;编译器集合&lt;/a&gt;）的缩写，可以理解为一组GNU操作系统中的编译器集合，可以用于编译C、C++、Java、Go、Fortan、Pascal、Objective-C等语言&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;gcc&lt;/strong&gt;：GCC（编译器集合）中的GNU C Compiler(C 编译器)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;g++&lt;/strong&gt;：GCC（编译器集合）中的GNU C++ Compiler(C++ 编译器)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;简单来说，gcc调用了GCC中的C Compiler，而g++调用了GCC中的C++ Compiler
+对于 &lt;code&gt;*.c&lt;/code&gt; 和 &lt;code&gt;*.cpp&lt;/code&gt; 文件，gcc分别当作 c 和 cpp文件编译，而g++则统一当作cpp文件编译&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241126223616.png]]&lt;/p&gt;
+&lt;h3 id=&#34;gdbgdb&#34;&gt;GDB(gdb)
+&lt;/h3&gt;&lt;p&gt;GDB（gdb）全称“GNU symbolic debugger”，是 Linux 下常用的程序调试器。 为了能够使用 gdb 调试，需要在代码编译的时候加上&lt;code&gt;-g&lt;/code&gt;，如&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;g++ -g -o test test.cpp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;常用指令&#34;&gt;常用指令
+&lt;/h2&gt;&lt;p&gt;![[Pasted image 20241027090624.png]]&lt;/p&gt;
+&lt;h1 id=&#34;编译过程&#34;&gt;编译过程
+&lt;/h1&gt;&lt;p&gt;![[Pasted image 20241027085312.png]]&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241027092346.png]]&lt;/p&gt;
+&lt;h2 id=&#34;step1-预处理&#34;&gt;step1. 预处理
+&lt;/h2&gt;&lt;p&gt;![[Pasted image 20241026230159.png]]
+&lt;strong&gt;命令：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;g++ -E test.cpp -o test.i
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;作用：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;去掉注释&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;预处理指令替换（ifndef ，宏定义等）&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;include 导入的头文件替换&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;预处理实例对比&#34;&gt;预处理实例对比
+&lt;/h3&gt;&lt;p&gt;.cpp 文件
+![[Pasted image 20241026230758.png]]&lt;/p&gt;
+&lt;p&gt;预处理后的 .i 文件&lt;/p&gt;
+&lt;p&gt;还有替换的&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&amp;lt;iostream&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;被省略了，替换的内容有3万多行&lt;/p&gt;
+&lt;p&gt;翻到最下面查看&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241026230952.png]]&lt;/p&gt;
+&lt;p&gt;具体解释
+预处理，顾名思义就是编译前的一些准备工作&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;预编译把一些&lt;code&gt;#define&lt;/code&gt;的宏定义完成文本替换，然后将&lt;/strong&gt;&lt;code&gt;#include&lt;/code&gt;&lt;strong&gt;的文件里的内容复制到&lt;code&gt;.cpp&lt;/code&gt;文件里，如果&lt;code&gt;.h&lt;/code&gt;文件里还有&lt;code&gt;.h&lt;/code&gt;文件，就递归展开&lt;/strong&gt;。在预处理这一步，代码注释直接被忽略，不会进入到后续的处理中，所以注释在程序中不会执行&lt;/p&gt;
+&lt;h2 id=&#34;step2-编译阶段&#34;&gt;step2. 编译阶段
+&lt;/h2&gt;&lt;p&gt;![[Pasted image 20241027001928.png]]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;命令：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;g++ -S test.i -o test.s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;对 .i 文件进行编译
+也可以对 .cpp 文件进行编译&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;g++ -S test.cpp -o test.s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;作用：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;翻译成汇编语言&lt;/li&gt;
+&lt;li&gt;检查代码报错&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;具体解释
+编译只是把我们写的代码转为汇编代码，&lt;strong&gt;它的工作是检查词法和语法规则，所以，如果程序没有词法或则语法错误，那么不管逻辑是怎样错误的，都不会报错&lt;/strong&gt;。&lt;br&gt;
+&lt;strong&gt;编译不是指程序从源文件到二进制程序的全部过程，而是指将经过预处理之后的程序转换成特定&lt;a class=&#34;link&#34; href=&#34;https://zhida.zhihu.com/search?content_id=225473028&amp;amp;content_type=Article&amp;amp;match_order=2&amp;amp;q=%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81&amp;amp;zhida_source=entity&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;汇编代码&lt;/a&gt;(assembly code)的过程&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;step3-汇编阶段&#34;&gt;step3. 汇编阶段
+&lt;/h2&gt;&lt;p&gt;![[Pasted image 20241027002224.png]]
+&lt;strong&gt;命令：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;g++ -c test.s -o test.o
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;作用：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将 .s 文件，汇编成二进制文件（二进制文件不可执行）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;step4-链接阶段&#34;&gt;step4. 链接阶段
+&lt;/h2&gt;&lt;p&gt;![[Pasted image 20241027002618.png]]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;命令：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;gcc test.o -o test
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;作用：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将目标文件 .o和库文件链接&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;具体解释：C语言代码经过编译以后，并没有生成最终的可执行文件（.exe 文件），而是生成了一种叫做目标文件（Object File）的中间文件（或者说临时文件）。目标文件也是二进制形式的，它和可执行文件的格式是一样的。对于 Visual C++，目标文件的后缀是&lt;code&gt;.obj&lt;/code&gt;；对于 GCC，目标文件的后缀是&lt;code&gt;.o&lt;/code&gt;。这就是一开始所说的编译完一堆.obj和.o文件的来源。&lt;/p&gt;
+&lt;p&gt;目标文件经过链接（Link）以后才能变成可执行文件。既然目标文件和可执行文件的格式是一样的，为什么还要再链接一次呢，因为编译只是将我们自己写的代码变成了二进制形式，&lt;strong&gt;它还需要和系统组件（比如标准库、动态链接库等）结合起来&lt;/strong&gt;，这些组件都是程序运行所必须的。链接（Link）其实就是一个“打包”的过程，它将所有二进制形式的目标文件和系统组件组合成一个可执行文件。完成链接的过程也需要一个特殊的软件，叫做链接器（Linker）。&lt;/p&gt;
+&lt;p&gt;C++程序编译的时候其实只识别.cpp文件。每个cpp文件都会分别编译一次，生成一个.o或者.obj文件。这个时候，链接器除了将目标文件和系统组件组合起来，还需要将编译器生成的多个.o或者.obj文件组合起来。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;g++&lt;/code&gt;自动链接了系统组件，我们只需要把自定义函数的目标文件与&lt;code&gt;main.o&lt;/code&gt;链接即可&lt;/p&gt;
+&lt;h3 id=&#34;链接的其他过程&#34;&gt;链接的其他过程
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/88255667#:~:text=C/C&amp;#43;&amp;#43;%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B%201%201.%E9%A2%84%E5%A4%84%E7%90%86%20%28Preprocessing%29%20%E9%A2%84%E5%A4%84%E7%90%86%E7%94%A8%E4%BA%8E%E5%B0%86%E6%89%80%E6%9C%89%E7%9A%84#include%20%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BB%A5%E5%8F%8A%E5%AE%8F%E5%AE%9A%E4%B9%89%E6%9B%BF%E6%8D%A2%E6%88%90%E5%85%B6%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%86%85%E5%AE%B9%20%EF%BC%8C%E9%A2%84%E5%A4%84%E7%90%86%E4%B9%8B%E5%90%8E%E5%BE%97%E5%88%B0%E7%9A%84%E4%BB%8D%E7%84%B6%E6%98%AF%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%8C%E4%BD%86%E6%96%87%E4%BB%B6%E4%BD%93%E7%A7%AF%E4%BC%9A%E5%A4%A7%E5%BE%88%E5%A4%9A%E3%80%82%20...,%E6%88%90%E6%9C%80%E7%BB%88%E7%9A%84%20%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%20%28executable%20file%29%E3%80%82%20...%205%205.%E6%95%B0%E6%8D%AE%E5%92%8C%E6%8C%87%E4%BB%A4%20&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C/C++编译链接 - 知乎 (zhihu.com)&lt;/a&gt;(进阶)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;合并段&lt;/strong&gt;
+![[Pasted image 20241027092742.png]]&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;调整段偏移&lt;/strong&gt;
+![[Pasted image 20241027092757.png]]&lt;/p&gt;
+&lt;h2 id=&#34;多文件g编译指令&#34;&gt;多文件g++编译指令
+&lt;/h2&gt;&lt;p&gt;![[Pasted image 20241027222011.png]]&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;g++ src/cmake_leran.cpp tools/hello.cpp -I includes -o cmake_leran
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;src/cmake_leran.cpp  tools/hello.cpp 是在指定当前目录下哪些源文件需要编译
+-I includes 是 库文件所在的目录&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241126230718.png]]&lt;/p&gt;
+&lt;h2 id=&#34;杂谈&#34;&gt;杂谈
+&lt;/h2&gt;&lt;h4 id=&#34;关于库文件&#34;&gt;关于库文件
+&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241126224636.png]]&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20241126224803.png]]&lt;/p&gt;
+&lt;h4 id=&#34;关于可执行文件&#34;&gt;关于可执行文件
+&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241126225616.png]]&lt;/p&gt;
+&lt;h4 id=&#34;关于c与c联合生成可执行文件&#34;&gt;关于C与C++联合生成可执行文件
+&lt;/h4&gt;&lt;p&gt;在C++中，告诉编译器以C的标准进行编译
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_46606290/article/details/119973574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//关键字
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;extern&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//example
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;#include&amp;lt;iostream&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;using&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;namespace&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;extern&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//用 extern&amp;#34;C&amp;#34;修饰
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;extern&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//用 extern&amp;#34;C&amp;#34;修饰
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;	
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//如果当前文件为cpp文件，就会告诉编译器按C语言方式编译和链接
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//如果不是cpp文件，则会被略过
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#ifdef __cplusplus
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;extern&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#endif
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;被调用内容&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#ifdef __cplusplus
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#enddif
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果编译器是 C++ 编译器，__&lt;em&gt;cplusplus&lt;/em&gt; 宏会被定义，&lt;em&gt;extern &amp;ldquo;C&amp;rdquo;&lt;/em&gt; 块将会被包含，这告诉编译器按照 C 语言的规则来处理函数名称，而不是 C++ 的规则。这样做的目的是为了保持与已经存在的 C 代码库的兼容性，特别是当使用 C++ 编写新代码时。&lt;/p&gt;
+&lt;h4 id=&#34;__cplusplus宏定义作用&#34;&gt;__cplusplus宏定义作用
+&lt;/h4&gt;&lt;p&gt;在 C++ 中，__&lt;em&gt;cplusplus&lt;/em&gt; 是一个预定义的宏，它用于确定正在使用的 C++ 标准的版本。这个宏的存在使得 C++ 代码能够以标准 C 形式输出，即以 C 的形式被调用，这对于跨平台编程和与 C 语言的兼容性至关重要。&lt;/p&gt;
+&lt;h5 id=&#34;宏的定义和使用&#34;&gt;宏的定义和使用
+&lt;/h5&gt;&lt;p&gt;__&lt;em&gt;cplusplus&lt;/em&gt; 宏通常在编写涉及 C 和 C++ 混合编程的头文件时使用。当 C++ 代码需要被 C 编译器调用时，使用这个宏可以确保 C++ 中的名称修饰（name mangling）不会发生，从而允许 C 代码安全地调用 C++ 函数。例如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#ifdef __cplusplus
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;extern&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#endif
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// C++ 函数声明
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#ifdef __cplusplus
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#endif
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;![[Pasted image 20241213212614.png]]&lt;/p&gt;
+&lt;p&gt;在这个例子中，如果编译器是 C++ 编译器，__&lt;em&gt;cplusplus&lt;/em&gt; 宏会被定义，&lt;em&gt;extern &amp;ldquo;C&amp;rdquo;&lt;/em&gt; 块将会被包含，这告诉编译器按照 C 语言的规则来处理函数名称，而不是 C++ 的规则。这样做的目的是为了保持与已经存在的 C 代码库的兼容性，特别是当使用 C++ 编写新代码时。&lt;/p&gt;
+&lt;h5 id=&#34;宏的值&#34;&gt;宏的值
+&lt;/h5&gt;&lt;p&gt;__&lt;em&gt;cplusplus&lt;/em&gt; 宏的值表示 C++ 标准的版本，例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;C++98 标准：199711L&lt;/li&gt;
+&lt;li&gt;C++11 标准：201103L&lt;/li&gt;
+&lt;li&gt;C++14 标准：201402L&lt;/li&gt;
+&lt;li&gt;C++17 标准：201703L&lt;/li&gt;
+&lt;li&gt;C++20 标准：202002L
+不同的编译器，如 GCC、Clang 或 Visual C++，都遵循这些标准，并在编译时定义相应的 __&lt;em&gt;cplusplus&lt;/em&gt; 值。这个宏的值可以用来确定编译器支持的 C++ 版本，从而在编写代码时做出相应的兼容性处理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;实际应用&#34;&gt;实际应用
+&lt;/h5&gt;&lt;p&gt;在实际应用中，__&lt;em&gt;cplusplus&lt;/em&gt; 宏确保了 C++ 代码可以与 C 代码无缝集成。例如，如果有一个用 C 语言编写的库，它的头文件是 &lt;em&gt;f.h&lt;/em&gt;，产生的库文件是 &lt;em&gt;f.lib&lt;/em&gt;，那么在 C++ 中使用这个库文件时，需要这样写：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;extern &amp;#34;C&amp;#34; {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#include &amp;#34;f.h&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这样，C++ 编译器就会知道如何正确地链接和调用 C 语言编写的函数。如果没有使用 __&lt;em&gt;cplusplus&lt;/em&gt; 宏，可能会出现链接错误，因为 C++ 编译器和 C 编译器对函数名称的处理方式不同。&lt;/p&gt;
+&lt;p&gt;总结来说，__&lt;em&gt;cplusplus&lt;/em&gt; 宏是 C++ 语言为了兼容 C 语言和支持混合编程而提供的一个重要工具。它允许开发者在保持 C++ 功能的同时，确保代码能够在不同的编程环境中正确运行。&lt;/p&gt;
+&lt;h4 id=&#34;关于extern关键字&#34;&gt;关于extern关键字
+&lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_46606290/article/details/119973574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客&lt;/a&gt;
+![[Pasted image 20241213212619.png]]&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>C&amp;C&#43;&#43; Statiic</title>
         <link>https://NomadJoeviolet.github.io/p/cc-statiic/</link>
         <pubDate>Mon, 13 Jan 2025 16:24:31 +0800</pubDate>

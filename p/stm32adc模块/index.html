@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="STM32H743-梳理ADC模数转换器在CubeMX上的配置_overrun behaviour-CSDN博客（写的很好，很详细）\nSTM32-HAL库-ADC学习 - 曲杨 - 博客园\n">
+<title>STM32————ADC模块</title>
+
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/stm32adc%E6%A8%A1%E5%9D%97/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="STM32————ADC模块">
+<meta property='og:description' content="STM32H743-梳理ADC模数转换器在CubeMX上的配置_overrun behaviour-CSDN博客（写的很好，很详细）\nSTM32-HAL库-ADC学习 - 曲杨 - 博客园\n">
+<meta property='og:url' content='https://NomadJoeviolet.github.io/p/stm32adc%E6%A8%A1%E5%9D%97/'>
+<meta property='og:site_name' content='Nomad_violet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='ADC模块' /><meta property='article:published_time' content='2025-06-24T22:44:59&#43;08:00'/><meta property='article:modified_time' content='2025-06-24T22:44:59&#43;08:00'/>
+<meta name="twitter:title" content="STM32————ADC模块">
+<meta name="twitter:description" content="STM32H743-梳理ADC模数转换器在CubeMX上的配置_overrun behaviour-CSDN博客（写的很好，很详细）\nSTM32-HAL库-ADC学习 - 曲杨 - 博客园\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu6061761693284197515.png" width="300"
+                            height="200" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Nomad_violet</a></h1>
+            <h2 class="site-description">to feel,to experience</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://www.bilibili.com/'
+                        target="_blank"
+                        title="Biliili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#adc定义">ADC定义</a></li>
+        <li><a href="#stm32单片机中的adc">STM32单片机中的ADC</a></li>
+        <li><a href="#分辨率与精度">分辨率与精度</a></li>
+        <li><a href="#stm32cubemx配置">STM32CubeMX配置</a></li>
+        <li><a href="#代码使用">代码使用</a>
+          <ol>
+            <li><a href="#关于多数据通道采集">关于多数据通道采集</a></li>
+            <li><a href="#检测">检测</a></li>
+          </ol>
+        </li>
+        <li><a href="#关于number-of-discontinuous-conversions">关于Number Of Discontinuous Conversions</a>
+          <ol>
+            <li><a href="#1-功能含义">1. 功能含义</a></li>
+            <li><a href="#2-配置步骤stm32cubemx">2. 配置步骤（STM32CubeMX）</a></li>
+            <li><a href="#3-工作流程示例"><strong>3. 工作流程示例</strong></a></li>
+            <li><a href="#4-注意事项"><strong>4. 注意事项</strong></a></li>
+            <li><a href="#总结"><strong>总结</strong></a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%9F%BA%E4%BA%8Ehal%E5%BA%93%E7%9A%84stm32%E5%BC%80%E5%8F%91/" >
+                基于HAL库的STM32开发
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/stm32adc%E6%A8%A1%E5%9D%97/">STM32————ADC模块</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-06-24</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p><a class="link" href="https://blog.csdn.net/wallace89/article/details/117048846"  target="_blank" rel="noopener"
+    >STM32H743-梳理ADC模数转换器在CubeMX上的配置_overrun behaviour-CSDN博客</a>（写的很好，很详细）</p>
+<p><a class="link" href="https://www.cnblogs.com/qu-yang/p/13221161.html"  target="_blank" rel="noopener"
+    >STM32-HAL库-ADC学习 - 曲杨 - 博客园</a></p>
+<h3 id="adc定义">ADC定义
+</h3><p>模数转换器(Analog to Digital Converter,ADC)
+模拟信号-&gt;数字信号转换器</p>
+<p>通过对输入的模拟信号进行测量，将其分级转换为数字信号</p>
+<h3 id="stm32单片机中的adc">STM32单片机中的ADC
+</h3><p>一般计算采用一下逻辑方式进行转换</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span> <span class="n">V</span><span class="o">&gt;</span><span class="n">V_ref_low</span> <span class="o">&amp;&amp;</span> <span class="n">V</span><span class="o">&lt;</span><span class="n">V_ref_high</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">V_ref_low</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">V_ref_high</span><span class="o">-</span><span class="n">V_ref_low</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span><span class="o">&lt;&lt;</span><span class="n">X</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//归一化，再按照配置的x进行转换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">erro</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>STM32单片机中的ADC，x一般是12，也可以是其他数值
+一般情况下，参考电压为0V，参考高电压为3.3V</p>
+<h3 id="分辨率与精度">分辨率与精度
+</h3><p>分辨率与位数有关，精度与性能有关，位数越高，分辨率越高，性能越高，波动越小，精度越强
+ADC位数为12位，则分辨率是1/4096</p>
+<p>使用时PLCK频率控制在36MHz以内，不然ADC模块的精度会大幅降低</p>
+<h3 id="stm32cubemx配置">STM32CubeMX配置
+</h3><p>这里以STM32C8T6为例</p>
+<ol>
+<li>x即Resolution 12bits( 15ADC时钟周期 )（看芯片型号，有的需要配置）</li>
+<li>数据选择右对齐，得到的数据就是转换后的值</li>
+<li>Mode选择Independent mode
+<img src="/p/stm32adc%E6%A8%A1%E5%9D%97/ADC%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE_1.png"
+	width="416"
+	height="203"
+	srcset="/p/stm32adc%E6%A8%A1%E5%9D%97/ADC%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE_1_hu405425321350879967.png 480w, /p/stm32adc%E6%A8%A1%E5%9D%97/ADC%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE_1_hu9995998333739149559.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="204"
+		data-flex-basis="491px"
+	
+></li>
+</ol>
+<p>Scan Conversion Mode（扫描转换模式），会采集ADC开启的所有通道，按顺序采集所有通道
+Continuous Conversion Mode（连续转换模式），可以在使能ADC时自动开始采集，而非手动采集
+Discontinuous Conversion Mode（间断采集模式），可以在一轮采集完成后暂停等待指令控制下一轮采集</p>
+<p>Number Of Discontinuous Conversions（单次转换次数）此参数定义每次触发后ADC执行的转换次数，每次转换完都需要<code>HAL_ADC_GetValue</code>来获取值。  如果它设为2，且ADC1使能了通道1，2，5，7的话，那么第一次触发ADC1采样时，就会采样通道1与通道2的值，再一次触发ADC1采样的话，就会采样通道5与通道7值，如此类推。</p>
+<p><code>ADC_Regular_ConversionMode</code>
+<img src="/p/stm32adc%E6%A8%A1%E5%9D%97/ADC%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE_2.png"
+	width="747"
+	height="245"
+	srcset="/p/stm32adc%E6%A8%A1%E5%9D%97/ADC%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE_2_hu17733844297870722250.png 480w, /p/stm32adc%E6%A8%A1%E5%9D%97/ADC%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE_2_hu3913388146016014527.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="304"
+		data-flex-basis="731px"
+	
+>
+可以配置每个通道的采集顺序和采样时间</p>
+<h3 id="代码使用">代码使用
+</h3><p>1.开始采集</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">HAL_ADC_Start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2.采集后转换</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">HAL_ADC_PollForConversion</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">,</span><span class="mi">20</span><span class="p">);</span><span class="c1">//地址，等待时间
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="关于多数据通道采集">关于多数据通道采集
+</h4><p>ADC_value[1]对应rank_1的通道的值，第一次采集rank1通道
+ADC_value[2]对应rank_2的通道的值，第一次采集rank2通道
+rank指在ADC_Regular_ConversionMode中的rank设置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span> <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">;</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">10</span> <span class="p">;</span> <span class="o">++</span> <span class="n">t</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span><span class="p">(</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="p">;</span> <span class="o">++</span> <span class="n">i</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">HAL_ADC_Start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">HAL_ADC_PollForConversion</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">,</span><span class="mi">20</span><span class="p">);</span><span class="c1">//采集后转换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="n">AD_value</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="nf">HAL_ADC_GetValue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">)</span> <span class="p">;</span><span class="c1">//采集十次，平均值处理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="检测">检测
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nf">HAL_IS_BIT_SET</span><span class="p">(</span> <span class="nf">HAL_ADC_GetState</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">),</span><span class="n">HAL_ADC_STATE_REG_EOC</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span><span class="c1">//检测是否正常采集
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">ADC_value</span> <span class="o">+=</span> <span class="nf">HAL_ADC_GetValue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="关于number-of-discontinuous-conversions">关于Number Of Discontinuous Conversions
+</h3><p>在STM32CubeMX中，<strong>Number Of Discontinuous Conversions</strong>（单次转换次数）是ADC（模数转换器）的一个配置选项，主要用于控制ADC在**非连续采样模式（Discontinuous Mode）**下的转换行为。以下是详细解释和使用方法：</p>
+<h4 id="1-功能含义">1. 功能含义
+</h4><ul>
+<li><strong>作用</strong>：<br>
+当ADC配置为非连续模式（Discontinuous Mode）时，此参数定义每次触发后ADC执行的转换次数。
+<ul>
+<li>例如，设置为<code>3</code>，则每次触发ADC后，会自动连续完成3次转换（无需额外触发信号）。</li>
+<li>若设置为<code>1</code>，则每次触发仅执行1次转换（等同于标准单次模式）。</li>
+</ul>
+</li>
+<li><strong>应用场景</strong>：<br>
+适用于需要<strong>分组采样</strong>的场景，例如：
+<ul>
+<li>周期性触发ADC，但每次触发需采集多个通道的数据。</li>
+<li>降低CPU干预频率（通过一次触发完成多次转换）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-配置步骤stm32cubemx">2. 配置步骤（STM32CubeMX）
+</h4><ol>
+<li><strong>启用Discontinuous Mode</strong>：
+<ul>
+<li>在ADC配置界面，勾选 <strong><code>Discontinuous Mode</code></strong>（通常在Parameter Settings选项卡中）。</li>
+<li>此时，<strong>Number Of Discontinuous Conversions</strong>选项会生效。</li>
+</ul>
+</li>
+<li><strong>设置转换次数</strong>：
+<ul>
+<li>输入需要的转换次数（取值范围取决于型号，通常为1~8）。</li>
+<li>该值必须 <strong>≤ 总启用通道数</strong>（例如，若启用5个通道，最多可设置为5）。</li>
+</ul>
+</li>
+<li><strong>配置触发源</strong>：
+<ul>
+<li>选择触发方式（如定时器触发、外部引脚触发等）。</li>
+<li>每次触发信号到来时，ADC会自动完成设定的转换次数。</li>
+</ul>
+</li>
+</ol>
+<h4 id="3-工作流程示例"><strong>3. 工作流程示例</strong>
+</h4><ul>
+<li><strong>硬件环境</strong>：
+<ul>
+<li>ADC通道：CH0、CH1、CH2</li>
+<li>配置：<code>Discontinuous Mode</code> + <code>Number Of Discontinuous Conversions = 2</code></li>
+</ul>
+</li>
+<li><strong>行为</strong>：
+<ol>
+<li>触发信号到来（如定时器溢出）。</li>
+<li>ADC自动连续转换<strong>2个通道</strong>（例如CH0→CH1）。</li>
+<li>转换完成后产生中断/DMA请求。</li>
+<li>下次触发时，继续从下一个通道开始（CH2→CH0，依此类推）。</li>
+</ol>
+</li>
+</ul>
+<p>在该配置下（<code>Discontinuous Mode</code> + <code>Number Of Discontinuous Conversions = 2</code>），每次触发后ADC会连续转换<strong>2个通道</strong>（例如CH0→CH1），因此你需要调用两次 <strong><code>HAL_ADC_GetValue(&amp;hadc2)</code></strong> 来分别读取这两个通道的转换结果。以下是具体说明和注意事项：</p>
+<h5 id="1-数据读取方式"><strong>1. 数据读取方式</strong>
+</h5><h6 id="方法一轮询模式polling"><strong>方法一：轮询模式（Polling）</strong>
+</h6><p>每次触发后，需手动读取两次ADC值：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">HAL_ADC_Start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">);</span>  <span class="c1">// 启动ADC（或通过触发信号启动）
+</span></span></span><span class="line"><span class="cl"><span class="c1">//开启一次，采集两次
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nf">HAL_ADC_PollForConversion</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span> <span class="o">==</span> <span class="n">HAL_OK</span><span class="p">)</span> <span class="p">{</span><span class="c1">//采集后第一次转换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint32_t</span> <span class="n">ch0_value</span> <span class="o">=</span> <span class="nf">HAL_ADC_GetValue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">);</span>  <span class="c1">// 读取CH0结果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">HAL_ADC_PollForConversion</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span> <span class="o">==</span> <span class="n">HAL_OK</span><span class="p">)</span> <span class="p">{</span><span class="c1">//采集后第二次转换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint32_t</span> <span class="n">ch1_value</span> <span class="o">=</span> <span class="nf">HAL_ADC_GetValue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">);</span>  <span class="c1">// 读取CH1结果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>注意</strong>：每次调用 <code>HAL_ADC_GetValue()</code> 会返回<strong>最后一次完成的转换结果</strong>，因此需按顺序读取。</li>
+</ul>
+<h6 id="方法二中断模式interrupt"><strong>方法二：中断模式（Interrupt）</strong>
+</h6><p>在ADC转换完成中断中读取：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_ADC_ConvCpltCallback</span><span class="p">(</span><span class="n">ADC_HandleTypeDef</span><span class="o">*</span> <span class="n">hadc</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">hadc</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">hadc2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint32_t</span> <span class="n">ch0_value</span> <span class="o">=</span> <span class="nf">HAL_ADC_GetValue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">);</span>  <span class="c1">// 第一次转换结果（CH0）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">uint32_t</span> <span class="n">ch1_value</span> <span class="o">=</span> <span class="nf">HAL_ADC_GetValue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">);</span>  <span class="c1">// 第二次转换结果（CH1）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>关键点</strong>：在中断回调中需连续读取两次，顺序由ADC的<strong>Rank配置</strong>决定。</li>
+</ul>
+<h6 id="方法三dma模式推荐"><strong>方法三：DMA模式（推荐）</strong>
+</h6><p>若启用DMA，ADC会自动将多次转换结果存入指定数组，无需手动调用 <code>HAL_ADC_GetValue()</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="n">adc_results</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>  <span class="c1">// 存储2次转换结果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">HAL_ADC_Start_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc2</span><span class="p">,</span> <span class="n">adc_results</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>  <span class="c1">// 启动DMA传输
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>结果存储</strong>：<br>
+<code>adc_results[0]</code> → CH0的值，<code>adc_results[1]</code> → CH1的值（顺序由Rank决定）。</li>
+</ul>
+<h4 id="4-注意事项"><strong>4. 注意事项</strong>
+</h4><ul>
+<li><strong>与连续模式（Continuous Mode）的区别</strong>：
+<ul>
+<li><strong>连续模式</strong>：ADC无限循环转换所有启用通道，无需触发。</li>
+<li><strong>非连续模式</strong>：需外部触发，且每次触发仅转换设定的次数。</li>
+</ul>
+</li>
+<li><strong>DMA配合</strong>：
+<ul>
+<li>建议启用DMA，以高效搬运多组转换结果（尤其是高频触发场景）。</li>
+<li>DMA缓冲区大小需 ≥ 转换次数 × 通道数。</li>
+</ul>
+</li>
+<li><strong>通道顺序</strong>：
+<ul>
+<li>转换顺序由<strong>Rank</strong>（在ADC配置中定义）决定，而非通道编号。</li>
+</ul>
+</li>
+</ul>
+<h4 id="总结"><strong>总结</strong>
+</h4><ul>
+<li><strong>Number Of Discontinuous Conversions</strong> 是ADC非连续模式下每次触发的转换次数。</li>
+<li><strong>关键配置</strong>：启用Discontinuous Mode → 设置转换次数 → 配置触发源。</li>
+<li><strong>优势</strong>：灵活控制采样节奏，减少CPU负担，适合分组采样需求。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/adc%E6%A8%A1%E5%9D%97/">ADC模块</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/stm32dma%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32——DMA使用与空闲中断</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Nomad
+    </section>
+    
+    <section class="powerby">
+        
+            experience <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
