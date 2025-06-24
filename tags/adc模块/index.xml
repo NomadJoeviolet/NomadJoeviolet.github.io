@@ -54,8 +54,9 @@ ADC位数为12位，则分辨率是1/4096&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;x即Resolution 12bits( 15ADC时钟周期 )（看芯片型号，有的需要配置）&lt;/li&gt;
 &lt;li&gt;数据选择右对齐，得到的数据就是转换后的值&lt;/li&gt;
-&lt;li&gt;Mode选择Independent mode
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32adc%E6%A8%A1%E5%9D%97/ADC%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE_1.png&#34;
+&lt;li&gt;Mode选择Independent mode&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32adc%E6%A8%A1%E5%9D%97/ADC%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE_1.png&#34;
 	width=&#34;416&#34;
 	height=&#34;203&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32adc%E6%A8%A1%E5%9D%97/ADC%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE_1_hu405425321350879967.png 480w, https://NomadJoeviolet.github.io/p/stm32adc%E6%A8%A1%E5%9D%97/ADC%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE_1_hu9995998333739149559.png 1024w&#34;
@@ -66,8 +67,7 @@ ADC位数为12位，则分辨率是1/4096&lt;/p&gt;
 		data-flex-grow=&#34;204&#34;
 		data-flex-basis=&#34;491px&#34;
 	
-&gt;&lt;/li&gt;
-&lt;/ol&gt;
+&gt;&lt;/p&gt;
 &lt;p&gt;Scan Conversion Mode（扫描转换模式），会采集ADC开启的所有通道，按顺序采集所有通道
 Continuous Conversion Mode（连续转换模式），可以在使能ADC时自动开始采集，而非手动采集
 Discontinuous Conversion Mode（间断采集模式），可以在一轮采集完成后暂停等待指令控制下一轮采集&lt;/p&gt;
