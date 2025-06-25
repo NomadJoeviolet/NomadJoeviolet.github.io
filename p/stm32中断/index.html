@@ -754,12 +754,16 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 </h4><p>CPU不断查询发送数据寄存器或者接受数据寄存器导致程序的阻塞</p>
 <h5 id="发送">发送
 </h5><p>在<code>UART</code>底层有发送移位寄存器和发送数据寄存器，发送数据时，需要CPU将发送数据寄存器的数据移动至发送移位寄存器，然后<code>UART</code>按照指定的波特率发送数据，CPU则不断查询数据发送寄存器是否空，如果空则需要移动数据进来
-<img src="/STM32%e4%b8%ad%e6%96%ad-UART%e6%8e%a5%e6%94%b6.png"
-	
-	
-	
+<img src="/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81.png"
+	width="631"
+	height="244"
+	srcset="/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81_hu15405304221731860814.png 480w, /p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81_hu11465131017380306252.png 1024w"
 	loading="lazy"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="258"
+		data-flex-basis="620px"
 	
 ></p>
 <h5 id="接收">接收
