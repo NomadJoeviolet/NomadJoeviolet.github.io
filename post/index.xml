@@ -167,8 +167,8 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 		data-flex-grow=&#34;368&#34;
 		data-flex-basis=&#34;883px&#34;
 	
-&gt;
-配置参数解释&lt;/p&gt;
+&gt;&lt;/p&gt;
+&lt;p&gt;配置参数解释&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;上升沿触发：指的是当引脚电平从低电平(0)转变为高电平(1)时，触发事件&lt;/li&gt;
 &lt;li&gt;下降沿触发：指的是当引脚电平从高电平(1)转变为低电平(0)时，触发事件&lt;/li&gt;
@@ -188,8 +188,8 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 		data-flex-grow=&#34;281&#34;
 		data-flex-basis=&#34;674px&#34;
 	
-&gt;
-推挽模式，初始输出为&lt;code&gt;Low&lt;/code&gt;低电平&lt;/p&gt;
+&gt;&lt;/p&gt;
+&lt;p&gt;推挽模式，初始输出为&lt;code&gt;Low&lt;/code&gt;低电平&lt;/p&gt;
 &lt;h4 id=&#34;按键消抖&#34;&gt;按键消抖
 &lt;/h4&gt;&lt;h5 id=&#34;方式1&#34;&gt;方式1
 &lt;/h5&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -268,8 +268,8 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 &lt;h4 id=&#34;调用流程-1&#34;&gt;调用流程
 &lt;/h4&gt;&lt;p&gt;触发更新中断后进入更新中断服务函数&lt;code&gt;TIM1_UP_IRQHandler&lt;/code&gt;，其中调用&lt;code&gt;HAL_TIM_IRQHandler&lt;/code&gt;，在该函数中调用了&lt;code&gt;HAL_TIM_PeriodElapsedCallback&lt;/code&gt;回调函数&lt;/p&gt;
 &lt;h4 id=&#34;cubemx参数配置&#34;&gt;CubeMX参数配置
-&lt;/h4&gt;&lt;p&gt;使用内部时钟模式
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F.png&#34;
+&lt;/h4&gt;&lt;p&gt;使用内部时钟模式&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F.png&#34;
 	width=&#34;675&#34;
 	height=&#34;177&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F_hu5309645045050208546.png 480w, https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F_hu9881976903012931188.png 1024w&#34;
@@ -280,9 +280,9 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 		data-flex-grow=&#34;381&#34;
 		data-flex-basis=&#34;915px&#34;
 	
-&gt;
-参数配置如下，实现1s触发一次定时器更新中断
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png&#34;
+&gt;&lt;/p&gt;
+&lt;p&gt;参数配置如下，实现1s触发一次定时器更新中断&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png&#34;
 	width=&#34;686&#34;
 	height=&#34;237&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE_hu12829645387105645740.png 480w, https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE_hu162320815802914554.png 1024w&#34;
