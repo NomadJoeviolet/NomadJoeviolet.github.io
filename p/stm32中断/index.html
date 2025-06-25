@@ -782,12 +782,16 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 上层中断实现数据接收完成后的数据处理，通过中断回调函数实现，需要我们自己设计</p>
 <h5 id="发送-1">发送
 </h5><p>CPU将数据送入 发送数据寄存器，然后就去执行其他代码，当发送移位寄存器的数据发送后，发送数据寄存器空，会触发发送数据寄存器空中断，CPU再次将数据送入 发送数据寄存器，然后又去执行其他代码，所有数据发送完成后会触发 传送完成中断，调用<code>HAL_UART_TxCpltCallback</code>中断回调函数
-<img src="/STM32%e4%b8%ad%e6%96%ad-UART%e4%b8%ad%e6%96%ad%e5%8f%91%e9%80%81.png"
-	
-	
-	
+<img src="/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-UART%E4%B8%AD%E6%96%AD%E5%8F%91%E9%80%81.png"
+	width="924"
+	height="355"
+	srcset="/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-UART%E4%B8%AD%E6%96%AD%E5%8F%91%E9%80%81_hu12903841339894141808.png 480w, /p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-UART%E4%B8%AD%E6%96%AD%E5%8F%91%E9%80%81_hu8863444947271062853.png 1024w"
 	loading="lazy"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="260"
+		data-flex-basis="624px"
 	
 ></p>
 <h5 id="接收-1">接收
