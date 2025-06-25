@@ -8,7 +8,7 @@
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
         <lastBuildDate>Wed, 25 Jun 2025 21:48:07 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>STM32中断</title>
+        <title>STM32——中断</title>
         <link>https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/</link>
         <pubDate>Wed, 25 Jun 2025 21:48:07 +0800</pubDate>
         
@@ -154,8 +154,8 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 		data-flex-grow=&#34;704&#34;
 		data-flex-basis=&#34;1689px&#34;
 	
-&gt;
-配置的是下降沿触发，检测下降沿，上拉模式
+&gt;&lt;/p&gt;
+&lt;p&gt;配置的是下降沿触发，检测下降沿，上拉模式
 &lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-EXTI%E6%A8%A1%E5%BC%8F.png&#34;
 	width=&#34;681&#34;
 	height=&#34;185&#34;
