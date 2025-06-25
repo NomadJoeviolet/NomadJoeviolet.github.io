@@ -497,8 +497,8 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 <h3 id="按键实现外部中断控制小灯亮灭">按键实现外部中断控制小灯亮灭
 </h3><h4 id="cube配置">Cube配置
 </h4><h5 id="exti配置">EXTI配置
-</h5><p>打开中断
-<img src="/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-EXTI%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF.png"
+</h5><p>打开中断</p>
+<p><img src="/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-EXTI%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF.png"
 	width="697"
 	height="99"
 	srcset="/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-EXTI%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF_hu14162493153675042262.png 480w, /p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-EXTI%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF_hu6564623695607794588.png 1024w"
@@ -754,16 +754,12 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 </h4><p>CPU不断查询发送数据寄存器或者接受数据寄存器导致程序的阻塞</p>
 <h5 id="发送">发送
 </h5><p>在<code>UART</code>底层有发送移位寄存器和发送数据寄存器，发送数据时，需要CPU将发送数据寄存器的数据移动至发送移位寄存器，然后<code>UART</code>按照指定的波特率发送数据，CPU则不断查询数据发送寄存器是否空，如果空则需要移动数据进来
-<img src="/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81%E5%BA%95%E5%B1%82.png"
-	width="822"
-	height="596"
-	srcset="/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81%E5%BA%95%E5%B1%82_hu3702578759801223340.png 480w, /p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81%E5%BA%95%E5%B1%82_hu4201940435872372184.png 1024w"
+<img src="/STM32%e4%b8%ad%e6%96%ad-UART%e6%8e%a5%e6%94%b6.png"
+	
+	
+	
 	loading="lazy"
 	
-	
-		class="gallery-image" 
-		data-flex-grow="137"
-		data-flex-basis="331px"
 	
 ></p>
 <h5 id="接收">接收
@@ -785,7 +781,15 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 </h4><p>底层中断实现数据每传送一字节，召回CPU继续运输数据，不需要我们考虑，<code>HAL</code>库底层已经帮我们实现
 上层中断实现数据接收完成后的数据处理，通过中断回调函数实现，需要我们自己设计</p>
 <h5 id="发送-1">发送
-</h5><p>CPU将数据送入 发送数据寄存器，然后就去执行其他代码，当发送移位寄存器的数据发送后，发送数据寄存器空，会触发发送数据寄存器空中断，CPU再次将数据送入 发送数据寄存器，然后又去执行其他代码，所有数据发送完成后会触发 传送完成中断，调用<code>HAL_UART_TxCpltCallback</code>中断回调函数</p>
+</h5><p>CPU将数据送入 发送数据寄存器，然后就去执行其他代码，当发送移位寄存器的数据发送后，发送数据寄存器空，会触发发送数据寄存器空中断，CPU再次将数据送入 发送数据寄存器，然后又去执行其他代码，所有数据发送完成后会触发 传送完成中断，调用<code>HAL_UART_TxCpltCallback</code>中断回调函数
+<img src="/STM32%e4%b8%ad%e6%96%ad-UART%e4%b8%ad%e6%96%ad%e5%8f%91%e9%80%81.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
 <h5 id="接收-1">接收
 </h5><p>CPU在处理其他代码，接收移位寄存器将一帧数据移动至 接受数据寄存器后，会触发 接收数据寄存器非空中断，CPU会回来将 接收数据寄存器 的数据移动至我们用来接收数据的变量的内存里，然后又去执行其他代码，所有数据完成后会调用<code>_HAL_UART_RxCpltCallback_</code>中断回调函数处理接收的数据
 <img src="/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-UART%E6%8E%A5%E6%94%B6%E4%B8%AD%E6%96%AD.png"
