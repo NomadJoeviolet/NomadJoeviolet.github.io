@@ -398,8 +398,8 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 &lt;h4 id=&#34;轮询模式&#34;&gt;轮询模式
 &lt;/h4&gt;&lt;p&gt;CPU不断查询发送数据寄存器或者接受数据寄存器导致程序的阻塞&lt;/p&gt;
 &lt;h5 id=&#34;发送&#34;&gt;发送
-&lt;/h5&gt;&lt;p&gt;在&lt;code&gt;UART&lt;/code&gt;底层有发送移位寄存器和发送数据寄存器，发送数据时，需要CPU将发送数据寄存器的数据移动至发送移位寄存器，然后&lt;code&gt;UART&lt;/code&gt;按照指定的波特率发送数据，CPU则不断查询数据发送寄存器是否空，如果空则需要移动数据进来
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81.png&#34;
+&lt;/h5&gt;&lt;p&gt;在&lt;code&gt;UART&lt;/code&gt;底层有发送移位寄存器和发送数据寄存器，发送数据时，需要CPU将发送数据寄存器的数据移动至发送移位寄存器，然后&lt;code&gt;UART&lt;/code&gt;按照指定的波特率发送数据，CPU则不断查询数据发送寄存器是否空，如果空则需要移动数据进来&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81.png&#34;
 	width=&#34;631&#34;
 	height=&#34;244&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81_hu15405304221731860814.png 480w, https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81_hu11465131017380306252.png 1024w&#34;
