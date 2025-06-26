@@ -98,7 +98,7 @@
 	
 &gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;code&gt;Prescaker&lt;/code&gt;:预分频，实际分频数是&lt;code&gt;number+1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Prescaler&lt;/code&gt;:预分频，实际分频数是&lt;code&gt;number+1&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;Counter Mode&lt;/code&gt;:计数模式设置&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;Counter Period&lt;/code&gt;:自动重装载计数器计数值&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;Internal Clock Division&lt;/code&gt;:内部时钟预分频&lt;/li&gt;
