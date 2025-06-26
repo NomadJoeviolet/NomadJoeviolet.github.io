@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="视频推荐： 【c/cpp程序编译过程】https://www.bilibili.com/video/BV1JM4m127y7?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
+<title>C&amp;C&#43;&#43; 编译过程</title>
+
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/cc-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="C&C++ 编译过程">
+<meta property='og:description' content="视频推荐： 【c/cpp程序编译过程】https://www.bilibili.com/video/BV1JM4m127y7?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
+<meta property='og:url' content='https://NomadJoeviolet.github.io/p/cc-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/'>
+<meta property='og:site_name' content='Nomad_violet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&amp;C&#43;&#43;' /><meta property='article:published_time' content='2025-06-24T22:30:22&#43;08:00'/><meta property='article:modified_time' content='2025-06-24T22:30:22&#43;08:00'/>
+<meta name="twitter:title" content="C&C++ 编译过程">
+<meta name="twitter:description" content="视频推荐： 【c/cpp程序编译过程】https://www.bilibili.com/video/BV1JM4m127y7?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu6061761693284197515.png" width="300"
+                            height="200" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Nomad_violet</a></h1>
+            <h2 class="site-description">to feel,to experience</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://www.bilibili.com/'
+                        target="_blank"
+                        title="Biliili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#关于编译器与不同系统的文件">关于编译器与不同系统的文件</a></li>
+    <li><a href="#gccgnugcc与g">GCC、GNU、gcc与g++</a>
+      <ol>
+        <li><a href="#gdbgdb">GDB(gdb)</a></li>
+      </ol>
+    </li>
+    <li><a href="#常用指令">常用指令</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#step1-预处理">step1. 预处理</a>
+      <ol>
+        <li><a href="#预处理实例对比">预处理实例对比</a></li>
+      </ol>
+    </li>
+    <li><a href="#step2-编译阶段">step2. 编译阶段</a></li>
+    <li><a href="#step3-汇编阶段">step3. 汇编阶段</a></li>
+    <li><a href="#step4-链接阶段">step4. 链接阶段</a>
+      <ol>
+        <li><a href="#链接的其他过程">链接的其他过程</a></li>
+      </ol>
+    </li>
+    <li><a href="#多文件g编译指令">多文件g++编译指令</a></li>
+    <li><a href="#杂谈">杂谈</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#关于库文件">关于库文件</a></li>
+            <li><a href="#关于可执行文件">关于可执行文件</a></li>
+            <li><a href="#关于c与c联合生成可执行文件">关于C与C++联合生成可执行文件</a></li>
+            <li><a href="#__cplusplus宏定义作用">__cplusplus宏定义作用</a></li>
+            <li><a href="#关于extern关键字">关于extern关键字</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/cc&#43;&#43;-study/" >
+                C&amp;C&#43;&#43; Study
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/cc-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/">C&amp;C&#43;&#43; 编译过程</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-06-24</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>视频推荐：
+【c/cpp程序编译过程】https://www.bilibili.com/video/BV1JM4m127y7?vd_source=5a0790755035f26a67935abfbfcdfd5b</p>
+<p>文章推荐：
+<a class="link" href="https://zhuanlan.zhihu.com/p/618037867"  target="_blank" rel="noopener"
+    >详解C/C++代码的预处理、编译、汇编、链接全过程 - 知乎 (zhihu.com)</a>
+<a class="link" href="https://www.cnblogs.com/suxia/p/14214982.html"  target="_blank" rel="noopener"
+    >C++ 预编译，编译，汇编，链接 - Suarezz - 博客园 (cnblogs.com)</a>
+<a class="link" href="https://zhuanlan.zhihu.com/p/88255667#:~:text=C/C&#43;&#43;%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B%201%201.%E9%A2%84%E5%A4%84%E7%90%86%20%28Preprocessing%29%20%E9%A2%84%E5%A4%84%E7%90%86%E7%94%A8%E4%BA%8E%E5%B0%86%E6%89%80%E6%9C%89%E7%9A%84#include%20%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BB%A5%E5%8F%8A%E5%AE%8F%E5%AE%9A%E4%B9%89%E6%9B%BF%E6%8D%A2%E6%88%90%E5%85%B6%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%86%85%E5%AE%B9%20%EF%BC%8C%E9%A2%84%E5%A4%84%E7%90%86%E4%B9%8B%E5%90%8E%E5%BE%97%E5%88%B0%E7%9A%84%E4%BB%8D%E7%84%B6%E6%98%AF%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%8C%E4%BD%86%E6%96%87%E4%BB%B6%E4%BD%93%E7%A7%AF%E4%BC%9A%E5%A4%A7%E5%BE%88%E5%A4%9A%E3%80%82%20...,%E6%88%90%E6%9C%80%E7%BB%88%E7%9A%84%20%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%20%28executable%20file%29%E3%80%82%20...%205%205.%E6%95%B0%E6%8D%AE%E5%92%8C%E6%8C%87%E4%BB%A4%20"  target="_blank" rel="noopener"
+    >C/C++编译链接 - 知乎 (zhihu.com)</a>(进阶)</p>
+<h2 id="关于编译器与不同系统的文件">关于编译器与不同系统的文件
+</h2><p>一般编译器可以分为前端和后端，前端主要负责 语义分析，后端主要负责 代码生成</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Linux</th>
+          <th>macOS</th>
+          <th>Windows</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>可执行文件</td>
+          <td>.out或/</td>
+          <td>.out或/</td>
+          <td>.exe</td>
+      </tr>
+      <tr>
+          <td>目标文件</td>
+          <td>.o</td>
+          <td>.o</td>
+          <td>.obj</td>
+      </tr>
+      <tr>
+          <td>静态库</td>
+          <td>.a</td>
+          <td>.a</td>
+          <td>.lib</td>
+      </tr>
+      <tr>
+          <td>动态库</td>
+          <td>.so</td>
+          <td>.dylib</td>
+          <td>.dll</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><img src="/C&amp;C&#43;&#43;%20%e7%bc%96%e8%af%91%e8%bf%87%e7%a8%8b-%e7%bc%96%e8%af%91%e6%b5%81%e7%a8%8b%e7%ae%80%e5%9b%be.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p><code>GCC</code>负责编译，生成各类库和目标文件，然后调用外部链接器进行链接然后生成可执行文件</p>
+<p><code>LLVM</code>同时有编译器和链接器（例如：<code>armclang</code>和<code>armlink</code>）</p>
+<p>运行程序的运行阶段，是让加载器将最后生成的可执行文件放到内存中</p>
+<h2 id="gccgnugcc与g">GCC、GNU、gcc与g++
+</h2><p>GNU：一个操作系统，具体内容不重要，感兴趣可以参考：</p>
+<p><a class="link" href="https://link.zhihu.com/?target=https%3A//blog.csdn.net/qq_43617936/article/details/104504992"  target="_blank" rel="noopener"
+    >GCC、GNU到底啥意思？_一只杨阳羊的博客-CSDN博客​blog.csdn.net/qq_43617936/article/details/104504992<img src="https://pica.zhimg.com/v2-b75437690db0fe8938d0fd10bf83821e_180x120.jpg"
+	
+	
+	
+	loading="lazy"
+	
+	
+></a></p>
+<ul>
+<li><strong>GCC</strong>：GNU Compiler Collection（GNU<a class="link" href="https://zhida.zhihu.com/search?content_id=225473028&amp;content_type=Article&amp;match_order=1&amp;q=%E7%BC%96%E8%AF%91%E5%99%A8%E9%9B%86%E5%90%88&amp;zhida_source=entity"  target="_blank" rel="noopener"
+    >编译器集合</a>）的缩写，可以理解为一组GNU操作系统中的编译器集合，可以用于编译C、C++、Java、Go、Fortan、Pascal、Objective-C等语言</li>
+<li><strong>gcc</strong>：GCC（编译器集合）中的GNU C Compiler(C 编译器)</li>
+<li><strong>g++</strong>：GCC（编译器集合）中的GNU C++ Compiler(C++ 编译器)</li>
+</ul>
+<p>简单来说，gcc调用了GCC中的C Compiler，而g++调用了GCC中的C++ Compiler
+对于 <code>*.c</code> 和 <code>*.cpp</code> 文件，gcc分别当作 c 和 cpp文件编译，而g++则统一当作cpp文件编译</p>
+<p>![[Pasted image 20241126223616.png]]</p>
+<h3 id="gdbgdb">GDB(gdb)
+</h3><p>GDB（gdb）全称“GNU symbolic debugger”，是 Linux 下常用的程序调试器。 为了能够使用 gdb 调试，需要在代码编译的时候加上<code>-g</code>，如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">g++ -g -o test test.cpp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="常用指令">常用指令
+</h2><p>![[Pasted image 20241027090624.png]]</p>
+<h1 id="编译过程">编译过程
+</h1><p>![[Pasted image 20241027085312.png]]</p>
+<p>![[Pasted image 20241027092346.png]]</p>
+<h2 id="step1-预处理">step1. 预处理
+</h2><p>![[Pasted image 20241026230159.png]]
+<strong>命令：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">g++ -E test.cpp -o test.i
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>作用：</strong></p>
+<ol>
+<li><strong>去掉注释</strong></li>
+<li><strong>预处理指令替换（ifndef ，宏定义等）</strong></li>
+<li><strong>include 导入的头文件替换</strong></li>
+</ol>
+<h3 id="预处理实例对比">预处理实例对比
+</h3><p>.cpp 文件
+![[Pasted image 20241026230758.png]]</p>
+<p>预处理后的 .i 文件</p>
+<p>还有替换的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include&lt;iostream&gt;
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>被省略了，替换的内容有3万多行</p>
+<p>翻到最下面查看</p>
+<p>![[Pasted image 20241026230952.png]]</p>
+<p>具体解释
+预处理，顾名思义就是编译前的一些准备工作</p>
+<p><strong>预编译把一些<code>#define</code>的宏定义完成文本替换，然后将</strong><code>#include</code><strong>的文件里的内容复制到<code>.cpp</code>文件里，如果<code>.h</code>文件里还有<code>.h</code>文件，就递归展开</strong>。在预处理这一步，代码注释直接被忽略，不会进入到后续的处理中，所以注释在程序中不会执行</p>
+<h2 id="step2-编译阶段">step2. 编译阶段
+</h2><p>![[Pasted image 20241027001928.png]]</p>
+<p><strong>命令：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">g++ -S test.i -o test.s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对 .i 文件进行编译
+也可以对 .cpp 文件进行编译</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">g++ -S test.cpp -o test.s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>作用：</strong></p>
+<ol>
+<li>翻译成汇编语言</li>
+<li>检查代码报错</li>
+</ol>
+<p>具体解释
+编译只是把我们写的代码转为汇编代码，<strong>它的工作是检查词法和语法规则，所以，如果程序没有词法或则语法错误，那么不管逻辑是怎样错误的，都不会报错</strong>。<br>
+<strong>编译不是指程序从源文件到二进制程序的全部过程，而是指将经过预处理之后的程序转换成特定<a class="link" href="https://zhida.zhihu.com/search?content_id=225473028&amp;content_type=Article&amp;match_order=2&amp;q=%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81&amp;zhida_source=entity"  target="_blank" rel="noopener"
+    >汇编代码</a>(assembly code)的过程</strong></p>
+<h2 id="step3-汇编阶段">step3. 汇编阶段
+</h2><p>![[Pasted image 20241027002224.png]]
+<strong>命令：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">g++ -c test.s -o test.o
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>作用：</strong></p>
+<ol>
+<li>将 .s 文件，汇编成二进制文件（二进制文件不可执行）</li>
+</ol>
+<h2 id="step4-链接阶段">step4. 链接阶段
+</h2><p>![[Pasted image 20241027002618.png]]</p>
+<p><strong>命令：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">gcc test.o -o test
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>作用：</strong></p>
+<ol>
+<li>将目标文件 .o和库文件链接</li>
+</ol>
+<p>具体解释：C语言代码经过编译以后，并没有生成最终的可执行文件（.exe 文件），而是生成了一种叫做目标文件（Object File）的中间文件（或者说临时文件）。目标文件也是二进制形式的，它和可执行文件的格式是一样的。对于 Visual C++，目标文件的后缀是<code>.obj</code>；对于 GCC，目标文件的后缀是<code>.o</code>。这就是一开始所说的编译完一堆.obj和.o文件的来源。</p>
+<p>目标文件经过链接（Link）以后才能变成可执行文件。既然目标文件和可执行文件的格式是一样的，为什么还要再链接一次呢，因为编译只是将我们自己写的代码变成了二进制形式，<strong>它还需要和系统组件（比如标准库、动态链接库等）结合起来</strong>，这些组件都是程序运行所必须的。链接（Link）其实就是一个“打包”的过程，它将所有二进制形式的目标文件和系统组件组合成一个可执行文件。完成链接的过程也需要一个特殊的软件，叫做链接器（Linker）。</p>
+<p>C++程序编译的时候其实只识别.cpp文件。每个cpp文件都会分别编译一次，生成一个.o或者.obj文件。这个时候，链接器除了将目标文件和系统组件组合起来，还需要将编译器生成的多个.o或者.obj文件组合起来。</p>
+<p><code>g++</code>自动链接了系统组件，我们只需要把自定义函数的目标文件与<code>main.o</code>链接即可</p>
+<h3 id="链接的其他过程">链接的其他过程
+</h3><p><a class="link" href="https://zhuanlan.zhihu.com/p/88255667#:~:text=C/C&#43;&#43;%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B%201%201.%E9%A2%84%E5%A4%84%E7%90%86%20%28Preprocessing%29%20%E9%A2%84%E5%A4%84%E7%90%86%E7%94%A8%E4%BA%8E%E5%B0%86%E6%89%80%E6%9C%89%E7%9A%84#include%20%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BB%A5%E5%8F%8A%E5%AE%8F%E5%AE%9A%E4%B9%89%E6%9B%BF%E6%8D%A2%E6%88%90%E5%85%B6%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%86%85%E5%AE%B9%20%EF%BC%8C%E9%A2%84%E5%A4%84%E7%90%86%E4%B9%8B%E5%90%8E%E5%BE%97%E5%88%B0%E7%9A%84%E4%BB%8D%E7%84%B6%E6%98%AF%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%8C%E4%BD%86%E6%96%87%E4%BB%B6%E4%BD%93%E7%A7%AF%E4%BC%9A%E5%A4%A7%E5%BE%88%E5%A4%9A%E3%80%82%20...,%E6%88%90%E6%9C%80%E7%BB%88%E7%9A%84%20%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%20%28executable%20file%29%E3%80%82%20...%205%205.%E6%95%B0%E6%8D%AE%E5%92%8C%E6%8C%87%E4%BB%A4%20"  target="_blank" rel="noopener"
+    >C/C++编译链接 - 知乎 (zhihu.com)</a>(进阶)</p>
+<p><strong>合并段</strong>
+![[Pasted image 20241027092742.png]]</p>
+<p><strong>调整段偏移</strong>
+![[Pasted image 20241027092757.png]]</p>
+<h2 id="多文件g编译指令">多文件g++编译指令
+</h2><p>![[Pasted image 20241027222011.png]]</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">g++ src/cmake_leran.cpp tools/hello.cpp -I includes -o cmake_leran
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>src/cmake_leran.cpp  tools/hello.cpp 是在指定当前目录下哪些源文件需要编译
+-I includes 是 库文件所在的目录</p>
+<p>![[Pasted image 20241126230718.png]]</p>
+<h2 id="杂谈">杂谈
+</h2><h4 id="关于库文件">关于库文件
+</h4><p>![[Pasted image 20241126224636.png]]</p>
+<p>![[Pasted image 20241126224803.png]]</p>
+<h4 id="关于可执行文件">关于可执行文件
+</h4><p>![[Pasted image 20241126225616.png]]</p>
+<h4 id="关于c与c联合生成可执行文件">关于C与C++联合生成可执行文件
+</h4><p>在C++中，告诉编译器以C的标准进行编译
+<a class="link" href="https://blog.csdn.net/m0_46606290/article/details/119973574"  target="_blank" rel="noopener"
+    >C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//关键字
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">extern</span> <span class="s">&#34;C&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//example
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include&lt;iostream&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="kt">void</span> <span class="n">func</span><span class="p">()</span> <span class="p">{</span> <span class="c1">//用 extern&#34;C&#34;修饰
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="kt">void</span> <span class="n">func</span><span class="p">(</span><span class="kt">int</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span><span class="c1">//用 extern&#34;C&#34;修饰
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>	
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//如果当前文件为cpp文件，就会告诉编译器按C语言方式编译和链接
+</span></span></span><span class="line"><span class="cl"><span class="c1">//如果不是cpp文件，则会被略过
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef __cplusplus
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">extern</span> <span class="s">&#34;C&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">被调用内容</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef __cplusplus
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#enddif
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果编译器是 C++ 编译器，__<em>cplusplus</em> 宏会被定义，<em>extern &ldquo;C&rdquo;</em> 块将会被包含，这告诉编译器按照 C 语言的规则来处理函数名称，而不是 C++ 的规则。这样做的目的是为了保持与已经存在的 C 代码库的兼容性，特别是当使用 C++ 编写新代码时。</p>
+<h4 id="__cplusplus宏定义作用">__cplusplus宏定义作用
+</h4><p>在 C++ 中，__<em>cplusplus</em> 是一个预定义的宏，它用于确定正在使用的 C++ 标准的版本。这个宏的存在使得 C++ 代码能够以标准 C 形式输出，即以 C 的形式被调用，这对于跨平台编程和与 C 语言的兼容性至关重要。</p>
+<h5 id="宏的定义和使用">宏的定义和使用
+</h5><p>__<em>cplusplus</em> 宏通常在编写涉及 C 和 C++ 混合编程的头文件时使用。当 C++ 代码需要被 C 编译器调用时，使用这个宏可以确保 C++ 中的名称修饰（name mangling）不会发生，从而允许 C 代码安全地调用 C++ 函数。例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#ifdef __cplusplus
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// C++ 函数声明
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef __cplusplus
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>![[Pasted image 20241213212614.png]]</p>
+<p>在这个例子中，如果编译器是 C++ 编译器，__<em>cplusplus</em> 宏会被定义，<em>extern &ldquo;C&rdquo;</em> 块将会被包含，这告诉编译器按照 C 语言的规则来处理函数名称，而不是 C++ 的规则。这样做的目的是为了保持与已经存在的 C 代码库的兼容性，特别是当使用 C++ 编写新代码时。</p>
+<h5 id="宏的值">宏的值
+</h5><p>__<em>cplusplus</em> 宏的值表示 C++ 标准的版本，例如：</p>
+<ul>
+<li>C++98 标准：199711L</li>
+<li>C++11 标准：201103L</li>
+<li>C++14 标准：201402L</li>
+<li>C++17 标准：201703L</li>
+<li>C++20 标准：202002L
+不同的编译器，如 GCC、Clang 或 Visual C++，都遵循这些标准，并在编译时定义相应的 __<em>cplusplus</em> 值。这个宏的值可以用来确定编译器支持的 C++ 版本，从而在编写代码时做出相应的兼容性处理。</li>
+</ul>
+<h5 id="实际应用">实际应用
+</h5><p>在实际应用中，__<em>cplusplus</em> 宏确保了 C++ 代码可以与 C 代码无缝集成。例如，如果有一个用 C 语言编写的库，它的头文件是 <em>f.h</em>，产生的库文件是 <em>f.lib</em>，那么在 C++ 中使用这个库文件时，需要这样写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">extern &#34;C&#34; {
+</span></span><span class="line"><span class="cl">#include &#34;f.h&#34;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样，C++ 编译器就会知道如何正确地链接和调用 C 语言编写的函数。如果没有使用 __<em>cplusplus</em> 宏，可能会出现链接错误，因为 C++ 编译器和 C 编译器对函数名称的处理方式不同。</p>
+<p>总结来说，__<em>cplusplus</em> 宏是 C++ 语言为了兼容 C 语言和支持混合编程而提供的一个重要工具。它允许开发者在保持 C++ 功能的同时，确保代码能够在不同的编程环境中正确运行。</p>
+<h4 id="关于extern关键字">关于extern关键字
+</h4><p><a class="link" href="https://blog.csdn.net/m0_46606290/article/details/119973574"  target="_blank" rel="noopener"
+    >C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客</a>
+![[Pasted image 20241213212619.png]]</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/cc&#43;&#43;/">C&amp;C&#43;&#43;</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/cc-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E6%9E%81%E7%AE%80%E7%89%88/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C&amp;C&#43;&#43; 内存对齐（极简版）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/cc-statiic/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C&amp;C&#43;&#43; Statiic</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C&#43;&#43; 的名字修饰（符号修饰）</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/cc-const/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C&amp;C&#43;&#43; const</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/c%E5%AD%98%E5%82%A8%E7%B1%BB/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C存储类</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Nomad
+    </section>
+    
+    <section class="powerby">
+        
+            experience <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
