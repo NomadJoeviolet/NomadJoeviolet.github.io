@@ -26,8 +26,8 @@
 &lt;h2 id=&#34;dma&#34;&gt;DMA
 &lt;/h2&gt;&lt;p&gt;DMA，全称为&lt;code&gt;Direct Memory Access&lt;/code&gt;，直接内存访问，本质是将传输数据从一个内存空间搬运至另一个内存空间，可以用来提供外设和内存，内存和外设之间的高速数据传输&lt;/p&gt;
 &lt;h3 id=&#34;usart发送&#34;&gt;USART发送
-&lt;/h3&gt;&lt;p&gt;在普通的轮询&lt;code&gt;USART&lt;/code&gt;中，CPU一直在等待外设发送数据，外设每发送一字节，CPU就从内存中移动一字节数据到外设的寄存器&lt;/p&gt;
-&lt;p&gt;在中断的&lt;code&gt;USART&lt;/code&gt;中，外设每从寄存器中发送一字节数据，就会触发一次发送数据寄存器空中断，使CPU回来将数据从内存搬运至外设的寄存器中&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;在普通的轮询&lt;code&gt;USART&lt;/code&gt;中，CPU一直在等待外设发送数据，外设每发送一帧数据，CPU就从内存中移动一帧数据到外设的寄存器&lt;/p&gt;
+&lt;p&gt;在中断的&lt;code&gt;USART&lt;/code&gt;中，外设每从寄存器中发送一帧数据，就会触发一次发送数据寄存器空中断，使CPU回来将一帧数据从内存搬运至外设的寄存器中&lt;/p&gt;
 &lt;h4 id=&#34;usart的dma发送&#34;&gt;USART的DMA发送
 &lt;/h4&gt;&lt;p&gt;没有DMA的话，CPU会作为数据发送的中转站，而使用DMA的话，整个数据传输过程不需要CPU的参与，由DMA代理执行，DMA负责将内存数据搬运至外设的传输寄存器&lt;/p&gt;
 &lt;p&gt;在整个数据发送过半时会触发一个传输过半中断，所有数据传输完成后会调用传输完成中断回调函数（&lt;code&gt;HAL_UART_TxCpltCallback&lt;/code&gt;）&lt;/p&gt;
@@ -87,8 +87,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;usart接收&#34;&gt;USART接收
-&lt;/h3&gt;&lt;p&gt;在普通的轮询&lt;code&gt;USART&lt;/code&gt;中，CPU一直在询问外设是否接收完数据，外设接收一字节数据，该位数据由CPU从外设的接收数据寄存器运进内存，CPU再次询问外设是否接收完数据，再运，直至整个数据结束完成&lt;/p&gt;
-&lt;p&gt;而在中断&lt;code&gt;USART&lt;/code&gt;中，外设每接收一字节数据，触发一次数据接收寄存器非空中断，CPU过来将数据从寄存器搬运至内存，所有数据接收完成后，会调用接收完成中断回调函数（&lt;code&gt;HAL_UART_RxCpltCallback&lt;/code&gt;）&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;在普通的轮询&lt;code&gt;USART&lt;/code&gt;中，CPU一直在询问外设是否接收完数据，外设接收一帧数据，该位数据由CPU从外设的数据接收寄存器运进内存，CPU再次询问外设是否接收完数据，再运，直至整个数据接收完成&lt;/p&gt;
+&lt;p&gt;而在中断&lt;code&gt;USART&lt;/code&gt;中，外设每接收一帧数据，触发一次数据接收寄存器非空中断，CPU过来将数据从寄存器搬运至内存，所有数据接收完成后，会调用接收完成中断回调函数（&lt;code&gt;HAL_UART_RxCpltCallback&lt;/code&gt;）&lt;/p&gt;
 &lt;h4 id=&#34;usart的dma接收&#34;&gt;USART的DMA接收
 &lt;/h4&gt;&lt;p&gt;没有DMA的话，CPU会作为数据转运的中转站，而使用DMA的话，整个数据转运过程不需要CPU的参与，由DMA代理执行&lt;/p&gt;
 &lt;p&gt;在整个数据接收过半时会触发一个传输过半中断，所有数据接收完成后会调用传输完成中断回调函数（&lt;code&gt;HAL_UART_RxCpltCallback&lt;/code&gt;）&lt;/p&gt;

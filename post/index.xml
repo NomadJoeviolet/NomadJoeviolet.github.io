@@ -7,7 +7,153 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
-        <lastBuildDate>Wed, 25 Jun 2025 21:48:07 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 26 Jun 2025 15:21:07 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>工具链的一些杂知识</title>
+        <link>https://NomadJoeviolet.github.io/p/%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9D%82%E7%9F%A5%E8%AF%86/</link>
+        <pubDate>Thu, 26 Jun 2025 15:21:07 +0800</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/p/%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9D%82%E7%9F%A5%E8%AF%86/</guid>
+        <description>&lt;h4 id=&#34;mdk介绍及其使用&#34;&gt;MDK介绍及其使用
+&lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/yychuyu/article/details/134980173&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;一文教你使用MDK开发工具-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;MDK、KEIL、uVision 之间的区别&lt;/p&gt;
+&lt;p&gt;MDK（ Microcontroller Development Kit ），也称 MDK-ARM 、KEIL MDK、KEIL For ARM，都是同一个东西。ARM 公司现在统一使用 MDK-ARM 的称呼，MDK 的设备数据库中有很多厂商的芯片，是专为微控制器开发的一款工具，为满足基于 MCU 进行嵌入式软件开发的工程师需求而设计，支持 ARM7，ARM9，Cortex-M4/M3/M1，Cortex-R0/R3/R4 等 ARM 微控制器内核。KEIL 是公司的名称，有时候也指 KEIL 公司的所有软件开发工具。Keil 公司在2005年被 ARM 公司收购。&lt;/p&gt;
+&lt;p&gt;uVision 是 KEIL 公司开发的一个集成开发环境（IDE）。它包括工程管理，源代码编辑，编译设置，下载调试和模拟仿真等功能，uVision 有 uVision2、uVision3、uVision4 和 uVision5 四个版本，目前最新的版本是 uVision5。它提供一个环境，让开发者易于操作。uVision 通用于 KEIL 的开发工具中，例如 MDK，PK51，PK166，DK251等。&lt;/p&gt;
+&lt;h4 id=&#34;armclang&#34;&gt;armclang
+&lt;/h4&gt;&lt;p&gt;就是俗称的AC6
+armclang是ARM公司提供的一款C/C++编译器，专门用于为ARM架构的处理器生成高性能代码。该编译器通常与ARM的其他工具链一起使用，适合嵌入式系统开发。&lt;/p&gt;
+&lt;p&gt;请注意，确保在项目中使用合适的工具和版本，并根据需求查阅最新的文档。&lt;/p&gt;
+&lt;h4 id=&#34;openocd&#34;&gt;OpenOCD
+&lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/41517198&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;跟我一起学OpenOCD(一) - 知乎 (zhihu.com)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;OpenOCD是一个开源的调试/编程工具，主要用于嵌入式系统，它支持多种硬件设备和调试协议，如JTAG和SWD。它通常与GNU工具链结合使用，可以为开发人员提供硬件调试和烧录固件的功能。&lt;/p&gt;
+&lt;h4 id=&#34;ozone&#34;&gt;Ozone
+&lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.armbbs.cn/forum.php?mod=viewthread&amp;amp;tid=95855&amp;amp;highlight=Ozone&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Ozone使用介绍-基础功能 - 开发环境 - 硬汉嵌入式论坛 - Powered by Discuz! (armbbs.cn)&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;mingw&#34;&gt;MinGW
+&lt;/h4&gt;&lt;p&gt;mingw 是一个为 Microsoft Windows 平台编译和运行 Unix 程序的工具套装，它提供了类似于 Unix 环境下的编译器、链接器等工具，以便在 Windows 平台上开发使用 GCC（GNU 编译器集合）和其他开源 Unix 工具的软件。&lt;/p&gt;
+&lt;h4 id=&#34;arm-none-eabi-gcc&#34;&gt;arm-none-eabi-gcc
+&lt;/h4&gt;&lt;p&gt;arm-none-eabi-gcc 是一个专为 ARM 架构的嵌入式系统设计的 GCC 编译器版本。它可以生成裸机代码，适用于没有操作系统的应用程序。开发者常用它来编译针对 ARM Cortex 和其他 ARM 设备的软件。&lt;/p&gt;
+&lt;h4 id=&#34;arm-none-eabi-gcc和armclang的区别&#34;&gt;arm-none-eabi-gcc 和 armclang的区别
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;arm-none-eabi-gcc&lt;/code&gt; 和 &lt;code&gt;armclang&lt;/code&gt; 是两种不同的编译工具链，主要用于嵌入式系统中基于 ARM 处理器的代码编译。它们之间存在一些关键的区别，以下是它们各自的特点及区别的简要概述：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;开发者和背景&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;arm-none-eabi-gcc&lt;/strong&gt;: 是 GNU 编译器集合（GCC）的一个变体，专门用于 ARM 处理器。这个工具链是开源的，由 GNU 项目支持。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;armclang&lt;/strong&gt;: 是 ARM 公司推出的编译器，属于 ARM Compiler 工具链的一部分。ARM Compiler 6及更高版本基于开源的 LLVM/Clang 技术，但包含许多 ARM 提供的专有优化和扩展。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;编译技术和优化&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;arm-none-eabi-gcc&lt;/strong&gt;: 利用 GCC 的优化技术，提供了广泛的架构支持和成熟的优化方法。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;armclang&lt;/strong&gt;: 使用 LLVM 编译技术框架，通常提供更现代的优化策略和更好的代码生成质量，尤其是在 C++ 的高级特性支持方面。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;语言支持&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;两者都支持主要的编程语言如 C 和 C++。但是，由于 ARM Compiler 包括来自 LLVM/Clang 的优势，armclang 可能在支持最新 C++ 标准方面有更好的表现。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;调试和错误信息&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;armclang&lt;/strong&gt; 通常提供更详细的错误和警告信息，这可以使调试过程更加高效。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;arm-none-eabi-gcc&lt;/strong&gt; 的错误信息较为传统，但由于广泛使用，网上有大量关于其调试的资源和社区支持。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;生态系统和集成&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;arm-none-eabi-gcc&lt;/strong&gt; 由于是开源和免费，被广泛应用于多种开发环境和项目中。其生态系统非常成熟，有大量的第三方库和工具支持。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;armclang&lt;/strong&gt; 尽管集成了许多 ARM 特定的优化，但作为商业产品，可能在使用上不如 GCC 灵活，特别是在版权和许可证管理方面。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;性能&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;性能比较并不绝对，依赖于具体的应用场景和代码特性。在某些情况下，armclang 生成的代码运行效率更高，而在其他情况下，arm-none-eabi-gcc 可能表现得更好。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在选择哪一个编译器进行项目开发时，需要考虑多个因素，如团队的熟悉度、项目需求对优化的依赖程度、成本（尤其是 armclang 可能涉及的许可成本）以及与其他工具的兼容性等。&lt;/p&gt;
+&lt;h4 id=&#34;clangd&#34;&gt;clangd
+&lt;/h4&gt;&lt;p&gt;clangd是llvm项目推出的C++语言服务器，通过LSP(Language Server Protocal)协议向编辑器如vscode/vim/emacs提供语法补全、错误检测、跳转、格式化等等功能。C++的LSP曾经是&lt;a class=&#34;link&#34; href=&#34;https://zhida.zhihu.com/search?content_id=214022597&amp;amp;content_type=Article&amp;amp;match_order=1&amp;amp;q=cquery&amp;amp;zhida_source=entity&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;cquery&lt;/a&gt;, ccls, clangd三足鼎立。但是clangd支持clang-tidy实时检查的功能是另外两者不具备的，而且cquery和ccls都是单个开发者主导的项目，clangd背后则是有llvm的背书。目前来看，“姓赵”的clangd在这场c++ lsp赛跑中已经有了不小的领先优势。&lt;/p&gt;
+&lt;h4 id=&#34;vscode的intellisense&#34;&gt;VScode的IntelliSense
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;IntelliSense 是 VS Code 提供的智能代码补全和理解功能&lt;/strong&gt;，它结合了代码补全、参数信息、快速信息和成员列表等功能，极大地提高了开发效率。&lt;/p&gt;
+&lt;p&gt;IntelliSense 的核心组成&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;代码补全 (Code Completion)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;输入时自动显示建议列表&lt;/li&gt;
+&lt;li&gt;包含变量、函数、类、方法等&lt;/li&gt;
+&lt;li&gt;支持模糊匹配 (如输入 &lt;code&gt;fs.rm&lt;/code&gt; 可匹配 &lt;code&gt;fs.rmdir&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;参数提示 (Parameter Hints)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;显示函数参数信息&lt;/li&gt;
+&lt;li&gt;当前参数位置高亮显示&lt;/li&gt;
+&lt;li&gt;函数重载时可通过箭头切换&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;快速信息 (Quick Info)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;悬停时显示符号定义&lt;/li&gt;
+&lt;li&gt;包含文档注释、类型信息等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;错误检查 (Error Checking)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;实时语法检查&lt;/li&gt;
+&lt;li&gt;类型错误检测&lt;/li&gt;
+&lt;li&gt;未定义符号提示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;intellisense-的工作原理&#34;&gt;IntelliSense 的工作原理
+&lt;/h5&gt;&lt;p&gt;VS Code 通过以下方式提供 IntelliSense：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;基于词法分析&lt;/strong&gt;：简单的文本匹配补全&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;基于语言服务器协议 (LSP)&lt;/strong&gt;：通过语言服务器获取深度分析&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;基于 TypeScript/JavaScript 的 TS Server&lt;/strong&gt;：专为 JS/TS 优化&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;基于标签 (Tag Parser)&lt;/strong&gt;：如 C/C++ 扩展使用的方案&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;交叉编译器&#34;&gt;交叉编译器
+&lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/133779123&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;arm 交叉编译器各种gcc 傻傻分不清楚：gnueabi,gnueabhf,none-eaib - 知乎&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;作为一个嵌入式工程师肯定会用到&lt;a class=&#34;link&#34; href=&#34;https://zhida.zhihu.com/search?content_id=117860044&amp;amp;content_type=Article&amp;amp;match_order=1&amp;amp;q=%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E5%99%A8&amp;amp;zhida_source=entity&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;交叉编译器&lt;/a&gt;arm-gcc，但是各种arm-gcc把人弄得晕头转向，于是在网上搜索，还真找到了有人解释了他们的区别。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://link.zhihu.com/?target=https%3A//www.veryarm.com/296.html%23comments&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.veryarm.com/296.html#comments&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;交叉编译工具链的命名规范是：
+&lt;strong&gt;arch [-vendor] [-os] [-(gnu)eabi]&lt;/strong&gt;
+&lt;strong&gt;arch : 架构的意思，如ARM ，MIPS&lt;/strong&gt;
+&lt;strong&gt;vendor： 工具链的提供厂商&lt;/strong&gt;
+&lt;strong&gt;os： 支持的操作系统&lt;/strong&gt;
+&lt;strong&gt;eabi：嵌入式应用二进制接口（Embedded Application Binary Interface）&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;arm gcc还分为 是否支持操作系统
+&lt;strong&gt;支持操作系统：&lt;/strong&gt; &lt;a class=&#34;link&#34; href=&#34;https://zhida.zhihu.com/search?content_id=117860044&amp;amp;content_type=Article&amp;amp;match_order=1&amp;amp;q=arm-none-linux-eabi-gcc&amp;amp;zhida_source=entity&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;arm-none-linux-eabi-gcc&lt;/a&gt;
+&lt;strong&gt;不支持操作系统：&lt;/strong&gt; arm-none-eabi-gcc&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;ninjamakecmake&#34;&gt;ninja，make，cmake
+&lt;/h4&gt;&lt;h5 id=&#34;cmake&#34;&gt;cmake
+&lt;/h5&gt;&lt;p&gt;cmake是一个生成 .ninja 和 .makefile 的工具。cmake只需要用户通过对源码文件的简单描述（就是CMakeLists.txt文件），就能自动生成一个project的makefile文件或者ninja文件，然后就可以通过ninja或者make进行启动编译了，很多IDE都在用cmake作为项目管理工具。&lt;/p&gt;
+&lt;h5 id=&#34;make与ninja&#34;&gt;make与ninja
+&lt;/h5&gt;&lt;p&gt;make功能强大，可以给人看，ninja启动速度快，项目构建速度快，但不是给人看的
+可以认为两者同级。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>STM32——中断</title>
         <link>https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/</link>
         <pubDate>Wed, 25 Jun 2025 21:48:07 +0800</pubDate>
@@ -2124,8 +2270,8 @@ rank指在ADC_Regular_ConversionMode中的rank设置&lt;/p&gt;
 &lt;h2 id=&#34;dma&#34;&gt;DMA
 &lt;/h2&gt;&lt;p&gt;DMA，全称为&lt;code&gt;Direct Memory Access&lt;/code&gt;，直接内存访问，本质是将传输数据从一个内存空间搬运至另一个内存空间，可以用来提供外设和内存，内存和外设之间的高速数据传输&lt;/p&gt;
 &lt;h3 id=&#34;usart发送&#34;&gt;USART发送
-&lt;/h3&gt;&lt;p&gt;在普通的轮询&lt;code&gt;USART&lt;/code&gt;中，CPU一直在等待外设发送数据，外设每发送一字节，CPU就从内存中移动一字节数据到外设的寄存器&lt;/p&gt;
-&lt;p&gt;在中断的&lt;code&gt;USART&lt;/code&gt;中，外设每从寄存器中发送一字节数据，就会触发一次发送数据寄存器空中断，使CPU回来将数据从内存搬运至外设的寄存器中&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;在普通的轮询&lt;code&gt;USART&lt;/code&gt;中，CPU一直在等待外设发送数据，外设每发送一帧数据，CPU就从内存中移动一帧数据到外设的寄存器&lt;/p&gt;
+&lt;p&gt;在中断的&lt;code&gt;USART&lt;/code&gt;中，外设每从寄存器中发送一帧数据，就会触发一次发送数据寄存器空中断，使CPU回来将一帧数据从内存搬运至外设的寄存器中&lt;/p&gt;
 &lt;h4 id=&#34;usart的dma发送&#34;&gt;USART的DMA发送
 &lt;/h4&gt;&lt;p&gt;没有DMA的话，CPU会作为数据发送的中转站，而使用DMA的话，整个数据传输过程不需要CPU的参与，由DMA代理执行，DMA负责将内存数据搬运至外设的传输寄存器&lt;/p&gt;
 &lt;p&gt;在整个数据发送过半时会触发一个传输过半中断，所有数据传输完成后会调用传输完成中断回调函数（&lt;code&gt;HAL_UART_TxCpltCallback&lt;/code&gt;）&lt;/p&gt;
@@ -2185,8 +2331,8 @@ rank指在ADC_Regular_ConversionMode中的rank设置&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;usart接收&#34;&gt;USART接收
-&lt;/h3&gt;&lt;p&gt;在普通的轮询&lt;code&gt;USART&lt;/code&gt;中，CPU一直在询问外设是否接收完数据，外设接收一字节数据，该位数据由CPU从外设的接收数据寄存器运进内存，CPU再次询问外设是否接收完数据，再运，直至整个数据结束完成&lt;/p&gt;
-&lt;p&gt;而在中断&lt;code&gt;USART&lt;/code&gt;中，外设每接收一字节数据，触发一次数据接收寄存器非空中断，CPU过来将数据从寄存器搬运至内存，所有数据接收完成后，会调用接收完成中断回调函数（&lt;code&gt;HAL_UART_RxCpltCallback&lt;/code&gt;）&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;在普通的轮询&lt;code&gt;USART&lt;/code&gt;中，CPU一直在询问外设是否接收完数据，外设接收一帧数据，该位数据由CPU从外设的数据接收寄存器运进内存，CPU再次询问外设是否接收完数据，再运，直至整个数据接收完成&lt;/p&gt;
+&lt;p&gt;而在中断&lt;code&gt;USART&lt;/code&gt;中，外设每接收一帧数据，触发一次数据接收寄存器非空中断，CPU过来将数据从寄存器搬运至内存，所有数据接收完成后，会调用接收完成中断回调函数（&lt;code&gt;HAL_UART_RxCpltCallback&lt;/code&gt;）&lt;/p&gt;
 &lt;h4 id=&#34;usart的dma接收&#34;&gt;USART的DMA接收
 &lt;/h4&gt;&lt;p&gt;没有DMA的话，CPU会作为数据转运的中转站，而使用DMA的话，整个数据转运过程不需要CPU的参与，由DMA代理执行&lt;/p&gt;
 &lt;p&gt;在整个数据接收过半时会触发一个传输过半中断，所有数据接收完成后会调用传输完成中断回调函数（&lt;code&gt;HAL_UART_RxCpltCallback&lt;/code&gt;）&lt;/p&gt;

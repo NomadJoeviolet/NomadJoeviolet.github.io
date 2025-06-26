@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="MDK介绍及其使用 一文教你使用MDK开发工具-CSDN博客\nMDK、KEIL、uVision 之间的区别\nMDK（ Microcontroller Development Kit ），也称 MDK-ARM 、KEIL MDK、KEIL For ARM，都是同一个东西。ARM 公司现在统一使用 MDK-ARM 的称呼，MDK 的设备数据库中有很多厂商的芯片，是专为微控制器开发的一款工具，为满足基于 MCU 进行嵌入式软件开发的工程师需求而设计，支持 ARM7，ARM9，Cortex-M4/M3/M1，Cortex-R0/R3/R4 等 ARM 微控制器内核。KEIL 是公司的名称，有时候也指 KEIL 公司的所有软件开发工具。Keil 公司在2005年被 ARM 公司收购。\n">
+<title>工具链的一些杂知识</title>
+
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9D%82%E7%9F%A5%E8%AF%86/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="工具链的一些杂知识">
+<meta property='og:description' content="MDK介绍及其使用 一文教你使用MDK开发工具-CSDN博客\nMDK、KEIL、uVision 之间的区别\nMDK（ Microcontroller Development Kit ），也称 MDK-ARM 、KEIL MDK、KEIL For ARM，都是同一个东西。ARM 公司现在统一使用 MDK-ARM 的称呼，MDK 的设备数据库中有很多厂商的芯片，是专为微控制器开发的一款工具，为满足基于 MCU 进行嵌入式软件开发的工程师需求而设计，支持 ARM7，ARM9，Cortex-M4/M3/M1，Cortex-R0/R3/R4 等 ARM 微控制器内核。KEIL 是公司的名称，有时候也指 KEIL 公司的所有软件开发工具。Keil 公司在2005年被 ARM 公司收购。\n">
+<meta property='og:url' content='https://NomadJoeviolet.github.io/p/%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9D%82%E7%9F%A5%E8%AF%86/'>
+<meta property='og:site_name' content='Nomad_violet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-06-26T15:21:07&#43;08:00'/><meta property='article:modified_time' content='2025-06-26T15:21:07&#43;08:00'/>
+<meta name="twitter:title" content="工具链的一些杂知识">
+<meta name="twitter:description" content="MDK介绍及其使用 一文教你使用MDK开发工具-CSDN博客\nMDK、KEIL、uVision 之间的区别\nMDK（ Microcontroller Development Kit ），也称 MDK-ARM 、KEIL MDK、KEIL For ARM，都是同一个东西。ARM 公司现在统一使用 MDK-ARM 的称呼，MDK 的设备数据库中有很多厂商的芯片，是专为微控制器开发的一款工具，为满足基于 MCU 进行嵌入式软件开发的工程师需求而设计，支持 ARM7，ARM9，Cortex-M4/M3/M1，Cortex-R0/R3/R4 等 ARM 微控制器内核。KEIL 是公司的名称，有时候也指 KEIL 公司的所有软件开发工具。Keil 公司在2005年被 ARM 公司收购。\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu6061761693284197515.png" width="300"
+                            height="200" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Nomad_violet</a></h1>
+            <h2 class="site-description">to feel,to experience</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://www.bilibili.com/'
+                        target="_blank"
+                        title="Biliili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#mdk介绍及其使用">MDK介绍及其使用</a></li>
+            <li><a href="#armclang">armclang</a></li>
+            <li><a href="#openocd">OpenOCD</a></li>
+            <li><a href="#ozone">Ozone</a></li>
+            <li><a href="#mingw">MinGW</a></li>
+            <li><a href="#arm-none-eabi-gcc">arm-none-eabi-gcc</a></li>
+            <li><a href="#arm-none-eabi-gcc和armclang的区别">arm-none-eabi-gcc 和 armclang的区别</a></li>
+            <li><a href="#clangd">clangd</a></li>
+            <li><a href="#vscode的intellisense">VScode的IntelliSense</a></li>
+            <li><a href="#交叉编译器">交叉编译器</a></li>
+            <li><a href="#ninjamakecmake">ninja，make，cmake</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9D%82%E7%9F%A5%E8%AF%86/">工具链的一些杂知识</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-06-26</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h4 id="mdk介绍及其使用">MDK介绍及其使用
+</h4><p><a class="link" href="https://blog.csdn.net/yychuyu/article/details/134980173"  target="_blank" rel="noopener"
+    >一文教你使用MDK开发工具-CSDN博客</a></p>
+<p>MDK、KEIL、uVision 之间的区别</p>
+<p>MDK（ Microcontroller Development Kit ），也称 MDK-ARM 、KEIL MDK、KEIL For ARM，都是同一个东西。ARM 公司现在统一使用 MDK-ARM 的称呼，MDK 的设备数据库中有很多厂商的芯片，是专为微控制器开发的一款工具，为满足基于 MCU 进行嵌入式软件开发的工程师需求而设计，支持 ARM7，ARM9，Cortex-M4/M3/M1，Cortex-R0/R3/R4 等 ARM 微控制器内核。KEIL 是公司的名称，有时候也指 KEIL 公司的所有软件开发工具。Keil 公司在2005年被 ARM 公司收购。</p>
+<p>uVision 是 KEIL 公司开发的一个集成开发环境（IDE）。它包括工程管理，源代码编辑，编译设置，下载调试和模拟仿真等功能，uVision 有 uVision2、uVision3、uVision4 和 uVision5 四个版本，目前最新的版本是 uVision5。它提供一个环境，让开发者易于操作。uVision 通用于 KEIL 的开发工具中，例如 MDK，PK51，PK166，DK251等。</p>
+<h4 id="armclang">armclang
+</h4><p>就是俗称的AC6
+armclang是ARM公司提供的一款C/C++编译器，专门用于为ARM架构的处理器生成高性能代码。该编译器通常与ARM的其他工具链一起使用，适合嵌入式系统开发。</p>
+<p>请注意，确保在项目中使用合适的工具和版本，并根据需求查阅最新的文档。</p>
+<h4 id="openocd">OpenOCD
+</h4><p><a class="link" href="https://zhuanlan.zhihu.com/p/41517198"  target="_blank" rel="noopener"
+    >跟我一起学OpenOCD(一) - 知乎 (zhihu.com)</a></p>
+<p>OpenOCD是一个开源的调试/编程工具，主要用于嵌入式系统，它支持多种硬件设备和调试协议，如JTAG和SWD。它通常与GNU工具链结合使用，可以为开发人员提供硬件调试和烧录固件的功能。</p>
+<h4 id="ozone">Ozone
+</h4><p><a class="link" href="https://www.armbbs.cn/forum.php?mod=viewthread&amp;tid=95855&amp;highlight=Ozone"  target="_blank" rel="noopener"
+    >Ozone使用介绍-基础功能 - 开发环境 - 硬汉嵌入式论坛 - Powered by Discuz! (armbbs.cn)</a></p>
+<h4 id="mingw">MinGW
+</h4><p>mingw 是一个为 Microsoft Windows 平台编译和运行 Unix 程序的工具套装，它提供了类似于 Unix 环境下的编译器、链接器等工具，以便在 Windows 平台上开发使用 GCC（GNU 编译器集合）和其他开源 Unix 工具的软件。</p>
+<h4 id="arm-none-eabi-gcc">arm-none-eabi-gcc
+</h4><p>arm-none-eabi-gcc 是一个专为 ARM 架构的嵌入式系统设计的 GCC 编译器版本。它可以生成裸机代码，适用于没有操作系统的应用程序。开发者常用它来编译针对 ARM Cortex 和其他 ARM 设备的软件。</p>
+<h4 id="arm-none-eabi-gcc和armclang的区别">arm-none-eabi-gcc 和 armclang的区别
+</h4><p><code>arm-none-eabi-gcc</code> 和 <code>armclang</code> 是两种不同的编译工具链，主要用于嵌入式系统中基于 ARM 处理器的代码编译。它们之间存在一些关键的区别，以下是它们各自的特点及区别的简要概述：</p>
+<ol>
+<li>
+<p><strong>开发者和背景</strong>：</p>
+<ul>
+<li><strong>arm-none-eabi-gcc</strong>: 是 GNU 编译器集合（GCC）的一个变体，专门用于 ARM 处理器。这个工具链是开源的，由 GNU 项目支持。</li>
+<li><strong>armclang</strong>: 是 ARM 公司推出的编译器，属于 ARM Compiler 工具链的一部分。ARM Compiler 6及更高版本基于开源的 LLVM/Clang 技术，但包含许多 ARM 提供的专有优化和扩展。</li>
+</ul>
+</li>
+<li>
+<p><strong>编译技术和优化</strong>：</p>
+<ul>
+<li><strong>arm-none-eabi-gcc</strong>: 利用 GCC 的优化技术，提供了广泛的架构支持和成熟的优化方法。</li>
+<li><strong>armclang</strong>: 使用 LLVM 编译技术框架，通常提供更现代的优化策略和更好的代码生成质量，尤其是在 C++ 的高级特性支持方面。</li>
+</ul>
+</li>
+<li>
+<p><strong>语言支持</strong>：</p>
+<ul>
+<li>两者都支持主要的编程语言如 C 和 C++。但是，由于 ARM Compiler 包括来自 LLVM/Clang 的优势，armclang 可能在支持最新 C++ 标准方面有更好的表现。</li>
+</ul>
+</li>
+<li>
+<p><strong>调试和错误信息</strong>：</p>
+<ul>
+<li><strong>armclang</strong> 通常提供更详细的错误和警告信息，这可以使调试过程更加高效。</li>
+<li><strong>arm-none-eabi-gcc</strong> 的错误信息较为传统，但由于广泛使用，网上有大量关于其调试的资源和社区支持。</li>
+</ul>
+</li>
+<li>
+<p><strong>生态系统和集成</strong>：</p>
+<ul>
+<li><strong>arm-none-eabi-gcc</strong> 由于是开源和免费，被广泛应用于多种开发环境和项目中。其生态系统非常成熟，有大量的第三方库和工具支持。</li>
+<li><strong>armclang</strong> 尽管集成了许多 ARM 特定的优化，但作为商业产品，可能在使用上不如 GCC 灵活，特别是在版权和许可证管理方面。</li>
+</ul>
+</li>
+<li>
+<p><strong>性能</strong>：</p>
+<ul>
+<li>性能比较并不绝对，依赖于具体的应用场景和代码特性。在某些情况下，armclang 生成的代码运行效率更高，而在其他情况下，arm-none-eabi-gcc 可能表现得更好。</li>
+</ul>
+</li>
+</ol>
+<p>在选择哪一个编译器进行项目开发时，需要考虑多个因素，如团队的熟悉度、项目需求对优化的依赖程度、成本（尤其是 armclang 可能涉及的许可成本）以及与其他工具的兼容性等。</p>
+<h4 id="clangd">clangd
+</h4><p>clangd是llvm项目推出的C++语言服务器，通过LSP(Language Server Protocal)协议向编辑器如vscode/vim/emacs提供语法补全、错误检测、跳转、格式化等等功能。C++的LSP曾经是<a class="link" href="https://zhida.zhihu.com/search?content_id=214022597&amp;content_type=Article&amp;match_order=1&amp;q=cquery&amp;zhida_source=entity"  target="_blank" rel="noopener"
+    >cquery</a>, ccls, clangd三足鼎立。但是clangd支持clang-tidy实时检查的功能是另外两者不具备的，而且cquery和ccls都是单个开发者主导的项目，clangd背后则是有llvm的背书。目前来看，“姓赵”的clangd在这场c++ lsp赛跑中已经有了不小的领先优势。</p>
+<h4 id="vscode的intellisense">VScode的IntelliSense
+</h4><p><strong>IntelliSense 是 VS Code 提供的智能代码补全和理解功能</strong>，它结合了代码补全、参数信息、快速信息和成员列表等功能，极大地提高了开发效率。</p>
+<p>IntelliSense 的核心组成</p>
+<ol>
+<li><strong>代码补全 (Code Completion)</strong>
+<ul>
+<li>输入时自动显示建议列表</li>
+<li>包含变量、函数、类、方法等</li>
+<li>支持模糊匹配 (如输入 <code>fs.rm</code> 可匹配 <code>fs.rmdir</code>)</li>
+</ul>
+</li>
+<li><strong>参数提示 (Parameter Hints)</strong>
+<ul>
+<li>显示函数参数信息</li>
+<li>当前参数位置高亮显示</li>
+<li>函数重载时可通过箭头切换</li>
+</ul>
+</li>
+<li><strong>快速信息 (Quick Info)</strong>
+<ul>
+<li>悬停时显示符号定义</li>
+<li>包含文档注释、类型信息等</li>
+</ul>
+</li>
+<li><strong>错误检查 (Error Checking)</strong>
+<ul>
+<li>实时语法检查</li>
+<li>类型错误检测</li>
+<li>未定义符号提示</li>
+</ul>
+</li>
+</ol>
+<h5 id="intellisense-的工作原理">IntelliSense 的工作原理
+</h5><p>VS Code 通过以下方式提供 IntelliSense：</p>
+<ol>
+<li><strong>基于词法分析</strong>：简单的文本匹配补全</li>
+<li><strong>基于语言服务器协议 (LSP)</strong>：通过语言服务器获取深度分析</li>
+<li><strong>基于 TypeScript/JavaScript 的 TS Server</strong>：专为 JS/TS 优化</li>
+<li><strong>基于标签 (Tag Parser)</strong>：如 C/C++ 扩展使用的方案</li>
+</ol>
+<h4 id="交叉编译器">交叉编译器
+</h4><p><a class="link" href="https://zhuanlan.zhihu.com/p/133779123"  target="_blank" rel="noopener"
+    >arm 交叉编译器各种gcc 傻傻分不清楚：gnueabi,gnueabhf,none-eaib - 知乎</a></p>
+<p>作为一个嵌入式工程师肯定会用到<a class="link" href="https://zhida.zhihu.com/search?content_id=117860044&amp;content_type=Article&amp;match_order=1&amp;q=%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E5%99%A8&amp;zhida_source=entity"  target="_blank" rel="noopener"
+    >交叉编译器</a>arm-gcc，但是各种arm-gcc把人弄得晕头转向，于是在网上搜索，还真找到了有人解释了他们的区别。</p>
+<p><a class="link" href="https://link.zhihu.com/?target=https%3A//www.veryarm.com/296.html%23comments"  target="_blank" rel="noopener"
+    >https://www.veryarm.com/296.html#comments</a></p>
+<ul>
+<li>
+<p>交叉编译工具链的命名规范是：
+<strong>arch [-vendor] [-os] [-(gnu)eabi]</strong>
+<strong>arch : 架构的意思，如ARM ，MIPS</strong>
+<strong>vendor： 工具链的提供厂商</strong>
+<strong>os： 支持的操作系统</strong>
+<strong>eabi：嵌入式应用二进制接口（Embedded Application Binary Interface）</strong></p>
+</li>
+<li>
+<p>arm gcc还分为 是否支持操作系统
+<strong>支持操作系统：</strong> <a class="link" href="https://zhida.zhihu.com/search?content_id=117860044&amp;content_type=Article&amp;match_order=1&amp;q=arm-none-linux-eabi-gcc&amp;zhida_source=entity"  target="_blank" rel="noopener"
+    >arm-none-linux-eabi-gcc</a>
+<strong>不支持操作系统：</strong> arm-none-eabi-gcc</p>
+</li>
+</ul>
+<h4 id="ninjamakecmake">ninja，make，cmake
+</h4><h5 id="cmake">cmake
+</h5><p>cmake是一个生成 .ninja 和 .makefile 的工具。cmake只需要用户通过对源码文件的简单描述（就是CMakeLists.txt文件），就能自动生成一个project的makefile文件或者ninja文件，然后就可以通过ninja或者make进行启动编译了，很多IDE都在用cmake作为项目管理工具。</p>
+<h5 id="make与ninja">make与ninja
+</h5><p>make功能强大，可以给人看，ninja启动速度快，项目构建速度快，但不是给人看的
+可以认为两者同级。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Nomad
+    </section>
+    
+    <section class="powerby">
+        
+            experience <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
