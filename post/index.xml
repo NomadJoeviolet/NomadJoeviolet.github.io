@@ -82,8 +82,8 @@
 		data-flex-grow=&#34;381&#34;
 		data-flex-basis=&#34;915px&#34;
 	
-&gt;
-在&lt;code&gt;f103c8t6&lt;/code&gt;中，&lt;code&gt;TIM1&lt;/code&gt;是高级定时器，&lt;code&gt;TIM2&lt;/code&gt;，&lt;code&gt;TIM3&lt;/code&gt;，&lt;code&gt;TIM4&lt;/code&gt;是通用计时器&lt;/p&gt;
+&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;f103c8t6&lt;/code&gt;中，&lt;code&gt;TIM1&lt;/code&gt;是高级定时器，&lt;code&gt;TIM2&lt;/code&gt;，&lt;code&gt;TIM3&lt;/code&gt;，&lt;code&gt;TIM4&lt;/code&gt;是通用计时器&lt;/p&gt;
 &lt;h4 id=&#34;cubemx参数配置&#34;&gt;CubeMX参数配置
 &lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png&#34;
 	width=&#34;686&#34;
@@ -345,8 +345,8 @@
 	
 &gt;&lt;/p&gt;
 &lt;h5 id=&#34;关于mx_tim2_init启动时会将中断标志位置1&#34;&gt;关于MX_TIM2_Init()启动时会将中断标志位置1
-&lt;/h5&gt;&lt;p&gt;在MX_TIM2_Init()时，会将定时器更新中断标志位置1，在调用HAL_TIM_Base_Start_IT后，NVIC会检测到更新中断标志位被置1，会立马触发中断
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-MX_TIM2_Init%28%29%E5%90%AF%E5%8A%A8%E6%97%B6%E4%BC%9A%E5%B0%86%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BD%AE1.png&#34;
+&lt;/h5&gt;&lt;p&gt;在MX_TIM2_Init()时，会将定时器更新中断标志位置1，在调用HAL_TIM_Base_Start_IT后，NVIC会检测到更新中断标志位被置1，会立马触发中断&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-MX_TIM2_Init%28%29%E5%90%AF%E5%8A%A8%E6%97%B6%E4%BC%9A%E5%B0%86%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BD%AE1.png&#34;
 	width=&#34;505&#34;
 	height=&#34;133&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-MX_TIM2_Init%28%29%E5%90%AF%E5%8A%A8%E6%97%B6%E4%BC%9A%E5%B0%86%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BD%AE1_hu10909019122286373041.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-MX_TIM2_Init%28%29%E5%90%AF%E5%8A%A8%E6%97%B6%E4%BC%9A%E5%B0%86%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BD%AE1_hu6249090256107097936.png 1024w&#34;
@@ -505,8 +505,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h5 id=&#34;关于mx_tim2_init启动时会将中断标志位置1-1&#34;&gt;关于MX_TIM2_Init()启动时会将中断标志位置1
-&lt;/h5&gt;&lt;p&gt;在MX_TIM2_Init()时，会将定时器更新中断标志位置1，在调用HAL_TIM_Base_Start_IT后，NVIC会检测到更新中断标志位被置1，会立马触发中断
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-MX_TIM2_Init%28%29%E5%90%AF%E5%8A%A8%E6%97%B6%E4%BC%9A%E5%B0%86%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BD%AE1.png&#34;
+&lt;/h5&gt;&lt;p&gt;在MX_TIM2_Init()时，会将定时器更新中断标志位置1，在调用HAL_TIM_Base_Start_IT后，NVIC会检测到更新中断标志位被置1，会立马触发中断&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-MX_TIM2_Init%28%29%E5%90%AF%E5%8A%A8%E6%97%B6%E4%BC%9A%E5%B0%86%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BD%AE1.png&#34;
 	width=&#34;505&#34;
 	height=&#34;133&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-MX_TIM2_Init%28%29%E5%90%AF%E5%8A%A8%E6%97%B6%E4%BC%9A%E5%B0%86%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BD%AE1_hu10909019122286373041.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-MX_TIM2_Init%28%29%E5%90%AF%E5%8A%A8%E6%97%B6%E4%BC%9A%E5%B0%86%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BD%AE1_hu6249090256107097936.png 1024w&#34;
@@ -606,9 +606,9 @@
 		data-flex-grow=&#34;144&#34;
 		data-flex-basis=&#34;346px&#34;
 	
-&gt;
-一般需要勾选单脉冲模式
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8D%95%E8%84%89%E5%86%B2%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8F.png&#34;
+&gt;&lt;/p&gt;
+&lt;p&gt;一般需要勾选单脉冲模式&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8D%95%E8%84%89%E5%86%B2%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8F.png&#34;
 	width=&#34;369&#34;
 	height=&#34;171&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8D%95%E8%84%89%E5%86%B2%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8F_hu4330916582684147670.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8D%95%E8%84%89%E5%86%B2%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8F_hu5523703620707339034.png 1024w&#34;
@@ -917,9 +917,11 @@ TI3和TI4是一对，可以相互借用
 		data-flex-grow=&#34;395&#34;
 		data-flex-basis=&#34;948px&#34;
 	
-&gt;
-PWM模式1 是 计数器值 小于 比较器值 时输出有效电平
-PWM模式2 是 计数器值 大于 比较器值 时输出有效电平&lt;/p&gt;
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;PWM模式1 是 计数器值 小于 比较器值 时输出有效电平&lt;/li&gt;
+&lt;li&gt;PWM模式2 是 计数器值 大于 比较器值 时输出有效电平&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h4 id=&#34;cube配置&#34;&gt;Cube配置
 &lt;/h4&gt;&lt;p&gt;为实现一个呼吸灯，进行以下配置
 PWM的频率为&lt;code&gt;1000Hz&lt;/code&gt;，最大计数值为&lt;code&gt;1000-1&lt;/code&gt;&lt;/p&gt;
@@ -935,8 +937,8 @@ PWM的频率为&lt;code&gt;1000Hz&lt;/code&gt;，最大计数值为&lt;code&gt;1
 		data-flex-grow=&#34;248&#34;
 		data-flex-basis=&#34;595px&#34;
 	
-&gt;
-预分频器值，计数模式选择（向上计数模式，向下计数模式，中央对齐模式），自动重装载值，内部时钟分频，重复计数器值，是否开启影子寄存器&lt;/p&gt;
+&gt;&lt;/p&gt;
+&lt;p&gt;预分频器值，计数模式选择（向上计数模式，向下计数模式，中央对齐模式），自动重装载值，内部时钟分频，重复计数器值，是否开启影子寄存器&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;PWM配置&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-PWM%E9%85%8D%E7%BD%AE.png&#34;
 	width=&#34;460&#34;
