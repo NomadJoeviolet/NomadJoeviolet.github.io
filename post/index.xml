@@ -7,7 +7,1055 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
-        <lastBuildDate>Thu, 26 Jun 2025 15:35:46 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 26 Jun 2025 17:26:06 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>STM32————TIM定时器</title>
+        <link>https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/</link>
+        <pubDate>Thu, 26 Jun 2025 17:26:06 +0800</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/</guid>
+        <description>&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/as480133937/article/details/99231677&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【STM32】HAL库 STM32CubeMX教程七&amp;mdash;PWM输出(呼吸灯)_stm32 hal pwm-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/demonneverhunts/article/details/135001314&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;STM32CubeIde中互补PWM配置项的详细解读_ch idle state-CSDN博客&lt;/a&gt;
+基于上述博客以及&lt;code&gt;keysking&lt;/code&gt;STM32教程写的个人学习文档
+【【STM32入门教程】应该是全B站最好的STM32教程了！！】https://www.bilibili.com/video/BV12v4y1y7uV?vd_source=5a0790755035f26a67935abfbfcdfd5b&lt;/p&gt;
+&lt;h3 id=&#34;定时器简介&#34;&gt;定时器简介
+&lt;/h3&gt;&lt;h4 id=&#34;hal库开启定时器的基本函数&#34;&gt;HAL库开启定时器的基本函数
+&lt;/h4&gt;&lt;p&gt;开启定时器&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_TIM_Base_Start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//仅开启定时器
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;HAL_TIM_Base_Start_IT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//开启定时器和中断
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_TIM_Base_Stop&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//关闭定时器
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;HAL_TIM_Base_Stop_IT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//既关闭定时器，同时关闭中断
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;框架&#34;&gt;框架
+&lt;/h4&gt;&lt;p&gt;解释整个&lt;code&gt;TIM&lt;/code&gt;外设的构成
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E6%A1%86%E6%9E%B6.png&#34;
+	width=&#34;1816&#34;
+	height=&#34;1046&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E6%A1%86%E6%9E%B6_hu7246255291864279068.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E6%A1%86%E6%9E%B6_hu2875189494378041386.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;173&#34;
+		data-flex-basis=&#34;416px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;计数信号来源&#34;&gt;计数信号来源
+&lt;/h4&gt;&lt;p&gt;有内部时钟以及外部时钟
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E6%97%B6%E9%92%9F%E6%BA%90%E6%9D%A5%E6%BA%90.png&#34;
+	width=&#34;1900&#34;
+	height=&#34;864&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E6%97%B6%E9%92%9F%E6%BA%90%E6%9D%A5%E6%BA%90_hu5088459183591891140.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E6%97%B6%E9%92%9F%E6%BA%90%E6%9D%A5%E6%BA%90_hu16582452387122152923.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;219&#34;
+		data-flex-basis=&#34;527px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;内部时钟模式&#34;&gt;内部时钟模式
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F.png&#34;
+	width=&#34;675&#34;
+	height=&#34;177&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F_hu5309645045050208546.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F_hu9881976903012931188.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;381&#34;
+		data-flex-basis=&#34;915px&#34;
+	
+&gt;
+在&lt;code&gt;f103c8t6&lt;/code&gt;中，&lt;code&gt;TIM1&lt;/code&gt;是高级定时器，&lt;code&gt;TIM2&lt;/code&gt;，&lt;code&gt;TIM3&lt;/code&gt;，&lt;code&gt;TIM4&lt;/code&gt;是通用计时器&lt;/p&gt;
+&lt;h4 id=&#34;cubemx参数配置&#34;&gt;CubeMX参数配置
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png&#34;
+	width=&#34;686&#34;
+	height=&#34;237&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE_hu12829645387105645740.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE_hu162320815802914554.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;289&#34;
+		data-flex-basis=&#34;694px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;Prescaker&lt;/code&gt;:预分频，实际分频数是&lt;code&gt;number+1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Counter Mode&lt;/code&gt;:计数模式设置&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Counter Period&lt;/code&gt;:自动重装载计数器计数值&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Internal Clock Division&lt;/code&gt;:内部时钟预分频&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Repetiton Counter&lt;/code&gt;:重复计数器 (&lt;strong&gt;RCR&lt;/strong&gt; -8 bits)，属于高级控制寄存器专用寄存器位，利用它可以非常容易控制输出 PWM 的个数，与内部时钟模式无关&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;auto-reload preload&lt;/code&gt;:是否开启影子寄存器模式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;还需要开启定时器更新中断&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD.png&#34;
+	width=&#34;685&#34;
+	height=&#34;165&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD_hu3931705140757947726.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%86%85%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD_hu9647680572974795723.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;415&#34;
+		data-flex-basis=&#34;996px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;代码实现&#34;&gt;代码实现
+&lt;/h4&gt;&lt;p&gt;用的&lt;code&gt;PA2&lt;/code&gt;作&lt;code&gt;GPIO&lt;/code&gt;输出&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;HAL_TIM_PeriodElapsedCallback&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//中断回调函数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;	&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;nf&#34;&gt;HAL_GPIO_TogglePin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOA&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIO_PIN_2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 1 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE END 1 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* MCU Configuration--------------------------------------------------------*/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* Reset of all peripherals, Initializes the Flash interface and the Systick. */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;HAL_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN Init */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE END Init */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* Configure the system clock */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;SystemClock_Config&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN SysInit */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE END SysInit */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* Initialize all configured peripherals */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;MX_GPIO_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;MX_TIM1_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;nf&#34;&gt;HAL_TIM_Base_Start_IT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE END 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* Infinite loop */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN WHILE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/* USER CODE END WHILE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 3 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE END 3 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;外部时钟模式&#34;&gt;外部时钟模式
+&lt;/h3&gt;&lt;p&gt;【【STM32】动画讲解定时器外部时钟 &amp;amp; 实战传送带测速装置】https://www.bilibili.com/video/BV1N94y1u7Uz?vd_source=5a0790755035f26a67935abfbfcdfd5b&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;__HAL_GET_COUNTER(&amp;amp;htim)&lt;/code&gt;获取计数值&lt;/p&gt;
+&lt;h4 id=&#34;外部时钟模式2&#34;&gt;外部时钟模式2
+&lt;/h4&gt;&lt;p&gt;在Clock Source处选择&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/TIM%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F2%E7%9A%84clock_source%E9%80%89%E6%8B%A9.png&#34;
+	width=&#34;774&#34;
+	height=&#34;473&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/TIM%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F2%E7%9A%84clock_source%E9%80%89%E6%8B%A9_hu11490052635626140431.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/TIM%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F2%E7%9A%84clock_source%E9%80%89%E6%8B%A9_hu14576272573499853989.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;163&#34;
+		data-flex-basis=&#34;392px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;注意外部时钟的滤波器&lt;code&gt;Clock Filter&lt;/code&gt;，输入滤波
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%BB%A4%E6%B3%A2.png&#34;
+	width=&#34;996&#34;
+	height=&#34;216&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%BB%A4%E6%B3%A2_hu9563077849774446580.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%BB%A4%E6%B3%A2_hu10049620090529568470.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;461&#34;
+		data-flex-basis=&#34;1106px&#34;
+	
+&gt;
+输入滤波，极性选择，预分频器&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;采样频率等于内部时钟的频率&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E6%BB%A4%E6%B3%A2%E5%8E%9F%E7%90%86.png&#34;
+	width=&#34;1450&#34;
+	height=&#34;885&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E6%BB%A4%E6%B3%A2%E5%8E%9F%E7%90%86_hu10908971946265844383.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E6%BB%A4%E6%B3%A2%E5%8E%9F%E7%90%86_hu8987433854676132003.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;163&#34;
+		data-flex-basis=&#34;393px&#34;
+	
+&gt;
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%BB%A4%E6%B3%A2%E8%AE%BE%E7%BD%AE.png&#34;
+	width=&#34;1477&#34;
+	height=&#34;768&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%BB%A4%E6%B3%A2%E8%AE%BE%E7%BD%AE_hu16572390343706948322.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%BB%A4%E6%B3%A2%E8%AE%BE%E7%BD%AE_hu16397634823087448288.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;192&#34;
+		data-flex-basis=&#34;461px&#34;
+	
+&gt;
+一般推荐选择1110（15）&lt;/p&gt;
+&lt;h4 id=&#34;外部时钟模式1&#34;&gt;外部时钟模式1
+&lt;/h4&gt;&lt;p&gt;通过定时器的Slave Mode 进行选择
+启用从模式，选择外部时钟模式1
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F1Cube%E9%85%8D%E7%BD%AE.png&#34;
+	width=&#34;764&#34;
+	height=&#34;420&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F1Cube%E9%85%8D%E7%BD%AE_hu11866422407166467253.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F1Cube%E9%85%8D%E7%BD%AE_hu736928791234625645.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;181&#34;
+		data-flex-basis=&#34;436px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;选择Trigger Source时，就是选择什么方式来外部计数
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8Triggersource%E9%80%89%E6%8B%A9.png&#34;
+	width=&#34;470&#34;
+	height=&#34;310&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8Triggersource%E9%80%89%E6%8B%A9_hu3995889018324661563.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8Triggersource%E9%80%89%E6%8B%A9_hu6757351429611777207.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;151&#34;
+		data-flex-basis=&#34;363px&#34;
+	
+&gt;
+就是选择触发器的来源
+&lt;code&gt;TI_ED&lt;/code&gt;是双边沿触发，且只能是双边沿触发&lt;/p&gt;
+&lt;h4 id=&#34;使用外部计数etr&#34;&gt;使用外部计数ETR
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;可以在外部时钟模式1下，Trigger Source选择ETR1
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F1Triggersource%E9%85%8D%E7%BD%AE.png&#34;
+	width=&#34;767&#34;
+	height=&#34;103&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F1Triggersource%E9%85%8D%E7%BD%AE_hu16708479085199084006.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F1Triggersource%E9%85%8D%E7%BD%AE_hu385851263168015434.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;744&#34;
+		data-flex-basis=&#34;1787px&#34;
+	
+&gt;
+芯片上会有引脚被设置为ETR1&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;直接选择外部时钟模式2，引脚上会自动有一个ETR2
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F2Triggersource%E9%85%8D%E7%BD%AE.png&#34;
+	width=&#34;785&#34;
+	height=&#34;155&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F2Triggersource%E9%85%8D%E7%BD%AE_hu589057229500730813.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F2Triggersource%E9%85%8D%E7%BD%AE_hu15069757756629320421.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;506&#34;
+		data-flex-basis=&#34;1215px&#34;
+	
+&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F2%E5%BC%95%E8%84%9A.png&#34;
+	width=&#34;242&#34;
+	height=&#34;138&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F2%E5%BC%95%E8%84%9A_hu14398155876919048593.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%A4%96%E9%83%A8%E6%97%B6%E9%92%9F%E6%A8%A1%E5%BC%8F2%E5%BC%95%E8%84%9A_hu10642979747135549966.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;175&#34;
+		data-flex-basis=&#34;420px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;关于定时器的事件更新中断&#34;&gt;关于定时器的事件更新中断
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;HAL%e5%ba%93%e7%9a%84%e5%ae%9a%e6%97%b6%e5%99%a8%e4%b8%ad%e6%96%ad.md&#34; &gt;关于定时器中断&lt;/a&gt;
+计数值到达自动重装载值时，触发更新中断
+在Cube中开启&lt;code&gt;global interrupt&lt;/code&gt;
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E4%B8%AD%E6%96%AD.png&#34;
+	width=&#34;695&#34;
+	height=&#34;125&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E4%B8%AD%E6%96%AD_hu3098622195240813322.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E4%B8%AD%E6%96%AD_hu9360666073227511213.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;556&#34;
+		data-flex-basis=&#34;1334px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;关于mx_tim2_init启动时会将中断标志位置1&#34;&gt;关于MX_TIM2_Init()启动时会将中断标志位置1
+&lt;/h5&gt;&lt;p&gt;在MX_TIM2_Init()时，会将定时器更新中断标志位置1，在调用HAL_TIM_Base_Start_IT后，NVIC会检测到更新中断标志位被置1，会立马触发中断
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-MX_TIM2_Init%28%29%E5%90%AF%E5%8A%A8%E6%97%B6%E4%BC%9A%E5%B0%86%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BD%AE1.png&#34;
+	width=&#34;505&#34;
+	height=&#34;133&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-MX_TIM2_Init%28%29%E5%90%AF%E5%8A%A8%E6%97%B6%E4%BC%9A%E5%B0%86%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BD%AE1_hu10909019122286373041.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-MX_TIM2_Init%28%29%E5%90%AF%E5%8A%A8%E6%97%B6%E4%BC%9A%E5%B0%86%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BD%AE1_hu6249090256107097936.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;379&#34;
+		data-flex-basis=&#34;911px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在HAL_TIM_Base_Start_IT前选择下面两个函数其中一个写上即可
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%BC%80%E5%90%AFTIM%E6%97%B6%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86.png&#34;
+	width=&#34;1007&#34;
+	height=&#34;101&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%BC%80%E5%90%AFTIM%E6%97%B6%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86_hu2790487887584429588.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%BC%80%E5%90%AFTIM%E6%97%B6%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86_hu7224389806914459737.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;997&#34;
+		data-flex-basis=&#34;2392px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;事件更新中断的逻辑&#34;&gt;事件更新中断的逻辑
+&lt;/h5&gt;&lt;p&gt;先是NVIC中断向量表查找到TIM2_IRQhandler，在该函数中，调用了HAL_TIM_IRQhandler函数
+其中的事件更新处理的代码(HAL库中&lt;code&gt;HAL_TIM_IRQHandler&lt;/code&gt;中的处理事件更新中断的代码)
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-TIM_IRQHandler%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86.png&#34;
+	width=&#34;1582&#34;
+	height=&#34;539&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-TIM_IRQHandler%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86_hu440923548277402571.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-TIM_IRQHandler%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86_hu10801739267182522720.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;293&#34;
+		data-flex-basis=&#34;704px&#34;
+	
+&gt;
+判断标志位，判断是否开启事件更新中断，清零标志位，调用&lt;code&gt;HAL_TIM_PeriodElapsedCallback&lt;/code&gt;函数&lt;/p&gt;
+&lt;h3 id=&#34;定时器的从模式&#34;&gt;定时器的从模式
+&lt;/h3&gt;&lt;p&gt;【【STM32】一看就懂的定时器从模式讲解】https://www.bilibili.com/video/BV1mU421o7vt?vd_source=5a0790755035f26a67935abfbfcdfd5b&lt;/p&gt;
+&lt;p&gt;定时器从模式&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Reset Mode 复位模式&lt;/li&gt;
+&lt;li&gt;Gate Mode 门模式&lt;/li&gt;
+&lt;li&gt;Trigger Mode 触发模式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;复位模式&#34;&gt;复位模式
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%A4%8D%E4%BD%8D%E6%A8%A1%E5%BC%8F.png&#34;
+	width=&#34;1886&#34;
+	height=&#34;921&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%A4%8D%E4%BD%8D%E6%A8%A1%E5%BC%8F_hu11725483115849287689.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%A4%8D%E4%BD%8D%E6%A8%A1%E5%BC%8F_hu1943116284556190292.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;204&#34;
+		data-flex-basis=&#34;491px&#34;
+	
+&gt;
+设定为复位模式时&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;选取计数信号，计数信号可以时内部时钟，也可以是外部时钟模式2（不是从模式控制器下外部时钟模式1）&lt;/li&gt;
+&lt;li&gt;触发器的信号，每出现一次，执行一次复位操作（向上计数模式恢复为0，向下计数模式恢复为自动重装载值）
+例子：选取计数信号为内部时钟，计数器不断计数，当触发器信号来临时（TI1的TIFP1检测到信号上升沿），则触发一次更新事件，计数器值复位&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;注意：如果开启定时器的事件更新中断，触发器信号也会触发事件更新中断&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;复位模式下的从模式控制器，在接收到触发信号后，就会让计数器重新开始计数，并且会触发定时器更新中断&lt;/strong&gt;&lt;/p&gt;
+&lt;h5 id=&#34;如何判断事件更新中断的产生原因&#34;&gt;如何判断事件更新中断的产生原因
+&lt;/h5&gt;&lt;p&gt;在复位模式中，需要区分事件更新中断是触发信号的复位导致还是自动挡重装载时导致&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-TIM%E7%8A%B6%E6%80%81%E5%AF%84%E5%AD%98%E5%99%A8%E5%88%A4%E6%96%AD.png&#34;
+	width=&#34;1545&#34;
+	height=&#34;495&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-TIM%E7%8A%B6%E6%80%81%E5%AF%84%E5%AD%98%E5%99%A8%E5%88%A4%E6%96%AD_hu6598019580509237006.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-TIM%E7%8A%B6%E6%80%81%E5%AF%84%E5%AD%98%E5%99%A8%E5%88%A4%E6%96%AD_hu16163515373619946038.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;312&#34;
+		data-flex-basis=&#34;749px&#34;
+	
+&gt;
+从模式收到触发信号后，会设置触发器中断标志位，可以借此来区分中断原因&lt;/p&gt;
+&lt;p&gt;使用该函数来获取触发器中断标志位
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-TIM_GET_FLAG.png&#34;
+	width=&#34;1288&#34;
+	height=&#34;85&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-TIM_GET_FLAG_hu15910363570811033068.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-TIM_GET_FLAG_hu7437791743752868895.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1515&#34;
+		data-flex-basis=&#34;3636px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;__HAL_TIM_GET_FALG&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_FLAG_UPDATE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//可以获取定时器对应标志位的值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;TIM_FLAG_TRIGGER&lt;/code&gt;是触发器中断标志位&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;__HAL_TIM_GET_FLAG&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_FLAG_TRIGGER&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;使用上述语句可以获取其标志位
+使用时需要注意，HAL库为了方便我们判断，并不会对该标志位清零，所以在获取标志位的值后，需要对其进行清零&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;__HAL_TIM_GET_FLAG&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_FLAG_TRIGGER&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;nf&#34;&gt;__HAL_TIM_CLEAR_FLAG&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_FLAG_TRIGGER&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;HAL_TIM_PeriodElapsedCallback&lt;/code&gt;回调函数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;HAL_TIM_PeriodElapsedCallback&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TIM_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim2&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;__HAL_TIM_GET_FLAG&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_FLAG_TRIGGER&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SET&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//获取触发标志位，用来区分复位引起的中断还是自动重装载引起的中断
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;		&lt;span class=&#34;nf&#34;&gt;__HAL_TIM_CLEAR_FLAG&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_FLAG_TRIGGER&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;nf&#34;&gt;HAL_UART_Transmit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart2&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;triggerMsg&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;strlen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;triggerMsg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			&lt;span class=&#34;nf&#34;&gt;HAL_UART_Transmit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart2&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;updateMsg&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;strlen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;updateMsg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h5 id=&#34;关于mx_tim2_init启动时会将中断标志位置1-1&#34;&gt;关于MX_TIM2_Init()启动时会将中断标志位置1
+&lt;/h5&gt;&lt;p&gt;在MX_TIM2_Init()时，会将定时器更新中断标志位置1，在调用HAL_TIM_Base_Start_IT后，NVIC会检测到更新中断标志位被置1，会立马触发中断
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-MX_TIM2_Init%28%29%E5%90%AF%E5%8A%A8%E6%97%B6%E4%BC%9A%E5%B0%86%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BD%AE1.png&#34;
+	width=&#34;505&#34;
+	height=&#34;133&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-MX_TIM2_Init%28%29%E5%90%AF%E5%8A%A8%E6%97%B6%E4%BC%9A%E5%B0%86%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BD%AE1_hu10909019122286373041.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-MX_TIM2_Init%28%29%E5%90%AF%E5%8A%A8%E6%97%B6%E4%BC%9A%E5%B0%86%E4%B8%AD%E6%96%AD%E6%A0%87%E5%BF%97%E4%BD%8D%E7%BD%AE1_hu6249090256107097936.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;379&#34;
+		data-flex-basis=&#34;911px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;在HAL_TIM_Base_Start_IT前选择下面两个函数其中一个写上即可
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%BC%80%E5%90%AFTIM%E6%97%B6%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86.png&#34;
+	width=&#34;1007&#34;
+	height=&#34;101&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%BC%80%E5%90%AFTIM%E6%97%B6%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86_hu2790487887584429588.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%BC%80%E5%90%AFTIM%E6%97%B6%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86_hu7224389806914459737.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;997&#34;
+		data-flex-basis=&#34;2392px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;事件更新中断的逻辑-1&#34;&gt;事件更新中断的逻辑
+&lt;/h5&gt;&lt;p&gt;先是NVIC中断向量表查找到TIM2_IRQhandler，在该函数中，调用了HAL_TIM2_IRQhandler函数
+其中的事件更新处理处的代码(HAL库中&lt;code&gt;HAL_TIM_IRQHandler&lt;/code&gt;中的处理事件更新中断的代码)
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-TIM_IRQHandler%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86.png&#34;
+	width=&#34;1582&#34;
+	height=&#34;539&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-TIM_IRQHandler%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86_hu440923548277402571.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-TIM_IRQHandler%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0%E4%B8%AD%E6%96%AD%E5%A4%84%E7%90%86_hu10801739267182522720.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;293&#34;
+		data-flex-basis=&#34;704px&#34;
+	
+&gt;
+判断标志位，判断是否开启事件更新中断，清零标志位，调用HAL_TIM_PeriodElapsedCallback函数&lt;/p&gt;
+&lt;h4 id=&#34;门模式&#34;&gt;门模式
+&lt;/h4&gt;&lt;p&gt;如果TI1的TI1FP1为上升沿检测，则是当触发信号是高电平时，时钟信号可以正常进入定时器，定时器能正常计数
+当触发信号时低电平时，门关闭，时钟信号不能正常进入定时器，定时器停止计数
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E9%97%A8%E6%A8%A1%E5%BC%8F.png&#34;
+	width=&#34;1846&#34;
+	height=&#34;1003&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E9%97%A8%E6%A8%A1%E5%BC%8F_hu14482877859231893830.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E9%97%A8%E6%A8%A1%E5%BC%8F_hu15862409341785774361.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;184&#34;
+		data-flex-basis=&#34;441px&#34;
+	
+&gt;
+若将触发器的极性改为检测下降沿的话，门的控制作用则相反
+触发器的极性选择
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8Trigger%E6%9E%81%E6%80%A7%E9%80%89%E6%8B%A9.png&#34;
+	width=&#34;638&#34;
+	height=&#34;125&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8Trigger%E6%9E%81%E6%80%A7%E9%80%89%E6%8B%A9_hu3005372532932280779.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8Trigger%E6%9E%81%E6%80%A7%E9%80%89%E6%8B%A9_hu12576360874264416519.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;510&#34;
+		data-flex-basis=&#34;1224px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;需要注意，在门模式情况下，上升下降沿的时刻，也会将触发器中断标志位置1，但是&lt;strong&gt;不会触发事件更新中断&lt;/strong&gt;（因为没有对计数值进行复位，就不会触发事件更新中断）
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E9%97%A8%E6%A8%A1%E5%BC%8FTrigger%E4%B8%AD%E6%96%AD.png&#34;
+	width=&#34;1459&#34;
+	height=&#34;924&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E9%97%A8%E6%A8%A1%E5%BC%8FTrigger%E4%B8%AD%E6%96%AD_hu2944559667312651129.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E9%97%A8%E6%A8%A1%E5%BC%8FTrigger%E4%B8%AD%E6%96%AD_hu10939188625029366002.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;157&#34;
+		data-flex-basis=&#34;378px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;触发模式&#34;&gt;触发模式
+&lt;/h4&gt;&lt;p&gt;在检测到设定的边沿后，让定时器开始计数
+开始后不能设定停止
+触发模式仅能启动定时器，并不能停止计数器计数&lt;/p&gt;
+&lt;p&gt;一般配合计时器的单脉冲模式使用
+单脉冲模式，是指计数器计数到重装载计数值后，就停止计数（不再循环计数）
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8F.png&#34;
+	width=&#34;879&#34;
+	height=&#34;608&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8F_hu12071710814715075892.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8F_hu15375127490993028844.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;144&#34;
+		data-flex-basis=&#34;346px&#34;
+	
+&gt;
+一般需要勾选单脉冲模式
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8D%95%E8%84%89%E5%86%B2%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8F.png&#34;
+	width=&#34;369&#34;
+	height=&#34;171&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8D%95%E8%84%89%E5%86%B2%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8F_hu4330916582684147670.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8D%95%E8%84%89%E5%86%B2%E8%A7%A6%E5%8F%91%E6%A8%A1%E5%BC%8F_hu5523703620707339034.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;215&#34;
+		data-flex-basis=&#34;517px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;三种模式的总结&#34;&gt;三种模式的总结
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%BB%93.png&#34;
+	width=&#34;1696&#34;
+	height=&#34;929&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%BB%93_hu13832106499077563247.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%BB%93_hu2416660951214798472.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;182&#34;
+		data-flex-basis=&#34;438px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;trigger-source-触发源的滤波器设置&#34;&gt;Trigger Source 触发源的滤波器设置
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%BB%A4%E6%B3%A2%E8%AE%BE%E7%BD%AE.png&#34;
+	width=&#34;1477&#34;
+	height=&#34;768&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%BB%A4%E6%B3%A2%E8%AE%BE%E7%BD%AE_hu16572390343706948322.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%BB%A4%E6%B3%A2%E8%AE%BE%E7%BD%AE_hu16397634823087448288.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;192&#34;
+		data-flex-basis=&#34;461px&#34;
+	
+&gt;
+在有触发源的时候，对触发源的信号的滤波设置
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E6%BB%A4%E6%B3%A2%E8%AE%BE%E7%BD%AE.png&#34;
+	width=&#34;1519&#34;
+	height=&#34;918&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E6%BB%A4%E6%B3%A2%E8%AE%BE%E7%BD%AE_hu6408856822874507352.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E6%BB%A4%E6%B3%A2%E8%AE%BE%E7%BD%AE_hu9709839833768929992.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;165&#34;
+		data-flex-basis=&#34;397px&#34;
+	
+&gt;
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8TriggerFilter%E8%AE%BE%E7%BD%AE.png&#34;
+	width=&#34;615&#34;
+	height=&#34;137&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8TriggerFilter%E8%AE%BE%E7%BD%AE_hu4088854993856135708.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8TriggerFilter%E8%AE%BE%E7%BD%AE_hu14367292676400960520.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;448&#34;
+		data-flex-basis=&#34;1077px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;定时器的输入捕获&#34;&gt;定时器的输入捕获
+&lt;/h3&gt;&lt;h4 id=&#34;软件层面上的模拟&#34;&gt;软件层面上的模拟
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%A8%A1%E6%8B%9F.png&#34;
+	width=&#34;1953&#34;
+	height=&#34;993&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%A8%A1%E6%8B%9F_hu1208606487945857974.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E7%9A%84%E8%BD%AF%E4%BB%B6%E6%A8%A1%E6%8B%9F_hu15486102283531148421.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;196&#34;
+		data-flex-basis=&#34;472px&#34;
+	
+&gt;
+在软件层面检测Echo端的电平高低，进行计时，到那时再极高精度要求的情况则 力不足&lt;/p&gt;
+&lt;h4 id=&#34;输入捕获的概括&#34;&gt;输入捕获的概括
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7.png&#34;
+	width=&#34;1403&#34;
+	height=&#34;936&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7_hu12150519234846394577.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7_hu2387246482467657621.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;149&#34;
+		data-flex-basis=&#34;359px&#34;
+	
+&gt;
+硬件在检测到上升或者下降沿时，就记录计数器值到捕获寄存器&lt;/p&gt;
+&lt;h4 id=&#34;输入捕获的运行机制&#34;&gt;输入捕获的运行机制
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6.png&#34;
+	width=&#34;1964&#34;
+	height=&#34;976&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6_hu1348731604447446013.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6_hu1768863916071223908.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;201&#34;
+		data-flex-basis=&#34;482px&#34;
+	
+&gt;
+在TI1检测到上升沿时，捕获寄存器立即复制计数器的值
+还可以开启输入捕获中断，输入捕获后，启动中断，可以快速处理捕获寄存器上的值&lt;/p&gt;
+&lt;p&gt;一个通道只能进行一种边沿检测
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E7%9B%B4%E6%8E%A5%E9%97%B4%E6%8E%A5%E6%A8%A1%E5%BC%8F.png&#34;
+	width=&#34;1942&#34;
+	height=&#34;978&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E7%9B%B4%E6%8E%A5%E9%97%B4%E6%8E%A5%E6%A8%A1%E5%BC%8F_hu17717979065058431200.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E7%9B%B4%E6%8E%A5%E9%97%B4%E6%8E%A5%E6%A8%A1%E5%BC%8F_hu6899220920855103433.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;198&#34;
+		data-flex-basis=&#34;476px&#34;
+	
+&gt;
+捕获的模式
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%BB%93%E5%90%88.png&#34;
+	width=&#34;1662&#34;
+	height=&#34;418&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%BB%93%E5%90%88_hu10512785567504860820.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%BB%93%E5%90%88_hu4843270472408465732.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;397&#34;
+		data-flex-basis=&#34;954px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;注意：TI3和TI4没有接入从模式控制器中
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B74%E4%B8%AA%E9%80%9A%E9%81%93.png&#34;
+	width=&#34;1816&#34;
+	height=&#34;1046&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B74%E4%B8%AA%E9%80%9A%E9%81%93_hu7246255291864279068.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B74%E4%B8%AA%E9%80%9A%E9%81%93_hu2875189494378041386.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;173&#34;
+		data-flex-basis=&#34;416px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B74%E4%B8%AA%E9%80%9A%E9%81%93%E6%96%B9%E6%B3%95%E5%9B%BE.png&#34;
+	width=&#34;1355&#34;
+	height=&#34;491&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B74%E4%B8%AA%E9%80%9A%E9%81%93%E6%96%B9%E6%B3%95%E5%9B%BE_hu8151643682100602727.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B74%E4%B8%AA%E9%80%9A%E9%81%93%E6%96%B9%E6%B3%95%E5%9B%BE_hu15963921000820360802.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;275&#34;
+		data-flex-basis=&#34;662px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;TI1和TI2是一对，可以相互借用
+TI3和TI4是一对，可以相互借用
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B74%E4%B8%AA%E9%80%9A%E9%81%93%E9%85%8D%E5%AF%B9%E5%85%B3%E7%B3%BB.png&#34;
+	width=&#34;1751&#34;
+	height=&#34;600&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B74%E4%B8%AA%E9%80%9A%E9%81%93%E9%85%8D%E5%AF%B9%E5%85%B3%E7%B3%BB_hu14045364042602557867.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B74%E4%B8%AA%E9%80%9A%E9%81%93%E9%85%8D%E5%AF%B9%E5%85%B3%E7%B3%BB_hu511363242770130273.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;291&#34;
+		data-flex-basis=&#34;700px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;cube上的配置&#34;&gt;Cube上的配置
+&lt;/h4&gt;&lt;p&gt;注意设置边沿检测
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E7%9B%B4%E6%8E%A5%E9%97%B4%E6%8E%A5%E9%85%8D%E7%BD%AE.png&#34;
+	width=&#34;1256&#34;
+	height=&#34;462&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E7%9B%B4%E6%8E%A5%E9%97%B4%E6%8E%A5%E9%85%8D%E7%BD%AE_hu5422131849685207703.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E7%9B%B4%E6%8E%A5%E9%97%B4%E6%8E%A5%E9%85%8D%E7%BD%AE_hu5174787296735538629.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;271&#34;
+		data-flex-basis=&#34;652px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;打开捕获中断
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%BC%80%E5%90%AF%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E4%B8%AD%E6%96%AD.png&#34;
+	width=&#34;1253&#34;
+	height=&#34;268&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%BC%80%E5%90%AF%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E4%B8%AD%E6%96%AD_hu7030381676163352643.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E5%BC%80%E5%90%AF%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E4%B8%AD%E6%96%AD_hu18227866073269948008.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;467&#34;
+		data-flex-basis=&#34;1122px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;启动，该例子中是需要在CHANNEL4捕获到后进行处理，所以CHANNEL44开启了中断
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E4%BB%A3%E7%A0%81%E5%88%9D%E5%A7%8B%E5%8C%96.png&#34;
+	width=&#34;1187&#34;
+	height=&#34;196&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E4%BB%A3%E7%A0%81%E5%88%9D%E5%A7%8B%E5%8C%96_hu292944159826191.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E4%BB%A3%E7%A0%81%E5%88%9D%E5%A7%8B%E5%8C%96_hu12801109800042694409.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;605&#34;
+		data-flex-basis=&#34;1453px&#34;
+	
+&gt;
+输入捕获的开启
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E5%BC%80%E5%90%AF.png&#34;
+	width=&#34;1590&#34;
+	height=&#34;1098&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E5%BC%80%E5%90%AF_hu15660898789581601865.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E5%BC%80%E5%90%AF_hu11235683347334909269.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;144&#34;
+		data-flex-basis=&#34;347px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;可能遇到的问题
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98.png&#34;
+	width=&#34;1619&#34;
+	height=&#34;521&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98_hu2597053158824355837.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98_hu9796556603946980297.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;310&#34;
+		data-flex-basis=&#34;745px&#34;
+	
+&gt;
+![[Pasted image 20250105120132.png]]
+用&lt;code&gt;SET_COUNTER&lt;/code&gt;来清零一下&lt;/p&gt;
+&lt;p&gt;中断回调函数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_TIM_IC_CaptureCallback&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;回调函数的代码编写
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E4%B8%AD%E6%96%AD%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E7%BC%96%E5%86%99.png&#34;
+	width=&#34;1960&#34;
+	height=&#34;400&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E4%B8%AD%E6%96%AD%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E7%BC%96%E5%86%99_hu12196864162675659652.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32%E2%80%94%E2%80%94TIM%E5%AE%9A%E6%97%B6%E5%99%A8%E8%BE%93%E5%85%A5%E6%8D%95%E8%8E%B7%E4%B8%AD%E6%96%AD%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E7%BC%96%E5%86%99_hu8919324062346131731.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;490&#34;
+		data-flex-basis=&#34;1176px&#34;
+	
+&gt;
+判断是否是TIM1，判断是否是TIM1的4通道（HAL_TIM_ACTIVE_CHANNEL_4）
+再读取指定寄存器的值&lt;/p&gt;
+&lt;h3 id=&#34;定时器的输出比较模式&#34;&gt;定时器的输出比较模式
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%87%BA%E6%AF%94%E8%BE%83%E6%A8%A1%E5%BC%8F.png&#34;
+	width=&#34;1446&#34;
+	height=&#34;236&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%87%BA%E6%AF%94%E8%BE%83%E6%A8%A1%E5%BC%8F_hu11531026684352876851.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E8%BE%93%E5%87%BA%E6%AF%94%E8%BE%83%E6%A8%A1%E5%BC%8F_hu14198924481222301.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;612&#34;
+		data-flex-basis=&#34;1470px&#34;
+	
+&gt;
+较为鸡肋，对这些模式能理解其行为即可&lt;/p&gt;
+&lt;h3 id=&#34;定时器的pwm&#34;&gt;定时器的PWM
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/as480133937/article/details/99231677&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【STM32】HAL库 STM32CubeMX教程七&amp;mdash;PWM输出(呼吸灯)_stm32 hal pwm-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/demonneverhunts/article/details/135001314&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;STM32CubeIde中互补PWM配置项的详细解读_ch idle state-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;pwm&#34;&gt;PWM
+&lt;/h4&gt;&lt;p&gt;脉冲宽度调制，用数字信号去模拟 模拟信号
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-PWM%E5%9B%BE%E8%A7%A3.png&#34;
+	width=&#34;2279&#34;
+	height=&#34;882&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-PWM%E5%9B%BE%E8%A7%A3_hu1515840751450853878.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-PWM%E5%9B%BE%E8%A7%A3_hu1814404565725477755.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;258&#34;
+		data-flex-basis=&#34;620px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;pwm模式&#34;&gt;PWM模式
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-PWM%E7%9A%84%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%BC%8F.png&#34;
+	width=&#34;2023&#34;
+	height=&#34;512&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-PWM%E7%9A%84%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%BC%8F_hu6178332926466110193.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-PWM%E7%9A%84%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%BC%8F_hu7638454572972725896.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;395&#34;
+		data-flex-basis=&#34;948px&#34;
+	
+&gt;
+PWM模式1 是 计数器值 小于 比较器值 时输出有效电平
+PWM模式2 是 计数器值 大于 比较器值 时输出有效电平&lt;/p&gt;
+&lt;h4 id=&#34;cube配置&#34;&gt;Cube配置
+&lt;/h4&gt;&lt;p&gt;为实现一个呼吸灯，进行以下配置
+PWM的频率为&lt;code&gt;1000Hz&lt;/code&gt;，最大计数值为&lt;code&gt;1000-1&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;STM32%e2%80%94%e2%80%94TIM%e5%ae%9a%e6%97%b6%e5%99%a8.md#%e5%86%85%e9%83%a8%e6%97%b6%e9%92%9f%e6%a8%a1%e5%bc%8f&#34; &gt;&lt;strong&gt;基础时钟配置&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%9F%BA%E7%A1%80%E6%97%B6%E9%92%9F%E8%AE%A1%E6%95%B0%E8%AE%BE%E7%BD%AE.png&#34;
+	width=&#34;437&#34;
+	height=&#34;176&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%9F%BA%E7%A1%80%E6%97%B6%E9%92%9F%E8%AE%A1%E6%95%B0%E8%AE%BE%E7%BD%AE_hu1633538757443388116.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%9F%BA%E7%A1%80%E6%97%B6%E9%92%9F%E8%AE%A1%E6%95%B0%E8%AE%BE%E7%BD%AE_hu16256555924781975787.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;248&#34;
+		data-flex-basis=&#34;595px&#34;
+	
+&gt;
+预分频器值，计数模式选择（向上计数模式，向下计数模式，中央对齐模式），自动重装载值，内部时钟分频，重复计数器值，是否开启影子寄存器&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;PWM配置&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-PWM%E9%85%8D%E7%BD%AE.png&#34;
+	width=&#34;460&#34;
+	height=&#34;181&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-PWM%E9%85%8D%E7%BD%AE_hu17223923486060153282.png 480w, https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-PWM%E9%85%8D%E7%BD%AE_hu5784584163411669148.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;254&#34;
+		data-flex-basis=&#34;609px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Mode：选择PWM模式&lt;/li&gt;
+&lt;li&gt;Pulse：设置比较寄存器的值&lt;/li&gt;
+&lt;li&gt;Output compare preload：是否开启影子寄存器&lt;/li&gt;
+&lt;li&gt;Fast Mode：是否需要输出非常高频的PWM信号&lt;/li&gt;
+&lt;li&gt;CH Polarity：设置有效电平极性&lt;/li&gt;
+&lt;li&gt;CH Idle State：空闲时，PWM通道的输出&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;hal库pwm常用函数&#34;&gt;HAL库PWM常用函数
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_TIM_PWM_Start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_CHANNEL_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//开启PWM
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;HAL_TIM_PWM_Stop&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_CHANNEL_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//关闭PWM
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;__HAL_TIM_SET_COMPARE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_CHANNEL_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;num&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//设置比较寄存器的值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;使用PWM控制流水灯
+PWM的频率为&lt;code&gt;1000Hz&lt;/code&gt;，最大计数值为&lt;code&gt;1000-1&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 1 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE END 1 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* MCU Configuration--------------------------------------------------------*/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* Reset of all peripherals, Initializes the Flash interface and the Systick. */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;HAL_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN Init */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE END Init */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* Configure the system clock */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;SystemClock_Config&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN SysInit */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE END SysInit */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* Initialize all configured peripherals */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;MX_GPIO_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;MX_TIM1_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;HAL_TIM_PWM_Start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_CHANNEL_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE END 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* Infinite loop */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN WHILE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1000&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;++&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			&lt;span class=&#34;nf&#34;&gt;__HAL_TIM_SET_COMPARE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_CHANNEL_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			&lt;span class=&#34;nf&#34;&gt;HAL_Delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1000&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			&lt;span class=&#34;nf&#34;&gt;__HAL_TIM_SET_COMPARE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_CHANNEL_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			&lt;span class=&#34;nf&#34;&gt;HAL_Delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/* USER CODE END WHILE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 3 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* USER CODE END 3 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;编码器的使用&#34;&gt;编码器的使用
+&lt;/h3&gt;&lt;p&gt;待完成&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>C&amp;C&#43;&#43; 内存对齐（极简版）</title>
         <link>https://NomadJoeviolet.github.io/p/cc-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E6%9E%81%E7%AE%80%E7%89%88/</link>
         <pubDate>Thu, 26 Jun 2025 15:35:46 +0800</pubDate>
