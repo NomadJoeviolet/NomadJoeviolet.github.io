@@ -221,26 +221,21 @@ armclang是ARM公司提供的一款C/C++编译器，专门用于为ARM架构的�
 &lt;h4 id=&#34;交叉编译器&#34;&gt;交叉编译器
 &lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/133779123&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;arm 交叉编译器各种gcc 傻傻分不清楚：gnueabi,gnueabhf,none-eaib - 知乎&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;作为一个嵌入式工程师肯定会用到&lt;a class=&#34;link&#34; href=&#34;https://zhida.zhihu.com/search?content_id=117860044&amp;amp;content_type=Article&amp;amp;match_order=1&amp;amp;q=%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E5%99%A8&amp;amp;zhida_source=entity&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;交叉编译器&lt;/a&gt;arm-gcc，但是各种arm-gcc把人弄得晕头转向，于是在网上搜索，还真找到了有人解释了他们的区别。&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://link.zhihu.com/?target=https%3A//www.veryarm.com/296.html%23comments&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://www.veryarm.com/296.html#comments&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;交叉编译工具链的命名规范是：
-&lt;strong&gt;arch [-vendor] [-os] [-(gnu)eabi]&lt;/strong&gt;
-&lt;strong&gt;arch : 架构的意思，如ARM ，MIPS&lt;/strong&gt;
-&lt;strong&gt;vendor： 工具链的提供厂商&lt;/strong&gt;
-&lt;strong&gt;os： 支持的操作系统&lt;/strong&gt;
-&lt;strong&gt;eabi：嵌入式应用二进制接口（Embedded Application Binary Interface）&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;h5 id=&#34;交叉编译工具链的命名规范&#34;&gt;交叉编译工具链的命名规范
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;arch [-vendor]  [-os]  [-(gnu)eabi]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;arch : 架构的意思，如ARM ，MIPS&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;vendor： 工具链的提供厂商&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;os： 支持的操作系统&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;eabi：嵌入式应用二进制接口（Embedded Application Binary Interface）&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;arm gcc还分为 是否支持操作系统
 &lt;strong&gt;支持操作系统：&lt;/strong&gt; &lt;a class=&#34;link&#34; href=&#34;https://zhida.zhihu.com/search?content_id=117860044&amp;amp;content_type=Article&amp;amp;match_order=1&amp;amp;q=arm-none-linux-eabi-gcc&amp;amp;zhida_source=entity&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;arm-none-linux-eabi-gcc&lt;/a&gt;
-&lt;strong&gt;不支持操作系统：&lt;/strong&gt; arm-none-eabi-gcc&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;strong&gt;不支持操作系统：&lt;/strong&gt; arm-none-eabi-gcc
+none表示vendor是none，也就是不属于某一公司的&lt;/p&gt;
+&lt;h5 id=&#34;abi-和-eabi&#34;&gt;ABI 和 EABI
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;ABI&lt;/strong&gt;：二进制应用程序接口(Application Binary Interface (ABI) for the ARM Architecture)。在计算机中，应用二进制接口描述了应用程序（或者其他类型）和操作系统之间或其他应用程序的低级接口。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;EABI&lt;/strong&gt;：嵌入式ABI。嵌入式应用二进制接口指定了文件格式、数据类型、寄存器使用、堆积组织优化和在一个嵌入式软件中的参数的标准约定。开发者使用自己的汇编语言也可以使用 EABI 作为与兼容的编译器生成的汇编语言的接口。&lt;/p&gt;
+&lt;p&gt;两者主要区别是，ABI是计算机上的，EABI是嵌入式平台上（如ARM，MIPS等）&lt;/p&gt;
 &lt;h4 id=&#34;ninjamakecmake&#34;&gt;ninja，make，cmake
 &lt;/h4&gt;&lt;h5 id=&#34;cmake&#34;&gt;cmake
 &lt;/h5&gt;&lt;p&gt;cmake是一个生成 .ninja 和 .makefile 的工具。cmake只需要用户通过对源码文件的简单描述（就是CMakeLists.txt文件），就能自动生成一个project的makefile文件或者ninja文件，然后就可以通过ninja或者make进行启动编译了，很多IDE都在用cmake作为项目管理工具。&lt;/p&gt;

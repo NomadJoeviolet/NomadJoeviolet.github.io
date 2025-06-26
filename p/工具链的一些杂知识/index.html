@@ -449,26 +449,21 @@ armclang是ARM公司提供的一款C/C++编译器，专门用于为ARM架构的�
 <h4 id="交叉编译器">交叉编译器
 </h4><p><a class="link" href="https://zhuanlan.zhihu.com/p/133779123"  target="_blank" rel="noopener"
     >arm 交叉编译器各种gcc 傻傻分不清楚：gnueabi,gnueabhf,none-eaib - 知乎</a></p>
-<p>作为一个嵌入式工程师肯定会用到<a class="link" href="https://zhida.zhihu.com/search?content_id=117860044&amp;content_type=Article&amp;match_order=1&amp;q=%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E5%99%A8&amp;zhida_source=entity"  target="_blank" rel="noopener"
-    >交叉编译器</a>arm-gcc，但是各种arm-gcc把人弄得晕头转向，于是在网上搜索，还真找到了有人解释了他们的区别。</p>
-<p><a class="link" href="https://link.zhihu.com/?target=https%3A//www.veryarm.com/296.html%23comments"  target="_blank" rel="noopener"
-    >https://www.veryarm.com/296.html#comments</a></p>
-<ul>
-<li>
-<p>交叉编译工具链的命名规范是：
-<strong>arch [-vendor] [-os] [-(gnu)eabi]</strong>
-<strong>arch : 架构的意思，如ARM ，MIPS</strong>
-<strong>vendor： 工具链的提供厂商</strong>
-<strong>os： 支持的操作系统</strong>
-<strong>eabi：嵌入式应用二进制接口（Embedded Application Binary Interface）</strong></p>
-</li>
-<li>
+<h5 id="交叉编译工具链的命名规范">交叉编译工具链的命名规范
+</h5><p><strong>arch [-vendor]  [-os]  [-(gnu)eabi]</strong></p>
+<p><strong>arch : 架构的意思，如ARM ，MIPS</strong></p>
+<p><strong>vendor： 工具链的提供厂商</strong></p>
+<p><strong>os： 支持的操作系统</strong></p>
+<p><strong>eabi：嵌入式应用二进制接口（Embedded Application Binary Interface）</strong></p>
 <p>arm gcc还分为 是否支持操作系统
 <strong>支持操作系统：</strong> <a class="link" href="https://zhida.zhihu.com/search?content_id=117860044&amp;content_type=Article&amp;match_order=1&amp;q=arm-none-linux-eabi-gcc&amp;zhida_source=entity"  target="_blank" rel="noopener"
     >arm-none-linux-eabi-gcc</a>
-<strong>不支持操作系统：</strong> arm-none-eabi-gcc</p>
-</li>
-</ul>
+<strong>不支持操作系统：</strong> arm-none-eabi-gcc
+none表示vendor是none，也就是不属于某一公司的</p>
+<h5 id="abi-和-eabi">ABI 和 EABI
+</h5><p><strong>ABI</strong>：二进制应用程序接口(Application Binary Interface (ABI) for the ARM Architecture)。在计算机中，应用二进制接口描述了应用程序（或者其他类型）和操作系统之间或其他应用程序的低级接口。</p>
+<p><strong>EABI</strong>：嵌入式ABI。嵌入式应用二进制接口指定了文件格式、数据类型、寄存器使用、堆积组织优化和在一个嵌入式软件中的参数的标准约定。开发者使用自己的汇编语言也可以使用 EABI 作为与兼容的编译器生成的汇编语言的接口。</p>
+<p>两者主要区别是，ABI是计算机上的，EABI是嵌入式平台上（如ARM，MIPS等）</p>
 <h4 id="ninjamakecmake">ninja，make，cmake
 </h4><h5 id="cmake">cmake
 </h5><p>cmake是一个生成 .ninja 和 .makefile 的工具。cmake只需要用户通过对源码文件的简单描述（就是CMakeLists.txt文件），就能自动生成一个project的makefile文件或者ninja文件，然后就可以通过ninja或者make进行启动编译了，很多IDE都在用cmake作为项目管理工具。</p>
