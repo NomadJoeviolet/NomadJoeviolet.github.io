@@ -16,9 +16,9 @@
         <description>&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/140063999&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;一文轻松理解内存对齐 - 知乎&lt;/a&gt;&lt;/p&gt;
 &lt;h5 id=&#34;结构体struct对齐&#34;&gt; &lt;strong&gt;结构体（struct）对齐&lt;/strong&gt;
-&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;规则 1&lt;/strong&gt;：成员地址 = &lt;code&gt;min(自身对齐值, 有效对齐值)&lt;/code&gt; 的倍数
-&lt;strong&gt;规则 2&lt;/strong&gt;：结构体总大小 = 最大成员对齐值的整数倍
-&lt;strong&gt;规则 3&lt;/strong&gt;：成员排列顺序影响最终大小&lt;/p&gt;
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;规则 1&lt;/strong&gt;：成员地址 = &lt;code&gt;min(自身对齐值, 有效对齐值)&lt;/code&gt; 的倍数&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;规则 2&lt;/strong&gt;：结构体总大小 = 最大成员对齐值的整数倍&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;规则 3&lt;/strong&gt;：成员排列顺序影响最终大小&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
