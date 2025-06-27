@@ -372,8 +372,8 @@
 <code>TTL</code>是<code>Transistor-Transistor Logic</code>的简写，是一种电平逻辑，晶体管-晶体管逻辑</p>
 <h3 id="usart简介">USART简介
 </h3><p>USART，即通用同步/异步收发传输器（Universal Asynchronous Receiver/Transmitter)，是单片机上的一个外设</p>
-<p>UART遵循异步串行通信协议的，USRT遵循同步串行通信协议</p>
-<p>异步不需要统一时钟信号，同步需要统一时钟信号</p>
+<p>UART遵循异步串行通信协议的，USRT遵循同步串行通信协议
+异步不需要统一时钟信号，同步需要统一时钟信号</p>
 <p>一般使用最多的是UART，我们此次学习也是针对UART</p>
 <h3 id="uart通信协议">UART通信协议
 </h3><p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32USART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-UART%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE.png"
@@ -699,7 +699,6 @@
 </span><span class="lnt">21
 </span><span class="lnt">22
 </span><span class="lnt">23
-</span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">
@@ -718,12 +717,11 @@
 </span></span><span class="line"><span class="cl">  <span class="nf">MX_USART1_UART_Init</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UART_Receive</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="n">rxBuffer</span><span class="p">,</span> <span class="n">rxBufferLen</span> <span class="p">,</span> <span class="n">HAL_MAX_DELAY</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="nf">strcmp</span><span class="p">(</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">rxBuffer</span> <span class="p">,</span> <span class="s">&#34;Nomad_violet&#34;</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">			<span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span> <span class="p">,</span> <span class="n">txBuffer</span> <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">)</span> <span class="p">,</span> <span class="mi">100</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UART_Receive</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="n">rxBuffer</span><span class="p">,</span> <span class="mi">12</span> <span class="p">,</span> <span class="n">HAL_MAX_DELAY</span><span class="p">);</span><span class="c1">//只能接收定长数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="nf">strcmp</span><span class="p">(</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">rxBuffer</span> <span class="p">,</span> <span class="s">&#34;Nomad_violet&#34;</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span><span class="c1">//Nomad_violet 12字节
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span> <span class="p">,</span> <span class="n">txBuffer</span> <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">)</span> <span class="p">,</span> <span class="mi">100</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span><span class="line"><span class="cl">		<span class="nf">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOA</span> <span class="p">,</span> <span class="n">GPIO_PIN_8</span> <span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">	<span class="nf">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOA</span> <span class="p">,</span> <span class="n">GPIO_PIN_8</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -782,7 +780,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;string.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="cp">#define rxBufferLen 16
+</span></span><span class="line"><span class="cl"><span class="cp">#define rxBufferLen 12
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define txBufferLen 25
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">uint8_t</span> <span class="n">rxBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">]</span> <span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">txBuffer</span><span class="p">[</span><span class="n">txBufferLen</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;to feel,to experience &#34;</span><span class="p">;</span><span class="c1">// 去感受，去经历「感其生，历其境」
