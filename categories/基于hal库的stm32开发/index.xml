@@ -1881,8 +1881,26 @@ rank指在ADC_Regular_ConversionMode中的rank设置&lt;/p&gt;
     &gt;STM32 hal库串口空闲中断最新用法_stm32hal库串口空闲中断-CSDN博客&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/soledade/article/details/129030082&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;HAL库 串口空闲中断+DMA接收不定长数据 详解及踩坑_hal库串口空闲中断-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;（写的非常好，非常有助于提升底层理解）&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_47010960/article/details/128000029&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？_hal uart dma-CSDN博客&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;dma&#34;&gt;DMA
 &lt;/h2&gt;&lt;p&gt;DMA，全称为&lt;code&gt;Direct Memory Access&lt;/code&gt;，直接内存访问，本质是将传输数据从一个内存空间搬运至另一个内存空间，可以用来提供外设和内存，内存和外设之间的高速数据传输&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;HAL&lt;/code&gt;库中直接使用的&lt;code&gt;HAL_UART_Transmit_DMA&lt;/code&gt;，&lt;code&gt;HAL_UART_Receive_DMA&lt;/code&gt;，&lt;code&gt;HAL_UARTEx_ReceiveToIdle_DMA&lt;/code&gt;等都有中断的参与，需要在&lt;code&gt;Cube&lt;/code&gt;中开启中断&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32dma%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/STM32CubeMXDMA%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD-%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF.png&#34;
+	width=&#34;696&#34;
+	height=&#34;118&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32dma%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/STM32CubeMXDMA%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD-%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF_hu2603047621200826920.png 480w, https://NomadJoeviolet.github.io/p/stm32dma%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/STM32CubeMXDMA%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD-%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF_hu106925818943637117.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;589&#34;
+		data-flex-basis=&#34;1415px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;对具体底层原理和DMA模式实现底层与中断模式底层实现区别感兴趣可参考以下博客
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_47010960/article/details/128000029&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？_hal uart dma-CSDN博客&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;usart发送&#34;&gt;USART发送
 &lt;/h3&gt;&lt;p&gt;在普通的轮询&lt;code&gt;USART&lt;/code&gt;中，CPU一直在等待外设发送数据，外设每发送一帧数据，CPU就从内存中移动一帧数据到外设的寄存器&lt;/p&gt;
 &lt;p&gt;在中断的&lt;code&gt;USART&lt;/code&gt;中，外设每从寄存器中发送一帧数据，就会触发一次发送数据寄存器空中断，使CPU回来将一帧数据从内存搬运至外设的寄存器中&lt;/p&gt;
@@ -2001,12 +2019,12 @@ rank指在ADC_Regular_ConversionMode中的rank设置&lt;/p&gt;
 &lt;/h4&gt;&lt;p&gt;以接收为例
 无限循环，接收至数据上限一半，触发接收过半中断，接受至数据上限，触发接收完成中断，同时会硬件自动重启，接收完成中断会调用``&lt;/p&gt;
 &lt;p&gt;summary：无限循环，硬件自动重启，接收过半和接收完成中断&lt;/p&gt;
-&lt;h4 id=&#34;说明&#34;&gt;说明
-&lt;/h4&gt;&lt;h2 id=&#34;空闲中断&#34;&gt;空闲中断
+&lt;h2 id=&#34;空闲中断&#34;&gt;空闲中断
 &lt;/h2&gt;&lt;h3 id=&#34;空闲中断定义&#34;&gt;空闲中断定义
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;空闲中断（IDLE Interrupt）&lt;/strong&gt; 是UART通信中的一种特殊中断类型，它在检测到UART接收线路&lt;strong&gt;连续空闲超过1个字节传输时间&lt;/strong&gt;时触发的中断。&amp;ldquo;空闲&amp;quot;指线路保持&lt;strong&gt;逻辑1状态&lt;/strong&gt;（高电平），线上无数据传输&lt;/p&gt;
 &lt;h3 id=&#34;hal库自带的空闲中断实现&#34;&gt;HAL库自带的空闲中断实现
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h3&gt;&lt;p&gt;使用的是&lt;code&gt;HAL&lt;/code&gt;库提供的拓展函数，同时都需要在&lt;code&gt;Cube&lt;/code&gt;中开启中断&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -2104,7 +2122,6 @@ rank指在ADC_Regular_ConversionMode中的rank设置&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;UART_DMARxHalfCplt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DMA_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hdma&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  
@@ -2112,12 +2129,11 @@ rank指在ADC_Regular_ConversionMode中的rank设置&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;UART_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UART_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)((&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DMA_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hdma&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Parent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* Initialize type of RxEvent that correspond to RxEvent callback execution;  
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     In this case, Rx Event type is Half Transfer */&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     In this case, Rx Event type is Half Transfer */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;n&#34;&gt;huart&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RxEventType&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HAL_UART_RXEVENT_HT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/* Check current reception Mode :  
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     If Reception till IDLE event has been selected : use Rx Event callback */&lt;/span&gt;  
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ReceptionType&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HAL_UART_RECEPTION_TOIDLE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;     If Reception till IDLE event has been selected : use Rx Event callback */&lt;/span&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ReceptionType&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HAL_UART_RECEPTION_TOIDLE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#if (USE_HAL_UART_REGISTER_CALLBACKS == 1)  
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;cm&#34;&gt;/*Call registered Rx Event callback*/&lt;/span&gt;  
@@ -2338,7 +2354,7 @@ rank指在ADC_Regular_ConversionMode中的rank设置&lt;/p&gt;
 &lt;p&gt;但是需要注意，如果达到&lt;code&gt;rxBufferLen&lt;/code&gt;,会触发接收过半和接收完成中断，然后硬件重启，重新回到&lt;code&gt;rxBufferLen[0]&lt;/code&gt;的位置读数据，直至发生空闲中断&lt;/p&gt;
 &lt;p&gt;例如：&lt;code&gt;rxBufferlen=10&lt;/code&gt;，发送&lt;code&gt;12345678910&lt;/code&gt;，会回复&lt;code&gt;0&lt;/code&gt;，随后&lt;code&gt;DMA&lt;/code&gt;仍然正常工作&lt;/p&gt;
 &lt;h3 id=&#34;方式2&#34;&gt;方式2
-&lt;/h3&gt;&lt;p&gt;使用&lt;code&gt;HAL&lt;/code&gt;库提供的空闲中断，使用&lt;code&gt;normal&lt;/code&gt;模式&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;使用&lt;code&gt;HAL&lt;/code&gt;库提供的拓展空闲中断，使用&lt;code&gt;normal&lt;/code&gt;模式&lt;/p&gt;
 &lt;p&gt;该方式下的空闲中断回调函数为&lt;code&gt;HAL_UARTEx_RxEventCallback&lt;/code&gt;
 ，需要注意接收过半中断也会调用&lt;code&gt;HAL_UARTEx_RxEventCallback&lt;/code&gt;的问题，在每次开启&lt;code&gt;HAL_UARTEx_ReceiveToIdle_DMA&lt;/code&gt;后都需要关闭接收过半中断&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

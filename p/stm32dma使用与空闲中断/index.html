@@ -285,7 +285,6 @@
           <ol>
             <li><a href="#normal模式">normal模式</a></li>
             <li><a href="#circular模式">circular模式</a></li>
-            <li><a href="#说明">说明</a></li>
           </ol>
         </li>
       </ol>
@@ -405,8 +404,26 @@
     >STM32 hal库串口空闲中断最新用法_stm32hal库串口空闲中断-CSDN博客</a></p>
 <p><a class="link" href="https://blog.csdn.net/soledade/article/details/129030082"  target="_blank" rel="noopener"
     >HAL库 串口空闲中断+DMA接收不定长数据 详解及踩坑_hal库串口空闲中断-CSDN博客</a></p>
+<p>（写的非常好，非常有助于提升底层理解）<a class="link" href="https://blog.csdn.net/m0_47010960/article/details/128000029"  target="_blank" rel="noopener"
+    >（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？_hal uart dma-CSDN博客</a></p>
 <h2 id="dma">DMA
 </h2><p>DMA，全称为<code>Direct Memory Access</code>，直接内存访问，本质是将传输数据从一个内存空间搬运至另一个内存空间，可以用来提供外设和内存，内存和外设之间的高速数据传输</p>
+<p>在<code>HAL</code>库中直接使用的<code>HAL_UART_Transmit_DMA</code>，<code>HAL_UART_Receive_DMA</code>，<code>HAL_UARTEx_ReceiveToIdle_DMA</code>等都有中断的参与，需要在<code>Cube</code>中开启中断</p>
+<p><img src="/p/stm32dma%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/STM32CubeMXDMA%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD-%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF.png"
+	width="696"
+	height="118"
+	srcset="/p/stm32dma%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/STM32CubeMXDMA%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD-%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF_hu2603047621200826920.png 480w, /p/stm32dma%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/STM32CubeMXDMA%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD-%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF_hu106925818943637117.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="589"
+		data-flex-basis="1415px"
+	
+></p>
+<p>对具体底层原理和DMA模式实现底层与中断模式底层实现区别感兴趣可参考以下博客
+<a class="link" href="https://blog.csdn.net/m0_47010960/article/details/128000029"  target="_blank" rel="noopener"
+    >（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？_hal uart dma-CSDN博客</a></p>
 <h3 id="usart发送">USART发送
 </h3><p>在普通的轮询<code>USART</code>中，CPU一直在等待外设发送数据，外设每发送一帧数据，CPU就从内存中移动一帧数据到外设的寄存器</p>
 <p>在中断的<code>USART</code>中，外设每从寄存器中发送一帧数据，就会触发一次发送数据寄存器空中断，使CPU回来将一帧数据从内存搬运至外设的寄存器中</p>
@@ -525,12 +542,12 @@
 </h4><p>以接收为例
 无限循环，接收至数据上限一半，触发接收过半中断，接受至数据上限，触发接收完成中断，同时会硬件自动重启，接收完成中断会调用``</p>
 <p>summary：无限循环，硬件自动重启，接收过半和接收完成中断</p>
-<h4 id="说明">说明
-</h4><h2 id="空闲中断">空闲中断
+<h2 id="空闲中断">空闲中断
 </h2><h3 id="空闲中断定义">空闲中断定义
 </h3><p><strong>空闲中断（IDLE Interrupt）</strong> 是UART通信中的一种特殊中断类型，它在检测到UART接收线路<strong>连续空闲超过1个字节传输时间</strong>时触发的中断。&ldquo;空闲&quot;指线路保持<strong>逻辑1状态</strong>（高电平），线上无数据传输</p>
 <h3 id="hal库自带的空闲中断实现">HAL库自带的空闲中断实现
-</h3><div class="highlight"><div class="chroma">
+</h3><p>使用的是<code>HAL</code>库提供的拓展函数，同时都需要在<code>Cube</code>中开启中断</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -628,7 +645,6 @@
 </span><span class="lnt">29
 </span><span class="lnt">30
 </span><span class="lnt">31
-</span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">UART_DMARxHalfCplt</span><span class="p">(</span><span class="n">DMA_HandleTypeDef</span> <span class="o">*</span><span class="n">hdma</span><span class="p">)</span>  
@@ -636,12 +652,11 @@
 </span></span><span class="line"><span class="cl">  <span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span> <span class="o">=</span> <span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="p">)((</span><span class="n">DMA_HandleTypeDef</span> <span class="o">*</span><span class="p">)</span><span class="n">hdma</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Parent</span><span class="p">;</span>  
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="cm">/* Initialize type of RxEvent that correspond to RxEvent callback execution;  
-</span></span></span><span class="line"><span class="cl"><span class="cm">     In this case, Rx Event type is Half Transfer */</span>  
+</span></span></span><span class="line"><span class="cl"><span class="cm">     In this case, Rx Event type is Half Transfer */</span>
 </span></span><span class="line"><span class="cl">     <span class="n">huart</span><span class="o">-&gt;</span><span class="n">RxEventType</span> <span class="o">=</span> <span class="n">HAL_UART_RXEVENT_HT</span><span class="p">;</span>  
 </span></span><span class="line"><span class="cl">  
 </span></span><span class="line"><span class="cl">  <span class="cm">/* Check current reception Mode :  
-</span></span></span><span class="line"><span class="cl"><span class="cm">     If Reception till IDLE event has been selected : use Rx Event callback */</span>  
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">ReceptionType</span> <span class="o">==</span> <span class="n">HAL_UART_RECEPTION_TOIDLE</span><span class="p">)</span>  
+</span></span></span><span class="line"><span class="cl"><span class="cm">     If Reception till IDLE event has been selected : use Rx Event callback */</span>  <span class="k">if</span> <span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">ReceptionType</span> <span class="o">==</span> <span class="n">HAL_UART_RECEPTION_TOIDLE</span><span class="p">)</span>  
 </span></span><span class="line"><span class="cl">  <span class="p">{</span>  
 </span></span><span class="line"><span class="cl"><span class="cp">#if (USE_HAL_UART_REGISTER_CALLBACKS == 1)  
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cm">/*Call registered Rx Event callback*/</span>  
@@ -862,7 +877,7 @@
 <p>但是需要注意，如果达到<code>rxBufferLen</code>,会触发接收过半和接收完成中断，然后硬件重启，重新回到<code>rxBufferLen[0]</code>的位置读数据，直至发生空闲中断</p>
 <p>例如：<code>rxBufferlen=10</code>，发送<code>12345678910</code>，会回复<code>0</code>，随后<code>DMA</code>仍然正常工作</p>
 <h3 id="方式2">方式2
-</h3><p>使用<code>HAL</code>库提供的空闲中断，使用<code>normal</code>模式</p>
+</h3><p>使用<code>HAL</code>库提供的拓展空闲中断，使用<code>normal</code>模式</p>
 <p>该方式下的空闲中断回调函数为<code>HAL_UARTEx_RxEventCallback</code>
 ，需要注意接收过半中断也会调用<code>HAL_UARTEx_RxEventCallback</code>的问题，在每次开启<code>HAL_UARTEx_ReceiveToIdle_DMA</code>后都需要关闭接收过半中断</p>
 <div class="highlight"><div class="chroma">
