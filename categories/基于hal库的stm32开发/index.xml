@@ -23,8 +23,8 @@
 &lt;code&gt;TTL&lt;/code&gt;是&lt;code&gt;Transistor-Transistor Logic&lt;/code&gt;的简写，是一种电平逻辑，晶体管-晶体管逻辑&lt;/p&gt;
 &lt;h3 id=&#34;usart简介&#34;&gt;USART简介
 &lt;/h3&gt;&lt;p&gt;USART，即通用同步/异步收发传输器（Universal Asynchronous Receiver/Transmitter)，是单片机上的一个外设&lt;/p&gt;
-&lt;p&gt;UART遵循异步串行通信协议的，USRT遵循同步串行通信协议
-异步不需要统一时钟信号，同步需要统一时钟信号&lt;/p&gt;
+&lt;p&gt;UART遵循异步串行通信协议的，USRT遵循同步串行通信协议&lt;/p&gt;
+&lt;p&gt;异步不需要统一时钟信号，同步需要统一时钟信号&lt;/p&gt;
 &lt;p&gt;一般使用最多的是UART，我们此次学习也是针对UART&lt;/p&gt;
 &lt;h3 id=&#34;uart通信协议&#34;&gt;UART通信协议
 &lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32USART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-UART%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE.png&#34;
