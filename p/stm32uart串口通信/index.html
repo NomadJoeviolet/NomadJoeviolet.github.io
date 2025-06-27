@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？_hal uart dma-CSDN博客\n10 通用同步异步收发器（USART） - 知乎\n">
+<title>STM32————UART串口通信</title>
+
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="STM32————UART串口通信">
+<meta property='og:description' content="（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？_hal uart dma-CSDN博客\n10 通用同步异步收发器（USART） - 知乎\n">
+<meta property='og:url' content='https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/'>
+<meta property='og:site_name' content='Nomad_violet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='UART串口通信' /><meta property='article:tag' content='中断' /><meta property='article:published_time' content='2025-06-27T14:53:35&#43;08:00'/><meta property='article:modified_time' content='2025-06-27T14:53:35&#43;08:00'/>
+<meta name="twitter:title" content="STM32————UART串口通信">
+<meta name="twitter:description" content="（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？_hal uart dma-CSDN博客\n10 通用同步异步收发器（USART） - 知乎\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu6061761693284197515.png" width="300"
+                            height="200" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Nomad_violet</a></h1>
+            <h2 class="site-description">to feel,to experience</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://www.bilibili.com/'
+                        target="_blank"
+                        title="Biliili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#串口简介">串口简介</a></li>
+        <li><a href="#usart简介">USART简介</a></li>
+        <li><a href="#uart通信协议">UART通信协议</a></li>
+        <li><a href="#uart发送接收机制">UART发送/接收机制</a></li>
+        <li><a href="#uart模式">UART模式</a>
+          <ol>
+            <li><a href="#轮询模式">轮询模式</a></li>
+            <li><a href="#中断模式">中断模式</a></li>
+            <li><a href="#dma模式">DMA模式</a></li>
+          </ol>
+        </li>
+        <li><a href="#cube配置解析">Cube配置解析</a>
+          <ol>
+            <li><a href="#基础参数配置">基础参数配置</a></li>
+            <li><a href="#nvic配置">NVIC配置</a></li>
+            <li><a href="#dma配置">DMA配置</a></li>
+            <li><a href="#gpio配置">GPIO配置</a></li>
+          </ol>
+        </li>
+        <li><a href="#hal库uart常用函数">HAL库UART常用函数</a>
+          <ol>
+            <li><a href="#轮询模式-1">轮询模式</a></li>
+            <li><a href="#中断模式-1">中断模式</a></li>
+            <li><a href="#dma模式-1">DMA模式</a></li>
+          </ol>
+        </li>
+        <li><a href="#demo">Demo</a>
+          <ol>
+            <li><a href="#轮询实现数据收发">轮询实现数据收发</a></li>
+            <li><a href="#中断实现数据收发">中断实现数据收发</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%9F%BA%E4%BA%8Ehal%E5%BA%93%E7%9A%84stm32%E5%BC%80%E5%8F%91/" >
+                基于HAL库的STM32开发
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/">STM32————UART串口通信</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-06-27</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p><a class="link" href="https://blog.csdn.net/m0_47010960/article/details/128000029"  target="_blank" rel="noopener"
+    >（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？_hal uart dma-CSDN博客</a></p>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/577618858"  target="_blank" rel="noopener"
+    >10 通用同步异步收发器（USART） - 知乎</a></p>
+<h3 id="串口简介">串口简介
+</h3><p>串口是串行接口的简称
+常用串口：<code>RS232</code>,<code>RS485</code>,<code>USB(Universal Serial Bus)</code>通用串行接口,<code>TTL</code>串口
+<code>TTL</code>是<code>Transistor-Transistor Logic</code>的简写，是一种电平逻辑，晶体管-晶体管逻辑</p>
+<h3 id="usart简介">USART简介
+</h3><p>USART，即通用同步/异步收发传输器（Universal Asynchronous Receiver/Transmitter)，是单片机上的一个外设</p>
+<p>UART遵循异步串行通信协议的，USRT遵循同步串行通信协议
+异步不需要统一时钟信号，同步需要统一时钟信号</p>
+<p>一般使用最多的是UART，我们此次学习也是针对UART</p>
+<h3 id="uart通信协议">UART通信协议
+</h3><p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32USART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-UART%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE.png"
+	width="1450"
+	height="346"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32USART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-UART%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE_hu2495030746923520299.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32USART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-UART%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE_hu16766829280963865577.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="419"
+		data-flex-basis="1005px"
+	
+></p>
+<ol>
+<li>起始位：发出1位低电平信号，表示开始传输字符</li>
+<li>数据位：真正发送的数据，一般为8位（1个字节），常采用ASCII编码，从最低位开始发送</li>
+<li>校验位：用于检验接收到的数据是否正确，分为奇校验和偶校验</li>
+<li>停止位：一组数据的结束传输的标志。可以是1位、1.5位、2位的高电平</li>
+<li>空闲位：空闲时数据线为高电平状态，代表无数据传输</li>
+<li>波特率：衡量传输速率的指标。UART通信中波特率等于比特率</li>
+</ol>
+<h3 id="uart发送接收机制">UART发送/接收机制
+</h3><p>UART发送端口，首先是CPU将数据放入数据发送寄存器，然后发送移位寄存器会将数据从数据发送寄存器 取出进行移位并通过<code>UART_TX</code>发送出去</p>
+<p>UART接收端口，首先是<code>UART_RX</code>接收串行数据至接收移位寄存器，接收移位寄存器将串行数据移位变换为并行数据给数据接收寄存器，再通过APB总线给STM32内部</p>
+<h3 id="uart模式">UART模式
+</h3><h4 id="轮询模式">轮询模式
+</h4><p>CPU不断查询发送数据寄存器或者接受数据寄存器导致程序的阻塞</p>
+<h5 id="发送">发送
+</h5><p>在<code>UART</code>底层有发送移位寄存器和发送数据寄存器，发送数据时，需要CPU将发送数据寄存器的数据移动至发送移位寄存器，然后<code>UART</code>按照指定的波特率发送数据，CPU则不断查询数据发送寄存器是否空，如果空则需要移动数据进来</p>
+<p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81.png"
+	width="631"
+	height="244"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81_hu15405304221731860814.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81_hu11465131017380306252.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="258"
+		data-flex-basis="620px"
+	
+></p>
+<h5 id="接收">接收
+</h5><p>在<code>UART</code>底层有接收移位寄存器和接收数据寄存器，接收数据时，<code>UART</code>按照指定的波特率接收数据至接收移位寄存器，然后数据会存储在接收数据寄存器，CPU则不断查询数据接收寄存器是否有数据，如果有数据，CPU会把寄存器的数据移动至我们用来接收数据的变量的内存里</p>
+<p>当<code>HAL_UART_Receive</code>执行完成，我们就可以知道数据接收完成</p>
+<p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E8%BD%AE%E8%AF%A2%E6%8E%A5%E6%94%B6.png"
+	width="589"
+	height="299"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E8%BD%AE%E8%AF%A2%E6%8E%A5%E6%94%B6_hu13280145308343782189.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E8%BD%AE%E8%AF%A2%E6%8E%A5%E6%94%B6_hu12241757098732507153.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="196"
+		data-flex-basis="472px"
+	
+></p>
+<h4 id="中断模式">中断模式
+</h4><p>使用中断模式时，需要先配置UART的<code>NVIC</code>中断设置</p>
+<p>底层中断实现数据每传送一字节，召回CPU继续运输数据，不需要我们考虑，<code>HAL</code>库底层已经帮我们实现
+上层中断实现数据接收完成后的数据处理，通过中断回调函数实现，需要我们自己设计</p>
+<p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-%E4%B8%AD%E6%96%AD%E6%94%B6%E5%8F%91.png"
+	width="1746"
+	height="851"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-%E4%B8%AD%E6%96%AD%E6%94%B6%E5%8F%91_hu18210528260682390799.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-%E4%B8%AD%E6%96%AD%E6%94%B6%E5%8F%91_hu14636135400338418313.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="205"
+		data-flex-basis="492px"
+	
+></p>
+<h5 id="发送-1">发送
+</h5><p>CPU将数据送入 发送数据寄存器，然后就去执行其他代码，当发送移位寄存器的数据发送后，发送数据寄存器空，会触发发送数据寄存器空中断，CPU再次将数据送入 发送数据寄存器，然后又去执行其他代码，所有数据发送完成后会触发 传送完成中断，调用<code>HAL_UART_TxCpltCallback</code>中断回调函数</p>
+<p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E4%B8%AD%E6%96%AD%E5%8F%91%E9%80%81.png"
+	width="924"
+	height="355"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E4%B8%AD%E6%96%AD%E5%8F%91%E9%80%81_hu12903841339894141808.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E4%B8%AD%E6%96%AD%E5%8F%91%E9%80%81_hu8863444947271062853.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="260"
+		data-flex-basis="624px"
+	
+></p>
+<h5 id="接收-1">接收
+</h5><p>CPU在处理其他代码，接收移位寄存器将一帧数据移动至 接受数据寄存器后，会触发 接收数据寄存器非空中断，CPU会回来将 接收数据寄存器 的数据移动至我们用来接收数据的变量的内存里，然后又去执行其他代码，所有数据完成后会调用<code>_HAL_UART_RxCpltCallback_</code>中断回调函数处理接收的数据</p>
+<p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E6%8E%A5%E6%94%B6%E4%B8%AD%E6%96%AD.png"
+	width="780"
+	height="312"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E6%8E%A5%E6%94%B6%E4%B8%AD%E6%96%AD_hu6741878258720157272.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E6%8E%A5%E6%94%B6%E4%B8%AD%E6%96%AD_hu15906450670116678087.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="250"
+		data-flex-basis="600px"
+	
+></p>
+<p>而执行<code>HAL_UART_Receive_IT</code>后，我们不能直接对数据继续处理，数据还没接收完成，因为CPU不会进入阻塞态，会去执行其他代码，需要通过<code>HAL_UART_RxCpltCallback</code>回调函数处理接收的数据</p>
+<h4 id="dma模式">DMA模式
+</h4><p>DMA，全称为<code>Direct Memory Access</code>，直接内存访问，本质是将传输数据从一个内存空间搬运至另一个内存空间，可以用来提供外设和内存，内存和外设之间的高速数据传输</p>
+<p>DMA模式中也会有中断参与，在<code>Cube</code>配置中需要开启中断</p>
+<h5 id="发送-2">发送
+</h5><p>在普通的轮询<code>USART</code>中，CPU一直在等待外设发送数据，外设每发送一帧数据，CPU就从内存中移动一帧数据到外设的寄存器</p>
+<p>在中断的<code>USART</code>中，外设每从寄存器中发送一帧数据，就会触发一次发送数据寄存器空中断，使CPU回来将数据从内存搬运至外设的寄存器中</p>
+<p>没有DMA的话，CPU会作为数据发送的中转站，而使用DMA的话，整个数据传输过程不需要CPU的参与，由DMA代理执行，DMA负责将内存数据搬运至外设的传输寄存器</p>
+<h5 id="接收-2">接收
+</h5><p>在普通的轮询<code>USART</code>中，CPU一直在询问外设是否接收完数据，外设接收一帧数据，该位数据由CPU从外设的数据接收寄存器运进内存，CPU再次询问外设是否接收完数据，再运，直至整个数据接收完成</p>
+<p>而在中断<code>USART</code>中，外设每接收一帧数据，触发一次数据接收寄存器非空中断，CPU过来将数据从寄存器搬运至内存，所有数据接收完成后，会调用接收完成中断回调函数（<code>HAL_UART_RxCpltCallback</code>）</p>
+<p>没有DMA的话，CPU会作为数据转运的中转站，而使用DMA的话，整个数据转运过程不需要CPU的参与，由DMA代理执行</p>
+<h3 id="cube配置解析">Cube配置解析
+</h3><h4 id="基础参数配置">基础参数配置
+</h4><p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-%E5%9F%BA%E7%A1%80%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png"
+	width="794"
+	height="309"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-%E5%9F%BA%E7%A1%80%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE_hu4541515614130285717.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-%E5%9F%BA%E7%A1%80%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE_hu5593458578770482069.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="256"
+		data-flex-basis="616px"
+	
+></p>
+<ol>
+<li>Baud Rate：波特率</li>
+<li>Word Length：包含校验位在内的数据包长度</li>
+<li>Parity：奇偶校验位</li>
+<li>Stop Bits：停止位位数</li>
+<li>Data Direction：发送和</li>
+</ol>
+<h4 id="nvic配置">NVIC配置
+</h4><p>如果使用中断模式，需要在<code>NVIC settings</code>开启<code>USARTi global interrupt </code></p>
+<p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-NVIC%E8%AE%BE%E7%BD%AE.png"
+	width="1037"
+	height="113"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-NVIC%E8%AE%BE%E7%BD%AE_hu18289503046657738626.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-NVIC%E8%AE%BE%E7%BD%AE_hu5102099424962217469.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="917"
+		data-flex-basis="2202px"
+	
+></p>
+<h4 id="dma配置">DMA配置
+</h4><p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-DMA%E9%85%8D%E7%BD%AE.png"
+	width="1014"
+	height="466"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-DMA%E9%85%8D%E7%BD%AE_hu12594280780564786123.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-DMA%E9%85%8D%E7%BD%AE_hu14695578641400187003.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="217"
+		data-flex-basis="522px"
+	
+></p>
+<ol>
+<li>Add：选择添加<code>USARTi_RX</code>的<code>DMA</code>或者<code>USARTi_TX</code>的<code>DMA</code></li>
+<li>Delete：删除对应的DMA</li>
+<li>Mode：选择<code>normal</code>模式或者<code>circular</code>模式</li>
+<li>Data Byte：数据传输的位数</li>
+<li>Increment Address：开启地址自增，外设只有一个寄存器，地址固定，不需要开启地址自增，而内存中我们存数据的变量是数组，接受一字节数据后需要往后移，需要开启地址自增</li>
+<li>Priority：优先级设置</li>
+<li>Direction：方向，固定死的</li>
+</ol>
+<h4 id="gpio配置">GPIO配置
+</h4><p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-GPIOsettings.png"
+	width="1012"
+	height="164"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-GPIOsettings_hu10464349181903929890.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-GPIOsettings_hu1805966639038626852.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="617"
+		data-flex-basis="1480px"
+	
+></p>
+<p>一般用来查看引脚的<code>GPIO</code>配置，不需要更改（有特殊需求时，可以按需修改）
+在<code>GPIO Settings</code>处可以查看<code>TX</code>和<code>RX</code>的<code>GPIO</code>引脚配置，此处可以看到<code>RX</code>为输入模式，无上拉无下拉</p>
+<h3 id="hal库uart常用函数">HAL库UART常用函数
+</h3><h4 id="轮询模式-1">轮询模式
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">HAL_UART_Receive</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="n">rxBuffer</span><span class="p">,</span> <span class="mi">16</span> <span class="p">,</span> <span class="n">HAL_MAX_DELAY</span><span class="p">);</span><span class="c1">//接收
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span> <span class="p">,</span> <span class="n">txBuffer</span> <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">)</span> <span class="p">,</span> <span class="mi">100</span> <span class="p">);</span><span class="c1">//发送
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="中断模式-1">中断模式
+</h4><p>只能接收一次，接收完成后需要再次开启</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">HAL_UART_Receive_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="n">rxBuffer</span><span class="p">,</span> <span class="mi">16</span> <span class="p">);</span><span class="c1">//接收
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">HAL_UART_Transmit_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span> <span class="p">,</span> <span class="n">txBuffer</span> <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">)</span> <span class="p">);</span><span class="c1">//发送
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//回调函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">HAL_UART_RxCpltCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="dma模式-1">DMA模式
+</h4><p><a class="link" href="https://blog.csdn.net/m0_47010960/article/details/128000029"  target="_blank" rel="noopener"
+    >（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？_hal uart dma-CSDN博客</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">HAL_UART_Receive_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="n">rxBuffer</span><span class="p">,</span> <span class="mi">16</span> <span class="p">);</span><span class="c1">//接收
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">HAL_UART_Transmit_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span> <span class="p">,</span> <span class="n">txBuffer</span> <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">)</span> <span class="p">);</span><span class="c1">//发送
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//回调函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">HAL_UART_RxCpltCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>HAL</code>库中使用的<code>HAL_UART_Transmit_DMA</code>，<code>HAL_UART_Receive_DMA</code>等都有中断的参与，需要在<code>Cube</code>中开启中断</p>
+<h3 id="demo">Demo
+</h3><p>接收定长数据<code>Nomad_violet</code>，同时在主函数中翻转小灯</p>
+<h4 id="轮询实现数据收发">轮询实现数据收发
+</h4><h5 id="cube配置">Cube配置
+</h5><p>模式选择为异步</p>
+<p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E9%85%8D%E7%BD%AE.png"
+	width="704"
+	height="103"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E9%85%8D%E7%BD%AE_hu9252176429549330016.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E9%85%8D%E7%BD%AE_hu8798023455270754163.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="683"
+		data-flex-basis="1640px"
+	
+></p>
+<p>波特率选择<code>115200 Bit/s</code>，其余不动即可</p>
+<p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E9%85%8D%E7%BD%AE%E5%9F%BA%E7%A1%80%E5%8F%82%E6%95%B0.png"
+	width="692"
+	height="333"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E9%85%8D%E7%BD%AE%E5%9F%BA%E7%A1%80%E5%8F%82%E6%95%B0_hu16668396444744089662.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E9%85%8D%E7%BD%AE%E5%9F%BA%E7%A1%80%E5%8F%82%E6%95%B0_hu4223627293265520172.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="207"
+		data-flex-basis="498px"
+	
+></p>
+<p>将<code>PA8</code>配置为<code>GPIO_Output</code></p>
+<p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E5%BC%95%E8%84%9A.png"
+	width="210"
+	height="108"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E5%BC%95%E8%84%9A_hu12445125660256453883.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E5%BC%95%E8%84%9A_hu12154975281623611940.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="194"
+		data-flex-basis="466px"
+	
+></p>
+<p><code>GPIO</code>配置保持默认即可</p>
+<p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2GPIO%E9%85%8D%E7%BD%AE.png"
+	width="691"
+	height="76"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2GPIO%E9%85%8D%E7%BD%AE_hu1113707906726736272.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2GPIO%E9%85%8D%E7%BD%AE_hu14860898518155546774.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="909"
+		data-flex-basis="2182px"
+	
+></p>
+<h5 id="代码实现">代码实现
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;string.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define rxBufferLen 16
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define txBufferLen 25
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">uint8_t</span> <span class="n">rxBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">]</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">txBuffer</span><span class="p">[</span><span class="n">txBufferLen</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;to feel,to experience &#34;</span><span class="p">;</span><span class="c1">// 去感受，去经历「感其生，历其境」
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">HAL_Init</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">SystemClock_Config</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">MX_GPIO_Init</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">MX_USART1_UART_Init</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UART_Receive</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="n">rxBuffer</span><span class="p">,</span> <span class="n">rxBufferLen</span> <span class="p">,</span> <span class="n">HAL_MAX_DELAY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="nf">strcmp</span><span class="p">(</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">rxBuffer</span> <span class="p">,</span> <span class="s">&#34;Nomad_violet&#34;</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span> <span class="p">,</span> <span class="n">txBuffer</span> <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">)</span> <span class="p">,</span> <span class="mi">100</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOA</span> <span class="p">,</span> <span class="n">GPIO_PIN_8</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="中断实现数据收发">中断实现数据收发
+</h4><h5 id="cube配置-1">Cube配置
+</h5><p>配置同上，只需额外开启中断即可</p>
+<p><img src="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF.png"
+	width="696"
+	height="118"
+	srcset="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF_hu2603047621200826920.png 480w, /p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF_hu106925818943637117.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="589"
+		data-flex-basis="1415px"
+	
+></p>
+<h5 id="代码实现-1">代码实现
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;string.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define rxBufferLen 16
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define txBufferLen 25
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">uint8_t</span> <span class="n">rxBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">]</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">txBuffer</span><span class="p">[</span><span class="n">txBufferLen</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;to feel,to experience &#34;</span><span class="p">;</span><span class="c1">// 去感受，去经历「感其生，历其境」
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_UART_RxCpltCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span><span class="p">(</span><span class="n">huart</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">huart1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="nf">strcmp</span><span class="p">(</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">rxBuffer</span> <span class="p">,</span> <span class="s">&#34;Nomad_violet&#34;</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span> <span class="p">,</span> <span class="n">txBuffer</span> <span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">txBuffer</span><span class="p">)</span> <span class="p">,</span> <span class="mi">100</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">HAL_UART_Receive_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="n">rxBuffer</span><span class="p">,</span> <span class="n">rxBufferLen</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">HAL_Init</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">SystemClock_Config</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">MX_GPIO_Init</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">MX_USART1_UART_Init</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">HAL_UART_Receive_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="n">rxBuffer</span><span class="p">,</span> <span class="n">rxBufferLen</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOA</span> <span class="p">,</span> <span class="n">GPIO_PIN_8</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">	    <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/">UART串口通信</a>
+        
+            <a href="/tags/%E4%B8%AD%E6%96%AD/">中断</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/stm32dma%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32——DMA使用与空闲中断</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/stm32%E4%B8%AD%E6%96%AD/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32——中断</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32————TIM定时器</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/can%E6%8E%A7%E5%88%B6%E5%99%A8%E5%92%8Ccan%E6%94%B6%E5%8F%91%E5%99%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CAN控制器和CAN收发器</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/stm32adc%E6%A8%A1%E5%9D%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32————ADC模块</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Nomad
+    </section>
+    
+    <section class="powerby">
+        
+            experience <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

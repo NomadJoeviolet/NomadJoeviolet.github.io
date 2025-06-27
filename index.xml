@@ -7,7 +7,465 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
-        <lastBuildDate>Thu, 26 Jun 2025 17:26:06 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 27 Jun 2025 14:53:35 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>STM32————UART串口通信</title>
+        <link>https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/</link>
+        <pubDate>Fri, 27 Jun 2025 14:53:35 +0800</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/</guid>
+        <description>&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_47010960/article/details/128000029&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？_hal uart dma-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/577618858&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;10 通用同步异步收发器（USART） - 知乎&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;串口简介&#34;&gt;串口简介
+&lt;/h3&gt;&lt;p&gt;串口是串行接口的简称
+常用串口：&lt;code&gt;RS232&lt;/code&gt;,&lt;code&gt;RS485&lt;/code&gt;,&lt;code&gt;USB(Universal Serial Bus)&lt;/code&gt;通用串行接口,&lt;code&gt;TTL&lt;/code&gt;串口
+&lt;code&gt;TTL&lt;/code&gt;是&lt;code&gt;Transistor-Transistor Logic&lt;/code&gt;的简写，是一种电平逻辑，晶体管-晶体管逻辑&lt;/p&gt;
+&lt;h3 id=&#34;usart简介&#34;&gt;USART简介
+&lt;/h3&gt;&lt;p&gt;USART，即通用同步/异步收发传输器（Universal Asynchronous Receiver/Transmitter)，是单片机上的一个外设&lt;/p&gt;
+&lt;p&gt;UART遵循异步串行通信协议的，USRT遵循同步串行通信协议
+异步不需要统一时钟信号，同步需要统一时钟信号&lt;/p&gt;
+&lt;p&gt;一般使用最多的是UART，我们此次学习也是针对UART&lt;/p&gt;
+&lt;h3 id=&#34;uart通信协议&#34;&gt;UART通信协议
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32USART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-UART%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE.png&#34;
+	width=&#34;1450&#34;
+	height=&#34;346&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32USART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-UART%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE_hu2495030746923520299.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32USART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-UART%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE_hu16766829280963865577.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;419&#34;
+		data-flex-basis=&#34;1005px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;起始位：发出1位低电平信号，表示开始传输字符&lt;/li&gt;
+&lt;li&gt;数据位：真正发送的数据，一般为8位（1个字节），常采用ASCII编码，从最低位开始发送&lt;/li&gt;
+&lt;li&gt;校验位：用于检验接收到的数据是否正确，分为奇校验和偶校验&lt;/li&gt;
+&lt;li&gt;停止位：一组数据的结束传输的标志。可以是1位、1.5位、2位的高电平&lt;/li&gt;
+&lt;li&gt;空闲位：空闲时数据线为高电平状态，代表无数据传输&lt;/li&gt;
+&lt;li&gt;波特率：衡量传输速率的指标。UART通信中波特率等于比特率&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;uart发送接收机制&#34;&gt;UART发送/接收机制
+&lt;/h3&gt;&lt;p&gt;UART发送端口，首先是CPU将数据放入数据发送寄存器，然后发送移位寄存器会将数据从数据发送寄存器 取出进行移位并通过&lt;code&gt;UART_TX&lt;/code&gt;发送出去&lt;/p&gt;
+&lt;p&gt;UART接收端口，首先是&lt;code&gt;UART_RX&lt;/code&gt;接收串行数据至接收移位寄存器，接收移位寄存器将串行数据移位变换为并行数据给数据接收寄存器，再通过APB总线给STM32内部&lt;/p&gt;
+&lt;h3 id=&#34;uart模式&#34;&gt;UART模式
+&lt;/h3&gt;&lt;h4 id=&#34;轮询模式&#34;&gt;轮询模式
+&lt;/h4&gt;&lt;p&gt;CPU不断查询发送数据寄存器或者接受数据寄存器导致程序的阻塞&lt;/p&gt;
+&lt;h5 id=&#34;发送&#34;&gt;发送
+&lt;/h5&gt;&lt;p&gt;在&lt;code&gt;UART&lt;/code&gt;底层有发送移位寄存器和发送数据寄存器，发送数据时，需要CPU将发送数据寄存器的数据移动至发送移位寄存器，然后&lt;code&gt;UART&lt;/code&gt;按照指定的波特率发送数据，CPU则不断查询数据发送寄存器是否空，如果空则需要移动数据进来&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81.png&#34;
+	width=&#34;631&#34;
+	height=&#34;244&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81_hu15405304221731860814.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E5%8F%91%E9%80%81_hu11465131017380306252.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;258&#34;
+		data-flex-basis=&#34;620px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;接收&#34;&gt;接收
+&lt;/h5&gt;&lt;p&gt;在&lt;code&gt;UART&lt;/code&gt;底层有接收移位寄存器和接收数据寄存器，接收数据时，&lt;code&gt;UART&lt;/code&gt;按照指定的波特率接收数据至接收移位寄存器，然后数据会存储在接收数据寄存器，CPU则不断查询数据接收寄存器是否有数据，如果有数据，CPU会把寄存器的数据移动至我们用来接收数据的变量的内存里&lt;/p&gt;
+&lt;p&gt;当&lt;code&gt;HAL_UART_Receive&lt;/code&gt;执行完成，我们就可以知道数据接收完成&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E8%BD%AE%E8%AF%A2%E6%8E%A5%E6%94%B6.png&#34;
+	width=&#34;589&#34;
+	height=&#34;299&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E8%BD%AE%E8%AF%A2%E6%8E%A5%E6%94%B6_hu13280145308343782189.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E8%BD%AE%E8%AF%A2%E6%8E%A5%E6%94%B6_hu12241757098732507153.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;196&#34;
+		data-flex-basis=&#34;472px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;中断模式&#34;&gt;中断模式
+&lt;/h4&gt;&lt;p&gt;使用中断模式时，需要先配置UART的&lt;code&gt;NVIC&lt;/code&gt;中断设置&lt;/p&gt;
+&lt;p&gt;底层中断实现数据每传送一字节，召回CPU继续运输数据，不需要我们考虑，&lt;code&gt;HAL&lt;/code&gt;库底层已经帮我们实现
+上层中断实现数据接收完成后的数据处理，通过中断回调函数实现，需要我们自己设计&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-%E4%B8%AD%E6%96%AD%E6%94%B6%E5%8F%91.png&#34;
+	width=&#34;1746&#34;
+	height=&#34;851&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-%E4%B8%AD%E6%96%AD%E6%94%B6%E5%8F%91_hu18210528260682390799.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-%E4%B8%AD%E6%96%AD%E6%94%B6%E5%8F%91_hu14636135400338418313.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;205&#34;
+		data-flex-basis=&#34;492px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;发送-1&#34;&gt;发送
+&lt;/h5&gt;&lt;p&gt;CPU将数据送入 发送数据寄存器，然后就去执行其他代码，当发送移位寄存器的数据发送后，发送数据寄存器空，会触发发送数据寄存器空中断，CPU再次将数据送入 发送数据寄存器，然后又去执行其他代码，所有数据发送完成后会触发 传送完成中断，调用&lt;code&gt;HAL_UART_TxCpltCallback&lt;/code&gt;中断回调函数&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E4%B8%AD%E6%96%AD%E5%8F%91%E9%80%81.png&#34;
+	width=&#34;924&#34;
+	height=&#34;355&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E4%B8%AD%E6%96%AD%E5%8F%91%E9%80%81_hu12903841339894141808.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E4%B8%AD%E6%96%AD%E5%8F%91%E9%80%81_hu8863444947271062853.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;260&#34;
+		data-flex-basis=&#34;624px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;接收-1&#34;&gt;接收
+&lt;/h5&gt;&lt;p&gt;CPU在处理其他代码，接收移位寄存器将一帧数据移动至 接受数据寄存器后，会触发 接收数据寄存器非空中断，CPU会回来将 接收数据寄存器 的数据移动至我们用来接收数据的变量的内存里，然后又去执行其他代码，所有数据完成后会调用&lt;code&gt;_HAL_UART_RxCpltCallback_&lt;/code&gt;中断回调函数处理接收的数据&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E6%8E%A5%E6%94%B6%E4%B8%AD%E6%96%AD.png&#34;
+	width=&#34;780&#34;
+	height=&#34;312&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E6%8E%A5%E6%94%B6%E4%B8%AD%E6%96%AD_hu6741878258720157272.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32%E4%B8%AD%E6%96%AD-UART%E6%8E%A5%E6%94%B6%E4%B8%AD%E6%96%AD_hu15906450670116678087.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;250&#34;
+		data-flex-basis=&#34;600px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;而执行&lt;code&gt;HAL_UART_Receive_IT&lt;/code&gt;后，我们不能直接对数据继续处理，数据还没接收完成，因为CPU不会进入阻塞态，会去执行其他代码，需要通过&lt;code&gt;HAL_UART_RxCpltCallback&lt;/code&gt;回调函数处理接收的数据&lt;/p&gt;
+&lt;h4 id=&#34;dma模式&#34;&gt;DMA模式
+&lt;/h4&gt;&lt;p&gt;DMA，全称为&lt;code&gt;Direct Memory Access&lt;/code&gt;，直接内存访问，本质是将传输数据从一个内存空间搬运至另一个内存空间，可以用来提供外设和内存，内存和外设之间的高速数据传输&lt;/p&gt;
+&lt;p&gt;DMA模式中也会有中断参与，在&lt;code&gt;Cube&lt;/code&gt;配置中需要开启中断&lt;/p&gt;
+&lt;h5 id=&#34;发送-2&#34;&gt;发送
+&lt;/h5&gt;&lt;p&gt;在普通的轮询&lt;code&gt;USART&lt;/code&gt;中，CPU一直在等待外设发送数据，外设每发送一帧数据，CPU就从内存中移动一帧数据到外设的寄存器&lt;/p&gt;
+&lt;p&gt;在中断的&lt;code&gt;USART&lt;/code&gt;中，外设每从寄存器中发送一帧数据，就会触发一次发送数据寄存器空中断，使CPU回来将数据从内存搬运至外设的寄存器中&lt;/p&gt;
+&lt;p&gt;没有DMA的话，CPU会作为数据发送的中转站，而使用DMA的话，整个数据传输过程不需要CPU的参与，由DMA代理执行，DMA负责将内存数据搬运至外设的传输寄存器&lt;/p&gt;
+&lt;h5 id=&#34;接收-2&#34;&gt;接收
+&lt;/h5&gt;&lt;p&gt;在普通的轮询&lt;code&gt;USART&lt;/code&gt;中，CPU一直在询问外设是否接收完数据，外设接收一帧数据，该位数据由CPU从外设的数据接收寄存器运进内存，CPU再次询问外设是否接收完数据，再运，直至整个数据接收完成&lt;/p&gt;
+&lt;p&gt;而在中断&lt;code&gt;USART&lt;/code&gt;中，外设每接收一帧数据，触发一次数据接收寄存器非空中断，CPU过来将数据从寄存器搬运至内存，所有数据接收完成后，会调用接收完成中断回调函数（&lt;code&gt;HAL_UART_RxCpltCallback&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;没有DMA的话，CPU会作为数据转运的中转站，而使用DMA的话，整个数据转运过程不需要CPU的参与，由DMA代理执行&lt;/p&gt;
+&lt;h3 id=&#34;cube配置解析&#34;&gt;Cube配置解析
+&lt;/h3&gt;&lt;h4 id=&#34;基础参数配置&#34;&gt;基础参数配置
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-%E5%9F%BA%E7%A1%80%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE.png&#34;
+	width=&#34;794&#34;
+	height=&#34;309&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-%E5%9F%BA%E7%A1%80%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE_hu4541515614130285717.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-%E5%9F%BA%E7%A1%80%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE_hu5593458578770482069.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;256&#34;
+		data-flex-basis=&#34;616px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Baud Rate：波特率&lt;/li&gt;
+&lt;li&gt;Word Length：包含校验位在内的数据包长度&lt;/li&gt;
+&lt;li&gt;Parity：奇偶校验位&lt;/li&gt;
+&lt;li&gt;Stop Bits：停止位位数&lt;/li&gt;
+&lt;li&gt;Data Direction：发送和&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;nvic配置&#34;&gt;NVIC配置
+&lt;/h4&gt;&lt;p&gt;如果使用中断模式，需要在&lt;code&gt;NVIC settings&lt;/code&gt;开启&lt;code&gt;USARTi global interrupt &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-NVIC%E8%AE%BE%E7%BD%AE.png&#34;
+	width=&#34;1037&#34;
+	height=&#34;113&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-NVIC%E8%AE%BE%E7%BD%AE_hu18289503046657738626.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-NVIC%E8%AE%BE%E7%BD%AE_hu5102099424962217469.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;917&#34;
+		data-flex-basis=&#34;2202px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;dma配置&#34;&gt;DMA配置
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-DMA%E9%85%8D%E7%BD%AE.png&#34;
+	width=&#34;1014&#34;
+	height=&#34;466&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-DMA%E9%85%8D%E7%BD%AE_hu12594280780564786123.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-DMA%E9%85%8D%E7%BD%AE_hu14695578641400187003.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;217&#34;
+		data-flex-basis=&#34;522px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Add：选择添加&lt;code&gt;USARTi_RX&lt;/code&gt;的&lt;code&gt;DMA&lt;/code&gt;或者&lt;code&gt;USARTi_TX&lt;/code&gt;的&lt;code&gt;DMA&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Delete：删除对应的DMA&lt;/li&gt;
+&lt;li&gt;Mode：选择&lt;code&gt;normal&lt;/code&gt;模式或者&lt;code&gt;circular&lt;/code&gt;模式&lt;/li&gt;
+&lt;li&gt;Data Byte：数据传输的位数&lt;/li&gt;
+&lt;li&gt;Increment Address：开启地址自增，外设只有一个寄存器，地址固定，不需要开启地址自增，而内存中我们存数据的变量是数组，接受一字节数据后需要往后移，需要开启地址自增&lt;/li&gt;
+&lt;li&gt;Priority：优先级设置&lt;/li&gt;
+&lt;li&gt;Direction：方向，固定死的&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;gpio配置&#34;&gt;GPIO配置
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-GPIOsettings.png&#34;
+	width=&#34;1012&#34;
+	height=&#34;164&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-GPIOsettings_hu10464349181903929890.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-GPIOsettings_hu1805966639038626852.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;617&#34;
+		data-flex-basis=&#34;1480px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;一般用来查看引脚的&lt;code&gt;GPIO&lt;/code&gt;配置，不需要更改（有特殊需求时，可以按需修改）
+在&lt;code&gt;GPIO Settings&lt;/code&gt;处可以查看&lt;code&gt;TX&lt;/code&gt;和&lt;code&gt;RX&lt;/code&gt;的&lt;code&gt;GPIO&lt;/code&gt;引脚配置，此处可以看到&lt;code&gt;RX&lt;/code&gt;为输入模式，无上拉无下拉&lt;/p&gt;
+&lt;h3 id=&#34;hal库uart常用函数&#34;&gt;HAL库UART常用函数
+&lt;/h3&gt;&lt;h4 id=&#34;轮询模式-1&#34;&gt;轮询模式
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_UART_Receive&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rxBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;16&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HAL_MAX_DELAY&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//接收
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;HAL_UART_Transmit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;txBuffer&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;sizeof&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;txBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//发送
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;中断模式-1&#34;&gt;中断模式
+&lt;/h4&gt;&lt;p&gt;只能接收一次，接收完成后需要再次开启&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_UART_Receive_IT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rxBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;16&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//接收
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;HAL_UART_Transmit_IT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;txBuffer&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;sizeof&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;txBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//发送
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//回调函数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;HAL_UART_RxCpltCallback&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UART_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;dma模式-1&#34;&gt;DMA模式
+&lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_47010960/article/details/128000029&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？_hal uart dma-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_UART_Receive_DMA&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rxBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;16&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//接收
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;HAL_UART_Transmit_DMA&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;txBuffer&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;sizeof&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;txBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//发送
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//回调函数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;HAL_UART_RxCpltCallback&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UART_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;HAL&lt;/code&gt;库中使用的&lt;code&gt;HAL_UART_Transmit_DMA&lt;/code&gt;，&lt;code&gt;HAL_UART_Receive_DMA&lt;/code&gt;等都有中断的参与，需要在&lt;code&gt;Cube&lt;/code&gt;中开启中断&lt;/p&gt;
+&lt;h3 id=&#34;demo&#34;&gt;Demo
+&lt;/h3&gt;&lt;p&gt;接收定长数据&lt;code&gt;Nomad_violet&lt;/code&gt;，同时在主函数中翻转小灯&lt;/p&gt;
+&lt;h4 id=&#34;轮询实现数据收发&#34;&gt;轮询实现数据收发
+&lt;/h4&gt;&lt;h5 id=&#34;cube配置&#34;&gt;Cube配置
+&lt;/h5&gt;&lt;p&gt;模式选择为异步&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E9%85%8D%E7%BD%AE.png&#34;
+	width=&#34;704&#34;
+	height=&#34;103&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E9%85%8D%E7%BD%AE_hu9252176429549330016.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E9%85%8D%E7%BD%AE_hu8798023455270754163.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;683&#34;
+		data-flex-basis=&#34;1640px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;波特率选择&lt;code&gt;115200 Bit/s&lt;/code&gt;，其余不动即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E9%85%8D%E7%BD%AE%E5%9F%BA%E7%A1%80%E5%8F%82%E6%95%B0.png&#34;
+	width=&#34;692&#34;
+	height=&#34;333&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E9%85%8D%E7%BD%AE%E5%9F%BA%E7%A1%80%E5%8F%82%E6%95%B0_hu16668396444744089662.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E9%85%8D%E7%BD%AE%E5%9F%BA%E7%A1%80%E5%8F%82%E6%95%B0_hu4223627293265520172.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;207&#34;
+		data-flex-basis=&#34;498px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;将&lt;code&gt;PA8&lt;/code&gt;配置为&lt;code&gt;GPIO_Output&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E5%BC%95%E8%84%9A.png&#34;
+	width=&#34;210&#34;
+	height=&#34;108&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E5%BC%95%E8%84%9A_hu12445125660256453883.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2%E5%BC%95%E8%84%9A_hu12154975281623611940.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;194&#34;
+		data-flex-basis=&#34;466px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;GPIO&lt;/code&gt;配置保持默认即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2GPIO%E9%85%8D%E7%BD%AE.png&#34;
+	width=&#34;691&#34;
+	height=&#34;76&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2GPIO%E9%85%8D%E7%BD%AE_hu1113707906726736272.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E8%BD%AE%E8%AF%A2GPIO%E9%85%8D%E7%BD%AE_hu14860898518155546774.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;909&#34;
+		data-flex-basis=&#34;2182px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;代码实现&#34;&gt;代码实现
+&lt;/h5&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;string.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#define rxBufferLen 16
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#define txBufferLen 25
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rxBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rxBufferLen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;txBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;txBufferLen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;to feel,to experience &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 去感受，去经历「感其生，历其境」
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;HAL_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;SystemClock_Config&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;MX_GPIO_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;MX_USART1_UART_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_UART_Receive&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rxBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rxBufferLen&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HAL_MAX_DELAY&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;strcmp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rxBuffer&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Nomad_violet&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			&lt;span class=&#34;nf&#34;&gt;HAL_UART_Transmit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;txBuffer&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;sizeof&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;txBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;nf&#34;&gt;HAL_GPIO_TogglePin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOA&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_8&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_Delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;500&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;中断实现数据收发&#34;&gt;中断实现数据收发
+&lt;/h4&gt;&lt;h5 id=&#34;cube配置-1&#34;&gt;Cube配置
+&lt;/h5&gt;&lt;p&gt;配置同上，只需额外开启中断即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF.png&#34;
+	width=&#34;696&#34;
+	height=&#34;118&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF_hu2603047621200826920.png 480w, https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/STM32UART%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1-Demo%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF_hu106925818943637117.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;589&#34;
+		data-flex-basis=&#34;1415px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;代码实现-1&#34;&gt;代码实现
+&lt;/h5&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;string.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#define rxBufferLen 16
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#define txBufferLen 25
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rxBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rxBufferLen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;txBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;txBufferLen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;to feel,to experience &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 去感受，去经历「感其生，历其境」
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;HAL_UART_RxCpltCallback&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UART_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;strcmp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rxBuffer&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Nomad_violet&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			&lt;span class=&#34;nf&#34;&gt;HAL_UART_Transmit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;txBuffer&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;sizeof&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;txBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;nf&#34;&gt;HAL_UART_Receive_IT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rxBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rxBufferLen&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;HAL_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;SystemClock_Config&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;MX_GPIO_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;MX_USART1_UART_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;nf&#34;&gt;HAL_UART_Receive_IT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rxBuffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rxBufferLen&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;nf&#34;&gt;HAL_GPIO_TogglePin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOA&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_8&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	    &lt;span class=&#34;nf&#34;&gt;HAL_Delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;500&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>STM32————TIM定时器</title>
         <link>https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/</link>
         <pubDate>Thu, 26 Jun 2025 17:26:06 +0800</pubDate>
