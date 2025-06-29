@@ -437,7 +437,7 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 		data-flex-basis="312px"
 	
 >
-<code>NVIC</code>会一直检测某一个中断线是否处于激活状态，当中断处理函数运行完成后，需要在中断处理函数中将请求挂起寄存器对应的位清除为0，避免<code>NVIC</code>一直检测到0，一直重复执行中断处理函数，而这一部分代码，在<code>HAL</code>库写的总<code>IRQHandler</code>中已经完成。</p>
+<code>NVIC</code>会一直检测某一个中断线是否处于激活状态，当中断处理函数运行完成后，需要在中断处理函数中将请求挂起寄存器对应的位清除为0，避免<code>NVIC</code>一直检测到1，一直重复执行中断处理函数，而这一部分代码，在<code>HAL</code>库写的总<code>IRQHandler</code>中已经完成。</p>
 <p>另外，<code>NVIC</code>对于中断还有中断优先级的设置，<code>stm32f103c8t6</code>中断优先级由<code>NVIC</code>的优先级寄存器里的4位决定。中断优先级分为抢占优先级和响应优先级（它们一起用这4位）</p>
 <ol>
 <li>抢占优先级的级别越高，越能够抢占中断通道，优先执行中断
@@ -493,10 +493,22 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 产生事件线路目的就是传输一个脉冲信号给其他外设使用，并且是电路级别的信号传输，属于硬件级的。</li>
 </ol>
 <h3 id="调用流程">调用流程
-</h3><p>以<code>EXTI1</code>为例，上升沿触发，当出现上升沿时，就会触发<code>EXTI5</code>的外部中断，进入<code>EXTI9_5_IRQHandler</code>，在<code>EXTI9_5_IRQHandler</code>中调用<code>HAL_GPIO_EXTI_IRQHandler</code>函数统一处理外部中断，在该函数中对挂起寄存器进行清0操作，并调用<code>HAL_GPIO_EXTI_Callback</code>中断回调函数</p>
+</h3><p>以<code>EXTI1</code>为例，下降沿触发，当出现下降沿时，就会触发<code>EXTI5</code>的外部中断，进入<code>EXTI9_5_IRQHandler</code>，在<code>EXTI9_5_IRQHandler</code>中调用<code>HAL_GPIO_EXTI_IRQHandler</code>函数统一处理外部中断，在该函数中对挂起寄存器进行清0操作，并调用<code>HAL_GPIO_EXTI_Callback</code>中断回调函数</p>
 <h3 id="按键实现外部中断控制小灯亮灭">按键实现外部中断控制小灯亮灭
 </h3><h4 id="cube配置">Cube配置
-</h4><h5 id="exti配置">EXTI配置
+</h4><p><img src="/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-Cube%E9%85%8D%E7%BD%AE.png"
+	width="688"
+	height="736"
+	srcset="/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-Cube%E9%85%8D%E7%BD%AE_hu10381672920257679102.png 480w, /p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-Cube%E9%85%8D%E7%BD%AE_hu2006250321636698059.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="93"
+		data-flex-basis="224px"
+	
+></p>
+<h5 id="exti配置">EXTI配置
 </h5><p>打开中断</p>
 <p><img src="/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-EXTI%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF.png"
 	width="697"

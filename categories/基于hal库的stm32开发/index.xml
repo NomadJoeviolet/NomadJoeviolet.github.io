@@ -1588,7 +1588,7 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 		data-flex-basis=&#34;312px&#34;
 	
 &gt;
-&lt;code&gt;NVIC&lt;/code&gt;会一直检测某一个中断线是否处于激活状态，当中断处理函数运行完成后，需要在中断处理函数中将请求挂起寄存器对应的位清除为0，避免&lt;code&gt;NVIC&lt;/code&gt;一直检测到0，一直重复执行中断处理函数，而这一部分代码，在&lt;code&gt;HAL&lt;/code&gt;库写的总&lt;code&gt;IRQHandler&lt;/code&gt;中已经完成。&lt;/p&gt;
+&lt;code&gt;NVIC&lt;/code&gt;会一直检测某一个中断线是否处于激活状态，当中断处理函数运行完成后，需要在中断处理函数中将请求挂起寄存器对应的位清除为0，避免&lt;code&gt;NVIC&lt;/code&gt;一直检测到1，一直重复执行中断处理函数，而这一部分代码，在&lt;code&gt;HAL&lt;/code&gt;库写的总&lt;code&gt;IRQHandler&lt;/code&gt;中已经完成。&lt;/p&gt;
 &lt;p&gt;另外，&lt;code&gt;NVIC&lt;/code&gt;对于中断还有中断优先级的设置，&lt;code&gt;stm32f103c8t6&lt;/code&gt;中断优先级由&lt;code&gt;NVIC&lt;/code&gt;的优先级寄存器里的4位决定。中断优先级分为抢占优先级和响应优先级（它们一起用这4位）&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;抢占优先级的级别越高，越能够抢占中断通道，优先执行中断
@@ -1644,10 +1644,22 @@ CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引
 产生事件线路目的就是传输一个脉冲信号给其他外设使用，并且是电路级别的信号传输，属于硬件级的。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;调用流程&#34;&gt;调用流程
-&lt;/h3&gt;&lt;p&gt;以&lt;code&gt;EXTI1&lt;/code&gt;为例，上升沿触发，当出现上升沿时，就会触发&lt;code&gt;EXTI5&lt;/code&gt;的外部中断，进入&lt;code&gt;EXTI9_5_IRQHandler&lt;/code&gt;，在&lt;code&gt;EXTI9_5_IRQHandler&lt;/code&gt;中调用&lt;code&gt;HAL_GPIO_EXTI_IRQHandler&lt;/code&gt;函数统一处理外部中断，在该函数中对挂起寄存器进行清0操作，并调用&lt;code&gt;HAL_GPIO_EXTI_Callback&lt;/code&gt;中断回调函数&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;以&lt;code&gt;EXTI1&lt;/code&gt;为例，下降沿触发，当出现下降沿时，就会触发&lt;code&gt;EXTI5&lt;/code&gt;的外部中断，进入&lt;code&gt;EXTI9_5_IRQHandler&lt;/code&gt;，在&lt;code&gt;EXTI9_5_IRQHandler&lt;/code&gt;中调用&lt;code&gt;HAL_GPIO_EXTI_IRQHandler&lt;/code&gt;函数统一处理外部中断，在该函数中对挂起寄存器进行清0操作，并调用&lt;code&gt;HAL_GPIO_EXTI_Callback&lt;/code&gt;中断回调函数&lt;/p&gt;
 &lt;h3 id=&#34;按键实现外部中断控制小灯亮灭&#34;&gt;按键实现外部中断控制小灯亮灭
 &lt;/h3&gt;&lt;h4 id=&#34;cube配置&#34;&gt;Cube配置
-&lt;/h4&gt;&lt;h5 id=&#34;exti配置&#34;&gt;EXTI配置
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-Cube%E9%85%8D%E7%BD%AE.png&#34;
+	width=&#34;688&#34;
+	height=&#34;736&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-Cube%E9%85%8D%E7%BD%AE_hu10381672920257679102.png 480w, https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-Cube%E9%85%8D%E7%BD%AE_hu2006250321636698059.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;93&#34;
+		data-flex-basis=&#34;224px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h5 id=&#34;exti配置&#34;&gt;EXTI配置
 &lt;/h5&gt;&lt;p&gt;打开中断&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/STM32%E4%B8%AD%E6%96%AD-EXTI%E4%B8%AD%E6%96%AD%E5%BC%80%E5%90%AF.png&#34;
 	width=&#34;697&#34;
