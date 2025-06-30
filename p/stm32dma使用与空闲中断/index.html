@@ -438,7 +438,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UART_Transmit_DMA</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">pData</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><code>HAL_UART_Transmit_DMA</code>的传输完成中断回调函数<code>HAL_UART_TxCpltCallback</code>以及传输过半中断回调函数<code>HAL_UART_TxHalfCpltCallback</code></p>
+</div><p><code>HAL_UART_Transmit_DMA</code>的传输完成中断回调函数<code>HAL_UART_TxCpltCallback</code>以及传输过半中断回调函数<code>HAL_UART_TxHalfCpltCallback</code>（这两个回调函数在<code>HAL_UART_Transmit_IT</code>中同样有）</p>
 <h4 id="dma发送注意事项">DMA发送注意事项
 </h4><p>在传输的过程中，当传输一半的数据后，半传输标志(HTIF)被置1，当设置了允许半传输中断位(HTIE)时，将产生一个中断请求。在数据传输结束后，传输完成标志(TCIF)被置1，当设置了允许传输完成中断位 (TCIE)时，将产生一个中断请求</p>
 <p>会触发的三个中断，传输完成中断，传输过半中断，错误中断
@@ -499,7 +499,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UART_Receive_DMA</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">pData</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><code>HAL_UART_Receive_DMA</code>的接收完成中断回调函数<code>HAL_UART_RxCpltCallback</code>以及接收过半中断回调函数<code>HAL_UART_RxHalfCpltCallback</code></p>
+</div><p><code>HAL_UART_Receive_DMA</code>的接收完成中断回调函数<code>HAL_UART_RxCpltCallback</code>以及接收过半中断回调函数<code>HAL_UART_RxHalfCpltCallback</code>（这两个回调函数在<code>HAL_UART_Receive_IT</code>中同样有）</p>
 <h4 id="dma接收注意事项">DMA接收注意事项
 </h4><p>同DMA发送，类比即可</p>
 <h2 id="hal库usart使用dma">HAL库USART使用DMA
@@ -513,7 +513,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UART_Transmit_DMA</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">pData</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>会触发中断</p>
+</div><p>会触发中断，对应回调函数为</p>
 <ol>
 <li><code>HAL_UART_TxCpltCallback</code></li>
 <li><code>HAL_UART_TxHalfCpltCallback</code></li>
@@ -527,7 +527,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_UART_Receive_DMA</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*</span><span class="n">pData</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>会触发的中断</p>
+</div><p>会触发的中断，对应的回调函数为</p>
 <ol>
 <li><code>HAL_UART_RxCpltCallback</code></li>
 <li><code>HAL_UART_RxHalfCpltCallback</code></li>
@@ -540,7 +540,7 @@
 <p>summary：单次传输，完成后停止，需要软件显式重启，接收过半和接收完成中断</p>
 <h4 id="circular模式">circular模式
 </h4><p>以接收为例
-无限循环，接收至数据上限一半，触发接收过半中断，接受至数据上限，触发接收完成中断，同时会硬件自动重启，接收完成中断会调用``</p>
+无限循环，接收至数据上限一半，触发接收过半中断，接受至数据上限，触发接收完成中断，同时会硬件自动重启，接收完成中断会调用对应的接收完成中断回调函数</p>
 <p>summary：无限循环，硬件自动重启，接收过半和接收完成中断</p>
 <h2 id="空闲中断">空闲中断
 </h2><h3 id="空闲中断定义">空闲中断定义
@@ -587,7 +587,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">HAL_UARTEx_RxEventCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>在触发空闲中断，接收完成中断都会调用<code>HAL_UARTEx_RxEventCallback</code>回调函数，需要注意的是在<code>F103c8t6</code>单片机上，使用<code>HAL_UARTEx_ReceiveToIdle_DMA</code>时，接收过半中断也会去调用该回调函数</p>
+</div><p>在触发空闲中断，接收完成中断都会调用<code>HAL_UARTEx_RxEventCallback</code>回调函数，需要注意的是在<code>F103c8t6</code>单片机以及其他<code>st</code>系列单片机上，使用<code>HAL_UARTEx_ReceiveToIdle_DMA</code>时，接收过半中断也会去调用该回调函数</p>
 <h4 id="接收过半中断的处理">接收过半中断的处理
 </h4><p><a class="link" href="https://www.iotword.com/25305.html"  target="_blank" rel="noopener"
     >STM32CubeIDE HAL库DMA与UART不定长数据接收实现：空闲中断详解-物联沃-IOTWORD物联网</a>
@@ -609,6 +609,49 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Set the UART DMA Half transfer complete callback */</span>  
 </span></span><span class="line"><span class="cl">  <span class="n">huart</span><span class="o">-&gt;</span><span class="n">hdmarx</span><span class="o">-&gt;</span><span class="n">XferHalfCpltCallback</span> <span class="o">=</span> <span class="n">UART_DMARxHalfCplt</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在<code>DMA</code>的中断处理函数中，会调用<code>huart-&gt;hdmarx-&gt;XferHalfCpltCallback</code>，此处即<code>UART_DMARxHalfCplt</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_DMA_IRQHandler</span><span class="p">(</span><span class="n">DMA_HandleTypeDef</span> <span class="o">*</span><span class="n">hdma</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">flag_it</span> <span class="o">=</span> <span class="n">hdma</span><span class="o">-&gt;</span><span class="n">DmaBaseAddress</span><span class="o">-&gt;</span><span class="n">ISR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">source_it</span> <span class="o">=</span> <span class="n">hdma</span><span class="o">-&gt;</span><span class="n">Instance</span><span class="o">-&gt;</span><span class="n">CCR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Half Transfer Complete Interrupt management ******************************/</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(((</span><span class="n">flag_it</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">DMA_FLAG_HT1</span> <span class="o">&lt;&lt;</span> <span class="n">hdma</span><span class="o">-&gt;</span><span class="n">ChannelIndex</span><span class="p">))</span> <span class="o">!=</span> <span class="n">RESET</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">((</span><span class="n">source_it</span> <span class="o">&amp;</span> <span class="n">DMA_IT_HT</span><span class="p">)</span> <span class="o">!=</span> <span class="n">RESET</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="p">......</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">hdma</span><span class="o">-&gt;</span><span class="n">XferHalfCpltCallback</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="cm">/* Half transfer callback */</span>
+</span></span><span class="line"><span class="cl">      <span class="n">hdma</span><span class="o">-&gt;</span><span class="nf">XferHalfCpltCallback</span><span class="p">(</span><span class="n">hdma</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">......</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">......</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>而<code>UART_DMARxHalfCplt</code>会调用<code>HAL_UARTEx_RxEventCallback</code></p>
@@ -888,10 +931,43 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">__HAL_DMA_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hdma_usart1_rx</span><span class="p">,</span><span class="n">DMA_IT_HT</span><span class="p">);</span><span class="c1">//关闭dma接收半满中断函数，这样我们在接收一组数据时就不会触发半满中断，dma就可以正常接收一组数据
 </span></span></span></code></pre></td></tr></table>
 </div>
+</div><p>注意需要添加</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">extern</span> <span class="n">UART_HandleTypeDef</span> <span class="n">huart1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="n">DMA_HandleTypeDef</span> <span class="n">hdma_usart1_rx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="n">DMA_HandleTypeDef</span> <span class="n">hdma_usart1_tx</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div><p>当接收数据超过<code>rxBufferLen</code>时，接收完成中断函数会调用<code>HAL_UARTEx_RxEventCallback</code>回调函数，然后重新开启接收</p>
 <p>例如：<code>rxBufferLen=10</code>，接收<code>12345678910</code>，发送<code>1234567891</code>（就是因为接收完成中断导致），后面<code>DMA</code>空闲中断接收正常开启</p>
 <h4 id="代码实现-1">代码实现
 </h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">extern</span> <span class="n">UART_HandleTypeDef</span> <span class="n">huart1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="n">DMA_HandleTypeDef</span> <span class="n">hdma_usart1_rx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="n">DMA_HandleTypeDef</span> <span class="n">hdma_usart1_tx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#define rxBufferLen 512
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">uint8_t</span> <span class="n">rxBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">txBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -915,6 +991,7 @@
 </span><span class="lnt">6
 </span><span class="lnt">7
 </span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_UARTEx_RxEventCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span> <span class="p">{</span><span class="c1">//接收完成和接收过半，空闲中断都会调用该中断回调函数  
@@ -924,7 +1001,8 @@
 </span></span><span class="line"><span class="cl">        <span class="nf">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">rxBuffer</span><span class="p">,</span> <span class="n">rxBufferLen</span><span class="p">);</span><span class="c1">//normal模式，接受一次后需要重新开启  
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">__HAL_DMA_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hdma_usart1_rx</span><span class="p">,</span> <span class="n">DMA_IT_HT</span><span class="p">);</span><span class="c1">//关闭f103板子DMA的接收过半中断  
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>  
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//Init_IdldeDMA();
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="关于normal和circular在方式2下的空闲中断实现的区别">关于normal和circular在方式2下的空闲中断实现的区别
@@ -1176,9 +1254,19 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define rxBufferLen 512
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="n">UART_HandleTypeDef</span> <span class="n">huart1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="n">DMA_HandleTypeDef</span> <span class="n">hdma_usart1_rx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="n">DMA_HandleTypeDef</span> <span class="n">hdma_usart1_tx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#define rxBufferLen 512
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">uint8_t</span> <span class="n">rxBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">];</span>  
 </span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">txBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">];</span>
 </span></span></code></pre></td></tr></table>
@@ -1351,11 +1439,21 @@
 </span><span class="lnt">18
 </span><span class="lnt">19
 </span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define __HAL_DMA_SET_COUNTERT(__HANDLE__,__COUNTER__)  ((__HANDLE__)-&gt;Instance-&gt;CNDTR = (uint16_t)(__COUNTER__))  
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">//重新设定计数值  
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define rxBufferLen 512
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="n">UART_HandleTypeDef</span> <span class="n">huart1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="n">DMA_HandleTypeDef</span> <span class="n">hdma_usart1_rx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="n">DMA_HandleTypeDef</span> <span class="n">hdma_usart1_tx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#define rxBufferLen 512
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">uint8_t</span> <span class="n">rxBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">];</span>  
 </span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">txBuffer</span><span class="p">[</span><span class="n">rxBufferLen</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">
