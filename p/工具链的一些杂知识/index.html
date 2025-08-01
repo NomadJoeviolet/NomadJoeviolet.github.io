@@ -470,6 +470,13 @@ none表示vendor是none，也就是不属于某一公司的</p>
 <h5 id="make与ninja">make与ninja
 </h5><p>make功能强大，可以给人看，ninja启动速度快，项目构建速度快，但不是给人看的
 可以认为两者同级。</p>
+<h5 id="层级关系">层级关系
+</h5><ol>
+<li><strong>开发者层</strong>：编写CMakeLists.txt定义构建规则</li>
+<li><strong>生成器层</strong>：CMake解析配置，生成底层构建文件</li>
+<li><strong>执行器层</strong>：Make/Ninja执行具体构建命令</li>
+<li><strong>工具链层</strong>：编译器(如gcc)、链接器等实际执行编译</li>
+</ol>
 
 </section>
 
