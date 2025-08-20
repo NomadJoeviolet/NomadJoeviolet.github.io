@@ -8,11 +8,11 @@
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
         <lastBuildDate>Wed, 20 Aug 2025 22:43:07 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>工具链的一些杂知识</title>
-        <link>https://NomadJoeviolet.github.io/p/%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9D%82%E7%9F%A5%E8%AF%86/</link>
+        <title>C&amp;C&#43;&#43; 深拷贝与浅拷贝</title>
+        <link>https://NomadJoeviolet.github.io/p/cc-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</link>
         <pubDate>Wed, 20 Aug 2025 22:43:07 +0800</pubDate>
         
-        <guid>https://NomadJoeviolet.github.io/p/%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9D%82%E7%9F%A5%E8%AF%86/</guid>
+        <guid>https://NomadJoeviolet.github.io/p/cc-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/</guid>
         <description>&lt;p&gt;在 C&amp;amp;C++ 中，&lt;strong&gt;深拷贝（Deep Copy）&lt;/strong&gt; 和 &lt;strong&gt;浅拷贝（Shallow Copy）&lt;/strong&gt; 是对象复制的两种根本不同的方式，主要区别在于如何处理指针成员指向的资源。理解它们的区别对内存管理和程序稳定性至关重要。&lt;/p&gt;
 &lt;p&gt;关于C的深拷贝与浅拷贝
 &lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/421011696&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
