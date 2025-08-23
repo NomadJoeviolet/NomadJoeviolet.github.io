@@ -13,8 +13,8 @@
         <pubDate>Tue, 24 Jun 2025 23:16:11 +0800</pubDate>
         
         <guid>https://NomadJoeviolet.github.io/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/</guid>
-        <description>&lt;h1 id=&#34;常见名词&#34;&gt;常见名词
-&lt;/h1&gt;&lt;p&gt;CPU，中央处理单元，Central Processing Unit
+        <description>&lt;h2 id=&#34;常见名词&#34;&gt;常见名词
+&lt;/h2&gt;&lt;p&gt;CPU，中央处理单元，Central Processing Unit
 ALU，算术逻辑单元，Arithmetic and Logic Units
 CU，控制单元，控制器，Control Unit
 CPU通常由中央处理单元，算术逻辑单元，寄存器组三部分组成
@@ -26,12 +26,12 @@ GR，通用寄存器，General Register&lt;/p&gt;
 &lt;p&gt;注意$IO$端口和$IO$接口不是同一个东西&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qq_34801169/article/details/102782643&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;操作系统知识：程序计数器（pc）、指令寄存器（IR）、通用寄存器（GR）、状态寄存器（SR）、程序状态字PSW_pc和ir-CSDN博客&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;特殊运算符和指令&#34;&gt;特殊运算符和指令
-&lt;/h1&gt;&lt;p&gt;&lt;code&gt;PTR&lt;/code&gt;用来指定存储器操作数的字长
+&lt;h2 id=&#34;特殊运算符和指令&#34;&gt;特殊运算符和指令
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;PTR&lt;/code&gt;用来指定存储器操作数的字长
 &lt;code&gt;Byte PTR[BX]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;所有单操作数指令要求操作数不能是立即数，如果是存储器操作数，需要指定字长&lt;/p&gt;
-&lt;h1 id=&#34;微型计算机基础概论&#34;&gt;微型计算机基础概论
-&lt;/h1&gt;&lt;h3 id=&#34;微型计算机系统&#34;&gt;微型计算机系统
+&lt;h2 id=&#34;微型计算机基础概论&#34;&gt;微型计算机基础概论
+&lt;/h2&gt;&lt;h3 id=&#34;微型计算机系统&#34;&gt;微型计算机系统
 &lt;/h3&gt;&lt;p&gt;微型计算机系统 由 硬件系统 和 软件系统 组成
 &lt;strong&gt;硬件系统&lt;/strong&gt;
 硬件系统 由 微型计算机（主机） 和 外设组成&lt;/p&gt;
@@ -56,8 +56,8 @@ GR，通用寄存器，General Register&lt;/p&gt;
 正数的补码与正数的反码和原码一样
 负数的补码 的符号位 与 负数原码一致，数值部分等于 负数原码 数值部分取反后再加1&lt;/p&gt;
 &lt;p&gt;特殊数&lt;code&gt;-128&lt;/code&gt;的补码表示为&lt;code&gt;10000000&lt;/code&gt;&lt;/p&gt;
-&lt;h1 id=&#34;微处理器与总线&#34;&gt;微处理器与总线
-&lt;/h1&gt;&lt;h3 id=&#34;cpu中央处理单元&#34;&gt;CPU中央处理单元
+&lt;h2 id=&#34;微处理器与总线&#34;&gt;微处理器与总线
+&lt;/h2&gt;&lt;h3 id=&#34;cpu中央处理单元&#34;&gt;CPU中央处理单元
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;CPU&lt;/code&gt;是微型计算机的运算和指挥控制中心
 一般由&lt;code&gt;ALU（运算器）&lt;/code&gt;，&lt;code&gt;CU（控制单元）&lt;/code&gt;，&lt;code&gt;寄存器组&lt;/code&gt;组成
 CPU内还有两个独立部件：EU（执行单元）和BIU（总线接口单元）
@@ -430,8 +430,8 @@ DF=1，串操作指令中的地址是减少方向，对应指令：STD&lt;/p&gt;
 &lt;h4 id=&#34;常用系统总线和外设总线标准&#34;&gt;常用系统总线和外设总线标准
 &lt;/h4&gt;&lt;p&gt;常用的系统总线标准包括：ISA 总线、PCI 总线、PCIE 总线、AGP 总线
 常用的外设总线标准包括：SATA 总线、USB 总线、RS485 总线、IDE 总线、RS232 总线&lt;/p&gt;
-&lt;h1 id=&#34;指令系统&#34;&gt;指令系统
-&lt;/h1&gt;&lt;p&gt;指令：控制计算机完成指定操作并能够被计算机所识别的命令。 指令系统：一台计算机能够识别的所有指令的集合称为该机的指令系统&lt;/p&gt;
+&lt;h2 id=&#34;指令系统&#34;&gt;指令系统
+&lt;/h2&gt;&lt;p&gt;指令：控制计算机完成指定操作并能够被计算机所识别的命令。 指令系统：一台计算机能够识别的所有指令的集合称为该机的指令系统&lt;/p&gt;
 &lt;p&gt;指令格式： &lt;code&gt;操作码 操作数1，操作数2&lt;/code&gt;
 操作数数量：零操作数指令，单操作数指令，双操作数指令&lt;/p&gt;
 &lt;p&gt;指令中操作数类型：立即操作数，寄存器操作数，存储器操作数
@@ -639,8 +639,8 @@ IO端口寻址&lt;/p&gt;
 左移，右移&lt;/p&gt;
 &lt;h4 id=&#34;循环移位&#34;&gt;循环移位
 &lt;/h4&gt;&lt;p&gt;分为带进位移位和不带进位移位&lt;/p&gt;
-&lt;h1 id=&#34;存储器&#34;&gt;存储器
-&lt;/h1&gt;&lt;p&gt;RAM（Random-Acess Memory）一般可分为SRAM（静态RAM），DRAM（动态RAM）
+&lt;h2 id=&#34;存储器&#34;&gt;存储器
+&lt;/h2&gt;&lt;p&gt;RAM（Random-Acess Memory）一般可分为SRAM（静态RAM），DRAM（动态RAM）
 ROM（Read Only Memory）一般可分为 掩膜ROM，一次性可写ROM，EPROM，EEPROM，闪速存储器Flash&lt;/p&gt;
 &lt;p&gt;高位地址，选通芯片
 低位地址，选芯片的读写单元&lt;/p&gt;
@@ -658,8 +658,8 @@ Cache高速缓冲存储器，Cache是构成内存储器的部件之一，设置C
 &lt;strong&gt;Cache存储系统&lt;/strong&gt;
 Cache存储系统主要有Cache高速缓冲器和主内存构成，有硬件系统负责管理&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1 id=&#34;io系统&#34;&gt;IO系统
-&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;输入输出系统&lt;/strong&gt;
+&lt;h2 id=&#34;io系统&#34;&gt;IO系统
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;输入输出系统&lt;/strong&gt;
 在计算机系统中，通常把处理器和主存储器之外的部分统称为输入/输出系统， 包括输入/输出设备、输入/输出接口和输入/输出软件&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;IO接口&lt;/strong&gt;
 IO接口就是外设连接到系统总线上的一组逻辑电路的总称&lt;/p&gt;
@@ -675,12 +675,12 @@ CPU与I/O接口进行通信实际上是通过I/O接口内部的一组寄存器�
 &lt;p&gt;输入接口需要具备数据控制能力，一般采用三态门接口，防止外设的输入影响数据总线，如74LS244&lt;/p&gt;
 &lt;p&gt;输出接口需要具备数据锁存能力，一般采用锁存器接口，如74LS273&lt;/p&gt;
 &lt;h4 id=&#34;基本输入输出方式&#34;&gt;基本输入输出方式
-&lt;/h4&gt;&lt;p&gt;1.无条件传送方式&lt;/p&gt;
-&lt;p&gt;2.查询方式&lt;/p&gt;
-&lt;p&gt;3.中断方式&lt;/p&gt;
-&lt;p&gt;4.直接存储器存取方式（DMA）&lt;/p&gt;
-&lt;h1 id=&#34;中断&#34;&gt;中断
-&lt;/h1&gt;&lt;p&gt;CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引起CPU暂时 中断正在运行的程序，转去执行一段特殊的服务程序(称为中断服务程序或 中断处理程序)，以处理该事件，该事件处理完后又返回被中断的程序继续 执行，这一过程称为中断
+&lt;/h4&gt;&lt;p&gt;1.无条件传送方式
+2.查询方式
+3.中断方式
+4.直接存储器存取方式（DMA）&lt;/p&gt;
+&lt;h2 id=&#34;中断&#34;&gt;中断
+&lt;/h2&gt;&lt;p&gt;CPU执行程序中，由于发生了某种随机的事件(外部或内部)，引起CPU暂时 中断正在运行的程序，转去执行一段特殊的服务程序(称为中断服务程序或 中断处理程序)，以处理该事件，该事件处理完后又返回被中断的程序继续 执行，这一过程称为中断
 &lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-%E4%B8%AD%E6%96%AD%E4%B8%80%E8%88%AC%E8%BF%87%E7%A8%8B.png&#34;
 	width=&#34;664&#34;
 	height=&#34;790&#34;
@@ -700,8 +700,8 @@ CPU与I/O接口进行通信实际上是通过I/O接口内部的一组寄存器�
 &lt;h5 id=&#34;内部中断响应过程&#34;&gt;内部中断响应过程
 &lt;/h5&gt;&lt;p&gt;无中断响应总线周期
 中断类型码固定或由指令（INT n）给出&lt;/p&gt;
-&lt;h1 id=&#34;主要芯片&#34;&gt;主要芯片
-&lt;/h1&gt;&lt;h3 id=&#34;1计数器8253&#34;&gt;1.计数器8253
+&lt;h2 id=&#34;主要芯片&#34;&gt;主要芯片
+&lt;/h2&gt;&lt;h3 id=&#34;1计数器8253&#34;&gt;1.计数器8253
 &lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8253%E8%AE%A1%E6%97%B6%E5%99%A8.png&#34;
 	width=&#34;1571&#34;
 	height=&#34;1022&#34;
