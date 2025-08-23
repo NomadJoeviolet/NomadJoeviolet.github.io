@@ -2832,8 +2832,8 @@ IF=0，禁止响应可屏蔽中断请求，对应指令：CLI&lt;/p&gt;
 DF=1，串操作指令中的地址是减少方向，对应指令：STD&lt;/p&gt;
 &lt;p&gt;TF=1，CPU按跟踪方式（单步方式）执行程序&lt;/p&gt;
 &lt;h4 id=&#34;8088外部引脚及其功能&#34;&gt;8088外部引脚及其功能
-&lt;/h4&gt;&lt;p&gt;最小模式下的引脚描述
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8088%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8%E5%BC%95%E8%84%9A%E6%8F%8F%E8%BF%B0.png&#34;
+&lt;/h4&gt;&lt;p&gt;最小模式下的引脚描述&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8088%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8%E5%BC%95%E8%84%9A%E6%8F%8F%E8%BF%B0.png&#34;
 	width=&#34;398&#34;
 	height=&#34;512&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8088%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8%E5%BC%95%E8%84%9A%E6%8F%8F%E8%BF%B0_hu12981524713681856048.png 480w, https://NomadJoeviolet.github.io/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86-8088%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8%E5%BC%95%E8%84%9A%E6%8F%8F%E8%BF%B0_hu6343090435501543611.png 1024w&#34;
@@ -2844,8 +2844,8 @@ DF=1，串操作指令中的地址是减少方向，对应指令：STD&lt;/p&gt;
 		data-flex-grow=&#34;77&#34;
 		data-flex-basis=&#34;186px&#34;
 	
-&gt;
-按功能对引脚进行划分：&lt;/p&gt;
+&gt;&lt;/p&gt;
+&lt;p&gt;按功能对引脚进行划分：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;基础工作引脚：$Vcc,GND,CLK(4.77Mhz)$&lt;/li&gt;
 &lt;li&gt;地址总线：${AD}&lt;em&gt;0-{AD}&lt;em&gt;7,A_8-A&lt;/em&gt;{15},A&lt;/em&gt;{16}-A_{19}$&lt;/li&gt;
