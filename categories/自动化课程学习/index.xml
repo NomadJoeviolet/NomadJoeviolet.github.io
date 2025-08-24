@@ -14,15 +14,15 @@
         
         <guid>https://NomadJoeviolet.github.io/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/</guid>
         <description>&lt;h2 id=&#34;常见名词&#34;&gt;常见名词
-&lt;/h2&gt;&lt;p&gt;CPU，中央处理单元，Central Processing Unit
-ALU，算术逻辑单元，Arithmetic and Logic Units
-CU，控制单元，控制器，Control Unit
-CPU通常由中央处理单元，算术逻辑单元，寄存器组三部分组成
-EU，执行单元，Execution Unit
-BIU，总线接口单元，Bus Interface Unit&lt;/p&gt;
-&lt;p&gt;PC，程序计数器，Program Counter
-IR，指令寄存器，Instruction Register
-GR，通用寄存器，General Register&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;CPU，中央处理单元，Central Processing Unit&lt;/p&gt;
+&lt;p&gt;ALU，算术逻辑单元，Arithmetic and Logic Units&lt;/p&gt;
+&lt;p&gt;CU，控制单元，控制器，Control Unit&lt;/p&gt;
+&lt;p&gt;CPU通常由中央处理单元，算术逻辑单元，寄存器组三部分组成&lt;/p&gt;
+&lt;p&gt;EU，执行单元，Execution Unit&lt;/p&gt;
+&lt;p&gt;BIU，总线接口单元，Bus Interface Unit&lt;/p&gt;
+&lt;p&gt;PC，程序计数器，Program Counter&lt;/p&gt;
+&lt;p&gt;IR，指令寄存器，Instruction Register&lt;/p&gt;
+&lt;p&gt;GR，通用寄存器，General Register&lt;/p&gt;
 &lt;p&gt;注意$IO$端口和$IO$接口不是同一个东西&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qq_34801169/article/details/102782643&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;操作系统知识：程序计数器（pc）、指令寄存器（IR）、通用寄存器（GR）、状态寄存器（SR）、程序状态字PSW_pc和ir-CSDN博客&lt;/a&gt;&lt;/p&gt;
