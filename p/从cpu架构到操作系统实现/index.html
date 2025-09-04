@@ -437,8 +437,8 @@
 ></li>
 </ol>
 <h3 id="指令集">指令集
-</h3><p>多套指令集用于处理不同的场景
-<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-ARM%E6%8C%87%E4%BB%A4%E9%9B%86%E6%BC%94%E5%8F%98.png"
+</h3><p>多套指令集用于处理不同的场景</p>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-ARM%E6%8C%87%E4%BB%A4%E9%9B%86%E6%BC%94%E5%8F%98.png"
 	width="542"
 	height="294"
 	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-ARM%E6%8C%87%E4%BB%A4%E9%9B%86%E6%BC%94%E5%8F%98_hu6983626606541064714.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-ARM%E6%8C%87%E4%BB%A4%E9%9B%86%E6%BC%94%E5%8F%98_hu6407889164870681698.png 1024w"
@@ -474,9 +474,9 @@
 		data-flex-grow="240"
 		data-flex-basis="576px"
 	
->
-<code>arm-none-eabi</code>
-<code>arm</code>是指<code>arm</code>架构，<code>none</code>是指编译出的可执行文件是运行在硬件上，而不是操作系统上，<code>eabi(The Embedded-Application Binary Interface)</code>嵌入式应用二进制接口</p>
+></p>
+<p><code>arm-none-eabi</code></p>
+<p><code>arm</code>是指<code>arm</code>架构，<code>none</code>是指编译出的可执行文件是运行在硬件上，而不是操作系统上，<code>eabi(The Embedded-Application Binary Interface)</code>嵌入式应用二进制接口</p>
 <p><code>arm-none-eabi-objcopy</code>是一个二进制生成工具</p>
 <h3 id="嵌入式编译烧录流程">嵌入式编译烧录流程
 </h3><p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%BC%96%E8%AF%91%E7%83%A7%E5%BD%95%E5%85%A8%E6%B5%81%E7%A8%8B.png"
@@ -537,8 +537,8 @@
 		data-flex-grow="358"
 		data-flex-basis="860px"
 	
->
-启动后，从零地址（零地址是经过映射的）出读取堆栈指针和程序计数器的值（此时程序计数器的值指向<code>Reset_Handler</code>），此外每个芯片的<code>Boot code</code>是定制化的，需要参考手册</p>
+></p>
+<p>启动后，从零地址（零地址是经过映射的）出读取堆栈指针和程序计数器的值（此时程序计数器的值指向<code>Reset_Handler</code>），此外每个芯片的<code>Boot code</code>是定制化的，需要参考手册</p>
 <p>最后<code>Reset_Handler</code>会指向<code>main</code>函数</p>
 <p>以<code>STM32F103</code>为例
 <img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-STM32F103%E7%9A%84%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE.png"
@@ -552,8 +552,8 @@
 		data-flex-grow="383"
 		data-flex-basis="920px"
 	
->
-这里有三种启动模式，根据启动时<code>BOOT1</code>和<code>BOOT0</code>的电平来选择不同的启动地址（即 将该不同的地址映射为零地址），一般情况下是第一种</p>
+></p>
+<p>这里有三种启动模式，根据启动时<code>BOOT1</code>和<code>BOOT0</code>的电平来选择不同的启动地址（即 将该不同的地址映射为零地址），一般情况下是第一种</p>
 <h3 id="ram内存分布">RAM内存分布
 </h3><p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.png"
 	width="1269"
@@ -1395,8 +1395,8 @@
 		data-flex-basis="414px"
 	
 ></p>
-<p><code>arm</code>系统寄存器组
-<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%9E%B6%E6%9E%84%E5%AF%84%E5%AD%98%E5%99%A8.png"
+<p><code>arm</code>系统寄存器组</p>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%9E%B6%E6%9E%84%E5%AF%84%E5%AD%98%E5%99%A8.png"
 	width="532"
 	height="521"
 	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%9E%B6%E6%9E%84%E5%AF%84%E5%AD%98%E5%99%A8_hu12295166982903513917.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%9E%B6%E6%9E%84%E5%AF%84%E5%AD%98%E5%99%A8_hu7556102674944354891.png 1024w"
@@ -1407,9 +1407,9 @@
 		data-flex-grow="102"
 		data-flex-basis="245px"
 	
->
-还有5个特殊寄存器
-<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%89%B9%E6%AE%8A%E5%AF%84%E5%AD%98%E5%99%A8.png"
+></p>
+<p>还有5个特殊寄存器</p>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%89%B9%E6%AE%8A%E5%AF%84%E5%AD%98%E5%99%A8.png"
 	width="411"
 	height="382"
 	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%89%B9%E6%AE%8A%E5%AF%84%E5%AD%98%E5%99%A8_hu2585720261492038434.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%89%B9%E6%AE%8A%E5%AF%84%E5%AD%98%E5%99%A8_hu16730692858137438873.png 1024w"
@@ -1420,9 +1420,9 @@
 		data-flex-grow="107"
 		data-flex-basis="258px"
 	
->
-浮点数寄存器
-<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%B5%AE%E7%82%B9%E6%95%B0%E5%AF%84%E5%AD%98%E5%99%A8.png"
+></p>
+<p>浮点数寄存器</p>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%B5%AE%E7%82%B9%E6%95%B0%E5%AF%84%E5%AD%98%E5%99%A8.png"
 	width="615"
 	height="752"
 	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%B5%AE%E7%82%B9%E6%95%B0%E5%AF%84%E5%AD%98%E5%99%A8_hu3518435444834283096.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%B5%AE%E7%82%B9%E6%95%B0%E5%AF%84%E5%AD%98%E5%99%A8_hu8231920671927945409.png 1024w"
@@ -1442,8 +1442,8 @@
 <p>在<code>arm cortex-M</code>的<code>CPU</code>内，每一次<code>PC</code>自增4（即向下移动了4个字节），但是在使用<code>thumb</code>指令集时，<code>thumb</code>指令集的部分指令是2个字节，这与处理器的执行流水线<code>pipeline</code>的特性有关，实际取址的时候是一次去4字节，也就是对于2字节的指令是一次取两条</p>
 <p><code>CPU</code>在不断执行程序，本质就是程序计数器的不断更新，<code>PC</code>指向的就是当前要执行的指令的地址</p>
 <h3 id="堆栈指针双堆栈指针机制">堆栈指针&amp;双堆栈指针机制
-</h3><p>栈是高址向低址方向生长，堆是低址向高址方向生长
-<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%A0%86%E6%A0%88.png"
+</h3><p>栈是高址向低址方向生长，堆是低址向高址方向生长</p>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%A0%86%E6%A0%88.png"
 	width="333"
 	height="305"
 	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%A0%86%E6%A0%88_hu16187981557609348171.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%A0%86%E6%A0%88_hu16680403190437700509.png 1024w"
@@ -1486,9 +1486,9 @@
 		data-flex-grow="139"
 		data-flex-basis="334px"
 	
->
-<code>系统架构图</code>
-<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.png"
+></p>
+<p><code>系统架构图</code></p>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.png"
 	width="650"
 	height="515"
 	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84_hu11818484246865093855.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84_hu15492943948597689706.png 1024w"
@@ -1499,9 +1499,9 @@
 		data-flex-grow="126"
 		data-flex-basis="302px"
 	
->
-<code>cortex-M3M4内核架构图</code>
-<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E5%86%85%E6%A0%B8.png"
+></p>
+<p><code>cortex-M3M4内核架构图</code></p>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E5%86%85%E6%A0%B8.png"
 	width="619"
 	height="381"
 	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E5%86%85%E6%A0%B8_hu1376430579139473456.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E5%86%85%E6%A0%B8_hu9245358393590328398.png 1024w"
@@ -1512,8 +1512,8 @@
 		data-flex-grow="162"
 		data-flex-basis="389px"
 	
->
-三级流水线外的设备属于<code>CPU</code>的内核外设，例如<code>NVIC</code>,<code>SysTick</code>系统滴答定时器，<code>MPU</code>等，用<code>0xE004 0000-0xE00F F000</code>地址访问</p>
+></p>
+<p>三级流水线外的设备属于<code>CPU</code>的内核外设，例如<code>NVIC</code>,<code>SysTick</code>系统滴答定时器，<code>MPU</code>等，用<code>0xE004 0000-0xE00F F000</code>地址访问</p>
 <p>软件上就是通过读写外设地址空间来控制这些外设，对应的地址空间单元映射到外设寄存器</p>
 <p>嵌入式编程本质就是在操作存储器，每一段<code>CPU</code>代码指令都是在读取某个地址空间的单元，高级编程语言就是不断向上封装抽象</p>
 <p><code>C</code>语言每条语句追溯到汇编都是在读写存储器的地址空间单元
@@ -1548,10 +1548,10 @@
 		data-flex-grow="196"
 		data-flex-basis="470px"
 	
->
-<code>NVIC</code>属于内核外设，专门管理中断</p>
-<p>在<code>cortex-M</code>芯片中，前15项中断向量都一样
-<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8.png"
+></p>
+<p><code>NVIC</code>属于内核外设，专门管理中断</p>
+<p>在<code>cortex-M</code>芯片中，前15项中断向量都一样</p>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8.png"
 	width="386"
 	height="509"
 	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8_hu6449595849150010522.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8_hu2482380903259567589.png 1024w"
@@ -1562,8 +1562,8 @@
 		data-flex-grow="75"
 		data-flex-basis="182px"
 	
->
-处理器具有向量表重定位功能，通过向量表偏移寄存器(<code>VTOR</code>)来获取向量表的起始地址</p>
+></p>
+<p>处理器具有向量表重定位功能，通过向量表偏移寄存器(<code>VTOR</code>)来获取向量表的起始地址</p>
 <p>中断触发时，处理器通过中断向量表去获取中断处理函数的入口地址</p>
 <h3 id="中断返回中断上下文">中断返回&amp;中断上下文
 </h3><p>在阅读中断的汇编时，会发现中断没有保存和恢复上下文的代码，实际上是硬件帮忙实现上述功能</p>
@@ -1579,14 +1579,14 @@
 		data-flex-grow="216"
 		data-flex-basis="520px"
 	
->
-<code>cortex-M3M4</code>中断需要入栈保存上下文的8个寄存器
+></p>
+<p><code>cortex-M3M4</code>中断需要入栈保存上下文的8个寄存器
 选择保存上述8个寄存器主要是根据<code>arm</code>架构的过程调用标准，<code>C</code>语言的函数实现会改动这些寄存器，为例能让<code>C</code>函数能作为异常（中断）处理函数，中断（异常）机制需要能自动地保存这些寄存器，这些寄存器也被称之为调用者保存寄存器</p>
 <p>处理器恢复上下文，回到原执行流，需要<code>lr</code>寄存器存储异常返回值来记录区分一些工作模式现场，这些信息是恢复中断上下文需要的</p>
 <h2 id="错误处理">错误处理
 </h2><p>介绍<code>arm cortex-M</code>处理器架构如何捕获和记录错误故障</p>
-<p>有专门的寄存器去记录故障，通过查找其对应的地址查看寄存器的位来获取错误信息
-<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E6%95%85%E9%9A%9C%E8%AE%B0%E5%BD%95%E5%AF%84%E5%AD%98%E5%99%A8.png"
+<p>有专门的寄存器去记录故障，通过查找其对应的地址查看寄存器的位来获取错误信息</p>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E6%95%85%E9%9A%9C%E8%AE%B0%E5%BD%95%E5%AF%84%E5%AD%98%E5%99%A8.png"
 	width="635"
 	height="382"
 	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E6%95%85%E9%9A%9C%E8%AE%B0%E5%BD%95%E5%AF%84%E5%AD%98%E5%99%A8_hu18224593236508536412.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E6%95%85%E9%9A%9C%E8%AE%B0%E5%BD%95%E5%AF%84%E5%AD%98%E5%99%A8_hu17222364446200839070.png 1024w"
@@ -1597,8 +1597,8 @@
 		data-flex-grow="166"
 		data-flex-basis="398px"
 	
->
-在发生错误时，对应错误寄存器的对应位被置1，同时触发错误中断处理</p>
+></p>
+<p>在发生错误时，对应错误寄存器的对应位被置1，同时触发错误中断处理</p>
 <p>程序执行非法指令操作导致系统进入不可恢复的故障状态，系统软件就会介入终止程序执行流，其实现机制是中断</p>
 <h2 id="待续">待续
 </h2>

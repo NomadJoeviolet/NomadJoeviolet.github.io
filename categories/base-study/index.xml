@@ -46,8 +46,8 @@
 &gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;指令集&#34;&gt;指令集
-&lt;/h3&gt;&lt;p&gt;多套指令集用于处理不同的场景
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-ARM%E6%8C%87%E4%BB%A4%E9%9B%86%E6%BC%94%E5%8F%98.png&#34;
+&lt;/h3&gt;&lt;p&gt;多套指令集用于处理不同的场景&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-ARM%E6%8C%87%E4%BB%A4%E9%9B%86%E6%BC%94%E5%8F%98.png&#34;
 	width=&#34;542&#34;
 	height=&#34;294&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-ARM%E6%8C%87%E4%BB%A4%E9%9B%86%E6%BC%94%E5%8F%98_hu6983626606541064714.png 480w, https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-ARM%E6%8C%87%E4%BB%A4%E9%9B%86%E6%BC%94%E5%8F%98_hu6407889164870681698.png 1024w&#34;
@@ -83,9 +83,9 @@
 		data-flex-grow=&#34;240&#34;
 		data-flex-basis=&#34;576px&#34;
 	
-&gt;
-&lt;code&gt;arm-none-eabi&lt;/code&gt;
-&lt;code&gt;arm&lt;/code&gt;是指&lt;code&gt;arm&lt;/code&gt;架构，&lt;code&gt;none&lt;/code&gt;是指编译出的可执行文件是运行在硬件上，而不是操作系统上，&lt;code&gt;eabi(The Embedded-Application Binary Interface)&lt;/code&gt;嵌入式应用二进制接口&lt;/p&gt;
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;arm-none-eabi&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;arm&lt;/code&gt;是指&lt;code&gt;arm&lt;/code&gt;架构，&lt;code&gt;none&lt;/code&gt;是指编译出的可执行文件是运行在硬件上，而不是操作系统上，&lt;code&gt;eabi(The Embedded-Application Binary Interface)&lt;/code&gt;嵌入式应用二进制接口&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;arm-none-eabi-objcopy&lt;/code&gt;是一个二进制生成工具&lt;/p&gt;
 &lt;h3 id=&#34;嵌入式编译烧录流程&#34;&gt;嵌入式编译烧录流程
 &lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%BC%96%E8%AF%91%E7%83%A7%E5%BD%95%E5%85%A8%E6%B5%81%E7%A8%8B.png&#34;
@@ -146,8 +146,8 @@
 		data-flex-grow=&#34;358&#34;
 		data-flex-basis=&#34;860px&#34;
 	
-&gt;
-启动后，从零地址（零地址是经过映射的）出读取堆栈指针和程序计数器的值（此时程序计数器的值指向&lt;code&gt;Reset_Handler&lt;/code&gt;），此外每个芯片的&lt;code&gt;Boot code&lt;/code&gt;是定制化的，需要参考手册&lt;/p&gt;
+&gt;&lt;/p&gt;
+&lt;p&gt;启动后，从零地址（零地址是经过映射的）出读取堆栈指针和程序计数器的值（此时程序计数器的值指向&lt;code&gt;Reset_Handler&lt;/code&gt;），此外每个芯片的&lt;code&gt;Boot code&lt;/code&gt;是定制化的，需要参考手册&lt;/p&gt;
 &lt;p&gt;最后&lt;code&gt;Reset_Handler&lt;/code&gt;会指向&lt;code&gt;main&lt;/code&gt;函数&lt;/p&gt;
 &lt;p&gt;以&lt;code&gt;STM32F103&lt;/code&gt;为例
 &lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-STM32F103%E7%9A%84%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE.png&#34;
@@ -161,8 +161,8 @@
 		data-flex-grow=&#34;383&#34;
 		data-flex-basis=&#34;920px&#34;
 	
-&gt;
-这里有三种启动模式，根据启动时&lt;code&gt;BOOT1&lt;/code&gt;和&lt;code&gt;BOOT0&lt;/code&gt;的电平来选择不同的启动地址（即 将该不同的地址映射为零地址），一般情况下是第一种&lt;/p&gt;
+&gt;&lt;/p&gt;
+&lt;p&gt;这里有三种启动模式，根据启动时&lt;code&gt;BOOT1&lt;/code&gt;和&lt;code&gt;BOOT0&lt;/code&gt;的电平来选择不同的启动地址（即 将该不同的地址映射为零地址），一般情况下是第一种&lt;/p&gt;
 &lt;h3 id=&#34;ram内存分布&#34;&gt;RAM内存分布
 &lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.png&#34;
 	width=&#34;1269&#34;
@@ -1004,8 +1004,8 @@
 		data-flex-basis=&#34;414px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;arm&lt;/code&gt;系统寄存器组
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%9E%B6%E6%9E%84%E5%AF%84%E5%AD%98%E5%99%A8.png&#34;
+&lt;p&gt;&lt;code&gt;arm&lt;/code&gt;系统寄存器组&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%9E%B6%E6%9E%84%E5%AF%84%E5%AD%98%E5%99%A8.png&#34;
 	width=&#34;532&#34;
 	height=&#34;521&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%9E%B6%E6%9E%84%E5%AF%84%E5%AD%98%E5%99%A8_hu12295166982903513917.png 480w, https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%9E%B6%E6%9E%84%E5%AF%84%E5%AD%98%E5%99%A8_hu7556102674944354891.png 1024w&#34;
@@ -1016,9 +1016,9 @@
 		data-flex-grow=&#34;102&#34;
 		data-flex-basis=&#34;245px&#34;
 	
-&gt;
-还有5个特殊寄存器
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%89%B9%E6%AE%8A%E5%AF%84%E5%AD%98%E5%99%A8.png&#34;
+&gt;&lt;/p&gt;
+&lt;p&gt;还有5个特殊寄存器&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%89%B9%E6%AE%8A%E5%AF%84%E5%AD%98%E5%99%A8.png&#34;
 	width=&#34;411&#34;
 	height=&#34;382&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%89%B9%E6%AE%8A%E5%AF%84%E5%AD%98%E5%99%A8_hu2585720261492038434.png 480w, https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%89%B9%E6%AE%8A%E5%AF%84%E5%AD%98%E5%99%A8_hu16730692858137438873.png 1024w&#34;
@@ -1029,9 +1029,9 @@
 		data-flex-grow=&#34;107&#34;
 		data-flex-basis=&#34;258px&#34;
 	
-&gt;
-浮点数寄存器
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%B5%AE%E7%82%B9%E6%95%B0%E5%AF%84%E5%AD%98%E5%99%A8.png&#34;
+&gt;&lt;/p&gt;
+&lt;p&gt;浮点数寄存器&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%B5%AE%E7%82%B9%E6%95%B0%E5%AF%84%E5%AD%98%E5%99%A8.png&#34;
 	width=&#34;615&#34;
 	height=&#34;752&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%B5%AE%E7%82%B9%E6%95%B0%E5%AF%84%E5%AD%98%E5%99%A8_hu3518435444834283096.png 480w, https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%B5%AE%E7%82%B9%E6%95%B0%E5%AF%84%E5%AD%98%E5%99%A8_hu8231920671927945409.png 1024w&#34;
@@ -1051,8 +1051,8 @@
 &lt;p&gt;在&lt;code&gt;arm cortex-M&lt;/code&gt;的&lt;code&gt;CPU&lt;/code&gt;内，每一次&lt;code&gt;PC&lt;/code&gt;自增4（即向下移动了4个字节），但是在使用&lt;code&gt;thumb&lt;/code&gt;指令集时，&lt;code&gt;thumb&lt;/code&gt;指令集的部分指令是2个字节，这与处理器的执行流水线&lt;code&gt;pipeline&lt;/code&gt;的特性有关，实际取址的时候是一次去4字节，也就是对于2字节的指令是一次取两条&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;CPU&lt;/code&gt;在不断执行程序，本质就是程序计数器的不断更新，&lt;code&gt;PC&lt;/code&gt;指向的就是当前要执行的指令的地址&lt;/p&gt;
 &lt;h3 id=&#34;堆栈指针双堆栈指针机制&#34;&gt;堆栈指针&amp;amp;双堆栈指针机制
-&lt;/h3&gt;&lt;p&gt;栈是高址向低址方向生长，堆是低址向高址方向生长
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%A0%86%E6%A0%88.png&#34;
+&lt;/h3&gt;&lt;p&gt;栈是高址向低址方向生长，堆是低址向高址方向生长&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%A0%86%E6%A0%88.png&#34;
 	width=&#34;333&#34;
 	height=&#34;305&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%A0%86%E6%A0%88_hu16187981557609348171.png 480w, https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%A0%86%E6%A0%88_hu16680403190437700509.png 1024w&#34;
@@ -1095,9 +1095,9 @@
 		data-flex-grow=&#34;139&#34;
 		data-flex-basis=&#34;334px&#34;
 	
-&gt;
-&lt;code&gt;系统架构图&lt;/code&gt;
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.png&#34;
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;系统架构图&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.png&#34;
 	width=&#34;650&#34;
 	height=&#34;515&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84_hu11818484246865093855.png 480w, https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84_hu15492943948597689706.png 1024w&#34;
@@ -1108,9 +1108,9 @@
 		data-flex-grow=&#34;126&#34;
 		data-flex-basis=&#34;302px&#34;
 	
-&gt;
-&lt;code&gt;cortex-M3M4内核架构图&lt;/code&gt;
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E5%86%85%E6%A0%B8.png&#34;
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cortex-M3M4内核架构图&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E5%86%85%E6%A0%B8.png&#34;
 	width=&#34;619&#34;
 	height=&#34;381&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E5%86%85%E6%A0%B8_hu1376430579139473456.png 480w, https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E5%86%85%E6%A0%B8_hu9245358393590328398.png 1024w&#34;
@@ -1121,8 +1121,8 @@
 		data-flex-grow=&#34;162&#34;
 		data-flex-basis=&#34;389px&#34;
 	
-&gt;
-三级流水线外的设备属于&lt;code&gt;CPU&lt;/code&gt;的内核外设，例如&lt;code&gt;NVIC&lt;/code&gt;,&lt;code&gt;SysTick&lt;/code&gt;系统滴答定时器，&lt;code&gt;MPU&lt;/code&gt;等，用&lt;code&gt;0xE004 0000-0xE00F F000&lt;/code&gt;地址访问&lt;/p&gt;
+&gt;&lt;/p&gt;
+&lt;p&gt;三级流水线外的设备属于&lt;code&gt;CPU&lt;/code&gt;的内核外设，例如&lt;code&gt;NVIC&lt;/code&gt;,&lt;code&gt;SysTick&lt;/code&gt;系统滴答定时器，&lt;code&gt;MPU&lt;/code&gt;等，用&lt;code&gt;0xE004 0000-0xE00F F000&lt;/code&gt;地址访问&lt;/p&gt;
 &lt;p&gt;软件上就是通过读写外设地址空间来控制这些外设，对应的地址空间单元映射到外设寄存器&lt;/p&gt;
 &lt;p&gt;嵌入式编程本质就是在操作存储器，每一段&lt;code&gt;CPU&lt;/code&gt;代码指令都是在读取某个地址空间的单元，高级编程语言就是不断向上封装抽象&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;C&lt;/code&gt;语言每条语句追溯到汇编都是在读写存储器的地址空间单元
@@ -1157,10 +1157,10 @@
 		data-flex-grow=&#34;196&#34;
 		data-flex-basis=&#34;470px&#34;
 	
-&gt;
-&lt;code&gt;NVIC&lt;/code&gt;属于内核外设，专门管理中断&lt;/p&gt;
-&lt;p&gt;在&lt;code&gt;cortex-M&lt;/code&gt;芯片中，前15项中断向量都一样
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8.png&#34;
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;NVIC&lt;/code&gt;属于内核外设，专门管理中断&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;cortex-M&lt;/code&gt;芯片中，前15项中断向量都一样&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8.png&#34;
 	width=&#34;386&#34;
 	height=&#34;509&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8_hu6449595849150010522.png 480w, https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8_hu2482380903259567589.png 1024w&#34;
@@ -1171,8 +1171,8 @@
 		data-flex-grow=&#34;75&#34;
 		data-flex-basis=&#34;182px&#34;
 	
-&gt;
-处理器具有向量表重定位功能，通过向量表偏移寄存器(&lt;code&gt;VTOR&lt;/code&gt;)来获取向量表的起始地址&lt;/p&gt;
+&gt;&lt;/p&gt;
+&lt;p&gt;处理器具有向量表重定位功能，通过向量表偏移寄存器(&lt;code&gt;VTOR&lt;/code&gt;)来获取向量表的起始地址&lt;/p&gt;
 &lt;p&gt;中断触发时，处理器通过中断向量表去获取中断处理函数的入口地址&lt;/p&gt;
 &lt;h3 id=&#34;中断返回中断上下文&#34;&gt;中断返回&amp;amp;中断上下文
 &lt;/h3&gt;&lt;p&gt;在阅读中断的汇编时，会发现中断没有保存和恢复上下文的代码，实际上是硬件帮忙实现上述功能&lt;/p&gt;
@@ -1188,14 +1188,14 @@
 		data-flex-grow=&#34;216&#34;
 		data-flex-basis=&#34;520px&#34;
 	
-&gt;
-&lt;code&gt;cortex-M3M4&lt;/code&gt;中断需要入栈保存上下文的8个寄存器
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cortex-M3M4&lt;/code&gt;中断需要入栈保存上下文的8个寄存器
 选择保存上述8个寄存器主要是根据&lt;code&gt;arm&lt;/code&gt;架构的过程调用标准，&lt;code&gt;C&lt;/code&gt;语言的函数实现会改动这些寄存器，为例能让&lt;code&gt;C&lt;/code&gt;函数能作为异常（中断）处理函数，中断（异常）机制需要能自动地保存这些寄存器，这些寄存器也被称之为调用者保存寄存器&lt;/p&gt;
 &lt;p&gt;处理器恢复上下文，回到原执行流，需要&lt;code&gt;lr&lt;/code&gt;寄存器存储异常返回值来记录区分一些工作模式现场，这些信息是恢复中断上下文需要的&lt;/p&gt;
 &lt;h2 id=&#34;错误处理&#34;&gt;错误处理
 &lt;/h2&gt;&lt;p&gt;介绍&lt;code&gt;arm cortex-M&lt;/code&gt;处理器架构如何捕获和记录错误故障&lt;/p&gt;
-&lt;p&gt;有专门的寄存器去记录故障，通过查找其对应的地址查看寄存器的位来获取错误信息
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E6%95%85%E9%9A%9C%E8%AE%B0%E5%BD%95%E5%AF%84%E5%AD%98%E5%99%A8.png&#34;
+&lt;p&gt;有专门的寄存器去记录故障，通过查找其对应的地址查看寄存器的位来获取错误信息&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E6%95%85%E9%9A%9C%E8%AE%B0%E5%BD%95%E5%AF%84%E5%AD%98%E5%99%A8.png&#34;
 	width=&#34;635&#34;
 	height=&#34;382&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E6%95%85%E9%9A%9C%E8%AE%B0%E5%BD%95%E5%AF%84%E5%AD%98%E5%99%A8_hu18224593236508536412.png 480w, https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E6%95%85%E9%9A%9C%E8%AE%B0%E5%BD%95%E5%AF%84%E5%AD%98%E5%99%A8_hu17222364446200839070.png 1024w&#34;
@@ -1206,8 +1206,8 @@
 		data-flex-grow=&#34;166&#34;
 		data-flex-basis=&#34;398px&#34;
 	
-&gt;
-在发生错误时，对应错误寄存器的对应位被置1，同时触发错误中断处理&lt;/p&gt;
+&gt;&lt;/p&gt;
+&lt;p&gt;在发生错误时，对应错误寄存器的对应位被置1，同时触发错误中断处理&lt;/p&gt;
 &lt;p&gt;程序执行非法指令操作导致系统进入不可恢复的故障状态，系统软件就会介入终止程序执行流，其实现机制是中断&lt;/p&gt;
 &lt;h2 id=&#34;待续&#34;&gt;待续
 &lt;/h2&gt;</description>
