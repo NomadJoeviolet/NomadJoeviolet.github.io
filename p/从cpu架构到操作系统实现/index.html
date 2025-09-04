@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="跟着下面的视频，系统梳理复习过往的嵌入式知识，同时也算是 电控成长指南 的一个 部分 实现，能有效且快速的建立一个嵌入式系统和工具链的整体认知\n【《从CPU架构到操作系统实现》系列课程 - Git 开源】https://www.bilibili.com/video/BV1ksNCzXEny?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
 <title>从CPU架构到操作系统实现</title>
 
 <link rel='canonical' href='https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/'>
 
 <link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="从CPU架构到操作系统实现">
-<meta property='og:description' content="">
+<meta property='og:description' content="跟着下面的视频，系统梳理复习过往的嵌入式知识，同时也算是 电控成长指南 的一个 部分 实现，能有效且快速的建立一个嵌入式系统和工具链的整体认知\n【《从CPU架构到操作系统实现》系列课程 - Git 开源】https://www.bilibili.com/video/BV1ksNCzXEny?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/'>
 <meta property='og:site_name' content='Nomad_violet'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='BASE' /><meta property='article:published_time' content='2025-09-04T00:36:07&#43;08:00'/><meta property='article:modified_time' content='2025-09-04T00:36:07&#43;08:00'/>
 <meta name="twitter:title" content="从CPU架构到操作系统实现">
-<meta name="twitter:description" content="">
+<meta name="twitter:description" content="跟着下面的视频，系统梳理复习过往的嵌入式知识，同时也算是 电控成长指南 的一个 部分 实现，能有效且快速的建立一个嵌入式系统和工具链的整体认知\n【《从CPU架构到操作系统实现》系列课程 - Git 开源】https://www.bilibili.com/video/BV1ksNCzXEny?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -239,7 +239,115 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#概述">概述</a>
+      <ol>
+        <li><a href="#关于arm架构">关于ARM架构</a>
+          <ol>
+            <li><a href="#cortex-m优点">Cortex-M优点</a></li>
+          </ol>
+        </li>
+        <li><a href="#指令集">指令集</a>
+          <ol>
+            <li><a href="#1cisccomplex-instruction-set-computer">1.CISC（Complex Instruction Set Computer）</a></li>
+            <li><a href="#2riscreduced-instruction-set-computer">2.RISC（Reduced Instruction Set Computer）</a></li>
+          </ol>
+        </li>
+        <li><a href="#开发环境dev">开发环境（DEV）</a></li>
+      </ol>
+    </li>
+    <li><a href="#编译">编译</a>
+      <ol>
+        <li><a href="#编译链工具">编译链工具</a></li>
+        <li><a href="#嵌入式编译烧录流程">嵌入式编译烧录流程</a>
+          <ol>
+            <li><a href="#预编译">预编译</a></li>
+            <li><a href="#编译-1">编译</a></li>
+            <li><a href="#汇编">汇编</a></li>
+            <li><a href="#链接">链接</a></li>
+            <li><a href="#转换">转换</a></li>
+            <li><a href="#烧录">烧录</a></li>
+          </ol>
+        </li>
+        <li><a href="#反汇编">反汇编</a></li>
+      </ol>
+    </li>
+    <li><a href="#启动">启动</a>
+      <ol>
+        <li><a href="#中断向量表">中断向量表</a></li>
+        <li><a href="#启动原理">启动原理</a></li>
+        <li><a href="#ram内存分布">RAM内存分布</a></li>
+        <li><a href="#启动文件详解">启动文件详解</a>
+          <ol>
+            <li><a href="#一stm32f103-启动文件startup_stm32f103xbs核心定位">一、STM32F103 启动文件（startup_stm32f103xb.s）核心定位</a></li>
+            <li><a href="#二启动文件整体结构拆解">二、启动文件整体结构拆解</a></li>
+            <li><a href="#三逐段解析启动文件代码">三、逐段解析启动文件代码</a></li>
+            <li><a href="#四启动文件与链接器脚本ld的配合关系">四、启动文件与链接器脚本（.ld）的配合关系</a></li>
+            <li><a href="#五总结启动文件的核心价值">五、总结：启动文件的核心价值</a></li>
+          </ol>
+        </li>
+        <li><a href="#stm32-启动流程ld-文件作用及示例解析">STM32 启动流程、.ld 文件作用及示例解析</a>
+          <ol>
+            <li><a href="#一stm32-的启动流程从复位到main函数">一、STM32 的启动流程（从复位到<code>main</code>函数）</a></li>
+            <li><a href="#二ld-文件链接器脚本的核心作用">二、.ld 文件（链接器脚本）的核心作用</a></li>
+            <li><a href="#三解析-stm32f103c8tx-的ld-文件">三、解析 STM32F103C8Tx 的.ld 文件</a></li>
+            <li><a href="#四总结启动流程与ld-文件的关联">四、总结：启动流程与.ld 文件的关联</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#寄存器">寄存器</a>
+      <ol>
+        <li><a href="#通用寄存器">通用寄存器</a></li>
+        <li><a href="#pc程序计数器程序如何跑起来">PC程序计数器&amp;程序如何跑起来</a></li>
+        <li><a href="#堆栈指针双堆栈指针机制">堆栈指针&amp;双堆栈指针机制</a></li>
+        <li><a href="#lr链接寄存器函数调用的本质">LR链接寄存器&amp;函数调用的本质</a></li>
+      </ol>
+    </li>
+    <li><a href="#地址分配">地址分配</a>
+      <ol>
+        <li><a href="#存储器系统">存储器系统</a></li>
+        <li><a href="#关于内存和编译优化">关于内存和编译优化</a></li>
+      </ol>
+    </li>
+    <li><a href="#中断">中断</a>
+      <ol>
+        <li><a href="#关于中断">关于中断</a></li>
+        <li><a href="#中断返回中断上下文">中断返回&amp;中断上下文</a></li>
+      </ol>
+    </li>
+    <li><a href="#错误处理">错误处理</a></li>
+    <li><a href="#待续">待续</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -296,7 +404,1204 @@
     <section class="article-content">
     
     
-    
+    <p>跟着下面的视频，系统梳理复习过往的嵌入式知识，同时也算是 电控成长指南 的一个 部分 实现，能有效且快速的建立一个嵌入式系统和工具链的整体认知</p>
+<p><code>【《从CPU架构到操作系统实现》系列课程 - Git 开源】https://www.bilibili.com/video/BV1ksNCzXEny?vd_source=5a0790755035f26a67935abfbfcdfd5b</code></p>
+<p>视频中详细且硬核的实例不会出现在此笔记中</p>
+<h2 id="概述">概述
+</h2><h3 id="关于arm架构">关于ARM架构
+</h3><p>目前<code>arm</code>内核主要演变分为<code>Cortex-X</code>，<code>Cortex-A</code>，<code>Cortex-R</code>，<code>Cortex-M</code></p>
+<p><code>Cortex-A</code>：应用处理器，设计用来处理复杂应用（例如高端嵌入操作系统<code>Linux</code>，<code>iOS</code>，<code>Android</code>，<code>Windows</code>），对标PC和手机处理器的性能</p>
+<p><code>Cortex-X</code>：比<code>Cortex-M</code>更高的性能</p>
+<p><code>Cortex-R</code>：<code>Real-time</code>，主要用于实时系统</p>
+<p><code>Cortex-M</code>：<code>Microcontrol</code>，微处理器</p>
+<h4 id="cortex-m优点">Cortex-M优点
+</h4><ol>
+<li>低功耗</li>
+<li>高性能</li>
+<li>中断易用</li>
+<li>代码密度高（原因在于指令集）</li>
+<li>可调式</li>
+<li>支持操作系统
+哈佛架构，指令与数据在同一内存
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-Cortex-M%E7%9A%84%E5%86%85%E6%A0%B8%E6%A1%86%E5%9B%BE.png"
+	width="790"
+	height="457"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-Cortex-M%E7%9A%84%E5%86%85%E6%A0%B8%E6%A1%86%E5%9B%BE_hu2536946228529719192.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-Cortex-M%E7%9A%84%E5%86%85%E6%A0%B8%E6%A1%86%E5%9B%BE_hu15969040657550120430.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="172"
+		data-flex-basis="414px"
+	
+></li>
+</ol>
+<h3 id="指令集">指令集
+</h3><p>多套指令集用于处理不同的场景
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-ARM%E6%8C%87%E4%BB%A4%E9%9B%86%E6%BC%94%E5%8F%98.png"
+	width="542"
+	height="294"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-ARM%E6%8C%87%E4%BB%A4%E9%9B%86%E6%BC%94%E5%8F%98_hu6983626606541064714.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-ARM%E6%8C%87%E4%BB%A4%E9%9B%86%E6%BC%94%E5%8F%98_hu6407889164870681698.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="184"
+		data-flex-basis="442px"
+	
+></p>
+<h4 id="1cisccomplex-instruction-set-computer">1.CISC（Complex Instruction Set Computer）
+</h4><p>复杂指令系统计算机，<code>CISC</code>指令集包含大量复杂的指令，每条指令可以完成多个操作，这种设计使得编程简单，但硬件实现复杂，执行效率低</p>
+<p><code>x86</code>架构（<code>Intel</code>的8086，8088，80286，80386）</p>
+<h4 id="2riscreduced-instruction-set-computer">2.RISC（Reduced Instruction Set Computer）
+</h4><p>精简指令系统计算机，<code>RISC</code>指令集包含较少的简单指令，每条指令只完成一个操作，使得硬件实现更简单，执行效率更高，但编程更复杂</p>
+<p><code>ARM</code>架构，<code>RISC-V</code>架构，<code>MIPS</code>架构</p>
+<h3 id="开发环境dev">开发环境（DEV）
+</h3><p><code>GUN-GCC</code>编译器，<code>CMake</code>-&gt;<code>makefile</code>
+<code>STM32F103C8（C8T6）</code>经典控制器（<code>Cortex-M3</code>）</p>
+<h2 id="编译">编译
+</h2><h3 id="编译链工具">编译链工具
+</h3><p><code>ARM-Cortex-M</code>处理器的编译器很多，常用的是<code>MDK-ARM</code>(<code>ARM</code>公司自研的)(<code>Keil</code>)，以及<code>GCC</code>(<code>GNU-Compiler-Collection</code>)</p>
+<p>编译器之间的最大区别在于汇编伪代码，链接语法，还有使用参数
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%BC%96%E8%AF%91%E9%93%BE%E5%B7%A5%E5%85%B7.png"
+	width="504"
+	height="210"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%BC%96%E8%AF%91%E9%93%BE%E5%B7%A5%E5%85%B7_hu6975328528861761610.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%BC%96%E8%AF%91%E9%93%BE%E5%B7%A5%E5%85%B7_hu7913020072329710182.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="240"
+		data-flex-basis="576px"
+	
+>
+<code>arm-none-eabi</code>
+<code>arm</code>是指<code>arm</code>架构，<code>none</code>是指编译出的可执行文件是运行在硬件上，而不是操作系统上，<code>eabi(The Embedded-Application Binary Interface)</code>嵌入式应用二进制接口</p>
+<p><code>arm-none-eabi-objcopy</code>是一个二进制生成工具</p>
+<h3 id="嵌入式编译烧录流程">嵌入式编译烧录流程
+</h3><p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%BC%96%E8%AF%91%E7%83%A7%E5%BD%95%E5%85%A8%E6%B5%81%E7%A8%8B.png"
+	width="1641"
+	height="820"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%BC%96%E8%AF%91%E7%83%A7%E5%BD%95%E5%85%A8%E6%B5%81%E7%A8%8B_hu18309702811978085822.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%BC%96%E8%AF%91%E7%83%A7%E5%BD%95%E5%85%A8%E6%B5%81%E7%A8%8B_hu7323167174626790360.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="200"
+		data-flex-basis="480px"
+	
+>
+个人更喜欢将编译过程拆解为 预编译，编译，汇编，链接</p>
+<p>转换这里是将<code>.elf</code>文件转换为<code>.bin</code>文件
+<code>.bin</code>文件是代码的纯机器码</p>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/671327144"  target="_blank" rel="noopener"
+    >一文看懂hex文件、bin文件、axf文件的区别 - 知乎</a></p>
+<h4 id="预编译">预编译
+</h4><p>将所有头文件和宏展开，同时去掉注释，生成<code>.i</code>文件（<code>c</code>中间文件）</p>
+<h4 id="编译-1">编译
+</h4><p>将<code>.i</code>文件编译为<code>.s</code>汇编文件，编译优化发生在此处</p>
+<h4 id="汇编">汇编
+</h4><p>将<code>.s</code>文件汇编为<code>.o</code>二进制文件（机器码）
+二进制文件中还包含很多的其他信息</p>
+<p>在汇编时，可以指定汇编器的参数来选择指令集</p>
+<h4 id="链接">链接
+</h4><p>链接是将各个二进制文件里面的机器码所在的各个段拼接起来，以形成可执行文件<code>.elf</code>（带有调试信息）</p>
+<p>在链接这个阶段才能检测出有不有重复定义和未定义的错误</p>
+<p>对于<code>GNU</code>来说，可以编写<code>.ld</code>链接脚本来编排代码的分区地址</p>
+<h4 id="转换">转换
+</h4><p>通过转换器能将<code>.elf</code>文件转换为<code>.hex</code>和<code>.bin</code>文件，主要用于提取信息</p>
+<p><code>.bin</code>文件只包含二进制机器码
+<code>.hex</code>文件是<code>Intel</code>定义的包含地址和二进制数值的<code>ASC</code>码文本文件</p>
+<h4 id="烧录">烧录
+</h4><p>烧录的过程是将编译好的机器码写到<code>CPU</code>存储器中</p>
+<h3 id="反汇编">反汇编
+</h3><p><code>GCC</code>中的反汇编工具<code>Disassembler</code>是<code>arm-none-eabi-objdump</code></p>
+<h2 id="启动">启动
+</h2><p>主要是讲解<code>STM32</code>的启动流程</p>
+<h3 id="中断向量表">中断向量表
+</h3><p>中断向量表的构建，根据不同的编译工具，有不同的方式构建</p>
+<p>中断向量表的前两项（.woed，4字节）是最关键的
+第一项是堆栈指针的值
+第二项是<code>Reset_Handler</code>函数入口</p>
+<p>在启动时，需要先设置堆栈指针，否则无法进行压栈的操作，从宏观上说，意味着<code>C</code>语言函数体不能调用子函数</p>
+<p>VTOR寄存器，中断向量表偏移寄存器</p>
+<h3 id="启动原理">启动原理
+</h3><p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-stm32%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86.png"
+	width="692"
+	height="193"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-stm32%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86_hu7308303685142515106.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-stm32%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86_hu3601764468401878811.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="358"
+		data-flex-basis="860px"
+	
+>
+启动后，从零地址（零地址是经过映射的）出读取堆栈指针和程序计数器的值（此时程序计数器的值指向<code>Reset_Handler</code>），此外每个芯片的<code>Boot code</code>是定制化的，需要参考手册</p>
+<p>最后<code>Reset_Handler</code>会指向<code>main</code>函数</p>
+<p>以<code>STM32F103</code>为例
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-STM32F103%E7%9A%84%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE.png"
+	width="702"
+	height="183"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-STM32F103%E7%9A%84%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE_hu9096615423115854028.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-STM32F103%E7%9A%84%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE_hu17858520829407483512.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="383"
+		data-flex-basis="920px"
+	
+>
+这里有三种启动模式，根据启动时<code>BOOT1</code>和<code>BOOT0</code>的电平来选择不同的启动地址（即 将该不同的地址映射为零地址），一般情况下是第一种</p>
+<h3 id="ram内存分布">RAM内存分布
+</h3><p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.png"
+	width="1269"
+	height="674"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83_hu13448359514406145975.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83_hu250755568266859443.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="188"
+		data-flex-basis="451px"
+	
+></p>
+<h3 id="启动文件详解">启动文件详解
+</h3><h4 id="一stm32f103-启动文件startup_stm32f103xbs核心定位">一、STM32F103 启动文件（startup_stm32f103xb.s）核心定位
+</h4><p>STM32 的启动文件（如<code>startup_stm32f103xb.s</code>）是<strong>汇编语言编写的底层程序</strong>，是硬件复位后执行的第一段代码，负责衔接 “硬件初始化” 与 “用户 C 代码（<code>main</code>函数）”。其核心功能包括：设置栈指针、构建中断向量表、初始化数据段（<code>.data</code>）、清零未初始化数据段（<code>.bss</code>）、配置系统时钟，最终引导程序进入<code>main</code>函数，是 STM32 程序运行的 “底层基石”。</p>
+<h4 id="二启动文件整体结构拆解">二、启动文件整体结构拆解
+</h4><p>该启动文件按功能可划分为 5 个核心模块，各模块职责明确且环环相扣：</p>
+<ol>
+<li><strong>汇编环境配置</strong>：指定处理器架构、指令集、浮点模式，确保汇编代码与硬件兼容。</li>
+<li><strong>关键符号声明</strong>：引用链接器脚本（<code>.ld</code>）中定义的内存地址符号，建立启动文件与内存布局的关联。</li>
+<li><strong>复位处理函数（<code>Reset_Handler</code>）</strong>：复位后执行的核心逻辑，完成初始化并跳转到<code>main</code>。</li>
+<li><strong>中断向量表（<code>g_pfnVectors</code>）</strong>：存储所有异常 / 中断的处理函数地址，供内核响应中断时调用。</li>
+<li><strong>默认中断处理函数（<code>Default_Handler</code>）</strong>：未自定义的中断会默认进入此处，避免系统崩溃。</li>
+</ol>
+<h4 id="三逐段解析启动文件代码">三、逐段解析启动文件代码
+</h4><h5 id="1-汇编环境配置开头基础设置">1. 汇编环境配置（开头基础设置）
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl">  <span class="na">.syntax</span> <span class="no">unified</span>       <span class="c1">; 使用统一汇编语法（兼容ARM与Thumb指令集）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.cpu</span> <span class="no">cortex-m3</span>        <span class="c1">; 目标处理器为Cortex-M3（STM32F103内核型号）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.fpu</span> <span class="no">softvfp</span>          <span class="c1">; 浮点模式：软件模拟（STM32F103无硬件FPU）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.thumb</span>                <span class="c1">; 启用Thumb指令集（Cortex-M3仅支持Thumb/Thumb2指令）
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>作用</strong>：告诉汇编器（如<code>arm-none-eabi-as</code>）“如何编译这段代码”，确保生成的指令能被 STM32F103 正确执行。</li>
+<li><strong>关键细节</strong>：<code>softvfp</code>对应 STM32F103 的硬件特性 —— 该型号无硬件浮点处理单元（FPU），需通过软件模拟浮点运算，与之前解析的<code>.ld</code>文件中未配置 FPU 参数完全匹配。</li>
+</ul>
+<h5 id="2-关键符号声明与链接器脚本联动">2. 关键符号声明（与链接器脚本联动）
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="na">.global</span> <span class="no">g_pfnVectors</span>    <span class="c1">; 全局符号：中断向量表（供链接器识别并分配地址）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.global</span> <span class="no">Default_Handler</span> <span class="c1">; 全局符号：默认中断处理函数（供中断向量表引用）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* 引用链接器脚本（.ld）中定义的内存地址符号 */</span>
+</span></span><span class="line"><span class="cl"><span class="na">.word</span> <span class="no">_sidata</span>  <span class="c1">; .data段在FLASH中的加载地址（LMA，初始值存放位置）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.word</span> <span class="no">_sdata</span>   <span class="c1">; .data段在RAM中的运行起始地址（VMA，变量实际存储位置）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.word</span> <span class="no">_edata</span>   <span class="c1">; .data段在RAM中的运行结束地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.word</span> <span class="no">_sbss</span>    <span class="c1">; .bss段在RAM中的起始地址（未初始化变量存储区）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.word</span> <span class="no">_ebss</span>    <span class="c1">; .bss段在RAM中的结束地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="na">.equ</span>  <span class="no">BootRAM</span><span class="p">,</span> <span class="mi">0xF108F85F</span>  <span class="c1">; 定义RAM启动模式的特殊地址（仅用于特定boot配置）
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>核心意义</strong>：通过<code>.word</code>指令声明的符号，直接引用<code>.ld</code>文件中根据硬件内存布局（64K FLASH、20K RAM）计算出的地址。例如：
+<ul>
+<li><code>_sdata</code>和<code>_edata</code>确定了<code>.data</code>段在 RAM 中的范围，<code>_sidata</code>确定了其初始值在 FLASH 中的位置，为后续 “数据段复制” 提供地址依据。</li>
+<li>若缺少这些符号，启动文件无法知道 “数据该从哪里复制到哪里”，内存初始化会彻底失败。</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-复位处理函数reset_handler启动核心逻辑">3. 复位处理函数（<code>Reset_Handler</code>：启动核心逻辑）
+</h5><p><code>Reset_Handler</code>是复位后执行的第一个函数（由中断向量表指定），对应 STM32 启动流程中的 “软件初始化” 阶段，代码逻辑可分为 5 步：</p>
+<p>asm</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl">  <span class="na">.section</span> <span class="no">.text.Reset_Handler</span>  <span class="c1">; 将函数放入.text段（代码段，.ld中分配到FLASH）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.weak</span> <span class="no">Reset_Handler</span>           <span class="c1">; 弱定义：允许用户代码重定义该函数（覆盖默认逻辑）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.type</span> <span class="no">Reset_Handler</span><span class="p">,</span> <span class="nv">%function</span> <span class="c1">; 标记为函数类型（汇编器识别函数边界）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nl">Reset_Handler:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/* 步骤1：初始化系统时钟 */</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">bl</span>  <span class="no">SystemInit</span>  <span class="c1">; 跳转到STM32库函数SystemInit（配置HSE/PLL，将时钟从8MHz HSI切换到72MHz）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* 步骤2：复制.data段（从FLASH到RAM） */</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">ldr</span> <span class="no">r0</span><span class="p">,</span> <span class="err">=</span><span class="no">_sdata</span>   <span class="c1">; r0 = .data段在RAM的起始地址（VMA）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">ldr</span> <span class="no">r1</span><span class="p">,</span> <span class="err">=</span><span class="no">_edata</span>   <span class="c1">; r1 = .data段在RAM的结束地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">ldr</span> <span class="no">r2</span><span class="p">,</span> <span class="err">=</span><span class="no">_sidata</span>  <span class="c1">; r2 = .data段在FLASH的加载地址（LMA）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">movs</span> <span class="no">r3</span><span class="p">,</span> <span class="c1">#0       ; r3 = 偏移量（初始为0，每次复制4字节后递增）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">b</span> <span class="no">LoopCopyDataInit</span> <span class="c1">; 跳转到循环复制入口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nl">CopyDataInit:</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">ldr</span> <span class="no">r4</span><span class="p">,</span> <span class="p">[</span><span class="no">r2</span><span class="p">,</span> <span class="no">r3</span><span class="p">]</span>  <span class="c1">; 从FLASH读取数据：r4 = *(r2 + r3)（源地址=加载地址+偏移量）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">str</span> <span class="no">r4</span><span class="p">,</span> <span class="p">[</span><span class="no">r0</span><span class="p">,</span> <span class="no">r3</span><span class="p">]</span>  <span class="c1">; 写入RAM：*(r0 + r3) = r4（目标地址=运行地址+偏移量）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">adds</span> <span class="no">r3</span><span class="p">,</span> <span class="no">r3</span><span class="p">,</span> <span class="c1">#4   ; 偏移量+4（32位数据，每次复制1个word）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nl">LoopCopyDataInit:</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">adds</span> <span class="no">r4</span><span class="p">,</span> <span class="no">r0</span><span class="p">,</span> <span class="no">r3</span>   <span class="c1">; r4 = 当前复制位置（运行地址+偏移量）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">cmp</span> <span class="no">r4</span><span class="p">,</span> <span class="no">r1</span>        <span class="c1">; 比较当前位置与结束地址：是否复制完成？
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">bcc</span> <span class="no">CopyDataInit</span>  <span class="c1">; 若未完成（r4 &lt; r1），继续循环复制
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  
+</span></span><span class="line"><span class="cl">  <span class="cm">/* 步骤3：清零.bss段（未初始化变量区） */</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">ldr</span> <span class="no">r2</span><span class="p">,</span> <span class="err">=</span><span class="no">_sbss</span>    <span class="c1">; r2 = .bss段在RAM的起始地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">ldr</span> <span class="no">r4</span><span class="p">,</span> <span class="err">=</span><span class="no">_ebss</span>    <span class="c1">; r4 = .bss段在RAM的结束地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">movs</span> <span class="no">r3</span><span class="p">,</span> <span class="c1">#0       ; r3 = 0（用于清零）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">b</span> <span class="no">LoopFillZerobss</span> <span class="c1">; 跳转到循环清零入口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nl">FillZerobss:</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">str</span>  <span class="no">r3</span><span class="p">,</span> <span class="p">[</span><span class="no">r2</span><span class="p">]</span>     <span class="c1">; 将0写入当前地址：*r2 = 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">adds</span> <span class="no">r2</span><span class="p">,</span> <span class="no">r2</span><span class="p">,</span> <span class="c1">#4   ; 地址+4（每次清零1个word）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nl">LoopFillZerobss:</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">cmp</span> <span class="no">r2</span><span class="p">,</span> <span class="no">r4</span>        <span class="c1">; 比较当前地址与结束地址：是否清零完成？
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">bcc</span> <span class="no">FillZerobss</span>   <span class="c1">; 若未完成（r2 &lt; r4），继续循环清零
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* 步骤4：初始化C++静态构造函数（兼容C++项目） */</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">bl</span> <span class="no">__libc_init_array</span>  <span class="c1">; 调用C库函数，执行全局对象构造（纯C项目可忽略，不影响运行）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* 步骤5：跳转到用户main函数 */</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">bl</span> <span class="no">main</span>   <span class="c1">; 跳转到用户C代码的main函数（启动流程结束，交权给用户）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">bx</span> <span class="no">lr</span>     <span class="c1">; 若main函数返回（实际中main通常是死循环），跳回当前位置（无实际意义）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.size</span> <span class="no">Reset_Handler</span><span class="p">,</span> <span class="no">.-Reset_Handler</span>  <span class="c1">; 定义函数大小（.表示当前地址，计算函数长度）
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="关键步骤解读">关键步骤解读：
+</h5><ul>
+<li><strong>系统时钟初始化（<code>SystemInit</code>）</strong>：STM32 复位后默认使用 8MHz 的内部高速时钟（HSI），<code>SystemInit</code>函数会配置外部高速时钟（HSE）和锁相环（PLL），将系统时钟提升到 72MHz（F103 的常用工作频率），确保外设和 CPU 高效运行。</li>
+<li><strong>.data 段复制</strong>：<code>.data</code>段存储 “已初始化的全局 / 静态变量”（如<code>int a = 10;</code>），这些变量需要读写权限，因此运行时必须在 RAM 中；但编译时其初始值会存放在 FLASH（节省 RAM），需通过此步骤复制到 RAM。</li>
+<li><strong>.bss 段清零</strong>：<code>.bss</code>段存储 “未初始化的全局 / 静态变量”（如<code>int b;</code>），C 语言标准要求其初始值为 0，因此无需在 FLASH 中存储初始值，直接将 RAM 对应区域清零即可。</li>
+<li><strong>跳转到<code>main</code></strong>：这是启动文件的 “最终目标”—— 完成所有底层初始化后，将程序控制权交给用户代码，正式进入应用逻辑。</li>
+</ul>
+<h5 id="4-中断向量表g_pfnvectors中断响应的-地址簿">4. 中断向量表（<code>g_pfnVectors</code>：中断响应的 “地址簿”）
+</h5><p>中断向量表是<strong>Cortex-M3 内核复位后访问的第一个数据结构</strong>，存储了所有异常（如复位、硬 fault）和外设中断（如串口、定时器）的处理函数地址。当发生中断 / 异常时，内核会从向量表中找到对应地址，跳转到处理函数执行。</p>
+<p>asm</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl">  <span class="na">.section</span> <span class="no">.isr_vector</span><span class="p">,</span><span class="s">&#34;a&#34;</span><span class="p">,</span><span class="nv">%progbits</span>  <span class="c1">; 将向量表放入.isr_vector段（.ld中分配到FLASH起始地址0x8000000）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.type</span> <span class="no">g_pfnVectors</span><span class="p">,</span> <span class="nv">%object</span>         <span class="c1">; 标记为数据对象（而非函数）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.size</span> <span class="no">g_pfnVectors</span><span class="p">,</span> <span class="no">.-g_pfnVectors</span>  <span class="c1">; 定义向量表大小（计算表的总字节数）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nl">g_pfnVectors:</span>
+</span></span><span class="line"><span class="cl">  <span class="na">.word</span> <span class="no">_estack</span>                       <span class="c1">; 第0个元素：栈顶地址（MSP初始值，来自.ld文件）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">Reset_Handler</span>                 <span class="c1">; 第1个元素：复位处理函数地址（复位后PC指向这里）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">NMI_Handler</span>                   <span class="c1">; 第2个元素：不可屏蔽中断（NMI）处理函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">HardFault_Handler</span>             <span class="c1">; 第3个元素：硬fault异常处理函数（严重错误，如内存访问越界）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">MemManage_Handler</span>             <span class="c1">; 第4个元素：内存管理异常处理函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">BusFault_Handler</span>              <span class="c1">; 第5个元素：总线fault异常处理函数（如访问不存在的外设地址）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">UsageFault_Handler</span>            <span class="c1">; 第6个元素：用法fault异常处理函数（如指令错误）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="mi">0</span>                             <span class="c1">; 第7-10个元素：保留（未使用）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">  <span class="na">.word</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">  <span class="na">.word</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">  <span class="na">.word</span> <span class="no">SVC_Handler</span>                   <span class="c1">; 第11个元素：系统服务调用（SVC）处理函数（OS常用）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">DebugMon_Handler</span>              <span class="c1">; 第12个元素：调试监控处理函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="mi">0</span>                             <span class="c1">; 第13个元素：保留
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">PendSV_Handler</span>                <span class="c1">; 第14个元素：PendSV异常处理函数（任务切换常用）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">SysTick_Handler</span>               <span class="c1">; 第15个元素：系统滴答定时器（SysTick）处理函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="cm">/* 以下为外设中断向量（第16个元素开始） */</span>
+</span></span><span class="line"><span class="cl">  <span class="na">.word</span> <span class="no">WWDG_IRQHandler</span>               <span class="c1">; 窗口看门狗中断
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">PVD_IRQHandler</span>                <span class="c1">; 电源电压检测中断
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">TAMPER_IRQHandler</span>             <span class="c1">; 篡改检测中断
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">RTC_IRQHandler</span>                <span class="c1">; RTC时钟中断
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">FLASH_IRQHandler</span>              <span class="c1">; FLASH操作中断
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">RCC_IRQHandler</span>                <span class="c1">; RCC时钟控制中断
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.word</span> <span class="no">EXTI0_IRQHandler</span>              <span class="c1">; 外部中断0（如PA0）中断
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">...</span><span class="err">（省略其余外设中断，共</span><span class="mi">60</span><span class="err">+个，对应</span><span class="no">F103所有外设</span><span class="err">）</span><span class="no">...</span>
+</span></span><span class="line"><span class="cl">  <span class="na">.word</span> <span class="no">BootRAM</span>                       <span class="c1">; RAM启动模式的特殊地址（仅用于从RAM启动，默认从FLASH启动时无用）
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="核心特性">核心特性：
+</h5><ul>
+<li><strong>位置固定</strong>：在<code>.ld</code>文件中，<code>.isr_vector</code>段被强制分配到 FLASH 起始地址（<code>0x8000000</code>），这是 Cortex-M3 内核的硬件规定 —— 复位后内核会自动从<code>0x8000000</code>读取向量表。</li>
+<li><strong>第 0 个元素必为栈顶</strong>：内核复位后做的第一件事是 “初始化栈指针（MSP）”，因此向量表第 0 个元素必须是栈顶地址（<code>_estack</code>，来自.ld 文件），否则后续函数调用、局部变量存储会因栈地址错误崩溃。</li>
+<li><strong>中断优先级隐含</strong>：向量表中元素的顺序对应中断 / 异常的优先级（靠前的优先级更高），例如 “硬 fault”（第 3 个元素）优先级高于 “SysTick”（第 15 个元素）。</li>
+</ul>
+<h5 id="5-默认中断处理函数default_handler中断-兜底-逻辑">5. 默认中断处理函数（<code>Default_Handler</code>：中断 “兜底” 逻辑）
+</h5><p>当用户未为某个中断定义处理函数时，中断向量表会将该中断的地址指向<code>Default_Handler</code>，避免系统因 “找不到中断处理函数” 而进入未知状态。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl">    <span class="na">.section</span> <span class="no">.text.Default_Handler</span><span class="p">,</span><span class="s">&#34;ax&#34;</span><span class="p">,</span><span class="nv">%progbits</span>  <span class="c1">; 放入.text段，属性为可执行（ax）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nl">Default_Handler:</span>
+</span></span><span class="line"><span class="cl"><span class="nl">Infinite_Loop:</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">b</span> <span class="no">Infinite_Loop</span>  <span class="c1">; 无限循环（死循环），防止程序跑飞
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.size</span> <span class="no">Default_Handler</span><span class="p">,</span> <span class="no">.-Default_Handler</span>  <span class="c1">; 定义函数大小
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="弱别名机制用户可重定义中断函数">弱别名机制（用户可重定义中断函数）
+</h5><p>启动文件通过 “弱别名（<code>.weak</code>）” 允许用户在 C 代码中重定义中断处理函数，具体逻辑如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl">  <span class="na">.weak</span> <span class="no">NMI_Handler</span>                  <span class="c1">; 弱定义：NMI_Handler可被用户代码覆盖
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="na">.thumb_set</span> <span class="no">NMI_Handler</span><span class="p">,</span><span class="no">Default_Handler</span>  <span class="c1">; 若用户未定义，NMI_Handler默认指向Default_Handler
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>工作原理</strong>：
+<ol>
+<li><code>.weak</code>标记表示 “该符号是弱定义的，若用户定义了同名符号，优先使用用户定义的版本”。</li>
+<li>用户只需在 C 代码中编写<code>void USART1_IRQHandler(void) { ... }</code>，链接时会自动覆盖启动文件中的弱定义，使串口 1 中断触发时执行用户代码。</li>
+<li>若用户未定义，则使用默认的<code>Default_Handler</code>（无限循环）。</li>
+</ol>
+</li>
+</ul>
+<h4 id="四启动文件与链接器脚本ld的配合关系">四、启动文件与链接器脚本（.ld）的配合关系
+</h4><p>启动文件与<code>.ld</code>文件是<strong>紧密耦合的 “搭档”</strong>，二者通过 “全局符号” 和 “段分配” 协同工作，缺一不可：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>协作维度</th>
+          <th>启动文件角色</th>
+          <th>链接器脚本（.ld）角色</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>内存地址提供</td>
+          <td>引用<code>.ld</code>定义的<code>_sdata</code>、<code>_ebss</code>、<code>_estack</code>等符号</td>
+          <td>根据硬件内存布局（64K FLASH、20K RAM）计算并定义这些符号</td>
+      </tr>
+      <tr>
+          <td>段分配依据</td>
+          <td>将<code>Reset_Handler</code>放入<code>.text</code>段、向量表放入<code>.isr_vector</code>段</td>
+          <td>规定<code>.text</code>、<code>.isr_vector</code>等段的存储位置（如<code>.isr_vector</code>分配到 FLASH 起始地址）</td>
+      </tr>
+      <tr>
+          <td>程序入口指定</td>
+          <td>实现<code>Reset_Handler</code>函数（入口逻辑）</td>
+          <td>通过<code>ENTRY(Reset_Handler)</code>指定程序入口为该函数</td>
+      </tr>
+      <tr>
+          <td>内存合法性检查</td>
+          <td>依赖<code>.ld</code>确保<code>_sdata</code>、<code>_ebss</code>不超出 RAM 范围</td>
+          <td>检查堆、栈、数据段总大小是否超过 RAM/FLASH 容量，溢出则报错</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="五总结启动文件的核心价值">五、总结：启动文件的核心价值
+</h4><p>STM32 启动文件是 “从硬件到软件的桥梁”，其核心作用可概括为 3 点：</p>
+<ol>
+<li><strong>硬件初始化</strong>：完成栈指针设置、系统时钟配置，为程序运行提供基础硬件环境。</li>
+<li><strong>内存初始化</strong>：通过复制<code>.data</code>段、清零<code>.bss</code>段，确保全局 / 静态变量符合 C 语言标准要求。</li>
+<li><strong>中断系统准备</strong>：构建中断向量表，提供默认中断处理逻辑，支持用户自定义中断函数。</li>
+<li><strong>引导用户代码</strong>：最终跳转到<code>main</code>函数，将程序控制权交给用户，完成 “底层初始化→应用逻辑” 的过渡。
+简言之：没有启动文件，STM32 复位后无法完成任何初始化，更无法进入<code>main</code>函数 —— 它是 STM32 程序运行的 “第一块拼图”。</li>
+</ol>
+<h3 id="stm32-启动流程ld-文件作用及示例解析">STM32 启动流程、.ld 文件作用及示例解析
+</h3><p>要理解 STM32 的启动流程、<code>.ld</code>文件（链接器脚本）的作用，以及你提供的具体<code>.ld</code>文件内容，我们需要从<strong>宏观启动逻辑</strong>到<strong>链接器脚本细节</strong>逐步拆解，最终建立两者的关联。</p>
+<h4 id="一stm32-的启动流程从复位到main函数">一、STM32 的启动流程（从复位到<code>main</code>函数）
+</h4><p>STM32 的启动流程是<strong>硬件复位→内核初始化→软件初始化→进入<code>main</code></strong> 的过程，核心依赖「中断向量表」和「启动文件」，而<code>.ld</code>文件为这个流程提供了<strong>内存地址映射</strong>和<strong>段分配规则</strong>。</p>
+<h5 id="1-硬件复位pc-指针的初始指向">1. 硬件复位：PC 指针的初始指向
+</h5><p>当 STM32 上电或复位时，Cortex-M 内核会自动执行以下操作：</p>
+<ul>
+<li>读取<strong>中断向量表的第一个元素</strong>（栈顶地址<code>_estack</code>），初始化主栈指针（MSP）—— 这是内核执行的第一个动作，因为函数调用、局部变量都依赖栈。</li>
+<li>将程序计数器（PC）指向<strong>中断向量表的第二个元素</strong>（<code>Reset_Handler</code>的地址）—— 这是复位后的第一个执行函数（启动流程的入口）。</li>
+</ul>
+<blockquote>
+<p>关键：中断向量表的默认地址是<code>0x8000000</code>（STM32 FLASH 的起始地址），这也是<code>.ld</code>文件中<code>FLASH</code>的<code>ORIGIN</code>（起始地址）设置为<code>0x8000000</code>的原因。</p>
+</blockquote>
+<h5 id="2-执行reset_handler启动文件核心逻辑">2. 执行<code>Reset_Handler</code>（启动文件核心逻辑）
+</h5><p><code>Reset_Handler</code>是启动文件（如<code>startup_stm32f103c8tx.s</code>）中的汇编函数，是软件初始化的核心，其逻辑完全依赖<code>.ld</code>文件定义的<strong>全局符号</strong>（如<code>_sdata</code>、<code>_ebss</code>），具体步骤如下：</p>
+<ol>
+<li>
+<p><strong>初始化数据段（.data）</strong>：<br>
+<code>.data</code>段存放「初始化过的全局 / 静态变量」（如<code>int a = 10;</code>），这些变量需要<strong>读写权限</strong>，因此运行时必须在 RAM 中；但编译时会把它们的初始值存放在 FLASH 中（节省 RAM 空间）。<br>
+<code>Reset_Handler</code>会执行复制操作：从<code>.ld</code>文件定义的<code>_sidata</code>（.data 在 FLASH 的加载地址）复制到<code>_sdata</code>（.data 在 RAM 的运行地址），直到<code>_edata</code>（.data 的结束地址）。</p>
+</li>
+<li>
+<p><strong>清零未初始化数据段（.bss）</strong>：<br>
+<code>.bss</code>段存放「未初始化的全局 / 静态变量」（如<code>int b;</code>），C 语言标准要求它们初始化为 0。<br>
+<code>Reset_Handler</code>会将<code>_sbss</code>（.bss 的起始地址）到<code>_ebss</code>（.bss 的结束地址）的 RAM 区域全部清零。</p>
+</li>
+<li>
+<p><strong>初始化系统时钟（SystemInit）</strong>：<br>
+调用<code>SystemInit</code>函数（由 STM32 标准库 / LL 库提供），配置 HSE/PLL 等，将系统时钟从默认的 HSI（8MHz）切换到更高频率（如 72MHz）。</p>
+</li>
+<li>
+<p><strong>调用<code>main</code>函数</strong>：<br>
+完成所有初始化后，跳转到 C 语言的<code>main</code>函数，进入用户应用逻辑。</p>
+</li>
+</ol>
+<h5 id="3-异常--中断的触发补充">3. 异常 / 中断的触发（补充）
+</h5><p>若程序运行中触发中断（如定时器、串口），内核会再次读取「中断向量表」，根据中断号找到对应的中断服务函数（ISR）地址，跳转到 ISR 执行，执行完成后返回断点继续运行。</p>
+<h4 id="二ld-文件链接器脚本的核心作用">二、.ld 文件（链接器脚本）的核心作用
+</h4><p><code>.ld</code>文件是<strong>链接器（ld）的配置文件</strong>，其本质是告诉链接器：</p>
+<ol>
+<li><strong>芯片的内存布局</strong>：FLASH（只读、存代码 / 常量）和 RAM（可读写、存变量 / 栈 / 堆）的<strong>起始地址</strong>和<strong>大小</strong>。</li>
+<li><strong>代码 / 数据的段分配规则</strong>：将编译生成的各个「段（Section）」（如<code>.text</code>、<code>.data</code>）分配到对应的内存区域（FLASH/RAM）。</li>
+<li><strong>定义全局符号</strong>：生成<code>_sdata</code>、<code>_ebss</code>、<code>_estack</code>等符号，供启动文件和用户代码使用（如启动文件依赖这些符号初始化内存）。</li>
+<li><strong>内存合法性检查</strong>：确保堆、栈、数据段的总大小不超过 RAM/FLASH 的实际容量，避免内存溢出。
+简单说：没有<code>.ld</code>文件，链接器无法知道 “代码该放哪里、变量该放哪里”，无法生成可执行的<code>.elf</code>/<code>.hex</code>文件。</li>
+</ol>
+<h4 id="三解析-stm32f103c8tx-的ld-文件">三、解析 STM32F103C8Tx 的.ld 文件
+</h4><p>以下按文件结构逐段解析，结合 STM32F103C8Tx 的硬件参数（64K FLASH、20K RAM）说明每部分的作用。</p>
+<h5 id="1-入口点与栈顶定义">1. 入口点与栈顶定义
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/* Entry Point */
+</span></span><span class="line"><span class="cl">ENTRY(Reset_Handler)  // 定义程序的入口函数：Reset_Handler（与启动文件对应）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/* Highest address of the user mode stack */
+</span></span><span class="line"><span class="cl">_estack = ORIGIN(RAM) + LENGTH(RAM);  // 栈顶地址 = RAM起始地址 + RAM总大小
+</span></span><span class="line"><span class="cl">/* Generate a link error if heap and stack don&#39;t fit into RAM */
+</span></span><span class="line"><span class="cl">_Min_Heap_Size = 0x200;      // 最小堆大小（512字节，供malloc使用）
+</span></span><span class="line"><span class="cl">_Min_Stack_Size = 0xF00;     // 最小栈大小（3840字节，供函数调用/局部变量使用）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong><code>ENTRY(Reset_Handler)</code></strong>：强制链接器将<code>Reset_Handler</code>作为程序第一个执行的函数，与启动流程中 PC 指向<code>Reset_Handler</code>完全对应。</li>
+<li><strong><code>_estack</code></strong>：定义栈顶地址（STM32F103C8Tx 的 RAM 是<code>0x20000000~0x20004FFF</code>，因此<code>_estack=0x20005000</code>），启动文件会将这个地址加载到 MSP（主栈指针）。</li>
+<li><strong>堆 / 栈大小</strong>：<code>_Min_Heap_Size</code>和<code>_Min_Stack_Size</code>是最小要求，若用户代码中堆 / 栈使用超过这个值，链接器会报错（防止 RAM 溢出），可根据需求调整（如栈不够时增大<code>_Min_Stack_Size</code>）。</li>
+</ul>
+<h5 id="2-内存区域定义memory-块">2. 内存区域定义（MEMORY 块）
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/* Specify the memory areas */
+</span></span><span class="line"><span class="cl">MEMORY
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 20K  // RAM区域
+</span></span><span class="line"><span class="cl">FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 64K   // FLASH区域
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这是<code>.ld</code>文件的核心，定义了芯片的<strong>物理内存属性</strong>：</p>
+<ul>
+<li><strong><code>RAM (xrw)</code></strong>：
+<ul>
+<li><code>xrw</code>：权限（<code>x</code>= 可执行，<code>r</code>= 可读，<code>w</code>= 可写）——RAM 支持读写，理论上可执行（但通常不放代码）。</li>
+<li><code>ORIGIN = 0x20000000</code>：STM32 所有 Cortex-M3 内核芯片的 RAM 起始地址（硬件规定）。</li>
+<li><code>LENGTH = 20K</code>：STM32F103C8Tx 的 RAM 实际大小（20KB = 0x5000 字节，范围<code>0x20000000~0x20004FFF</code>）。</li>
+</ul>
+</li>
+<li><strong><code>FLASH (rx)</code></strong>：
+<ul>
+<li><code>rx</code>：权限（<code>r</code>= 可读，<code>x</code>= 可执行，<code>w</code>= 不可写）——FLASH 是只读存储器，只能存放代码和常量。</li>
+<li><code>ORIGIN = 0x8000000</code>：STM32 FLASH 的起始地址（硬件规定，复位后 PC 默认指向这里）。</li>
+<li><code>LENGTH = 64K</code>：STM32F103C8Tx 的 FLASH 实际大小（64KB = 0x10000 字节，范围<code>0x8000000~0x800FFFF</code>）。</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-段分配规则sections-块">3. 段分配规则（SECTIONS 块）
+</h5><p><code>SECTIONS</code>块是最复杂的部分，定义了「编译生成的段」如何映射到「MEMORY 块定义的物理内存」，每一个子段都对应特定的代码 / 数据类型。</p>
+<h6 id="1isr_vector中断向量表放-flash">（1）.isr_vector：中断向量表（放 FLASH）
+</h6><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.isr_vector :
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);          // 地址4字节对齐（Cortex-M内核要求，否则触发硬 fault）
+</span></span><span class="line"><span class="cl">  KEEP(*(.isr_vector))   // 保留中断向量表，防止链接器优化删除（核心！）
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">} &gt;FLASH  // 分配到FLASH区域
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>作用</strong>：存放 STM32 的中断向量表（如复位向量、定时器中断向量、串口中断向量等），是复位后内核第一个访问的段。</li>
+<li><strong><code>KEEP(*(.isr_vector))</code></strong>：中断向量表由启动文件定义（如<code>startup_stm32f103c8tx.s</code>中的<code>g_pfnVectors</code>数组），<code>KEEP</code>关键字确保链接器不会因为 “看似未被调用” 而删除这个段 —— 如果删除，复位后内核找不到<code>Reset_Handler</code>地址，程序会崩溃。</li>
+<li><strong><code>&gt;FLASH</code></strong>：明确将该段分配到<code>MEMORY</code>块定义的<code>FLASH</code>区域（符合硬件要求，向量表默认在 FLASH 起始地址）。</li>
+</ul>
+<h6 id="2text代码段放-flash">（2）.text：代码段（放 FLASH）
+</h6><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.text :
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">  *(.text)           // 所有.c/.s文件的代码（如main函数、自定义函数）
+</span></span><span class="line"><span class="cl">  *(.text*)          // 扩展代码段（如C++的成员函数）
+</span></span><span class="line"><span class="cl">  *(.glue_7)         // ARM指令与Thumb指令的胶水代码（Cortex-M用Thumb指令，兼容用）
+</span></span><span class="line"><span class="cl">  *(.glue_7t)        // 同上
+</span></span><span class="line"><span class="cl">  *(.eh_frame)       // C++异常处理相关（若用C可忽略）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  KEEP (*(.init))    // 程序初始化函数（如构造函数）
+</span></span><span class="line"><span class="cl">  KEEP (*(.fini))    // 程序结束函数（如析构函数）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">  _etext = .;        // 定义符号：.text段的结束地址（供后续段定位）
+</span></span><span class="line"><span class="cl">} &gt;FLASH
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>作用</strong>：存放所有<strong>可执行代码</strong>（C 函数、汇编函数），是 FLASH 中占用空间最大的段。</li>
+<li><strong><code>_etext = .</code></strong>：<code>.</code>代表当前地址，<code>_etext</code>是全局符号，标记<code>.text</code>段的结束地址 —— 后续的<code>.rodata</code>段会从<code>_etext</code>之后的地址开始分配，避免段重叠。</li>
+</ul>
+<h6 id="3rodata只读常量段放-flash">（3）.rodata：只读常量段（放 FLASH）
+</h6><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">.</span><span class="n">rodata</span> <span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span> <span class="o">=</span> <span class="n">ALIGN</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="o">*</span><span class="p">(</span><span class="o">.</span><span class="n">rodata</span><span class="p">)</span>         <span class="o">//</span> <span class="err">只读常量（如</span><span class="k">const</span> <span class="ne">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span><span class="err">、字符串常量</span><span class="s2">&#34;hello&#34;</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">  <span class="o">*</span><span class="p">(</span><span class="o">.</span><span class="n">rodata</span><span class="o">*</span><span class="p">)</span>        <span class="o">//</span> <span class="err">扩展只读常量段</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span> <span class="o">=</span> <span class="n">ALIGN</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="o">&gt;</span><span class="n">FLASH</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>作用</strong>：存放<strong>只读数据</strong>，因为这些数据不需要修改，放在 FLASH 中可节省 RAM 空间。</li>
+<li><strong>示例</strong>：<code>const char str[] = &quot;STM32&quot;;</code>会被编译到<code>.rodata</code>段，运行时直接从 FLASH 读取，不会复制到 RAM。</li>
+</ul>
+<h6 id="4armextabarmarm-架构兼容段放-flash">（4）.ARM.extab/.ARM：ARM 架构兼容段（放 FLASH）
+</h6><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.ARM.extab (READONLY) : 
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">  *(.ARM.extab* .gnu.linkonce.armextab.*)
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">} &gt;FLASH
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">.ARM (READONLY) : 
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">  __exidx_start = .;
+</span></span><span class="line"><span class="cl">  *(.ARM.exidx*)     // ARM异常索引表（C++异常处理用）
+</span></span><span class="line"><span class="cl">  __exidx_end = .;
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">} &gt;FLASH
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>作用</strong>：主要用于<strong>ARM 架构与 Thumb 架构的兼容</strong>，以及 C++ 的异常处理（若项目用纯 C，这些段几乎为空，但保留可避免链接错误）。</li>
+<li><strong><code>READONLY</code></strong>：标记为只读，与 FLASH 的权限匹配（GCC11 + 支持，低版本需删除）。</li>
+</ul>
+<h6 id="5preinit_arrayinit_arrayfini_array初始化--结束函数数组放-flash">（5）.preinit_array/.init_array/.fini_array：初始化 / 结束函数数组（放 FLASH）
+</h6><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.preinit_array (READONLY) : 
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">  PROVIDE_HIDDEN (__preinit_array_start = .);
+</span></span><span class="line"><span class="cl">  KEEP (*(.preinit_array*))  // 预初始化函数（如动态库预初始化）
+</span></span><span class="line"><span class="cl">  PROVIDE_HIDDEN (__preinit_array_end = .);
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">} &gt;FLASH
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">.init_array (READONLY) : 
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">  PROVIDE_HIDDEN (__init_array_start = .);
+</span></span><span class="line"><span class="cl">  KEEP (*(SORT(.init_array.*)))  // 初始化函数（如C++全局对象的构造函数）
+</span></span><span class="line"><span class="cl">  KEEP (*(.init_array*))
+</span></span><span class="line"><span class="cl">  PROVIDE_HIDDEN (__init_array_end = .);
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">} &gt;FLASH
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">.fini_array (READONLY) : 
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">  PROVIDE_HIDDEN (__fini_array_start = .);
+</span></span><span class="line"><span class="cl">  KEEP (*(SORT(.fini_array.*)))  // 结束函数（如C++全局对象的析构函数）
+</span></span><span class="line"><span class="cl">  KEEP (*(.fini_array*))
+</span></span><span class="line"><span class="cl">  PROVIDE_HIDDEN (__fini_array_end = .);
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">} &gt;FLASH
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>作用</strong>：存放程序启动 / 退出时自动执行的函数数组（主要用于 C++），例如：
+<ul>
+<li><code>init_array</code>：<code>main</code>函数执行前，会自动调用这里的函数（如全局对象<code>A a;</code>的构造函数）。</li>
+<li><code>fini_array</code>：<code>main</code>函数退出后，会自动调用这里的函数（如全局对象的析构函数）。</li>
+</ul>
+</li>
+<li><strong><code>PROVIDE_HIDDEN</code></strong>：若用户代码未定义<code>__init_array_start</code>等符号，链接器自动提供（隐藏符号，避免冲突）；<code>KEEP</code>确保这些段不被优化删除。</li>
+</ul>
+<h6 id="6data初始化数据段放-ram加载地址在-flash">（6）.data：初始化数据段（放 RAM，加载地址在 FLASH）
+</h6><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/* used by the startup to initialize data */
+</span></span><span class="line"><span class="cl">_sidata = LOADADDR(.data);  // 定义符号：.data在FLASH的加载地址（LMA）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">.data :
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">  _sdata = .;        // 定义符号：.data在RAM的运行地址（VMA）
+</span></span><span class="line"><span class="cl">  *(.data)           // 初始化的全局/静态变量（如int a = 10;）
+</span></span><span class="line"><span class="cl">  *(.data*)          // 扩展初始化数据段
+</span></span><span class="line"><span class="cl">  *(.RamFunc)        // 要放到RAM中执行的函数（如某些快速中断处理函数）
+</span></span><span class="line"><span class="cl">  *(.RamFunc*)       // 同上
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">  _edata = .;        // 定义符号：.data在RAM的结束地址
+</span></span><span class="line"><span class="cl">} &gt;RAM AT&gt; FLASH  // 运行地址（VMA）在RAM，加载地址（LMA）在FLASH
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>核心概念</strong>：<code>VMA</code>（虚拟 / 运行地址）和<code>LMA</code>（加载地址）：
+<ul>
+<li><code>&gt;RAM</code>：<code>.data</code>段的<strong>运行地址（VMA）</strong> 在 RAM（因为变量需要读写）。</li>
+<li><code>AT&gt;FLASH</code>：<code>.data</code>段的<strong>加载地址（LMA）</strong> 在 FLASH（编译时将变量初始值存到 FLASH，节省 RAM）。</li>
+</ul>
+</li>
+<li><strong>与启动流程关联</strong>：启动文件的<code>Reset_Handler</code>会从<code>_sidata</code>（FLASH 的 LMA）复制数据到<code>_sdata</code>（RAM 的 VMA），直到<code>_edata</code>—— 这就是 “初始化.data 段” 的具体实现。</li>
+<li><strong><code>.RamFunc</code></strong>：某些对执行速度要求高的函数（如高频中断服务函数），可通过<code>__attribute__((section(&quot;.RamFunc&quot;)))</code>标记，链接时会放到 RAM 中执行（RAM 访问速度比 FLASH 快）。</li>
+</ul>
+<h6 id="7bss未初始化数据段放-ram">（7）.bss：未初始化数据段（放 RAM）
+</h6><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.bss :
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  _sbss = .;         // 定义符号：.bss在RAM的起始地址
+</span></span><span class="line"><span class="cl">  __bss_start__ = _sbss;
+</span></span><span class="line"><span class="cl">  *(.bss)            // 未初始化的全局/静态变量（如int b;）
+</span></span><span class="line"><span class="cl">  *(.bss*)           // 扩展未初始化数据段
+</span></span><span class="line"><span class="cl">  *(COMMON)          // 未初始化的全局变量（如extern int c;）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  . = ALIGN(4);
+</span></span><span class="line"><span class="cl">  _ebss = .;         // 定义符号：.bss在RAM的结束地址
+</span></span><span class="line"><span class="cl">  __bss_end__ = _ebss;
+</span></span><span class="line"><span class="cl">} &gt;RAM
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>作用</strong>：存放<strong>未初始化的全局 / 静态变量</strong>，C 语言标准要求这些变量初始化为 0，因此不需要在 FLASH 中存储初始值（节省 FLASH 空间）。</li>
+<li><strong>与启动流程关联</strong>：启动文件的<code>Reset_Handler</code>会将<code>_sbss</code>到<code>_ebss</code>的 RAM 区域清零 —— 这就是 “清零.bss 段” 的具体实现。</li>
+<li><strong><code>COMMON</code></strong>：对应未声明但外部引用的全局变量（如<code>extern int c;</code>），链接时会分配到.bss 段。</li>
+</ul>
+<h6 id="8_user_heap_stack堆和栈的占位段放-ram">（8）._user_heap_stack：堆和栈的占位段（放 RAM）
+</h6><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">._user_heap_stack :
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  . = ALIGN(8);      // 8字节对齐（堆/栈通常要求更高对齐，避免内存访问错误）
+</span></span><span class="line"><span class="cl">  PROVIDE ( end = . );    // 定义符号：RAM已分配区域的结束地址
+</span></span><span class="line"><span class="cl">  PROVIDE ( _end = . );
+</span></span><span class="line"><span class="cl">  . = . + _Min_Heap_Size; // 堆区域：从当前地址分配_Min_Heap_Size大小
+</span></span><span class="line"><span class="cl">  . = . + _Min_Stack_Size;// 栈区域：在堆之后分配_Min_Stack_Size大小
+</span></span><span class="line"><span class="cl">  . = ALIGN(8);
+</span></span><span class="line"><span class="cl">} &gt;RAM
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>作用</strong>：为堆和栈预留空间，并检查 RAM 是否足够 —— 若堆 + 栈 + 已分配段（.data+.bss）的总大小超过 RAM 容量，链接器会报错。</li>
+<li><strong><code>end</code>/<code>_end</code></strong>：标记 RAM 中 “已分配段（.data+.bss）” 的结束地址，堆从<code>end</code>开始向上生长，栈从<code>_estack</code>（栈顶）开始向下生长。</li>
+<li><strong>堆 / 栈生长方向</strong>：
+<ul>
+<li>堆：从<code>end</code>向上（地址增大方向）生长，供<code>malloc</code>/<code>free</code>使用。</li>
+<li>栈：从<code>_estack</code>向下（地址减小方向）生长，供函数调用、局部变量使用。</li>
+<li>若堆和栈生长时重叠，会导致内存溢出（硬 fault），因此需合理设置<code>_Min_Heap_Size</code>和<code>_Min_Stack_Size</code>。
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83-1.png"
+	width="1269"
+	height="674"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83-1_hu13448359514406145975.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83-1_hu250755568266859443.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="188"
+		data-flex-basis="451px"
+	
+></li>
+</ul>
+</li>
+</ul>
+<h6 id="9discard丢弃无用段减小可执行文件大小">（9）/DISCARD/：丢弃无用段（减小可执行文件大小）
+</h6><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/DISCARD/ :
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  libc.a ( * )    // 丢弃标准C库的所有段
+</span></span><span class="line"><span class="cl">  libm.a ( * )    // 丢弃标准数学库的所有段
+</span></span><span class="line"><span class="cl">  libgcc.a ( * )  // 丢弃GCC编译器库的所有段
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>作用</strong>：嵌入式系统通常不需要标准库的完整功能（如<code>printf</code>的文件输出、<code>malloc</code>的复杂内存管理），丢弃这些段可大幅减小<code>.elf</code>/<code>.hex</code>文件的大小。</li>
+<li><strong>注意</strong>：若项目需要使用标准库功能（如<code>printf</code>、<code>sqrt</code>），需删除对应行，否则会出现 “未定义引用” 错误（需搭配<code>newlib-nano</code>等嵌入式精简库）。</li>
+</ul>
+<h4 id="四总结启动流程与ld-文件的关联">四、总结：启动流程与.ld 文件的关联
+</h4><ol>
+<li><strong>硬件复位</strong> → 内核读取<code>FLASH</code>起始地址（<code>0x8000000</code>）的<code>.isr_vector</code>段 → 找到<code>Reset_Handler</code>地址。</li>
+<li><strong>执行<code>Reset_Handler</code></strong> → 利用<code>.ld</code>定义的<code>_sdata</code>/<code>_sidata</code>/<code>_edata</code>复制<code>.data</code>段 → 利用<code>_sbss</code>/<code>_ebss</code>清零<code>.bss</code>段。</li>
+<li><strong>调用<code>main</code></strong> → 用户代码中的变量（.data/.bss）已在 RAM 中初始化，函数（.text）在 FLASH 中执行，堆 / 栈在 RAM 中预留空间。
+可以说：<strong>.ld 文件是 STM32 启动流程的 “地图”</strong>，没有它，启动文件不知道如何初始化内存，链接器不知道如何分配代码和数据，程序无法正常运行。</li>
+</ol>
+<h2 id="寄存器">寄存器
+</h2><p>认识一个<code>CPU</code>最直接的是去认识它的寄存器组
+（Register bank）
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-Cortex-M%E7%9A%84%E5%86%85%E6%A0%B8%E6%A1%86%E5%9B%BE.png"
+	width="790"
+	height="457"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-Cortex-M%E7%9A%84%E5%86%85%E6%A0%B8%E6%A1%86%E5%9B%BE_hu2536946228529719192.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-Cortex-M%E7%9A%84%E5%86%85%E6%A0%B8%E6%A1%86%E5%9B%BE_hu15969040657550120430.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="172"
+		data-flex-basis="414px"
+	
+></p>
+<p><code>arm</code>系统寄存器组
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%9E%B6%E6%9E%84%E5%AF%84%E5%AD%98%E5%99%A8.png"
+	width="532"
+	height="521"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%9E%B6%E6%9E%84%E5%AF%84%E5%AD%98%E5%99%A8_hu12295166982903513917.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%9E%B6%E6%9E%84%E5%AF%84%E5%AD%98%E5%99%A8_hu7556102674944354891.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="102"
+		data-flex-basis="245px"
+	
+>
+还有5个特殊寄存器
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%89%B9%E6%AE%8A%E5%AF%84%E5%AD%98%E5%99%A8.png"
+	width="411"
+	height="382"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%89%B9%E6%AE%8A%E5%AF%84%E5%AD%98%E5%99%A8_hu2585720261492038434.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%89%B9%E6%AE%8A%E5%AF%84%E5%AD%98%E5%99%A8_hu16730692858137438873.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="107"
+		data-flex-basis="258px"
+	
+>
+浮点数寄存器
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%B5%AE%E7%82%B9%E6%95%B0%E5%AF%84%E5%AD%98%E5%99%A8.png"
+	width="615"
+	height="752"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%B5%AE%E7%82%B9%E6%95%B0%E5%AF%84%E5%AD%98%E5%99%A8_hu3518435444834283096.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-arm%E6%B5%AE%E7%82%B9%E6%95%B0%E5%AF%84%E5%AD%98%E5%99%A8_hu8231920671927945409.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="81"
+		data-flex-basis="196px"
+	
+></p>
+<h3 id="通用寄存器">通用寄存器
+</h3><p>通用寄存器通用性强，常用于存储临时的数据
+其中<code>R0-R7</code>是低组寄存器，<code>R8-R12</code>是高组寄存器，高组寄存器部分指令无法访问</p>
+<h3 id="pc程序计数器程序如何跑起来">PC程序计数器&amp;程序如何跑起来
+</h3><p><code>arm</code>架构中的<code>R15</code>寄存器，是程序计数器（program counter），该寄存器可读可写</p>
+<p>在<code>arm cortex-M</code>的<code>CPU</code>内，每一次<code>PC</code>自增4（即向下移动了4个字节），但是在使用<code>thumb</code>指令集时，<code>thumb</code>指令集的部分指令是2个字节，这与处理器的执行流水线<code>pipeline</code>的特性有关，实际取址的时候是一次去4字节，也就是对于2字节的指令是一次取两条</p>
+<p><code>CPU</code>在不断执行程序，本质就是程序计数器的不断更新，<code>PC</code>指向的就是当前要执行的指令的地址</p>
+<h3 id="堆栈指针双堆栈指针机制">堆栈指针&amp;双堆栈指针机制
+</h3><p>栈是高址向低址方向生长，堆是低址向高址方向生长
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%A0%86%E6%A0%88.png"
+	width="333"
+	height="305"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%A0%86%E6%A0%88_hu16187981557609348171.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%A0%86%E6%A0%88_hu16680403190437700509.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="109"
+		data-flex-basis="262px"
+	
+></p>
+<p><code>arm cortex-M</code>架构中<code>R13</code>是堆栈指针寄存器
+在物理上该寄存器是两个不同的寄存器<code>MSP</code>主堆栈指针和<code>PSP</code>进程堆栈指针，在程序运行时选用哪一个寄存器会有<code>Control</code>控制寄存器的值来决定</p>
+<p>默认启动时，处理器使用的是主堆栈指针，可以修改<code>Control</code>控制寄存器的第一位的值来修改处理器使用的堆栈指针</p>
+<p>双堆栈指针-<code>MSP</code>主堆栈指针，<code>PSP</code>进程堆栈指针
+可以用来实现隔离系统内核和应用程序任务</p>
+<h3 id="lr链接寄存器函数调用的本质">LR链接寄存器&amp;函数调用的本质
+</h3><p>函数调用的本质是<strong>程序执行流的动态转移与上下文管理</strong>，其核心在于通过 栈 来实现代码模块化执行和状态的保存与恢复</p>
+<p><code>arm</code>架构的<code>CPU</code>有专门设立一个寄存器<code>R14(link register)</code>，用于存放子函数的返回地址</p>
+<p>以<code>arm</code>的<code>bl</code>指令为例（用于函数调用）
+<code>bl &lt;label&gt;</code>是跳转到标签地址，同时将返回地址存入<code>LR</code>寄存器</p>
+<p>需要注意的是，<code>arm cortex-M</code>架构的处理器指令都是半字对齐（两字节对齐），所以其反汇编的地址都是偶数，存在<code>lr</code>寄存器的返回地址也都是偶数，但是<code>lr</code>寄存器的第0位必须设置为1来指示<code>thumb</code>指令集的状态，所以<code>lr</code>寄存器的值会是<code>返回地址+1</code></p>
+<p>在多级函数调用时，<code>lr</code>寄存器的值会被压入栈中</p>
+<p>另外<code>lr</code>寄存器还能记录异常返回值。当处理器进入中断时，链接寄存器会更新为异常返回值，用来实现异常返回机制，用来记录区分一些工作模式现场，这些信息是恢复中断上下文需要的</p>
+<h2 id="地址分配">地址分配
+</h2><h3 id="存储器系统">存储器系统
+</h3><p><code>cortex-M</code>处理器是32位地址，因此会有
+4<code>GB</code>的地址空间，所有的指令和数据通过这个地址访问</p>
+<p>硬件资源都是通过地址映射的方式访问
+另外<code>cortex-M</code>架构没有设置<code>MMU</code>内存管理单元，所以没有<code>MMU</code>内存管理单元，一般也不会搭载<code>Linux,Windows</code>这种通用类型的系统</p>
+<p><code>地址映射图</code>
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84.png"
+	width="790"
+	height="567"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84_hu9295500705439601579.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84_hu7291421710444432392.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="139"
+		data-flex-basis="334px"
+	
+>
+<code>系统架构图</code>
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.png"
+	width="650"
+	height="515"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84_hu11818484246865093855.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84_hu15492943948597689706.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="126"
+		data-flex-basis="302px"
+	
+>
+<code>cortex-M3M4内核架构图</code>
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E5%86%85%E6%A0%B8.png"
+	width="619"
+	height="381"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E5%86%85%E6%A0%B8_hu1376430579139473456.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E5%86%85%E6%A0%B8_hu9245358393590328398.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="162"
+		data-flex-basis="389px"
+	
+>
+三级流水线外的设备属于<code>CPU</code>的内核外设，例如<code>NVIC</code>,<code>SysTick</code>系统滴答定时器，<code>MPU</code>等，用<code>0xE004 0000-0xE00F F000</code>地址访问</p>
+<p>软件上就是通过读写外设地址空间来控制这些外设，对应的地址空间单元映射到外设寄存器</p>
+<p>嵌入式编程本质就是在操作存储器，每一段<code>CPU</code>代码指令都是在读取某个地址空间的单元，高级编程语言就是不断向上封装抽象</p>
+<p><code>C</code>语言每条语句追溯到汇编都是在读写存储器的地址空间单元
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%AE%80%E5%8C%96%E5%9B%BE.png"
+	width="920"
+	height="375"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%AE%80%E5%8C%96%E5%9B%BE_hu3667266801560343470.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%AE%80%E5%8C%96%E5%9B%BE_hu8319569534823074497.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="245"
+		data-flex-basis="588px"
+	
+></p>
+<h3 id="关于内存和编译优化">关于内存和编译优化
+</h3><p>指针是内存地址的容器
+关于<code>i++</code>与<code>++i</code>执行效率的问题，在<code>O0</code>优化的情况下，不同编译器的具体实现是不一样的，执行效率是不能直接比较的</p>
+<p>编译优化会使汇编的指令在执行速度上提高，例如会使用<code>mov</code>去代替<code>ldr</code>，或者将一些简单的函数改为内嵌，以减少函数调用带来的开销</p>
+<h2 id="中断">中断
+</h2><p>在微机原理中已有涉及，后面只做简单回顾用</p>
+<h3 id="关于中断">关于中断
+</h3><p>中断的事件一般由硬件触发（实际有硬中断和软中断），会改变程序执行流</p>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E7%9A%84%E6%A1%86%E6%9E%B6.png"
+	width="604"
+	height="308"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E7%9A%84%E6%A1%86%E6%9E%B6_hu10756980578003421082.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E7%9A%84%E6%A1%86%E6%9E%B6_hu18416676295983188224.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="196"
+		data-flex-basis="470px"
+	
+>
+<code>NVIC</code>属于内核外设，专门管理中断</p>
+<p>在<code>cortex-M</code>芯片中，前15项中断向量都一样
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8.png"
+	width="386"
+	height="509"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8_hu6449595849150010522.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E5%90%91%E9%87%8F%E8%A1%A8_hu2482380903259567589.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="75"
+		data-flex-basis="182px"
+	
+>
+处理器具有向量表重定位功能，通过向量表偏移寄存器(<code>VTOR</code>)来获取向量表的起始地址</p>
+<p>中断触发时，处理器通过中断向量表去获取中断处理函数的入口地址</p>
+<h3 id="中断返回中断上下文">中断返回&amp;中断上下文
+</h3><p>在阅读中断的汇编时，会发现中断没有保存和恢复上下文的代码，实际上是硬件帮忙实现上述功能</p>
+<p>关于上下文，如程序上的函数调用需要保存上下文，在操作系统中需要处理线程上下文（任务上下文），其本质都在于保存和恢复若干寄存器的值</p>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E4%B8%AD%E6%96%AD%E4%BF%9D%E5%AD%98%E4%B8%8A%E4%B8%8B%E6%96%87.png"
+	width="622"
+	height="287"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E4%B8%AD%E6%96%AD%E4%BF%9D%E5%AD%98%E4%B8%8A%E4%B8%8B%E6%96%87_hu9991126449488417769.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E4%B8%AD%E6%96%AD%E4%BF%9D%E5%AD%98%E4%B8%8A%E4%B8%8B%E6%96%87_hu8903719563909650552.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="216"
+		data-flex-basis="520px"
+	
+>
+<code>cortex-M3M4</code>中断需要入栈保存上下文的8个寄存器
+选择保存上述8个寄存器主要是根据<code>arm</code>架构的过程调用标准，<code>C</code>语言的函数实现会改动这些寄存器，为例能让<code>C</code>函数能作为异常（中断）处理函数，中断（异常）机制需要能自动地保存这些寄存器，这些寄存器也被称之为调用者保存寄存器</p>
+<p>处理器恢复上下文，回到原执行流，需要<code>lr</code>寄存器存储异常返回值来记录区分一些工作模式现场，这些信息是恢复中断上下文需要的</p>
+<h2 id="错误处理">错误处理
+</h2><p>介绍<code>arm cortex-M</code>处理器架构如何捕获和记录错误故障</p>
+<p>有专门的寄存器去记录故障，通过查找其对应的地址查看寄存器的位来获取错误信息
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E6%95%85%E9%9A%9C%E8%AE%B0%E5%BD%95%E5%AF%84%E5%AD%98%E5%99%A8.png"
+	width="635"
+	height="382"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E6%95%85%E9%9A%9C%E8%AE%B0%E5%BD%95%E5%AF%84%E5%AD%98%E5%99%A8_hu18224593236508536412.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E6%95%85%E9%9A%9C%E8%AE%B0%E5%BD%95%E5%AF%84%E5%AD%98%E5%99%A8_hu17222364446200839070.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="166"
+		data-flex-basis="398px"
+	
+>
+在发生错误时，对应错误寄存器的对应位被置1，同时触发错误中断处理</p>
+<p>程序执行非法指令操作导致系统进入不可恢复的故障状态，系统软件就会介入终止程序执行流，其实现机制是中断</p>
+<h2 id="待续">待续
+</h2>
 </section>
 
 
