@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="引言 重载的本质 重载（overloading）是同一符号在不同作用域的不同应用条件下具有不同的语义。这个符号可以是函数，运算符，也就是一物多用\n函数重载 函数重载：定义同名但参数类型与数量不同的函数，编译系统根参数的匹配规则来决定调用哪一个函数\n">
+<title>C&#43;&#43; 重载</title>
+
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/c-%E9%87%8D%E8%BD%BD/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="C++ 重载">
+<meta property='og:description' content="引言 重载的本质 重载（overloading）是同一符号在不同作用域的不同应用条件下具有不同的语义。这个符号可以是函数，运算符，也就是一物多用\n函数重载 函数重载：定义同名但参数类型与数量不同的函数，编译系统根参数的匹配规则来决定调用哪一个函数\n">
+<meta property='og:url' content='https://NomadJoeviolet.github.io/p/c-%E9%87%8D%E8%BD%BD/'>
+<meta property='og:site_name' content='Nomad_violet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&amp;C&#43;&#43;' /><meta property='article:published_time' content='2025-09-04T10:13:46&#43;08:00'/><meta property='article:modified_time' content='2025-09-04T10:13:46&#43;08:00'/>
+<meta name="twitter:title" content="C++ 重载">
+<meta name="twitter:description" content="引言 重载的本质 重载（overloading）是同一符号在不同作用域的不同应用条件下具有不同的语义。这个符号可以是函数，运算符，也就是一物多用\n函数重载 函数重载：定义同名但参数类型与数量不同的函数，编译系统根参数的匹配规则来决定调用哪一个函数\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu6061761693284197515.png" width="300"
+                            height="200" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Nomad_violet</a></h1>
+            <h2 class="site-description">to feel,to experience</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://www.bilibili.com/'
+                        target="_blank"
+                        title="Biliili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#引言">引言</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#重载的本质">重载的本质</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#函数重载">函数重载</a>
+      <ol>
+        <li><a href="#前置内容带缺省值的函数">前置内容（带缺省值的函数）</a>
+          <ol>
+            <li><a href="#带缺省值的函数">带缺省值的函数</a></li>
+          </ol>
+        </li>
+        <li><a href="#不带缺省的得函数重载">不带缺省的得函数重载</a></li>
+        <li><a href="#带缺省值的函数重载">带缺省值的函数重载</a></li>
+      </ol>
+    </li>
+    <li><a href="#运算符重载">运算符重载</a>
+      <ol>
+        <li><a href="#为什么需要运算符重载">为什么需要运算符重载</a></li>
+        <li><a href="#运算符重载的例子">运算符重载的例子</a>
+          <ol>
+            <li><a href="#成员函数重载运算符">成员函数重载运算符</a></li>
+            <li><a href="#友元函数重载运算符">友元函数重载运算符</a></li>
+            <li><a href="#重载和运算符">重载&laquo;和&raquo;运算符</a></li>
+            <li><a href="#重载单目运算符">重载单目运算符</a></li>
+          </ol>
+        </li>
+        <li><a href="#运算符重载的规则看个乐呵就行">运算符重载的规则（看个乐呵就行）</a></li>
+        <li><a href="#运算符重载的实现形式">运算符重载的实现形式</a>
+          <ol>
+            <li><a href="#推荐使用成员函数或是友元函数实现">推荐使用成员函数或是友元函数实现</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/cc&#43;&#43;-study/" >
+                C&amp;C&#43;&#43; Study
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/c-%E9%87%8D%E8%BD%BD/">C&#43;&#43; 重载</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-09-04</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="引言">引言
+</h2><h4 id="重载的本质">重载的本质
+</h4><p>重载（overloading）是同一符号在不同作用域的不同应用条件下具有不同的语义。这个符号可以是<strong>函数，运算符</strong>，也就是一物多用</p>
+<h2 id="函数重载">函数重载
+</h2><p>函数重载：定义同名但参数类型与数量不同的函数，编译系统根参数的匹配规则来决定调用哪一个函数</p>
+<h3 id="前置内容带缺省值的函数">前置内容（带缺省值的函数）
+</h3><h4 id="带缺省值的函数">带缺省值的函数
+</h4><p>函数在说明或函数定义中，形参指定了一个数值，则称此函数为带缺省值的函数，指定的值称为缺省值</p>
+<h5 id="example">Example
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//带缺省值的函数声明：
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">float</span> <span class="n">area</span><span class="p">(</span><span class="kt">float</span> <span class="n">r</span><span class="o">=</span><span class="mf">6.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//6.5就是缺省值
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在调用时，如果不传参数，使用默认值，就会默认形参等于缺省值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">area</span><span class="p">();</span><span class="c1">//默认 r=6.5
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>不使用默认值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">area</span><span class="p">(</span><span class="mf">7.5</span><span class="p">);</span><span class="c1">// r=7.5
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="带多个缺省参数的函数">带多个缺省参数的函数
+</h5><p>如果函数有多个缺省参数，则缺省参数必须是 从右向左定义，并且在一个缺省参数的右边不能有 未指定缺省值的参数。(缺省值集中在参数表右侧)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">f1</span><span class="p">(</span> <span class="kt">float</span> <span class="n">a</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">c</span> <span class="p">,</span> <span class="kt">char</span> <span class="n">d</span><span class="o">=</span><span class="sc">&#39;a&#39;</span> <span class="p">);</span><span class="c1">//错误定义
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">f2</span><span class="p">(</span> <span class="kt">float</span> <span class="n">a</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">c</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span> <span class="p">,</span> <span class="kt">char</span> <span class="n">d</span><span class="o">=</span><span class="sc">&#39;a&#39;</span> <span class="p">);</span><span class="c1">//正确定义
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>调用形式可以为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">f2</span><span class="p">(</span> <span class="mf">3.5</span> <span class="p">,</span> <span class="mi">5</span> <span class="p">,</span> <span class="mi">3</span> <span class="p">,</span> <span class="sc">&#39;x&#39;</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">f2</span><span class="p">(</span> <span class="mf">3.5</span> <span class="p">,</span> <span class="mi">5</span> <span class="p">,</span> <span class="mi">3</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">f2</span><span class="p">(</span> <span class="mf">3.5</span> <span class="p">,</span> <span class="mi">5</span> <span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="不带缺省的得函数重载">不带缺省的得函数重载
+</h3><p>函数重载：定义同名但参数类型与数量不同的函数，编译系统根据参数的匹配规则来来决定调用哪一个函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">max</span><span class="p">(</span> <span class="kt">int</span> <span class="n">a</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">b</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">c</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">max</span><span class="p">(</span> <span class="kt">int</span> <span class="n">a</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">b</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">double</span> <span class="nf">max</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span> <span class="p">,</span> <span class="kt">double</span> <span class="n">b</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意：不能出现函数参数个数，参数类型都相同，只有函数返回值不同的同名函数。
+因为系统将无法从调用形式上判断调用哪个函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">max</span><span class="p">(</span> <span class="kt">int</span> <span class="n">a</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">b</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">max</span><span class="p">(</span> <span class="kt">int</span> <span class="n">a</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">b</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="带缺省值的函数重载">带缺省值的函数重载
+</h3><p>一般带缺省值的函数不能进行重载，容易出现错误
+错误实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">max</span><span class="p">(</span> <span class="kt">int</span> <span class="n">a</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">b</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">c</span><span class="o">=</span><span class="mi">1</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">max</span><span class="p">(</span> <span class="kt">int</span> <span class="n">a</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">b</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时系统无法匹配正确的函数，不能实现函数重载（静态多态）</p>
+<p><strong>一个函数不能即作为重载函数，又 作为有默认参数的函数！</strong>
+（这是一个建议，其实并不绝对，只要让系统能匹配到唯一的函数就行）</p>
+<h2 id="运算符重载">运算符重载
+</h2><p><strong>前置内容（C++ 类与对象）</strong></p>
+<p>运算符重载本质上是函数重载，将指定的运算表达式转化为对运算符函数的调用，运算对象转化为运算符函数的实参（看个乐呵就行）</p>
+<h3 id="为什么需要运算符重载">为什么需要运算符重载
+</h3><p>C++中预定义的运算符其运算对象只能是基本数据类型，而不适用于用户自定义类型。运算符重载允许把C++标准运算符应用于自定义数据类型的对象，与函数重载类似，对已有的运算符赋予新的含义，用一个运算符表示不同功能的运算， 这就是运算符重载</p>
+<h3 id="运算符重载的例子">运算符重载的例子
+</h3><p>类的定义</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">complex</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">complex</span><span class="p">();</span><span class="c1">//默认构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">complex</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span><span class="kt">double</span><span class="p">);</span><span class="c1">//初始化构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">complex</span><span class="p">(</span><span class="kt">double</span><span class="p">);</span><span class="c1">//强制转换构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1">//*****************************************************//
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>       <span class="c1">//下面是二选一
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">complex</span> <span class="k">operator</span> <span class="o">+</span> <span class="p">(</span><span class="n">complex</span><span class="o">&amp;</span><span class="p">);</span><span class="c1">//运算符重载成员函数实现
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">complex</span> <span class="k">operator</span> <span class="o">-</span> <span class="p">(</span><span class="n">complex</span><span class="o">&amp;</span><span class="p">);</span><span class="c1">//运算符重载成员函数实现
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">friend</span> <span class="n">complex</span> <span class="k">operator</span> <span class="o">+</span> <span class="p">(</span><span class="n">complex</span><span class="o">&amp;</span><span class="p">,</span><span class="n">complex</span><span class="o">&amp;</span><span class="p">);</span><span class="c1">//友元函数实现
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">friend</span> <span class="n">complex</span> <span class="k">operator</span> <span class="o">-</span> <span class="p">(</span><span class="n">complex</span><span class="o">&amp;</span><span class="p">,</span><span class="n">complex</span><span class="o">&amp;</span><span class="p">);</span><span class="c1">//友元函数实现
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl"><span class="c1">//****************************************************//
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">friend</span> <span class="n">istream</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">istream</span><span class="o">&amp;</span> <span class="p">,</span> <span class="n">complex</span><span class="o">&amp;</span><span class="p">);</span><span class="c1">//istream类&gt;&gt;运算符重载
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">friend</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="p">,</span> <span class="n">complex</span><span class="o">&amp;</span><span class="p">);</span><span class="c1">//ostream类&lt;&lt;运算符重载
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">double</span> <span class="n">real</span> <span class="p">,</span> <span class="n">imag</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="成员函数重载运算符">成员函数重载运算符
+</h4><p>隐含this指针，左侧自定义类型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">c3</span> <span class="o">=</span> <span class="n">c1</span><span class="o">+</span><span class="n">c2</span> <span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>翻译为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">c3</span> <span class="o">=</span> <span class="n">c1</span><span class="p">.</span><span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">c2</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>参数个数=原操作数个数-1（后置++、&ndash;除外）</p>
+<h5 id="模板">模板
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="err">数据类型</span><span class="p">(</span><span class="err">返回值类型</span><span class="p">)</span> <span class="err">类名</span><span class="p">(</span><span class="err">域</span><span class="p">)</span><span class="o">::</span><span class="k">operator</span> <span class="err">运算符</span><span class="p">(</span> <span class="err">形参表</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="err">重载处理</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="具体例子">具体例子
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">complex</span> <span class="n">complex</span><span class="o">::</span><span class="k">operator</span> <span class="o">+</span> <span class="p">(</span><span class="k">const</span> <span class="n">complex</span> <span class="o">&amp;</span><span class="n">c1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">complex</span> <span class="n">c2</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c2</span><span class="p">.</span><span class="n">real</span> <span class="o">=</span> <span class="n">real</span><span class="o">+</span><span class="n">c1</span><span class="p">.</span><span class="n">real</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c2</span><span class="p">.</span><span class="n">imag</span> <span class="o">=</span> <span class="n">imag</span><span class="o">+</span><span class="n">c1</span><span class="p">.</span><span class="n">imag</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">c2</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">complex</span> <span class="n">complex</span><span class="o">::</span><span class="k">operator</span> <span class="o">-</span> <span class="p">(</span><span class="k">const</span> <span class="n">complex</span> <span class="o">&amp;</span><span class="n">c1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">complex</span> <span class="n">c2</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c2</span><span class="p">.</span><span class="n">real</span> <span class="o">=</span> <span class="n">real</span><span class="o">-</span><span class="n">c1</span><span class="p">.</span><span class="n">real</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c2</span><span class="p">.</span><span class="n">imag</span> <span class="o">=</span> <span class="n">imag</span><span class="o">-</span><span class="n">c1</span><span class="p">.</span><span class="n">imag</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">c2</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="友元函数重载运算符">友元函数重载运算符
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">c3</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">+</span> <span class="n">c2</span> <span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>翻译为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">c3</span> <span class="o">=</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">);</span><span class="c1">//友元函数
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>参数个数=原操作数个数 (至少有一个自定义类型形参)</p>
+<h5 id="模板-1">模板
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">friend</span> <span class="err">数据类型</span><span class="p">(</span><span class="err">返回值类型</span><span class="p">)</span> <span class="err">类名</span><span class="p">(</span><span class="err">域</span><span class="p">)</span><span class="o">::</span> <span class="k">operator</span> <span class="err">运算符</span><span class="p">(</span> <span class="err">形参表</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="err">重载处理</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="具体例子-1">具体例子
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">complex</span> <span class="n">complex</span><span class="o">::</span><span class="k">operator</span> <span class="o">+</span> <span class="p">(</span><span class="k">const</span> <span class="n">complex</span> <span class="o">&amp;</span><span class="n">c1</span> <span class="p">,</span> <span class="k">const</span> <span class="n">complex</span> <span class="o">&amp;</span><span class="n">c2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">complex</span> <span class="n">c</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c</span><span class="p">.</span><span class="n">real</span> <span class="o">=</span> <span class="n">c2</span><span class="p">.</span><span class="n">real</span><span class="o">+</span><span class="n">c1</span><span class="p">.</span><span class="n">real</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c</span><span class="p">.</span><span class="n">imag</span> <span class="o">=</span> <span class="n">c2</span><span class="p">.</span><span class="n">imag</span><span class="o">+</span><span class="n">c1</span><span class="p">.</span><span class="n">imag</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">c</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">complex</span> <span class="n">complex</span><span class="o">::</span><span class="k">operator</span> <span class="o">-</span> <span class="p">(</span><span class="k">const</span> <span class="n">complex</span> <span class="o">&amp;</span><span class="n">c1</span> <span class="p">,</span> <span class="k">const</span> <span class="n">complex</span> <span class="o">&amp;</span><span class="n">c2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">complex</span> <span class="n">c</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c</span><span class="p">.</span><span class="n">real</span> <span class="o">=</span> <span class="n">c1</span><span class="p">.</span><span class="n">real</span><span class="o">-</span><span class="n">c2</span><span class="p">.</span><span class="n">real</span> <span class="p">;</span><span class="err">、</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c</span><span class="p">.</span><span class="n">imag</span> <span class="o">=</span> <span class="n">c1</span><span class="p">.</span><span class="n">imag</span><span class="o">-</span><span class="n">c2</span><span class="p">.</span><span class="n">imag</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">c</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="重载和运算符">重载&laquo;和&raquo;运算符
+</h4><p>&laquo;重载函数和&raquo;重载函数只能定义为友元函数，不能定义为成员函数，
+因为&laquo;和&raquo;运算符有两个形参，并且第一个形参不是自定义类型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//类中的友元函数定义
+</span></span></span><span class="line"><span class="cl"><span class="c1">//***********************************//
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">friend</span> <span class="n">istream</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">istream</span><span class="o">&amp;</span> <span class="p">,</span> <span class="n">complex</span><span class="o">&amp;</span><span class="p">);</span><span class="c1">//istream类&gt;&gt;运算符重载
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">friend</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="p">,</span> <span class="n">complex</span><span class="o">&amp;</span><span class="p">);</span><span class="c1">//ostream类&lt;&lt;运算符重载
+</span></span></span><span class="line"><span class="cl"><span class="c1">//***********************************//
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//复数的自定义输入输出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">istream</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">istream</span><span class="o">&amp;</span> <span class="n">input</span> <span class="p">,</span> <span class="n">complex</span><span class="o">&amp;</span><span class="n">c</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">input</span> <span class="o">&gt;&gt;</span> <span class="n">c</span><span class="p">.</span><span class="n">real</span> <span class="o">&gt;&gt;</span> <span class="n">c</span><span class="p">.</span><span class="n">imag</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">input</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">output</span> <span class="p">,</span> <span class="n">complex</span><span class="o">&amp;</span><span class="n">c</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output</span> <span class="o">&lt;&lt;</span> <span class="n">c</span><span class="p">.</span><span class="n">real</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;+&#39;</span> <span class="o">&lt;&lt;</span> <span class="n">c</span><span class="p">.</span><span class="n">imag</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;i&#39;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">output</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="重载单目运算符">重载单目运算符
+</h4><h5 id="成员函数重载">成员函数重载
+</h5><p>前置++</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//前置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">complex</span> <span class="k">operator</span> <span class="o">++</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>后置++</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//后置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">complex</span> <span class="k">operator</span> <span class="o">++</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//如果在形参中添加int占位参数，编译器会识别出这是后置++
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="友元函数重载">友元函数重载
+</h5><p>前置++</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//前置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">friend</span> <span class="n">complex</span> <span class="k">operator</span> <span class="o">++</span> <span class="p">(</span><span class="n">complex</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>后置++</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">friend</span> <span class="n">complex</span> <span class="k">operator</span> <span class="o">++</span> <span class="p">(</span><span class="n">complex</span><span class="p">,</span><span class="kt">int</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="运算符重载的规则看个乐呵就行">运算符重载的规则（看个乐呵就行）
+</h3><p>• 运算符重载不允许发明新的运算符。如@
+• 不能改变运算符操作对象的个数，如+是双目运算
+• 运算符被重载后，优先级和结合性不会改变
+• 经重载的运算符至少有一个参数为自定义类型，否则系 统已经实现</p>
+<h3 id="运算符重载的实现形式">运算符重载的实现形式
+</h3><p>运算符重载函数可以声明为  类成员函数 也可以是  类的友元函数  ，还可以是  普通函数</p>
+<h4 id="推荐使用成员函数或是友元函数实现">推荐使用成员函数或是友元函数实现
+</h4><p>（主要因为私有成员的访问问题）
+实现运算符重载的方式&mdash;&mdash;既然是操作符重载，一般会访问类的私有成员变量，根据类的封装性要求，除了友元函数外，其他任何外部操作都是违规的，所以不推荐用 普通函数 来重载操作符</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/cc&#43;&#43;/">C&amp;C&#43;&#43;</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/c-%E5%BC%95%E7%94%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C&#43;&#43; 引用</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/c-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%8E%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C&#43;&#43; 构造函数与析构函数</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/c-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C&#43;&#43; 类与对象</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/c-%E8%99%9A%E5%87%BD%E6%95%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C&#43;&#43; 虚函数</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/c-%E5%A4%9A%E6%80%81/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C&#43;&#43; 多态</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Nomad
+    </section>
+    
+    <section class="powerby">
+        
+            experience <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
