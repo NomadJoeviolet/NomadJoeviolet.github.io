@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园 C++&ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客 C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客 C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客\n">
 <title>C&#43;&#43; 的名字修饰（符号修饰）</title>
 
 <link rel='canonical' href='https://NomadJoeviolet.github.io/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/'>
 
 <link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="C++ 的名字修饰（符号修饰）">
-<meta property='og:description' content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
+<meta property='og:description' content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园 C++&ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客 C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客 C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/'>
 <meta property='og:site_name' content='Nomad_violet'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&amp;C&#43;&#43;' /><meta property='article:published_time' content='2025-01-13T16:17:46&#43;08:00'/><meta property='article:modified_time' content='2025-01-13T16:17:46&#43;08:00'/>
 <meta name="twitter:title" content="C++ 的名字修饰（符号修饰）">
-<meta name="twitter:description" content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
+<meta name="twitter:description" content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园 C++&ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客 C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客 C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -271,6 +271,13 @@
       </ol>
     </li>
     <li><a href="#extern-c">extern &ldquo;C&rdquo;</a></li>
+    <li><a href="#arm-none-eabi的符号修饰">arm-none-eabi的符号修饰</a>
+      <ol>
+        <li><a href="#1-c-语言的符号修饰">1. C 语言的符号修饰</a></li>
+        <li><a href="#2-c-的符号修饰命名粉碎">2. C++ 的符号修饰（命名粉碎）</a></li>
+        <li><a href="#3-c-和-c-混合编程的符号兼容">3. C 和 C++ 混合编程的符号兼容</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -336,14 +343,14 @@
     <section class="article-content">
     
     
-    <p>【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b</p>
-<p><a class="link" href="https://www.cnblogs.com/ArsenalfanInECNU/p/18499811"  target="_blank" rel="noopener"
-    >extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园</a></p>
-<p><a class="link" href="https://blog.csdn.net/it_is_me_a/article/details/81979537"  target="_blank" rel="noopener"
-    >C++&ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客</a></p>
-<p><a class="link" href="https://blog.csdn.net/helena1993/article/details/124149052"  target="_blank" rel="noopener"
-    >C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客</a></p>
-<p><a class="link" href="https://blog.csdn.net/m0_46606290/article/details/119973574"  target="_blank" rel="noopener"
+    <p>【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b
+<a class="link" href="https://www.cnblogs.com/ArsenalfanInECNU/p/18499811"  target="_blank" rel="noopener"
+    >extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园</a>
+<a class="link" href="https://blog.csdn.net/it_is_me_a/article/details/81979537"  target="_blank" rel="noopener"
+    >C++&ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客</a>
+<a class="link" href="https://blog.csdn.net/helena1993/article/details/124149052"  target="_blank" rel="noopener"
+    >C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客</a>
+<a class="link" href="https://blog.csdn.net/m0_46606290/article/details/119973574"  target="_blank" rel="noopener"
     >C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客</a></p>
 <h2 id="符号修饰">符号修饰
 </h2><p>在C/C++中，一个程序要运行起来，需要经历以下几个阶段：预处理、编译、汇编、链接。</p>
@@ -365,8 +372,7 @@
 </ul>
 <p>因此，<strong>用c++的方式去寻找c语言的符号是无法寻找到的</strong>。<code>extern &quot;C&quot;</code>为何可以做到？</p>
 <p><strong><code>extern &quot;C&quot;</code>的作用就是修改了符号表的生成方式，将c++符号的生成方式换成了c的生成方式。</strong></p>
-<p>即
-c库中生成的符号是c编译器的符号， 因此c语言可以直接链接。而c++程序需要使用<code>extern &quot;C&quot;</code>让编译器使用c的符号命名方式去进行链接，这样才能找到对应的符号。</p>
+<p>即c库中生成的符号是c编译器的符号， 因此c语言可以直接链接。而c++程序需要使用<code>extern &quot;C&quot;</code>让编译器使用c的符号命名方式去进行链接，这样才能找到对应的符号。</p>
 <h2 id="extern-c">extern &ldquo;C&rdquo;
 </h2><p><a class="link" href="https://blog.csdn.net/m0_46606290/article/details/119973574"  target="_blank" rel="noopener"
     >C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客</a></p>
@@ -377,7 +383,87 @@ c库中生成的符号是c编译器的符号， 因此c语言可以直接链接�
 <li>c调用cpp（不涉及C++的类和成员函数），设计一个C的接口，接口的实现在cpp中，接口函数内部去使用C++的特性</li>
 <li>c中调用c++成员函数，需要一个接口函数</li>
 </ol>
-
+<h2 id="arm-none-eabi的符号修饰">arm-none-eabi的符号修饰
+</h2><p>在嵌入式开发中，<code>arm-none-eabi</code> 工具链（针对 ARM 架构的裸机 / 嵌入式交叉编译工具）的<strong>符号修饰（Name Mangling）</strong> 主要由编译器（通常是 GCC）根据语言特性（C/C++）和目标 ABI（应用程序二进制接口）决定，目的是生成唯一的符号名，以支持函数重载、命名空间、类型信息等特性。</p>
+<h3 id="1-c-语言的符号修饰">1. C 语言的符号修饰
+</h3><p>C 语言不支持函数重载和命名空间，因此符号修饰非常简单，通常仅在函数名前添加下划线（<code>_</code>），或直接使用原函数名，具体取决于目标 ABI（如 ARM 的 APCS、EABI 等）。</p>
+<ul>
+<li>示例：<br>
+C 函数 <code>void foo(int a)</code> 经过 <code>arm-none-eabi-gcc</code> 编译后，符号通常为 <code>foo</code>
+这也是为什么在汇编中调用 C 函数时，通常需要引用带下划线的符号</li>
+</ul>
+<h3 id="2-c-的符号修饰命名粉碎">2. C++ 的符号修饰（命名粉碎）
+</h3><p>C++ 支持函数重载、类、命名空间、模板等特性，因此需要更复杂的符号修饰规则（称为 “命名粉碎”），以确保每个重载函数 / 方法生成唯一的符号。<code>arm-none-eabi-g++</code> 遵循 GCC 的 C++ 符号修饰规则，基本格式为：<br>
+<code>_Z[命名空间/类前缀][函数名长度][函数名][参数类型编码]</code></p>
+<ul>
+<li>关键规则解析：
+<ul>
+<li><code>_Z</code>：固定前缀，标识 C++ 符号。</li>
+<li>命名空间 / 类：若函数属于命名空间或类，会在前缀中编码（如 <code>N</code> 表示命名空间开始，<code>E</code> 表示结束）。</li>
+<li>函数名长度：紧跟在命名空间 / 类之后，用数字表示函数名的字符数。</li>
+<li>参数类型编码：用简写字母表示参数类型（如 <code>i</code>=int，<code>f</code>=float，<code>p</code>= 指针，<code>v</code>=void 等）。</li>
+</ul>
+</li>
+<li>示例：
+<ol>
+<li>全局函数 <code>void foo(int)</code><br>
+修饰后符号：<code>_Z3fooi</code><br>
+解析：<code>_Z</code>（C++ 符号） + <code>3</code>（<code>foo</code> 长度为 3） + <code>foo</code>（函数名） + <code>i</code>（参数 int）。</li>
+<li>重载函数 <code>void foo(float)</code><br>
+修饰后符号：<code>_Z3foof</code>（参数 <code>f</code> 表示 float，与上例区分）。</li>
+<li>类成员函数 <code>class A { void bar(double); }</code><br>
+修饰后符号：<code>_ZN1A3barEd</code><br>
+解析：<code>_Z</code> + <code>N</code>（类 / 命名空间开始） + <code>1A</code>（类名 <code>A</code> 长度为 1） + <code>3bar</code>（函数名 <code>bar</code> 长度为 3） + <code>E</code>（类结束） + <code>d</code>（参数 double）。</li>
+<li>命名空间内函数 <code>namespace ns { int add(int, int); }</code><br>
+修饰后符号：<code>_ZN2ns3addii</code><br>
+解析：<code>_Z</code> + <code>N</code>（命名空间开始） + <code>2ns</code>（命名空间 <code>ns</code> 长度为 2） + <code>3add</code>（函数名 <code>add</code> 长度为 3） + <code>E</code>（命名空间结束） + <code>ii</code>（两个 int 参数）。</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-c-和-c-混合编程的符号兼容">3. C 和 C++ 混合编程的符号兼容
+</h3><p>当 C++ 代码调用 C 函数（或反之）时，需使用 <code>extern &quot;C&quot;</code> 声明，以禁用 C++ 的符号修饰，确保链接时匹配 C 风格的符号。</p>
+<ul>
+<li>示例：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="c1">// C头文件（需兼容C++）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="cp">#ifdef __cplusplus
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">c_function</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">);</span>  <span class="c1">// C函数，符号为 _c_function
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">    <span class="cp">#ifdef __cplusplus
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    
+</span></span><span class="line"><span class="cl">    <span class="c1">// C++代码中调用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">cpp_func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c_function</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>  <span class="c1">// 正确引用C符号 _c_function
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="err">```</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
