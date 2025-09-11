@@ -1313,7 +1313,7 @@ public关键字允许类的子类，以及类外类内的访问&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;= 0 告诉编译器，函数没有主体，上面的虚函数是&lt;strong&gt;纯虚函数&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt; virtual int area() = 0&lt;/code&gt;告诉编译器，函数没有主体，上面的虚函数是&lt;strong&gt;纯虚函数&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;虚函数使用注意事项&#34;&gt;虚函数使用注意事项
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;当在基类中把成员函数定义为虚函数后， 在其派生类中定义的虚函数必须与基类中的虚函数 &lt;strong&gt;同名，参数的类型、顺序、数量必须一一 对应，函数的返回的类型也相同&lt;/strong&gt;&lt;/li&gt;

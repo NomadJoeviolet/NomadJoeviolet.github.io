@@ -470,7 +470,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>= 0 告诉编译器，函数没有主体，上面的虚函数是<strong>纯虚函数</strong></p>
+</div><p><code> virtual int area() = 0</code>告诉编译器，函数没有主体，上面的虚函数是<strong>纯虚函数</strong></p>
 <h2 id="虚函数使用注意事项">虚函数使用注意事项
 </h2><ol>
 <li>当在基类中把成员函数定义为虚函数后， 在其派生类中定义的虚函数必须与基类中的虚函数 <strong>同名，参数的类型、顺序、数量必须一一 对应，函数的返回的类型也相同</strong></li>
