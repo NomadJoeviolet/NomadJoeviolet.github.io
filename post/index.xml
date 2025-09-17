@@ -1899,7 +1899,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;dynamic-memory-management-in-classes&#34;&gt;Dynamic-Memory-Management-in-Classes
-&lt;/h2&gt;&lt;h3 id=&#34;some-default-operations&#34;&gt;some-default-operations
+&lt;/h2&gt;&lt;h3 id=&#34;some-default-operations&#34;&gt;Some-default-operations
 &lt;/h3&gt;&lt;h4 id=&#34;default-constructors&#34;&gt;Default-Constructors
 &lt;/h4&gt;&lt;p&gt;默认构造函数&lt;/p&gt;
 &lt;p&gt;如果一个类没有任何构造函数，编译器就会生成一个空的构造函数，如果给类定义了构造函数，编译器就不会生成默认构造函数&lt;/p&gt;
@@ -1997,7 +1997,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;copy-assignment&#34;&gt;Copy-Assignment
-&lt;/h3&gt;&lt;p&gt;注意赋值运算符再内存管理上的细节&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;注意赋值运算符在内存管理上的细节&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;避免自赋值&lt;/li&gt;
 &lt;li&gt;赋值前先回收，避免内存泄漏&lt;/li&gt;
