@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="violet 初步入门嵌入式开发后（假定已经会使用Keil和CubeMX进行开发），需要回头补充的基础以及提升，本指南只起到抛砖引玉的作用，对所需知识仅作精简的概述，主要在于帮助构建知识框架\n">
 <title>电控成长指南</title>
 
 <link rel='canonical' href='https://NomadJoeviolet.github.io/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/'>
 
 <link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="电控成长指南">
-<meta property='og:description' content="">
+<meta property='og:description' content="violet 初步入门嵌入式开发后（假定已经会使用Keil和CubeMX进行开发），需要回头补充的基础以及提升，本指南只起到抛砖引玉的作用，对所需知识仅作精简的概述，主要在于帮助构建知识框架\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/'>
 <meta property='og:site_name' content='Nomad_violet'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='成长' /><meta property='article:published_time' content='2025-09-04T00:34:07&#43;08:00'/><meta property='article:modified_time' content='2025-09-04T00:34:07&#43;08:00'/>
 <meta name="twitter:title" content="电控成长指南">
-<meta name="twitter:description" content="">
+<meta name="twitter:description" content="violet 初步入门嵌入式开发后（假定已经会使用Keil和CubeMX进行开发），需要回头补充的基础以及提升，本指南只起到抛砖引玉的作用，对所需知识仅作精简的概述，主要在于帮助构建知识框架\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -239,7 +239,140 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#step1---keilcubemx工具链使用hal库使用基本外设基本开发常识">Step1   Keil+CubeMX工具链使用，HAL库使用，基本外设，基本开发常识</a>
+      <ol>
+        <li><a href="#开发常识">开发常识</a>
+          <ol>
+            <li><a href="#开发环境">开发环境</a></li>
+            <li><a href="#ide集成开发环境">IDE集成开发环境</a></li>
+            <li><a href="#代码编辑器">代码编辑器</a></li>
+          </ol>
+        </li>
+        <li><a href="#关于单片机">关于单片机</a></li>
+        <li><a href="#外设">外设</a></li>
+        <li><a href="#关于cubemx">关于CubeMX</a></li>
+        <li><a href="#关于hal库">关于HAL库</a></li>
+      </ol>
+    </li>
+    <li><a href="#step2---工具链的基础认知构建与工具链换新">Step2   工具链的基础认知构建与工具链换新</a>
+      <ol>
+        <li><a href="#从c语言到机器语言">从C语言到机器语言</a>
+          <ol>
+            <li><a href="#机器语言">机器语言</a></li>
+            <li><a href="#汇编语言">汇编语言</a></li>
+            <li><a href="#高级语言ccjava等到机器语言">高级语言（C&amp;C++&amp;Java等）到机器语言</a></li>
+          </ol>
+        </li>
+        <li><a href="#编译原理">编译原理</a>
+          <ol>
+            <li></li>
+            <li><a href="#编译器与链接器">编译器与链接器</a></li>
+          </ol>
+        </li>
+        <li><a href="#多文件编程">多文件编程</a>
+          <ol>
+            <li><a href="#核心原理分离式编译与链接">核心原理：分离式编译与链接</a></li>
+            <li><a href="#作用域与链接属性">作用域与链接属性</a></li>
+            <li><a href="#符号解析与重定位">符号解析与重定位</a></li>
+            <li><a href="#链接器符号表处理">链接器符号表处理</a></li>
+          </ol>
+        </li>
+        <li><a href="#总结">总结</a></li>
+      </ol>
+    </li>
+    <li><a href="#step3-cc混合编程cmakemakeninja">Step3 C&amp;C++混合编程，CMake&amp;Make&amp;Ninja</a>
+      <ol>
+        <li><a href="#cc混合编程">C&amp;C++混合编程</a>
+          <ol>
+            <li><a href="#符号修饰">符号修饰</a></li>
+            <li><a href="#c与c符号修饰的实例">C与C++符号修饰的实例</a></li>
+            <li><a href="#extern-c">extern &ldquo;C&rdquo;</a></li>
+          </ol>
+        </li>
+        <li><a href="#cmake这一块">CMake这一块</a>
+          <ol>
+            <li></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#step4-c提升设计模式">Step4 C++提升&amp;设计模式</a>
+      <ol>
+        <li><a href="#c提升">C++提升</a>
+          <ol>
+            <li><a href="#内存对齐">内存对齐</a></li>
+            <li><a href="#深拷贝与浅拷贝">深拷贝与浅拷贝</a></li>
+            <li><a href="#1-浅拷贝shallow-copy">1. 浅拷贝（Shallow Copy）</a></li>
+            <li><a href="#2-深拷贝deep-copy">2. 深拷贝（Deep Copy）</a></li>
+            <li><a href="#构造函数拷贝构造函数赋值运算符">构造函数&amp;拷贝构造函数&amp;赋值运算符</a></li>
+            <li><a href="#模板函数模板类模板">模板(函数模板&amp;类模板)</a></li>
+          </ol>
+        </li>
+        <li><a href="#设计模式">设计模式</a></li>
+      </ol>
+    </li>
+    <li><a href="#step5-arm-cortex-m学习启动文件与链接器脚本">Step5 arm-cortex-M学习&amp;启动文件与链接器脚本</a>
+      <ol>
+        <li><a href="#cortex-m">cortex-M</a>
+          <ol>
+            <li><a href="#架构特性">架构特性</a></li>
+            <li><a href="#内存分布规则">内存分布规则</a></li>
+          </ol>
+        </li>
+        <li><a href="#启动文件与启动原理">启动文件与启动原理</a>
+          <ol>
+            <li><a href="#启动原理">启动原理</a></li>
+            <li><a href="#启动模式">启动模式</a></li>
+            <li><a href="#启动文件">启动文件</a></li>
+            <li><a href="#启动文件结构拆解">启动文件结构拆解</a></li>
+            <li><a href="#2关键符号声明">（2）关键符号声明</a></li>
+            <li><a href="#3复位处理函数reset_handler">（3）复位处理函数（Reset_Handler）</a></li>
+            <li><a href="#4中断向量表g_pfnvectors">（4）中断向量表（g_pfnVectors）</a></li>
+            <li><a href="#5默认中断处理函数default_handler">（5）默认中断处理函数（Default_Handler）</a></li>
+          </ol>
+        </li>
+        <li><a href="#链接器脚本">链接器脚本</a>
+          <ol>
+            <li><a href="#1入口点与栈顶定义">（1）入口点与栈顶定义</a></li>
+            <li><a href="#2内存区域定义memory-块">（2）内存区域定义（MEMORY 块）</a></li>
+            <li><a href="#3段分配规则sections-块">（3）段分配规则（SECTIONS 块）</a></li>
+          </ol>
+        </li>
+        <li><a href="#链接脚本与启动文件的协同关系">链接脚本与启动文件的协同关系</a></li>
+      </ol>
+    </li>
+    <li><a href="#待续">待续</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -296,7 +429,1118 @@
     <section class="article-content">
     
     
-    
+    <p>violet
+初步入门嵌入式开发后（假定已经会使用Keil和CubeMX进行开发），需要回头补充的基础以及提升，本指南只起到抛砖引玉的作用，对所需知识仅作精简的概述，主要在于帮助构建知识框架</p>
+<h2 id="step1---keilcubemx工具链使用hal库使用基本外设基本开发常识">Step1   Keil+CubeMX工具链使用，HAL库使用，基本外设，基本开发常识
+</h2><h3 id="开发常识">开发常识
+</h3><p>该部分内容摘自队内文档部分内容</p>
+<h4 id="开发环境">开发环境
+</h4><p>开发环境是软件开发过程中使用的软件和硬件的组合。通常情况下包括<strong>代码编辑器、编译器、调试工具和其他工具</strong>。开发环境帮助程序员编写、测试和调试代码的环境。</p>
+<h4 id="ide集成开发环境">IDE集成开发环境
+</h4><p>集成开发环境是一种包含<strong>代码编辑器、编译器和调试器的综合性软件应用程序</strong>。IDE提供了方便编写、测试和调试程序的一体化界面。例如Keil，Clion，RTT Studio，CubeIDE等，本文中主要介绍Keil和Clion</p>
+<h4 id="代码编辑器">代码编辑器
+</h4><p>代码编辑器是用于编写和修改代码的工具。它提供了基本的文本编辑功能，通常还包括语法高亮、代码格式化和错误检查等特性。比如我们所使用的VScode。一般来讲，对于一个项目，代码编辑器的选择通常是无所谓的</p>
+<h3 id="关于单片机">关于单片机
+</h3><p>单片机是一种微型计算机</p>
+<p>单片机（Microcontroller Unit，简称MCU）是一种将微处理器、存储器（包括程序存储器和数据存储器）、输入/输出接口和其他必要的功能模块集成在单个芯片上的微型计算机。它通常用于控制应用，可以在没有外部支持芯片的情况下独立运行。</p>
+<p>可以理解为<code>单片机=微处理器+存储器+片上外设</code></p>
+<ol>
+<li>微处理器主要负责运算与控制逻辑的执行</li>
+<li>存储器用于存储代码与数据</li>
+<li>外设用于实现单片机的各种功能，例如定时器的定时，输入捕获功能，USART的串口通信功能</li>
+</ol>
+<h3 id="外设">外设
+</h3><p>单片机外设是指用于扩展单片机功能的辅助电路，包括内部外设和外部外设，能够与单片机协同工作，实现各种控制和处理任务</p>
+<p>例如定时器TIM和USART就是两个常见的单片机的片上外设
+定时器可以用来实现定时，PWM调制，输入捕获等复杂功能
+USART可以用来实现同步/异步的串口通信</p>
+<h3 id="关于cubemx">关于CubeMX
+</h3><p>CubeMX本质是代码生成器，<strong>图形化嵌入式开发辅助工具</strong>，用于快速配置STM32硬件资源并生成初始化代码框架，降低底层开发门槛，通过图形化界面，自动配置好用户所需的外设资源</p>
+<p>CubeMX生成的代码与HAL库强绑定</p>
+<h3 id="关于hal库">关于HAL库
+</h3><p>HAL库（Hardware Abstraction Layer，硬件抽象层）是ST公司为STM32微控制器设计的<strong>标准化硬件驱动库</strong>。作为嵌入式开发的关键基础设施，其实质是在硬件寄存器与用户应用之间构建了一个<strong>抽象接口层</strong>，彻底改变了传统嵌入式开发模式</p>
+<p>用户只需要关注HAL库提供的抽象层，而不用去关注抽象层之下的外设寄存器操作（这类设计思想很值得借鉴）</p>
+<p>HAL库提供统一的接口函数，例如<code>HAL_xxxx_Transmit</code>发送执行函数，<code>xxxxCallback</code>回调函数等</p>
+<p>开发范式变为： 应用层-&gt;HAL库的抽象层-&gt;具体硬件平台</p>
+<h2 id="step2---工具链的基础认知构建与工具链换新">Step2   工具链的基础认知构建与工具链换新
+</h2><p>对于整个工具链的理解，需要建立在对单片机（微型计算机）的基本工作方式有一定认知的基础上</p>
+<p>计算机的运行都是基于机器语言，我们编写的C语言程序，最后经过编译得到汇编代码，再经过汇编，得到二进制代码（已经是机器语言，但不可运行），最后经过链接，得到一个能运行于单片机上的可执行程序</p>
+<p>同时，还需要提一下的是，在一种计算机环境中运行的编译程序，能编译出在另外一种环境下运行的代码，这个编译过程就叫交叉编译。简单地说，就是在一个平台上生成另一个平台上的可执行代码，嵌入式开发的程序编译就是典型的交叉编译，用到的编译器用被称作交叉编译器</p>
+<p>目前队内的开发工具链是<code>VScode/Clion</code>+<code>arm-none-eabi/armclag</code>+<code>CMake</code>+<code>Ninja</code>+<code>Ozone</code>+<code>cland/intellisence/Clion_LSP</code>（编辑器+编译器+项目构建工具+项目构建的执行工具+烧录器+语法服务支持LSP），个人认为还是相当现代化且高度自定义的
+![[新工具链.png]]</p>
+<p>下面简单讲解C语言到机器语言的定义以及编译过程</p>
+<h3 id="从c语言到机器语言">从C语言到机器语言
+</h3><h4 id="机器语言">机器语言
+</h4><p>计算机（包括单片机）是不能直接识别我们所编写的C语言程序。它只能识别机器语言，而机器语言是用二进制代码表示的<strong>计算机能直接识别和执行的一种机器指指令系统令的集合</strong></p>
+<h4 id="汇编语言">汇编语言
+</h4><p>汇编语言是一种用于微处理器、微控制器或其他可编程器件的低级语言。 在不同的设备中，汇编语言对应着不同的机器语言指令集。 一种汇编语言专用于某种计算机系统结构，而不像许多高级语言，可以在不同系统平台之间移植。汇编语言的主体是汇编指令，汇编语言是二进制指令的文本形式，与指令是一一对应的关系。比如，有一些架构的汇编指令中的加法指令<code>00000011</code>写成汇编语言就是 <code>Add</code></p>
+<p>通俗的理解，汇编语言与对应计算机的架构相关，x86和arm结构的计算机分别有一套对应的汇编指令，而汇编语言是机器语言的文本化表达，例如 某一汇编指令中<code>00000011</code>可以简记为<code>Add</code></p>
+<h4 id="高级语言ccjava等到机器语言">高级语言（C&amp;C++&amp;Java等）到机器语言
+</h4><ol>
+<li>
+<p>高级语言到汇编语言需要经过<strong>编译</strong>，例如 .c文件经过编译后，会生成 .s文件</p>
+</li>
+<li>
+<p>汇编语言到机器语言需要经过<strong>汇编</strong>，例如 .s文件经过汇编后，会生成 .o文件</p>
+</li>
+</ol>
+<p>需要注意的是，高级语言具有迁移性，在不同架构的计算机上高级语言是不变的，但是汇编语言对于不同的架构会有不同的指令，
+这就需要我们选择对应的编译器，例如<code>stm32</code>是<code>arm</code>架构的芯片，在C编译器的选择上需要 选择将C语言编译为<code>arm</code>架构汇编语言的编译器，例如<code>armcc</code>，<code>armclang</code>，<code>arm-none-eabi</code>等编译器</p>
+<p>所以在嵌入式开发中，需要根据单片机的架构选择对应的编译器</p>
+<h3 id="编译原理">编译原理
+</h3><p>C语言编译原理涉及将C语言代码转换为机器语言的过程。这个过程包括预处理、编译、汇编和链接。编译器在这个过程中对源代码进行优化和转换，生成可执行文件，主要包括以下几个阶段：</p>
+<h5 id="1预处理preprocessing">1.  预处理（Preprocessing）
+</h5><p><strong>作用</strong>：处理源代码文件中的预处理指令，如#include和#define
+<strong>过程</strong>：替换宏定义，处理条件编译指令，包含头文件内容
+<strong>工具</strong>：预处理器，如cpp、armclang</p>
+<h5 id="2编译compilation">2.编译（Compilation）
+</h5><p><strong>作用</strong>：将预处理后的源代码转换成汇编语言
+<strong>过程</strong>：进行语法分析和语义分析，生成汇编代码
+<strong>工具</strong>：编译器，如GCC、armclang</p>
+<h5 id="3汇编assembly">3.汇编（Assembly）
+</h5><p><strong>作用</strong>：将汇编语言转换成机器语言，即目标代码（Object Code）
+<strong>过程</strong>：汇编器将汇编指令转换为机器码
+<strong>工具</strong>：汇编器，如as、armasm</p>
+<h5 id="4链接linking">4.链接（Linking）
+</h5><p><strong>作用</strong>：将多个目标代码文件和库文件合并成一个单独的可执行文件</p>
+<p><strong>过程</strong>：
+解决外部符号引用，如函数和全局变量
+合并不同模块中的相同段（如.text，.data）
+生成最终的可执行文件或库文件
+<strong>工具</strong>：链接器，如ld、armlink</p>
+<h4 id="编译器与链接器">编译器与链接器
+</h4><p>在整个编译过程中，编译器和链接器是核心组件，一般的环境配置也主要针对这二者展开：</p>
+<p><strong>编译器（Compiler）</strong>：负责将源代码转换成汇编代码或直接生成目标代码。编译器的高级优化包括循环优化、常数传播、死码删除等
+<strong>链接器（Linker）</strong>：负责将多个目标代码文件整合为一个可执行文件。链接器处理符号解析、重定位等任务</p>
+<h3 id="多文件编程">多文件编程
+</h3><p>简单来说就是头文件提供声明（就是给编译器说有某一个函数），源文件里面有函数的具体定义/实现</p>
+<p>多文件编译时会生成多个二进制文件，链接器会实现重定位后生成唯一的可执行文件（也就是最后实现 main.c能使用usart.c里面的函数）</p>
+<h4 id="核心原理分离式编译与链接">核心原理：分离式编译与链接
+</h4><p><strong>编译链接过程</strong>
+<img src="/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E7%94%B5%E6%8E%A7%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97-%E5%A4%9A%E6%96%87%E4%BB%B6%E7%BC%96%E7%A8%8B%E8%BF%87%E7%A8%8B.png"
+	width="2478"
+	height="834"
+	srcset="/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E7%94%B5%E6%8E%A7%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97-%E5%A4%9A%E6%96%87%E4%BB%B6%E7%BC%96%E7%A8%8B%E8%BF%87%E7%A8%8B_hu1549188601157836830.png 480w, /p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E7%94%B5%E6%8E%A7%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97-%E5%A4%9A%E6%96%87%E4%BB%B6%E7%BC%96%E7%A8%8B%E8%BF%87%E7%A8%8B_hu7353814610565968913.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="297"
+		data-flex-basis="713px"
+	
+>
+<strong>关键步骤</strong></p>
+<ol>
+<li><strong>预处理阶段</strong>：处理<code>#include</code>指令，将头文件内容复制到源文件中</li>
+<li><strong>编译阶段</strong>：将每个.c文件独立编译为目标文件(.o)</li>
+<li><strong>链接阶段</strong>：合并所有目标文件，解析符号引用，生成可执行文件</li>
+</ol>
+<h4 id="作用域与链接属性">作用域与链接属性
+</h4><h5 id="1-存储类说明符">1. 存储类说明符
+</h5><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>关键字</th>
+          <th>文件内作用</th>
+          <th>文件间作用</th>
+          <th>典型用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>static</code></td>
+          <td>私有</td>
+          <td>不可访问</td>
+          <td>内部辅助函数</td>
+      </tr>
+      <tr>
+          <td><code>extern</code></td>
+          <td>声明</td>
+          <td>可访问</td>
+          <td>全局变量声明</td>
+      </tr>
+      <tr>
+          <td>(默认)</td>
+          <td>定义</td>
+          <td>可访问</td>
+          <td>公共函数</td>
+      </tr>
+  </tbody>
+</table></div>
+<h5 id="2-作用域控制示例">2. 作用域控制示例
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// module.c
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="kt">int</span> <span class="n">internal_counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 文件内私有变量
+</span></span></span><span class="line"><span class="cl"><span class="c1">//只有在该文件内的函数才可以访问
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">public_function</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">internal_counter</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// header.h
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">extern</span> <span class="kt">int</span> <span class="n">global_variable</span><span class="p">;</span> <span class="c1">// 声明全局变量
+</span></span></span><span class="line"><span class="cl"><span class="c1">//注意，声明不等于定义
+</span></span></span><span class="line"><span class="cl"><span class="c1">// main.c
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">global_variable</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// 定义全局变量
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="符号解析与重定位">符号解析与重定位
+</h4><h5 id="链接器核心任务">链接器核心任务
+</h5><ol>
+<li><strong>符号解析</strong>：将符号引用与符号定义关联</li>
+<li><strong>重定位</strong>：合并目标文件，调整地址引用</li>
+</ol>
+<h5 id="符号类型">符号类型
+</h5><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>符号类型</th>
+          <th>定义位置</th>
+          <th>引用位置</th>
+          <th>链接器处理</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>强符号</td>
+          <td>.text/.data</td>
+          <td>其他文件</td>
+          <td>必须唯一</td>
+      </tr>
+      <tr>
+          <td>弱符号</td>
+          <td>未初始化全局变量</td>
+          <td>其他文件</td>
+          <td>可覆盖</td>
+      </tr>
+      <tr>
+          <td>外部引用</td>
+          <td>未定义</td>
+          <td>当前文件</td>
+          <td>需在其它文件找到定义</td>
+      </tr>
+  </tbody>
+</table></div>
+<h5 id="符号解析示例">符号解析示例
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// module.c
+</span></span></span><span class="line"><span class="cl"><span class="c1">//需要#include &#34;helper.h&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">helper</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span> <span class="c1">// 外部引用（未定义）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">public_func</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">helper</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// helper.c
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">helper</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 强符号定义
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="cm">/* 实现 */</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// main.c
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">extern</span> <span class="kt">void</span> <span class="nf">public_func</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span> <span class="c1">// 外部引用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">public_func</span><span class="p">();</span> <span class="c1">// 链接器解析到module.c中的定义
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="链接器符号表处理">链接器符号表处理
+</h4><ol>
+<li>扫描所有目标文件，收集符号定义</li>
+<li>构建全局符号表：
+<ul>
+<li>强符号：记录地址</li>
+<li>弱符号：标记为可选（weak关键字）</li>
+</ul>
+</li>
+<li>解析引用：
+<ul>
+<li>找到匹配的强符号</li>
+<li>或使用弱符号（如果存在）</li>
+</ul>
+</li>
+<li>报告未解析引用错误</li>
+</ol>
+<h3 id="总结">总结
+</h3><p>在上述内容的基础上，我们可以知道，无论是<code>Clion</code>还是<code>VScode</code>，其本质都还是代码编辑器（虽然Clion内置了编译器），配环境实际上配的都还是对应的编译器（现代的编译器包含了编译器，汇编器，链接器等），如<code>arm-none-eabi</code>的<code>gcc/g++</code>或者是 <code>arm-clang</code>和<code>arm-cc</code></p>
+<h2 id="step3-cc混合编程cmakemakeninja">Step3 C&amp;C++混合编程，CMake&amp;Make&amp;Ninja
+</h2><h3 id="cc混合编程">C&amp;C++混合编程
+</h3><p>核心原理 在于C与C++的符号修饰，如何利用<code>extern &quot;C&quot;</code>命令实现<code>C call C++</code>以及<code>C++ call C</code></p>
+<p>【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b</p>
+<p><a class="link" href="https://www.cnblogs.com/ArsenalfanInECNU/p/18499811"  target="_blank" rel="noopener"
+    >extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园</a>
+<a class="link" href="https://blog.csdn.net/it_is_me_a/article/details/81979537"  target="_blank" rel="noopener"
+    >C++&ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客</a>
+<a class="link" href="https://blog.csdn.net/helena1993/article/details/124149052"  target="_blank" rel="noopener"
+    >C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客</a>
+<a class="link" href="https://blog.csdn.net/m0_46606290/article/details/119973574"  target="_blank" rel="noopener"
+    >C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客</a></p>
+<h4 id="符号修饰">符号修饰
+</h4><p>在C/C++中，一个程序要运行起来，需要经历以下几个阶段：预处理、编译、汇编、链接。</p>
+<p>名字修饰（Name Mangling）是一种在<code>编译</code>过程中，将函数、变量的名称重新改编的机制，简单来说就是编译器为了区分各个函数，将函数通过一定算法，重新修饰为一个全局唯一的名称。</p>
+<p>由于C++和C的名字修饰规则不同（<a class="link" href="https://blog.csdn.net/helena1993/article/details/124149052"  target="_blank" rel="noopener"
+    >不同操作系统下的编译器的名字修饰方式也会不同</a>），导致C++可以支持函数重载，而C不支持函数重载</p>
+<p>可以简单理解为，c++中支持函数重载，c语言不支持函数重载，这造成了c++和c语言的函数名解析不同（名字修饰/符号修饰）。c语言函数名就是函数名，c++的函数名是函数名+参数组合起来的。</p>
+<h4 id="c与c符号修饰的实例">C与C++符号修饰的实例
+</h4><p><a class="link" href="https://www.cnblogs.com/ArsenalfanInECNU/p/18499811"  target="_blank" rel="noopener"
+    >extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园</a>
+（直接copy自该博客）</p>
+<p>比如，函数<code>void func(double a)</code> 在<code>C</code>和<code>C++</code>中的编译阶段函数名称会被解析成什么呢？</p>
+<p>在<code>C</code>语言中，由于没有名称修饰，所以在编译时函数名称仍然是<code>func</code>，不会因为参数类型或数量而改变。</p>
+<p>在<code>C++</code>中，由于名称修饰的存在，函数名称在编译阶段会被编译器转换成一个包含函数原型信息的唯一标识符。通常会涉及函数返回类型、参数类型以及参数数量。以<code>GCC(GNU Compiler Collection)</code>为例，<code>func(double a)</code>会被转换成<code>_Z4funcd</code> ，这里：</p>
+<ul>
+<li><code>_Z</code>：是<code>GCC</code>用来表示修饰名称的前缀</li>
+<li><code>4</code>：表示函数名称<code>func</code>的的字符数</li>
+<li><code>d</code>：是double类型的编码</li>
+</ul>
+<p>因此，<strong>用c++的方式去寻找c语言的符号是无法寻找到的</strong>。<code>extern &quot;C&quot;</code>为何可以做到？</p>
+<p><strong><code>extern &quot;C&quot;</code>的作用就是修改了符号表的生成方式，将c++符号的生成方式换成了c的生成方式。</strong></p>
+<p>即c库中生成的符号是c编译器的符号， 因此c语言可以直接链接。而c++程序需要使用<code>extern &quot;C&quot;</code>让编译器使用c的符号命名方式去进行链接，这样才能找到对应的符号。</p>
+<h4 id="extern-c">extern &ldquo;C&rdquo;
+</h4><p><a class="link" href="https://blog.csdn.net/m0_46606290/article/details/119973574"  target="_blank" rel="noopener"
+    >C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客</a></p>
+<p>看这一篇就够了
+看实例</p>
+<ol>
+<li>cpp调用c，cpp编译时会有C++的符号修饰，导致链接C库的函数找不到，需要用extern &ldquo;C&quot;告诉g++编译器以C语言的风格进行编译</li>
+<li>c调用cpp（不涉及C++的类和成员函数），设计一个C的接口，接口的实现在cpp中，接口函数内部去使用C++的特性</li>
+<li>c中调用c++成员函数，需要一个接口函数</li>
+</ol>
+<h3 id="cmake这一块">CMake这一块
+</h3><p>CMake是一个C/C++项目构建工具
+根据CMakeLists.txt来构建makefile/ninja文件，再根据makefile/ninja文件来编译C和C++文件并生成可执行文件</p>
+<p>只需要理解
+在命令行使用g++ 进行多文件编译时，每次输入都需要输入一大堆的文件，非常麻烦
+![[CMake简化编译命令.png]]
+使用CMake+make/ninja进行简化操作即可（个人认为的CMake的一个核心思想（极简化理解））</p>
+<p>层级关系</p>
+<ol>
+<li><strong>开发者层</strong>：编写CMakeLists.txt定义构建规则</li>
+<li><strong>生成器层</strong>：CMake解析配置，生成底层构建文件</li>
+<li><strong>执行器层</strong>：Make/Ninja执行具体构建命令</li>
+<li><strong>工具链层</strong>：编译器(如gcc)、链接器等实际执行编译</li>
+</ol>
+<h5 id="cmake">cmake
+</h5><p>cmake是一个生成 .ninja 和 .makefile 的工具。cmake只需要用户通过对源码文件的简单描述（就是CMakeLists.txt文件），就能自动生成一个project的makefile文件或者ninja文件，然后就可以通过ninja或者make进行启动编译了，很多IDE都在用cmake作为项目管理工具。</p>
+<h5 id="make与ninja">make与ninja
+</h5><p>make功能强大，可以给人看，ninja启动速度快，项目构建速度快，但不是给人看的<br>
+可以认为两者同级。</p>
+<h2 id="step4-c提升设计模式">Step4 C++提升&amp;设计模式
+</h2><p>这一节也是本人极其欠缺的，目前正在恶补
+<code>C++</code>的提升推荐
+设计模式推荐</p>
+<h3 id="c提升">C++提升
+</h3><h4 id="内存对齐">内存对齐
+</h4><p><a class="link" href="https://zhuanlan.zhihu.com/p/140063999"  target="_blank" rel="noopener"
+    >一文轻松理解内存对齐 - 知乎</a>
+这里仅以结构体的内存对齐为例，不提供具体例子，具体例子详见上面的博客</p>
+<h5 id="结构体struct对齐"> <strong>结构体（struct）对齐</strong>
+</h5><p><strong>规则 1</strong>：成员地址 = <code>min(自身对齐值, 有效对齐值)</code> 的倍数
+<strong>规则 2</strong>：结构体总大小 = 最大成员对齐值的整数倍
+<strong>规则 3</strong>：成员排列顺序影响最终大小</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#pragma pack(1)</span><span class="c1">//设置默认对齐数为1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">S1</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">c1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">c2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#pragma pack()</span><span class="c1">//取消设置的默认对齐数，还原为默认
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//输出的结果是什么？
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">S1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#pragma pack(push, 1)</span><span class="c1">//设置默认对齐数为1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">MyStruct</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">a</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">b</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">	<span class="kt">double</span> <span class="n">c</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">	<span class="p">};</span> 
+</span></span><span class="line"><span class="cl"><span class="cp">#pragma pack(pop)</span><span class="c1">//取消设置的默认对齐数，还原为默认
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">MyStruct</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">a</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">b</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">	<span class="kt">double</span> <span class="n">c</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="nf">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="深拷贝与浅拷贝">深拷贝与浅拷贝
+</h4><h4 id="1-浅拷贝shallow-copy">1. 浅拷贝（Shallow Copy）
+</h4><p><strong>原理</strong>：仅复制对象的成员值（包括指针的值），<strong>不复制指针指向的实际资源</strong>。<br>
+<strong>结果</strong>：原对象和拷贝对象的指针成员指向<strong>同一块内存地址</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Shallow</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span><span class="o">*</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">Shallow</span><span class="p">(</span><span class="kt">int</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>  <span class="c1">// 分配堆内存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 编译器生成的默认拷贝构造函数（浅拷贝）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Shallow</span><span class="p">(</span><span class="k">const</span> <span class="n">Shallow</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="o">:</span> <span class="n">data</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">data</span><span class="p">)</span> <span class="p">{}</span> 
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">Shallow</span><span class="p">()</span> <span class="p">{</span> <span class="k">delete</span> <span class="n">data</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用示例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Shallow</span> <span class="nf">obj1</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">Shallow</span> <span class="n">obj2</span> <span class="o">=</span> <span class="n">obj1</span><span class="p">;</span>  <span class="c1">// 浅拷贝：obj2.data 指向 obj1.data 的内存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span><span class="n">obj1</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>      <span class="c1">// 修改 obj1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">obj2</span><span class="p">.</span><span class="n">data</span><span class="p">;</span>   <span class="c1">// 输出 20（obj2 也被修改）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// main结束时：obj2 和 obj1 会先后调用析构函数
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 导致同一内存被 delete 两次 → 程序崩溃！
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="浅拷贝的核心问题">浅拷贝的核心问题：
+</h5><ol>
+<li><strong>悬空指针</strong>：一个对象释放资源后，另一个对象的指针失效</li>
+<li><strong>重复释放</strong>：多个对象尝试释放同一块内存 → <strong>崩溃</strong></li>
+<li><strong>数据篡改</strong>：通过一个对象修改数据会影响其他对象</li>
+</ol>
+<hr>
+<h4 id="2-深拷贝deep-copy">2. 深拷贝（Deep Copy）
+</h4><p>主要用于拷贝构造函数，赋值运算符
+<strong>原理</strong>：不仅复制对象成员，还<strong>复制指针指向的资源</strong>。<br>
+<strong>结果</strong>：原对象和拷贝对象拥有<strong>完全独立的资源副本</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Deep</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span><span class="o">*</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">Deep</span><span class="p">(</span><span class="kt">int</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 自定义拷贝构造函数（深拷贝）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Deep</span><span class="p">(</span><span class="k">const</span> <span class="n">Deep</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="o">*</span><span class="n">other</span><span class="p">.</span><span class="n">data</span><span class="p">);</span>  <span class="c1">// 关键：分配新内存并复制值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 深拷贝赋值运算符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Deep</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Deep</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 防止自赋值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">delete</span> <span class="n">data</span><span class="p">;</span>              <span class="c1">// 释放原有资源
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="o">*</span><span class="n">other</span><span class="p">.</span><span class="n">data</span><span class="p">);</span>  <span class="c1">// 创建新副本
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">Deep</span><span class="p">()</span> <span class="p">{</span> <span class="k">delete</span> <span class="n">data</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用示例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Deep</span> <span class="nf">obj1</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">Deep</span> <span class="n">obj2</span> <span class="o">=</span> <span class="n">obj1</span><span class="p">;</span>  <span class="c1">// 深拷贝：obj2 拥有独立的内存副本
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="o">*</span><span class="n">obj1</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>   <span class="c1">// 修改 obj1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">obj2</span><span class="p">.</span><span class="n">data</span><span class="p">;</span> <span class="c1">// 输出 10（obj2 不受影响）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 析构时各自释放独立内存 → 安全
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="深拷贝的核心优势">深拷贝的核心优势：
+</h5><ol>
+<li><strong>资源独立</strong>：每个对象拥有自己的资源副本</li>
+<li><strong>安全析构</strong>：不会发生重复释放</li>
+<li><strong>数据隔离</strong>：修改一个对象不影响其他对象</li>
+</ol>
+<h4 id="构造函数拷贝构造函数赋值运算符">构造函数&amp;拷贝构造函数&amp;赋值运算符
+</h4><p><a class="link" href="https://mp.weixin.qq.com/s/uk12AxukYzxpROlw_bqgzA"  target="_blank" rel="noopener"
+    >大疆C++一面：C++什么时候生成默认拷贝构造函数？</a></p>
+<h5 id="1构造函数">1.构造函数
+</h5><p>用于初始化对象的特殊成员函数，与类同名，无返回值</p>
+<ul>
+<li>可重载，支持默认参数</li>
+<li>若未显式定义，编译器生成默认构造函数</li>
+<li>对象创建时自动调用</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="err">```</span><span class="n">cpp</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Point</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1. 默认构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Point</span><span class="p">()</span> <span class="o">:</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">y</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 2. 带参数构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Point</span><span class="p">(</span><span class="kt">int</span> <span class="n">x_val</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y_val</span><span class="p">)</span> <span class="o">:</span> <span class="n">x</span><span class="p">(</span><span class="n">x_val</span><span class="p">),</span> <span class="n">y</span><span class="p">(</span><span class="n">y_val</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Point</span> <span class="n">p1</span><span class="p">;</span>           <span class="c1">// 调用默认构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Point</span> <span class="nf">p2</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>     <span class="c1">// 调用带参数构造函数
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="2拷贝构造函数">2.拷贝构造函数
+</h5><p>用已有对象初始化新对象时调用的特殊构造函数，注意与赋值运算符区分</p>
+<ul>
+<li>参数为同类对象的 const 引用</li>
+<li>若未显式定义，编译器生成默认拷贝构造函数（浅拷贝）</li>
+<li>涉及动态内存时必须显式定义（深拷贝）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">String</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span><span class="o">*</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 普通构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">String</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="p">[</span><span class="n">strlen</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">strcpy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 拷贝构造函数（深拷贝）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">String</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	    <span class="c1">//不需要提前处理data，这是在构造是调用的
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="p">[</span><span class="n">strlen</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">data</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">strcpy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">other</span><span class="p">.</span><span class="n">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 禁用拷贝构造函数（C++11）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// String(const String&amp;) = delete;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">String</span><span class="p">()</span> <span class="p">{</span> <span class="k">delete</span><span class="p">[]</span> <span class="n">data</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">String</span> <span class="nf">s1</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">String</span> <span class="nf">s2</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>  <span class="c1">// 调用拷贝构造函数
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是，不用再拷贝构造函数中先判断是否删除<code>data</code>的动态内存，因为拷贝构造函数本质还是一个构造函数，初始化时调用</p>
+<h5 id="3赋值运算符">3.赋值运算符
+</h5><p>当类中包含指针或需要深拷贝的数据成员时，使用默认的赋值运算符可能会导致问题，如内存泄漏或重复释放内存。因此，在这些情况下，需要显式地重载赋值运算符。</p>
+<p>注意赋值运算符再内存管理上的细节</p>
+<ol>
+<li>避免自赋值</li>
+<li>赋值前先回收，避免内存泄漏</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ClassA</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ClassA</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ClassA</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">pszInputStr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">pszTestStr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="p">[</span><span class="n">strlen</span><span class="p">(</span><span class="n">pszInputStr</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">		<span class="n">strncpy</span><span class="p">(</span><span class="n">pszTestStr</span><span class="p">,</span> <span class="n">pszInputStr</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">pszInputStr</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">virtual</span> <span class="o">~</span><span class="n">ClassA</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">delete</span> <span class="n">pszTestStr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 赋值运算符重载函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">ClassA</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">ClassA</span><span class="o">&amp;</span> <span class="n">cls</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 避免自赋值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">cls</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 避免内存泄露
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">if</span> <span class="p">(</span><span class="n">pszTestStr</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">delete</span> <span class="n">pszTestStr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="n">pszTestStr</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="n">pszTestStr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="p">[</span><span class="n">strlen</span><span class="p">(</span><span class="n">cls</span><span class="p">.</span><span class="n">pszTestStr</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">		<span class="n">strncpy</span><span class="p">(</span><span class="n">pszTestStr</span><span class="p">,</span> <span class="n">cls</span><span class="p">.</span><span class="n">pszTestStr</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">cls</span><span class="p">.</span><span class="n">pszTestStr</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span><span class="o">*</span> <span class="n">pszTestStr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ClassA</span> <span class="n">obj1</span><span class="p">(</span><span class="s">&#34;liitdar&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ClassA</span> <span class="n">obj2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">obj2</span> <span class="o">=</span> <span class="n">obj1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;obj2.pszTestStr is: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">obj2</span><span class="p">.</span><span class="n">pszTestStr</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="模板函数模板类模板">模板(函数模板&amp;类模板)
+</h4><p>函数模板生成的实例化成为模板函数，类模板和模板类的定义同理</p>
+<h5 id="函数模板">函数模板
+</h5><p><strong>定义</strong>：通用函数定义，支持多种数据类型，编译器根据实际类型（隐式实例化）或者显式实例化生成具体函数
+<strong>特点</strong>：</p>
+<ul>
+<li>用 template 关键字声明</li>
+<li>可显式或隐式实例化</li>
+<li>支持函数重载和特化
+模板的定义（实现），还是模板的全特化，都建议放在头文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 1. 基本函数模板
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">T</span> <span class="n">max</span><span class="p">(</span><span class="n">T</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="o">?</span> <span class="nl">a</span> <span class="p">:</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. 函数模板特化（针对特定类型）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">template</span><span class="o">&lt;&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">max</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nf">strcmp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="nl">a</span> <span class="p">:</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>                <span class="c1">// 隐式实例化int版本
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">s</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="s">&#34;apple&#34;</span><span class="p">,</span> <span class="s">&#34;banana&#34;</span><span class="p">);</span>  <span class="c1">// 调用特化版本
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="类模板">类模板
+</h5><p><strong>定义</strong>：通用类定义，成员变量和函数可使用模板参数类型。</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>类内成员函数可在<strong>类内定义（默认内联）</strong> 或类外定义</li>
+<li>支持全特化和部分特化</li>
+<li>实例化时需指定具体类型</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 1. 基本类模板
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="p">,</span> <span class="kt">int</span> <span class="n">Size</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Array</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">T</span> <span class="n">data</span><span class="p">[</span><span class="n">Size</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Array</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">T</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">getSize</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">Size</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. 类模板特化（针对bool类型优化）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">template</span><span class="o">&lt;</span><span class="kt">int</span> <span class="n">Size</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Array</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span> <span class="n">Size</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">data</span><span class="p">[(</span><span class="n">Size</span> <span class="o">+</span> <span class="mi">7</span><span class="p">)</span> <span class="o">/</span> <span class="mi">8</span><span class="p">];</span>  <span class="c1">// 位压缩存储
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">get</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">index</span> <span class="o">/</span> <span class="mi">8</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">index</span> <span class="o">%</span> <span class="mi">8</span><span class="p">))</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">10</span><span class="o">&gt;</span> <span class="n">intArray</span><span class="p">;</span>        <span class="c1">// 实例化int类型数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span> <span class="mi">100</span><span class="o">&gt;</span> <span class="n">boolArray</span><span class="p">;</span>     <span class="c1">// 使用特化版本
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="设计模式">设计模式
+</h3><p>To be continued</p>
+<h2 id="step5-arm-cortex-m学习启动文件与链接器脚本">Step5 arm-cortex-M学习&amp;启动文件与链接器脚本
+</h2><p>在对上面的抽象层级有一定了解后，还需要将上述偏软件的抽象层与具体的硬件相连接，建立软硬结合的认知需要有一定微机原理的知识</p>
+<p>自荐一下笔者的博客
+<a class="link" href="https://nomadjoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/"  target="_blank" rel="noopener"
+    >从CPU架构到操作系统实现</a></p>
+<h3 id="cortex-m">cortex-M
+</h3><h4 id="架构特性">架构特性
+</h4><p>Cortex-M 系列作为微控制器内核，采用<strong>哈佛架构</strong>（指令与数据独立存储但共享内存空间），具备低功耗、高性能、中断易用性强、代码密度高等优势，支持嵌入式操作系统运行。其内核演变包含 Cortex-M0/M3/M4 等多个型号，其中 M3/M4 集成 3 级流水线（取指 - 译码 - 执行），M4F 额外支持浮点运算单元</p>
+<p>核心组件包括：</p>
+<ul>
+<li><strong>NVIC（嵌套向量中断控制器）</strong>：管理中断响应，支持多级中断优先级。</li>
+<li><strong>MPU（内存保护单元）</strong>：实现内存访问权限控制，保障系统安全。</li>
+<li><strong>调试接口</strong>：支持 JTAG 或 Serial Wire 调试，搭配嵌入式跟踪模块（ETM）实现代码跟踪。</li>
+<li><strong>指令集</strong>：主要支持 Thumb/Thumb2 指令集（16 位 + 32 位混合），兼顾代码密度与执行效率，属于 RISC 架构（精简指令系统），每条指令仅完成单一操作，硬件实现简单高效。</li>
+</ul>
+<h4 id="内存分布规则">内存分布规则
+</h4><p>Cortex-M 芯片内存分为 FLASH和 RAM两大区域，具体分布由硬件特性和链接脚本共同定义，以 STM32F103C8Tx（64K FLASH、20K RAM）为例：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>内存类型</th>
+          <th>起始地址</th>
+          <th>大小</th>
+          <th>权限</th>
+          <th>存储内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>FLASH</td>
+          <td>0x8000000</td>
+          <td>64K</td>
+          <td>可读可执行</td>
+          <td>中断向量表、.text 代码段、.rodata 只读常量段</td>
+      </tr>
+      <tr>
+          <td>RAM</td>
+          <td>0x20000000</td>
+          <td>20K</td>
+          <td>可读可写</td>
+          <td>.data 初始化数据段、.bss 未初始化数据段、堆、栈</td>
+      </tr>
+      <tr>
+          <td>内存段特性：</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<ul>
+<li><strong>.isr_vector</strong>：位于 FLASH 起始地址，存储栈顶地址和中断 / 异常处理函数地址，是复位后内核首个访问的区域。</li>
+<li><strong>.text</strong>：存放可执行代码（函数实现），包括用户代码和启动文件逻辑。</li>
+<li><strong>.rodata</strong>：存储只读常量（如 const 变量、字符串字面量），节省 RAM 空间。</li>
+<li><strong>.data</strong>：存放已初始化的全局 / 静态变量，编译时初始值存于 FLASH，运行时复制到 RAM。</li>
+<li><strong>.bss</strong>：存放未初始化的全局 / 静态变量，运行时由启动文件清零，无需占用 FLASH 空间。</li>
+<li><strong>堆 / 栈</strong>：堆从低地址向上生长（供 malloc 使用），栈从高地址向下生长（供函数调用、局部变量使用），由链接脚本预留空间。</li>
+</ul>
+<h3 id="启动文件与启动原理">启动文件与启动原理
+</h3><h4 id="启动原理">启动原理
+</h4><ol>
+<li><strong>硬件复位</strong>：内核读取 FLASH 起始地址的中断向量表，初始化 MSP（栈顶地址），将 PC 指向<code>Reset_Handler</code>。</li>
+<li><strong>执行 Reset_Handler</strong>：完成时钟配置、内存段初始化（.data 复制、.bss 清零）。</li>
+<li><strong>进入用户代码</strong>：跳转至<code>main</code>函数，启动流程结束，正式运行应用逻辑。</li>
+<li><strong>中断响应</strong>：运行中触发中断时，内核从向量表查找对应处理函数地址，执行后返回断点。</li>
+</ol>
+<h4 id="启动模式">启动模式
+</h4><p>STM32F103 支持 3 种启动模式，由 BOOT0 和 BOOT1 引脚电平决定：</p>
+<ul>
+<li><strong>BOOT0=0</strong>：主 FLASH 启动（默认模式），从用户代码区启动。</li>
+<li><strong>BOOT0=1、BOOT1=0</strong>：系统内存启动，从芯片出厂固化的 Bootloader 启动。</li>
+<li><strong>BOOT0=1、BOOT1=1</strong>：嵌入式 SRAM 启动，从 RAM 加载代码（用于调试）。</li>
+</ul>
+<h4 id="启动文件">启动文件
+</h4><p>启动文件（如<code>startup_stm32f103xb.s</code>）是汇编语言编写的底层程序，作为 &ldquo;硬件到软件的桥梁&rdquo;，负责衔接硬件复位与用户<code>main</code>函数，核心功能包括硬件初始化、内存初始化、中断系统准备和引导用户代码</p>
+<h4 id="启动文件结构拆解">启动文件结构拆解
+</h4><h5 id="1汇编环境配置">（1）汇编环境配置
+</h5><p>指定处理器架构、指令集和浮点模式，确保汇编代码与硬件兼容，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="na">.syntax</span> <span class="no">unified</span>          <span class="c1">; 兼容ARM与Thumb指令集
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.cpu</span> <span class="no">cortex-m3</span>           <span class="c1">; 目标内核为Cortex-M3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.fpu</span> <span class="no">softvfp</span>             <span class="c1">; 软件模拟浮点运算（无硬件FPU）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.thumb</span>                   <span class="c1">; 启用Thumb指令集
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2关键符号声明">（2）关键符号声明
+</h4><p>引用链接器脚本定义的内存地址符号，建立启动文件与内存布局的关联，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="na">.word</span> <span class="no">_sidata</span>  <span class="c1">; .data段在FLASH的加载地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.word</span> <span class="no">_sdata</span>   <span class="c1">; .data段在RAM的运行起始地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.word</span> <span class="no">_edata</span>   <span class="c1">; .data段在RAM的运行结束地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.word</span> <span class="no">_sbss</span>    <span class="c1">; .bss段在RAM的起始地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.word</span> <span class="no">_ebss</span>    <span class="c1">; .bss段在RAM的结束地址
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="3复位处理函数reset_handler">（3）复位处理函数（Reset_Handler）
+</h4><p>复位后执行的核心逻辑，是启动流程的入口，分为 5 个关键步骤：</p>
+<ol>
+<li><strong>系统时钟初始化</strong>：调用<code>SystemInit</code>函数配置 HSE/PLL，将时钟从 8MHz HSI 提升至 72MHz</li>
+<li><strong>.data 段复制</strong>：从 FLASH 的<code>_sidata</code>地址复制初始值到 RAM 的<code>_sdata</code>至<code>_edata</code>区域</li>
+<li><strong>.bss 段清零</strong>：将 RAM 中<code>_sbss</code>至<code>_ebss</code>区域全部置 0，符合 C 语言标准</li>
+<li><strong>C++ 静态构造函数初始化</strong>：调用<code>__libc_init_array</code>，执行全局对象构造（兼容 C++ 项目）</li>
+<li><strong>跳转至 main 函数</strong>：完成底层初始化后，将程序控制权交给用户代码</li>
+</ol>
+<h4 id="4中断向量表g_pfnvectors">（4）中断向量表（g_pfnVectors）
+</h4><p>存储所有异常 / 中断的处理函数地址，位于 FLASH 起始地址，核心特性包括：</p>
+<ul>
+<li>第 0 个元素为栈顶地址（<code>_estack</code>），用于初始化主栈指针（MSP）</li>
+<li>第 1 个元素为<code>Reset_Handler</code>地址，是复位后程序计数器（PC）的初始指向</li>
+<li>向量表顺序隐含中断优先级，靠前元素对应优先级更高（如硬 fault 优先级高于 SysTick）</li>
+</ul>
+<h4 id="5默认中断处理函数default_handler">（5）默认中断处理函数（Default_Handler）
+</h4><p>为未自定义的中断提供 &ldquo;兜底&rdquo; 逻辑，通过无限循环防止程序跑飞，同时支持弱别名机制（<code>.weak</code>），允许用户在 C 代码中重定义中断函数覆盖默认逻辑</p>
+<h3 id="链接器脚本">链接器脚本
+</h3><p>链接脚本（.ld）是链接器的配置文件，本质是告知链接器芯片内存布局、代码 / 数据的段分配规则、全局符号定义和内存合法性检查，是生成可执行文件（.elf/.hex）的关键，没有它链接器无法确定 &ldquo;代码放哪里、变量放哪里&rdquo;</p>
+<h4 id="1入口点与栈顶定义">（1）入口点与栈顶定义
+</h4><p>指定程序入口和栈堆大小，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ENTRY(Reset_Handler)        ; 程序入口为Reset_Handler
+</span></span><span class="line"><span class="cl">_estack = ORIGIN(RAM) + LENGTH(RAM); 栈顶地址=RAM起始+RAM大小
+</span></span><span class="line"><span class="cl">_Min_Heap_Size = 0x200;     最小堆大小（512字节）
+</span></span><span class="line"><span class="cl">_Min_Stack_Size = 0xF00;    最小栈大小（3840字节）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2内存区域定义memory-块">（2）内存区域定义（MEMORY 块）
+</h4><p>描述 FLASH 和 RAM 的物理属性，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">MEMORY
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">RAM (xrw) : ORIGIN = 0x20000000, LENGTH = 20K  ; RAM：可读可写可执行
+</span></span><span class="line"><span class="cl">FLASH (rx) : ORIGIN = 0x8000000, LENGTH = 64K  ; FLASH：可读可执行
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="3段分配规则sections-块">（3）段分配规则（SECTIONS 块）
+</h4><p>定义编译生成的段与物理内存的映射关系，核心段包括：</p>
+<ul>
+<li><strong>.isr_vector</strong>：分配到 FLASH 起始地址，用<code>KEEP</code>关键字防止被优化删除。</li>
+<li><strong>.text</strong>：存放代码段，定义<code>_etext</code>标记结束地址。</li>
+<li><strong>.rodata</strong>：存放只读常量，分配到 FLASH。</li>
+<li><strong>.data</strong>：运行地址在 RAM，加载地址在 FLASH，定义<code>_sidata</code>（加载地址）、<code>_sdata</code>（运行起始）、<code>_edata</code>（运行结束）。</li>
+<li><strong>.bss</strong>：分配到 RAM，定义<code>_sbss</code>（起始）、<code>_ebss</code>（结束）。</li>
+<li><strong>._user_heap_stack</strong>：预留堆和栈空间，检查 RAM 容量是否充足。</li>
+<li><strong>/DISCARD/</strong>：丢弃无用段（如标准库冗余代码），减小文件大小。</li>
+</ul>
+<h3 id="链接脚本与启动文件的协同关系">链接脚本与启动文件的协同关系
+</h3><p>启动文件与链接脚本通过全局符号和段分配紧密耦合，二者协作关系如下：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>协作维度</th>
+          <th>启动文件角色</th>
+          <th>链接脚本角色</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>内存地址提供</td>
+          <td>引用<code>_sdata</code>、<code>_ebss</code>等符号</td>
+          <td>计算并定义内存地址符号</td>
+      </tr>
+      <tr>
+          <td>段分配依据</td>
+          <td>将代码 / 数据放入指定段（如.text）</td>
+          <td>规定段的存储位置（如 FLASH/RAM）</td>
+      </tr>
+      <tr>
+          <td>程序入口指定</td>
+          <td>实现<code>Reset_Handler</code>函数</td>
+          <td>通过<code>ENTRY</code>指定入口为<code>Reset_Handler</code></td>
+      </tr>
+      <tr>
+          <td>内存合法性检查</td>
+          <td>依赖符号确保内存访问不越界</td>
+          <td>检查堆 / 栈 / 数据段总大小是否超过 RAM 容量</td>
+      </tr>
+  </tbody>
+</table></div>
+<ol>
+<li><strong>架构→内存→链接脚本</strong>：Cortex-M 的哈佛架构决定内存分为 FLASH 和 RAM，链接脚本根据硬件内存参数（起始地址、大小）定义存储规则。</li>
+<li><strong>链接脚本→启动文件</strong>：链接脚本提供内存地址符号（如<code>_sdata</code>），启动文件依赖这些符号完成.data 复制、.bss 清零等初始化操作。</li>
+<li><strong>启动文件→架构</strong>：启动文件根据 Cortex-M 内核特性（如向量表位置、栈初始化要求）实现底层逻辑，最终引导程序进入用户代码。</li>
+</ol>
+<h2 id="待续">待续
+</h2>
 </section>
 
 
