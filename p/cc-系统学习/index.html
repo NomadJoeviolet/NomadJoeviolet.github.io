@@ -466,7 +466,7 @@
         <li><a href="#inheritance-and-dynamic-memory-allocation">Inheritance-and-dynamic-memory-allocation</a></li>
       </ol>
     </li>
-    <li><a href="#class-templattes-and-std-library">Class-Templattes-and-Std-Library</a>
+    <li><a href="#class-templates-and-std-library">Class-Templates-and-Std-Library</a>
       <ol>
         <li><a href="#函数模板回顾">函数模板回顾</a></li>
         <li><a href="#class-template">class-template</a></li>
@@ -504,7 +504,12 @@
         <li><a href="#计算cpu优化效率">计算<code>CPU</code>优化效率</a></li>
       </ol>
     </li>
-    <li><a href="#关于include">关于Include</a></li>
+    <li><a href="#个人的补充与总结">个人的补充与总结</a>
+      <ol>
+        <li><a href="#关于include">关于Include</a></li>
+        <li><a href="#关于模板">关于模板</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -1907,7 +1912,7 @@
 </span></span><span class="line"><span class="cl"><span class="c1">//这里指定实例化类型后，对参数会有隐式转换
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>实例化后还可以进行自定义，也就是特例化</p>
+</div><p>实例化后还可以进行自定义，也就是特例化，特例化的代码是会被编译的，一般会放在<code>.cpp</code>源文件</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2948,7 +2953,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="class-templattes-and-std-library">Class-Templattes-and-Std-Library
+</div><h2 id="class-templates-and-std-library">Class-Templates-and-Std-Library
 </h2><p>模板十分实用，前面有函数模板，此处是类模板</p>
 <h3 id="函数模板回顾">函数模板回顾
 </h3><p><strong>函数模板生成的函数是模板函数</strong>，模板函数是函数模板被实例化以后生成的</p>
@@ -3674,8 +3679,9 @@
 <code>Effected floating op = 2*m*k*n</code></p>
 <p>衡量优化效率
 <code>Efficiency=Eddected_Performance/Peak_Performance</code></p>
-<h2 id="关于include">关于Include
-</h2><div class="highlight"><div class="chroma">
+<h2 id="个人的补充与总结">个人的补充与总结
+</h2><h3 id="关于include">关于Include
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -3685,7 +3691,58 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">include</span> <span class="s">&#34;&#34;</span><span class="c1">//从编译器指定的路径去找以及当前.cpp文件所在目录去找
 </span></span></span></code></pre></td></tr></table>
 </div>
+</div><h3 id="关于模板">关于模板
+</h3><p><a class="link" href="https://www.zhihu.com/question/444534843"  target="_blank" rel="noopener"
+    >c++模板编程应该把实现放在头文件中吗，这样写会不会让头文件变得很难看？ - 知乎</a>
+借用其中的一个回答</p>
+<blockquote>
+<p>理论上，<a class="link" href="https://zhida.zhihu.com/search?content_id=375342898&amp;content_type=Answer&amp;match_order=1&amp;q=%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0&amp;zhida_source=entity"  target="_blank" rel="noopener"
+    >模板函数</a>的实现应该放在头文件里，这是因为 C++ 继承了 C 语言先分离编译最后链接的传统，而模板的实例化在编译期，所以必须要让编译器看到函数的实现，才能实例化</p>
+</blockquote>
+<p>这里从原理上来看就知道模板的声明和定义（实现）应该都放在头文件中了，不然在编译期引用了模板实例化的源文件会无法正常编译，也就是无法正常生成实例化的模板函数，类模板同理</p>
+<p>详解如下
+<a class="link" href="https://blog.csdn.net/l15799033407/article/details/120411311"  target="_blank" rel="noopener"
+    >C++中模板以及模板实例化都放在头文件_模板特化能放到cpp文件吗-CSDN博客</a></p>
+<p>关于全特化，函数模板的特化版本本质上是一个<strong>具体的函数</strong>（不再是模板），但由于它与通用模板存在关联，实践中几乎都放在头文件中</p>
+<p>类模板特例化的同样规则，类模板的全特化和部分特化也建议放在头文件中</p>
+<p>原因如下</p>
+<ol>
+<li><strong>避免隐式实例化冲突</strong><br>
+当编译器处理模板实例化时，如果在某个编译单元中看不到特化版本的声明，会自动实例化通用模板。若此时其他编译单元存在特化版本的实现，会导致链接时出现 “多重定义” 错误</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 头文件（func.h）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">print</span><span class="p">(</span><span class="n">T</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// 通用模板
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 特化版本放在头文件，确保所有使用处可见
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">template</span><span class="o">&lt;&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">print</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;String: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">str</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
+</div><ol start="2">
+<li><strong>符合模板使用习惯</strong><br>
+模板（包括特化）的使用者通常会通过头文件获取完整定义，无需关心实现文件的链接细节。将特化放在头文件中，能让代码结构更清晰，减少外部依赖</li>
+</ol>
+
 </section>
 
 

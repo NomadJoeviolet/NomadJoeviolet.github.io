@@ -1346,7 +1346,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//这里指定实例化类型后，对参数会有隐式转换
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;实例化后还可以进行自定义，也就是特例化&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;实例化后还可以进行自定义，也就是特例化，特例化的代码是会被编译的，一般会放在&lt;code&gt;.cpp&lt;/code&gt;源文件&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -2387,7 +2387,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;class-templattes-and-std-library&#34;&gt;Class-Templattes-and-Std-Library
+&lt;/div&gt;&lt;h2 id=&#34;class-templates-and-std-library&#34;&gt;Class-Templates-and-Std-Library
 &lt;/h2&gt;&lt;p&gt;模板十分实用，前面有函数模板，此处是类模板&lt;/p&gt;
 &lt;h3 id=&#34;函数模板回顾&#34;&gt;函数模板回顾
 &lt;/h3&gt;&lt;p&gt;&lt;strong&gt;函数模板生成的函数是模板函数&lt;/strong&gt;，模板函数是函数模板被实例化以后生成的&lt;/p&gt;
@@ -3113,8 +3113,9 @@
 &lt;code&gt;Effected floating op = 2*m*k*n&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;衡量优化效率
 &lt;code&gt;Efficiency=Eddected_Performance/Peak_Performance&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id=&#34;关于include&#34;&gt;关于Include
-&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;h2 id=&#34;个人的补充与总结&#34;&gt;个人的补充与总结
+&lt;/h2&gt;&lt;h3 id=&#34;关于include&#34;&gt;关于Include
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -3124,7 +3125,58 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//从编译器指定的路径去找以及当前.cpp文件所在目录去找
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description>
+&lt;/div&gt;&lt;h3 id=&#34;关于模板&#34;&gt;关于模板
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/question/444534843&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;c++模板编程应该把实现放在头文件中吗，这样写会不会让头文件变得很难看？ - 知乎&lt;/a&gt;
+借用其中的一个回答&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;理论上，&lt;a class=&#34;link&#34; href=&#34;https://zhida.zhihu.com/search?content_id=375342898&amp;amp;content_type=Answer&amp;amp;match_order=1&amp;amp;q=%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0&amp;amp;zhida_source=entity&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;模板函数&lt;/a&gt;的实现应该放在头文件里，这是因为 C++ 继承了 C 语言先分离编译最后链接的传统，而模板的实例化在编译期，所以必须要让编译器看到函数的实现，才能实例化&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这里从原理上来看就知道模板的声明和定义（实现）应该都放在头文件中了，不然在编译期引用了模板实例化的源文件会无法正常编译，也就是无法正常生成实例化的模板函数，类模板同理&lt;/p&gt;
+&lt;p&gt;详解如下
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/l15799033407/article/details/120411311&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C++中模板以及模板实例化都放在头文件_模板特化能放到cpp文件吗-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;关于全特化，函数模板的特化版本本质上是一个&lt;strong&gt;具体的函数&lt;/strong&gt;（不再是模板），但由于它与通用模板存在关联，实践中几乎都放在头文件中&lt;/p&gt;
+&lt;p&gt;类模板特例化的同样规则，类模板的全特化和部分特化也建议放在头文件中&lt;/p&gt;
+&lt;p&gt;原因如下&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;避免隐式实例化冲突&lt;/strong&gt;&lt;br&gt;
+当编译器处理模板实例化时，如果在某个编译单元中看不到特化版本的声明，会自动实例化通用模板。若此时其他编译单元存在特化版本的实现，会导致链接时出现 “多重定义” 错误&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 头文件（func.h）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;template&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;typename&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// 通用模板
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cout&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 特化版本放在头文件，确保所有使用处可见
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;template&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&amp;gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cout&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;String: &amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;符合模板使用习惯&lt;/strong&gt;&lt;br&gt;
+模板（包括特化）的使用者通常会通过头文件获取完整定义，无需关心实现文件的链接细节。将特化放在头文件中，能让代码结构更清晰，减少外部依赖&lt;/li&gt;
+&lt;/ol&gt;
+</description>
         </item>
         <item>
         <title>从CPU架构到操作系统实现</title>
