@@ -2492,7 +2492,8 @@
 <h4 id="default-copy-constructors">Default-Copy-Constructors
 </h4><p><a class="link" href="https://mp.weixin.qq.com/s/uk12AxukYzxpROlw_bqgzA"  target="_blank" rel="noopener"
     >大疆C++一面：C++什么时候生成默认拷贝构造函数？</a></p>
-<p>拷贝构造函数定义如下</p>
+<p>拷贝构造函数的参数必须是<code>const</code>引用（避免无限递归调用）
+拷贝构造函数定义如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
