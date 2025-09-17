@@ -471,7 +471,18 @@ USART可以用来实现同步/异步的串口通信</p>
 <p>计算机的运行都是基于机器语言，我们编写的C语言程序，最后经过编译得到汇编代码，再经过汇编，得到二进制代码（已经是机器语言，但不可运行），最后经过链接，得到一个能运行于单片机上的可执行程序</p>
 <p>同时，还需要提一下的是，在一种计算机环境中运行的编译程序，能编译出在另外一种环境下运行的代码，这个编译过程就叫交叉编译。简单地说，就是在一个平台上生成另一个平台上的可执行代码，嵌入式开发的程序编译就是典型的交叉编译，用到的编译器用被称作交叉编译器</p>
 <p>目前队内的开发工具链是<code>VScode/Clion</code>+<code>arm-none-eabi/armclag</code>+<code>CMake</code>+<code>Ninja</code>+<code>Ozone</code>+<code>cland/intellisence/Clion_LSP</code>（编辑器+编译器+项目构建工具+项目构建的执行工具+烧录器+语法服务支持LSP），个人认为还是相当现代化且高度自定义的
-![[新工具链.png]]</p>
+<img src="/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E6%96%B0%E5%B7%A5%E5%85%B7%E9%93%BE.png"
+	width="1662"
+	height="1065"
+	srcset="/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E6%96%B0%E5%B7%A5%E5%85%B7%E9%93%BE_hu11427774341996634186.png 480w, /p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E6%96%B0%E5%B7%A5%E5%85%B7%E9%93%BE_hu4232838292584919944.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="156"
+		data-flex-basis="374px"
+	
+></p>
 <p>下面简单讲解C语言到机器语言的定义以及编译过程</p>
 <h3 id="从c语言到机器语言">从C语言到机器语言
 </h3><h4 id="机器语言">机器语言
@@ -755,7 +766,18 @@ USART可以用来实现同步/异步的串口通信</p>
 根据CMakeLists.txt来构建makefile/ninja文件，再根据makefile/ninja文件来编译C和C++文件并生成可执行文件</p>
 <p>只需要理解
 在命令行使用g++ 进行多文件编译时，每次输入都需要输入一大堆的文件，非常麻烦
-![[CMake简化编译命令.png]]
+<img src="/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/CMake%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4.png"
+	width="1531"
+	height="622"
+	srcset="/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/CMake%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4_hu13196005942084954256.png 480w, /p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/CMake%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91%E5%91%BD%E4%BB%A4_hu12639865504616744492.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="246"
+		data-flex-basis="590px"
+	
+>
 使用CMake+make/ninja进行简化操作即可（个人认为的CMake的一个核心思想（极简化理解））</p>
 <p>层级关系</p>
 <ol>
