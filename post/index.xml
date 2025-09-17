@@ -3125,7 +3125,11 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//从编译器指定的路径去找以及当前.cpp文件所在目录去找
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;关于模板&#34;&gt;关于模板
+&lt;/div&gt;&lt;h3 id=&#34;关于类&#34;&gt;关于类
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;类内成员函数可在&lt;strong&gt;类内定义（默认内联）&lt;/strong&gt; 或类外定义&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关于模板&#34;&gt;关于模板
 &lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/question/444534843&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;c++模板编程应该把实现放在头文件中吗，这样写会不会让头文件变得很难看？ - 知乎&lt;/a&gt;
 借用其中的一个回答&lt;/p&gt;
