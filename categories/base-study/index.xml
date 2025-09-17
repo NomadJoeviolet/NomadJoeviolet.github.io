@@ -809,12 +809,16 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/C&amp;amp;C&amp;#43;&amp;#43;%20%e7%b3%bb%e7%bb%9f%e5%ad%a6%e4%b9%a0-Union%e5%86%85%e5%ad%98%e5%b8%83%e5%b1%80.png&#34;
-	
-	
-	
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-Union%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.png&#34;
+	width=&#34;422&#34;
+	height=&#34;242&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-Union%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80_hu4925730204986132028.png 480w, https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-Union%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80_hu5963275405719956214.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;174&#34;
+		data-flex-basis=&#34;418px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;enum&#34;&gt;Enum
@@ -846,12 +850,16 @@
 &lt;/div&gt;&lt;h2 id=&#34;memory-and-pointer&#34;&gt;Memory and Pointer
 &lt;/h2&gt;&lt;h3 id=&#34;pointers&#34;&gt;Pointers
 &lt;/h3&gt;&lt;p&gt;指针变量存储的是一个地址
-&lt;img src=&#34;https://NomadJoeviolet.github.io/C&amp;amp;C&amp;#43;&amp;#43;%20%e7%b3%bb%e7%bb%9f%e5%ad%a6%e4%b9%a0-%e6%8c%87%e9%92%88.png&#34;
-	
-	
-	
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E6%8C%87%E9%92%88.png&#34;
+	width=&#34;789&#34;
+	height=&#34;479&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E6%8C%87%E9%92%88_hu14653292494025820826.png 480w, https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E6%8C%87%E9%92%88_hu808150211156278628.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;164&#34;
+		data-flex-basis=&#34;395px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;对指针进行加减，加减是加减一个元素&lt;/p&gt;
@@ -927,12 +935,16 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;allocate-memoryc-style&#34;&gt;Allocate-memory:C-style
 &lt;/h3&gt;&lt;p&gt;只是示意图，在不同系统下会有区别
-&lt;img src=&#34;https://NomadJoeviolet.github.io/C&amp;amp;C&amp;#43;&amp;#43;%20%e7%b3%bb%e7%bb%9f%e5%ad%a6%e4%b9%a0-program-memory.png&#34;
-	
-	
-	
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-program-memory.png&#34;
+	width=&#34;254&#34;
+	height=&#34;570&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-program-memory_hu12025276190676837247.png 480w, https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-program-memory_hu10396555254829416398.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;44&#34;
+		data-flex-basis=&#34;106px&#34;
 	
 &gt;
 申请内存&lt;/p&gt;
@@ -1106,12 +1118,16 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;num_ref&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;num&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//别名 
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/C&amp;amp;C&amp;#43;&amp;#43;%20%e7%b3%bb%e7%bb%9f%e5%ad%a6%e4%b9%a0-%e5%bc%95%e7%94%a8.png&#34;
-	
-	
-	
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E5%BC%95%E7%94%A8.png&#34;
+	width=&#34;745&#34;
+	height=&#34;211&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E5%BC%95%E7%94%A8_hu4255241783674712907.png 480w, https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E5%BC%95%E7%94%A8_hu2671952415462133359.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;353&#34;
+		data-flex-basis=&#34;847px&#34;
 	
 &gt;
 引用创建的时候一定要初始化&lt;/p&gt;
@@ -1126,12 +1142,16 @@
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;在函数传递一个内存占用巨大的参数时，采用值传递，拷贝的变量会占用大量内存，这个时候可以使用指针或者引用&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&#34;指针与引用的区别&#34;&gt;指针与引用的区别
 &lt;/h4&gt;&lt;p&gt;引用相较于指针更加安全
-&lt;img src=&#34;https://NomadJoeviolet.github.io/C&amp;amp;C&amp;#43;&amp;#43;%20%e7%b3%bb%e7%bb%9f%e5%ad%a6%e4%b9%a0-%e6%8c%87%e9%92%88%e4%b8%8e%e5%bc%95%e7%94%a8.png&#34;
-	
-	
-	
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E6%8C%87%E9%92%88%E4%B8%8E%E5%BC%95%E7%94%A8.png&#34;
+	width=&#34;738&#34;
+	height=&#34;384&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E6%8C%87%E9%92%88%E4%B8%8E%E5%BC%95%E7%94%A8_hu8140064181848231642.png 480w, https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E6%8C%87%E9%92%88%E4%B8%8E%E5%BC%95%E7%94%A8_hu10579029790385717556.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;192&#34;
+		data-flex-basis=&#34;461px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;return-statement&#34;&gt;Return-statement
@@ -1454,12 +1474,16 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;//需要注意将任务拆开给不同的cpu核本身也是需要时耗的
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/C&amp;amp;C&amp;#43;&amp;#43;%20%e7%b3%bb%e7%bb%9f%e5%ad%a6%e4%b9%a0-%e5%a4%9a%e6%a0%b8%e8%bf%90%e8%a1%8c.png&#34;
-	
-	
-	
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E5%A4%9A%E6%A0%B8%E8%BF%90%E8%A1%8C.png&#34;
+	width=&#34;608&#34;
+	height=&#34;362&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E5%A4%9A%E6%A0%B8%E8%BF%90%E8%A1%8C_hu8995788538681686211.png 480w, https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E5%A4%9A%E6%A0%B8%E8%BF%90%E8%A1%8C_hu5018434423499845832.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;167&#34;
+		data-flex-basis=&#34;403px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;h2 id=&#34;basics-of-classes&#34;&gt;Basics of Classes
@@ -2566,12 +2590,16 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;std-classes&#34;&gt;std-classes
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;std::string&lt;/code&gt;
-&lt;img src=&#34;https://NomadJoeviolet.github.io/C&amp;amp;C&amp;#43;&amp;#43;%20%e7%b3%bb%e7%bb%9f%e5%ad%a6%e4%b9%a0-std%e5%b8%b8%e7%94%a8%e7%9a%84%e6%a8%a1%e6%9d%bf%e7%b1%bb.png&#34;
-	
-	
-	
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-std%E5%B8%B8%E7%94%A8%E7%9A%84%E6%A8%A1%E6%9D%BF%E7%B1%BB.png&#34;
+	width=&#34;805&#34;
+	height=&#34;440&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-std%E5%B8%B8%E7%94%A8%E7%9A%84%E6%A8%A1%E6%9D%BF%E7%B1%BB_hu9600181098880771016.png 480w, https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-std%E5%B8%B8%E7%94%A8%E7%9A%84%E6%A8%A1%E6%9D%BF%E7%B1%BB_hu9257064616529464900.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;182&#34;
+		data-flex-basis=&#34;439px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;array&lt;/code&gt;&lt;/p&gt;
@@ -2588,42 +2616,58 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;code&gt;others&lt;/code&gt;
-&lt;img src=&#34;https://NomadJoeviolet.github.io/C&amp;amp;C&amp;#43;&amp;#43;%20%e7%b3%bb%e7%bb%9f%e5%ad%a6%e4%b9%a0-std%e7%b1%bb_1.png&#34;
-	
-	
-	
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-std%E7%B1%BB_1.png&#34;
+	width=&#34;1240&#34;
+	height=&#34;173&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-std%E7%B1%BB_1_hu9457826083613686169.png 480w, https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-std%E7%B1%BB_1_hu4304098364907832662.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;716&#34;
+		data-flex-basis=&#34;1720px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/C&amp;amp;C&amp;#43;&amp;#43;%20%e7%b3%bb%e7%bb%9f%e5%ad%a6%e4%b9%a0std%e7%b1%bb_2.png&#34;
-	
-	
-	
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0std%E7%B1%BB_2.png&#34;
+	width=&#34;677&#34;
+	height=&#34;384&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0std%E7%B1%BB_2_hu8199292439672007710.png 480w, https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0std%E7%B1%BB_2_hu2427079130727021306.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;176&#34;
+		data-flex-basis=&#34;423px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;h2 id=&#34;error-handling&#34;&gt;Error-Handling
 &lt;/h2&gt;&lt;h3 id=&#34;standard-output-stream-and-standard-error-stream&#34;&gt;Standard-Output-Stream-and-Standard-Error-Stream
 &lt;/h3&gt;&lt;p&gt;标准输出流与标准错误流
 &lt;code&gt;C&amp;amp;C++&lt;/code&gt;的输出流与错误流
-&lt;img src=&#34;https://NomadJoeviolet.github.io/C&amp;amp;C&amp;#43;&amp;#43;%20%e7%b3%bb%e7%bb%9f%e5%ad%a6%e4%b9%a0-C&amp;amp;C&amp;#43;&amp;#43;%e8%be%93%e5%87%ba%e6%b5%81%e4%b8%8e%e9%94%99%e8%af%af%e6%b5%81.png&#34;
-	
-	
-	
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-C&amp;amp;C&amp;#43;&amp;#43;%E8%BE%93%E5%87%BA%E6%B5%81%E4%B8%8E%E9%94%99%E8%AF%AF%E6%B5%81.png&#34;
+	width=&#34;673&#34;
+	height=&#34;294&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-C&amp;amp;C&amp;#43;&amp;#43;%E8%BE%93%E5%87%BA%E6%B5%81%E4%B8%8E%E9%94%99%E8%AF%AF%E6%B5%81_hu12131997885952558507.png 480w, https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-C&amp;amp;C&amp;#43;&amp;#43;%E8%BE%93%E5%87%BA%E6%B5%81%E4%B8%8E%E9%94%99%E8%AF%AF%E6%B5%81_hu12624196581652433190.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;228&#34;
+		data-flex-basis=&#34;549px&#34;
 	
 &gt;
 标准输出流的内容可以通过管道输出到其他文件，而标准错误流不会&lt;/p&gt;
 &lt;h3 id=&#34;重定向&#34;&gt;重定向
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/C&amp;amp;C&amp;#43;&amp;#43;%20%e7%b3%bb%e7%bb%9f%e5%ad%a6%e4%b9%a0-%e8%be%93%e5%85%a5%e8%be%93%e5%87%ba%e6%b5%81.png&#34;
-	
-	
-	
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81.png&#34;
+	width=&#34;490&#34;
+	height=&#34;242&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81_hu1019439950282887564.png 480w, https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81_hu3431468540221987376.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;202&#34;
+		data-flex-basis=&#34;485px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
