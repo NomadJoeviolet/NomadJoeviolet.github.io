@@ -13,8 +13,8 @@
         <pubDate>Wed, 17 Sep 2025 23:37:07 +0800</pubDate>
         
         <guid>https://NomadJoeviolet.github.io/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/</guid>
-        <description>&lt;p&gt;violet
-初步入门嵌入式开发后（假定已经会使用Keil和CubeMX进行开发），需要回头补充的基础以及提升，本指南只起到抛砖引玉的作用，对所需知识仅作精简的概述，主要在于帮助构建知识框架&lt;/p&gt;
+        <description>&lt;p&gt;violet&lt;/p&gt;
+&lt;p&gt;初步入门嵌入式开发后（假定已经会使用Keil和CubeMX进行开发），需要回头补充的基础以及提升，本指南只起到抛砖引玉的作用，对所需知识仅作精简的概述，主要在于帮助构建知识框架&lt;/p&gt;
 &lt;h2 id=&#34;step1---keilcubemx工具链使用hal库使用基本外设基本开发常识&#34;&gt;Step1   Keil+CubeMX工具链使用，HAL库使用，基本外设，基本开发常识
 &lt;/h2&gt;&lt;h3 id=&#34;开发常识&#34;&gt;开发常识
 &lt;/h3&gt;&lt;p&gt;该部分内容摘自队内文档部分内容&lt;/p&gt;
@@ -372,19 +372,19 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 &lt;/h5&gt;&lt;p&gt;make功能强大，可以给人看，ninja启动速度快，项目构建速度快，但不是给人看的&lt;br&gt;
 可以认为两者同级。&lt;/p&gt;
 &lt;h2 id=&#34;step4-c提升设计模式&#34;&gt;Step4 C++提升&amp;amp;设计模式
-&lt;/h2&gt;&lt;p&gt;这一节也是本人极其欠缺的，目前正在恶补
-&lt;code&gt;C++&lt;/code&gt;的提升推荐&lt;a class=&#34;link&#34; href=&#34;https://nomadjoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;C&amp;amp;C++ 系统学习&lt;/a&gt;（自荐这一块儿）
-设计模式推荐&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;这一节也是本人极其欠缺的，目前正在恶补&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;C++&lt;/code&gt;的提升推荐&lt;a class=&#34;link&#34; href=&#34;https://nomadjoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;C&amp;amp;C++ 系统学习&lt;/a&gt;（自荐这一块儿）&lt;/p&gt;
+&lt;p&gt;设计模式推荐：暂无&lt;/p&gt;
 &lt;h3 id=&#34;c提升&#34;&gt;C++提升
 &lt;/h3&gt;&lt;h4 id=&#34;内存对齐&#34;&gt;内存对齐
 &lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/140063999&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;一文轻松理解内存对齐 - 知乎&lt;/a&gt;
 这里仅以结构体的内存对齐为例，不提供具体例子，具体例子详见上面的博客&lt;/p&gt;
 &lt;h5 id=&#34;结构体struct对齐&#34;&gt; &lt;strong&gt;结构体（struct）对齐&lt;/strong&gt;
-&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;规则 1&lt;/strong&gt;：成员地址 = &lt;code&gt;min(自身对齐值, 有效对齐值)&lt;/code&gt; 的倍数
-&lt;strong&gt;规则 2&lt;/strong&gt;：结构体总大小 = 最大成员对齐值的整数倍
-&lt;strong&gt;规则 3&lt;/strong&gt;：成员排列顺序影响最终大小&lt;/p&gt;
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;规则 1&lt;/strong&gt;：成员地址 = &lt;code&gt;min(自身对齐值, 有效对齐值)&lt;/code&gt; 的倍数&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;规则 2&lt;/strong&gt;：结构体总大小 = 最大成员对齐值的整数倍&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;规则 3&lt;/strong&gt;：成员排列顺序影响最终大小&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
