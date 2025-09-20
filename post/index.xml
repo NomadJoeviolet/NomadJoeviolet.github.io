@@ -148,9 +148,9 @@
 		data-flex-basis=&#34;1630px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Auto-Retransmission&lt;/code&gt;：自动重传，如果发送的帧没有收到应答，出现错误，就不断重新发送，在总线负载较高的时候一定要关掉，会严重拉低控制频率
-&lt;code&gt;Transmit-Pause&lt;/code&gt;：一种临时停止 FDCAN 发送功能的机制，用于在特定场景下主动暂停数据发送，避免干扰总线或等待特定条件，可以通过软件主动触发，调用&lt;code&gt;HAL&lt;/code&gt;库函数
-&lt;code&gt;Protocol-Exception&lt;/code&gt;：检测到异常情况（帧格式错误等），会去触发异常处理机制（例如异常处理中断）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Auto-Retransmission&lt;/code&gt;：自动重传，如果发送的帧没有收到应答，出现错误，就不断重新发送，在总线负载较高的时候一定要关掉，会严重拉低控制频率&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Transmit-Pause&lt;/code&gt;：一种临时停止 FDCAN 发送功能的机制，用于在特定场景下主动暂停数据发送，避免干扰总线或等待特定条件，可以通过软件主动触发，调用&lt;code&gt;HAL&lt;/code&gt;库函数&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Protocol-Exception&lt;/code&gt;：检测到异常情况（帧格式错误等），会去触发异常处理机制（例如异常处理中断）&lt;/p&gt;
 &lt;h4 id=&#34;data--nominal&#34;&gt;Data &amp;amp; Nominal
 &lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/stm32fdcancan/STM32FDCAN&amp;amp;CAN-Data&amp;amp;Nominal.png&#34;
 	width=&#34;709&#34;
