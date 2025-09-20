@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="FDCAN CubeMX配置解析 这里的配置以STM32G474CET6为例 Frame-Format Classic mode：普通CAN FD mode without BitRate Switching：FDCAN，没有波特率转换 FD mode with BitRate Switching：FDCAN，带有波特率转换，数据段使用更高波特率 注意选用FD mode with BitRate Switching后还可以通过txheader去选定是否开启BitRateSwithcing，以及是 采用CAN的帧格式还是 FDCAN帧格式\n">
+<title>STM32——FDCAN&amp;CAN</title>
+
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/stm32fdcancan/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="STM32——FDCAN&CAN">
+<meta property='og:description' content="FDCAN CubeMX配置解析 这里的配置以STM32G474CET6为例 Frame-Format Classic mode：普通CAN FD mode without BitRate Switching：FDCAN，没有波特率转换 FD mode with BitRate Switching：FDCAN，带有波特率转换，数据段使用更高波特率 注意选用FD mode with BitRate Switching后还可以通过txheader去选定是否开启BitRateSwithcing，以及是 采用CAN的帧格式还是 FDCAN帧格式\n">
+<meta property='og:url' content='https://NomadJoeviolet.github.io/p/stm32fdcancan/'>
+<meta property='og:site_name' content='Nomad_violet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-09-20T13:04:46&#43;08:00'/><meta property='article:modified_time' content='2025-09-20T13:04:46&#43;08:00'/>
+<meta name="twitter:title" content="STM32——FDCAN&CAN">
+<meta name="twitter:description" content="FDCAN CubeMX配置解析 这里的配置以STM32G474CET6为例 Frame-Format Classic mode：普通CAN FD mode without BitRate Switching：FDCAN，没有波特率转换 FD mode with BitRate Switching：FDCAN，带有波特率转换，数据段使用更高波特率 注意选用FD mode with BitRate Switching后还可以通过txheader去选定是否开启BitRateSwithcing，以及是 采用CAN的帧格式还是 FDCAN帧格式\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu6061761693284197515.png" width="300"
+                            height="200" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Nomad_violet</a></h1>
+            <h2 class="site-description">to feel,to experience</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://www.bilibili.com/'
+                        target="_blank"
+                        title="Biliili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#fdcan">FDCAN</a>
+      <ol>
+        <li><a href="#cubemx配置解析">CubeMX配置解析</a>
+          <ol>
+            <li><a href="#frame-format">Frame-Format</a></li>
+            <li><a href="#mode">Mode</a></li>
+            <li><a href="#auto-retransmission--transmit-pause--protocol-exception">Auto-Retransmission &amp; Transmit-Pause &amp; Protocol-Exception</a></li>
+            <li><a href="#data--nominal">Data &amp; Nominal</a></li>
+            <li><a href="#filter-and-std-filters-nbrext-filters-nbr">Filter and Std-Filters-Nbr&amp;Ext-Filters-Nbr</a></li>
+            <li><a href="#txheader">Txheader</a></li>
+            <li><a href="#时间片">时间片</a></li>
+          </ol>
+        </li>
+        <li><a href="#使用代码">使用代码</a>
+          <ol>
+            <li><a href="#filterinit-and-fdcanstart">FilterInit-and-FDCANStart</a></li>
+            <li><a href="#数据发送">数据发送</a></li>
+            <li><a href="#数据接收">数据接收</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#can">CAN</a>
+      <ol>
+        <li><a href="#cube配置">Cube配置</a>
+          <ol>
+            <li><a href="#模式设置mode">模式设置（Mode）</a></li>
+            <li><a href="#波特率">波特率</a></li>
+            <li><a href="#basic-parameters">Basic-Parameters</a></li>
+          </ol>
+        </li>
+        <li><a href="#使用代码-1">使用代码</a>
+          <ol>
+            <li><a href="#filterinit-and-fdcanstart-1">FilterInit-and-FDCANStart</a></li>
+            <li><a href="#发送">发送</a></li>
+            <li><a href="#接收">接收</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E5%9F%BA%E4%BA%8Ehal%E5%BA%93%E7%9A%84stm32%E5%BC%80%E5%8F%91/" >
+                基于HAL库的STM32开发
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/stm32fdcancan/">STM32——FDCAN&amp;CAN</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-09-20</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="fdcan">FDCAN
+</h2><h3 id="cubemx配置解析">CubeMX配置解析
+</h3><p>这里的配置以<code>STM32G474CET6</code>为例
+<img src="/p/stm32fdcancan/STM32FDCAN&amp;CAN-FDCAN%E7%9A%84Cube%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90.png"
+	width="903"
+	height="1031"
+	srcset="/p/stm32fdcancan/STM32FDCAN&amp;CAN-FDCAN%E7%9A%84Cube%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90_hu7157238711978379387.png 480w, /p/stm32fdcancan/STM32FDCAN&amp;CAN-FDCAN%E7%9A%84Cube%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90_hu4946150270157719123.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="87"
+		data-flex-basis="210px"
+	
+></p>
+<h4 id="frame-format">Frame-Format
+</h4><p><code>Classic mode</code>：普通CAN
+<code>FD mode without BitRate Switching</code>：FDCAN，没有波特率转换
+<code>FD mode with BitRate Switching</code>：FDCAN，带有波特率转换，数据段使用更高波特率
+<img src="/p/stm32fdcancan/STM32FDCAN&amp;CAN-FrameFormat.png"
+	width="973"
+	height="188"
+	srcset="/p/stm32fdcancan/STM32FDCAN&amp;CAN-FrameFormat_hu4354359993436785605.png 480w, /p/stm32fdcancan/STM32FDCAN&amp;CAN-FrameFormat_hu14267893887804085537.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="517"
+		data-flex-basis="1242px"
+	
+>
+注意选用<code>FD mode with BitRate Switching</code>后还可以通过<code>txheader</code>去选定是否开启<code>BitRateSwithcing</code>，以及是 采用<code>CAN</code>的帧格式还是 <code>FDCAN</code>帧格式</p>
+<p>也就是说这个帧格式选择是决定 是否允许拥有<code>FDCAN</code>的特殊格式和能否开启<code>BitRateSwitching</code>，至于发送的帧实际是否用，取决于<code>txheader</code></p>
+<p>从这一段<code>HAL_FDCAN_Init</code>初始化代码中可以看出，只有<code>FD mode with BitRate Switching</code>才会去初始化数据段的传输参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">HAL_StatusTypeDef</span> <span class="nf">HAL_FDCAN_Init</span><span class="p">(</span><span class="n">FDCAN_HandleTypeDef</span> <span class="o">*</span><span class="n">hfdcan</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">tickstart</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Check FDCAN handle */</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="cm">/* Check function parameters */</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="n">hfdcan</span><span class="o">-&gt;</span><span class="n">Init</span><span class="p">.</span><span class="n">FrameFormat</span> <span class="o">==</span> <span class="n">FDCAN_FRAME_FD_BRS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">assert_param</span><span class="p">(</span><span class="n">IS_FDCAN_DATA_PRESCALER</span><span class="p">(</span><span class="n">hfdcan</span><span class="o">-&gt;</span><span class="n">Init</span><span class="p">.</span><span class="n">DataPrescaler</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">assert_param</span><span class="p">(</span><span class="n">IS_FDCAN_DATA_SJW</span><span class="p">(</span><span class="n">hfdcan</span><span class="o">-&gt;</span><span class="n">Init</span><span class="p">.</span><span class="n">DataSyncJumpWidth</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">assert_param</span><span class="p">(</span><span class="n">IS_FDCAN_DATA_TSEG1</span><span class="p">(</span><span class="n">hfdcan</span><span class="o">-&gt;</span><span class="n">Init</span><span class="p">.</span><span class="n">DataTimeSeg1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">assert_param</span><span class="p">(</span><span class="n">IS_FDCAN_DATA_TSEG2</span><span class="p">(</span><span class="n">hfdcan</span><span class="o">-&gt;</span><span class="n">Init</span><span class="p">.</span><span class="n">DataTimeSeg2</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//....
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="1-classic-mode传统模式">1. Classic Mode（传统模式）
+</h5><ul>
+<li><strong>本质</strong>：完全兼容传统 CAN 2.0B 协议，不启用 FDCAN 的扩展功能</li>
+<li><strong>数据长度</strong>：最大 8 字节（DLC=0~8）</li>
+<li><strong>波特率</strong>：全程使用<strong>标称波特率（Nominal Bit Rate）</strong>，无速率切换</li>
+<li><strong>帧结构</strong>：与传统 CAN 帧一致，仅包含仲裁段、控制段、数据段（≤8 字节）、CRC 段等</li>
+<li><strong>核心作用</strong>：用于对接仅支持传统 CAN 协议的设备（如老旧传感器、执行器），确保兼容性</li>
+</ul>
+<h5 id="2-fd-mode-with-bitrate-switching带波特率切换的-fd-模式">2. FD mode with BitRate Switching（带波特率切换的 FD 模式）
+</h5><ul>
+<li><strong>本质</strong>：启用 FDCAN 的核心扩展功能，支持高速长数据传输，且数据段使用更高波特率</li>
+<li><strong>数据长度</strong>：最大 64 字节（DLC=0<del>15，其中 DLC=9</del>15 对应 32~64 字节）</li>
+<li><strong>波特率</strong>：
+<ul>
+<li><strong>仲裁段（Arbitration Phase）</strong>：使用标称波特率（与传统模式一致，确保仲裁兼容性）</li>
+<li><strong>数据段（Data Phase）</strong>：使用更高的<strong>数据波特率（Data Bit Rate）</strong>（可配置为标称波特率的 2~8 倍，如 8Mbps）</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-fd-mode-without-bitrate-switching不带波特率切换的-fd-模式">3. FD mode without BitRate Switching（不带波特率切换的 FD 模式）
+</h5><ul>
+<li><strong>本质</strong>：启用 FDCAN 的长数据功能，但不切换波特率，全程使用标称波特率</li>
+<li><strong>数据长度</strong>：最大 64 字节（与带切换的 FD 模式一致）</li>
+<li><strong>波特率</strong>：仲裁段和数据段均使用<strong>标称波特率</strong>，无速率提升</li>
+<li><strong>帧结构</strong>：包含 FD 帧标志（FDF），但无波特率切换标志（BRS=0）</li>
+<li><strong>核心作用</strong>：用于需要长数据传输（＞8 字节）但总线上存在不支持高速数据段的设备场景，或因硬件限制（如线缆质量差）无法使用高速率的场景</li>
+</ul>
+<h4 id="mode">Mode
+</h4><p>一般使用<code>Normal mode</code>
+<img src="/p/stm32fdcancan/STM32FDCAN&amp;CAN-Mode%E9%85%8D%E7%BD%AE.png"
+	width="877"
+	height="187"
+	srcset="/p/stm32fdcancan/STM32FDCAN&amp;CAN-Mode%E9%85%8D%E7%BD%AE_hu5674897828685483828.png 480w, /p/stm32fdcancan/STM32FDCAN&amp;CAN-Mode%E9%85%8D%E7%BD%AE_hu15021940551582674318.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="468"
+		data-flex-basis="1125px"
+	
+></p>
+<ol>
+<li>Normal mode（正常模式）</li>
+<li>Restricted operation（受限操作模式）</li>
+<li>Bus Monitoring mode（总线监听模式）</li>
+<li>Internal LoopBack mode（内部回环模式）</li>
+<li>External LoopBack mode（外部回环模式）</li>
+</ol>
+<h4 id="auto-retransmission--transmit-pause--protocol-exception">Auto-Retransmission &amp; Transmit-Pause &amp; Protocol-Exception
+</h4><p><img src="/p/stm32fdcancan/STM32FDCAN&amp;CAN-%E4%B8%89%E4%B8%AA%E9%A2%9D%E5%A4%96%E6%A8%A1%E5%BC%8F.png"
+	width="598"
+	height="88"
+	srcset="/p/stm32fdcancan/STM32FDCAN&amp;CAN-%E4%B8%89%E4%B8%AA%E9%A2%9D%E5%A4%96%E6%A8%A1%E5%BC%8F_hu17982564046468859407.png 480w, /p/stm32fdcancan/STM32FDCAN&amp;CAN-%E4%B8%89%E4%B8%AA%E9%A2%9D%E5%A4%96%E6%A8%A1%E5%BC%8F_hu12520894332944574700.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="679"
+		data-flex-basis="1630px"
+	
+></p>
+<p><code>Auto-Retransmission</code>：自动重传，如果发送的帧没有收到应答，出现错误，就不断重新发送，在总线负载较高的时候一定要关掉，会严重拉低控制频率
+<code>Transmit-Pause</code>：一种临时停止 FDCAN 发送功能的机制，用于在特定场景下主动暂停数据发送，避免干扰总线或等待特定条件，可以通过软件主动触发，调用<code>HAL</code>库函数
+<code>Protocol-Exception</code>：检测到异常情况（帧格式错误等），会去触发异常处理机制（例如异常处理中断）</p>
+<h4 id="data--nominal">Data &amp; Nominal
+</h4><p><img src="/p/stm32fdcancan/STM32FDCAN&amp;CAN-Data&amp;Nominal.png"
+	width="709"
+	height="443"
+	srcset="/p/stm32fdcancan/STM32FDCAN&amp;CAN-Data&amp;Nominal_hu16084052005595761327.png 480w, /p/stm32fdcancan/STM32FDCAN&amp;CAN-Data&amp;Nominal_hu15075206644771715187.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="160"
+		data-flex-basis="384px"
+	
+>
+此处提一下，<code>Data Sync Jump Width</code>（数据段同步跳转宽度）是针对<strong>数据波特率（Data Bit Rate）</strong> 配置的关键时序参数</p>
+<h5 id="data数据波特率相关">Data（数据波特率相关）
+</h5><p>“Data” 特指 FDCAN 在<strong>FD 模式（Flexible Data Rate Mode）</strong> 下，帧的<strong>数据段（Data Phase）</strong> 所使用的传输速率，即<strong>数据波特率（Data Bit Rate）</strong></p>
+<h5 id="nominal标称波特率相关">Nominal（标称波特率相关）
+</h5><p>“Nominal” 特指 FDCAN 帧在<strong>仲裁段（Arbitration Phase）</strong>、<strong>控制段（Control Phase）</strong>、<strong>CRC 段（CRC Phase）</strong> 和<strong>ACK 段（Acknowledgment Phase）</strong> 中使用的传输速率，即<strong>标称波特率（Nominal Bit Rate）</strong></p>
+<h4 id="filter-and-std-filters-nbrext-filters-nbr">Filter and Std-Filters-Nbr&amp;Ext-Filters-Nbr
+</h4><p><strong>Std Filters Nbr（标准帧过滤器数量）</strong> 和<strong>Ext Filters Nbr（扩展帧过滤器数量）</strong> 是配置 FDCAN（Flexible Data Rate CAN）接收过滤功能的核心参数。它们分别用于定义<strong>标准帧（11 位 ID）</strong> 和<strong>扩展帧（29 位 ID）</strong> 的硬件过滤器数量，直接影响 FDCAN 控制器能接收的帧类型和数量</p>
+<ul>
+<li><strong>Std Filters Nbr</strong>：配置<strong>标准帧（11 位 ID）</strong> 的过滤器数量。每个过滤器可匹配一个或多个标准 ID，或通过掩码模式匹配 ID 范围</li>
+<li><strong>Ext Filters Nbr</strong>：配置<strong>扩展帧（29 位 ID）</strong> 的过滤器数量。每个过滤器可匹配一个或多个扩展 ID，或通过掩码模式匹配 ID 范围</li>
+</ul>
+<h5 id="过滤器类型">过滤器类型
+</h5><p>FDCAN 支持多种过滤模式，不同模式对过滤器数量的需求不同：</p>
+<ul>
+<li><strong>掩码模式（Mask Mode）</strong>：
+通过 ID 和掩码匹配 ID 范围。例如，1 个标准过滤器可匹配 0x100~0x1FF 范围内的所有 ID（掩码 = 0x100，ID=0x1FF）</li>
+<li><strong>双 ID 模式（Dual ID Mode）</strong>：
+匹配两个特定 ID。例如，1 个扩展过滤器可同时匹配 0x12345678 和 0x87654321</li>
+<li><strong>范围模式（Range Mode）</strong>：
+匹配 ID 在两个值之间的所有帧。例如，1 个标准过滤器可匹配 0x000~0x0FF 范围内的 ID</li>
+</ul>
+<h5 id="配置示例">配置示例
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 配置4个扩展过滤器，每个匹配1个特定ID（双ID模式）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">FDCAN_FilterTypeDef</span> <span class="n">sFilterConfig</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sFilterConfig</span><span class="p">.</span><span class="n">IdType</span> <span class="o">=</span> <span class="n">FDCAN_EXTENDED_ID</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterType</span> <span class="o">=</span> <span class="n">FDCAN_FILTER_DUAL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterConfig</span> <span class="o">=</span> <span class="n">FDCAN_FILTER_TO_RXBUFFER</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 过滤器0匹配ID=0x01
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterID1</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterID2</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sFilterConfig</span><span class="p">.</span><span class="n">RxBufferIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">HAL_FDCAN_ConfigFilter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hfdcan2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sFilterConfig</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 过滤器1匹配ID=0x02
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterIndex</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterID1</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterID2</span> <span class="o">=</span> <span class="mh">0x02</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sFilterConfig</span><span class="p">.</span><span class="n">RxBufferIndex</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">HAL_FDCAN_ConfigFilter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hfdcan2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sFilterConfig</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 依此类推配置过滤器2和3
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="txheader">Txheader
+</h4><p>关于<code>Txheader</code>的配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">	<span class="n">FDCAN_TxHeaderTypeDef</span> <span class="n">Txheader_gimbal</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">Txheader_gimbal</span><span class="p">.</span><span class="n">DataLength</span> <span class="o">=</span> <span class="mh">0x08</span> <span class="p">;</span><span class="c1">//数据长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Txheader_gimbal</span><span class="p">.</span><span class="n">Identifier</span> <span class="o">=</span> <span class="mh">0x1FF</span> <span class="p">;</span><span class="c1">//标识符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Txheader_gimbal</span><span class="p">.</span><span class="n">TxFrameType</span> <span class="o">=</span> <span class="n">FDCAN_DATA_FRAME</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">Txheader_gimbal</span><span class="p">.</span><span class="n">IdType</span> <span class="o">=</span> <span class="n">FDCAN_STANDARD_ID</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">Txheader_gimbal</span><span class="p">.</span><span class="n">ErrorStateIndicator</span><span class="o">=</span><span class="n">FDCAN_ESI_ACTIVE</span><span class="p">;</span><span class="c1">//开启错误状态指示
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Txheader_gimbal</span><span class="p">.</span><span class="n">BitRateSwitch</span><span class="o">=</span><span class="n">FDCAN_BRS_OFF</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">Txheader_gimbal</span><span class="p">.</span><span class="n">FDFormat</span><span class="o">=</span><span class="n">FDCAN_CLASSIC_CAN</span><span class="p">;</span><span class="c1">//传统的CAN模式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">//Txheader_gimbal.FDFormat=FDCAN_FD_CAN;//FDCAN模式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Txheader_gimbal</span><span class="p">.</span><span class="n">TxEventFifoControl</span> <span class="o">=</span> <span class="n">FDCAN_NO_TX_EVENTS</span><span class="p">;</span><span class="c1">//无发送事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Txheader_gimbal</span><span class="p">.</span><span class="n">MessageMarker</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="时间片">时间片
+</h4><p>不做解析，硬件方面计算出来拿来用即可</p>
+<h3 id="使用代码">使用代码
+</h3><h4 id="filterinit-and-fdcanstart">FilterInit-and-FDCANStart
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">FDCAN_IntFilterAndStart</span><span class="p">(</span><span class="n">FDCAN_HandleTypeDef</span> <span class="o">*</span><span class="n">hfdcan</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//--------FDCAN1 Filter and Start--------//
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">FDCAN_FilterTypeDef</span> <span class="n">sFilterConfig</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">IdType</span> <span class="o">=</span> <span class="n">FDCAN_STANDARD_ID</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterType</span> <span class="o">=</span> <span class="n">FDCAN_FILTER_MASK</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterConfig</span> <span class="o">=</span> <span class="n">FDCAN_FILTER_TO_RXFIFO0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterID1</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">;</span><span class="c1">//0x500;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterID2</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">;</span><span class="c1">//0x780;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_FDCAN_ConfigFilter</span><span class="p">(</span><span class="n">hfdcan</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sFilterConfig</span><span class="p">)</span> <span class="o">!=</span> <span class="n">HAL_OK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">FDCAN_ErrorHandler</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_FDCAN_ConfigGlobalFilter</span><span class="p">(</span><span class="n">hfdcan</span><span class="p">,</span> <span class="n">FDCAN_REJECT</span><span class="p">,</span> <span class="n">FDCAN_REJECT</span><span class="p">,</span> <span class="n">FDCAN_FILTER_REMOTE</span><span class="p">,</span> <span class="n">FDCAN_FILTER_REMOTE</span><span class="p">)</span> <span class="o">!=</span> <span class="n">HAL_OK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">FDCAN_ErrorHandler</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_FDCAN_Start</span><span class="p">(</span><span class="n">hfdcan</span><span class="p">)</span> <span class="o">!=</span> <span class="n">HAL_OK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">FDCAN_ErrorHandler</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_FDCAN_ActivateNotification</span><span class="p">(</span><span class="n">hfdcan</span><span class="p">,</span> <span class="n">FDCAN_IT_RX_FIFO0_NEW_MESSAGE</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">HAL_OK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">FDCAN_ErrorHandler</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_FDCAN_ActivateNotification</span><span class="p">(</span><span class="n">hfdcan</span><span class="p">,</span> <span class="n">FDCAN_IT_BUS_OFF</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">HAL_OK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">FDCAN_ErrorHandler</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>解析一下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">HAL_FDCAN_ConfigGlobalFilter</span><span class="p">(</span><span class="n">hfdcan</span><span class="p">,</span> <span class="n">FDCAN_REJECT</span><span class="p">,</span> <span class="n">FDCAN_REJECT</span><span class="p">,</span> <span class="n">FDCAN_FILTER_REMOTE</span><span class="p">,</span> <span class="n">FDCAN_FILTER_REMOTE</span><span class="p">)</span> <span class="o">!=</span> <span class="n">HAL_OK</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>HAL_FDCAN_ConfigGlobalFilter</code>用于定义<strong>未被任何特定过滤器匹配的帧</strong>的处理规则，参数含义如下：</p>
+<ul>
+<li>第 2 个参数（<code>FDCAN_REJECT</code>）：未匹配的<strong>标准帧</strong>被 “拒绝”（不接收）；</li>
+<li>第 3 个参数（<code>FDCAN_REJECT</code>）：未匹配的<strong>扩展帧</strong>被 “拒绝”（不接收）；</li>
+<li>第 4 个参数（<code>FDCAN_FILTER_REMOTE</code>）：未匹配的<strong>标准远程帧</strong>被 “拒绝”；</li>
+<li>第 5 个参数（<code>FDCAN_FILTER_REMOTE</code>）：未匹配的<strong>扩展远程帧</strong>被 “拒绝”。
+结合前面的过滤器配置（所有标准帧都被第 0 号过滤器匹配），这里的全局规则实际效果是：</li>
+<li>所有标准帧被第 0 号过滤器接收（存入 FIFO0）；</li>
+<li>扩展帧、远程帧（无论标准还是扩展）因未被匹配，全部被拒绝。</li>
+</ul>
+<h4 id="数据发送">数据发送
+</h4><p>如果需要兼容<code>CAN</code>，将<code>FDFormat</code>修改为<code>FDCAN_CLASSIC_CAN</code>即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">FDCAN_InitTxHander</span><span class="p">(</span><span class="n">FDCAN_TxHeaderTypeDef</span><span class="o">*</span> <span class="n">pheader</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">id</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">dlc</span><span class="p">,</span><span class="kt">uint32_t</span> <span class="n">baudrateswitch</span><span class="p">,</span><span class="kt">uint32_t</span> <span class="n">can_type</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pheader</span><span class="o">-&gt;</span><span class="n">Identifier</span> <span class="o">=</span> <span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">id</span><span class="o">&gt;=</span><span class="mh">0x800</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	    <span class="n">pheader</span><span class="o">-&gt;</span><span class="n">IdType</span> <span class="o">=</span> <span class="n">FDCAN_EXTENDED_ID</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	    <span class="n">pheader</span><span class="o">-&gt;</span><span class="n">IdType</span> <span class="o">=</span>   <span class="n">FDCAN_STANDARD_ID</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pheader</span><span class="o">-&gt;</span><span class="n">TxFrameType</span> <span class="o">=</span>  <span class="n">FDCAN_DATA_FRAME</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pheader</span><span class="o">-&gt;</span><span class="n">DataLength</span> <span class="o">=</span> <span class="n">dlc</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pheader</span><span class="o">-&gt;</span><span class="n">ErrorStateIndicator</span> <span class="o">=</span> <span class="n">FDCAN_ESI_ACTIVE</span><span class="p">;</span><span class="c1">//开启错误状态指示
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">pheader</span><span class="o">-&gt;</span><span class="n">BitRateSwitch</span> <span class="o">=</span>  <span class="n">baudrateswitch</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pheader</span><span class="o">-&gt;</span><span class="n">FDFormat</span> <span class="o">=</span> <span class="n">can_type</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pheader</span><span class="o">-&gt;</span><span class="n">TxEventFifoControl</span> <span class="o">=</span> <span class="n">FDCAN_NO_TX_EVENTS</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pheader</span><span class="o">-&gt;</span><span class="n">MessageMarker</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">FDCAN_SendMessageWithBaudSwitch</span><span class="p">(</span><span class="n">FDCAN_HandleTypeDef</span> <span class="o">*</span><span class="n">hfdcan</span><span class="p">,</span><span class="kt">uint8_t</span><span class="o">*</span> <span class="n">pdata</span><span class="p">,</span><span class="kt">uint32_t</span> <span class="n">dlc</span><span class="p">,</span><span class="kt">uint32_t</span> <span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">FDCAN_TxHeaderTypeDef</span> <span class="n">txhead</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">FDCAN_InitTxHander</span><span class="p">(</span><span class="o">&amp;</span><span class="n">txhead</span><span class="p">,</span><span class="n">id</span><span class="p">,</span><span class="n">dlc</span><span class="p">,</span><span class="n">FDCAN_BRS_ON</span><span class="p">,</span><span class="n">FDCAN_FD_CAN</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FDCAN_AddMessageToTxFifoQ</span><span class="p">(</span><span class="n">hfdcan</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">txhead</span><span class="p">,</span> <span class="n">pdata</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">FDCAN_SendMessageWithOutBaudSwitch</span><span class="p">(</span><span class="n">FDCAN_HandleTypeDef</span> <span class="o">*</span><span class="n">hfdcan</span><span class="p">,</span><span class="kt">uint8_t</span><span class="o">*</span> <span class="n">pdata</span><span class="p">,</span><span class="kt">uint32_t</span> <span class="n">dlc</span><span class="p">,</span><span class="kt">uint32_t</span> <span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">FDCAN_TxHeaderTypeDef</span> <span class="n">txhead</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">FDCAN_InitTxHander</span><span class="p">(</span><span class="o">&amp;</span><span class="n">txhead</span><span class="p">,</span><span class="n">id</span><span class="p">,</span><span class="n">dlc</span><span class="p">,</span><span class="n">FDCAN_BRS_OFF</span><span class="p">,</span><span class="n">FDCAN_CLASSIC_CAN</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FDCAN_AddMessageToTxFifoQ</span><span class="p">(</span><span class="n">hfdcan</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">txhead</span><span class="p">,</span> <span class="n">pdata</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">HAL_FDCAN_AddMessageToTxFifoQ</span><span class="p">(</span><span class="n">hfdcan</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">txhead</span><span class="p">,</span> <span class="n">pdata</span><span class="p">)</span><span class="o">!=</span><span class="n">HAL_OK</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">FDCAN_ErrorHandler</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="数据接收">数据接收
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">RxData</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_FDCAN_RxFifo0Callback</span><span class="p">(</span><span class="n">FDCAN_HandleTypeDef</span> <span class="o">*</span><span class="n">hfdcan</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">RxFifo0ITs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">((</span><span class="n">RxFifo0ITs</span> <span class="o">&amp;</span> <span class="n">FDCAN_IT_RX_FIFO0_NEW_MESSAGE</span><span class="p">)</span><span class="o">!=</span><span class="n">RESET</span><span class="p">)</span><span class="c1">//判断是否是新消息中断
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">hfdcan</span><span class="o">-&gt;</span><span class="n">Instance</span> <span class="o">==</span> <span class="n">FDCAN1</span><span class="p">)</span> <span class="c1">//Slave Arm
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">HAL_FDCAN_GetRxMessage</span><span class="p">(</span><span class="n">hfdcan</span><span class="p">,</span> <span class="n">FDCAN_RX_FIFO0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">RxHeader</span><span class="p">,</span> <span class="n">RxData</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="can">CAN
+</h2><h3 id="cube配置">Cube配置
+</h3><p><img src="/p/stm32fdcancan/STM32FDCAN&amp;CAN-CAN%E7%9A%84Cube%E9%85%8D%E7%BD%AE.png"
+	width="889"
+	height="517"
+	srcset="/p/stm32fdcancan/STM32FDCAN&amp;CAN-CAN%E7%9A%84Cube%E9%85%8D%E7%BD%AE_hu3062212629618048469.png 480w, /p/stm32fdcancan/STM32FDCAN&amp;CAN-CAN%E7%9A%84Cube%E9%85%8D%E7%BD%AE_hu13144796004444087730.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="171"
+		data-flex-basis="412px"
+	
+></p>
+<h4 id="模式设置mode">模式设置（Mode）
+</h4><p><img src="/p/stm32fdcancan/STM32FDCAN&amp;CAN-CAN%E7%9A%84mode.png"
+	width="899"
+	height="193"
+	srcset="/p/stm32fdcancan/STM32FDCAN&amp;CAN-CAN%E7%9A%84mode_hu14813646946158995366.png 480w, /p/stm32fdcancan/STM32FDCAN&amp;CAN-CAN%E7%9A%84mode_hu15444955145760101.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="465"
+		data-flex-basis="1117px"
+	
+></p>
+<ul>
+<li><strong>Normal mode</strong>（正常模式）：正常发送和接收帧，用于实际总线通信</li>
+<li><strong>Loopback mode</strong>（回环模式）：发送的帧会被自身接收，无需外部总线，用于调试</li>
+<li><strong>Silent mode</strong>（静默模式）：只能接收帧，不能发送，用于监听总线</li>
+<li><strong>Silent Loopback mode</strong>（静默回环模式）：结合静默和回环，仅内部测试</li>
+</ul>
+<h4 id="波特率">波特率
+</h4>$$波特率 = APB时钟频率 / [ Prescaler × (1 + TimeSeg1 + TimeSeg2) ]$$<p>
+<img src="/p/stm32fdcancan/STM32FDCAN&amp;CAN_%E6%B3%A2%E7%89%B9%E7%8E%87%E9%85%8D%E7%BD%AE.png"
+	width="753"
+	height="234"
+	srcset="/p/stm32fdcancan/STM32FDCAN&amp;CAN_%E6%B3%A2%E7%89%B9%E7%8E%87%E9%85%8D%E7%BD%AE_hu14887586793497255969.png 480w, /p/stm32fdcancan/STM32FDCAN&amp;CAN_%E6%B3%A2%E7%89%B9%E7%8E%87%E9%85%8D%E7%BD%AE_hu16209401040093241942.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="321"
+		data-flex-basis="772px"
+	
+></p>
+<p>CAN 的波特率由<strong>位时间（Bit Time）</strong> 决定，位时间 = 1 / 波特率（如 1Mbps 对应位时间 1μs）。位时间由 3 部分组成：</p>
+<ul>
+<li><strong>Prescaler</strong>（预分频器）：将 APB 时钟（如 APB1=36MHz）分频为时间量子（TQ），公式：<code>TQ = 1/(APB时钟频率 / Prescaler)</code></li>
+<li><strong>Sync Jump Width (SJW)</strong>：同步跳转宽度，用于补偿节点间时钟偏差，取值 1~4TQ（通常设为 1 或 2）</li>
+<li><strong>Time Seg1</strong>：包含传播段（PropSeg）和相位段 1（PS1），取值 4~16TQ（用于补偿总线延迟）</li>
+<li><strong>Time Seg2</strong>：相位段 2（PS2），取值 2~8TQ（用于同步补偿）</li>
+</ul>
+<h4 id="basic-parameters">Basic-Parameters
+</h4><p><img src="/p/stm32fdcancan/STM32FDCAN&amp;CAN-CAN-Basic-Parameters.png"
+	width="743"
+	height="213"
+	srcset="/p/stm32fdcancan/STM32FDCAN&amp;CAN-CAN-Basic-Parameters_hu15874198689003734250.png 480w, /p/stm32fdcancan/STM32FDCAN&amp;CAN-CAN-Basic-Parameters_hu18154244688467312360.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="348"
+		data-flex-basis="837px"
+	
+>
+Time Triggered Communication（时间触发通信）</p>
+<p>Automatic Bus-Off Management（自动总线关闭管理）
+当节点因错误计数超限进入 “总线关闭” 状态（无法发送和接收帧）时，是否需要软件手动恢复，还是控制器自动恢复</p>
+<p>Automatic WakeUP mode（自动唤醒模式） 是一种针对<strong>低功耗场景</strong>的功能，用于让 CAN 控制器在休眠（低功耗）状态下，通过检测总线上的有效活动（如特定 CAN 帧）自动恢复到正常工作状态，无需软件手动触发唤醒</p>
+<p>Automatic Retransmission（自动重传）</p>
+<p>Receive FIFO Locked Mode（接收 FIFO 锁定模式）
+当接收 FIFO（CAN 通常有 2 个接收 FIFO，FIFO0 和 FIFO1）存储的帧数量达到最大深度（如 3 个或 6 个，依芯片型号而定）时，新接收的帧是否覆盖旧的帧</p>
+<p>Transmit FIFO Priority（发送 FIFO 优先级）
+当发送 FIFO（CAN 通常有 1 个发送 FIFO，可存储多个待发送帧）中有多个帧等待发送时，帧的发送顺序规则</p>
+<h3 id="使用代码-1">使用代码
+</h3><h4 id="filterinit-and-fdcanstart-1">FilterInit-and-FDCANStart
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">CAN_Config</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">CAN_FilterTypeDef</span>  <span class="n">sFilterConfig</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Configure the CAN Filter */</span>
+</span></span><span class="line"><span class="cl">  <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterBank</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                      <span class="c1">// 过滤器编号，使用一个CAN，则可选0-13；使用两个CAN可选0-27
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterMode</span> <span class="o">=</span> <span class="n">CAN_FILTERMODE_IDMASK</span><span class="p">;</span>  <span class="c1">// 过滤器模式，掩码模式或列表模式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterScale</span> <span class="o">=</span> <span class="n">CAN_FILTERSCALE_32BIT</span><span class="p">;</span> <span class="c1">// 过滤器位宽
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterIdHigh</span> <span class="o">=</span> <span class="mh">0x0000</span><span class="p">;</span>               <span class="c1">// 过滤器验证码ID高16位，0-0xFFFF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterIdLow</span> <span class="o">=</span> <span class="mh">0x0000</span><span class="p">;</span>                <span class="c1">// 过滤器验证码ID低16位，0-0xFFFF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterMaskIdHigh</span> <span class="o">=</span> <span class="mh">0x0000</span><span class="p">;</span>           <span class="c1">// 过滤器掩码ID高16位，0-0xFFFF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterMaskIdLow</span> <span class="o">=</span> <span class="mh">0x0000</span><span class="p">;</span>            <span class="c1">// 过滤器掩码ID低16位，0-0xFFFF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterFIFOAssignment</span> <span class="o">=</span> <span class="n">CAN_FilterFIFO0</span><span class="p">;</span> <span class="c1">// FIFOx，0或1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">FilterActivation</span> <span class="o">=</span> <span class="n">ENABLE</span><span class="p">;</span>           <span class="c1">// 使能过滤器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">sFilterConfig</span><span class="p">.</span><span class="n">SlaveStartFilterBank</span> <span class="o">=</span> <span class="mi">14</span><span class="p">;</span>           <span class="c1">// 从过滤器编号，0-27，对于单CAN实例该参数没有意义
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_CAN_ConfigFilter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hcan1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sFilterConfig</span><span class="p">)</span> <span class="o">!=</span> <span class="n">HAL_OK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Filter configuration Error */</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Start the CAN peripheral */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_CAN_Start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hcan1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">HAL_OK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Start Error */</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Activate CAN RX notification */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_CAN_ActivateNotification</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hcan1</span><span class="p">,</span> <span class="n">CAN_IT_RX_FIFO0_MSG_PENDING</span><span class="p">)</span> <span class="o">!=</span> <span class="n">HAL_OK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Notification Error */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="发送">发送
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="nf">CAN_Send_Msg</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="n">output</span> <span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">len</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint8_t</span> <span class="n">message</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32_t</span> <span class="n">TxMailbox</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">CAN_TxHeaderTypeDef</span> <span class="n">CAN_TxHeader</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 设置发送参数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">CAN_TxHeader</span><span class="p">.</span><span class="n">StdId</span> <span class="o">=</span> <span class="mh">0x200</span><span class="p">;</span>                 <span class="c1">// 标准标识符(12bit)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">//CAN_TxHeader.ExtId = 0x00;                 // 扩展标识符(29bit)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">CAN_TxHeader</span><span class="p">.</span><span class="n">IDE</span> <span class="o">=</span> <span class="n">CAN_ID_STD</span><span class="p">;</span>             <span class="c1">// 使用标准帧
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">CAN_TxHeader</span><span class="p">.</span><span class="n">RTR</span> <span class="o">=</span> <span class="n">CAN_RTR_DATA</span><span class="p">;</span>           <span class="c1">// 数据帧
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">CAN_TxHeader</span><span class="p">.</span><span class="n">DLC</span> <span class="o">=</span> <span class="mh">0x08</span><span class="p">;</span>                    <span class="c1">// 发送长度      
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">CAN_TxHeader</span><span class="p">.</span><span class="n">TransmitGlobalTime</span> <span class="o">=</span> <span class="n">DISABLE</span><span class="p">;</span><span class="c1">//关闭can的时间触发通信模式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 装载数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">memset</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">message</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">output</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">message</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">output</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 发送CAN消息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span><span class="p">(</span><span class="nf">HAL_CAN_AddTxMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hcan1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">CAN_TxHeader</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">TxMailbox</span><span class="p">)</span> <span class="o">!=</span> <span class="n">HAL_OK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="接收">接收
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_CAN_RxFifo0MsgPendingCallback</span><span class="p">(</span><span class="n">CAN_HandleTypeDef</span> <span class="o">*</span><span class="n">hcan</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="c1">// 收到CAN数据会触发接收中断，进入该回调函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">uint8_t</span> <span class="n">RxData</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="n">CAN_RxHeaderTypeDef</span> <span class="n">CAN_RxHeader</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="nf">HAL_CAN_GetRxMessage</span><span class="p">(</span><span class="n">hcan</span><span class="p">,</span> <span class="n">CAN_RX_FIFO0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">CAN_RxHeader</span><span class="p">,</span> <span class="n">RxData</span><span class="p">)</span> <span class="o">!=</span> <span class="n">HAL_OK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="n">hcan</span><span class="o">==&amp;</span><span class="n">hcan1</span><span class="p">)</span> <span class="c1">// 只处理CAN1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 处理CAN1接收到的数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">switch</span> <span class="p">(</span><span class="n">CAN_RxHeader</span><span class="p">.</span><span class="n">StdId</span><span class="p">)</span> <span class="c1">// 标准标识符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">case</span> <span class="mh">0x201</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 处理ID为0x201的消息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">test_motor</span><span class="p">.</span><span class="n">motor_raw_angle</span> <span class="o">=</span> <span class="p">(</span><span class="n">RxData</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">RxData</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">test_motor</span><span class="p">.</span><span class="n">motor_angle</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">test_motor</span><span class="p">.</span><span class="n">motor_raw_angle</span><span class="o">/</span><span class="mf">8191.f</span><span class="o">*</span><span class="mf">360.f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">test_motor</span><span class="p">.</span><span class="n">motor_speed</span> <span class="o">=</span> <span class="p">(</span><span class="n">RxData</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">RxData</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">test_motor</span><span class="p">.</span><span class="n">motor_current</span> <span class="o">=</span> <span class="p">(</span><span class="n">RxData</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">RxData</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">test_motor</span><span class="p">.</span><span class="n">temp</span> <span class="o">=</span> <span class="n">RxData</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">default</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32————UART串口通信</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32————TIM定时器</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/stm32%E4%B8%AD%E6%96%AD/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32——中断</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/can%E6%8E%A7%E5%88%B6%E5%99%A8%E5%92%8Ccan%E6%94%B6%E5%8F%91%E5%99%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CAN控制器和CAN收发器</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/stm32adc%E6%A8%A1%E5%9D%97/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32————ADC模块</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Nomad
+    </section>
+    
+    <section class="powerby">
+        
+            experience <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
