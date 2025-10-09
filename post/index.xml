@@ -8070,7 +8070,10 @@ C++ 多态意味着调用成员函数时，会根据调用函数的对象的类�
 &lt;p&gt;处理器具有向量表重定位功能，通过向量表偏移寄存器(&lt;code&gt;VTOR&lt;/code&gt;)来获取向量表的起始地址&lt;/p&gt;
 &lt;p&gt;中断触发时，处理器通过中断向量表去获取中断处理函数的入口地址&lt;/p&gt;
 &lt;h3 id=&#34;中断返回中断上下文&#34;&gt;中断返回&amp;amp;中断上下文
-&lt;/h3&gt;&lt;p&gt;在阅读中断的汇编时，会发现中断没有保存和恢复上下文的代码，实际上是硬件帮忙实现上述功能&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1PwpgzGEmV/?vd_source=5a0790755035f26a67935abfbfcdfd5b&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;电脑为什么能边玩游戏边聊天？CPU这个骚操作，99%的程序员都说不清！| CPU / 多任务 / 进程上下文 / 中断机制_哔哩哔哩_bilibili&lt;/a&gt;
+该视频中最后讲解的就类似于&lt;code&gt;arm&lt;/code&gt;架构采用的方式&lt;/p&gt;
+&lt;p&gt;在阅读中断的汇编时，会发现中断没有保存和恢复上下文的代码，实际上是硬件帮忙实现上述功能&lt;/p&gt;
 &lt;p&gt;关于上下文，如程序上的函数调用需要保存上下文，在操作系统中需要处理线程上下文（任务上下文），其本质都在于保存和恢复若干寄存器的值&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-cortex-M3M4%E4%B8%AD%E6%96%AD%E4%BF%9D%E5%AD%98%E4%B8%8A%E4%B8%8B%E6%96%87.png&#34;
 	width=&#34;622&#34;
