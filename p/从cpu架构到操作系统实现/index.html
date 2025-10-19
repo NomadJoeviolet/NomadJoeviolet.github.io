@@ -538,7 +538,7 @@
 		data-flex-basis="860px"
 	
 ></p>
-<p>启动后，从零地址（零地址是经过映射的）出读取堆栈指针和程序计数器的值（此时程序计数器的值指向<code>Reset_Handler</code>），此外每个芯片的<code>Boot code</code>是定制化的，需要参考手册</p>
+<p>启动后，从零地址（零地址是经过映射的）处读取堆栈指针和程序计数器的值（此时程序计数器的值指向<code>Reset_Handler</code>），此外每个芯片的<code>Boot code</code>是定制化的，需要参考手册</p>
 <p>最后<code>Reset_Handler</code>会指向<code>main</code>函数</p>
 <p>以<code>STM32F103</code>为例
 <img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-STM32F103%E7%9A%84%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE.png"
@@ -553,7 +553,14 @@
 		data-flex-basis="920px"
 	
 ></p>
-<p>这里有三种启动模式，根据启动时<code>BOOT1</code>和<code>BOOT0</code>的电平来选择不同的启动地址（即 将该不同的地址映射为零地址），一般情况下是第一种</p>
+<p>这里有三种启动模式，根据启动时<code>BOOT1</code>和<code>BOOT0</code>的电平来选择不同的启动地址（即 将该不同的地址映射为零地址）</p>
+<p>三种启动模式分别是 从 flash 引导启动，从 system memory 引导启动 和 从 SRAM 引导启动（即 将该不同的地址映射为零地址）</p>
+<ol>
+<li>从主 Flash 启动：将主 Flash 地址 0x0800 0000 映射到 0x0000 0000，代码启动后相当于从 0x0800 0000 开始运行，使用 JTAG 或者 SWD 模式下载程序时会下载到 Flash 并从中启动</li>
+<li>从系统存储器启动：将系统存储器地址 0x1FFF F000 映射到 0x0000 0000，系统存储器是芯片内部的 ROM 区域，芯片出厂时在其中预置了 Bootloader，称为 ISP 程序。Bootloader 由厂家设置，一般无法修改</li>
+<li>从内置 SRAM 启动：将 SRAM 地址 0x2000 0000 映射到 0x0000 0000，代码启动后相当于从 0x2000 0000 开始运行。由于 SRAM 是易失性存储器，因此这个模式一般仅用于程序调试
+（以<code>STM32F103</code>为例）</li>
+</ol>
 <h3 id="ram内存分布">RAM内存分布
 </h3><p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.png"
 	width="1269"
@@ -638,7 +645,6 @@
 </ul>
 <h5 id="3-复位处理函数reset_handler启动核心逻辑">3. 复位处理函数（<code>Reset_Handler</code>：启动核心逻辑）
 </h5><p><code>Reset_Handler</code>是复位后执行的第一个函数（由中断向量表指定），对应 STM32 启动流程中的 “软件初始化” 阶段，代码逻辑可分为 5 步：</p>
-<p>asm</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1485,6 +1491,19 @@
 		class="gallery-image" 
 		data-flex-grow="139"
 		data-flex-basis="334px"
+	
+></p>
+<p><code>F103C8的地址映射图</code>
+<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-f103c8%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E5%9B%BE.png"
+	width="798"
+	height="1104"
+	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-f103c8%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E5%9B%BE_hu7833596306396871614.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-f103c8%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E5%9B%BE_hu16908648889634145177.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="72"
+		data-flex-basis="173px"
 	
 ></p>
 <p><code>系统架构图</code></p>

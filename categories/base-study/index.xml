@@ -4565,7 +4565,7 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 		data-flex-basis=&#34;860px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;启动后，从零地址（零地址是经过映射的）出读取堆栈指针和程序计数器的值（此时程序计数器的值指向&lt;code&gt;Reset_Handler&lt;/code&gt;），此外每个芯片的&lt;code&gt;Boot code&lt;/code&gt;是定制化的，需要参考手册&lt;/p&gt;
+&lt;p&gt;启动后，从零地址（零地址是经过映射的）处读取堆栈指针和程序计数器的值（此时程序计数器的值指向&lt;code&gt;Reset_Handler&lt;/code&gt;），此外每个芯片的&lt;code&gt;Boot code&lt;/code&gt;是定制化的，需要参考手册&lt;/p&gt;
 &lt;p&gt;最后&lt;code&gt;Reset_Handler&lt;/code&gt;会指向&lt;code&gt;main&lt;/code&gt;函数&lt;/p&gt;
 &lt;p&gt;以&lt;code&gt;STM32F103&lt;/code&gt;为例
 &lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-STM32F103%E7%9A%84%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE.png&#34;
@@ -4580,7 +4580,14 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 		data-flex-basis=&#34;920px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;这里有三种启动模式，根据启动时&lt;code&gt;BOOT1&lt;/code&gt;和&lt;code&gt;BOOT0&lt;/code&gt;的电平来选择不同的启动地址（即 将该不同的地址映射为零地址），一般情况下是第一种&lt;/p&gt;
+&lt;p&gt;这里有三种启动模式，根据启动时&lt;code&gt;BOOT1&lt;/code&gt;和&lt;code&gt;BOOT0&lt;/code&gt;的电平来选择不同的启动地址（即 将该不同的地址映射为零地址）&lt;/p&gt;
+&lt;p&gt;三种启动模式分别是 从 flash 引导启动，从 system memory 引导启动 和 从 SRAM 引导启动（即 将该不同的地址映射为零地址）&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;从主 Flash 启动：将主 Flash 地址 0x0800 0000 映射到 0x0000 0000，代码启动后相当于从 0x0800 0000 开始运行，使用 JTAG 或者 SWD 模式下载程序时会下载到 Flash 并从中启动&lt;/li&gt;
+&lt;li&gt;从系统存储器启动：将系统存储器地址 0x1FFF F000 映射到 0x0000 0000，系统存储器是芯片内部的 ROM 区域，芯片出厂时在其中预置了 Bootloader，称为 ISP 程序。Bootloader 由厂家设置，一般无法修改&lt;/li&gt;
+&lt;li&gt;从内置 SRAM 启动：将 SRAM 地址 0x2000 0000 映射到 0x0000 0000，代码启动后相当于从 0x2000 0000 开始运行。由于 SRAM 是易失性存储器，因此这个模式一般仅用于程序调试
+（以&lt;code&gt;STM32F103&lt;/code&gt;为例）&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h3 id=&#34;ram内存分布&#34;&gt;RAM内存分布
 &lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.png&#34;
 	width=&#34;1269&#34;
@@ -4665,7 +4672,6 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h5 id=&#34;3-复位处理函数reset_handler启动核心逻辑&#34;&gt;3. 复位处理函数（&lt;code&gt;Reset_Handler&lt;/code&gt;：启动核心逻辑）
 &lt;/h5&gt;&lt;p&gt;&lt;code&gt;Reset_Handler&lt;/code&gt;是复位后执行的第一个函数（由中断向量表指定），对应 STM32 启动流程中的 “软件初始化” 阶段，代码逻辑可分为 5 步：&lt;/p&gt;
-&lt;p&gt;asm&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -5512,6 +5518,19 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 		class=&#34;gallery-image&#34; 
 		data-flex-grow=&#34;139&#34;
 		data-flex-basis=&#34;334px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;F103C8的地址映射图&lt;/code&gt;
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-f103c8%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E5%9B%BE.png&#34;
+	width=&#34;798&#34;
+	height=&#34;1104&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-f103c8%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E5%9B%BE_hu7833596306396871614.png 480w, https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-f103c8%E5%9C%B0%E5%9D%80%E6%98%A0%E5%B0%84%E5%9B%BE_hu16908648889634145177.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;72&#34;
+		data-flex-basis=&#34;173px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;系统架构图&lt;/code&gt;&lt;/p&gt;
