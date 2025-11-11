@@ -18,7 +18,7 @@
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/NomadJoeviolet/RM_test_Infantry_Fighting_Vehicle&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;NomadJoeviolet/RM_test_Infantry_Fighting_Vehicle&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;个人电机库&#34;&gt;个人电机库
-&lt;/h3&gt;&lt;p&gt;该项目是一个基于 STM32 + HAL + FreeRTOS 的嵌入式电机驱动测试库，主要用于验证和调试 DJI 一拖四（one-to-four）系列 CAN 电机。它提供一个专为 DJI 协议设计的    CanMotorManager，用以统一管理最多 4 个电机的 CAN 收发与数据解析；同时包含可复用的控制算法（如 PID）、多线程示例以及对 ETL、CMSIS‑DSP 和 FreeRTOS 的集成支持，便于在受限资源下实现高效、可扩展的电机控制与测试。&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;该项目是一个基于 STM32 + HAL + FreeRTOS 的嵌入式电机驱动测试库，主要用于验证和调试 DJI 一拖四（one-to-four）系列 CAN 电机。它提供一个专为 DJI 协议设计的 CanMotorManager，用以统一管理最多 4 个电机的 CAN 收发与数据解析；同时包含可复用的控制算法（如 PID）、多线程示例以及对 ETL、CMSIS‑DSP 和 FreeRTOS 的集成支持，便于在受限资源下实现高效、可扩展的电机控制与测试。&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/NomadJoeviolet/MotorsLib&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;NomadJoeviolet/MotorsLib&lt;/a&gt;&lt;/p&gt;
 </description>
