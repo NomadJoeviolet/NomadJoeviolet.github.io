@@ -7094,6 +7094,19 @@ C++ 多态意味着调用成员函数时，会根据调用函数的对象的类�
 		data-flex-basis=&#34;451px&#34;
 	
 &gt;&lt;/p&gt;
+&lt;p&gt;如果使用了FreeRTOS的话，FreeRTOS的内存布局如下&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-FreeRTOS%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.png&#34;
+	width=&#34;1038&#34;
+	height=&#34;695&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-FreeRTOS%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80_hu6082313860412554675.png 480w, https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-FreeRTOS%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80_hu14391524076225901871.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;149&#34;
+		data-flex-basis=&#34;358px&#34;
+	
+&gt;&lt;/p&gt;
 &lt;h3 id=&#34;启动文件详解&#34;&gt;启动文件详解
 &lt;/h3&gt;&lt;h4 id=&#34;一stm32f103-启动文件startup_stm32f103xbs核心定位&#34;&gt;一、STM32F103 启动文件（startup_stm32f103xb.s）核心定位
 &lt;/h4&gt;&lt;p&gt;STM32 的启动文件（如&lt;code&gt;startup_stm32f103xb.s&lt;/code&gt;）是&lt;strong&gt;汇编语言编写的底层程序&lt;/strong&gt;，是硬件复位后执行的第一段代码，负责衔接 “硬件初始化” 与 “用户 C 代码（&lt;code&gt;main&lt;/code&gt;函数）”。其核心功能包括：设置栈指针、构建中断向量表、初始化数据段（&lt;code&gt;.data&lt;/code&gt;）、清零未初始化数据段（&lt;code&gt;.bss&lt;/code&gt;）、配置系统时钟，最终引导程序进入&lt;code&gt;main&lt;/code&gt;函数，是 STM32 程序运行的 “底层基石”。&lt;/p&gt;
@@ -7876,6 +7889,19 @@ C++ 多态意味着调用成员函数时，会根据调用函数的对象的类�
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;如果使用了FreeRTOS的话，FreeRTOS的内存布局如下&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-FreeRTOS%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.png&#34;
+	width=&#34;1038&#34;
+	height=&#34;695&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-FreeRTOS%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80_hu6082313860412554675.png 480w, https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-FreeRTOS%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80_hu14391524076225901871.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;149&#34;
+		data-flex-basis=&#34;358px&#34;
+	
+&gt;&lt;/p&gt;
 &lt;h6 id=&#34;9discard丢弃无用段减小可执行文件大小&#34;&gt;（9）/DISCARD/：丢弃无用段（减小可执行文件大小）
 &lt;/h6&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
