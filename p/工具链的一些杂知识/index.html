@@ -270,12 +270,16 @@
             <li><a href="#openocd">OpenOCD</a></li>
             <li><a href="#ozone">Ozone</a></li>
             <li><a href="#mingw">MinGW</a></li>
+            <li><a href="#llvm">LLVM</a></li>
             <li><a href="#arm-none-eabi-gcc">arm-none-eabi-gcc</a></li>
             <li><a href="#arm-none-eabi-gcc和armclang的区别">arm-none-eabi-gcc 和 armclang的区别</a></li>
             <li><a href="#clangd">clangd</a></li>
             <li><a href="#vscode的intellisense">VScode的IntelliSense</a></li>
             <li><a href="#交叉编译器">交叉编译器</a></li>
             <li><a href="#ninjamakecmake">ninja，make，cmake</a></li>
+            <li><a href="#hal库hardware-abstraction-layer-硬件抽象层库">HAL库（Hardware Abstraction Layer 硬件抽象层库）</a></li>
+            <li><a href="#cmsiscortex-microcontroller-software-interface-standard">CMSIS（Cortex Microcontroller Software Interface Standard）</a></li>
+            <li><a href="#hal-库与-cmsis-的关系">HAL 库与 CMSIS 的关系</a></li>
           </ol>
         </li>
       </ol>
@@ -364,6 +368,14 @@ armclang是ARM公司提供的一款C/C++编译器，专门用于为ARM架构的�
     >Ozone使用介绍-基础功能 - 开发环境 - 硬汉嵌入式论坛 - Powered by Discuz! (armbbs.cn)</a></p>
 <h4 id="mingw">MinGW
 </h4><p>mingw 是一个为 Microsoft Windows 平台编译和运行 Unix 程序的工具套装，它提供了类似于 Unix 环境下的编译器、链接器等工具，以便在 Windows 平台上开发使用 GCC（GNU 编译器集合）和其他开源 Unix 工具的软件。</p>
+<h4 id="llvm">LLVM
+</h4><p><a class="link" href="https://zhuanlan.zhihu.com/p/140462815"  target="_blank" rel="noopener"
+    >LLVM基本概念入门 - 知乎</a></p>
+<p>来自于百度百科的解释</p>
+<ul>
+<li>LLVM 命名最早源自于底层虚拟机（Low Level Virtual Machine）的缩写，由于命名带来的混乱，LLVM就是该项目的全称。LLVM 核心库提供了与编译器相关的支持，可以作为多种语言编译器的后台来使用。能够进行程序语言的编译器优化、链接优化、在线编译优化、代码生成。LLVM的项目是一个模块化和可重复使用的编译器和工具技术的集合。</li>
+</ul>
+<p>现在的LLVM是一个编译器框架。LLVM作为编译器框架，是需要各种功能模块支撑起来的，你可以将clang和lld都看做是LLVM的组成部分，框架的意思是，你可以基于LLVM提供的功能开发自己的模块，并集成在LLVM系统上，增加它的功能，或者就单纯自己开发软件工具，而利用LLVM来支撑底层实现。LLVM由一些库和工具组成，正因为它的这种设计思想，使它可以很容易和IDE集成（因为IDE软件可以直接调用库来实现一些如静态检查这些功能），也很容易构建生成各种功能的工具（因为新的工具只需要调用需要的库就行）</p>
 <h4 id="arm-none-eabi-gcc">arm-none-eabi-gcc
 </h4><p>arm-none-eabi-gcc 是一个专为 ARM 架构的嵌入式系统设计的 GCC 编译器版本。它可以生成裸机代码，适用于没有操作系统的应用程序。开发者常用它来编译针对 ARM Cortex 和其他 ARM 设备的软件。</p>
 <h4 id="arm-none-eabi-gcc和armclang的区别">arm-none-eabi-gcc 和 armclang的区别
@@ -455,7 +467,8 @@ armclang是ARM公司提供的一款C/C++编译器，专门用于为ARM架构的�
 <li><strong>基于标签 (Tag Parser)</strong>：如 C/C++ 扩展使用的方案</li>
 </ol>
 <h4 id="交叉编译器">交叉编译器
-</h4><p><a class="link" href="https://zhuanlan.zhihu.com/p/133779123"  target="_blank" rel="noopener"
+</h4><p>在一种计算机环境中运行的编译程序，能编译出在另外一种环境下运行的代码，这个编译过程就叫交叉编译.简单地说，就是在一个平台上生成另一个平台上的可执行代码</p>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/133779123"  target="_blank" rel="noopener"
     >arm 交叉编译器各种gcc 傻傻分不清楚：gnueabi,gnueabhf,none-eaib - 知乎</a></p>
 <h5 id="交叉编译工具链的命名规范">交叉编译工具链的命名规范
 </h5><p><strong>arch [-vendor]  [-os]  [-(gnu)eabi]</strong></p>
@@ -467,7 +480,8 @@ armclang是ARM公司提供的一款C/C++编译器，专门用于为ARM架构的�
 <strong>支持操作系统：</strong> <a class="link" href="https://zhida.zhihu.com/search?content_id=117860044&amp;content_type=Article&amp;match_order=1&amp;q=arm-none-linux-eabi-gcc&amp;zhida_source=entity"  target="_blank" rel="noopener"
     >arm-none-linux-eabi-gcc</a>
 <strong>不支持操作系统：</strong> arm-none-eabi-gcc
-none表示vendor是none，也就是不属于某一公司的</p>
+none表示vendor是none，也就是不属于某一公司的
+（更多的解释是<code>none</code>是指无操作系统）</p>
 <h5 id="abi-和-eabi">ABI 和 EABI
 </h5><p><strong>ABI</strong>：二进制应用程序接口(Application Binary Interface (ABI) for the ARM Architecture)。在计算机中，应用二进制接口描述了应用程序（或者其他类型）和操作系统之间或其他应用程序的低级接口。</p>
 <p><strong>EABI</strong>：嵌入式ABI。嵌入式应用二进制接口指定了文件格式、数据类型、寄存器使用、堆积组织优化和在一个嵌入式软件中的参数的标准约定。开发者使用自己的汇编语言也可以使用 EABI 作为与兼容的编译器生成的汇编语言的接口。</p>
@@ -484,6 +498,50 @@ none表示vendor是none，也就是不属于某一公司的</p>
 <li><strong>生成器层</strong>：CMake解析配置，生成底层构建文件</li>
 <li><strong>执行器层</strong>：Make/Ninja执行具体构建命令</li>
 <li><strong>工具链层</strong>：编译器(如gcc)、链接器等实际执行编译</li>
+</ol>
+<h4 id="hal库hardware-abstraction-layer-硬件抽象层库">HAL库（Hardware Abstraction Layer 硬件抽象层库）
+</h4><h5 id="1-核心定义与归属">1. 核心定义与归属
+</h5><p>HAL 库是 <strong>STMicroelectronics（意法半导体）</strong> 为自家 <strong>STM32 系列微控制器（MCU）</strong> 量身打造的底层软件库，是 STM32 生态中核心的开发工具之一，基于 ARM 的 CMSIS 标准构建。</p>
+<h5 id="2-核心组成模块">2. 核心组成模块
+</h5><ul>
+<li><strong>外设驱动模块</strong>：覆盖 STM32 所有常用外设（GPIO、UART、SPI、I2C、ADC、DAC、定时器、DMA、CAN、USB 等），每个外设都封装了完整的操作接口（初始化、配置、数据收发 / 采集、中断处理等）。</li>
+<li><strong>系统级功能模块</strong>：包含时钟树配置（HAL_RCC_XXX 系列函数）、中断控制器配置、低功耗模式（睡眠 / 停机 / 待机）管理、复位处理等核心系统功能。</li>
+<li><strong>工具链适配模块</strong>：兼容主流开发环境（STM32CubeIDE、Keil MDK、IAR EWARM），支持与 STM32CubeMX（图形化配置工具）联动，可自动生成初始化代码，大幅减少手动编码工作量。</li>
+<li><strong>辅助功能模块</strong>：提供延时函数（HAL_Delay）、错误处理机制、外设状态查询等通用工具函数，提升开发便捷性。</li>
+</ul>
+<h4 id="cmsiscortex-microcontroller-software-interface-standard">CMSIS（Cortex Microcontroller Software Interface Standard）
+</h4><h5 id="1-核心定义与归属-1">1. 核心定义与归属
+</h5><p>CMSIS 是 <strong>ARM 公司</strong> 制定的 <strong>行业统一软件接口标准</strong>（注意：不是具体的软件库，而是 “规范 / 协议”），面向所有基于 ARM Cortex-M 内核（M0/M0+/M3/M4/M7 等）的微控制器，所有主流 MCU 厂商（ST、NXP、Microchip、TI、瑞萨等）均需遵循该标准。</p>
+<h5 id="2-核心组成模块关键子规范">2. 核心组成模块（关键子规范）
+</h5><ul>
+<li><strong>CMSIS-Core（内核核心层）</strong>：最基础、最核心的模块，定义了：
+<ul>
+<li>内核寄存器的统一访问接口（如 NVIC 中断控制器、Systick 定时器、MPU 内存保护单元的配置函数）；</li>
+<li>系统初始化函数（<code>SystemInit()</code>）、时钟配置接口，统一不同厂商 Cortex-M MCU 的内核启动流程；</li>
+<li>内核状态查询、中断优先级管理等通用 API，避免开发者直接操作内核寄存器导致的兼容性问题。</li>
+</ul>
+</li>
+<li><strong>CMSIS-Driver（外设驱动接口层）</strong>：定义了外设驱动的统一接口模板（如 UART、SPI、GPIO、ADC 等），厂商需按该模板实现驱动函数（如<code>UART_Transmit</code>、<code>SPI_Receive</code>），确保不同厂商的外设驱动接口一致。</li>
+<li><strong>CMSIS-RTOS（实时操作系统接口层）</strong>：定义了 RTOS 的统一 API 规范（如任务创建、信号量、消息队列、定时器等），主流 RTOS（FreeRTOS、RTX5、μC/OS-III）均遵循该标准，使 RTOS 能跨厂商 MCU 无缝移植。</li>
+<li><strong>CMSIS-DSP（数字信号处理库接口层）</strong>：定义了 DSP 功能的统一接口（如 FFT、滤波、矩阵运算、PID 控制等），ARM 提供了标准的 CMSIS-DSP 库实现，开发者可直接调用，无需关注底层算法细节。</li>
+<li><strong>CMSIS-Pack（软件包格式层）</strong>：统一了 MCU 设备描述、驱动库、中间件、示例代码的打包格式，方便开发工具（如 Keil MDK、STM32CubeIDE）自动识别、导入和管理软件资源。</li>
+</ul>
+<h5 id="3-特点与适用场景">3. 特点与适用场景
+</h5><ul>
+<li>优点：通用性极强、跨平台性好、生态完善，是 Cortex-M MCU 开发的 “通用语言”，适用于所有基于 Cortex-M 内核的 MCU 项目，尤其适合需要跨厂商移植、使用中间件（RTOS/DSP）的复杂项目。</li>
+<li>缺点：仅定义接口规范，不提供具体的驱动实现（需厂商或第三方基于规范开发），开发者无法直接使用 CMSIS，必须结合厂商库（如 HAL 库）或第三方库才能落地。</li>
+</ul>
+<h4 id="hal-库与-cmsis-的关系">HAL 库与 CMSIS 的关系
+</h4><ol>
+<li><strong>层级关系</strong>：CMSIS 是 <strong>底层标准</strong>，HAL 库是 <strong>基于 CMSIS 标准的具体实现</strong>——HAL 库的内核操作（如中断配置、Systick 定时器、时钟初始化）完全遵循 CMSIS-Core 规范，外设驱动接口也兼容 CMSIS-Driver 模板。</li>
+<li><strong>作用互补</strong>：
+<ul>
+<li>CMSIS 解决 “跨厂商兼容性”：让代码能在 ST、NXP、TI 等不同厂商的 Cortex-M MCU 间移植；</li>
+<li>HAL 库解决 “ST 内部跨型号开发效率”：让 STM32 用户无需关注 CMSIS 底层细节，快速调用封装好的 API 开发功能。</li>
+</ul>
+</li>
+<li><strong>依赖关系</strong>：HAL 库必须遵循 CMSIS 标准才能保证兼容性（否则无法适配 Cortex-M 内核）；而 CMSIS 需要 HAL 库这类厂商库来落地实现，才能被开发者直接使用（CMSIS 本身只是 “规则”，不是可执行代码）。
+简单总结：<strong>CMSIS 是 “通用接口规则”，HAL 库是 ST 按规则为 STM32 定制的 “工具包”</strong>，两者结合既保证了跨平台兼容性，又提升了 STM32 的开发效率。</li>
 </ol>
 
 </section>
