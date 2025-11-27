@@ -49,8 +49,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;游戏设计&#34;&gt;游戏设计
-&lt;/h2&gt;&lt;p&gt;玩法介绍&lt;/p&gt;
-&lt;p&gt;游戏设计&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;玩法介绍：&lt;a class=&#34;link&#34; href=&#34;https://nomadjoeviolet.github.io/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ChipTanks-玩法介绍&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;游戏设计：&lt;a class=&#34;link&#34; href=&#34;https://nomadjoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ChipTanks-游戏设计&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;硬件选型&#34;&gt;硬件选型
 &lt;/h2&gt;&lt;p&gt;使用的 OLED 屏的显示驱动为 SSD1306
 主控板为 stm32f103c8t6
@@ -63,7 +65,7 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 编译器 arm-none-eabi 使用的版本为&lt;code&gt;14.3 rel1&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;开发方式采用 C&amp;amp;C++混编，使用&lt;code&gt;exter &amp;quot;C&amp;quot; { }&lt;/code&gt;解决 C++名词修饰导致 C 无法链接的问题，&lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt;的作用就是告诉 C++编译器修改符号表生成方式，将 C++符号的生成方式换成了的生成方式。&lt;/p&gt;
 &lt;p&gt;实践上将 FreeRTOS 的线程函数入口声明 定义为&lt;code&gt;As external&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/ChipTanks-%e5%9f%ba%e4%ba%8eC&amp;amp;C&amp;#43;&amp;#43;%e6%b7%b7%e7%bc%96%e7%9a%84STM32OLED%e8%bf%b7%e4%bd%a0%e6%b8%b8%e6%88%8f%e6%8e%8c%e6%9c%ba%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae%e5%bc%80%e5%8f%91-keyScan%e7%ba%bf%e7%a8%8b.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/ChipTanks-keyScan%e7%ba%bf%e7%a8%8b.png&#34;
 	
 	
 	
@@ -189,7 +191,7 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;这样重载后，动态分配的内存不会从 系统堆里面分配，而是从 FreeRTOS 的 &lt;strong&gt;静态 堆&lt;/strong&gt;（内存池） （此处静态指 编译期最大容量确定）里面分配，从而避免可能的堆栈溢出，FreeRTOS 的堆栈管理方案采用 安全 且 有高效内存碎片化处理 的 heap4 即可&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/ChipTanks-%e5%9f%ba%e4%ba%8eC&amp;amp;C&amp;#43;&amp;#43;%e6%b7%b7%e7%bc%96%e7%9a%84STM32OLED%e8%bf%b7%e4%bd%a0%e6%b8%b8%e6%88%8f%e6%8e%8c%e6%9c%ba%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae%e5%bc%80%e5%8f%91-FreeRTOS%e5%a0%86%e6%a0%88%e7%ae%a1%e7%90%86.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/ChipTanks-FreeRTOS%e5%a0%86%e6%a0%88%e7%ae%a1%e7%90%86.png&#34;
 	
 	
 	
@@ -208,7 +210,7 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;li&gt;这两个函数会使得链接器配置得复杂。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;系统内存分配&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/ChipTanks-%e5%9f%ba%e4%ba%8eC&amp;amp;C&amp;#43;&amp;#43;%e6%b7%b7%e7%bc%96%e7%9a%84STM32OLED%e8%bf%b7%e4%bd%a0%e6%b8%b8%e6%88%8f%e6%8e%8c%e6%9c%ba%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae%e5%bc%80%e5%8f%91-%e7%b3%bb%e7%bb%9fRAM%e5%86%85%e5%ad%98%e5%88%86%e9%85%8d.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/ChipTanks-%e7%b3%bb%e7%bb%9fRAM%e5%86%85%e5%ad%98%e5%88%86%e9%85%8d.png&#34;
 	
 	
 	
@@ -216,7 +218,7 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 	
 	
 &gt;
-&lt;img src=&#34;https://NomadJoeviolet.github.io/ChipTanks-%e5%9f%ba%e4%ba%8eC&amp;amp;C&amp;#43;&amp;#43;%e6%b7%b7%e7%bc%96%e7%9a%84STM32OLED%e8%bf%b7%e4%bd%a0%e6%b8%b8%e6%88%8f%e6%8e%8c%e6%9c%ba%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae%e5%bc%80%e5%8f%91-FreeRTOS%e7%9a%84%e5%86%85%e5%ad%98%e5%b8%83%e5%b1%80.png&#34;
+&lt;img src=&#34;https://NomadJoeviolet.github.io/ChipTanks-FreeRTOS%e7%9a%84%e5%86%85%e5%ad%98%e5%b8%83%e5%b1%80.png&#34;
 	
 	
 	

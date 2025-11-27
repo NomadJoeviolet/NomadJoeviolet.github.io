@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前言 非常适合集成各类库后去雕琢，练习 C&amp;C++混编和设计模式，C++动态内存分配等，很爽的练手项目\n项目代码状况\n1 2 3 4 5 6 7 8 9 10 11 12 13 Top-level groups: Bullet Raw= 378 NonEmpty= 304 Code= 266 Data Raw= 301 NonEmpty= 252 Code= 186 gameEntityManager.hpp Raw= 412 NonEmpty= 362 Code= 300 gamePerkCardManager.hpp Raw= 171 NonEmpty= 145 Code= 128 gameProgressManager.hpp Raw= 410 NonEmpty= 359 Code= 307 Peripheral Raw= 1624 NonEmpty= 1495 Code= 905 PerkCard Raw= 67 NonEmpty= 56 Code= 54 reload_new_delete.cpp Raw= 61 NonEmpty= 52 Code= 33 Role Raw= 3314 NonEmpty= 2865 Code= 2349 threads.cpp Raw= 259 NonEmpty= 219 Code= 140 Totals: RawLines=6997 NonEmptyLines=6109 CodeLines=4668 游戏设计 玩法介绍\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前言 非常适合集成各类库后去雕琢，练习 C&amp;C++混编和设计模式，C++动态内存分配等，很爽的练手项目\n项目代码状况\n1 2 3 4 5 6 7 8 9 10 11 12 13 Top-level groups: Bullet Raw= 378 NonEmpty= 304 Code= 266 Data Raw= 301 NonEmpty= 252 Code= 186 gameEntityManager.hpp Raw= 412 NonEmpty= 362 Code= 300 gamePerkCardManager.hpp Raw= 171 NonEmpty= 145 Code= 128 gameProgressManager.hpp Raw= 410 NonEmpty= 359 Code= 307 Peripheral Raw= 1624 NonEmpty= 1495 Code= 905 PerkCard Raw= 67 NonEmpty= 56 Code= 54 reload_new_delete.cpp Raw= 61 NonEmpty= 52 Code= 33 Role Raw= 3314 NonEmpty= 2865 Code= 2349 threads.cpp Raw= 259 NonEmpty= 219 Code= 140 Totals: RawLines=6997 NonEmptyLines=6109 CodeLines=4668 游戏设计 玩法介绍：ChipTanks-玩法介绍\n">
 <title>ChipTanks-基于C&amp;C&#43;&#43;混编的STM32OLED迷你游戏掌机个人项目开发</title>
 
 <link rel='canonical' href='https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/'>
 
 <link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="ChipTanks-基于C&C++混编的STM32OLED迷你游戏掌机个人项目开发">
-<meta property='og:description' content="前言 非常适合集成各类库后去雕琢，练习 C&amp;C++混编和设计模式，C++动态内存分配等，很爽的练手项目\n项目代码状况\n1 2 3 4 5 6 7 8 9 10 11 12 13 Top-level groups: Bullet Raw= 378 NonEmpty= 304 Code= 266 Data Raw= 301 NonEmpty= 252 Code= 186 gameEntityManager.hpp Raw= 412 NonEmpty= 362 Code= 300 gamePerkCardManager.hpp Raw= 171 NonEmpty= 145 Code= 128 gameProgressManager.hpp Raw= 410 NonEmpty= 359 Code= 307 Peripheral Raw= 1624 NonEmpty= 1495 Code= 905 PerkCard Raw= 67 NonEmpty= 56 Code= 54 reload_new_delete.cpp Raw= 61 NonEmpty= 52 Code= 33 Role Raw= 3314 NonEmpty= 2865 Code= 2349 threads.cpp Raw= 259 NonEmpty= 219 Code= 140 Totals: RawLines=6997 NonEmptyLines=6109 CodeLines=4668 游戏设计 玩法介绍\n">
+<meta property='og:description' content="前言 非常适合集成各类库后去雕琢，练习 C&amp;C++混编和设计模式，C++动态内存分配等，很爽的练手项目\n项目代码状况\n1 2 3 4 5 6 7 8 9 10 11 12 13 Top-level groups: Bullet Raw= 378 NonEmpty= 304 Code= 266 Data Raw= 301 NonEmpty= 252 Code= 186 gameEntityManager.hpp Raw= 412 NonEmpty= 362 Code= 300 gamePerkCardManager.hpp Raw= 171 NonEmpty= 145 Code= 128 gameProgressManager.hpp Raw= 410 NonEmpty= 359 Code= 307 Peripheral Raw= 1624 NonEmpty= 1495 Code= 905 PerkCard Raw= 67 NonEmpty= 56 Code= 54 reload_new_delete.cpp Raw= 61 NonEmpty= 52 Code= 33 Role Raw= 3314 NonEmpty= 2865 Code= 2349 threads.cpp Raw= 259 NonEmpty= 219 Code= 140 Totals: RawLines=6997 NonEmptyLines=6109 CodeLines=4668 游戏设计 玩法介绍：ChipTanks-玩法介绍\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/'>
 <meta property='og:site_name' content='Nomad_violet'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&amp;C&#43;&#43;' /><meta property='article:tag' content='个人项目' /><meta property='article:published_time' content='2025-11-27T18:23:07&#43;08:00'/><meta property='article:modified_time' content='2025-11-27T18:23:07&#43;08:00'/>
 <meta name="twitter:title" content="ChipTanks-基于C&C++混编的STM32OLED迷你游戏掌机个人项目开发">
-<meta name="twitter:description" content="前言 非常适合集成各类库后去雕琢，练习 C&amp;C++混编和设计模式，C++动态内存分配等，很爽的练手项目\n项目代码状况\n1 2 3 4 5 6 7 8 9 10 11 12 13 Top-level groups: Bullet Raw= 378 NonEmpty= 304 Code= 266 Data Raw= 301 NonEmpty= 252 Code= 186 gameEntityManager.hpp Raw= 412 NonEmpty= 362 Code= 300 gamePerkCardManager.hpp Raw= 171 NonEmpty= 145 Code= 128 gameProgressManager.hpp Raw= 410 NonEmpty= 359 Code= 307 Peripheral Raw= 1624 NonEmpty= 1495 Code= 905 PerkCard Raw= 67 NonEmpty= 56 Code= 54 reload_new_delete.cpp Raw= 61 NonEmpty= 52 Code= 33 Role Raw= 3314 NonEmpty= 2865 Code= 2349 threads.cpp Raw= 259 NonEmpty= 219 Code= 140 Totals: RawLines=6997 NonEmptyLines=6109 CodeLines=4668 游戏设计 玩法介绍\n">
+<meta name="twitter:description" content="前言 非常适合集成各类库后去雕琢，练习 C&amp;C++混编和设计模式，C++动态内存分配等，很爽的练手项目\n项目代码状况\n1 2 3 4 5 6 7 8 9 10 11 12 13 Top-level groups: Bullet Raw= 378 NonEmpty= 304 Code= 266 Data Raw= 301 NonEmpty= 252 Code= 186 gameEntityManager.hpp Raw= 412 NonEmpty= 362 Code= 300 gamePerkCardManager.hpp Raw= 171 NonEmpty= 145 Code= 128 gameProgressManager.hpp Raw= 410 NonEmpty= 359 Code= 307 Peripheral Raw= 1624 NonEmpty= 1495 Code= 905 PerkCard Raw= 67 NonEmpty= 56 Code= 54 reload_new_delete.cpp Raw= 61 NonEmpty= 52 Code= 33 Role Raw= 3314 NonEmpty= 2865 Code= 2349 threads.cpp Raw= 259 NonEmpty= 219 Code= 140 Totals: RawLines=6997 NonEmptyLines=6109 CodeLines=4668 游戏设计 玩法介绍：ChipTanks-玩法介绍\n">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -401,8 +401,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="游戏设计">游戏设计
-</h2><p>玩法介绍</p>
-<p>游戏设计</p>
+</h2><p>玩法介绍：<a class="link" href="https://nomadjoeviolet.github.io/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/"  target="_blank" rel="noopener"
+    >ChipTanks-玩法介绍</a></p>
+<p>游戏设计：<a class="link" href="https://nomadjoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/"  target="_blank" rel="noopener"
+    >ChipTanks-游戏设计</a></p>
 <h2 id="硬件选型">硬件选型
 </h2><p>使用的 OLED 屏的显示驱动为 SSD1306
 主控板为 stm32f103c8t6
@@ -415,7 +417,7 @@ CMake 使用的版本为<code>4.1.0</code>
 编译器 arm-none-eabi 使用的版本为<code>14.3 rel1</code></p>
 <p>开发方式采用 C&amp;C++混编，使用<code>exter &quot;C&quot; { }</code>解决 C++名词修饰导致 C 无法链接的问题，<code>extern &quot;C&quot;</code>的作用就是告诉 C++编译器修改符号表生成方式，将 C++符号的生成方式换成了的生成方式。</p>
 <p>实践上将 FreeRTOS 的线程函数入口声明 定义为<code>As external</code></p>
-<p><img src="/ChipTanks-%e5%9f%ba%e4%ba%8eC&amp;C&#43;&#43;%e6%b7%b7%e7%bc%96%e7%9a%84STM32OLED%e8%bf%b7%e4%bd%a0%e6%b8%b8%e6%88%8f%e6%8e%8c%e6%9c%ba%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae%e5%bc%80%e5%8f%91-keyScan%e7%ba%bf%e7%a8%8b.png"
+<p><img src="/ChipTanks-keyScan%e7%ba%bf%e7%a8%8b.png"
 	
 	
 	
@@ -541,7 +543,7 @@ CMake 使用的版本为<code>4.1.0</code>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>这样重载后，动态分配的内存不会从 系统堆里面分配，而是从 FreeRTOS 的 <strong>静态 堆</strong>（内存池） （此处静态指 编译期最大容量确定）里面分配，从而避免可能的堆栈溢出，FreeRTOS 的堆栈管理方案采用 安全 且 有高效内存碎片化处理 的 heap4 即可</p>
-<p><img src="/ChipTanks-%e5%9f%ba%e4%ba%8eC&amp;C&#43;&#43;%e6%b7%b7%e7%bc%96%e7%9a%84STM32OLED%e8%bf%b7%e4%bd%a0%e6%b8%b8%e6%88%8f%e6%8e%8c%e6%9c%ba%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae%e5%bc%80%e5%8f%91-FreeRTOS%e5%a0%86%e6%a0%88%e7%ae%a1%e7%90%86.png"
+<p><img src="/ChipTanks-FreeRTOS%e5%a0%86%e6%a0%88%e7%ae%a1%e7%90%86.png"
 	
 	
 	
@@ -560,7 +562,7 @@ CMake 使用的版本为<code>4.1.0</code>
 <li>这两个函数会使得链接器配置得复杂。</li>
 </ol>
 <p>系统内存分配</p>
-<p><img src="/ChipTanks-%e5%9f%ba%e4%ba%8eC&amp;C&#43;&#43;%e6%b7%b7%e7%bc%96%e7%9a%84STM32OLED%e8%bf%b7%e4%bd%a0%e6%b8%b8%e6%88%8f%e6%8e%8c%e6%9c%ba%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae%e5%bc%80%e5%8f%91-%e7%b3%bb%e7%bb%9fRAM%e5%86%85%e5%ad%98%e5%88%86%e9%85%8d.png"
+<p><img src="/ChipTanks-%e7%b3%bb%e7%bb%9fRAM%e5%86%85%e5%ad%98%e5%88%86%e9%85%8d.png"
 	
 	
 	
@@ -568,7 +570,7 @@ CMake 使用的版本为<code>4.1.0</code>
 	
 	
 >
-<img src="/ChipTanks-%e5%9f%ba%e4%ba%8eC&amp;C&#43;&#43;%e6%b7%b7%e7%bc%96%e7%9a%84STM32OLED%e8%bf%b7%e4%bd%a0%e6%b8%b8%e6%88%8f%e6%8e%8c%e6%9c%ba%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae%e5%bc%80%e5%8f%91-FreeRTOS%e7%9a%84%e5%86%85%e5%ad%98%e5%b8%83%e5%b1%80.png"
+<img src="/ChipTanks-FreeRTOS%e7%9a%84%e5%86%85%e5%ad%98%e5%b8%83%e5%b1%80.png"
 	
 	
 	

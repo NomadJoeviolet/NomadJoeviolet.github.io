@@ -15,12 +15,18 @@
         <guid>https://NomadJoeviolet.github.io/p/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/</guid>
         <description>&lt;h3 id=&#34;rm步兵基本功能实现&#34;&gt;RM步兵基本功能实现
 &lt;/h3&gt;&lt;p&gt;该项目是一个基于 STM32G4 系列微控制器的载具控制与外设测试工程，面向步兵（Infantry Fighting Vehicle）相关子系统的开发与验证。项目包含底盘、云台与整车测试工程，集成了传感器融合算法、电机控制、CAN/FD 通信及外设驱动，实现运动控制、姿态估计和通信管理的参考实现与调试用例。&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/NomadJoeviolet/RM_test_Infantry_Fighting_Vehicle&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;p&gt;仓库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/NomadJoeviolet/RM_test_Infantry_Fighting_Vehicle&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;NomadJoeviolet/RM_test_Infantry_Fighting_Vehicle&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;个人电机库&#34;&gt;个人电机库
-&lt;/h3&gt;&lt;p&gt;该项目是一个基于 STM32 + HAL + FreeRTOS 的嵌入式电机驱动测试库，主要用于验证和调试 DJI 一拖四（one-to-four）系列 CAN 电机。它提供一个专为 DJI 协议设计的 CanMotorManager，用以统一管理最多 4 个电机的 CAN 收发与数据解析；同时包含可复用的控制算法（如 PID）、多线程示例以及对 ETL、CMSIS‑DSP 和 FreeRTOS 的集成支持，便于在受限资源下实现高效、可扩展的电机控制与测试。&lt;/p&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/NomadJoeviolet/MotorsLib&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/h3&gt;&lt;p&gt;该项目是一个基于 STM32 + HAL + FreeRTOS 的嵌入式电机驱动测试库，主要用于验证和调试 DJI 一拖四（one-to-four）系列 CAN 电机。它提供一个专为 DJI 协议设计的  CanMotorManager，用以统一管理最多 4 个电机的 CAN 收发与数据解析；同时包含可复用的控制算法（如 PID）、多线程示例以及对 ETL、CMSIS‑DSP 和 FreeRTOS 的集成支持，便于在受限资源下实现高效、可扩展的电机控制与测试。&lt;/p&gt;
+&lt;p&gt;仓库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/NomadJoeviolet/MotorsLib&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;NomadJoeviolet/MotorsLib&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;chiptanks--stm32-oled-迷你射击游戏&#34;&gt;ChipTanks —— STM32 OLED 迷你射击游戏
+&lt;/h3&gt;&lt;p&gt;该项目是一个基于 STM32F103 与 128×64 OLED 的迷你射击游戏，采用 C/C++ 混编与 FreeRTOS 任务模型，结合 ETL 实现固定容量容器与确定性更新。核心包括实体管理（角色/子弹分层、行动/状态/清理/渲染四阶段）、关卡与波次推进、Roguelike 选卡增益，以及按键输入与渲染线程分离的主循环。&lt;/p&gt;
+&lt;p&gt;仓库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/NomadJoeviolet/ChipTanks&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;NomadJoeviolet/ChipTanks&lt;/a&gt;
+项目总结博客：&lt;a class=&#34;link&#34; href=&#34;https://nomadjoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ChipTanks-基于C&amp;amp;C++混编的STM32OLED迷你游戏掌机个人项目开发&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         
