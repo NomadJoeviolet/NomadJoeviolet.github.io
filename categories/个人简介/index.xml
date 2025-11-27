@@ -24,8 +24,8 @@
 &lt;h3 id=&#34;chiptanks--stm32-oled-迷你射击游戏&#34;&gt;ChipTanks —— STM32 OLED 迷你射击游戏
 &lt;/h3&gt;&lt;p&gt;该项目是一个基于 STM32F103 与 128×64 OLED 的迷你射击游戏，采用 C/C++ 混编与 FreeRTOS 任务模型，结合 ETL 实现固定容量容器与确定性更新。核心包括实体管理（角色/子弹分层、行动/状态/清理/渲染四阶段）、关卡与波次推进、Roguelike 选卡增益，以及按键输入与渲染线程分离的主循环。&lt;/p&gt;
 &lt;p&gt;仓库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/NomadJoeviolet/ChipTanks&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;NomadJoeviolet/ChipTanks&lt;/a&gt;
-项目总结博客：&lt;a class=&#34;link&#34; href=&#34;https://nomadjoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;NomadJoeviolet/ChipTanks&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;项目总结博客：&lt;a class=&#34;link&#34; href=&#34;https://nomadjoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ChipTanks-基于C&amp;amp;C++混编的STM32OLED迷你游戏掌机个人项目开发&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
