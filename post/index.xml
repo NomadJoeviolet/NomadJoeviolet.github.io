@@ -8,11 +8,11 @@
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
         <lastBuildDate>Thu, 27 Nov 2025 18:23:07 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title></title>
-        <link>https://NomadJoeviolet.github.io/p/</link>
+        <title>ChipTanks-基于C&amp;C&#43;&#43;混编的STM32OLED迷你游戏掌机个人项目开发</title>
+        <link>https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/</link>
         <pubDate>Thu, 27 Nov 2025 18:23:07 +0800</pubDate>
         
-        <guid>https://NomadJoeviolet.github.io/p/</guid>
+        <guid>https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/</guid>
         <description>&lt;h2 id=&#34;前言&#34;&gt;前言
 &lt;/h2&gt;&lt;p&gt;非常适合集成各类库后去雕琢，练习 C&amp;amp;C++混编和设计模式，C++动态内存分配等，很爽的练手项目&lt;/p&gt;
 &lt;p&gt;项目代码状况&lt;/p&gt;
@@ -2615,11 +2615,11 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 </description>
         </item>
         <item>
-        <title></title>
-        <link>https://NomadJoeviolet.github.io/p/</link>
+        <title>ChipTanks-玩法介绍</title>
+        <link>https://NomadJoeviolet.github.io/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/</link>
         <pubDate>Thu, 27 Nov 2025 18:23:07 +0800</pubDate>
         
-        <guid>https://NomadJoeviolet.github.io/p/</guid>
+        <guid>https://NomadJoeviolet.github.io/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/</guid>
         <description>&lt;h2 id=&#34;-游戏介绍chip-tanks-芯片坦克&#34;&gt;🎮 游戏介绍：Chip Tanks (芯片坦克)
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Chip Tanks&lt;/strong&gt;  是一款运行在 STM32 嵌入式平台上的  &lt;strong&gt;Roguelike 俯视视角弹幕射击游戏&lt;/strong&gt;。玩家将操控一辆微型坦克，在 OLED 屏幕呈现的战场上，迎战源自《山海经》与中国上古神话的机械化凶兽。&lt;/p&gt;
 &lt;p&gt;通过击败敌人获取经验，升级并抽取强力的  &lt;strong&gt;PerkCard（天赋卡）&lt;/strong&gt;，构建属于你的战斗流派，挑战强大的关卡 BOSS！&lt;/p&gt;
@@ -2751,6 +2751,470 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;最后，祝您在 Chip Tanks 的世界中武运昌隆&lt;/strong&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>ChipTanks-游戏设计</title>
+        <link>https://NomadJoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/</link>
+        <pubDate>Thu, 27 Nov 2025 18:23:07 +0800</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/</guid>
+        <description>&lt;h2 id=&#34;设计思路简介&#34;&gt;设计思路简介
+&lt;/h2&gt;&lt;h3 id=&#34;游戏类型设计&#34;&gt;游戏类型设计
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;嵌入式平台上的“山海经”题材 Rougelite 弹幕射击游戏&lt;/strong&gt;（STG）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;横版/竖版射击 (Shoot &amp;rsquo;em up / STG)&lt;/strong&gt;：
+游戏的核心玩法是控制主角在 OLED 屏幕上移动，发射子弹消灭源源不断的敌人。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Roguelite (轻度肉鸽)&lt;/strong&gt;：
+&lt;strong&gt;随机成长&lt;/strong&gt;：包含  &lt;code&gt;PerkCard&lt;/code&gt;  系统和  &lt;code&gt;gamePerkCardManager&lt;/code&gt;。玩家升级后会触发 Perk 选择（如“攻速提升”、“解锁火球”、“解锁闪电”），每次游玩的构建（Build）都是不同的。
+&lt;strong&gt;永久死亡/单局进程&lt;/strong&gt;：通常此类嵌入式游戏为单局挑战模式。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;热量系统 (Overheat System)&lt;/strong&gt;：不同于传统的无限射击，游戏引入了“热量”机制（&lt;code&gt;heatData&lt;/code&gt;）。普通子弹、火球、闪电消耗不同的热量，过热可能导致无法射击。这要求玩家在“爆发输出”和“控温”之间做决策，增加了战术深度。&lt;/p&gt;
+&lt;h3 id=&#34;游戏背景设计&#34;&gt;游戏背景设计
+&lt;/h3&gt;&lt;p&gt;基于中国古代神话典籍《山海经》。所有的敌人都是古代神话中的妖兽，所有敌人的设计元素均来自于《山海经》。&lt;/p&gt;
+&lt;p&gt;通过将古老的神话生物与“坦克/射击”、“OLED 显示”、“热量过载”等科技元素结合形成反差。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;敌人&lt;/strong&gt;：&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;小怪&lt;/strong&gt;：飞廉（风神）、蛊雕（食人雕）、魑魅（山林鬼怪）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BOSS&lt;/strong&gt;：上古四凶（饕餮、梼杌）和凶神（相柳）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;游戏具体设计&#34;&gt;游戏具体设计
+&lt;/h2&gt;&lt;h3 id=&#34;机制设计&#34;&gt;机制设计
+&lt;/h3&gt;&lt;p&gt;所有角色遵循以下基础物理与战斗公式：&lt;/p&gt;
+&lt;h4 id=&#34;1-基础战斗机制&#34;&gt;1. 基础战斗机制
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;射击冷却 (Cooldown):&lt;/strong&gt; &lt;code&gt;射击间隔(ms) = resetTime / Speed&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;热量机制 (Heat):&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;冷却速率:&lt;/strong&gt;  每  &lt;strong&gt;200ms&lt;/strong&gt;  减少  &lt;code&gt;heatCoolDownRate&lt;/code&gt;  点热量。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;热量消耗倍率:&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;普通子弹: &lt;strong&gt;1.0x&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;火球弹: &lt;strong&gt;2.0x&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;闪电链: &lt;strong&gt;1.5x&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;伤害计算:&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;普通子弹:&lt;/strong&gt; &lt;code&gt;Damage = attackPower&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;火球弹:&lt;/strong&gt; &lt;code&gt;Damage = attackPower + 10&lt;/code&gt; (直接伤害 + 范围伤害)（造成两次）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;闪电链:&lt;/strong&gt; &lt;code&gt;Damage = (multiplier * attackPower) + 30&lt;/code&gt; (穿透伤害&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;恢复计算&lt;/strong&gt;：&lt;code&gt;恢复间隔(ms) = resetTime / Speed , 恢复量 = healValue&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;子弹设计逻辑，火球弹是大范围清杂子弹，闪电链是高伤害穿透子弹&lt;/p&gt;
+&lt;h4 id=&#34;2升级机制-level-up-mechanism&#34;&gt;2.升级机制 (Level-Up Mechanism)
+&lt;/h4&gt;&lt;p&gt;升级是玩家成长的基础驱动力。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;经验获取 (XP Gain)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;来源&lt;/strong&gt;: 击杀敌人。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数值&lt;/strong&gt;: 每个敌人都有定义的  &lt;code&gt;dropExp&lt;/code&gt;（掉落经验值）。
+&lt;ul&gt;
+&lt;li&gt;例如  &lt;code&gt;FeilianEnemy&lt;/code&gt;  构造函数中传入  &lt;code&gt;dropExp&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;过程&lt;/strong&gt;: 当敌人死亡（&lt;a class=&#34;link&#34; href=&#34;vscode-file://vscode-app/c:/IncludeAll/Tools/VSCode/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-browser/workbench/workbench.html&#34; &gt;die()&lt;/a&gt;）时，其  &lt;code&gt;dropExp&lt;/code&gt;  会被加到玩家（&lt;code&gt;LeadingRole&lt;/code&gt;）的当前经验池中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;升级判定&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;阈值&lt;/strong&gt;: 玩家拥有  &lt;code&gt;currentExp&lt;/code&gt;  和  &lt;code&gt;maxExp&lt;/code&gt;（升级所需经验）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;逻辑&lt;/strong&gt;: 当  &lt;code&gt;currentExp &amp;gt;= maxExp&lt;/code&gt;  时，触发升级&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;成长曲线&lt;/strong&gt;: 升级后，下一级所需的  &lt;code&gt;maxExp&lt;/code&gt;  通常会增加（例如：&lt;code&gt;maxExp = maxExp * 1.2&lt;/code&gt;  或固定增量），增加升级难度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;升级后的基础提升 (Base Stat Growth)&lt;/strong&gt;
+每次升级，玩家角色会自动获得一些基础属性的提升，无需选择：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;生命值上限 (Max Health)&lt;/strong&gt;: 提升生存能力（例如  &lt;code&gt;maxHealth += 10&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;回满血&lt;/strong&gt;: 升级通常伴随着状态恢复&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击力/热量上限&lt;/strong&gt;: 可能伴随微量的线性成长（取决于  &lt;code&gt;LeadingRole&lt;/code&gt;  的具体实现）
+&lt;strong&gt;触发特殊事件&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Perk 选择&lt;/strong&gt;: 每隔特定等级（&lt;strong&gt;每 2 级&lt;/strong&gt;），触发一次 PerkCard 选择&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;形态变化&lt;/strong&gt;: ，会改变角色的基础攻速&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3perkcard-机制-天赋卡片系统&#34;&gt;3.PerkCard 机制 (天赋卡片系统)
+&lt;/h4&gt;&lt;p&gt;PerkCard 是游戏的&lt;strong&gt;Roguelike&lt;/strong&gt;核心元素，允许玩家在单局游戏中构建不同的战斗流派。
+&lt;strong&gt;卡片定义&lt;/strong&gt;
+卡片包含以下属性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Type (类型)&lt;/strong&gt;: 枚举值，决定卡片的功能。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Name (名称)&lt;/strong&gt;: 显示在 OLED 屏幕上的文本（如 &amp;ldquo;Attack +5&amp;rdquo;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Param (参数)&lt;/strong&gt;: 数值强度（如加 5 点攻击，参数就是 5）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;卡片类型与效果详解&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;卡片类型&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;效果描述&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;关联代码变量&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;HEAL_SPEED_UP&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;提升回血速度&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;healthData.healSpeed&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;HEAL_AMOUNT_UP&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;提升单次回复量&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;healthData.healValue&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;HEALTH_UP&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;提升生命上限&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;healthData.maxHealth&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;ATTACK_UP&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;提升基础攻击力&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;attackData.attackPower&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;ATTACK_SPEED_UP&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;提升射击频率&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;attackData.shootCooldownSpeed&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;HEAT_CAPACITY_UP&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;提升热量上限&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;heatData.maxHeat&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;HEAT_COOL_DOWN_UP&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;提升散热速度&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;heatData.heatCoolDownRate&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;UNLOCK_FIREBALL&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;解锁新武器&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;玩家解锁新的子弹&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;UNLOCK_LIGHTNING&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;解锁新武器&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;玩家解锁新的子弹&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;FIREBALL_RANGE_UP&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;提升火球爆炸范围&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;attackData.bulletRange&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;LIGHTNING_MULTIPLIER&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;提升闪电伤害倍率&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;attackData.bulletDamageMultiplier&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;MOVE_SPEED_UP&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;提升移动速度&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;spatialData.moveSpeed&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h5 id=&#34;流派构建&#34;&gt;流派构建
+&lt;/h5&gt;&lt;p&gt;通过升级和 Perk 的组合，玩家可以形成不同的策略：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;加特林流 (高攻速 + 高散热)&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;重点选择  &lt;code&gt;ATTACK_SPEED_UP&lt;/code&gt;  和  &lt;code&gt;HEAT_COOL_DOWN_UP&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;结果：发射普通子弹像泼水一样，利用高频率触发伤害。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;重炮流 (火球 + 爆炸范围 + 高攻击)&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;重点选择  &lt;code&gt;UNLOCK_FIREBALL&lt;/code&gt;, &lt;code&gt;ATTACK_UP&lt;/code&gt;, &lt;code&gt;FIREBALL_RANGE_UP&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;结果：攻速慢，但一发火球能清空一片区域。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;雷神流 (闪电 + 倍率 + 高攻击 )&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;重点选择  &lt;code&gt;UNLOCK_LIGHTNING&lt;/code&gt;, &lt;code&gt;LIGHTNING_MULTIPLIER_UP&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;结果：利用闪电的穿透特性和高倍率伤害，瞬间秒杀直线上的敌人。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;坦克流 (回血 + 高血量)&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;重点选择  &lt;code&gt;HEALTH_UP&lt;/code&gt;, &lt;code&gt;HEAL_SPEED_UP&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;结果：依靠中的自动回血逻辑（&lt;code&gt;healTimeCounter&lt;/code&gt;），硬抗敌人&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;敌人设计风格&#34;&gt;敌人设计风格
+&lt;/h3&gt;&lt;h4 id=&#34;定位&#34;&gt;定位
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;Fodder (炮灰/骚扰)&lt;/strong&gt;：飞廉（高机动低伤）、魑魅（自爆卡车），主要用于干扰走位和消耗玩家精力。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Elite (精英/高威胁)&lt;/strong&gt;：蛊雕，拥有亡语机制（死后发火球），强迫玩家进行特定走位。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Boss (首领)&lt;/strong&gt;：拥有多阶段或多技能循环。
+&lt;em&gt;饕餮&lt;/em&gt;：近战系 BOSS，强调位移控制（拉人、冲撞）。
+&lt;em&gt;梼杌&lt;/em&gt;：敏捷系 BOSS，强调反应速度（闪现、狂暴弹幕）。
+&lt;em&gt;相柳&lt;/em&gt;：法师/召唤系 BOSS，强调全屏躲避和处理小怪（AOE、召唤）。&lt;/p&gt;
+&lt;h4 id=&#34;攻击机制与数值&#34;&gt;攻击机制与数值
+&lt;/h4&gt;&lt;h5 id=&#34;1-飞廉-feilianenemy&#34;&gt;1. 飞廉 (FeilianEnemy)
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：小型高速骚扰者&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：风神，鹿身翼角。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：12x12 (小)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：高速，轨迹飘忽不定（模拟风的特性）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击力&lt;/strong&gt;：低。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：250ms。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击方式&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;普通射击&lt;/strong&gt;：只发射普通子弹。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;战术意义&lt;/strong&gt;：单体威胁小，依靠数量和难以预测的移动轨迹干扰玩家，消耗玩家的注意力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;2-蛊雕-gudiaoenemy&#34;&gt;2. 蛊雕 (GudiaoEnemy)
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：中型伏击者&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：食人猛禽，似雕有角，音如婴儿。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：15x15 (中)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：中速，飞行轨迹较直接。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击力&lt;/strong&gt;：较高。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：250ms。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击方式&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;双侧射击&lt;/strong&gt;：每次从身体中心的两侧发射普通子弹（高伤害）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;亡语（Death Rattle）&lt;/strong&gt;：死亡后会发射一颗火球弹，对击杀者造成最后威胁。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;战术意义&lt;/strong&gt;：需要优先处理的高伤害单位，且击杀时需注意躲避亡语子弹。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;3-魑魅-chimeienemy&#34;&gt;3. 魑魅 (ChiMeiEnemy)
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：自杀式冲锋怪&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：山林鬼怪，迷惑人心。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：8x8 (极小)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：高速。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：250ms。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击方式&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;自杀冲撞&lt;/strong&gt;：不发射子弹，通过高速移动直接撞击玩家造成伤害。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;战术意义&lt;/strong&gt;：迫使玩家保持移动，不能停留在原地。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;4-饕餮-taotieenemy&#34;&gt;4. 饕餮 (TaotieEnemy)
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：近战坦克型 BOSS&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：四凶之一，贪婪，吞噬万物。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：64x64 (巨大)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HP&lt;/strong&gt;：高血量。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击力&lt;/strong&gt;：高。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：低速。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：500ms。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击方式 (5 种模式)&lt;/strong&gt;：
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;吞噬 (Devour)&lt;/strong&gt;：将玩家向自己拉近 (&lt;code&gt;pullDistance = 30&lt;/code&gt;)，然后进行攻击。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;弹幕&lt;/strong&gt;：发射三排普通子弹。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;冲撞 (Ram)&lt;/strong&gt;：向前冲锋 (&lt;code&gt;chargeDistance = 30&lt;/code&gt;) 进行撞击。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;碾压 (Crush)&lt;/strong&gt;：从玩家左侧出现 (&lt;code&gt;crushChargeDistance = 100&lt;/code&gt;)，向后碾压，封锁走位。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;组合技&lt;/strong&gt;：将玩家拉近，同时向前冲锋 (&lt;code&gt;pullAndChargeDistance = 50&lt;/code&gt;)。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;5-梼杌-taowuenemy&#34;&gt;5. 梼杌 (TaowuEnemy)
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：高机动弹幕型 BOSS&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：四凶之一，顽固凶暴。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：64x64 (巨大)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HP&lt;/strong&gt;：低血量（相对其他 BOSS）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击力&lt;/strong&gt;：高。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：高速，擅长闪现 (Blink)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：500ms。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击方式 (6 种模式)&lt;/strong&gt;：
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;狂暴弹幕&lt;/strong&gt;：闪现至中间，随机发射大量普通子弹。&lt;strong&gt;狂暴机制&lt;/strong&gt;：血量越低，持续时间越长（3 秒 -&amp;gt; 6 秒），频率 5 发/秒。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;随机火球&lt;/strong&gt;：随机位置发射 5 个火球弹。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;混合射击&lt;/strong&gt;：中间发射 1 颗火球，两侧边缘各发射 2 颗普通子弹。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺口阵型&lt;/strong&gt;：发射一排子弹，仅中间留有缺口（迫使玩家钻缝）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;诡雷闪现&lt;/strong&gt;：原地留下一颗火球弹，本体消失。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;追击闪现&lt;/strong&gt;：消除冷却 CD，直接闪现对齐玩家位置。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;6-相柳-xiangliuenemy&#34;&gt;6. 相柳 (XiangliuEnemy)
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：召唤与全屏压制型 BOSS&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：九头蛇怪，所过之处尽成泽国。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：64x64 (巨大)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HP&lt;/strong&gt;：高血量。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击力&lt;/strong&gt;：高。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：中速。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：500ms。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击方式 (6 种模式)&lt;/strong&gt;：
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;九头齐射&lt;/strong&gt;：发射  &lt;strong&gt;9 排&lt;/strong&gt;  普通子弹（覆盖面极大）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;雷狱&lt;/strong&gt;：发射  &lt;strong&gt;3 排&lt;/strong&gt;  闪电链（穿透伤害）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;火海&lt;/strong&gt;：发射  &lt;strong&gt;3 排&lt;/strong&gt;  火球弹（范围爆炸）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;召唤魑魅&lt;/strong&gt;：生成 3 只自爆怪 (ChiMei) 协同作战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;召唤飞廉&lt;/strong&gt;：生成 2 只高速怪 (Feilian) 协同作战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;召唤蛊雕&lt;/strong&gt;：生成 1 只高伤怪 (Gudiao) 协同作战。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;所有角色数值设计&#34;&gt;所有角色数值设计
+&lt;/h3&gt;&lt;h4 id=&#34;玩家-leadingrole-数值公式&#34;&gt;玩家 (LeadingRole) 数值公式
+&lt;/h4&gt;&lt;p&gt;玩家的数值受基础属性、等级成长和 PerkCard（天赋卡）共同影响。&lt;/p&gt;
+&lt;h5 id=&#34;1-基础属性与成长&#34;&gt;1. 基础属性与成长
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;生命值 (HP):&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;MaxHealth&lt;/code&gt; = 初始值 (180) + &lt;code&gt;Level&lt;/code&gt;  成长 (每级+20) + &lt;code&gt;Perk: HEALTH_UP&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CurrentHealth&lt;/code&gt;: 升级时回满；受伤害减少；受回血机制增加。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击力 (Atk):&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;AttackPower&lt;/code&gt; = 初始值 (15) + &lt;code&gt;Level&lt;/code&gt;  成长 (每级+1) + &lt;code&gt;Perk: ATTACK_UP&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;移动速度:&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;MoveSpeed&lt;/code&gt; = 初始值 (1) + &lt;code&gt;Perk: MOVE_SPEED_UP&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-战斗机制公式&#34;&gt;2. 战斗机制公式
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;射击冷却 (Cooldown):&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;冷却时间(ms)&lt;/code&gt; = &lt;code&gt;shootCooldownResetTime&lt;/code&gt; (4000) / shootCooldownSpeed&lt;/li&gt;
+&lt;li&gt;shootCooldownSpeed = 初始值 (4) + &lt;code&gt;Level&lt;/code&gt;  成长 (每 5 级+2) + &lt;code&gt;Perk: ATTACK_SPEED_UP&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;热量机制 (Heat):&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;热量上限&lt;/code&gt; = &lt;code&gt;maxHeat&lt;/code&gt; (100) + &lt;code&gt;Level&lt;/code&gt;  成长 (每级+5) + &lt;code&gt;Perk: HEAT_CAPACITY_UP&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;冷却速率&lt;/code&gt; = 每 200ms 减少  &lt;code&gt;heatCoolDownRate&lt;/code&gt; (初始 4 + 每 2 级+1 + &lt;code&gt;Perk: HEAT_COOL_DOWN_UP&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;单发热量&lt;/code&gt; = &lt;code&gt;heatPerShot&lt;/code&gt; (初始 0 + 每 2 级-1)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;回血机制 (Regen):&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;触发间隔&lt;/code&gt; = &lt;code&gt;healResetTime&lt;/code&gt; (15000) / &lt;code&gt;healSpeed&lt;/code&gt; (3) = 5000ms&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;单次回复量&lt;/code&gt; = &lt;code&gt;healValue&lt;/code&gt; (初始 5 + 每级+1 + &lt;code&gt;Perk: HEAL_AMOUNT_UP&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-玩家伤害输出公式-createbullet&#34;&gt;3. 玩家伤害输出公式 (createBullet)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;普通子弹 (Basic):&lt;/strong&gt;&lt;br&gt;
+Damage=attackPowerDamage=attackPower&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;火球弹 (FireBall):&lt;/strong&gt;&lt;br&gt;
+Damage=attackPower+10Damage=attackPower+10
+&lt;em&gt;(注：火球造成一次直接伤害 + 范围伤害，两者数值相同)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;闪电链 (Lightning):&lt;/strong&gt;&lt;br&gt;
+Damage=(attackPower×multiplier)+30Damage=(attackPower×multiplier)+30
+&lt;em&gt;(注：&lt;code&gt;multiplier&lt;/code&gt;  初始为 1.5，可通过 Perk 提升)&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;敌人-enemy-数值公式&#34;&gt;敌人 (Enemy) 数值公式
+&lt;/h4&gt;&lt;p&gt;敌人的数值主要由其类型和当前游戏等级 (&lt;code&gt;Level&lt;/code&gt;) 决定。&lt;/p&gt;
+&lt;h4 id=&#34;1-基础属性-通用模板&#34;&gt;1. 基础属性 (通用模板)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;生命值 (HP):&lt;/strong&gt;&lt;br&gt;
+HP=BaseHP+(Level×HP_Growth)HP=BaseHP+(Level×HP_Growth)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击力 (Atk):&lt;/strong&gt;&lt;br&gt;
+Atk=BaseAtk+(Level×Atk_Growth)Atk=BaseAtk+(Level×Atk_Growth)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;经验掉落 (XP):&lt;/strong&gt;&lt;br&gt;
+DropExp=BaseExp+(Level×Exp_Growth)DropExp=BaseExp+(Level×Exp_Growth)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-具体敌人数值-基于-enemyrolecpp&#34;&gt;2. 具体敌人数值 (基于 enemyRole.cpp)
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;敌人类型&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;生命值公式 (HP)&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;攻击力公式 (Atk)&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;碰撞伤害&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;备注&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;飞廉 (Feilian)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10+(Level×20)10+(Level×20)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;2+(Level×1)2+(Level×1)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;4+(Level×1)4+(Level×1)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;高速骚扰，低伤脆皮&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;蛊雕 (Gudiao)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;60+(Level×100)60+(Level×100)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;8+(Level×2)8+(Level×2)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;4+(Level×1)4+(Level×1)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;远程伏击，死后发火球&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;魑魅 (ChiMei)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1+(Level×1)1+(Level×1)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1+(Level×1)1+(Level×1)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;2020&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;自爆冲撞&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;饕餮 (Taotie)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1450+(Level×400)1450+(Level×400)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;5+(Level×2)5+(Level×2)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;20+(Level×10)20+(Level×10)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;吞噬/冲撞/碾压&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;梼杌 (Taowu)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;830+(Level×300)830+(Level×300)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10+(Level×2)10+(Level×2)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;7+(Level×3)7+(Level×3)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;闪现/弹幕爆发&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;相柳 (Xiangliu)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;830+(Level×400)830+(Level×400)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;2+(Level×3)2+(Level×3)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;12+(Level×4)12+(Level×4)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;全屏 AOE/召唤&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;3-敌人伤害输出&#34;&gt;3. 敌人伤害输出
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;普通射击:&lt;/strong&gt;  造成  &lt;code&gt;Atk&lt;/code&gt;  点伤害。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;碰撞伤害:&lt;/strong&gt;  等于其  &lt;code&gt;collisionPower&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;特殊技能:&lt;/strong&gt;  如火球或闪电，遵循与玩家相同的伤害增幅逻辑（例如火球通常比普攻高）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;通用物理与状态公式&#34;&gt;通用物理与状态公式
+&lt;/h4&gt;&lt;p&gt;适用于所有角色（玩家与敌人）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;移动公式:&lt;/strong&gt;&lt;br&gt;
+NewPos=CurrentPos+(Direction×Speed)NewPos=CurrentPos+(Direction×Speed)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;碰撞回退:&lt;/strong&gt; BackStep=BaseStep×ConsecutiveCollisionCountBackStep=BaseStep×ConsecutiveCollisionCount
+&lt;em&gt;(注：连续碰撞次数越多，弹开距离越远，防止卡死)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;受伤公式:&lt;/strong&gt; CurrentHealth=max⁡(0,CurrentHealth−Damage)CurrentHealth=max(0,CurrentHealth−Damage)&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -16948,470 +17412,6 @@ b.使用static修饰局部变量可以在函数调用之间保持局部变量的
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
-        </item>
-        <item>
-        <title></title>
-        <link>https://NomadJoeviolet.github.io/p/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>https://NomadJoeviolet.github.io/p/</guid>
-        <description>&lt;h2 id=&#34;设计思路简介&#34;&gt;设计思路简介
-&lt;/h2&gt;&lt;h3 id=&#34;游戏类型设计&#34;&gt;游戏类型设计
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;嵌入式平台上的“山海经”题材 Rougelite 弹幕射击游戏&lt;/strong&gt;（STG）&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;横版/竖版射击 (Shoot &amp;rsquo;em up / STG)&lt;/strong&gt;：
-游戏的核心玩法是控制主角在 OLED 屏幕上移动，发射子弹消灭源源不断的敌人。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Roguelite (轻度肉鸽)&lt;/strong&gt;：
-&lt;strong&gt;随机成长&lt;/strong&gt;：包含  &lt;code&gt;PerkCard&lt;/code&gt;  系统和  &lt;code&gt;gamePerkCardManager&lt;/code&gt;。玩家升级后会触发 Perk 选择（如“攻速提升”、“解锁火球”、“解锁闪电”），每次游玩的构建（Build）都是不同的。
-&lt;strong&gt;永久死亡/单局进程&lt;/strong&gt;：通常此类嵌入式游戏为单局挑战模式。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;热量系统 (Overheat System)&lt;/strong&gt;：不同于传统的无限射击，游戏引入了“热量”机制（&lt;code&gt;heatData&lt;/code&gt;）。普通子弹、火球、闪电消耗不同的热量，过热可能导致无法射击。这要求玩家在“爆发输出”和“控温”之间做决策，增加了战术深度。&lt;/p&gt;
-&lt;h3 id=&#34;游戏背景设计&#34;&gt;游戏背景设计
-&lt;/h3&gt;&lt;p&gt;基于中国古代神话典籍《山海经》。所有的敌人都是古代神话中的妖兽，所有敌人的设计元素均来自于《山海经》。&lt;/p&gt;
-&lt;p&gt;通过将古老的神话生物与“坦克/射击”、“OLED 显示”、“热量过载”等科技元素结合形成反差。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;敌人&lt;/strong&gt;：&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;小怪&lt;/strong&gt;：飞廉（风神）、蛊雕（食人雕）、魑魅（山林鬼怪）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;BOSS&lt;/strong&gt;：上古四凶（饕餮、梼杌）和凶神（相柳）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;游戏具体设计&#34;&gt;游戏具体设计
-&lt;/h2&gt;&lt;h3 id=&#34;机制设计&#34;&gt;机制设计
-&lt;/h3&gt;&lt;p&gt;所有角色遵循以下基础物理与战斗公式：&lt;/p&gt;
-&lt;h4 id=&#34;1-基础战斗机制&#34;&gt;1. 基础战斗机制
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;射击冷却 (Cooldown):&lt;/strong&gt; &lt;code&gt;射击间隔(ms) = resetTime / Speed&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;热量机制 (Heat):&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;冷却速率:&lt;/strong&gt;  每  &lt;strong&gt;200ms&lt;/strong&gt;  减少  &lt;code&gt;heatCoolDownRate&lt;/code&gt;  点热量。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;热量消耗倍率:&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;普通子弹: &lt;strong&gt;1.0x&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;火球弹: &lt;strong&gt;2.0x&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;闪电链: &lt;strong&gt;1.5x&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;伤害计算:&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;普通子弹:&lt;/strong&gt; &lt;code&gt;Damage = attackPower&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;火球弹:&lt;/strong&gt; &lt;code&gt;Damage = attackPower + 10&lt;/code&gt; (直接伤害 + 范围伤害)（造成两次）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;闪电链:&lt;/strong&gt; &lt;code&gt;Damage = (multiplier * attackPower) + 30&lt;/code&gt; (穿透伤害&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;恢复计算&lt;/strong&gt;：&lt;code&gt;恢复间隔(ms) = resetTime / Speed , 恢复量 = healValue&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;子弹设计逻辑，火球弹是大范围清杂子弹，闪电链是高伤害穿透子弹&lt;/p&gt;
-&lt;h4 id=&#34;2升级机制-level-up-mechanism&#34;&gt;2.升级机制 (Level-Up Mechanism)
-&lt;/h4&gt;&lt;p&gt;升级是玩家成长的基础驱动力。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;经验获取 (XP Gain)&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;来源&lt;/strong&gt;: 击杀敌人。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;数值&lt;/strong&gt;: 每个敌人都有定义的  &lt;code&gt;dropExp&lt;/code&gt;（掉落经验值）。
-&lt;ul&gt;
-&lt;li&gt;例如  &lt;code&gt;FeilianEnemy&lt;/code&gt;  构造函数中传入  &lt;code&gt;dropExp&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;过程&lt;/strong&gt;: 当敌人死亡（&lt;a class=&#34;link&#34; href=&#34;vscode-file://vscode-app/c:/IncludeAll/Tools/VSCode/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-browser/workbench/workbench.html&#34; &gt;die()&lt;/a&gt;）时，其  &lt;code&gt;dropExp&lt;/code&gt;  会被加到玩家（&lt;code&gt;LeadingRole&lt;/code&gt;）的当前经验池中&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;升级判定&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;阈值&lt;/strong&gt;: 玩家拥有  &lt;code&gt;currentExp&lt;/code&gt;  和  &lt;code&gt;maxExp&lt;/code&gt;（升级所需经验）&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;逻辑&lt;/strong&gt;: 当  &lt;code&gt;currentExp &amp;gt;= maxExp&lt;/code&gt;  时，触发升级&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;成长曲线&lt;/strong&gt;: 升级后，下一级所需的  &lt;code&gt;maxExp&lt;/code&gt;  通常会增加（例如：&lt;code&gt;maxExp = maxExp * 1.2&lt;/code&gt;  或固定增量），增加升级难度&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;升级后的基础提升 (Base Stat Growth)&lt;/strong&gt;
-每次升级，玩家角色会自动获得一些基础属性的提升，无需选择：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;生命值上限 (Max Health)&lt;/strong&gt;: 提升生存能力（例如  &lt;code&gt;maxHealth += 10&lt;/code&gt;）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;回满血&lt;/strong&gt;: 升级通常伴随着状态恢复&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击力/热量上限&lt;/strong&gt;: 可能伴随微量的线性成长（取决于  &lt;code&gt;LeadingRole&lt;/code&gt;  的具体实现）
-&lt;strong&gt;触发特殊事件&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Perk 选择&lt;/strong&gt;: 每隔特定等级（&lt;strong&gt;每 2 级&lt;/strong&gt;），触发一次 PerkCard 选择&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;形态变化&lt;/strong&gt;: ，会改变角色的基础攻速&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;3perkcard-机制-天赋卡片系统&#34;&gt;3.PerkCard 机制 (天赋卡片系统)
-&lt;/h4&gt;&lt;p&gt;PerkCard 是游戏的&lt;strong&gt;Roguelike&lt;/strong&gt;核心元素，允许玩家在单局游戏中构建不同的战斗流派。
-&lt;strong&gt;卡片定义&lt;/strong&gt;
-卡片包含以下属性：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Type (类型)&lt;/strong&gt;: 枚举值，决定卡片的功能。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Name (名称)&lt;/strong&gt;: 显示在 OLED 屏幕上的文本（如 &amp;ldquo;Attack +5&amp;rdquo;）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Param (参数)&lt;/strong&gt;: 数值强度（如加 5 点攻击，参数就是 5）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;卡片类型与效果详解&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;卡片类型&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;效果描述&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;关联代码变量&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;HEAL_SPEED_UP&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;提升回血速度&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;healthData.healSpeed&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;HEAL_AMOUNT_UP&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;提升单次回复量&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;healthData.healValue&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;HEALTH_UP&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;提升生命上限&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;healthData.maxHealth&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;ATTACK_UP&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;提升基础攻击力&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;attackData.attackPower&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;ATTACK_SPEED_UP&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;提升射击频率&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;attackData.shootCooldownSpeed&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;HEAT_CAPACITY_UP&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;提升热量上限&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;heatData.maxHeat&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;HEAT_COOL_DOWN_UP&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;提升散热速度&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;heatData.heatCoolDownRate&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;UNLOCK_FIREBALL&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;解锁新武器&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;玩家解锁新的子弹&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;UNLOCK_LIGHTNING&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;解锁新武器&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;玩家解锁新的子弹&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;FIREBALL_RANGE_UP&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;提升火球爆炸范围&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;attackData.bulletRange&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;LIGHTNING_MULTIPLIER&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;提升闪电伤害倍率&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;attackData.bulletDamageMultiplier&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;MOVE_SPEED_UP&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;提升移动速度&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;spatialData.moveSpeed&lt;/code&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h5 id=&#34;流派构建&#34;&gt;流派构建
-&lt;/h5&gt;&lt;p&gt;通过升级和 Perk 的组合，玩家可以形成不同的策略：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;加特林流 (高攻速 + 高散热)&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;重点选择  &lt;code&gt;ATTACK_SPEED_UP&lt;/code&gt;  和  &lt;code&gt;HEAT_COOL_DOWN_UP&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;结果：发射普通子弹像泼水一样，利用高频率触发伤害。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;重炮流 (火球 + 爆炸范围 + 高攻击)&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;重点选择  &lt;code&gt;UNLOCK_FIREBALL&lt;/code&gt;, &lt;code&gt;ATTACK_UP&lt;/code&gt;, &lt;code&gt;FIREBALL_RANGE_UP&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;结果：攻速慢，但一发火球能清空一片区域。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;雷神流 (闪电 + 倍率 + 高攻击 )&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;重点选择  &lt;code&gt;UNLOCK_LIGHTNING&lt;/code&gt;, &lt;code&gt;LIGHTNING_MULTIPLIER_UP&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;结果：利用闪电的穿透特性和高倍率伤害，瞬间秒杀直线上的敌人。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;坦克流 (回血 + 高血量)&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;重点选择  &lt;code&gt;HEALTH_UP&lt;/code&gt;, &lt;code&gt;HEAL_SPEED_UP&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;结果：依靠中的自动回血逻辑（&lt;code&gt;healTimeCounter&lt;/code&gt;），硬抗敌人&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;敌人设计风格&#34;&gt;敌人设计风格
-&lt;/h3&gt;&lt;h4 id=&#34;定位&#34;&gt;定位
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;Fodder (炮灰/骚扰)&lt;/strong&gt;：飞廉（高机动低伤）、魑魅（自爆卡车），主要用于干扰走位和消耗玩家精力。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Elite (精英/高威胁)&lt;/strong&gt;：蛊雕，拥有亡语机制（死后发火球），强迫玩家进行特定走位。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Boss (首领)&lt;/strong&gt;：拥有多阶段或多技能循环。
-&lt;em&gt;饕餮&lt;/em&gt;：近战系 BOSS，强调位移控制（拉人、冲撞）。
-&lt;em&gt;梼杌&lt;/em&gt;：敏捷系 BOSS，强调反应速度（闪现、狂暴弹幕）。
-&lt;em&gt;相柳&lt;/em&gt;：法师/召唤系 BOSS，强调全屏躲避和处理小怪（AOE、召唤）。&lt;/p&gt;
-&lt;h4 id=&#34;攻击机制与数值&#34;&gt;攻击机制与数值
-&lt;/h4&gt;&lt;h5 id=&#34;1-飞廉-feilianenemy&#34;&gt;1. 飞廉 (FeilianEnemy)
-&lt;/h5&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：小型高速骚扰者&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：风神，鹿身翼角。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：12x12 (小)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：高速，轨迹飘忽不定（模拟风的特性）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击力&lt;/strong&gt;：低。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：250ms。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击方式&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;普通射击&lt;/strong&gt;：只发射普通子弹。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;战术意义&lt;/strong&gt;：单体威胁小，依靠数量和难以预测的移动轨迹干扰玩家，消耗玩家的注意力。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id=&#34;2-蛊雕-gudiaoenemy&#34;&gt;2. 蛊雕 (GudiaoEnemy)
-&lt;/h5&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：中型伏击者&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：食人猛禽，似雕有角，音如婴儿。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：15x15 (中)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：中速，飞行轨迹较直接。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击力&lt;/strong&gt;：较高。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：250ms。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击方式&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;双侧射击&lt;/strong&gt;：每次从身体中心的两侧发射普通子弹（高伤害）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;亡语（Death Rattle）&lt;/strong&gt;：死亡后会发射一颗火球弹，对击杀者造成最后威胁。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;战术意义&lt;/strong&gt;：需要优先处理的高伤害单位，且击杀时需注意躲避亡语子弹。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id=&#34;3-魑魅-chimeienemy&#34;&gt;3. 魑魅 (ChiMeiEnemy)
-&lt;/h5&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：自杀式冲锋怪&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：山林鬼怪，迷惑人心。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：8x8 (极小)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：高速。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：250ms。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击方式&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;自杀冲撞&lt;/strong&gt;：不发射子弹，通过高速移动直接撞击玩家造成伤害。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;战术意义&lt;/strong&gt;：迫使玩家保持移动，不能停留在原地。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id=&#34;4-饕餮-taotieenemy&#34;&gt;4. 饕餮 (TaotieEnemy)
-&lt;/h5&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：近战坦克型 BOSS&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：四凶之一，贪婪，吞噬万物。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：64x64 (巨大)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;HP&lt;/strong&gt;：高血量。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击力&lt;/strong&gt;：高。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：低速。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：500ms。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击方式 (5 种模式)&lt;/strong&gt;：
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;吞噬 (Devour)&lt;/strong&gt;：将玩家向自己拉近 (&lt;code&gt;pullDistance = 30&lt;/code&gt;)，然后进行攻击。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;弹幕&lt;/strong&gt;：发射三排普通子弹。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;冲撞 (Ram)&lt;/strong&gt;：向前冲锋 (&lt;code&gt;chargeDistance = 30&lt;/code&gt;) 进行撞击。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;碾压 (Crush)&lt;/strong&gt;：从玩家左侧出现 (&lt;code&gt;crushChargeDistance = 100&lt;/code&gt;)，向后碾压，封锁走位。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;组合技&lt;/strong&gt;：将玩家拉近，同时向前冲锋 (&lt;code&gt;pullAndChargeDistance = 50&lt;/code&gt;)。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id=&#34;5-梼杌-taowuenemy&#34;&gt;5. 梼杌 (TaowuEnemy)
-&lt;/h5&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：高机动弹幕型 BOSS&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：四凶之一，顽固凶暴。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：64x64 (巨大)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;HP&lt;/strong&gt;：低血量（相对其他 BOSS）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击力&lt;/strong&gt;：高。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：高速，擅长闪现 (Blink)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：500ms。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击方式 (6 种模式)&lt;/strong&gt;：
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;狂暴弹幕&lt;/strong&gt;：闪现至中间，随机发射大量普通子弹。&lt;strong&gt;狂暴机制&lt;/strong&gt;：血量越低，持续时间越长（3 秒 -&amp;gt; 6 秒），频率 5 发/秒。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;随机火球&lt;/strong&gt;：随机位置发射 5 个火球弹。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;混合射击&lt;/strong&gt;：中间发射 1 颗火球，两侧边缘各发射 2 颗普通子弹。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;缺口阵型&lt;/strong&gt;：发射一排子弹，仅中间留有缺口（迫使玩家钻缝）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;诡雷闪现&lt;/strong&gt;：原地留下一颗火球弹，本体消失。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;追击闪现&lt;/strong&gt;：消除冷却 CD，直接闪现对齐玩家位置。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h5 id=&#34;6-相柳-xiangliuenemy&#34;&gt;6. 相柳 (XiangliuEnemy)
-&lt;/h5&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：召唤与全屏压制型 BOSS&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：九头蛇怪，所过之处尽成泽国。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：64x64 (巨大)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;HP&lt;/strong&gt;：高血量。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击力&lt;/strong&gt;：高。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：中速。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：500ms。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击方式 (6 种模式)&lt;/strong&gt;：
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;九头齐射&lt;/strong&gt;：发射  &lt;strong&gt;9 排&lt;/strong&gt;  普通子弹（覆盖面极大）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;雷狱&lt;/strong&gt;：发射  &lt;strong&gt;3 排&lt;/strong&gt;  闪电链（穿透伤害）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;火海&lt;/strong&gt;：发射  &lt;strong&gt;3 排&lt;/strong&gt;  火球弹（范围爆炸）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;召唤魑魅&lt;/strong&gt;：生成 3 只自爆怪 (ChiMei) 协同作战。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;召唤飞廉&lt;/strong&gt;：生成 2 只高速怪 (Feilian) 协同作战。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;召唤蛊雕&lt;/strong&gt;：生成 1 只高伤怪 (Gudiao) 协同作战。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;所有角色数值设计&#34;&gt;所有角色数值设计
-&lt;/h3&gt;&lt;h4 id=&#34;玩家-leadingrole-数值公式&#34;&gt;玩家 (LeadingRole) 数值公式
-&lt;/h4&gt;&lt;p&gt;玩家的数值受基础属性、等级成长和 PerkCard（天赋卡）共同影响。&lt;/p&gt;
-&lt;h5 id=&#34;1-基础属性与成长&#34;&gt;1. 基础属性与成长
-&lt;/h5&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;生命值 (HP):&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;MaxHealth&lt;/code&gt; = 初始值 (180) + &lt;code&gt;Level&lt;/code&gt;  成长 (每级+20) + &lt;code&gt;Perk: HEALTH_UP&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;CurrentHealth&lt;/code&gt;: 升级时回满；受伤害减少；受回血机制增加。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击力 (Atk):&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;AttackPower&lt;/code&gt; = 初始值 (15) + &lt;code&gt;Level&lt;/code&gt;  成长 (每级+1) + &lt;code&gt;Perk: ATTACK_UP&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;移动速度:&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;MoveSpeed&lt;/code&gt; = 初始值 (1) + &lt;code&gt;Perk: MOVE_SPEED_UP&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-战斗机制公式&#34;&gt;2. 战斗机制公式
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;射击冷却 (Cooldown):&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;冷却时间(ms)&lt;/code&gt; = &lt;code&gt;shootCooldownResetTime&lt;/code&gt; (4000) / shootCooldownSpeed&lt;/li&gt;
-&lt;li&gt;shootCooldownSpeed = 初始值 (4) + &lt;code&gt;Level&lt;/code&gt;  成长 (每 5 级+2) + &lt;code&gt;Perk: ATTACK_SPEED_UP&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;热量机制 (Heat):&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;热量上限&lt;/code&gt; = &lt;code&gt;maxHeat&lt;/code&gt; (100) + &lt;code&gt;Level&lt;/code&gt;  成长 (每级+5) + &lt;code&gt;Perk: HEAT_CAPACITY_UP&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;冷却速率&lt;/code&gt; = 每 200ms 减少  &lt;code&gt;heatCoolDownRate&lt;/code&gt; (初始 4 + 每 2 级+1 + &lt;code&gt;Perk: HEAT_COOL_DOWN_UP&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;单发热量&lt;/code&gt; = &lt;code&gt;heatPerShot&lt;/code&gt; (初始 0 + 每 2 级-1)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;回血机制 (Regen):&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;触发间隔&lt;/code&gt; = &lt;code&gt;healResetTime&lt;/code&gt; (15000) / &lt;code&gt;healSpeed&lt;/code&gt; (3) = 5000ms&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;单次回复量&lt;/code&gt; = &lt;code&gt;healValue&lt;/code&gt; (初始 5 + 每级+1 + &lt;code&gt;Perk: HEAL_AMOUNT_UP&lt;/code&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;3-玩家伤害输出公式-createbullet&#34;&gt;3. 玩家伤害输出公式 (createBullet)
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;普通子弹 (Basic):&lt;/strong&gt;&lt;br&gt;
-Damage=attackPowerDamage=attackPower&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;火球弹 (FireBall):&lt;/strong&gt;&lt;br&gt;
-Damage=attackPower+10Damage=attackPower+10
-&lt;em&gt;(注：火球造成一次直接伤害 + 范围伤害，两者数值相同)&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;闪电链 (Lightning):&lt;/strong&gt;&lt;br&gt;
-Damage=(attackPower×multiplier)+30Damage=(attackPower×multiplier)+30
-&lt;em&gt;(注：&lt;code&gt;multiplier&lt;/code&gt;  初始为 1.5，可通过 Perk 提升)&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;敌人-enemy-数值公式&#34;&gt;敌人 (Enemy) 数值公式
-&lt;/h4&gt;&lt;p&gt;敌人的数值主要由其类型和当前游戏等级 (&lt;code&gt;Level&lt;/code&gt;) 决定。&lt;/p&gt;
-&lt;h4 id=&#34;1-基础属性-通用模板&#34;&gt;1. 基础属性 (通用模板)
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;生命值 (HP):&lt;/strong&gt;&lt;br&gt;
-HP=BaseHP+(Level×HP_Growth)HP=BaseHP+(Level×HP_Growth)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击力 (Atk):&lt;/strong&gt;&lt;br&gt;
-Atk=BaseAtk+(Level×Atk_Growth)Atk=BaseAtk+(Level×Atk_Growth)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;经验掉落 (XP):&lt;/strong&gt;&lt;br&gt;
-DropExp=BaseExp+(Level×Exp_Growth)DropExp=BaseExp+(Level×Exp_Growth)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;2-具体敌人数值-基于-enemyrolecpp&#34;&gt;2. 具体敌人数值 (基于 enemyRole.cpp)
-&lt;/h4&gt;&lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;敌人类型&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;生命值公式 (HP)&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;攻击力公式 (Atk)&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;碰撞伤害&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;备注&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;飞廉 (Feilian)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;10+(Level×20)10+(Level×20)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;2+(Level×1)2+(Level×1)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;4+(Level×1)4+(Level×1)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;高速骚扰，低伤脆皮&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;蛊雕 (Gudiao)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;60+(Level×100)60+(Level×100)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;8+(Level×2)8+(Level×2)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;4+(Level×1)4+(Level×1)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;远程伏击，死后发火球&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;魑魅 (ChiMei)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;1+(Level×1)1+(Level×1)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;1+(Level×1)1+(Level×1)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;2020&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;自爆冲撞&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;饕餮 (Taotie)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;1450+(Level×400)1450+(Level×400)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;5+(Level×2)5+(Level×2)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;20+(Level×10)20+(Level×10)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;吞噬/冲撞/碾压&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;梼杌 (Taowu)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;830+(Level×300)830+(Level×300)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;10+(Level×2)10+(Level×2)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;7+(Level×3)7+(Level×3)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;闪现/弹幕爆发&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;相柳 (Xiangliu)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;830+(Level×400)830+(Level×400)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;2+(Level×3)2+(Level×3)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;12+(Level×4)12+(Level×4)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;全屏 AOE/召唤&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h4 id=&#34;3-敌人伤害输出&#34;&gt;3. 敌人伤害输出
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;普通射击:&lt;/strong&gt;  造成  &lt;code&gt;Atk&lt;/code&gt;  点伤害。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;碰撞伤害:&lt;/strong&gt;  等于其  &lt;code&gt;collisionPower&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;特殊技能:&lt;/strong&gt;  如火球或闪电，遵循与玩家相同的伤害增幅逻辑（例如火球通常比普攻高）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;通用物理与状态公式&#34;&gt;通用物理与状态公式
-&lt;/h4&gt;&lt;p&gt;适用于所有角色（玩家与敌人）：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;移动公式:&lt;/strong&gt;&lt;br&gt;
-NewPos=CurrentPos+(Direction×Speed)NewPos=CurrentPos+(Direction×Speed)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;碰撞回退:&lt;/strong&gt; BackStep=BaseStep×ConsecutiveCollisionCountBackStep=BaseStep×ConsecutiveCollisionCount
-&lt;em&gt;(注：连续碰撞次数越多，弹开距离越远，防止卡死)&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;受伤公式:&lt;/strong&gt; CurrentHealth=max⁡(0,CurrentHealth−Damage)CurrentHealth=max(0,CurrentHealth−Damage)&lt;/li&gt;
-&lt;/ul&gt;
-</description>
         </item>
         
     </channel>

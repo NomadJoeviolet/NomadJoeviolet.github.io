@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="设计思路简介 游戏类型设计 嵌入式平台上的“山海经”题材 Rougelite 弹幕射击游戏（STG）\n横版/竖版射击 (Shoot &rsquo;em up / STG)： 游戏的核心玩法是控制主角在 OLED 屏幕上移动，发射子弹消灭源源不断的敌人。\n">
+<title>ChipTanks-游戏设计</title>
+
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="ChipTanks-游戏设计">
+<meta property='og:description' content="设计思路简介 游戏类型设计 嵌入式平台上的“山海经”题材 Rougelite 弹幕射击游戏（STG）\n横版/竖版射击 (Shoot &rsquo;em up / STG)： 游戏的核心玩法是控制主角在 OLED 屏幕上移动，发射子弹消灭源源不断的敌人。\n">
+<meta property='og:url' content='https://NomadJoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/'>
+<meta property='og:site_name' content='Nomad_violet'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='个人项目' /><meta property='article:published_time' content='2025-11-27T18:23:07&#43;08:00'/><meta property='article:modified_time' content='2025-11-27T18:23:07&#43;08:00'/>
+<meta name="twitter:title" content="ChipTanks-游戏设计">
+<meta name="twitter:description" content="设计思路简介 游戏类型设计 嵌入式平台上的“山海经”题材 Rougelite 弹幕射击游戏（STG）\n横版/竖版射击 (Shoot &rsquo;em up / STG)： 游戏的核心玩法是控制主角在 OLED 屏幕上移动，发射子弹消灭源源不断的敌人。\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu6061761693284197515.png" width="300"
+                            height="200" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Nomad_violet</a></h1>
+            <h2 class="site-description">to feel,to experience</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://www.bilibili.com/'
+                        target="_blank"
+                        title="Biliili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#设计思路简介">设计思路简介</a>
+      <ol>
+        <li><a href="#游戏类型设计">游戏类型设计</a></li>
+        <li><a href="#游戏背景设计">游戏背景设计</a></li>
+      </ol>
+    </li>
+    <li><a href="#游戏具体设计">游戏具体设计</a>
+      <ol>
+        <li><a href="#机制设计">机制设计</a>
+          <ol>
+            <li><a href="#1-基础战斗机制">1. 基础战斗机制</a></li>
+            <li><a href="#2升级机制-level-up-mechanism">2.升级机制 (Level-Up Mechanism)</a></li>
+            <li><a href="#3perkcard-机制-天赋卡片系统">3.PerkCard 机制 (天赋卡片系统)</a></li>
+          </ol>
+        </li>
+        <li><a href="#敌人设计风格">敌人设计风格</a>
+          <ol>
+            <li><a href="#定位">定位</a></li>
+            <li><a href="#攻击机制与数值">攻击机制与数值</a></li>
+          </ol>
+        </li>
+        <li><a href="#所有角色数值设计">所有角色数值设计</a>
+          <ol>
+            <li><a href="#玩家-leadingrole-数值公式">玩家 (LeadingRole) 数值公式</a></li>
+            <li><a href="#2-战斗机制公式">2. 战斗机制公式</a></li>
+            <li><a href="#3-玩家伤害输出公式-createbullet">3. 玩家伤害输出公式 (createBullet)</a></li>
+            <li><a href="#敌人-enemy-数值公式">敌人 (Enemy) 数值公式</a></li>
+            <li><a href="#1-基础属性-通用模板">1. 基础属性 (通用模板)</a></li>
+            <li><a href="#2-具体敌人数值-基于-enemyrolecpp">2. 具体敌人数值 (基于 enemyRole.cpp)</a></li>
+            <li><a href="#3-敌人伤害输出">3. 敌人伤害输出</a></li>
+            <li><a href="#通用物理与状态公式">通用物理与状态公式</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" >
+                个人项目
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/">ChipTanks-游戏设计</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-11-27</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="设计思路简介">设计思路简介
+</h2><h3 id="游戏类型设计">游戏类型设计
+</h3><p><strong>嵌入式平台上的“山海经”题材 Rougelite 弹幕射击游戏</strong>（STG）</p>
+<p><strong>横版/竖版射击 (Shoot &rsquo;em up / STG)</strong>：
+游戏的核心玩法是控制主角在 OLED 屏幕上移动，发射子弹消灭源源不断的敌人。</p>
+<p><strong>Roguelite (轻度肉鸽)</strong>：
+<strong>随机成长</strong>：包含  <code>PerkCard</code>  系统和  <code>gamePerkCardManager</code>。玩家升级后会触发 Perk 选择（如“攻速提升”、“解锁火球”、“解锁闪电”），每次游玩的构建（Build）都是不同的。
+<strong>永久死亡/单局进程</strong>：通常此类嵌入式游戏为单局挑战模式。</p>
+<p><strong>热量系统 (Overheat System)</strong>：不同于传统的无限射击，游戏引入了“热量”机制（<code>heatData</code>）。普通子弹、火球、闪电消耗不同的热量，过热可能导致无法射击。这要求玩家在“爆发输出”和“控温”之间做决策，增加了战术深度。</p>
+<h3 id="游戏背景设计">游戏背景设计
+</h3><p>基于中国古代神话典籍《山海经》。所有的敌人都是古代神话中的妖兽，所有敌人的设计元素均来自于《山海经》。</p>
+<p>通过将古老的神话生物与“坦克/射击”、“OLED 显示”、“热量过载”等科技元素结合形成反差。</p>
+<ul>
+<li><strong>敌人</strong>：</li>
+<li><strong>小怪</strong>：飞廉（风神）、蛊雕（食人雕）、魑魅（山林鬼怪）</li>
+<li><strong>BOSS</strong>：上古四凶（饕餮、梼杌）和凶神（相柳）</li>
+</ul>
+<h2 id="游戏具体设计">游戏具体设计
+</h2><h3 id="机制设计">机制设计
+</h3><p>所有角色遵循以下基础物理与战斗公式：</p>
+<h4 id="1-基础战斗机制">1. 基础战斗机制
+</h4><ul>
+<li><strong>射击冷却 (Cooldown):</strong> <code>射击间隔(ms) = resetTime / Speed</code>。</li>
+<li><strong>热量机制 (Heat):</strong>
+<ul>
+<li><strong>冷却速率:</strong>  每  <strong>200ms</strong>  减少  <code>heatCoolDownRate</code>  点热量。</li>
+<li><strong>热量消耗倍率:</strong>
+<ul>
+<li>普通子弹: <strong>1.0x</strong></li>
+<li>火球弹: <strong>2.0x</strong></li>
+<li>闪电链: <strong>1.5x</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>伤害计算:</strong>
+<ul>
+<li><strong>普通子弹:</strong> <code>Damage = attackPower</code></li>
+<li><strong>火球弹:</strong> <code>Damage = attackPower + 10</code> (直接伤害 + 范围伤害)（造成两次）</li>
+<li><strong>闪电链:</strong> <code>Damage = (multiplier * attackPower) + 30</code> (穿透伤害</li>
+</ul>
+</li>
+<li><strong>恢复计算</strong>：<code>恢复间隔(ms) = resetTime / Speed , 恢复量 = healValue</code></li>
+</ul>
+<p>子弹设计逻辑，火球弹是大范围清杂子弹，闪电链是高伤害穿透子弹</p>
+<h4 id="2升级机制-level-up-mechanism">2.升级机制 (Level-Up Mechanism)
+</h4><p>升级是玩家成长的基础驱动力。</p>
+<p><strong>经验获取 (XP Gain)</strong></p>
+<ul>
+<li><strong>来源</strong>: 击杀敌人。</li>
+<li><strong>数值</strong>: 每个敌人都有定义的  <code>dropExp</code>（掉落经验值）。
+<ul>
+<li>例如  <code>FeilianEnemy</code>  构造函数中传入  <code>dropExp</code></li>
+</ul>
+</li>
+<li><strong>过程</strong>: 当敌人死亡（<a class="link" href="vscode-file://vscode-app/c:/IncludeAll/Tools/VSCode/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-browser/workbench/workbench.html" >die()</a>）时，其  <code>dropExp</code>  会被加到玩家（<code>LeadingRole</code>）的当前经验池中</li>
+</ul>
+<p><strong>升级判定</strong></p>
+<ul>
+<li><strong>阈值</strong>: 玩家拥有  <code>currentExp</code>  和  <code>maxExp</code>（升级所需经验）</li>
+<li><strong>逻辑</strong>: 当  <code>currentExp &gt;= maxExp</code>  时，触发升级</li>
+<li><strong>成长曲线</strong>: 升级后，下一级所需的  <code>maxExp</code>  通常会增加（例如：<code>maxExp = maxExp * 1.2</code>  或固定增量），增加升级难度</li>
+</ul>
+<p><strong>升级后的基础提升 (Base Stat Growth)</strong>
+每次升级，玩家角色会自动获得一些基础属性的提升，无需选择：</p>
+<ul>
+<li><strong>生命值上限 (Max Health)</strong>: 提升生存能力（例如  <code>maxHealth += 10</code>）。</li>
+<li><strong>回满血</strong>: 升级通常伴随着状态恢复</li>
+<li><strong>攻击力/热量上限</strong>: 可能伴随微量的线性成长（取决于  <code>LeadingRole</code>  的具体实现）
+<strong>触发特殊事件</strong></li>
+<li><strong>Perk 选择</strong>: 每隔特定等级（<strong>每 2 级</strong>），触发一次 PerkCard 选择</li>
+<li><strong>形态变化</strong>: ，会改变角色的基础攻速</li>
+</ul>
+<h4 id="3perkcard-机制-天赋卡片系统">3.PerkCard 机制 (天赋卡片系统)
+</h4><p>PerkCard 是游戏的<strong>Roguelike</strong>核心元素，允许玩家在单局游戏中构建不同的战斗流派。
+<strong>卡片定义</strong>
+卡片包含以下属性：</p>
+<ul>
+<li><strong>Type (类型)</strong>: 枚举值，决定卡片的功能。</li>
+<li><strong>Name (名称)</strong>: 显示在 OLED 屏幕上的文本（如 &ldquo;Attack +5&rdquo;）。</li>
+<li><strong>Param (参数)</strong>: 数值强度（如加 5 点攻击，参数就是 5）。</li>
+<li><strong>卡片类型与效果详解</strong></li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">卡片类型</th>
+          <th style="text-align: left">效果描述</th>
+          <th style="text-align: left">关联代码变量</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>HEAL_SPEED_UP</strong></td>
+          <td style="text-align: left">提升回血速度</td>
+          <td style="text-align: left"><code>healthData.healSpeed</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>HEAL_AMOUNT_UP</strong></td>
+          <td style="text-align: left">提升单次回复量</td>
+          <td style="text-align: left"><code>healthData.healValue</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>HEALTH_UP</strong></td>
+          <td style="text-align: left">提升生命上限</td>
+          <td style="text-align: left"><code>healthData.maxHealth</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>ATTACK_UP</strong></td>
+          <td style="text-align: left">提升基础攻击力</td>
+          <td style="text-align: left"><code>attackData.attackPower</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>ATTACK_SPEED_UP</strong></td>
+          <td style="text-align: left">提升射击频率</td>
+          <td style="text-align: left"><code>attackData.shootCooldownSpeed</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>HEAT_CAPACITY_UP</strong></td>
+          <td style="text-align: left">提升热量上限</td>
+          <td style="text-align: left"><code>heatData.maxHeat</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>HEAT_COOL_DOWN_UP</strong></td>
+          <td style="text-align: left">提升散热速度</td>
+          <td style="text-align: left"><code>heatData.heatCoolDownRate</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>UNLOCK_FIREBALL</strong></td>
+          <td style="text-align: left"><strong>解锁新武器</strong></td>
+          <td style="text-align: left">玩家解锁新的子弹</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>UNLOCK_LIGHTNING</strong></td>
+          <td style="text-align: left"><strong>解锁新武器</strong></td>
+          <td style="text-align: left">玩家解锁新的子弹</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>FIREBALL_RANGE_UP</strong></td>
+          <td style="text-align: left">提升火球爆炸范围</td>
+          <td style="text-align: left"><code>attackData.bulletRange</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>LIGHTNING_MULTIPLIER</strong></td>
+          <td style="text-align: left">提升闪电伤害倍率</td>
+          <td style="text-align: left"><code>attackData.bulletDamageMultiplier</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>MOVE_SPEED_UP</strong></td>
+          <td style="text-align: left">提升移动速度</td>
+          <td style="text-align: left"><code>spatialData.moveSpeed</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<h5 id="流派构建">流派构建
+</h5><p>通过升级和 Perk 的组合，玩家可以形成不同的策略：</p>
+<ol>
+<li><strong>加特林流 (高攻速 + 高散热)</strong>:
+<ul>
+<li>重点选择  <code>ATTACK_SPEED_UP</code>  和  <code>HEAT_COOL_DOWN_UP</code>。</li>
+<li>结果：发射普通子弹像泼水一样，利用高频率触发伤害。</li>
+</ul>
+</li>
+<li><strong>重炮流 (火球 + 爆炸范围 + 高攻击)</strong>:
+<ul>
+<li>重点选择  <code>UNLOCK_FIREBALL</code>, <code>ATTACK_UP</code>, <code>FIREBALL_RANGE_UP</code>。</li>
+<li>结果：攻速慢，但一发火球能清空一片区域。</li>
+</ul>
+</li>
+<li><strong>雷神流 (闪电 + 倍率 + 高攻击 )</strong>:
+<ul>
+<li>重点选择  <code>UNLOCK_LIGHTNING</code>, <code>LIGHTNING_MULTIPLIER_UP</code>。</li>
+<li>结果：利用闪电的穿透特性和高倍率伤害，瞬间秒杀直线上的敌人。</li>
+</ul>
+</li>
+<li><strong>坦克流 (回血 + 高血量)</strong>:
+<ul>
+<li>重点选择  <code>HEALTH_UP</code>, <code>HEAL_SPEED_UP</code>。</li>
+<li>结果：依靠中的自动回血逻辑（<code>healTimeCounter</code>），硬抗敌人</li>
+</ul>
+</li>
+</ol>
+<h3 id="敌人设计风格">敌人设计风格
+</h3><h4 id="定位">定位
+</h4><p><strong>Fodder (炮灰/骚扰)</strong>：飞廉（高机动低伤）、魑魅（自爆卡车），主要用于干扰走位和消耗玩家精力。</p>
+<p><strong>Elite (精英/高威胁)</strong>：蛊雕，拥有亡语机制（死后发火球），强迫玩家进行特定走位。</p>
+<p><strong>Boss (首领)</strong>：拥有多阶段或多技能循环。
+<em>饕餮</em>：近战系 BOSS，强调位移控制（拉人、冲撞）。
+<em>梼杌</em>：敏捷系 BOSS，强调反应速度（闪现、狂暴弹幕）。
+<em>相柳</em>：法师/召唤系 BOSS，强调全屏躲避和处理小怪（AOE、召唤）。</p>
+<h4 id="攻击机制与数值">攻击机制与数值
+</h4><h5 id="1-飞廉-feilianenemy">1. 飞廉 (FeilianEnemy)
+</h5><ul>
+<li><strong>定位</strong>：小型高速骚扰者</li>
+<li><strong>原型</strong>：风神，鹿身翼角。</li>
+<li><strong>数值设定</strong>：
+<ul>
+<li><strong>体型</strong>：12x12 (小)</li>
+<li><strong>移动</strong>：高速，轨迹飘忽不定（模拟风的特性）。</li>
+<li><strong>攻击力</strong>：低。</li>
+<li><strong>死亡动画</strong>：250ms。</li>
+</ul>
+</li>
+<li><strong>攻击方式</strong>：
+<ul>
+<li><strong>普通射击</strong>：只发射普通子弹。</li>
+</ul>
+</li>
+<li><strong>战术意义</strong>：单体威胁小，依靠数量和难以预测的移动轨迹干扰玩家，消耗玩家的注意力。</li>
+</ul>
+<h5 id="2-蛊雕-gudiaoenemy">2. 蛊雕 (GudiaoEnemy)
+</h5><ul>
+<li><strong>定位</strong>：中型伏击者</li>
+<li><strong>原型</strong>：食人猛禽，似雕有角，音如婴儿。</li>
+<li><strong>数值设定</strong>：
+<ul>
+<li><strong>体型</strong>：15x15 (中)</li>
+<li><strong>移动</strong>：中速，飞行轨迹较直接。</li>
+<li><strong>攻击力</strong>：较高。</li>
+<li><strong>死亡动画</strong>：250ms。</li>
+</ul>
+</li>
+<li><strong>攻击方式</strong>：
+<ul>
+<li><strong>双侧射击</strong>：每次从身体中心的两侧发射普通子弹（高伤害）。</li>
+<li><strong>亡语（Death Rattle）</strong>：死亡后会发射一颗火球弹，对击杀者造成最后威胁。</li>
+</ul>
+</li>
+<li><strong>战术意义</strong>：需要优先处理的高伤害单位，且击杀时需注意躲避亡语子弹。</li>
+</ul>
+<h5 id="3-魑魅-chimeienemy">3. 魑魅 (ChiMeiEnemy)
+</h5><ul>
+<li><strong>定位</strong>：自杀式冲锋怪</li>
+<li><strong>原型</strong>：山林鬼怪，迷惑人心。</li>
+<li><strong>数值设定</strong>：
+<ul>
+<li><strong>体型</strong>：8x8 (极小)</li>
+<li><strong>移动</strong>：高速。</li>
+<li><strong>死亡动画</strong>：250ms。</li>
+</ul>
+</li>
+<li><strong>攻击方式</strong>：
+<ul>
+<li><strong>自杀冲撞</strong>：不发射子弹，通过高速移动直接撞击玩家造成伤害。</li>
+</ul>
+</li>
+<li><strong>战术意义</strong>：迫使玩家保持移动，不能停留在原地。</li>
+</ul>
+<h5 id="4-饕餮-taotieenemy">4. 饕餮 (TaotieEnemy)
+</h5><ul>
+<li><strong>定位</strong>：近战坦克型 BOSS</li>
+<li><strong>原型</strong>：四凶之一，贪婪，吞噬万物。</li>
+<li><strong>数值设定</strong>：
+<ul>
+<li><strong>体型</strong>：64x64 (巨大)</li>
+<li><strong>HP</strong>：高血量。</li>
+<li><strong>攻击力</strong>：高。</li>
+<li><strong>移动</strong>：低速。</li>
+<li><strong>死亡动画</strong>：500ms。</li>
+</ul>
+</li>
+<li><strong>攻击方式 (5 种模式)</strong>：
+<ol>
+<li><strong>吞噬 (Devour)</strong>：将玩家向自己拉近 (<code>pullDistance = 30</code>)，然后进行攻击。</li>
+<li><strong>弹幕</strong>：发射三排普通子弹。</li>
+<li><strong>冲撞 (Ram)</strong>：向前冲锋 (<code>chargeDistance = 30</code>) 进行撞击。</li>
+<li><strong>碾压 (Crush)</strong>：从玩家左侧出现 (<code>crushChargeDistance = 100</code>)，向后碾压，封锁走位。</li>
+<li><strong>组合技</strong>：将玩家拉近，同时向前冲锋 (<code>pullAndChargeDistance = 50</code>)。</li>
+</ol>
+</li>
+</ul>
+<h5 id="5-梼杌-taowuenemy">5. 梼杌 (TaowuEnemy)
+</h5><ul>
+<li><strong>定位</strong>：高机动弹幕型 BOSS</li>
+<li><strong>原型</strong>：四凶之一，顽固凶暴。</li>
+<li><strong>数值设定</strong>：
+<ul>
+<li><strong>体型</strong>：64x64 (巨大)</li>
+<li><strong>HP</strong>：低血量（相对其他 BOSS）。</li>
+<li><strong>攻击力</strong>：高。</li>
+<li><strong>移动</strong>：高速，擅长闪现 (Blink)。</li>
+<li><strong>死亡动画</strong>：500ms。</li>
+</ul>
+</li>
+<li><strong>攻击方式 (6 种模式)</strong>：
+<ol>
+<li><strong>狂暴弹幕</strong>：闪现至中间，随机发射大量普通子弹。<strong>狂暴机制</strong>：血量越低，持续时间越长（3 秒 -&gt; 6 秒），频率 5 发/秒。</li>
+<li><strong>随机火球</strong>：随机位置发射 5 个火球弹。</li>
+<li><strong>混合射击</strong>：中间发射 1 颗火球，两侧边缘各发射 2 颗普通子弹。</li>
+<li><strong>缺口阵型</strong>：发射一排子弹，仅中间留有缺口（迫使玩家钻缝）。</li>
+<li><strong>诡雷闪现</strong>：原地留下一颗火球弹，本体消失。</li>
+<li><strong>追击闪现</strong>：消除冷却 CD，直接闪现对齐玩家位置。</li>
+</ol>
+</li>
+</ul>
+<h5 id="6-相柳-xiangliuenemy">6. 相柳 (XiangliuEnemy)
+</h5><ul>
+<li><strong>定位</strong>：召唤与全屏压制型 BOSS</li>
+<li><strong>原型</strong>：九头蛇怪，所过之处尽成泽国。</li>
+<li><strong>数值设定</strong>：
+<ul>
+<li><strong>体型</strong>：64x64 (巨大)</li>
+<li><strong>HP</strong>：高血量。</li>
+<li><strong>攻击力</strong>：高。</li>
+<li><strong>移动</strong>：中速。</li>
+<li><strong>死亡动画</strong>：500ms。</li>
+</ul>
+</li>
+<li><strong>攻击方式 (6 种模式)</strong>：
+<ol>
+<li><strong>九头齐射</strong>：发射  <strong>9 排</strong>  普通子弹（覆盖面极大）。</li>
+<li><strong>雷狱</strong>：发射  <strong>3 排</strong>  闪电链（穿透伤害）。</li>
+<li><strong>火海</strong>：发射  <strong>3 排</strong>  火球弹（范围爆炸）。</li>
+<li><strong>召唤魑魅</strong>：生成 3 只自爆怪 (ChiMei) 协同作战。</li>
+<li><strong>召唤飞廉</strong>：生成 2 只高速怪 (Feilian) 协同作战。</li>
+<li><strong>召唤蛊雕</strong>：生成 1 只高伤怪 (Gudiao) 协同作战。</li>
+</ol>
+</li>
+</ul>
+<h3 id="所有角色数值设计">所有角色数值设计
+</h3><h4 id="玩家-leadingrole-数值公式">玩家 (LeadingRole) 数值公式
+</h4><p>玩家的数值受基础属性、等级成长和 PerkCard（天赋卡）共同影响。</p>
+<h5 id="1-基础属性与成长">1. 基础属性与成长
+</h5><ul>
+<li><strong>生命值 (HP):</strong>
+<ul>
+<li><code>MaxHealth</code> = 初始值 (180) + <code>Level</code>  成长 (每级+20) + <code>Perk: HEALTH_UP</code></li>
+<li><code>CurrentHealth</code>: 升级时回满；受伤害减少；受回血机制增加。</li>
+</ul>
+</li>
+<li><strong>攻击力 (Atk):</strong>
+<ul>
+<li><code>AttackPower</code> = 初始值 (15) + <code>Level</code>  成长 (每级+1) + <code>Perk: ATTACK_UP</code></li>
+</ul>
+</li>
+<li><strong>移动速度:</strong>
+<ul>
+<li><code>MoveSpeed</code> = 初始值 (1) + <code>Perk: MOVE_SPEED_UP</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="2-战斗机制公式">2. 战斗机制公式
+</h4><ul>
+<li><strong>射击冷却 (Cooldown):</strong>
+<ul>
+<li><code>冷却时间(ms)</code> = <code>shootCooldownResetTime</code> (4000) / shootCooldownSpeed</li>
+<li>shootCooldownSpeed = 初始值 (4) + <code>Level</code>  成长 (每 5 级+2) + <code>Perk: ATTACK_SPEED_UP</code></li>
+</ul>
+</li>
+<li><strong>热量机制 (Heat):</strong>
+<ul>
+<li><code>热量上限</code> = <code>maxHeat</code> (100) + <code>Level</code>  成长 (每级+5) + <code>Perk: HEAT_CAPACITY_UP</code></li>
+<li><code>冷却速率</code> = 每 200ms 减少  <code>heatCoolDownRate</code> (初始 4 + 每 2 级+1 + <code>Perk: HEAT_COOL_DOWN_UP</code>)</li>
+<li><code>单发热量</code> = <code>heatPerShot</code> (初始 0 + 每 2 级-1)</li>
+</ul>
+</li>
+<li><strong>回血机制 (Regen):</strong>
+<ul>
+<li><code>触发间隔</code> = <code>healResetTime</code> (15000) / <code>healSpeed</code> (3) = 5000ms</li>
+<li><code>单次回复量</code> = <code>healValue</code> (初始 5 + 每级+1 + <code>Perk: HEAL_AMOUNT_UP</code>)</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-玩家伤害输出公式-createbullet">3. 玩家伤害输出公式 (createBullet)
+</h4><ul>
+<li><strong>普通子弹 (Basic):</strong><br>
+Damage=attackPowerDamage=attackPower</li>
+<li><strong>火球弹 (FireBall):</strong><br>
+Damage=attackPower+10Damage=attackPower+10
+<em>(注：火球造成一次直接伤害 + 范围伤害，两者数值相同)</em></li>
+<li><strong>闪电链 (Lightning):</strong><br>
+Damage=(attackPower×multiplier)+30Damage=(attackPower×multiplier)+30
+<em>(注：<code>multiplier</code>  初始为 1.5，可通过 Perk 提升)</em></li>
+</ul>
+<h4 id="敌人-enemy-数值公式">敌人 (Enemy) 数值公式
+</h4><p>敌人的数值主要由其类型和当前游戏等级 (<code>Level</code>) 决定。</p>
+<h4 id="1-基础属性-通用模板">1. 基础属性 (通用模板)
+</h4><ul>
+<li><strong>生命值 (HP):</strong><br>
+HP=BaseHP+(Level×HP_Growth)HP=BaseHP+(Level×HP_Growth)</li>
+<li><strong>攻击力 (Atk):</strong><br>
+Atk=BaseAtk+(Level×Atk_Growth)Atk=BaseAtk+(Level×Atk_Growth)</li>
+<li><strong>经验掉落 (XP):</strong><br>
+DropExp=BaseExp+(Level×Exp_Growth)DropExp=BaseExp+(Level×Exp_Growth)</li>
+</ul>
+<h4 id="2-具体敌人数值-基于-enemyrolecpp">2. 具体敌人数值 (基于 enemyRole.cpp)
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">敌人类型</th>
+          <th style="text-align: left">生命值公式 (HP)</th>
+          <th style="text-align: left">攻击力公式 (Atk)</th>
+          <th style="text-align: left">碰撞伤害</th>
+          <th style="text-align: left">备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>飞廉 (Feilian)</strong></td>
+          <td style="text-align: left">10+(Level×20)10+(Level×20)</td>
+          <td style="text-align: left">2+(Level×1)2+(Level×1)</td>
+          <td style="text-align: left">4+(Level×1)4+(Level×1)</td>
+          <td style="text-align: left">高速骚扰，低伤脆皮</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>蛊雕 (Gudiao)</strong></td>
+          <td style="text-align: left">60+(Level×100)60+(Level×100)</td>
+          <td style="text-align: left">8+(Level×2)8+(Level×2)</td>
+          <td style="text-align: left">4+(Level×1)4+(Level×1)</td>
+          <td style="text-align: left">远程伏击，死后发火球</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>魑魅 (ChiMei)</strong></td>
+          <td style="text-align: left">1+(Level×1)1+(Level×1)</td>
+          <td style="text-align: left">1+(Level×1)1+(Level×1)</td>
+          <td style="text-align: left">2020</td>
+          <td style="text-align: left">自爆冲撞</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>饕餮 (Taotie)</strong></td>
+          <td style="text-align: left">1450+(Level×400)1450+(Level×400)</td>
+          <td style="text-align: left">5+(Level×2)5+(Level×2)</td>
+          <td style="text-align: left">20+(Level×10)20+(Level×10)</td>
+          <td style="text-align: left">吞噬/冲撞/碾压</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>梼杌 (Taowu)</strong></td>
+          <td style="text-align: left">830+(Level×300)830+(Level×300)</td>
+          <td style="text-align: left">10+(Level×2)10+(Level×2)</td>
+          <td style="text-align: left">7+(Level×3)7+(Level×3)</td>
+          <td style="text-align: left">闪现/弹幕爆发</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>相柳 (Xiangliu)</strong></td>
+          <td style="text-align: left">830+(Level×400)830+(Level×400)</td>
+          <td style="text-align: left">2+(Level×3)2+(Level×3)</td>
+          <td style="text-align: left">12+(Level×4)12+(Level×4)</td>
+          <td style="text-align: left">全屏 AOE/召唤</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="3-敌人伤害输出">3. 敌人伤害输出
+</h4><ul>
+<li><strong>普通射击:</strong>  造成  <code>Atk</code>  点伤害。</li>
+<li><strong>碰撞伤害:</strong>  等于其  <code>collisionPower</code>。</li>
+<li><strong>特殊技能:</strong>  如火球或闪电，遵循与玩家相同的伤害增幅逻辑（例如火球通常比普攻高）。</li>
+</ul>
+<h4 id="通用物理与状态公式">通用物理与状态公式
+</h4><p>适用于所有角色（玩家与敌人）：</p>
+<ul>
+<li><strong>移动公式:</strong><br>
+NewPos=CurrentPos+(Direction×Speed)NewPos=CurrentPos+(Direction×Speed)</li>
+<li><strong>碰撞回退:</strong> BackStep=BaseStep×ConsecutiveCollisionCountBackStep=BaseStep×ConsecutiveCollisionCount
+<em>(注：连续碰撞次数越多，弹开距离越远，防止卡死)</em></li>
+<li><strong>受伤公式:</strong> CurrentHealth=max⁡(0,CurrentHealth−Damage)CurrentHealth=max(0,CurrentHealth−Damage)</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/">个人项目</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ChipTanks-基于C&amp;C&#43;&#43;混编的STM32OLED迷你游戏掌机个人项目开发</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">ChipTanks-玩法介绍</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Nomad
+    </section>
+    
+    <section class="powerby">
+        
+            experience <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
