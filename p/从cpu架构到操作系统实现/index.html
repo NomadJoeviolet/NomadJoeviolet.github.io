@@ -297,7 +297,13 @@
       <ol>
         <li><a href="#中断向量表">中断向量表</a></li>
         <li><a href="#启动原理">启动原理</a></li>
-        <li><a href="#ram内存分布">RAM内存分布</a></li>
+        <li><a href="#存储分布">存储分布</a>
+          <ol>
+            <li><a href="#flash区">Flash区</a></li>
+            <li><a href="#ram区">RAM区</a></li>
+            <li><a href="#内存分配规则">内存分配规则</a></li>
+          </ol>
+        </li>
         <li><a href="#启动文件详解">启动文件详解</a>
           <ol>
             <li><a href="#一stm32f103-启动文件startup_stm32f103xbs核心定位">一、STM32F103 启动文件（startup_stm32f103xb.s）核心定位</a></li>
@@ -561,8 +567,127 @@
 <li>从内置 SRAM 启动：将 SRAM 地址 0x2000 0000 映射到 0x0000 0000，代码启动后相当于从 0x2000 0000 开始运行。由于 SRAM 是易失性存储器，因此这个模式一般仅用于程序调试
 （以<code>STM32F103</code>为例）</li>
 </ol>
-<h3 id="ram内存分布">RAM内存分布
-</h3><p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.png"
+<h3 id="存储分布">存储分布
+</h3><p>以stm32f103c8t6为例</p>
+<h4 id="flash区">Flash区
+</h4><p><strong>Flash区，起始位置0x8000000，长度512K</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>段名称</th>
+          <th>起始地址</th>
+          <th>结束地址</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>.isr_vector</td>
+          <td>0x8000 0000</td>
+          <td>按需计算，四字节对齐</td>
+          <td>中断向量表</td>
+      </tr>
+      <tr>
+          <td>.text</td>
+          <td>紧邻.isr_vector末尾</td>
+          <td>按需计算，四字节对齐</td>
+          <td>程序</td>
+      </tr>
+      <tr>
+          <td>.rodata</td>
+          <td>紧邻.text末尾</td>
+          <td>按需计算，四字节对齐</td>
+          <td>常量</td>
+      </tr>
+      <tr>
+          <td>.ARM.extab</td>
+          <td>紧邻.rodata末尾</td>
+          <td>按需计算</td>
+          <td>ARM异常处理信息</td>
+      </tr>
+      <tr>
+          <td>.ARM.exidx*</td>
+          <td>紧邻.ARM.extab末尾</td>
+          <td>按需计算</td>
+          <td>ARM异常索引表</td>
+      </tr>
+      <tr>
+          <td>.preinit_array</td>
+          <td>紧邻.ARM.exidx* 末尾</td>
+          <td>按需计算</td>
+          <td>C++预初始化数组</td>
+      </tr>
+      <tr>
+          <td>.init_array</td>
+          <td>紧邻.preinit_array末尾</td>
+          <td>按需计算</td>
+          <td>C++构造函数数组</td>
+      </tr>
+      <tr>
+          <td>.fini_array</td>
+          <td>紧邻.init_array末尾</td>
+          <td>按需计算</td>
+          <td>C++析构函数数组</td>
+      </tr>
+      <tr>
+          <td>.data</td>
+          <td>紧邻.fini_array末尾</td>
+          <td>按需计算，四字节对齐</td>
+          <td>初始化变量的初始值</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="ram区">RAM区
+</h4><p><strong>RAM区，起始位置0x20000000，长度128K</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>段名称</th>
+          <th>起始地址</th>
+          <th>结束地址</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>.data</td>
+          <td>0x2000 0000</td>
+          <td>_edata，拷贝自Flash区</td>
+          <td>已初始化全局/静态变量</td>
+      </tr>
+      <tr>
+          <td>.bss</td>
+          <td>_edata</td>
+          <td>_end</td>
+          <td>未初始化全局/静态变量</td>
+      </tr>
+      <tr>
+          <td>系统堆底</td>
+          <td>_end</td>
+          <td>_end</td>
+          <td>堆底</td>
+      </tr>
+      <tr>
+          <td>系统堆栈最小预留空间</td>
+          <td>_end</td>
+          <td>_end+预留空间</td>
+          <td>堆栈预留空间</td>
+      </tr>
+      <tr>
+          <td>空闲RAM</td>
+          <td>_end+预留空间</td>
+          <td>_estack</td>
+          <td>空闲空间</td>
+      </tr>
+      <tr>
+          <td>系统栈底</td>
+          <td>_estack（RAM末尾）</td>
+          <td>_estack（RAM末尾）</td>
+          <td>栈底</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.png"
 	width="1269"
 	height="674"
 	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83_hu13448359514406145975.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83_hu250755568266859443.png 1024w"
@@ -587,6 +712,18 @@
 		data-flex-basis="358px"
 	
 ></p>
+<h4 id="内存分配规则">内存分配规则
+</h4><ol>
+<li><strong>全局变量、局部静态变量</strong>：根据是否初始化决定分配在.data段或.bss段</li>
+<li><strong>用const关键字声明的常量</strong>：分配在Flash中</li>
+<li><strong>使用C标准的malloc申请的内存</strong>：分配在系统堆中</li>
+<li><strong>不在任务中定义的临时变量</strong>：分配在系统栈中</li>
+<li><strong>使用</strong>*<code>pvPortMalloc</code>**开辟的内存或调用FreeRTOS标准API自动分配的内存：**分配在FreeRTOS堆中</li>
+<li><strong>在任务中定义的临时变量</strong>：分配在对应任务的任务栈中</li>
+<li><strong>在中断中使用</strong>*<code>pvPortMallocFromISR</code><strong>分配的内存</strong>：分配在FreeRTOS堆中</li>
+<li>在中断中禁止使用C标准的malloc和free</li>
+<li><strong>中断中定义的临时变量</strong>：分配在系统</li>
+</ol>
 <h3 id="启动文件详解">启动文件详解
 </h3><h4 id="一stm32f103-启动文件startup_stm32f103xbs核心定位">一、STM32F103 启动文件（startup_stm32f103xb.s）核心定位
 </h4><p>STM32 的启动文件（如<code>startup_stm32f103xb.s</code>）是<strong>汇编语言编写的底层程序</strong>，是硬件复位后执行的第一段代码，负责衔接 “硬件初始化” 与 “用户 C 代码（<code>main</code>函数）”。其核心功能包括：设置栈指针、构建中断向量表、初始化数据段（<code>.data</code>）、清零未初始化数据段（<code>.bss</code>）、配置系统时钟，最终引导程序进入<code>main</code>函数，是 STM32 程序运行的 “底层基石”。</p>
@@ -765,7 +902,6 @@
 </ul>
 <h5 id="4-中断向量表g_pfnvectors中断响应的-地址簿">4. 中断向量表（<code>g_pfnVectors</code>：中断响应的 “地址簿”）
 </h5><p>中断向量表是<strong>Cortex-M3 内核复位后访问的第一个数据结构</strong>，存储了所有异常（如复位、硬 fault）和外设中断（如串口、定时器）的处理函数地址。当发生中断 / 异常时，内核会从向量表中找到对应地址，跳转到处理函数执行。</p>
-<p>asm</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1035,6 +1171,122 @@
 </ul>
 <h5 id="3-段分配规则sections-块">3. 段分配规则（SECTIONS 块）
 </h5><p><code>SECTIONS</code>块是最复杂的部分，定义了「编译生成的段」如何映射到「MEMORY 块定义的物理内存」，每一个子段都对应特定的代码 / 数据类型。</p>
+<p><strong>Flash区，起始位置0x8000000，长度512K</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>段名称</th>
+          <th>起始地址</th>
+          <th>结束地址</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>.isr_vector</td>
+          <td>0x8000 0000</td>
+          <td>按需计算，四字节对齐</td>
+          <td>中断向量表</td>
+      </tr>
+      <tr>
+          <td>.text</td>
+          <td>紧邻.isr_vector末尾</td>
+          <td>按需计算，四字节对齐</td>
+          <td>程序</td>
+      </tr>
+      <tr>
+          <td>.rodata</td>
+          <td>紧邻.text末尾</td>
+          <td>按需计算，四字节对齐</td>
+          <td>常量</td>
+      </tr>
+      <tr>
+          <td>.ARM.extab</td>
+          <td>紧邻.rodata末尾</td>
+          <td>按需计算</td>
+          <td>ARM异常处理信息</td>
+      </tr>
+      <tr>
+          <td>.ARM.exidx*</td>
+          <td>紧邻.ARM.extab末尾</td>
+          <td>按需计算</td>
+          <td>ARM异常索引表</td>
+      </tr>
+      <tr>
+          <td>.preinit_array</td>
+          <td>紧邻.ARM.exidx* 末尾</td>
+          <td>按需计算</td>
+          <td>C++预初始化数组</td>
+      </tr>
+      <tr>
+          <td>.init_array</td>
+          <td>紧邻.preinit_array末尾</td>
+          <td>按需计算</td>
+          <td>C++构造函数数组</td>
+      </tr>
+      <tr>
+          <td>.fini_array</td>
+          <td>紧邻.init_array末尾</td>
+          <td>按需计算</td>
+          <td>C++析构函数数组</td>
+      </tr>
+      <tr>
+          <td>.data</td>
+          <td>紧邻.fini_array末尾</td>
+          <td>按需计算，四字节对齐</td>
+          <td>初始化变量的初始值</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>RAM区，起始位置0x20000000，长度128K</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>段名称</th>
+          <th>起始地址</th>
+          <th>结束地址</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>.data</td>
+          <td>0x2000 0000</td>
+          <td>_edata，拷贝自Flash区</td>
+          <td>已初始化全局/静态变量</td>
+      </tr>
+      <tr>
+          <td>.bss</td>
+          <td>_edata</td>
+          <td>_end</td>
+          <td>未初始化全局/静态变量</td>
+      </tr>
+      <tr>
+          <td>系统堆底</td>
+          <td>_end</td>
+          <td>_end</td>
+          <td>堆底</td>
+      </tr>
+      <tr>
+          <td>系统堆栈最小预留空间</td>
+          <td>_end</td>
+          <td>_end+预留空间</td>
+          <td>堆栈预留空间</td>
+      </tr>
+      <tr>
+          <td>空闲RAM</td>
+          <td>_end+预留空间</td>
+          <td>_estack</td>
+          <td>空闲空间</td>
+      </tr>
+      <tr>
+          <td>系统栈底</td>
+          <td>_estack（RAM末尾）</td>
+          <td>_estack（RAM末尾）</td>
+          <td>栈底</td>
+      </tr>
+  </tbody>
+</table></div>
 <h6 id="1isr_vector中断向量表放-flash">（1）.isr_vector：中断向量表（放 FLASH）
 </h6><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1353,8 +1605,11 @@
 <ul>
 <li>堆：从<code>end</code>向上（地址增大方向）生长，供<code>malloc</code>/<code>free</code>使用。</li>
 <li>栈：从<code>_estack</code>向下（地址减小方向）生长，供函数调用、局部变量使用。</li>
-<li>若堆和栈生长时重叠，会导致内存溢出（硬 fault），因此需合理设置<code>_Min_Heap_Size</code>和<code>_Min_Stack_Size</code>。
-<img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83-1.png"
+<li>若堆和栈生长时重叠，会导致内存溢出（硬 fault），因此需合理设置<code>_Min_Heap_Size</code>和<code>_Min_Stack_Size</code>。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83-1.png"
 	width="1269"
 	height="674"
 	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83-1_hu13448359514406145975.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83-1_hu250755568266859443.png 1024w"
@@ -1365,10 +1620,7 @@
 		data-flex-grow="188"
 		data-flex-basis="451px"
 	
-></li>
-</ul>
-</li>
-</ul>
+></p>
 <p>如果使用了FreeRTOS的话，FreeRTOS的内存布局如下</p>
 <p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-FreeRTOS%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.png"
 	width="1038"
