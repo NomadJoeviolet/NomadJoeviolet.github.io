@@ -56,21 +56,21 @@
 &lt;p&gt;游戏设计：&lt;a class=&#34;link&#34; href=&#34;https://nomadjoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ChipTanks-游戏设计&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;硬件选型&#34;&gt;硬件选型
-&lt;/h2&gt;&lt;p&gt;使用的 OLED 屏的显示驱动为 SSD1306
-主控板为 stm32f103c8t6
-使用 4 * 4 矩阵键盘&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;使用的OLED屏的显示驱动为SSD1306
+主控板为stm32f103c8t6
+使用4 * 4 矩阵键盘&lt;/p&gt;
 &lt;h2 id=&#34;开发工具链&#34;&gt;开发工具链
-&lt;/h2&gt;&lt;p&gt;使用 VSCode+Intellisence+CubeMX+CMake+Ninja+arm-none-eabi+Ozone+Jlink 的高自定义开发工具链&lt;/p&gt;
-&lt;p&gt;代码编辑器采用 VSCode，语言服务器使用 VSCode 的 Intellisence 来实现智能代码补全和理解功能，用 CubeMX 生成硬件抽象层代码，CMake 和 Ninja 作为项目构建工具，使用 arm-none-eabi 编译器，烧录和调试使用 Ozone，硬件烧录器使用 Jlink&lt;/p&gt;
-&lt;p&gt;CubeMX 使用的版本为&lt;code&gt;6.15.0&lt;/code&gt;
-CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
-编译器 arm-none-eabi 使用的版本为&lt;code&gt;14.3 rel1&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;开发方式采用 C&amp;amp;C++混编，使用&lt;code&gt;exter &amp;quot;C&amp;quot; { }&lt;/code&gt;解决 C++名词修饰导致 C 无法链接的问题，&lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt;的作用就是告诉 C++编译器修改符号表生成方式，将 C++符号的生成方式换成了的生成方式。&lt;/p&gt;
-&lt;p&gt;实践上将 FreeRTOS 的线程函数入口声明 定义为&lt;code&gt;As external&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-keyScan%E7%BA%BF%E7%A8%8B.png&#34;
+&lt;/h2&gt;&lt;p&gt;使用 VSCode+Intellisence+CubeMX+CMake+Ninja+arm-none-eabi+Ozone+Jlink的高自定义开发工具链&lt;/p&gt;
+&lt;p&gt;代码编辑器采用VSCode，语言服务器使用VSCode的Intellisence来实现智能代码补全和理解功能，用CubeMX生成硬件抽象层代码，CMake和Ninja作为项目构建工具，使用arm-none-eabi编译器，烧录和调试使用Ozone，硬件烧录器使用Jlink&lt;/p&gt;
+&lt;p&gt;CubeMX使用的版本为&lt;code&gt;6.15.0&lt;/code&gt;
+CMake使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
+编译器arm-none-eabi使用的版本为&lt;code&gt;14.3 rel1&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;开发方式采用C&amp;amp;C++混编，使用&lt;code&gt;exter &amp;quot;C&amp;quot; { }&lt;/code&gt;解决C++名词修饰导致C无法链接的问题，&lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt;的作用就是告诉C++编译器修改符号表生成方式，将C++符号的生成方式换成了的生成方式。&lt;/p&gt;
+&lt;p&gt;实践上将FreeRTOS的线程函数入口声明 定义为&lt;code&gt;As external&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E5%9F%BA%E4%BA%8EC&amp;amp;C&amp;#43;&amp;#43;%E6%B7%B7%E7%BC%96%E7%9A%84STM32OLED%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-keyScan%E7%BA%BF%E7%A8%8B.png&#34;
 	width=&#34;517&#34;
 	height=&#34;381&#34;
-	srcset=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-keyScan%E7%BA%BF%E7%A8%8B_hu15671464145582846492.png 480w, https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-keyScan%E7%BA%BF%E7%A8%8B_hu6642610777374566032.png 1024w&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E5%9F%BA%E4%BA%8EC&amp;amp;C&amp;#43;&amp;#43;%E6%B7%B7%E7%BC%96%E7%9A%84STM32OLED%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-keyScan%E7%BA%BF%E7%A8%8B_hu15671464145582846492.png 480w, https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E5%9F%BA%E4%BA%8EC&amp;amp;C&amp;#43;&amp;#43;%E6%B7%B7%E7%BC%96%E7%9A%84STM32OLED%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-keyScan%E7%BA%BF%E7%A8%8B_hu6642610777374566032.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -79,7 +79,7 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 		data-flex-basis=&#34;325px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;然后在&lt;code&gt;cpp&lt;/code&gt;文件中去实现，实现的函数用&lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt;包裹即可，这样&lt;code&gt;void keyScanThread(void *argument)&lt;/code&gt;经过 C++编译器编译后的符号就可以被 C 链接&lt;/p&gt;
+&lt;p&gt;然后在&lt;code&gt;cpp&lt;/code&gt;文件中去实现，实现的函数用&lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt;包裹即可，这样&lt;code&gt;void keyScanThread(void *argument)&lt;/code&gt;经过C++编译器编译后的符号就可以被C链接&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -117,11 +117,11 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;第三方库引入&#34;&gt;第三方库引入
-&lt;/h2&gt;&lt;p&gt;引入 FreeRTOS 和 dsp 库以及 etl 库&lt;/p&gt;
-&lt;p&gt;引入 FreeRTOS 用来处理多线程任务，引入 dsp 库用来加速部分运算（主要想用来加速 游戏实体 碰撞检测）（实际基本上没用，当做练手了），引入 etl 库来做到 零开销的使用 C++ 容器 提高开发效率，其确定性内存管理 (Deterministic Memory)在&lt;strong&gt;栈上&lt;/strong&gt;或&lt;strong&gt;静态区&lt;/strong&gt;分配固定大小的内存，而不是在堆上动态扩容，能完全避免了内存碎片问题，且内存占用在编译期就是已知的，非常适合 RAM 有限的 STM32，同时有容器去实现设计模式等会更加高效。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;引入FreeRTOS和dsp库以及etl库&lt;/p&gt;
+&lt;p&gt;引入FreeRTOS用来处理多线程任务，引入dsp库用来加速部分运算（主要想用来加速 游戏实体 碰撞检测）（实际基本上没用，当做练手了），引入etl库来做到 零开销的使用 C++ 容器 提高开发效率，其确定性内存管理 (Deterministic Memory)在&lt;strong&gt;栈上&lt;/strong&gt;或&lt;strong&gt;静态区&lt;/strong&gt;分配固定大小的内存，而不是在堆上动态扩容，能完全避免了内存碎片问题，且内存占用在编译期就是已知的，非常适合 RAM 有限的 STM32，同时有容器去实现设计模式等会更加高效。&lt;/p&gt;
 &lt;h2 id=&#34;代码实现&#34;&gt;代码实现
 &lt;/h2&gt;&lt;h3 id=&#34;动态内存分配在嵌入式平台上的解决&#34;&gt;动态内存分配在嵌入式平台上的解决
-&lt;/h3&gt;&lt;p&gt;因嵌入式平台的内存资源非常有限，同时还要保证 FreeRTOS 的线程安全，需要对 C++的动态内存分配（&lt;code&gt;new&lt;/code&gt;和&lt;code&gt;delete&lt;/code&gt;）进行重载，重载为&lt;code&gt;pvPortMalloc(size)&lt;/code&gt;和&lt;code&gt;vPortFree(ptr)&lt;/code&gt;，FreeRTOS 线程安全的分配方式，从 FreeRTOS 的堆里面分配&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;因嵌入式平台的内存资源非常有限，同时还要保证FreeRTOS的线程安全，需要对C++的动态内存分配（&lt;code&gt;new&lt;/code&gt;和&lt;code&gt;delete&lt;/code&gt;）进行重载，重载为&lt;code&gt;pvPortMalloc(size)&lt;/code&gt;和&lt;code&gt;vPortFree(ptr)&lt;/code&gt;，FreeRTOS线程安全的分配方式，从FreeRTOS的堆里面分配&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -196,11 +196,11 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;这样重载后，动态分配的内存不会从 系统堆里面分配，而是从 FreeRTOS 的 &lt;strong&gt;静态 堆&lt;/strong&gt;（内存池） （此处静态指 编译期最大容量确定）里面分配，从而避免可能的堆栈溢出，FreeRTOS 的堆栈管理方案采用 安全 且 有高效内存碎片化处理 的 heap4 即可&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-FreeRTOS%E5%A0%86%E6%A0%88%E7%AE%A1%E7%90%86.png&#34;
+&lt;/div&gt;&lt;p&gt;这样重载后，动态分配的内存不会从 系统堆里面分配，而是从FreeRTOS的 &lt;strong&gt;静态 堆&lt;/strong&gt;（内存池） （此处静态指 编译期最大容量确定）里面分配，从而避免可能的堆栈溢出，FreeRTOS的堆栈管理方案采用 安全 且 有高效内存碎片化处理 的heap4 即可&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E5%9F%BA%E4%BA%8EC&amp;amp;C&amp;#43;&amp;#43;%E6%B7%B7%E7%BC%96%E7%9A%84STM32OLED%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-FreeRTOS%E5%A0%86%E6%A0%88%E7%AE%A1%E7%90%86.png&#34;
 	width=&#34;590&#34;
 	height=&#34;121&#34;
-	srcset=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-FreeRTOS%E5%A0%86%E6%A0%88%E7%AE%A1%E7%90%86_hu5349902845894408533.png 480w, https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-FreeRTOS%E5%A0%86%E6%A0%88%E7%AE%A1%E7%90%86_hu320583743673713592.png 1024w&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E5%9F%BA%E4%BA%8EC&amp;amp;C&amp;#43;&amp;#43;%E6%B7%B7%E7%BC%96%E7%9A%84STM32OLED%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-FreeRTOS%E5%A0%86%E6%A0%88%E7%AE%A1%E7%90%86_hu5349902845894408533.png 480w, https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E5%9F%BA%E4%BA%8EC&amp;amp;C&amp;#43;&amp;#43;%E6%B7%B7%E7%BC%96%E7%9A%84STM32OLED%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-FreeRTOS%E5%A0%86%E6%A0%88%E7%AE%A1%E7%90%86_hu320583743673713592.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -211,8 +211,8 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;为什么不使用系统堆？&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;因为在嵌入式实时操作系统中，调用 C 标准库中 malloc() 和 free() 是危险的，C++中的 new 和 delete 也一样：&lt;/li&gt;
-&lt;li&gt;这些函数在小型嵌入式系统中并不总是可用的，小型嵌入式设备中的 RAM 不足。&lt;/li&gt;
+&lt;li&gt;因为在嵌入式实时操作系统中，调用C标准库中 malloc() 和 free() 是危险的，C++中的 new 和 delete 也一样：&lt;/li&gt;
+&lt;li&gt;这些函数在小型嵌入式系统中并不总是可用的，小型嵌入式设备中的RAM不足。&lt;/li&gt;
 &lt;li&gt;它们的实现可能非常的大，占据了相当大的一块代码空间。&lt;/li&gt;
 &lt;li&gt;他们几乎都不是线程安全的。&lt;/li&gt;
 &lt;li&gt;它们并不是确定的，每次调用这些函数执行的时间可能都不一样。&lt;/li&gt;
@@ -220,10 +220,10 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;li&gt;这两个函数会使得链接器配置得复杂。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;系统内存分配&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E7%B3%BB%E7%BB%9FRAM%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E5%9F%BA%E4%BA%8EC&amp;amp;C&amp;#43;&amp;#43;%E6%B7%B7%E7%BC%96%E7%9A%84STM32OLED%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-%E7%B3%BB%E7%BB%9FRAM%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D.png&#34;
 	width=&#34;1112&#34;
 	height=&#34;547&#34;
-	srcset=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E7%B3%BB%E7%BB%9FRAM%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D_hu15727381582680729250.png 480w, https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E7%B3%BB%E7%BB%9FRAM%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D_hu15550453250770003800.png 1024w&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E5%9F%BA%E4%BA%8EC&amp;amp;C&amp;#43;&amp;#43;%E6%B7%B7%E7%BC%96%E7%9A%84STM32OLED%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-%E7%B3%BB%E7%BB%9FRAM%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D_hu15727381582680729250.png 480w, https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E5%9F%BA%E4%BA%8EC&amp;amp;C&amp;#43;&amp;#43;%E6%B7%B7%E7%BC%96%E7%9A%84STM32OLED%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-%E7%B3%BB%E7%BB%9FRAM%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D_hu15550453250770003800.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -232,10 +232,10 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 		data-flex-basis=&#34;487px&#34;
 	
 &gt;
-&lt;img src=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-FreeRTOS%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.png&#34;
+&lt;img src=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E5%9F%BA%E4%BA%8EC&amp;amp;C&amp;#43;&amp;#43;%E6%B7%B7%E7%BC%96%E7%9A%84STM32OLED%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-FreeRTOS%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.png&#34;
 	width=&#34;1068&#34;
 	height=&#34;712&#34;
-	srcset=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-FreeRTOS%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80_hu477729828376538425.png 480w, https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-FreeRTOS%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80_hu3271794750010975834.png 1024w&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E5%9F%BA%E4%BA%8EC&amp;amp;C&amp;#43;&amp;#43;%E6%B7%B7%E7%BC%96%E7%9A%84STM32OLED%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-FreeRTOS%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80_hu477729828376538425.png 480w, https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/ChipTanks-%E5%9F%BA%E4%BA%8EC&amp;amp;C&amp;#43;&amp;#43;%E6%B7%B7%E7%BC%96%E7%9A%84STM32OLED%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91-FreeRTOS%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80_hu3271794750010975834.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 	
@@ -315,7 +315,7 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;└── STM32F103C8Tx_FLASH.ld      // 链接脚本
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;app-结构&#34;&gt;App 结构
+&lt;/div&gt;&lt;h4 id=&#34;app结构&#34;&gt;App结构
 &lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -381,36 +381,36 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;架构与设计思路&#34;&gt;架构与设计思路
-&lt;/h3&gt;&lt;p&gt;主要采用 &lt;strong&gt;面向对象（OOP）&lt;/strong&gt; 的设计思路，结合 FreeRTOS 实时操作系统，构建简单的嵌入式游戏框架。&lt;/p&gt;
-&lt;p&gt;主要分为 5 各层级：&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;主要采用 &lt;strong&gt;面向对象（OOP）&lt;/strong&gt; 的设计思路，结合FreeRTOS实时操作系统，构建简单的嵌入式游戏框架。&lt;/p&gt;
+&lt;p&gt;主要分为5各层级：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;硬件抽象层：基于 HAL 库的对底层硬件的抽象，对外设硬件操作进行再次封装&lt;/li&gt;
+&lt;li&gt;硬件抽象层：基于HAL库的对底层硬件的抽象，对外设硬件操作进行再次封装&lt;/li&gt;
 &lt;li&gt;核心数据层（Data）：定义游戏通用的数据结构和枚举&lt;/li&gt;
 &lt;li&gt;游戏实体层（Entity/Role）：定义角色(Role)基类和子弹(Bullet)基类 及其派生类&lt;/li&gt;
-&lt;li&gt;管理器层（Manager）：负责实体生命周期管理，碰撞检测，进度控制和 PerkSelection 系统&lt;/li&gt;
+&lt;li&gt;管理器层（Manager）：负责实体生命周期管理，碰撞检测，进度控制和PerkSelection系统&lt;/li&gt;
 &lt;li&gt;应用逻辑层（App Logic）：多线程任务处理，游戏业务逻辑&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;硬件抽象层&#34;&gt;硬件抽象层
-&lt;/h4&gt;&lt;p&gt;在 HAL 库基础上，对外设进行面向对象的进一步封装&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;OLED&lt;/strong&gt;(使用的 keysking 的开源库):
-提供 OLED_DrawImage，OLED_PrintString 等绘图 API。
+&lt;/h4&gt;&lt;p&gt;在HAL库基础上，对外设进行面向对象的进一步封装&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;OLED&lt;/strong&gt;(使用的keysking的开源库):
+提供OLED_DrawImage，OLED_PrintString 等绘图 API。
 包含字库 (&lt;code&gt;font.c&lt;/code&gt;)，支持文本显示。
 作为游戏的&lt;strong&gt;输出设备&lt;/strong&gt;，负责将游戏状态可视化。
 &lt;strong&gt;KEY&lt;/strong&gt;:
 提供按键扫描逻辑。
 作为游戏的&lt;strong&gt;输入设备&lt;/strong&gt;，将物理按键映射为游戏内的控制信号&lt;/p&gt;
 &lt;h4 id=&#34;核心数据层&#34;&gt;核心数据层
-&lt;/h4&gt;&lt;p&gt;定义了所有游戏实体共用的数据结构，如  &lt;code&gt;HealthData&lt;/code&gt;（血量）、&lt;code&gt;AttackData&lt;/code&gt;（攻击）、&lt;code&gt;SpatialData&lt;/code&gt;（位置与大小）、&lt;code&gt;HeatData&lt;/code&gt;（热量）等。
-使用  &lt;code&gt;struct&lt;/code&gt;  组合数据，便于在不同类之间传递和管理状态。
-定义了  &lt;code&gt;RoleIdentity&lt;/code&gt;（身份）、（子弹类型）等关键枚举。&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;定义了所有游戏实体共用的数据结构，如 &lt;code&gt;HealthData&lt;/code&gt;（血量）、&lt;code&gt;AttackData&lt;/code&gt;（攻击）、&lt;code&gt;SpatialData&lt;/code&gt;（位置与大小）、&lt;code&gt;HeatData&lt;/code&gt;（热量）等。
+使用 &lt;code&gt;struct&lt;/code&gt; 组合数据，便于在不同类之间传递和管理状态。
+定义了 &lt;code&gt;RoleIdentity&lt;/code&gt;（身份）、（子弹类型）等关键枚举。&lt;/p&gt;
 &lt;h4 id=&#34;游戏实体层&#34;&gt;游戏实体层
 &lt;/h4&gt;&lt;p&gt;这是游戏逻辑的核心部分，采用了&lt;strong&gt;继承与多态&lt;/strong&gt;的设计。&lt;/p&gt;
 &lt;h5 id=&#34;基类设计&#34;&gt;&lt;strong&gt;基类设计&lt;/strong&gt;:
-&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;IRole&lt;/code&gt; （role.hpp&lt;/strong&gt;）: 所有角色（玩家和敌人）的基类。包含  &lt;code&gt;RoleData&lt;/code&gt;  指针，管理角色的所有属性。
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;IRole&lt;/code&gt; （role.hpp&lt;/strong&gt;）: 所有角色（玩家和敌人）的基类。包含 &lt;code&gt;RoleData&lt;/code&gt; 指针，管理角色的所有属性。
 定义了虚函数接口：&lt;code&gt;init()&lt;/code&gt;, &lt;code&gt;think()&lt;/code&gt;, &lt;code&gt;doAction()&lt;/code&gt;, &lt;code&gt;drawRole()&lt;/code&gt;, &lt;code&gt;die()&lt;/code&gt;, &lt;code&gt;shoot()&lt;/code&gt;。
 实现了通用的物理逻辑：&lt;code&gt;move()&lt;/code&gt;（移动与边界检查）、&lt;code&gt;update()&lt;/code&gt;（状态更新）、&lt;code&gt;createBullet()&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;IBullet&lt;/code&gt; (bullet.hpp)&lt;/strong&gt;: 所有子弹的基类。
-定义了  &lt;code&gt;move()&lt;/code&gt;, &lt;code&gt;update()&lt;/code&gt;, &lt;code&gt;drawBullet()&lt;/code&gt;, &lt;code&gt;die()&lt;/code&gt;  等接口。&lt;/p&gt;
+定义了 &lt;code&gt;move()&lt;/code&gt;, &lt;code&gt;update()&lt;/code&gt;, &lt;code&gt;drawBullet()&lt;/code&gt;, &lt;code&gt;die()&lt;/code&gt; 等接口。&lt;/p&gt;
 &lt;h5 id=&#34;派生类设计&#34;&gt;&lt;strong&gt;派生类设计&lt;/strong&gt;:
 &lt;/h5&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;LeadingRole&lt;/code&gt; (&lt;code&gt;leadingRole.cpp&lt;/code&gt;)&lt;/strong&gt;: 玩家控制的主角。
 实现了复杂的升级逻辑 (&lt;code&gt;levelUp&lt;/code&gt;)、热量控制和多武器切换。
@@ -423,7 +423,7 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;h4 id=&#34;管理器层&#34;&gt;管理器层
 &lt;/h4&gt;&lt;h5 id=&#34;1gameentitymanager-gameentitymanagerhpp&#34;&gt;1.&lt;strong&gt;&lt;code&gt;GameEntityManager&lt;/code&gt; (&lt;code&gt;gameEntityManager.hpp&lt;/code&gt;)&lt;/strong&gt;:
 &lt;/h5&gt;&lt;p&gt;核心职责:
-维护所有活跃的角色和子弹容器，使用固定容量的嵌入式向量。包含角色池（最多 20 个）和子弹池（最多 100 个），以及游戏结束标记。提供注册新增实体、分阶段的行为与状态更新、碰撞与范围伤害检测、统一渲染、失效实体清理、获取主角指针和经验投递等功能。行为与状态分离，更新顺序通常为：角色行为、子弹行为、角色状态、子弹状态、清理、渲染。碰撞使用轴对齐包围盒，子弹碰撞允许穿透；范围伤害使用圆形距离判定。所有容器操作使用临界区保护以确保一致性。&lt;/p&gt;
+维护所有活跃的角色和子弹容器，使用固定容量的嵌入式向量。包含角色池（最多20个）和子弹池（最多100个），以及游戏结束标记。提供注册新增实体、分阶段的行为与状态更新、碰撞与范围伤害检测、统一渲染、失效实体清理、获取主角指针和经验投递等功能。行为与状态分离，更新顺序通常为：角色行为、子弹行为、角色状态、子弹状态、清理、渲染。碰撞使用轴对齐包围盒，子弹碰撞允许穿透；范围伤害使用圆形距离判定。所有容器操作使用临界区保护以确保一致性。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -462,7 +462,7 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;li&gt;&lt;code&gt;initWarehouse()&lt;/code&gt;：初始化卡片仓库&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;triggerPerkSelection()&lt;/code&gt;：触发&lt;code&gt;PerkSelection&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;selectCard&lt;/code&gt;：选择卡片，同时将卡片效果应用&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;drawSelectionUI&lt;/code&gt;：绘制选卡界面的 UI&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;drawSelectionUI&lt;/code&gt;：绘制选卡界面的UI&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h5 id=&#34;3gameprogressmanagergameprogressmanagerhpp&#34;&gt;3.&lt;code&gt;GameProgressManager&lt;/code&gt; (&lt;code&gt;gameProgressManager.hpp&lt;/code&gt;)
 &lt;/h5&gt;&lt;p&gt;核心职责：
@@ -470,7 +470,7 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 功能&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;resetGameProgress()&lt;/code&gt;：重置整局流程，创建玩家实体并加入实体管理器，初始化卡片管理器仓库&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;updateGameProgress()&lt;/code&gt;：推进波次/关卡与选卡触发，特定条件调用  &lt;code&gt;AddWaveEnemies()&lt;/code&gt;  生成新的一波敌人&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;updateGameProgress()&lt;/code&gt;：推进波次/关卡与选卡触发，特定条件调用 &lt;code&gt;AddWaveEnemies()&lt;/code&gt; 生成新的一波敌人&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;AddWaveEnemies()&lt;/code&gt;：根据当前关卡与波次生成敌人阵型或 Boss&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;drawOpeningCG()&lt;/code&gt;：绘制开场过场动画&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;drawClearCG()&lt;/code&gt;：绘制通关动画&lt;/li&gt;
@@ -484,7 +484,8 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;h3 id=&#34;各层级和功能的代码实现与解析&#34;&gt;各层级和功能的代码实现与解析
 &lt;/h3&gt;&lt;h4 id=&#34;硬件抽象层-1&#34;&gt;硬件抽象层
 &lt;/h4&gt;&lt;h5 id=&#34;key&#34;&gt;KEY
-&lt;/h5&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h5&gt;&lt;p&gt;当前按键采用“左右各 4 独立键，低电平按下”方案，不再是 4x4 矩阵。CubeMX 已将引脚配置为上拉输入，扫描直接读电平即可。左右各有独立状态缓存，方向枚举在上层做映射。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -530,6 +531,13 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#ifndef KEY_HPP
@@ -538,40 +546,47 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;gpio.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;GPIO_TypeDef&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIOx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;uint16_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KeyGPIO&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;GPIO_TypeDef&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIOx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;uint16_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KeyGPIO&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;enum&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;LeftKeyState&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;KEY_DOWN&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;KEY_UP&lt;/span&gt;   &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;KEY_RIGHT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;KEY_LEFT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;enum&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;RightKeyState&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;KEY_DOWN&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;KEY_LEFT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;KEY_RIGHT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;KEY_UP&lt;/span&gt;   &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Key&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_keyButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//按键状态缓存
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;KeyGPIO&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_rankOutput&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;nullptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;KeyGPIO&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_colInput&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;nullptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_leftKeyButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 左手4键，低电平按下
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_rightKeyButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 右手4键，低电平按下
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;n&#34;&gt;KeyGPIO&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_rightInput&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;nullptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;KeyGPIO&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_leftInput&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;nullptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;public&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;Key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KeyGPIO&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rankOutput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KeyGPIO&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;colInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;m_rankOutput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rankOutput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_colInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;colInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(){};&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(){&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;//初始化行输出
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;HAL_GPIO_WritePin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;m_rankOutput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_rankOutput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIO_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_SET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;scan&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(){&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;//拉低当前行
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;            &lt;span class=&#34;n&#34;&gt;HAL_GPIO_WritePin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;m_rankOutput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_rankOutput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIO_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_RESET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;//扫描列
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;            &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HAL_GPIO_ReadPin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;m_colInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_colInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIO_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_RESET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;){&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;n&#34;&gt;m_keyButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;n&#34;&gt;m_keyButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;//拉高当前行
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;            &lt;span class=&#34;n&#34;&gt;HAL_GPIO_WritePin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;m_rankOutput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_rankOutput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIO_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_SET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;Key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KeyGPIO&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rightInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KeyGPIO&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;leftInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_rightInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rightInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_leftInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;leftInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 引脚已在 MX_GPIO_Init 配为上拉输入，无需重复配置
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;scan&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;m_rightKeyButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HAL_GPIO_ReadPin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;m_rightInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m_rightInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIO_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_RESET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;m_leftKeyButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HAL_GPIO_ReadPin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;m_leftInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;m_leftInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;].&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIO_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_RESET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;extern&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Key&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
@@ -596,28 +611,30 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;key.hpp&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KeyGPIO&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;keyRankOutput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_R1_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_R1_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_R2_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_R2_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_R3_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_R3_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_R4_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_R4_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;KeyGPIO&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;keyRightOutput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_R1_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_R1_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_R2_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_R2_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_R3_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_R3_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_R4_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_R4_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;KeyGPIO&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;keyColInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_C1_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_C1_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_C2_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_C2_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_C3_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_C3_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_C4_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_C4_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;KeyGPIO&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;keyLeftInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_C1_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_C1_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_C2_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_C2_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_C3_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_C3_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KEY_C4_GPIO_Port&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;KEY_C4_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Key&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;keyRankOutput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;keyColInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Key&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;keyRightOutput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;keyLeftInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h5 id=&#34;oled&#34;&gt;OLED
-&lt;/h5&gt;&lt;p&gt;使用的是 keysking 的开源，该代码中提供 OLED 的驱动和绘画渲染的 API，直接使用即可&lt;/p&gt;
+&lt;/h5&gt;&lt;p&gt;使用的是keysking的开源，该代码中提供OLED的驱动和绘画渲染的API，直接使用即可&lt;/p&gt;
 &lt;h4 id=&#34;核心数据层-1&#34;&gt;核心数据层
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;概览&lt;/strong&gt;
 定义了游戏所需的基础数据类型：身份、子弹类型、动作/移动/攻击/死亡/空间等数据结构，以及角色与子弹的数据聚合体。
@@ -689,8 +706,8 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;HeatData（热量数据）&lt;/strong&gt;
 变量：&lt;code&gt;currentHeat&lt;/code&gt;，&lt;code&gt;maxHeat&lt;/code&gt;，&lt;code&gt;heatCoolDownRate&lt;/code&gt;，&lt;code&gt;heatCoolDownTimer&lt;/code&gt;，&lt;code&gt;heatPerShot&lt;/code&gt;。
-构造：可用构造函数设置“初值、上限、冷却速率、每枪增量”。默认不显式初始化  &lt;code&gt;heatCoolDownTimer&lt;/code&gt;（保持 0 即可）。
-用法：开火前检查  &lt;code&gt;currentHeat + heatPerShot &amp;lt;= maxHeat&lt;/code&gt;；每帧/每周期按  &lt;code&gt;heatCoolDownRate&lt;/code&gt;  降温（受  &lt;code&gt;heatCoolDownTimer&lt;/code&gt;  和节拍控制）。&lt;/p&gt;
+构造：可用构造函数设置“初值、上限、冷却速率、每枪增量”。默认不显式初始化 &lt;code&gt;heatCoolDownTimer&lt;/code&gt;（保持 0 即可）。
+用法：开火前检查 &lt;code&gt;currentHeat + heatPerShot &amp;lt;= maxHeat&lt;/code&gt;；每帧/每周期按 &lt;code&gt;heatCoolDownRate&lt;/code&gt; 降温（受 &lt;code&gt;heatCoolDownTimer&lt;/code&gt; 和节拍控制）。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -729,7 +746,7 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;HealthData（生命与回复）&lt;/strong&gt;
 变量：&lt;code&gt;currentHealth&lt;/code&gt;，&lt;code&gt;maxHealth&lt;/code&gt;，&lt;code&gt;healValue&lt;/code&gt;，&lt;code&gt;healTimeCounter&lt;/code&gt;，&lt;code&gt;healResetTime&lt;/code&gt;，&lt;code&gt;healSpeed&lt;/code&gt;。
-语义：每  &lt;code&gt;healResetTime / healSpeed&lt;/code&gt;  毫秒回复  &lt;code&gt;healValue&lt;/code&gt;  点；&lt;code&gt;healTimeCounter&lt;/code&gt;  为内部累加计时。
+语义：每 &lt;code&gt;healResetTime / healSpeed&lt;/code&gt; 毫秒回复 &lt;code&gt;healValue&lt;/code&gt; 点；&lt;code&gt;healTimeCounter&lt;/code&gt; 为内部累加计时。
 默认值：最大/当前 100，&lt;code&gt;healValue=3&lt;/code&gt;，&lt;code&gt;healResetTime=15000ms&lt;/code&gt;，&lt;code&gt;healSpeed=5&lt;/code&gt;（等效更高频率）。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -880,7 +897,7 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;RoleAttackData（攻击参数）&lt;/strong&gt;
 字段：&lt;code&gt;shootSpeed&lt;/code&gt;，&lt;code&gt;shootCooldownTimer&lt;/code&gt;，&lt;code&gt;shootCooldownResetTime&lt;/code&gt;，&lt;code&gt;shootCooldownSpeed&lt;/code&gt;，&lt;code&gt;attackPower&lt;/code&gt;，&lt;code&gt;collisionPower&lt;/code&gt;，&lt;code&gt;bulletSpeed&lt;/code&gt;，&lt;code&gt;bulletRange&lt;/code&gt;，&lt;code&gt;bulletDamageMultiplier&lt;/code&gt;。
 语义：
-冷却体系：开火将  &lt;code&gt;shootCooldownTimer&lt;/code&gt;  置为  &lt;code&gt;shootCooldownResetTime&lt;/code&gt;，随后按帧减速（受  &lt;code&gt;shootCooldownSpeed&lt;/code&gt;  影响）；计时至 0 才可再开火。
+冷却体系：开火将 &lt;code&gt;shootCooldownTimer&lt;/code&gt; 置为 &lt;code&gt;shootCooldownResetTime&lt;/code&gt;，随后按帧减速（受 &lt;code&gt;shootCooldownSpeed&lt;/code&gt; 影响）；计时至 0 才可再开火。
 &lt;code&gt;attackPower&lt;/code&gt;：子弹/技能的基础伤害。
 &lt;code&gt;collisionPower&lt;/code&gt;：实体体撞造成的伤害。
 &lt;code&gt;bulletSpeed&lt;/code&gt;/&lt;code&gt;bulletRange&lt;/code&gt;/&lt;code&gt;bulletDamageMultiplier&lt;/code&gt;：子弹飞行速度、范围（火球类有效）、伤害倍率（闪电链类有效）。&lt;/p&gt;
@@ -941,9 +958,9 @@ CMake 使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 空间数据初始移动速度 1，位置/尺寸 0。
 &lt;code&gt;img=nullptr&lt;/code&gt;（注释明确“此处易出错，若有问题优先检查”）。
 典型交互：
-管理器在更新状态前用  &lt;code&gt;refPos&lt;/code&gt;  做碰撞探测，结果再更新  &lt;code&gt;currentPos&lt;/code&gt;。
-玩家升级逻辑在管理器的状态更新阶段主动调用（基于  &lt;code&gt;experiencePoints&lt;/code&gt;  等外部字段，非此处）。
-Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血量上限、射速、热量、移动等）。&lt;/p&gt;
+管理器在更新状态前用 &lt;code&gt;refPos&lt;/code&gt; 做碰撞探测，结果再更新 &lt;code&gt;currentPos&lt;/code&gt;。
+玩家升级逻辑在管理器的状态更新阶段主动调用（基于 &lt;code&gt;experiencePoints&lt;/code&gt; 等外部字段，非此处）。
+Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血量上限、射速、热量、移动等）。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1086,7 +1103,7 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 默认构造：不做初始化。
 参数构造：
 参数：&lt;code&gt;speed&lt;/code&gt;，&lt;code&gt;currentPosX/Y&lt;/code&gt;，&lt;code&gt;dmg&lt;/code&gt;，&lt;code&gt;rg&lt;/code&gt;，&lt;code&gt;type&lt;/code&gt;，&lt;code&gt;dmgMultiplier=1.0f&lt;/code&gt;。
-逻辑：按  &lt;code&gt;type&lt;/code&gt;  分支设置  &lt;code&gt;damage&lt;/code&gt;、&lt;code&gt;spatialData&lt;/code&gt;、&lt;code&gt;isActive=true&lt;/code&gt;、&lt;code&gt;range=rg&lt;/code&gt;；&lt;code&gt;LIGHTNING_LINE&lt;/code&gt;  设为  &lt;code&gt;canCrossBorder=true&lt;/code&gt;。&lt;/p&gt;
+逻辑：按 &lt;code&gt;type&lt;/code&gt; 分支设置 &lt;code&gt;damage&lt;/code&gt;、&lt;code&gt;spatialData&lt;/code&gt;、&lt;code&gt;isActive=true&lt;/code&gt;、&lt;code&gt;range=rg&lt;/code&gt;；&lt;code&gt;LIGHTNING_LINE&lt;/code&gt; 设为 &lt;code&gt;canCrossBorder=true&lt;/code&gt;。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1453,8 +1470,8 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;其余代码就不展示了，基本就是复制，只需根据需求对虚接口进行重写即可&lt;/p&gt;
 &lt;h4 id=&#34;管理器层-1&#34;&gt;管理器层
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;该层级的设计主要是针对整个游戏运行的职责进行划分解耦&lt;/strong&gt;，&lt;code&gt;GameEntityManager&lt;/code&gt;,&lt;code&gt;GameProgressManager&lt;/code&gt;,&lt;code&gt;GamePerkCardManager&lt;/code&gt;三者协作的关键在于清晰的职责边界与状态门控：进度与选卡控制何时推进逻辑或暂停到过场/选卡，实体管理器提供确定性更新与资源回收，卡片管理器以数据驱动改变玩家的 RoleData&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;GameEntityManager&lt;/code&gt;统一掌控角色与子弹的生命周期与时序，采用固定容量的嵌入式向量存储多态指针，所有增删与遍历在临界区内执行，按“行动 → 状态 → 清理 → 渲染”的分阶段流程驱动：行动阶段调用角色/子弹的思考与动作，状态阶段推进位置与 AABB 碰撞、伤害与范围伤害并对玩家执行升级检查，清理阶段删除失效实体并向玩家结算经验，渲染阶段输出图像。&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;该层级的设计主要是针对整个游戏运行的职责进行划分解耦&lt;/strong&gt;，&lt;code&gt;GameEntityManager&lt;/code&gt;,&lt;code&gt;GameProgressManager&lt;/code&gt;,&lt;code&gt;GamePerkCardManager&lt;/code&gt;三者协作的关键在于清晰的职责边界与状态门控：进度与选卡控制何时推进逻辑或暂停到过场/选卡，实体管理器提供确定性更新与资源回收，卡片管理器以数据驱动改变玩家的RoleData&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;GameEntityManager&lt;/code&gt;统一掌控角色与子弹的生命周期与时序，采用固定容量的嵌入式向量存储多态指针，所有增删与遍历在临界区内执行，按“行动→状态→清理→渲染”的分阶段流程驱动：行动阶段调用角色/子弹的思考与动作，状态阶段推进位置与AABB碰撞、伤害与范围伤害并对玩家执行升级检查，清理阶段删除失效实体并向玩家结算经验，渲染阶段输出图像。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
@@ -1723,7 +1740,7 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;FreeRTOS.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;task.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 管理游戏中的实体：角色和子弹
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 会被多个模块引用
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 归gameProgressManager管理
@@ -1775,7 +1792,7 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;bool&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;removeAndDestroyBullet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IBullet&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bullet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bullet&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;nullptr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;taskENTER_CRITICAL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
@@ -1823,7 +1840,7 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;collisionDetected&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;bool&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;checkBulletRefPositionCollision&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IBullet&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bullet_A&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;	        &lt;span class=&#34;c1&#34;&gt;//...
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;collisionDetected&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
@@ -1965,7 +1982,7 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#endif &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// GAMEENTITYMANAGER_HPP
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;code&gt;GameProgressManager&lt;/code&gt;负责关卡与波次推进以及 Boss 触发和过场展示：当清场（场上仅剩玩家）时递进波次/关卡，在关键节点触发选卡并按章节规则生成阵型或 Boss，从而把战斗节奏和演出串联起来。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;GameProgressManager&lt;/code&gt;负责关卡与波次推进以及Boss触发和过场展示：当清场（场上仅剩玩家）时递进波次/关卡，在关键节点触发选卡并按章节规则生成阵型或Boss，从而把战斗节奏和演出串联起来。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
@@ -2140,7 +2157,7 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;//...
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 更新游戏进度
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
@@ -2148,13 +2165,13 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;c1&#34;&gt;//...
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;AddWaveEnemies&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;//...
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 绘图展示功能
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;// 绘制开场动画
@@ -2169,7 +2186,7 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;OLED_PrintString&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;28&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;CHIP TANKS&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;font8x6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;OLED_COLOR_NORMAL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;drawClearCG&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;clearCGTimer&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;controlDelayTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -2192,7 +2209,7 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#endif &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// GAMEPROGRESSMANAGER_HPP
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;code&gt;GamePerkCardManager&lt;/code&gt;管理 Roguelike 式成长：基于配置初始化卡片仓库，按需抽取待选卡、应用所选增益到玩家并回库未选卡，同时提供选卡界面渲染与交互状态。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;GamePerkCardManager&lt;/code&gt;管理Roguelike式成长：基于配置初始化卡片仓库，按需抽取待选卡、应用所选增益到玩家并回库未选卡，同时提供选卡界面渲染与交互状态。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
@@ -2427,7 +2444,7 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;bool&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;selectCard&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;slotIndex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 前置校验：1. 在选卡中；2. 槽索引有效
@@ -2515,7 +2532,7 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;应用逻辑层-1&#34;&gt;应用逻辑层
 &lt;/h4&gt;&lt;p&gt;按“主循环驱动、输入分发、渲染输出”三类职责拆分成独立的 FreeRTOS 任务，全局状态作为门控，保证在过场、选卡、战斗三种模式之间平滑切换。&lt;/p&gt;
-&lt;p&gt;核心数据与行为推进集中在  &lt;code&gt;gameControlThread&lt;/code&gt;，输入解析与状态写入在  &lt;code&gt;keyScanThread&lt;/code&gt;，画面组合与输出在  &lt;code&gt;oledTaskThread&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;核心数据与行为推进集中在 &lt;code&gt;gameControlThread&lt;/code&gt;，输入解析与状态写入在 &lt;code&gt;keyScanThread&lt;/code&gt;，画面组合与输出在 &lt;code&gt;oledTaskThread&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;给出伪代码如下：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2617,8 +2634,8 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;controlDelayTime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;timer-定时器的设计&#34;&gt;timer 定时器的设计
-&lt;/h4&gt;&lt;p&gt;代码比较重点一个设计在于 timer 计时器，每一帧增加或减少帧间隔的时间（相当于决定多少帧触发某一个动作，可以用此来作为一个门控）&lt;/p&gt;
+&lt;/div&gt;&lt;h4 id=&#34;timer定时器的设计&#34;&gt;timer定时器的设计
+&lt;/h4&gt;&lt;p&gt;代码比较重点一个设计在于timer计时器，每一帧增加或减少帧间隔的时间（相当于决定多少帧触发某一个动作，可以用此来作为一个门控）&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;shootCooldownTimer：射击冷却倒计时，归零前禁止再次开火。&lt;/li&gt;
 &lt;li&gt;heatCoolDownTimer：热量冷却触发间隔计时，累计到阈值（200ms）降低一次热量。&lt;/li&gt;
@@ -2804,12 +2821,12 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;li&gt;&lt;strong&gt;射击冷却 (Cooldown):&lt;/strong&gt; &lt;code&gt;射击间隔(ms) = resetTime / Speed&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;热量机制 (Heat):&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;冷却速率:&lt;/strong&gt;  每  &lt;strong&gt;200ms&lt;/strong&gt;  减少  &lt;code&gt;heatCoolDownRate&lt;/code&gt;  点热量。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;热量消耗倍率:&lt;/strong&gt;
+&lt;li&gt;&lt;strong&gt;冷却速率:&lt;/strong&gt;  基类 &lt;code&gt;IRole::update()&lt;/code&gt; 每 &lt;strong&gt;500ms&lt;/strong&gt; 结算一次，减少 &lt;code&gt;heatCoolDownRate * 5&lt;/code&gt; 点热量（等效每秒 &lt;code&gt;heatCoolDownRate * 10&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;热量消耗倍率（与 &lt;code&gt;heatPerShot&lt;/code&gt; 基值相乘）:&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;普通子弹: &lt;strong&gt;1.0x&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;火球弹: &lt;strong&gt;2.0x&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;闪电链: &lt;strong&gt;1.5x&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;闪电链: &lt;strong&gt;2.0x&lt;/strong&gt; （当前实现）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -3128,13 +3145,11 @@ Perk 卡片直接修改  &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血
 &lt;li&gt;shootCooldownSpeed = 初始值 (4) + &lt;code&gt;Level&lt;/code&gt;  成长 (每 5 级+2) + &lt;code&gt;Perk: ATTACK_SPEED_UP&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;热量机制 (Heat):&lt;/strong&gt;
-&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;热量机制 (Heat):&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;热量机制 (Heat):&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;热量上限&lt;/code&gt; = &lt;code&gt;maxHeat&lt;/code&gt; (100) + &lt;code&gt;Level&lt;/code&gt;  成长 (每级+5) + &lt;code&gt;Perk: HEAT_CAPACITY_UP&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;冷却速率&lt;/code&gt; = 每 200ms 减少  &lt;code&gt;heatCoolDownRate&lt;/code&gt; (初始 4 + 每 2 级+1 + &lt;code&gt;Perk: HEAT_COOL_DOWN_UP&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;单发热量&lt;/code&gt; = &lt;code&gt;heatPerShot&lt;/code&gt; (初始 0 + 每 2 级-1)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;冷却速率&lt;/code&gt; = &lt;strong&gt;每 500ms&lt;/strong&gt; 结算一次，减少 &lt;code&gt;heatCoolDownRate * 5&lt;/code&gt; 点热量；初始 &lt;code&gt;heatCoolDownRate = 4&lt;/code&gt;，每 2 级 +1，Perk: HEAT_COOL_DOWN_UP 每张 +2。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;单发热量&lt;/code&gt; = &lt;code&gt;heatPerShot&lt;/code&gt; (初始 &lt;strong&gt;15&lt;/strong&gt;，每 2 级 -1，最低不低于 1) × 枪械倍率（普通 1.0x / 火球 2.0x / 闪电 2.0x）。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;回血机制 (Regen):&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;触发间隔&lt;/code&gt; = &lt;code&gt;healResetTime&lt;/code&gt; (15000) / &lt;code&gt;healSpeed&lt;/code&gt; (3) = 5000ms&lt;/li&gt;
@@ -3163,6 +3178,7 @@ HP=BaseHP+(Level×HP_Growth)HP=BaseHP+(Level×HP_Growth)&lt;/li&gt;
 Atk=BaseAtk+(Level×Atk_Growth)Atk=BaseAtk+(Level×Atk_Growth)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;经验掉落 (XP):&lt;/strong&gt;&lt;br&gt;
 DropExp=BaseExp+(Level×Exp_Growth)DropExp=BaseExp+(Level×Exp_Growth)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;热量冷却:&lt;/strong&gt; 基类同一逻辑，每 500ms 结算一次，减少 &lt;code&gt;heatCoolDownRate * 5&lt;/code&gt; 点（敌人默认 &lt;code&gt;heatCoolDownRate = 10&lt;/code&gt;，见 enemyRole.cpp）。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;2-具体敌人数值-基于-enemyrolecpp&#34;&gt;2. 具体敌人数值 (基于 enemyRole.cpp)
 &lt;/h4&gt;&lt;table&gt;
@@ -3178,44 +3194,44 @@ DropExp=BaseExp+(Level×Exp_Growth)DropExp=BaseExp+(Level×Exp_Growth)&lt;/li&gt
   &lt;tbody&gt;
       &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;飞廉 (Feilian)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;10+(Level×20)10+(Level×20)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;2+(Level×1)2+(Level×1)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;4+(Level×1)4+(Level×1)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10 + Level×20&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;2 + Level×1&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;4 + Level×1&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;高速骚扰，低伤脆皮&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;蛊雕 (Gudiao)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;60+(Level×100)60+(Level×100)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;8+(Level×2)8+(Level×2)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;4+(Level×1)4+(Level×1)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;60 + Level×100&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;8 + Level×2&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;4 + Level×1&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;远程伏击，死后发火球&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;魑魅 (ChiMei)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;1+(Level×1)1+(Level×1)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;1+(Level×1)1+(Level×1)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;2020&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1 + Level×1&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1 + Level×1&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;20（固定）&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;自爆冲撞&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;饕餮 (Taotie)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;1450+(Level×400)1450+(Level×400)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;5+(Level×2)5+(Level×2)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;20+(Level×10)20+(Level×10)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;350 + Level×1100&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;2 + Level×4&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10 + Level×10&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;吞噬/冲撞/碾压&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;梼杌 (Taowu)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;830+(Level×300)830+(Level×300)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;10+(Level×2)10+(Level×2)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;7+(Level×3)7+(Level×3)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;130 + Level×800&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10 + Level×5&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;7 + Level×5&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;闪现/弹幕爆发&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;相柳 (Xiangliu)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;830+(Level×400)830+(Level×400)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;2+(Level×3)2+(Level×3)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;12+(Level×4)12+(Level×4)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;30 + Level×900&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;3 + Level×5&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;12 + Level×4&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;全屏 AOE/召唤&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;

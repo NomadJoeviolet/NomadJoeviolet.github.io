@@ -386,12 +386,12 @@
 <li><strong>射击冷却 (Cooldown):</strong> <code>射击间隔(ms) = resetTime / Speed</code>。</li>
 <li><strong>热量机制 (Heat):</strong>
 <ul>
-<li><strong>冷却速率:</strong>  每  <strong>200ms</strong>  减少  <code>heatCoolDownRate</code>  点热量。</li>
-<li><strong>热量消耗倍率:</strong>
+<li><strong>冷却速率:</strong>  基类 <code>IRole::update()</code> 每 <strong>500ms</strong> 结算一次，减少 <code>heatCoolDownRate * 5</code> 点热量（等效每秒 <code>heatCoolDownRate * 10</code>）。</li>
+<li><strong>热量消耗倍率（与 <code>heatPerShot</code> 基值相乘）:</strong>
 <ul>
 <li>普通子弹: <strong>1.0x</strong></li>
 <li>火球弹: <strong>2.0x</strong></li>
-<li>闪电链: <strong>1.5x</strong></li>
+<li>闪电链: <strong>2.0x</strong> （当前实现）</li>
 </ul>
 </li>
 </ul>
@@ -710,13 +710,11 @@
 <li>shootCooldownSpeed = 初始值 (4) + <code>Level</code>  成长 (每 5 级+2) + <code>Perk: ATTACK_SPEED_UP</code></li>
 </ul>
 </li>
-<li><strong>热量机制 (Heat):</strong>
-<ul>
+<li><strong>热量机制 (Heat):</strong></li>
+<li><strong>热量机制 (Heat):</strong></li>
 <li><code>热量上限</code> = <code>maxHeat</code> (100) + <code>Level</code>  成长 (每级+5) + <code>Perk: HEAT_CAPACITY_UP</code></li>
-<li><code>冷却速率</code> = 每 200ms 减少  <code>heatCoolDownRate</code> (初始 4 + 每 2 级+1 + <code>Perk: HEAT_COOL_DOWN_UP</code>)</li>
-<li><code>单发热量</code> = <code>heatPerShot</code> (初始 0 + 每 2 级-1)</li>
-</ul>
-</li>
+<li><code>冷却速率</code> = <strong>每 500ms</strong> 结算一次，减少 <code>heatCoolDownRate * 5</code> 点热量；初始 <code>heatCoolDownRate = 4</code>，每 2 级 +1，Perk: HEAT_COOL_DOWN_UP 每张 +2。</li>
+<li><code>单发热量</code> = <code>heatPerShot</code> (初始 <strong>15</strong>，每 2 级 -1，最低不低于 1) × 枪械倍率（普通 1.0x / 火球 2.0x / 闪电 2.0x）。</li>
 <li><strong>回血机制 (Regen):</strong>
 <ul>
 <li><code>触发间隔</code> = <code>healResetTime</code> (15000) / <code>healSpeed</code> (3) = 5000ms</li>
@@ -745,6 +743,7 @@ HP=BaseHP+(Level×HP_Growth)HP=BaseHP+(Level×HP_Growth)</li>
 Atk=BaseAtk+(Level×Atk_Growth)Atk=BaseAtk+(Level×Atk_Growth)</li>
 <li><strong>经验掉落 (XP):</strong><br>
 DropExp=BaseExp+(Level×Exp_Growth)DropExp=BaseExp+(Level×Exp_Growth)</li>
+<li><strong>热量冷却:</strong> 基类同一逻辑，每 500ms 结算一次，减少 <code>heatCoolDownRate * 5</code> 点（敌人默认 <code>heatCoolDownRate = 10</code>，见 enemyRole.cpp）。</li>
 </ul>
 <h4 id="2-具体敌人数值-基于-enemyrolecpp">2. 具体敌人数值 (基于 enemyRole.cpp)
 </h4><div class="table-wrapper"><table>
@@ -760,44 +759,44 @@ DropExp=BaseExp+(Level×Exp_Growth)DropExp=BaseExp+(Level×Exp_Growth)</li>
   <tbody>
       <tr>
           <td style="text-align: left"><strong>飞廉 (Feilian)</strong></td>
-          <td style="text-align: left">10+(Level×20)10+(Level×20)</td>
-          <td style="text-align: left">2+(Level×1)2+(Level×1)</td>
-          <td style="text-align: left">4+(Level×1)4+(Level×1)</td>
+          <td style="text-align: left">10 + Level×20</td>
+          <td style="text-align: left">2 + Level×1</td>
+          <td style="text-align: left">4 + Level×1</td>
           <td style="text-align: left">高速骚扰，低伤脆皮</td>
       </tr>
       <tr>
           <td style="text-align: left"><strong>蛊雕 (Gudiao)</strong></td>
-          <td style="text-align: left">60+(Level×100)60+(Level×100)</td>
-          <td style="text-align: left">8+(Level×2)8+(Level×2)</td>
-          <td style="text-align: left">4+(Level×1)4+(Level×1)</td>
+          <td style="text-align: left">60 + Level×100</td>
+          <td style="text-align: left">8 + Level×2</td>
+          <td style="text-align: left">4 + Level×1</td>
           <td style="text-align: left">远程伏击，死后发火球</td>
       </tr>
       <tr>
           <td style="text-align: left"><strong>魑魅 (ChiMei)</strong></td>
-          <td style="text-align: left">1+(Level×1)1+(Level×1)</td>
-          <td style="text-align: left">1+(Level×1)1+(Level×1)</td>
-          <td style="text-align: left">2020</td>
+          <td style="text-align: left">1 + Level×1</td>
+          <td style="text-align: left">1 + Level×1</td>
+          <td style="text-align: left">20（固定）</td>
           <td style="text-align: left">自爆冲撞</td>
       </tr>
       <tr>
           <td style="text-align: left"><strong>饕餮 (Taotie)</strong></td>
-          <td style="text-align: left">1450+(Level×400)1450+(Level×400)</td>
-          <td style="text-align: left">5+(Level×2)5+(Level×2)</td>
-          <td style="text-align: left">20+(Level×10)20+(Level×10)</td>
+          <td style="text-align: left">350 + Level×1100</td>
+          <td style="text-align: left">2 + Level×4</td>
+          <td style="text-align: left">10 + Level×10</td>
           <td style="text-align: left">吞噬/冲撞/碾压</td>
       </tr>
       <tr>
           <td style="text-align: left"><strong>梼杌 (Taowu)</strong></td>
-          <td style="text-align: left">830+(Level×300)830+(Level×300)</td>
-          <td style="text-align: left">10+(Level×2)10+(Level×2)</td>
-          <td style="text-align: left">7+(Level×3)7+(Level×3)</td>
+          <td style="text-align: left">130 + Level×800</td>
+          <td style="text-align: left">10 + Level×5</td>
+          <td style="text-align: left">7 + Level×5</td>
           <td style="text-align: left">闪现/弹幕爆发</td>
       </tr>
       <tr>
           <td style="text-align: left"><strong>相柳 (Xiangliu)</strong></td>
-          <td style="text-align: left">830+(Level×400)830+(Level×400)</td>
-          <td style="text-align: left">2+(Level×3)2+(Level×3)</td>
-          <td style="text-align: left">12+(Level×4)12+(Level×4)</td>
+          <td style="text-align: left">30 + Level×900</td>
+          <td style="text-align: left">3 + Level×5</td>
+          <td style="text-align: left">12 + Level×4</td>
           <td style="text-align: left">全屏 AOE/召唤</td>
       </tr>
   </tbody>
