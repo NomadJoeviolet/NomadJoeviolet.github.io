@@ -14,6 +14,7 @@
         
         <guid>https://NomadJoeviolet.github.io/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/</guid>
         <description>&lt;p&gt;violet&lt;/p&gt;
+&lt;p&gt;violet&lt;/p&gt;
 &lt;p&gt;初步入门嵌入式开发后（假定已经会使用Keil和CubeMX进行开发），需要回头补充的基础以及提升，本指南只起到抛砖引玉的作用，对所需知识仅作精简的概述，主要在于帮助构建知识框架&lt;/p&gt;
 &lt;h2 id=&#34;step1---keilcubemx工具链使用hal库使用基本外设基本开发常识&#34;&gt;Step1   Keil+CubeMX工具链使用，HAL库使用，基本外设，基本开发常识
 &lt;/h2&gt;&lt;h3 id=&#34;开发常识&#34;&gt;开发常识
@@ -1116,8 +1117,9 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
           &lt;td&gt;_estack（RAM末尾）&lt;/td&gt;
           &lt;td&gt;栈底&lt;/td&gt;
       &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.png&#34;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.png&#34;
 	width=&#34;1269&#34;
 	height=&#34;674&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83_hu13448359514406145975.png 480w, https://NomadJoeviolet.github.io/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83_hu250755568266859443.png 1024w&#34;
@@ -1128,13 +1130,7 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 		data-flex-grow=&#34;188&#34;
 		data-flex-basis=&#34;451px&#34;
 	
-&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&gt;&lt;/p&gt;
 &lt;h3 id=&#34;启动文件与启动原理&#34;&gt;启动文件与启动原理
 &lt;/h3&gt;&lt;h4 id=&#34;启动原理&#34;&gt;启动原理
 &lt;/h4&gt;&lt;ol&gt;
