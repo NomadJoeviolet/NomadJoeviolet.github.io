@@ -570,7 +570,7 @@
 <h3 id="存储分布">存储分布
 </h3><p>以stm32f103c8t6为例</p>
 <h4 id="flash区">Flash区
-</h4><p><strong>Flash区，起始位置0x8000000，长度512K</strong></p>
+</h4><p><strong>Flash区，起始位置0x8000000</strong></p>
 <div class="table-wrapper"><table>
   <thead>
       <tr>
@@ -638,7 +638,7 @@
   </tbody>
 </table></div>
 <h4 id="ram区">RAM区
-</h4><p><strong>RAM区，起始位置0x20000000，长度128K</strong></p>
+</h4><p><strong>RAM区，起始位置0x20000000</strong></p>
 <div class="table-wrapper"><table>
   <thead>
       <tr>
@@ -718,7 +718,7 @@
 <li><strong>用const关键字声明的常量</strong>：分配在Flash中</li>
 <li><strong>使用C标准的malloc申请的内存</strong>：分配在系统堆中</li>
 <li><strong>不在任务中定义的临时变量</strong>：分配在系统栈中</li>
-<li><strong>使用</strong>*<code>pvPortMalloc</code>**开辟的内存或调用FreeRTOS标准API自动分配的内存：**分配在FreeRTOS堆中</li>
+<li><strong>使用<code>pvPortMalloc</code>开辟的内存或调用FreeRTOS标准API自动分配的内存：分配在FreeRTOS堆中</strong></li>
 <li><strong>在任务中定义的临时变量</strong>：分配在对应任务的任务栈中</li>
 <li><strong>在中断中使用</strong>*<code>pvPortMallocFromISR</code><strong>分配的内存</strong>：分配在FreeRTOS堆中</li>
 <li>在中断中禁止使用C标准的malloc和free</li>
@@ -1171,7 +1171,7 @@
 </ul>
 <h5 id="3-段分配规则sections-块">3. 段分配规则（SECTIONS 块）
 </h5><p><code>SECTIONS</code>块是最复杂的部分，定义了「编译生成的段」如何映射到「MEMORY 块定义的物理内存」，每一个子段都对应特定的代码 / 数据类型。</p>
-<p><strong>Flash区，起始位置0x8000000，长度512K</strong></p>
+<p><strong>Flash区，起始位置0x8000000</strong></p>
 <div class="table-wrapper"><table>
   <thead>
       <tr>
@@ -1238,7 +1238,7 @@
       </tr>
   </tbody>
 </table></div>
-<p><strong>RAM区，起始位置0x20000000，长度128K</strong></p>
+<p><strong>RAM区，起始位置0x20000000</strong></p>
 <div class="table-wrapper"><table>
   <thead>
       <tr>
@@ -2005,7 +2005,9 @@
     <section class="copyright">
         &copy; 
         
-        2025 Nomad
+            2025 - 
+        
+        2026 Nomad
     </section>
     
     <section class="powerby">

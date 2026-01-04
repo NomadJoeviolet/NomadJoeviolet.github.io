@@ -273,7 +273,13 @@
         <li><a href="#关于单片机">关于单片机</a></li>
         <li><a href="#外设">外设</a></li>
         <li><a href="#关于cubemx">关于CubeMX</a></li>
-        <li><a href="#关于hal库">关于HAL库</a></li>
+        <li><a href="#关于hal库">关于HAL库</a>
+          <ol>
+            <li><a href="#hal库hardware-abstraction-layer-硬件抽象层库">HAL库（Hardware Abstraction Layer 硬件抽象层库）</a></li>
+            <li><a href="#cmsiscortex-microcontroller-software-interface-standard">CMSIS（Cortex Microcontroller Software Interface Standard）</a></li>
+            <li><a href="#hal-库与-cmsis-的关系">HAL 库与 CMSIS 的关系</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
     <li><a href="#step2---工具链的基础认知构建与工具链换新">Step2   工具链的基础认知构建与工具链换新</a>
@@ -324,10 +330,9 @@
           <ol>
             <li><a href="#内存对齐">内存对齐</a></li>
             <li><a href="#深拷贝与浅拷贝">深拷贝与浅拷贝</a></li>
-            <li><a href="#1-浅拷贝shallow-copy">1. 浅拷贝（Shallow Copy）</a></li>
-            <li><a href="#2-深拷贝deep-copy">2. 深拷贝（Deep Copy）</a></li>
             <li><a href="#构造函数拷贝构造函数赋值运算符">构造函数&amp;拷贝构造函数&amp;赋值运算符</a></li>
             <li><a href="#模板函数模板类模板">模板(函数模板&amp;类模板)</a></li>
+            <li><a href="#现代c相关待补充">现代C++相关（待补充）</a></li>
           </ol>
         </li>
         <li><a href="#设计模式">设计模式</a></li>
@@ -347,10 +352,6 @@
             <li><a href="#启动模式">启动模式</a></li>
             <li><a href="#启动文件">启动文件</a></li>
             <li><a href="#启动文件结构拆解">启动文件结构拆解</a></li>
-            <li><a href="#2关键符号声明">（2）关键符号声明</a></li>
-            <li><a href="#3复位处理函数reset_handler">（3）复位处理函数（Reset_Handler）</a></li>
-            <li><a href="#4中断向量表g_pfnvectors">（4）中断向量表（g_pfnVectors）</a></li>
-            <li><a href="#5默认中断处理函数default_handler">（5）默认中断处理函数（Default_Handler）</a></li>
           </ol>
         </li>
         <li><a href="#链接器脚本">链接器脚本</a>
@@ -466,11 +467,19 @@ USART可以用来实现同步/异步的串口通信</p>
 <p>用户只需要关注HAL库提供的抽象层，而不用去关注抽象层之下的外设寄存器操作（这类设计思想很值得借鉴）</p>
 <p>HAL库提供统一的接口函数，例如<code>HAL_xxxx_Transmit</code>发送执行函数，<code>xxxxCallback</code>回调函数等</p>
 <p>开发范式变为： 应用层-&gt;HAL库的抽象层-&gt;具体硬件平台</p>
+<p>下面讨论HAL库，CMSIS协议，以及两者关系</p>
+<h4 id="hal库hardware-abstraction-layer-硬件抽象层库">HAL库（Hardware Abstraction Layer 硬件抽象层库）
+</h4><p>HAL 库是 <strong>STMicroelectronics（意法半导体）</strong> 为自家 <strong>STM32 系列微控制器（MCU）</strong> 量身打造的底层软件库，是 STM32 生态中核心的开发工具之一，基于 ARM 的 CMSIS 标准构建。</p>
+<h4 id="cmsiscortex-microcontroller-software-interface-standard">CMSIS（Cortex Microcontroller Software Interface Standard）
+</h4><p>CMSIS 是 <strong>ARM 公司</strong> 制定的 <strong>行业统一软件接口标准</strong>（注意：不是具体的软件库，而是 “规范 / 协议”），面向所有基于 ARM Cortex-M 内核（M0/M0+/M3/M4/M7 等）的微控制器，所有主流 MCU 厂商（ST、NXP、Microchip、TI、瑞萨等）均需遵循该标准。</p>
+<h4 id="hal-库与-cmsis-的关系">HAL 库与 CMSIS 的关系
+</h4><p>层级关系：CMSIS 是 <strong>底层标准</strong>，HAL 库是 <strong>基于 CMSIS 标准的具体实现</strong>——HAL 库的内核操作（如中断配置、Systick 定时器、时钟初始化）完全遵循 CMSIS-Core 规范，外设驱动接口也兼容 CMSIS-Driver 模板。</p>
+<p>简单总结：<strong>CMSIS 是 “通用接口规则”，HAL 库是 ST 按规则为 STM32 定制的 “工具包”</strong>，两者结合既保证了跨平台兼容性，又提升了 STM32 的开发效率。</p>
 <h2 id="step2---工具链的基础认知构建与工具链换新">Step2   工具链的基础认知构建与工具链换新
 </h2><p>对于整个工具链的理解，需要建立在对单片机（微型计算机）的基本工作方式有一定认知的基础上</p>
 <p>计算机的运行都是基于机器语言，我们编写的C语言程序，最后经过编译得到汇编代码，再经过汇编，得到二进制代码（已经是机器语言，但不可运行），最后经过链接，得到一个能运行于单片机上的可执行程序</p>
 <p>同时，还需要提一下的是，在一种计算机环境中运行的编译程序，能编译出在另外一种环境下运行的代码，这个编译过程就叫交叉编译。简单地说，就是在一个平台上生成另一个平台上的可执行代码，嵌入式开发的程序编译就是典型的交叉编译，用到的编译器用被称作交叉编译器</p>
-<p>目前队内的开发工具链是<code>VScode/Clion</code>+<code>arm-none-eabi/armclag</code>+<code>CMake</code>+<code>Ninja</code>+<code>Ozone</code>+<code>cland/intellisence/Clion_LSP</code>（编辑器+编译器+项目构建工具+项目构建的执行工具+烧录器+语法服务支持LSP），个人认为还是相当现代化且高度自定义的
+<p>目前队内的开发工具链是<code>VScode/Clion</code>+<code>arm-none-eabi/armclag</code>+<code>CMake</code>+<code>Ninja</code>+<code>Ozone</code>+<code>clangd/intellisence/Clion_LSP</code>（编辑器+编译器+项目构建工具+项目构建的执行工具+烧录器+语法服务支持LSP），个人认为还是相当现代化且高度自定义的
 <img src="/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E6%96%B0%E5%B7%A5%E5%85%B7%E9%93%BE.png"
 	width="1662"
 	height="1065"
@@ -880,8 +889,8 @@ USART可以用来实现同步/异步的串口通信</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="深拷贝与浅拷贝">深拷贝与浅拷贝
-</h4><h4 id="1-浅拷贝shallow-copy">1. 浅拷贝（Shallow Copy）
-</h4><p><strong>原理</strong>：仅复制对象的成员值（包括指针的值），<strong>不复制指针指向的实际资源</strong>。<br>
+</h4><h5 id="1-浅拷贝shallow-copy">1. 浅拷贝（Shallow Copy）
+</h5><p><strong>原理</strong>：仅复制对象的成员值（包括指针的值），<strong>不复制指针指向的实际资源</strong>。<br>
 <strong>结果</strong>：原对象和拷贝对象的指针成员指向<strong>同一块内存地址</strong>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -935,15 +944,15 @@ USART可以用来实现同步/异步的串口通信</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 导致同一内存被 delete 两次 → 程序崩溃！
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="浅拷贝的核心问题">浅拷贝的核心问题：
-</h5><ol>
+</div><h6 id="浅拷贝的核心问题">浅拷贝的核心问题：
+</h6><ol>
 <li><strong>悬空指针</strong>：一个对象释放资源后，另一个对象的指针失效</li>
 <li><strong>重复释放</strong>：多个对象尝试释放同一块内存 → <strong>崩溃</strong></li>
 <li><strong>数据篡改</strong>：通过一个对象修改数据会影响其他对象</li>
 </ol>
 <hr>
-<h4 id="2-深拷贝deep-copy">2. 深拷贝（Deep Copy）
-</h4><p>主要用于拷贝构造函数，赋值运算符
+<h5 id="2-深拷贝deep-copy">2. 深拷贝（Deep Copy）
+</h5><p>主要用于拷贝构造函数，赋值运算符
 <strong>原理</strong>：不仅复制对象成员，还<strong>复制指针指向的资源</strong>。<br>
 <strong>结果</strong>：原对象和拷贝对象拥有<strong>完全独立的资源副本</strong>。</p>
 <div class="highlight"><div class="chroma">
@@ -1018,8 +1027,8 @@ USART可以用来实现同步/异步的串口通信</p>
 </span></span><span class="line"><span class="cl"><span class="c1">// 析构时各自释放独立内存 → 安全
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="深拷贝的核心优势">深拷贝的核心优势：
-</h5><ol>
+</div><h6 id="深拷贝的核心优势">深拷贝的核心优势：
+</h6><ol>
 <li><strong>资源独立</strong>：每个对象拥有自己的资源副本</li>
 <li><strong>安全析构</strong>：不会发生重复释放</li>
 <li><strong>数据隔离</strong>：修改一个对象不影响其他对象</li>
@@ -1350,7 +1359,9 @@ USART可以用来实现同步/异步的串口通信</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span> <span class="mi">100</span><span class="o">&gt;</span> <span class="n">boolArray</span><span class="p">;</span>     <span class="c1">// 使用特化版本
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="设计模式">设计模式
+</div><h4 id="现代c相关待补充">现代C++相关（待补充）
+</h4><p>自推导，lambda表达式，智能指针，RAII与RTTI的概念</p>
+<h3 id="设计模式">设计模式
 </h3><p>To be continued</p>
 <h2 id="step5-arm-cortex-m学习启动文件与链接器脚本">Step5 arm-cortex-M学习&amp;启动文件与链接器脚本
 </h2><p>在对上面的抽象层级有一定了解后，还需要将上述偏软件的抽象层与具体的硬件相连接，建立软硬结合的认知需要有一定微机原理的知识</p>
@@ -1368,7 +1379,8 @@ USART可以用来实现同步/异步的串口通信</p>
 <li><strong>指令集</strong>：主要支持 Thumb/Thumb2 指令集（16 位 + 32 位混合），兼顾代码密度与执行效率，属于 RISC 架构（精简指令系统），每条指令仅完成单一操作，硬件实现简单高效。</li>
 </ul>
 <h4 id="内存分布规则">内存分布规则
-</h4><p>Cortex-M 芯片内存分为 FLASH和 RAM两大区域，具体分布由硬件特性和链接脚本共同定义，以 STM32F103C8Tx（64K FLASH、20K RAM）为例：</p>
+</h4><p>重点看Flash和RAM，以及对应的段分配规则</p>
+<p>Cortex-M 芯片内存分为 FLASH和 RAM两大区域，具体分布由硬件特性和链接脚本共同定义，以 STM32F103C8Tx（64K FLASH、20K RAM）为例：</p>
 <div class="table-wrapper"><table>
   <thead>
       <tr>
@@ -1411,6 +1423,139 @@ USART可以用来实现同步/异步的串口通信</p>
 <li><strong>.bss</strong>：存放未初始化的全局 / 静态变量，运行时由启动文件清零，无需占用 FLASH 空间。</li>
 <li><strong>堆 / 栈</strong>：堆从低地址向上生长（供 malloc 使用），栈从高地址向下生长（供函数调用、局部变量使用），由链接脚本预留空间。</li>
 </ul>
+<p><strong>Flash区，起始位置0x8000000</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>段名称</th>
+          <th>起始地址</th>
+          <th>结束地址</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>.isr_vector</td>
+          <td>0x8000 0000</td>
+          <td>按需计算，四字节对齐</td>
+          <td>中断向量表</td>
+      </tr>
+      <tr>
+          <td>.text</td>
+          <td>紧邻.isr_vector末尾</td>
+          <td>按需计算，四字节对齐</td>
+          <td>程序</td>
+      </tr>
+      <tr>
+          <td>.rodata</td>
+          <td>紧邻.text末尾</td>
+          <td>按需计算，四字节对齐</td>
+          <td>常量</td>
+      </tr>
+      <tr>
+          <td>.ARM.extab</td>
+          <td>紧邻.rodata末尾</td>
+          <td>按需计算</td>
+          <td>ARM异常处理信息</td>
+      </tr>
+      <tr>
+          <td>.ARM.exidx*</td>
+          <td>紧邻.ARM.extab末尾</td>
+          <td>按需计算</td>
+          <td>ARM异常索引表</td>
+      </tr>
+      <tr>
+          <td>.preinit_array</td>
+          <td>紧邻.ARM.exidx* 末尾</td>
+          <td>按需计算</td>
+          <td>C++预初始化数组</td>
+      </tr>
+      <tr>
+          <td>.init_array</td>
+          <td>紧邻.preinit_array末尾</td>
+          <td>按需计算</td>
+          <td>C++构造函数数组</td>
+      </tr>
+      <tr>
+          <td>.fini_array</td>
+          <td>紧邻.init_array末尾</td>
+          <td>按需计算</td>
+          <td>C++析构函数数组</td>
+      </tr>
+      <tr>
+          <td>.data</td>
+          <td>紧邻.fini_array末尾</td>
+          <td>按需计算，四字节对齐</td>
+          <td>初始化变量的初始值</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>RAM区，起始位置0x20000000</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>段名称</th>
+          <th>起始地址</th>
+          <th>结束地址</th>
+          <th>内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>.data</td>
+          <td>0x2000 0000</td>
+          <td>_edata，拷贝自Flash区</td>
+          <td>已初始化全局/静态变量</td>
+      </tr>
+      <tr>
+          <td>.bss</td>
+          <td>_edata</td>
+          <td>_end</td>
+          <td>未初始化全局/静态变量</td>
+      </tr>
+      <tr>
+          <td>系统堆底</td>
+          <td>_end</td>
+          <td>_end</td>
+          <td>堆底</td>
+      </tr>
+      <tr>
+          <td>系统堆栈最小预留空间</td>
+          <td>_end</td>
+          <td>_end+预留空间</td>
+          <td>堆栈预留空间</td>
+      </tr>
+      <tr>
+          <td>空闲RAM</td>
+          <td>_end+预留空间</td>
+          <td>_estack</td>
+          <td>空闲空间</td>
+      </tr>
+      <tr>
+          <td>系统栈底</td>
+          <td>_estack（RAM末尾）</td>
+          <td>_estack（RAM末尾）</td>
+          <td>栈底</td>
+      </tr>
+      <tr>
+          <td><img src="/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.png"
+	width="1269"
+	height="674"
+	srcset="/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83_hu13448359514406145975.png 480w, /p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83_hu250755568266859443.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="188"
+		data-flex-basis="451px"
+	
+></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
 <h3 id="启动文件与启动原理">启动文件与启动原理
 </h3><h4 id="启动原理">启动原理
 </h4><ol>
@@ -1445,8 +1590,8 @@ USART可以用来实现同步/异步的串口通信</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.thumb</span>                   <span class="c1">; 启用Thumb指令集
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="2关键符号声明">（2）关键符号声明
-</h4><p>引用链接器脚本定义的内存地址符号，建立启动文件与内存布局的关联，例如：</p>
+</div><h5 id="2关键符号声明">（2）关键符号声明
+</h5><p>引用链接器脚本定义的内存地址符号，建立启动文件与内存布局的关联，例如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1463,8 +1608,8 @@ USART可以用来实现同步/异步的串口通信</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">.word</span> <span class="no">_ebss</span>    <span class="c1">; .bss段在RAM的结束地址
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="3复位处理函数reset_handler">（3）复位处理函数（Reset_Handler）
-</h4><p>复位后执行的核心逻辑，是启动流程的入口，分为 5 个关键步骤：</p>
+</div><h5 id="3复位处理函数reset_handler">（3）复位处理函数（Reset_Handler）
+</h5><p>复位后执行的核心逻辑，是启动流程的入口，分为 5 个关键步骤：</p>
 <ol>
 <li><strong>系统时钟初始化</strong>：调用<code>SystemInit</code>函数配置 HSE/PLL，将时钟从 8MHz HSI 提升至 72MHz</li>
 <li><strong>.data 段复制</strong>：从 FLASH 的<code>_sidata</code>地址复制初始值到 RAM 的<code>_sdata</code>至<code>_edata</code>区域</li>
@@ -1472,15 +1617,15 @@ USART可以用来实现同步/异步的串口通信</p>
 <li><strong>C++ 静态构造函数初始化</strong>：调用<code>__libc_init_array</code>，执行全局对象构造（兼容 C++ 项目）</li>
 <li><strong>跳转至 main 函数</strong>：完成底层初始化后，将程序控制权交给用户代码</li>
 </ol>
-<h4 id="4中断向量表g_pfnvectors">（4）中断向量表（g_pfnVectors）
-</h4><p>存储所有异常 / 中断的处理函数地址，位于 FLASH 起始地址，核心特性包括：</p>
+<h5 id="4中断向量表g_pfnvectors">（4）中断向量表（g_pfnVectors）
+</h5><p>存储所有异常 / 中断的处理函数地址，位于 FLASH 起始地址，核心特性包括：</p>
 <ul>
 <li>第 0 个元素为栈顶地址（<code>_estack</code>），用于初始化主栈指针（MSP）</li>
 <li>第 1 个元素为<code>Reset_Handler</code>地址，是复位后程序计数器（PC）的初始指向</li>
 <li>向量表顺序隐含中断优先级，靠前元素对应优先级更高（如硬 fault 优先级高于 SysTick）</li>
 </ul>
-<h4 id="5默认中断处理函数default_handler">（5）默认中断处理函数（Default_Handler）
-</h4><p>为未自定义的中断提供 &ldquo;兜底&rdquo; 逻辑，通过无限循环防止程序跑飞，同时支持弱别名机制（<code>.weak</code>），允许用户在 C 代码中重定义中断函数覆盖默认逻辑</p>
+<h5 id="5默认中断处理函数default_handler">（5）默认中断处理函数（Default_Handler）
+</h5><p>为未自定义的中断提供 &ldquo;兜底&rdquo; 逻辑，通过无限循环防止程序跑飞，同时支持弱别名机制（<code>.weak</code>），允许用户在 C 代码中重定义中断函数覆盖默认逻辑</p>
 <h3 id="链接器脚本">链接器脚本
 </h3><p>链接脚本（.ld）是链接器的配置文件，本质是告知链接器芯片内存布局、代码 / 数据的段分配规则、全局符号定义和内存合法性检查，是生成可执行文件（.elf/.hex）的关键，没有它链接器无法确定 &ldquo;代码放哪里、变量放哪里&rdquo;</p>
 <h4 id="1入口点与栈顶定义">（1）入口点与栈顶定义
@@ -1673,7 +1818,9 @@ USART可以用来实现同步/异步的串口通信</p>
     <section class="copyright">
         &copy; 
         
-        2025 Nomad
+            2025 - 
+        
+        2026 Nomad
     </section>
     
     <section class="powerby">

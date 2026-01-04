@@ -4025,11 +4025,19 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 &lt;p&gt;用户只需要关注HAL库提供的抽象层，而不用去关注抽象层之下的外设寄存器操作（这类设计思想很值得借鉴）&lt;/p&gt;
 &lt;p&gt;HAL库提供统一的接口函数，例如&lt;code&gt;HAL_xxxx_Transmit&lt;/code&gt;发送执行函数，&lt;code&gt;xxxxCallback&lt;/code&gt;回调函数等&lt;/p&gt;
 &lt;p&gt;开发范式变为： 应用层-&amp;gt;HAL库的抽象层-&amp;gt;具体硬件平台&lt;/p&gt;
+&lt;p&gt;下面讨论HAL库，CMSIS协议，以及两者关系&lt;/p&gt;
+&lt;h4 id=&#34;hal库hardware-abstraction-layer-硬件抽象层库&#34;&gt;HAL库（Hardware Abstraction Layer 硬件抽象层库）
+&lt;/h4&gt;&lt;p&gt;HAL 库是 &lt;strong&gt;STMicroelectronics（意法半导体）&lt;/strong&gt; 为自家 &lt;strong&gt;STM32 系列微控制器（MCU）&lt;/strong&gt; 量身打造的底层软件库，是 STM32 生态中核心的开发工具之一，基于 ARM 的 CMSIS 标准构建。&lt;/p&gt;
+&lt;h4 id=&#34;cmsiscortex-microcontroller-software-interface-standard&#34;&gt;CMSIS（Cortex Microcontroller Software Interface Standard）
+&lt;/h4&gt;&lt;p&gt;CMSIS 是 &lt;strong&gt;ARM 公司&lt;/strong&gt; 制定的 &lt;strong&gt;行业统一软件接口标准&lt;/strong&gt;（注意：不是具体的软件库，而是 “规范 / 协议”），面向所有基于 ARM Cortex-M 内核（M0/M0+/M3/M4/M7 等）的微控制器，所有主流 MCU 厂商（ST、NXP、Microchip、TI、瑞萨等）均需遵循该标准。&lt;/p&gt;
+&lt;h4 id=&#34;hal-库与-cmsis-的关系&#34;&gt;HAL 库与 CMSIS 的关系
+&lt;/h4&gt;&lt;p&gt;层级关系：CMSIS 是 &lt;strong&gt;底层标准&lt;/strong&gt;，HAL 库是 &lt;strong&gt;基于 CMSIS 标准的具体实现&lt;/strong&gt;——HAL 库的内核操作（如中断配置、Systick 定时器、时钟初始化）完全遵循 CMSIS-Core 规范，外设驱动接口也兼容 CMSIS-Driver 模板。&lt;/p&gt;
+&lt;p&gt;简单总结：&lt;strong&gt;CMSIS 是 “通用接口规则”，HAL 库是 ST 按规则为 STM32 定制的 “工具包”&lt;/strong&gt;，两者结合既保证了跨平台兼容性，又提升了 STM32 的开发效率。&lt;/p&gt;
 &lt;h2 id=&#34;step2---工具链的基础认知构建与工具链换新&#34;&gt;Step2   工具链的基础认知构建与工具链换新
 &lt;/h2&gt;&lt;p&gt;对于整个工具链的理解，需要建立在对单片机（微型计算机）的基本工作方式有一定认知的基础上&lt;/p&gt;
 &lt;p&gt;计算机的运行都是基于机器语言，我们编写的C语言程序，最后经过编译得到汇编代码，再经过汇编，得到二进制代码（已经是机器语言，但不可运行），最后经过链接，得到一个能运行于单片机上的可执行程序&lt;/p&gt;
 &lt;p&gt;同时，还需要提一下的是，在一种计算机环境中运行的编译程序，能编译出在另外一种环境下运行的代码，这个编译过程就叫交叉编译。简单地说，就是在一个平台上生成另一个平台上的可执行代码，嵌入式开发的程序编译就是典型的交叉编译，用到的编译器用被称作交叉编译器&lt;/p&gt;
-&lt;p&gt;目前队内的开发工具链是&lt;code&gt;VScode/Clion&lt;/code&gt;+&lt;code&gt;arm-none-eabi/armclag&lt;/code&gt;+&lt;code&gt;CMake&lt;/code&gt;+&lt;code&gt;Ninja&lt;/code&gt;+&lt;code&gt;Ozone&lt;/code&gt;+&lt;code&gt;cland/intellisence/Clion_LSP&lt;/code&gt;（编辑器+编译器+项目构建工具+项目构建的执行工具+烧录器+语法服务支持LSP），个人认为还是相当现代化且高度自定义的
+&lt;p&gt;目前队内的开发工具链是&lt;code&gt;VScode/Clion&lt;/code&gt;+&lt;code&gt;arm-none-eabi/armclag&lt;/code&gt;+&lt;code&gt;CMake&lt;/code&gt;+&lt;code&gt;Ninja&lt;/code&gt;+&lt;code&gt;Ozone&lt;/code&gt;+&lt;code&gt;clangd/intellisence/Clion_LSP&lt;/code&gt;（编辑器+编译器+项目构建工具+项目构建的执行工具+烧录器+语法服务支持LSP），个人认为还是相当现代化且高度自定义的
 &lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E6%96%B0%E5%B7%A5%E5%85%B7%E9%93%BE.png&#34;
 	width=&#34;1662&#34;
 	height=&#34;1065&#34;
@@ -4439,8 +4447,8 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;深拷贝与浅拷贝&#34;&gt;深拷贝与浅拷贝
-&lt;/h4&gt;&lt;h4 id=&#34;1-浅拷贝shallow-copy&#34;&gt;1. 浅拷贝（Shallow Copy）
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;原理&lt;/strong&gt;：仅复制对象的成员值（包括指针的值），&lt;strong&gt;不复制指针指向的实际资源&lt;/strong&gt;。&lt;br&gt;
+&lt;/h4&gt;&lt;h5 id=&#34;1-浅拷贝shallow-copy&#34;&gt;1. 浅拷贝（Shallow Copy）
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;原理&lt;/strong&gt;：仅复制对象的成员值（包括指针的值），&lt;strong&gt;不复制指针指向的实际资源&lt;/strong&gt;。&lt;br&gt;
 &lt;strong&gt;结果&lt;/strong&gt;：原对象和拷贝对象的指针成员指向&lt;strong&gt;同一块内存地址&lt;/strong&gt;。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -4494,15 +4502,15 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 导致同一内存被 delete 两次 → 程序崩溃！
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h5 id=&#34;浅拷贝的核心问题&#34;&gt;浅拷贝的核心问题：
-&lt;/h5&gt;&lt;ol&gt;
+&lt;/div&gt;&lt;h6 id=&#34;浅拷贝的核心问题&#34;&gt;浅拷贝的核心问题：
+&lt;/h6&gt;&lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;悬空指针&lt;/strong&gt;：一个对象释放资源后，另一个对象的指针失效&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;重复释放&lt;/strong&gt;：多个对象尝试释放同一块内存 → &lt;strong&gt;崩溃&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;数据篡改&lt;/strong&gt;：通过一个对象修改数据会影响其他对象&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;h4 id=&#34;2-深拷贝deep-copy&#34;&gt;2. 深拷贝（Deep Copy）
-&lt;/h4&gt;&lt;p&gt;主要用于拷贝构造函数，赋值运算符
+&lt;h5 id=&#34;2-深拷贝deep-copy&#34;&gt;2. 深拷贝（Deep Copy）
+&lt;/h5&gt;&lt;p&gt;主要用于拷贝构造函数，赋值运算符
 &lt;strong&gt;原理&lt;/strong&gt;：不仅复制对象成员，还&lt;strong&gt;复制指针指向的资源&lt;/strong&gt;。&lt;br&gt;
 &lt;strong&gt;结果&lt;/strong&gt;：原对象和拷贝对象拥有&lt;strong&gt;完全独立的资源副本&lt;/strong&gt;。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -4577,8 +4585,8 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 析构时各自释放独立内存 → 安全
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h5 id=&#34;深拷贝的核心优势&#34;&gt;深拷贝的核心优势：
-&lt;/h5&gt;&lt;ol&gt;
+&lt;/div&gt;&lt;h6 id=&#34;深拷贝的核心优势&#34;&gt;深拷贝的核心优势：
+&lt;/h6&gt;&lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;资源独立&lt;/strong&gt;：每个对象拥有自己的资源副本&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;安全析构&lt;/strong&gt;：不会发生重复释放&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;数据隔离&lt;/strong&gt;：修改一个对象不影响其他对象&lt;/li&gt;
@@ -4909,7 +4917,9 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Array&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;bool&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;boolArray&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;     &lt;span class=&#34;c1&#34;&gt;// 使用特化版本
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;设计模式&#34;&gt;设计模式
+&lt;/div&gt;&lt;h4 id=&#34;现代c相关待补充&#34;&gt;现代C++相关（待补充）
+&lt;/h4&gt;&lt;p&gt;自推导，lambda表达式，智能指针，RAII与RTTI的概念&lt;/p&gt;
+&lt;h3 id=&#34;设计模式&#34;&gt;设计模式
 &lt;/h3&gt;&lt;p&gt;To be continued&lt;/p&gt;
 &lt;h2 id=&#34;step5-arm-cortex-m学习启动文件与链接器脚本&#34;&gt;Step5 arm-cortex-M学习&amp;amp;启动文件与链接器脚本
 &lt;/h2&gt;&lt;p&gt;在对上面的抽象层级有一定了解后，还需要将上述偏软件的抽象层与具体的硬件相连接，建立软硬结合的认知需要有一定微机原理的知识&lt;/p&gt;
@@ -4927,7 +4937,8 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;指令集&lt;/strong&gt;：主要支持 Thumb/Thumb2 指令集（16 位 + 32 位混合），兼顾代码密度与执行效率，属于 RISC 架构（精简指令系统），每条指令仅完成单一操作，硬件实现简单高效。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;内存分布规则&#34;&gt;内存分布规则
-&lt;/h4&gt;&lt;p&gt;Cortex-M 芯片内存分为 FLASH和 RAM两大区域，具体分布由硬件特性和链接脚本共同定义，以 STM32F103C8Tx（64K FLASH、20K RAM）为例：&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;重点看Flash和RAM，以及对应的段分配规则&lt;/p&gt;
+&lt;p&gt;Cortex-M 芯片内存分为 FLASH和 RAM两大区域，具体分布由硬件特性和链接脚本共同定义，以 STM32F103C8Tx（64K FLASH、20K RAM）为例：&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
@@ -4970,6 +4981,139 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;.bss&lt;/strong&gt;：存放未初始化的全局 / 静态变量，运行时由启动文件清零，无需占用 FLASH 空间。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;堆 / 栈&lt;/strong&gt;：堆从低地址向上生长（供 malloc 使用），栈从高地址向下生长（供函数调用、局部变量使用），由链接脚本预留空间。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Flash区，起始位置0x8000000&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;段名称&lt;/th&gt;
+          &lt;th&gt;起始地址&lt;/th&gt;
+          &lt;th&gt;结束地址&lt;/th&gt;
+          &lt;th&gt;内容&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;.isr_vector&lt;/td&gt;
+          &lt;td&gt;0x8000 0000&lt;/td&gt;
+          &lt;td&gt;按需计算，四字节对齐&lt;/td&gt;
+          &lt;td&gt;中断向量表&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;.text&lt;/td&gt;
+          &lt;td&gt;紧邻.isr_vector末尾&lt;/td&gt;
+          &lt;td&gt;按需计算，四字节对齐&lt;/td&gt;
+          &lt;td&gt;程序&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;.rodata&lt;/td&gt;
+          &lt;td&gt;紧邻.text末尾&lt;/td&gt;
+          &lt;td&gt;按需计算，四字节对齐&lt;/td&gt;
+          &lt;td&gt;常量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;.ARM.extab&lt;/td&gt;
+          &lt;td&gt;紧邻.rodata末尾&lt;/td&gt;
+          &lt;td&gt;按需计算&lt;/td&gt;
+          &lt;td&gt;ARM异常处理信息&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;.ARM.exidx*&lt;/td&gt;
+          &lt;td&gt;紧邻.ARM.extab末尾&lt;/td&gt;
+          &lt;td&gt;按需计算&lt;/td&gt;
+          &lt;td&gt;ARM异常索引表&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;.preinit_array&lt;/td&gt;
+          &lt;td&gt;紧邻.ARM.exidx* 末尾&lt;/td&gt;
+          &lt;td&gt;按需计算&lt;/td&gt;
+          &lt;td&gt;C++预初始化数组&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;.init_array&lt;/td&gt;
+          &lt;td&gt;紧邻.preinit_array末尾&lt;/td&gt;
+          &lt;td&gt;按需计算&lt;/td&gt;
+          &lt;td&gt;C++构造函数数组&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;.fini_array&lt;/td&gt;
+          &lt;td&gt;紧邻.init_array末尾&lt;/td&gt;
+          &lt;td&gt;按需计算&lt;/td&gt;
+          &lt;td&gt;C++析构函数数组&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;.data&lt;/td&gt;
+          &lt;td&gt;紧邻.fini_array末尾&lt;/td&gt;
+          &lt;td&gt;按需计算，四字节对齐&lt;/td&gt;
+          &lt;td&gt;初始化变量的初始值&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;RAM区，起始位置0x20000000&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;段名称&lt;/th&gt;
+          &lt;th&gt;起始地址&lt;/th&gt;
+          &lt;th&gt;结束地址&lt;/th&gt;
+          &lt;th&gt;内容&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;.data&lt;/td&gt;
+          &lt;td&gt;0x2000 0000&lt;/td&gt;
+          &lt;td&gt;_edata，拷贝自Flash区&lt;/td&gt;
+          &lt;td&gt;已初始化全局/静态变量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;.bss&lt;/td&gt;
+          &lt;td&gt;_edata&lt;/td&gt;
+          &lt;td&gt;_end&lt;/td&gt;
+          &lt;td&gt;未初始化全局/静态变量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;系统堆底&lt;/td&gt;
+          &lt;td&gt;_end&lt;/td&gt;
+          &lt;td&gt;_end&lt;/td&gt;
+          &lt;td&gt;堆底&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;系统堆栈最小预留空间&lt;/td&gt;
+          &lt;td&gt;_end&lt;/td&gt;
+          &lt;td&gt;_end+预留空间&lt;/td&gt;
+          &lt;td&gt;堆栈预留空间&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;空闲RAM&lt;/td&gt;
+          &lt;td&gt;_end+预留空间&lt;/td&gt;
+          &lt;td&gt;_estack&lt;/td&gt;
+          &lt;td&gt;空闲空间&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;系统栈底&lt;/td&gt;
+          &lt;td&gt;_estack（RAM末尾）&lt;/td&gt;
+          &lt;td&gt;_estack（RAM末尾）&lt;/td&gt;
+          &lt;td&gt;栈底&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.png&#34;
+	width=&#34;1269&#34;
+	height=&#34;674&#34;
+	srcset=&#34;https://NomadJoeviolet.github.io/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83_hu13448359514406145975.png 480w, https://NomadJoeviolet.github.io/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83_hu250755568266859443.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;188&#34;
+		data-flex-basis=&#34;451px&#34;
+	
+&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 &lt;h3 id=&#34;启动文件与启动原理&#34;&gt;启动文件与启动原理
 &lt;/h3&gt;&lt;h4 id=&#34;启动原理&#34;&gt;启动原理
 &lt;/h4&gt;&lt;ol&gt;
@@ -5004,8 +5148,8 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.thumb&lt;/span&gt;                   &lt;span class=&#34;c1&#34;&gt;; 启用Thumb指令集
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;2关键符号声明&#34;&gt;（2）关键符号声明
-&lt;/h4&gt;&lt;p&gt;引用链接器脚本定义的内存地址符号，建立启动文件与内存布局的关联，例如：&lt;/p&gt;
+&lt;/div&gt;&lt;h5 id=&#34;2关键符号声明&#34;&gt;（2）关键符号声明
+&lt;/h5&gt;&lt;p&gt;引用链接器脚本定义的内存地址符号，建立启动文件与内存布局的关联，例如：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -5022,8 +5166,8 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;.word&lt;/span&gt; &lt;span class=&#34;no&#34;&gt;_ebss&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;; .bss段在RAM的结束地址
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;3复位处理函数reset_handler&#34;&gt;（3）复位处理函数（Reset_Handler）
-&lt;/h4&gt;&lt;p&gt;复位后执行的核心逻辑，是启动流程的入口，分为 5 个关键步骤：&lt;/p&gt;
+&lt;/div&gt;&lt;h5 id=&#34;3复位处理函数reset_handler&#34;&gt;（3）复位处理函数（Reset_Handler）
+&lt;/h5&gt;&lt;p&gt;复位后执行的核心逻辑，是启动流程的入口，分为 5 个关键步骤：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;系统时钟初始化&lt;/strong&gt;：调用&lt;code&gt;SystemInit&lt;/code&gt;函数配置 HSE/PLL，将时钟从 8MHz HSI 提升至 72MHz&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;.data 段复制&lt;/strong&gt;：从 FLASH 的&lt;code&gt;_sidata&lt;/code&gt;地址复制初始值到 RAM 的&lt;code&gt;_sdata&lt;/code&gt;至&lt;code&gt;_edata&lt;/code&gt;区域&lt;/li&gt;
@@ -5031,15 +5175,15 @@ USART可以用来实现同步/异步的串口通信&lt;/p&gt;
 &lt;li&gt;&lt;strong&gt;C++ 静态构造函数初始化&lt;/strong&gt;：调用&lt;code&gt;__libc_init_array&lt;/code&gt;，执行全局对象构造（兼容 C++ 项目）&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;跳转至 main 函数&lt;/strong&gt;：完成底层初始化后，将程序控制权交给用户代码&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h4 id=&#34;4中断向量表g_pfnvectors&#34;&gt;（4）中断向量表（g_pfnVectors）
-&lt;/h4&gt;&lt;p&gt;存储所有异常 / 中断的处理函数地址，位于 FLASH 起始地址，核心特性包括：&lt;/p&gt;
+&lt;h5 id=&#34;4中断向量表g_pfnvectors&#34;&gt;（4）中断向量表（g_pfnVectors）
+&lt;/h5&gt;&lt;p&gt;存储所有异常 / 中断的处理函数地址，位于 FLASH 起始地址，核心特性包括：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;第 0 个元素为栈顶地址（&lt;code&gt;_estack&lt;/code&gt;），用于初始化主栈指针（MSP）&lt;/li&gt;
 &lt;li&gt;第 1 个元素为&lt;code&gt;Reset_Handler&lt;/code&gt;地址，是复位后程序计数器（PC）的初始指向&lt;/li&gt;
 &lt;li&gt;向量表顺序隐含中断优先级，靠前元素对应优先级更高（如硬 fault 优先级高于 SysTick）&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;5默认中断处理函数default_handler&#34;&gt;（5）默认中断处理函数（Default_Handler）
-&lt;/h4&gt;&lt;p&gt;为未自定义的中断提供 &amp;ldquo;兜底&amp;rdquo; 逻辑，通过无限循环防止程序跑飞，同时支持弱别名机制（&lt;code&gt;.weak&lt;/code&gt;），允许用户在 C 代码中重定义中断函数覆盖默认逻辑&lt;/p&gt;
+&lt;h5 id=&#34;5默认中断处理函数default_handler&#34;&gt;（5）默认中断处理函数（Default_Handler）
+&lt;/h5&gt;&lt;p&gt;为未自定义的中断提供 &amp;ldquo;兜底&amp;rdquo; 逻辑，通过无限循环防止程序跑飞，同时支持弱别名机制（&lt;code&gt;.weak&lt;/code&gt;），允许用户在 C 代码中重定义中断函数覆盖默认逻辑&lt;/p&gt;
 &lt;h3 id=&#34;链接器脚本&#34;&gt;链接器脚本
 &lt;/h3&gt;&lt;p&gt;链接脚本（.ld）是链接器的配置文件，本质是告知链接器芯片内存布局、代码 / 数据的段分配规则、全局符号定义和内存合法性检查，是生成可执行文件（.elf/.hex）的关键，没有它链接器无法确定 &amp;ldquo;代码放哪里、变量放哪里&amp;rdquo;&lt;/p&gt;
 &lt;h4 id=&#34;1入口点与栈顶定义&#34;&gt;（1）入口点与栈顶定义
@@ -10336,7 +10480,7 @@ C++ 多态意味着调用成员函数时，会根据调用函数的对象的类�
 &lt;h3 id=&#34;存储分布&#34;&gt;存储分布
 &lt;/h3&gt;&lt;p&gt;以stm32f103c8t6为例&lt;/p&gt;
 &lt;h4 id=&#34;flash区&#34;&gt;Flash区
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;Flash区，起始位置0x8000000，长度512K&lt;/strong&gt;&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;Flash区，起始位置0x8000000&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
@@ -10404,7 +10548,7 @@ C++ 多态意味着调用成员函数时，会根据调用函数的对象的类�
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h4 id=&#34;ram区&#34;&gt;RAM区
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;RAM区，起始位置0x20000000，长度128K&lt;/strong&gt;&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;RAM区，起始位置0x20000000&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
@@ -10484,7 +10628,7 @@ C++ 多态意味着调用成员函数时，会根据调用函数的对象的类�
 &lt;li&gt;&lt;strong&gt;用const关键字声明的常量&lt;/strong&gt;：分配在Flash中&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;使用C标准的malloc申请的内存&lt;/strong&gt;：分配在系统堆中&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;不在任务中定义的临时变量&lt;/strong&gt;：分配在系统栈中&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;使用&lt;/strong&gt;*&lt;code&gt;pvPortMalloc&lt;/code&gt;**开辟的内存或调用FreeRTOS标准API自动分配的内存：**分配在FreeRTOS堆中&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;使用&lt;code&gt;pvPortMalloc&lt;/code&gt;开辟的内存或调用FreeRTOS标准API自动分配的内存：分配在FreeRTOS堆中&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;在任务中定义的临时变量&lt;/strong&gt;：分配在对应任务的任务栈中&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;在中断中使用&lt;/strong&gt;*&lt;code&gt;pvPortMallocFromISR&lt;/code&gt;&lt;strong&gt;分配的内存&lt;/strong&gt;：分配在FreeRTOS堆中&lt;/li&gt;
 &lt;li&gt;在中断中禁止使用C标准的malloc和free&lt;/li&gt;
@@ -10937,7 +11081,7 @@ C++ 多态意味着调用成员函数时，会根据调用函数的对象的类�
 &lt;/ul&gt;
 &lt;h5 id=&#34;3-段分配规则sections-块&#34;&gt;3. 段分配规则（SECTIONS 块）
 &lt;/h5&gt;&lt;p&gt;&lt;code&gt;SECTIONS&lt;/code&gt;块是最复杂的部分，定义了「编译生成的段」如何映射到「MEMORY 块定义的物理内存」，每一个子段都对应特定的代码 / 数据类型。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Flash区，起始位置0x8000000，长度512K&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Flash区，起始位置0x8000000&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
@@ -11004,7 +11148,7 @@ C++ 多态意味着调用成员函数时，会根据调用函数的对象的类�
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;RAM区，起始位置0x20000000，长度128K&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;RAM区，起始位置0x20000000&lt;/strong&gt;&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
