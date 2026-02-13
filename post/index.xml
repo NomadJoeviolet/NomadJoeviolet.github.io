@@ -8,11 +8,11 @@
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
         <lastBuildDate>Thu, 12 Feb 2026 18:23:07 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>ChipTanks-游戏设计</title>
-        <link>https://NomadJoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/</link>
+        <title>ChipTanks-玩法介绍</title>
+        <link>https://NomadJoeviolet.github.io/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/</link>
         <pubDate>Thu, 12 Feb 2026 18:23:07 +0800</pubDate>
         
-        <guid>https://NomadJoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/</guid>
+        <guid>https://NomadJoeviolet.github.io/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/</guid>
         <description>&lt;h2 id=&#34;-游戏介绍chip-tanks-芯片坦克&#34;&gt;🎮 游戏介绍：Chip Tanks (芯片坦克)
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Chip Tanks&lt;/strong&gt;  是一款运行在 STM32 嵌入式平台上的  &lt;strong&gt;Roguelike 俯视视角弹幕射击游戏&lt;/strong&gt;。玩家将操控一辆微型坦克，在 OLED 屏幕呈现的战场上，迎战源自《山海经》与中国上古神话的机械化凶兽。&lt;/p&gt;
 &lt;p&gt;通过击败敌人获取经验，升级并抽取强力的  &lt;strong&gt;PerkCard（天赋卡）&lt;/strong&gt;，构建属于你的战斗流派，挑战强大的关卡 BOSS！&lt;/p&gt;

@@ -10,7 +10,7 @@
 <meta property='og:description' content="设计思路简介 游戏类型设计 嵌入式平台上的“山海经”题材 Rougelite 弹幕射击游戏（STG）\n横版/竖版射击 (Shoot &rsquo;em up / STG)： 游戏的核心玩法是控制主角在 OLED 屏幕上移动，发射子弹消灭源源不断的敌人。\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/'>
 <meta property='og:site_name' content='Nomad_violet'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='个人项目' /><meta property='article:published_time' content='2026-02-12T18:23:07&#43;08:00'/><meta property='article:modified_time' content='2026-02-12T18:23:07&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='个人项目' /><meta property='article:published_time' content='2025-11-27T18:23:07&#43;08:00'/><meta property='article:modified_time' content='2025-11-27T18:23:07&#43;08:00'/>
 <meta name="twitter:title" content="ChipTanks-游戏设计">
 <meta name="twitter:description" content="设计思路简介 游戏类型设计 嵌入式平台上的“山海经”题材 Rougelite 弹幕射击游戏（STG）\n横版/竖版射击 (Shoot &rsquo;em up / STG)： 游戏的核心玩法是控制主角在 OLED 屏幕上移动，发射子弹消灭源源不断的敌人。\n">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -261,22 +261,39 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#-游戏介绍chip-tanks-芯片坦克">🎮 游戏介绍：Chip Tanks (芯片坦克)</a></li>
-    <li><a href="#-游戏类型与核心机制">🕹️ 游戏类型与核心机制</a></li>
-    <li><a href="#-操作指南">🎮 操作指南</a></li>
-    <li><a href="#-perkcard-天赋卡-系统详解">🃏 PerkCard (天赋卡) 系统详解</a>
+    <li><a href="#设计思路简介">设计思路简介</a>
       <ol>
-        <li><a href="#-生存与恢复类">🛡️ 生存与恢复类</a></li>
-        <li><a href="#-攻击与火力类">⚔️ 攻击与火力类</a></li>
-        <li><a href="#-热量管理类-核心机制">🔥 热量管理类 (核心机制)</a></li>
-        <li><a href="#-机动类">🚀 机动类</a></li>
+        <li><a href="#游戏类型设计">游戏类型设计</a></li>
+        <li><a href="#游戏背景设计">游戏背景设计</a></li>
       </ol>
     </li>
-    <li><a href="#-敌人图鉴-山海经机械兽">👾 敌人图鉴 (山海经机械兽)</a>
+    <li><a href="#游戏具体设计">游戏具体设计</a>
       <ol>
-        <li><a href="#普通敌人">普通敌人</a></li>
-        <li><a href="#精英敌人">精英敌人</a></li>
-        <li><a href="#关卡-boss">关卡 BOSS</a></li>
+        <li><a href="#机制设计">机制设计</a>
+          <ol>
+            <li><a href="#1-基础战斗机制">1. 基础战斗机制</a></li>
+            <li><a href="#2升级机制-level-up-mechanism">2.升级机制 (Level-Up Mechanism)</a></li>
+            <li><a href="#3perkcard-机制-天赋卡片系统">3.PerkCard 机制 (天赋卡片系统)</a></li>
+          </ol>
+        </li>
+        <li><a href="#敌人设计风格">敌人设计风格</a>
+          <ol>
+            <li><a href="#定位">定位</a></li>
+            <li><a href="#攻击机制与数值">攻击机制与数值</a></li>
+          </ol>
+        </li>
+        <li><a href="#所有角色数值设计">所有角色数值设计</a>
+          <ol>
+            <li><a href="#玩家-leadingrole-数值公式">玩家 (LeadingRole) 数值公式</a></li>
+            <li><a href="#2-战斗机制公式">2. 战斗机制公式</a></li>
+            <li><a href="#3-玩家伤害输出公式-createbullet">3. 玩家伤害输出公式 (createBullet)</a></li>
+            <li><a href="#敌人-enemy-数值公式">敌人 (Enemy) 数值公式</a></li>
+            <li><a href="#1-基础属性-通用模板">1. 基础属性 (通用模板)</a></li>
+            <li><a href="#2-具体敌人数值-基于-enemyrolecpp">2. 具体敌人数值 (基于 enemyRole.cpp)</a></li>
+            <li><a href="#3-敌人伤害输出">3. 敌人伤害输出</a></li>
+            <li><a href="#通用物理与状态公式">通用物理与状态公式</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
   </ol>
@@ -328,7 +345,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2026-02-12</time>
+                <time class="article-time--published">2025-11-27</time>
             </div>
         
 
@@ -344,144 +361,579 @@
     <section class="article-content">
     
     
-    <h2 id="-游戏介绍chip-tanks-芯片坦克">🎮 游戏介绍：Chip Tanks (芯片坦克)
-</h2><p><strong>Chip Tanks</strong>  是一款运行在 STM32 嵌入式平台上的  <strong>Roguelike 俯视视角弹幕射击游戏</strong>。玩家将操控一辆微型坦克，在 OLED 屏幕呈现的战场上，迎战源自《山海经》与中国上古神话的机械化凶兽。</p>
-<p>通过击败敌人获取经验，升级并抽取强力的  <strong>PerkCard（天赋卡）</strong>，构建属于你的战斗流派，挑战强大的关卡 BOSS！</p>
-<h2 id="-游戏类型与核心机制">🕹️ 游戏类型与核心机制
-</h2><ul>
-<li><strong>类型</strong>：Roguelike / 弹幕射击 (STG) / 嵌入式游戏</li>
-<li><strong>核心循环</strong>：战斗 -&gt; 积累经验 -&gt; 升级 -&gt; <strong>三选一抽卡 (Perk)</strong> -&gt; 挑战 BOSS -&gt; 进入下一章。</li>
-<li><strong>热量系统 (Heat System)</strong>：
+    <h2 id="设计思路简介">设计思路简介
+</h2><h3 id="游戏类型设计">游戏类型设计
+</h3><p><strong>嵌入式平台上的“山海经”题材 Rougelite 弹幕射击游戏</strong>（STG）</p>
+<p><strong>横版/竖版射击 (Shoot &rsquo;em up / STG)</strong>：
+游戏的核心玩法是控制主角在 OLED 屏幕上移动，发射子弹消灭源源不断的敌人。</p>
+<p><strong>Roguelite (轻度肉鸽)</strong>：
+<strong>随机成长</strong>：包含  <code>PerkCard</code>  系统和  <code>gamePerkCardManager</code>。玩家升级后会触发 Perk 选择（如“攻速提升”、“解锁火球”、“解锁闪电”），每次游玩的构建（Build）都是不同的。
+<strong>永久死亡/单局进程</strong>：通常此类嵌入式游戏为单局挑战模式。</p>
+<p><strong>热量系统 (Overheat System)</strong>：不同于传统的无限射击，游戏引入了“热量”机制（<code>heatData</code>）。普通子弹、火球、闪电消耗不同的热量，过热可能导致无法射击。这要求玩家在“爆发输出”和“控温”之间做决策，增加了战术深度。</p>
+<h3 id="游戏背景设计">游戏背景设计
+</h3><p>基于中国古代神话典籍《山海经》。所有的敌人都是古代神话中的妖兽，所有敌人的设计元素均来自于《山海经》。</p>
+<p>通过将古老的神话生物与“坦克/射击”、“OLED 显示”、“热量过载”等科技元素结合形成反差。</p>
 <ul>
-<li>坦克的射击受到“热量”限制。</li>
-<li>普通子弹、火球、闪电链会产生不同程度的热量。</li>
-<li>当热量达到上限时，坦克将<strong>过热无法射击</strong>，必须等待冷却。</li>
-<li>策略点：玩家需要在输出火力和控制热量之间寻找平衡。</li>
+<li><strong>敌人</strong>：</li>
+<li><strong>小怪</strong>：飞廉（风神）、蛊雕（食人雕）、魑魅（山林鬼怪）</li>
+<li><strong>BOSS</strong>：上古四凶（饕餮、梼杌）和凶神（相柳）</li>
 </ul>
-</li>
-<li><strong>自动回血</strong>：坦克具备自我修复功能，在不受伤害一段时间后会缓慢恢复生命值。</li>
-</ul>
-<h2 id="-操作指南">🎮 操作指南
-</h2><p>游戏通过按键进行操作：</p>
+<h2 id="游戏具体设计">游戏具体设计
+</h2><h3 id="机制设计">机制设计
+</h3><p>所有角色遵循以下基础物理与战斗公式：</p>
+<h4 id="1-基础战斗机制">1. 基础战斗机制
+</h4><ul>
+<li><strong>射击冷却 (Cooldown):</strong> <code>射击间隔(ms) = resetTime / Speed</code>。</li>
+<li><strong>热量机制 (Heat):</strong>
 <ul>
-<li><strong>移动控制</strong>：
+<li><strong>冷却速率:</strong>  基类 <code>IRole::update()</code> 每 <strong>500ms</strong> 结算一次，减少 <code>heatCoolDownRate * 5</code> 点热量（等效每秒 <code>heatCoolDownRate * 10</code>）。</li>
+<li><strong>热量消耗倍率（与 <code>heatPerShot</code> 基值相乘）:</strong>
 <ul>
-<li><strong>Key 10</strong>：向上移动 (UP) / 菜单上选</li>
-<li><strong>Key 11</strong>：向下移动 (DOWN) / 菜单下选</li>
-<li><strong>Key 15</strong>：向左移动 (LEFT)</li>
-<li><strong>Key 7</strong>：向右移动 (RIGHT)</li>
-</ul>
-</li>
-<li><strong>功能控制</strong>：
-<ul>
-<li><strong>Key 3</strong>：确认选择 (Select) —— 用于在升级界面选择 PerkCard。</li>
-</ul>
-</li>
-<li><strong>攻击</strong>：
-<ul>
-<li>坦克会自动锁定并攻击，自动判定冷却和热量。</li>
+<li>普通子弹: <strong>1.0x</strong></li>
+<li>火球弹: <strong>2.0x</strong></li>
+<li>闪电链: <strong>2.0x</strong> （当前实现）</li>
 </ul>
 </li>
 </ul>
-<h2 id="-perkcard-天赋卡-系统详解">🃏 PerkCard (天赋卡) 系统详解
-</h2><p>PerkCard 是游戏的核心 Roguelike 元素。每当玩家升级（特定等级）时，系统会随机提供 3 张卡片供玩家选择。</p>
-<p>以下是所有卡片的效果说明：</p>
-<h3 id="-生存与恢复类">🛡️ 生存与恢复类
-</h3><ol>
-<li><strong>HEAL_SPEED_UP (回复速度提升)</strong>
+</li>
+<li><strong>伤害计算:</strong>
 <ul>
-<li><strong>效果</strong>：加快自动回血的频率。让你在受损后能更快开始修复。</li>
+<li><strong>普通子弹:</strong> <code>Damage = attackPower</code></li>
+<li><strong>火球弹:</strong> <code>Damage = attackPower + 10</code> (直接伤害 + 范围伤害)（造成两次）</li>
+<li><strong>闪电链:</strong> <code>Damage = (multiplier * attackPower) + 30</code> (穿透伤害</li>
 </ul>
 </li>
-<li><strong>HEAL_AMOUNT_UP (回复量提升)</strong>
+<li><strong>恢复计算</strong>：<code>恢复间隔(ms) = resetTime / Speed , 恢复量 = healValue</code></li>
+</ul>
+<p>子弹设计逻辑，火球弹是大范围清杂子弹，闪电链是高伤害穿透子弹</p>
+<h4 id="2升级机制-level-up-mechanism">2.升级机制 (Level-Up Mechanism)
+</h4><p>升级是玩家成长的基础驱动力。</p>
+<p><strong>经验获取 (XP Gain)</strong></p>
 <ul>
-<li><strong>效果</strong>：增加每次回血恢复的生命值数值。</li>
+<li><strong>来源</strong>: 击杀敌人。</li>
+<li><strong>数值</strong>: 每个敌人都有定义的  <code>dropExp</code>（掉落经验值）。
+<ul>
+<li>例如  <code>FeilianEnemy</code>  构造函数中传入  <code>dropExp</code></li>
 </ul>
 </li>
-<li><strong>HEALTH_UP (生命上限提升)</strong>
+<li><strong>过程</strong>: 当敌人死亡（<a class="link" href="vscode-file://vscode-app/c:/IncludeAll/Tools/VSCode/Microsoft%20VS%20Code/resources/app/out/vs/code/electron-browser/workbench/workbench.html" >die()</a>）时，其  <code>dropExp</code>  会被加到玩家（<code>LeadingRole</code>）的当前经验池中</li>
+</ul>
+<p><strong>升级判定</strong></p>
 <ul>
-<li><strong>效果</strong>：大幅提升坦克的最大生命值，并且<strong>瞬间回满所有生命值</strong>。救命神卡。</li>
+<li><strong>阈值</strong>: 玩家拥有  <code>currentExp</code>  和  <code>maxExp</code>（升级所需经验）</li>
+<li><strong>逻辑</strong>: 当  <code>currentExp &gt;= maxExp</code>  时，触发升级</li>
+<li><strong>成长曲线</strong>: 升级后，下一级所需的  <code>maxExp</code>  通常会增加（例如：<code>maxExp = maxExp * 1.2</code>  或固定增量），增加升级难度</li>
+</ul>
+<p><strong>升级后的基础提升 (Base Stat Growth)</strong>
+每次升级，玩家角色会自动获得一些基础属性的提升，无需选择：</p>
+<ul>
+<li><strong>生命值上限 (Max Health)</strong>: 提升生存能力（例如  <code>maxHealth += 10</code>）。</li>
+<li><strong>回满血</strong>: 升级通常伴随着状态恢复</li>
+<li><strong>攻击力/热量上限</strong>: 可能伴随微量的线性成长（取决于  <code>LeadingRole</code>  的具体实现）
+<strong>触发特殊事件</strong></li>
+<li><strong>Perk 选择</strong>: 每隔特定等级（<strong>每 2 级</strong>），触发一次 PerkCard 选择</li>
+<li><strong>形态变化</strong>: ，会改变角色的基础攻速</li>
+</ul>
+<h4 id="3perkcard-机制-天赋卡片系统">3.PerkCard 机制 (天赋卡片系统)
+</h4><p>PerkCard 是游戏的<strong>Roguelike</strong>核心元素，允许玩家在单局游戏中构建不同的战斗流派。
+<strong>卡片定义</strong>
+卡片包含以下属性：</p>
+<ul>
+<li><strong>Type (类型)</strong>: 枚举值，决定卡片的功能。</li>
+<li><strong>Name (名称)</strong>: 显示在 OLED 屏幕上的文本（如 &ldquo;Attack +5&rdquo;）。</li>
+<li><strong>Param (参数)</strong>: 数值强度（如加 5 点攻击，参数就是 5）。</li>
+<li><strong>卡片类型与效果详解</strong></li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">卡片类型</th>
+          <th style="text-align: left">效果描述</th>
+          <th style="text-align: left">关联代码变量</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>HEAL_SPEED_UP</strong></td>
+          <td style="text-align: left">提升回血速度</td>
+          <td style="text-align: left"><code>healthData.healSpeed</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>HEAL_AMOUNT_UP</strong></td>
+          <td style="text-align: left">提升单次回复量</td>
+          <td style="text-align: left"><code>healthData.healValue</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>HEALTH_UP</strong></td>
+          <td style="text-align: left">提升生命上限</td>
+          <td style="text-align: left"><code>healthData.maxHealth</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>ATTACK_UP</strong></td>
+          <td style="text-align: left">提升基础攻击力</td>
+          <td style="text-align: left"><code>attackData.attackPower</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>ATTACK_SPEED_UP</strong></td>
+          <td style="text-align: left">提升射击频率</td>
+          <td style="text-align: left"><code>attackData.shootCooldownSpeed</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>HEAT_CAPACITY_UP</strong></td>
+          <td style="text-align: left">提升热量上限</td>
+          <td style="text-align: left"><code>heatData.maxHeat</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>HEAT_COOL_DOWN_UP</strong></td>
+          <td style="text-align: left">提升散热速度</td>
+          <td style="text-align: left"><code>heatData.heatCoolDownRate</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>UNLOCK_FIREBALL</strong></td>
+          <td style="text-align: left"><strong>解锁新武器</strong></td>
+          <td style="text-align: left">玩家解锁新的子弹</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>UNLOCK_LIGHTNING</strong></td>
+          <td style="text-align: left"><strong>解锁新武器</strong></td>
+          <td style="text-align: left">玩家解锁新的子弹</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>FIREBALL_RANGE_UP</strong></td>
+          <td style="text-align: left">提升火球爆炸范围</td>
+          <td style="text-align: left"><code>attackData.bulletRange</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>LIGHTNING_MULTIPLIER</strong></td>
+          <td style="text-align: left">提升闪电伤害倍率</td>
+          <td style="text-align: left"><code>attackData.bulletDamageMultiplier</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>MOVE_SPEED_UP</strong></td>
+          <td style="text-align: left">提升移动速度</td>
+          <td style="text-align: left"><code>spatialData.moveSpeed</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<h5 id="流派构建">流派构建
+</h5><p>通过升级和 Perk 的组合，玩家可以形成不同的策略：</p>
+<ol>
+<li><strong>加特林流 (高攻速 + 高散热)</strong>:
+<ul>
+<li>重点选择  <code>ATTACK_SPEED_UP</code>  和  <code>HEAT_COOL_DOWN_UP</code>。</li>
+<li>结果：发射普通子弹像泼水一样，利用高频率触发伤害。</li>
+</ul>
+</li>
+<li><strong>重炮流 (火球 + 爆炸范围 + 高攻击)</strong>:
+<ul>
+<li>重点选择  <code>UNLOCK_FIREBALL</code>, <code>ATTACK_UP</code>, <code>FIREBALL_RANGE_UP</code>。</li>
+<li>结果：攻速慢，但一发火球能清空一片区域。</li>
+</ul>
+</li>
+<li><strong>雷神流 (闪电 + 倍率 + 高攻击 )</strong>:
+<ul>
+<li>重点选择  <code>UNLOCK_LIGHTNING</code>, <code>LIGHTNING_MULTIPLIER_UP</code>。</li>
+<li>结果：利用闪电的穿透特性和高倍率伤害，瞬间秒杀直线上的敌人。</li>
+</ul>
+</li>
+<li><strong>坦克流 (回血 + 高血量)</strong>:
+<ul>
+<li>重点选择  <code>HEALTH_UP</code>, <code>HEAL_SPEED_UP</code>。</li>
+<li>结果：依靠中的自动回血逻辑（<code>healTimeCounter</code>），硬抗敌人</li>
 </ul>
 </li>
 </ol>
-<h3 id="-攻击与火力类">⚔️ 攻击与火力类
-</h3><ol start="4">
-<li><strong>ATTACK_UP (攻击力提升)</strong>
+<h3 id="敌人设计风格">敌人设计风格
+</h3><h4 id="定位">定位
+</h4><p><strong>Fodder (炮灰/骚扰)</strong>：飞廉（高机动低伤）、魑魅（自爆卡车），主要用于干扰走位和消耗玩家精力。</p>
+<p><strong>Elite (精英/高威胁)</strong>：驳、胜遇、狸力，拥有多种攻击模式，强迫玩家进行特定走位和策略应对。蛊雕拥有亡语机制（死后发火球）。</p>
+<p><strong>Boss (首领)</strong>：拥有多阶段或多技能循环。
+<em>饕餮</em>：近战系 BOSS，强调位移控制（拉人、冲撞）。
+<em>梼杌</em>：敏捷系 BOSS，强调反应速度（闪现、狂暴弹幕）。
+<em>相柳</em>：法师/召唤系 BOSS，强调全屏躲避和处理小怪（AOE、召唤）。
+<em>混沌</em>：四凶之首，混乱系 BOSS，强调视野干扰、随机弹幕和牵引玩家。</p>
+<h4 id="攻击机制与数值">攻击机制与数值
+</h4><h5 id="1-飞廉-feilianenemy">1. 飞廉 (FeilianEnemy)
+</h5><ul>
+<li><strong>定位</strong>：小型高速骚扰者</li>
+<li><strong>原型</strong>：风神，鹿身翼角。</li>
+<li><strong>数值设定</strong>：
 <ul>
-<li><strong>效果</strong>：直接增加所有子弹的基础伤害。</li>
+<li><strong>体型</strong>：12x12 (小)</li>
+<li><strong>移动</strong>：高速，轨迹飘忽不定（模拟风的特性）。</li>
+<li><strong>攻击力</strong>：低。</li>
+<li><strong>死亡动画</strong>：250ms。</li>
 </ul>
 </li>
-<li><strong>ATTACK_SPEED_UP (攻速提升)</strong>
+<li><strong>攻击方式</strong>：
 <ul>
-<li><strong>效果</strong>：减少射击的冷却时间，让你能更频繁地发射子弹（需配合热量卡使用，否则容易过热）。</li>
+<li><strong>普通射击</strong>：只发射普通子弹。</li>
 </ul>
 </li>
-<li><strong>UNLOCK_FIREBALL (解锁：火球弹)</strong>
+<li><strong>战术意义</strong>：单体威胁小，依靠数量和难以预测的移动轨迹干扰玩家，消耗玩家的注意力。</li>
+</ul>
+<h5 id="2-蛊雕-gudiaoenemy">2. 蛊雕 (GudiaoEnemy)
+</h5><ul>
+<li><strong>定位</strong>：中型伏击者</li>
+<li><strong>原型</strong>：食人猛禽，似雕有角，音如婴儿。</li>
+<li><strong>数值设定</strong>：
 <ul>
-<li><strong>效果</strong>：解锁副武器<strong>火球</strong>。火球击中敌人后会造成<strong>范围爆炸伤害</strong>（AOE），适合清理成群的小怪。</li>
+<li><strong>体型</strong>：15x15 (中)</li>
+<li><strong>移动</strong>：中速，飞行轨迹较直接。</li>
+<li><strong>攻击力</strong>：较高。</li>
+<li><strong>死亡动画</strong>：250ms。</li>
 </ul>
 </li>
-<li><strong>UNLOCK_LIGHTNING (解锁：闪电链)</strong>
+<li><strong>攻击方式</strong>：
 <ul>
-<li><strong>效果</strong>：解锁副武器<strong>闪电链</strong>。闪电具有极高的单体伤害倍率，是击杀 BOSS 的利器。</li>
+<li><strong>双侧射击</strong>：每次从身体中心的两侧发射普通子弹（高伤害）。</li>
+<li><strong>亡语（Death Rattle）</strong>：死亡后会发射一颗火球弹，对击杀者造成最后威胁。</li>
 </ul>
 </li>
-<li><strong>FIREBALL_RANGE_UP (火球范围提升)</strong>
+<li><strong>战术意义</strong>：需要优先处理的高伤害单位，且击杀时需注意躲避亡语子弹。</li>
+</ul>
+<h5 id="3-魑魅-chimeienemy">3. 魑魅 (ChiMeiEnemy)
+</h5><ul>
+<li><strong>定位</strong>：自杀式冲锋怪</li>
+<li><strong>原型</strong>：山林鬼怪，迷惑人心。</li>
+<li><strong>数值设定</strong>：
 <ul>
-<li><strong>效果</strong>：扩大火球爆炸的伤害半径，增强 AOE 能力。</li>
+<li><strong>体型</strong>：8x8 (极小)</li>
+<li><strong>移动</strong>：高速。</li>
+<li><strong>死亡动画</strong>：250ms。</li>
 </ul>
 </li>
-<li><strong>LIGHTNING_MULTIPLIER_UP (闪电伤害倍率提升)</strong>
+<li><strong>攻击方式</strong>：
 <ul>
-<li><strong>效果</strong>：大幅提升闪电链的伤害倍数，使其成为终极杀伤武器。</li>
+<li><strong>自杀冲撞</strong>：不发射子弹，通过高速移动直接撞击玩家造成伤害。</li>
 </ul>
 </li>
+<li><strong>战术意义</strong>：迫使玩家保持移动，不能停留在原地。</li>
+</ul>
+<h5 id="4-饕餮-taotieenemy">4. 饕餮 (TaotieEnemy)
+</h5><ul>
+<li><strong>定位</strong>：近战坦克型 BOSS</li>
+<li><strong>原型</strong>：四凶之一，贪婪，吞噬万物。</li>
+<li><strong>数值设定</strong>：
+<ul>
+<li><strong>体型</strong>：64x64 (巨大)</li>
+<li><strong>HP</strong>：高血量。</li>
+<li><strong>攻击力</strong>：高。</li>
+<li><strong>移动</strong>：低速。</li>
+<li><strong>死亡动画</strong>：500ms。</li>
+</ul>
+</li>
+<li><strong>攻击方式 (5 种模式)</strong>：
+<ol>
+<li><strong>吞噬 (Devour)</strong>：将玩家向自己拉近 (<code>pullDistance = 30</code>)，然后进行攻击。</li>
+<li><strong>弹幕</strong>：发射三排普通子弹。</li>
+<li><strong>冲撞 (Ram)</strong>：向前冲锋 (<code>chargeDistance = 30</code>) 进行撞击。</li>
+<li><strong>碾压 (Crush)</strong>：从玩家左侧出现 (<code>crushChargeDistance = 100</code>)，向后碾压，封锁走位。</li>
+<li><strong>组合技</strong>：将玩家拉近，同时向前冲锋 (<code>pullAndChargeDistance = 50</code>)。</li>
 </ol>
-<h3 id="-热量管理类-核心机制">🔥 热量管理类 (核心机制)
-</h3><ol start="10">
-<li><strong>HEAT_CAPACITY_UP (热容上限提升)</strong>
+</li>
+</ul>
+<h5 id="5-梼杌-taowuenemy">5. 梼杌 (TaowuEnemy)
+</h5><ul>
+<li><strong>定位</strong>：高机动弹幕型 BOSS</li>
+<li><strong>原型</strong>：四凶之一，顽固凶暴。</li>
+<li><strong>数值设定</strong>：
 <ul>
-<li><strong>效果</strong>：提升热量槽上限。允许你在过热前连续发射更多子弹。</li>
+<li><strong>体型</strong>：64x64 (巨大)</li>
+<li><strong>HP</strong>：低血量（相对其他 BOSS）。</li>
+<li><strong>攻击力</strong>：高。</li>
+<li><strong>移动</strong>：高速，擅长闪现 (Blink)。</li>
+<li><strong>死亡动画</strong>：500ms。</li>
 </ul>
 </li>
-<li><strong>HEAT_COOL_DOWN_UP (散热速度提升)</strong>
-<ul>
-<li><strong>效果</strong>：加快热量的自然冷却速度。让你在停止射击后能更快恢复开火能力。</li>
-</ul>
-</li>
+<li><strong>攻击方式 (6 种模式)</strong>：
+<ol>
+<li><strong>狂暴弹幕</strong>：闪现至中间，随机发射大量普通子弹。<strong>狂暴机制</strong>：血量越低，持续时间越长（3 秒 -&gt; 6 秒），频率 5 发/秒。</li>
+<li><strong>随机火球</strong>：随机位置发射 5 个火球弹。</li>
+<li><strong>混合射击</strong>：中间发射 1 颗火球，两侧边缘各发射 2 颗普通子弹。</li>
+<li><strong>缺口阵型</strong>：发射一排子弹，仅中间留有缺口（迫使玩家钻缝）。</li>
+<li><strong>诡雷闪现</strong>：原地留下一颗火球弹，本体消失。</li>
+<li><strong>追击闪现</strong>：消除冷却 CD，直接闪现对齐玩家位置。</li>
 </ol>
-<h3 id="-机动类">🚀 机动类
-</h3><ol start="12">
-<li><strong>MOVE_SPEED_UP (移速提升)</strong>
+</li>
+</ul>
+<h5 id="6-相柳-xiangliuenemy">6. 相柳 (XiangliuEnemy)
+</h5><ul>
+<li><strong>定位</strong>：召唤与全屏压制型 BOSS</li>
+<li><strong>原型</strong>：九头蛇怪，所过之处尽成泽国。</li>
+<li><strong>数值设定</strong>：
 <ul>
-<li><strong>效果</strong>：提升坦克的移动速度，更利于躲避密集的弹幕和敌人的冲撞。</li>
+<li><strong>体型</strong>：64x64 (巨大)</li>
+<li><strong>HP</strong>：高血量。</li>
+<li><strong>攻击力</strong>：高。</li>
+<li><strong>移动</strong>：中速。</li>
+<li><strong>死亡动画</strong>：500ms。</li>
 </ul>
 </li>
+<li><strong>攻击方式 (6 种模式)</strong>：
+<ol>
+<li><strong>九头齐射</strong>：发射  <strong>9 排</strong>  普通子弹（覆盖面极大）。</li>
+<li><strong>雷狱</strong>：发射  <strong>3 排</strong>  闪电链（穿透伤害）。</li>
+<li><strong>火海</strong>：发射  <strong>3 排</strong>  火球弹（范围爆炸）。</li>
+<li><strong>召唤魑魅</strong>：生成 3 只自爆怪 (ChiMei) 协同作战。</li>
+<li><strong>召唤飞廉</strong>：生成 2 只高速怪 (Feilian) 协同作战。</li>
+<li><strong>召唤蛊雕</strong>：生成 1 只高伤怪 (Gudiao) 协同作战。</li>
 </ol>
-<h2 id="-敌人图鉴-山海经机械兽">👾 敌人图鉴 (山海经机械兽)
-</h2><p>你将面对形态各异的敌人，它们拥有不同的攻击模式：</p>
-<h3 id="普通敌人">普通敌人
-</h3><ul>
-<li><strong>飞廉 (Feilian)</strong>：小型敌人。移动速度极快，轨迹飘忽不定，通常成群结队出现进行骚扰。</li>
-<li><strong>蛊雕 (Gudiao)</strong>：中型敌人。擅长远程伏击，从身体两侧发射高伤子弹，死亡时会发射一颗复仇火球。</li>
-<li><strong>魑魅 (ChiMei)</strong>：极小敌人。只会进行自杀式冲撞，速度极快，一旦接触造成大量伤害。</li>
-</ul>
-<h3 id="精英敌人">精英敌人
-</h3><ul>
-<li><strong>驳 (Bo)</strong>：马形神兽，白身黑尾，头生独角。会使用<strong>冲锋践踏</strong>直扑玩家，发射<strong>扇形虎爪弹幕</strong>，以及释放<strong>鼓音震荡波</strong>。</li>
-<li><strong>胜遇 (Shengyu)</strong>：赤色野鸡状凶兽，擅长干扰。会在场地生成<strong>遮挡视野的水雾</strong>，推出<strong>迷雾屏障</strong>，并发射<strong>连续雷鸣子弹</strong>。</li>
-<li><strong>狸力 (Lili)</strong>：猪形神兽，与土系能力绑定。会发射<strong>土涌火球</strong>，释放<strong>獠吠扇形震波</strong>，并在随机位置埋设<strong>延时爆炸陷阱</strong>。</li>
-</ul>
-<h3 id="关卡-boss">关卡 BOSS
-</h3><ul>
-<li><strong>饕餮 (Taotie)</strong>：贪婪巨兽，四凶之一。血量极厚，会使用<strong>吞噬</strong>技能将玩家吸向自己，或发起猛烈的<strong>冲撞</strong>和<strong>碾压</strong>。</li>
-<li><strong>梼杌 (Taowu)</strong>：凶暴巨兽，四凶之一。擅长<strong>闪现</strong>移动，能释放覆盖全屏的<strong>随机弹幕</strong>和<strong>诡雷</strong>。</li>
-<li><strong>相柳 (Xiangliu)</strong>：灾难巨兽。九头蛇身，能同时发射<strong>九排弹幕</strong>，释放闪电与火球，并能<strong>召唤</strong>大量小怪协同作战。</li>
-<li><strong>混沌 (Hundun)</strong>：<strong>四凶之首</strong>，无面目的原始巨兽。血量最高，会<strong>随机闪烁移动并发射八方向弹幕</strong>，生成<strong>七窍封印干扰视野</strong>，使用<strong>虚空牵引</strong>将玩家拉向自身，释放<strong>螺旋式混沌漩涡</strong>和<strong>时空裂隙弹幕墙</strong>，以及终极技能<strong>归于混沌</strong>——全屏弹幕攻击（血量越低缺口越小）。
-<hr>
 </li>
 </ul>
-<p><strong>最后，祝您在 Chip Tanks 的世界中武运昌隆</strong></p>
+<h5 id="7-混沌-hundunenemy---四凶之首">7. 混沌 (HundunEnemy) - 四凶之首
+</h5><ul>
+<li><strong>定位</strong>：混乱与干扰型 BOSS（四凶之首）</li>
+<li><strong>原型</strong>：《山海经》记载其形如黄囊，赤如丹火，六足四翼，无面目；《庄子》有&quot;七窍凿而混沌死&quot;典故。</li>
+<li><strong>数值设定</strong>：
+<ul>
+<li><strong>体型</strong>：64x64 (巨大)</li>
+<li><strong>HP</strong>：最高血量（400 + Level×1200）。</li>
+<li><strong>攻击力</strong>：中高（8 + Level×6）。</li>
+<li><strong>移动</strong>：低速但可瞬移。</li>
+<li><strong>死亡动画</strong>：500ms。</li>
+</ul>
+</li>
+<li><strong>攻击方式 (6 种模式)</strong>：
+<ol>
+<li><strong>混沌涌动</strong>：随机闪烁移动，同时向 8 个方向发射普通子弹，低血量时夹杂火球。持续 3000ms，每 500ms 闪烁一次。</li>
+<li><strong>七窍封印</strong>：在屏幕上生成 7 个闪烁干扰区域遮挡视野，持续 2000ms（呼应&quot;七窍凿而混沌死&quot;典故）。</li>
+<li><strong>虚空牵引</strong>：将玩家向混沌位置缓慢拉近，同时发射追踪火球。持续 2500ms，每 300ms 拉近一次。</li>
+<li><strong>混沌漩涡</strong>：螺旋式发射子弹，Y位置按正弦波扫射。持续 2000ms，每 150ms 发射一发。</li>
+<li><strong>时空裂隙</strong>：快速发射带随机缺口的弹幕墙，缺口位置每轮变化。持续 2500ms，每 550ms 发射一轮。</li>
+<li><strong>归于混沌</strong>：全屏弹幕攻击，中间有安全缺口，血量越低缺口越小。警告 500ms 后发射。</li>
+</ol>
+</li>
+</ul>
+<h5 id="8-驳-boenemy">8. 驳 (BoEnemy)
+</h5><ul>
+<li><strong>定位</strong>：精英级中型敌人</li>
+<li><strong>原型</strong>：《山海经·西山经》记载，马形神兽，白身黑尾，头生独角，有虎牙虎爪，叫声如鼓，能捕食虎豹。</li>
+<li><strong>数值设定</strong>：
+<ul>
+<li><strong>体型</strong>：24x24 (中)</li>
+<li><strong>HP</strong>：40 + Level×200</li>
+<li><strong>攻击力</strong>：6 + Level×2</li>
+<li><strong>移动</strong>：中速（2）。</li>
+<li><strong>死亡动画</strong>：300ms。</li>
+</ul>
+</li>
+<li><strong>攻击方式 (3 种模式)</strong>：
+<ol>
+<li><strong>冲锋践踏</strong>：向玩家方向快速直线冲锋，造成碰撞伤害。冲锋距离 40 像素，持续 800ms。</li>
+<li><strong>虎牙利爪</strong>：发射 3 发呈扇形的普通子弹（呼应&quot;虎牙爪&quot;）。持续 200ms。</li>
+<li><strong>鼓音震荡</strong>：发射一排横向冲击波子弹（呼应&quot;音如鼓音&quot;）。持续 300ms。</li>
+</ol>
+</li>
+</ul>
+<h5 id="9-胜遇-shengyuenemy">9. 胜遇 (ShengyuEnemy)
+</h5><ul>
+<li><strong>定位</strong>：精英级干扰型敌人</li>
+<li><strong>原型</strong>：《山海经·西次三经》记载，赤色野鸡状凶兽，叫声独特，出现预示洪水灾厄。</li>
+<li><strong>数值设定</strong>：
+<ul>
+<li><strong>体型</strong>：20x20 (中)</li>
+<li><strong>HP</strong>：50 + Level×220</li>
+<li><strong>攻击力</strong>：10 + Level×4</li>
+<li><strong>移动</strong>：中速（2）。</li>
+<li><strong>死亡动画</strong>：300ms。</li>
+</ul>
+</li>
+<li><strong>攻击方式 (3 种模式)</strong>：
+<ol>
+<li><strong>水雾弥漫</strong>：在场景中生成 2 个迷雾区域遮挡玩家视线（呼应&quot;大水&quot;典故）。持续 3000ms。</li>
+<li><strong>洪波推涌</strong>：往前推出一长条迷雾屏障，长度 110 像素，逐渐消散。持续 2800ms。</li>
+<li><strong>赤羽雷鸣</strong>：发射一串 5 发普通子弹（呼应&quot;赤&quot;色特征）。每 150ms 发射一发，持续 800ms。</li>
+</ol>
+</li>
+</ul>
+<h5 id="10-狸力-lilienemy">10. 狸力 (LiliEnemy)
+</h5><ul>
+<li><strong>定位</strong>：精英级土系敌人</li>
+<li><strong>原型</strong>：《山海经·南山经》记载，猪形神兽，长有利爪，叫声如狗吠，出现预示大量土木工程。</li>
+<li><strong>数值设定</strong>：
+<ul>
+<li><strong>体型</strong>：22x22 (中)</li>
+<li><strong>HP</strong>：60 + Level×160</li>
+<li><strong>攻击力</strong>：6 + Level×3</li>
+<li><strong>移动</strong>：中速（2）。</li>
+<li><strong>死亡动画</strong>：300ms。</li>
+</ul>
+</li>
+<li><strong>攻击方式 (3 种模式)</strong>：
+<ol>
+<li><strong>土涌突刺</strong>：在前方间隔发射火球弹（土块爆炸，呼应&quot;土功&quot;）。持续 1200ms，每 400ms 发射一发。</li>
+<li><strong>獠吠震波</strong>：发射 5 发扇形普通子弹阵（呼应&quot;其音如狗吠&quot;）。持续 400ms。</li>
+<li><strong>穴地陷阱</strong>：在随机位置标记 2 个陷阱，延迟 500ms 后爆炸发射火球。持续 800ms。</li>
+</ol>
+</li>
+</ul>
+<h3 id="所有角色数值设计">所有角色数值设计
+</h3><h4 id="玩家-leadingrole-数值公式">玩家 (LeadingRole) 数值公式
+</h4><p>玩家的数值受基础属性、等级成长和 PerkCard（天赋卡）共同影响。</p>
+<h5 id="1-基础属性与成长">1. 基础属性与成长
+</h5><ul>
+<li><strong>生命值 (HP):</strong>
+<ul>
+<li><code>MaxHealth</code> = 初始值 (180) + <code>Level</code>  成长 (每级+20) + <code>Perk: HEALTH_UP</code></li>
+<li><code>CurrentHealth</code>: 升级时回满；受伤害减少；受回血机制增加。</li>
+</ul>
+</li>
+<li><strong>攻击力 (Atk):</strong>
+<ul>
+<li><code>AttackPower</code> = 初始值 (15) + <code>Level</code>  成长 (每级+1) + <code>Perk: ATTACK_UP</code></li>
+</ul>
+</li>
+<li><strong>移动速度:</strong>
+<ul>
+<li><code>MoveSpeed</code> = 初始值 (1) + <code>Perk: MOVE_SPEED_UP</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="2-战斗机制公式">2. 战斗机制公式
+</h4><ul>
+<li><strong>射击冷却 (Cooldown):</strong>
+<ul>
+<li><code>冷却时间(ms)</code> = <code>shootCooldownResetTime</code> (4000) / shootCooldownSpeed</li>
+<li>shootCooldownSpeed = 初始值 (4) + <code>Level</code>  成长 (每 5 级+2) + <code>Perk: ATTACK_SPEED_UP</code></li>
+</ul>
+</li>
+<li><strong>热量机制 (Heat):</strong>
+<ul>
+<li><code>热量上限</code> = <code>maxHeat</code> (100) + <code>Level</code>  成长 (每级+5) + <code>Perk: HEAT_CAPACITY_UP</code></li>
+<li><code>冷却速率</code> = <strong>每 2000ms</strong> 结算一次，减少 <code>heatCoolDownRate * 10</code> 点热量；初始 <code>heatCoolDownRate = 4</code>，每 2 级 +1，Perk: HEAT_COOL_DOWN_UP 每张 +2。</li>
+<li><code>单发热量</code> = <code>heatPerShot</code> (初始 <strong>15</strong>，每 2 级 -1，最低不低于 1) × 枪械倍率（普通 1.0x / 火球 2.0x / 闪电 1.5x）。</li>
+</ul>
+</li>
+<li><strong>回血机制 (Regen):</strong>
+<ul>
+<li><code>触发间隔</code> = <code>healResetTime</code> (15000) / <code>healSpeed</code> (3) = 5000ms</li>
+<li><code>单次回复量</code> = <code>healValue</code> (初始 5 + 每级+1 + <code>Perk: HEAL_AMOUNT_UP</code>)</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-玩家伤害输出公式-createbullet">3. 玩家伤害输出公式 (createBullet)
+</h4><ul>
+<li><strong>普通子弹 (Basic):</strong><br>
+Damage=attackPowerDamage=attackPower</li>
+<li><strong>火球弹 (FireBall):</strong><br>
+Damage=attackPower+10Damage=attackPower+10
+<em>(注：火球造成一次直接伤害 + 范围伤害，两者数值相同)</em></li>
+<li><strong>闪电链 (Lightning):</strong><br>
+Damage=(attackPower×multiplier)+30Damage=(attackPower×multiplier)+30
+<em>(注：<code>multiplier</code>  初始为 1.5，可通过 Perk 提升)</em></li>
+</ul>
+<h4 id="敌人-enemy-数值公式">敌人 (Enemy) 数值公式
+</h4><p>敌人的数值主要由其类型和当前游戏等级 (<code>Level</code>) 决定。</p>
+<h4 id="1-基础属性-通用模板">1. 基础属性 (通用模板)
+</h4><ul>
+<li><strong>生命值 (HP):</strong><br>
+HP=BaseHP+(Level×HP_Growth)HP=BaseHP+(Level×HP_Growth)</li>
+<li><strong>攻击力 (Atk):</strong><br>
+Atk=BaseAtk+(Level×Atk_Growth)Atk=BaseAtk+(Level×Atk_Growth)</li>
+<li><strong>经验掉落 (XP):</strong><br>
+DropExp=BaseExp+(Level×Exp_Growth)DropExp=BaseExp+(Level×Exp_Growth)</li>
+<li><strong>热量冷却:</strong> 基类同一逻辑，每 2000ms 结算一次，减少 <code>heatCoolDownRate * 10</code> 点（敌人默认 <code>heatCoolDownRate = 10</code>，见 enemyRole.cpp）。</li>
+</ul>
+<h4 id="2-具体敌人数值-基于-enemyrolecpp">2. 具体敌人数值 (基于 enemyRole.cpp)
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">敌人类型</th>
+          <th style="text-align: left">生命值公式 (HP)</th>
+          <th style="text-align: left">攻击力公式 (Atk)</th>
+          <th style="text-align: left">碰撞伤害</th>
+          <th style="text-align: left">备注</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>飞廉 (Feilian)</strong></td>
+          <td style="text-align: left">10 + Level×20</td>
+          <td style="text-align: left">2 + Level×1</td>
+          <td style="text-align: left">4 + Level×1</td>
+          <td style="text-align: left">高速骚扰，低伤脆皮</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>蛊雕 (Gudiao)</strong></td>
+          <td style="text-align: left">20 + Level×150</td>
+          <td style="text-align: left">8 + Level×2</td>
+          <td style="text-align: left">4 + Level×1</td>
+          <td style="text-align: left">远程伏击，死后发火球</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>魑魅 (ChiMei)</strong></td>
+          <td style="text-align: left">1 + Level×1</td>
+          <td style="text-align: left">1 + Level×1</td>
+          <td style="text-align: left">20（固定）</td>
+          <td style="text-align: left">自爆冲撞</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>驳 (Bo)</strong></td>
+          <td style="text-align: left">40 + Level×200</td>
+          <td style="text-align: left">6 + Level×2</td>
+          <td style="text-align: left">10 + Level×3</td>
+          <td style="text-align: left">精英，冲锋/扇形射击</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>胜遇 (Shengyu)</strong></td>
+          <td style="text-align: left">50 + Level×220</td>
+          <td style="text-align: left">10 + Level×4</td>
+          <td style="text-align: left">6 + Level×2</td>
+          <td style="text-align: left">精英，水雾干扰/洪波</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>狸力 (Lili)</strong></td>
+          <td style="text-align: left">60 + Level×160</td>
+          <td style="text-align: left">6 + Level×3</td>
+          <td style="text-align: left">8 + Level×2</td>
+          <td style="text-align: left">精英，土涌/陷阱</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>饕餮 (Taotie)</strong></td>
+          <td style="text-align: left">50 + Level×1700</td>
+          <td style="text-align: left">2 + Level×4</td>
+          <td style="text-align: left">10 + Level×10</td>
+          <td style="text-align: left">BOSS，吞噬/冲撞/碾压</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>梼杌 (Taowu)</strong></td>
+          <td style="text-align: left">30 + Level×1200</td>
+          <td style="text-align: left">10 + Level×6</td>
+          <td style="text-align: left">7 + Level×5</td>
+          <td style="text-align: left">BOSS，闪现/弹幕爆发</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>相柳 (Xiangliu)</strong></td>
+          <td style="text-align: left">30 + Level×1300</td>
+          <td style="text-align: left">3 + Level×5</td>
+          <td style="text-align: left">12 + Level×4</td>
+          <td style="text-align: left">BOSS，全屏AOE/召唤</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>混沌 (Hundun)</strong></td>
+          <td style="text-align: left">40 + Level×1400</td>
+          <td style="text-align: left">8 + Level×6</td>
+          <td style="text-align: left">15 + Level×8</td>
+          <td style="text-align: left">BOSS（四凶之首），混乱弹幕</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="3-敌人伤害输出">3. 敌人伤害输出
+</h4><ul>
+<li><strong>普通射击:</strong>  造成  <code>Atk</code>  点伤害。</li>
+<li><strong>碰撞伤害:</strong>  等于其  <code>collisionPower</code>。</li>
+<li><strong>特殊技能:</strong>  如火球或闪电，遵循与玩家相同的伤害增幅逻辑（例如火球通常比普攻高）。</li>
+</ul>
+<h4 id="通用物理与状态公式">通用物理与状态公式
+</h4><p>适用于所有角色（玩家与敌人）：</p>
+<ul>
+<li><strong>移动公式:</strong><br>
+NewPos=CurrentPos+(Direction×Speed)NewPos=CurrentPos+(Direction×Speed)</li>
+<li><strong>碰撞回退:</strong> BackStep=BaseStep×ConsecutiveCollisionCountBackStep=BaseStep×ConsecutiveCollisionCount
+<em>(注：连续碰撞次数越多，弹开距离越远，防止卡死)</em></li>
+<li><strong>受伤公式:</strong> CurrentHealth=max⁡(0,CurrentHealth−Damage)CurrentHealth=max(0,CurrentHealth−Damage)</li>
+</ul>
 
 </section>
 
@@ -536,12 +988,12 @@
             
                 
 <article class="">
-    <a href="/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/">
+    <a href="/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">ChipTanks-基于C&amp;C&#43;&#43;混编的STM32OLED迷你游戏掌机个人项目开发</h2>
+            <h2 class="article-title">ChipTanks-玩法介绍</h2>
         </div>
     </a>
 </article>
@@ -549,12 +1001,12 @@
             
                 
 <article class="">
-    <a href="/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/">
+    <a href="/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/">
         
         
 
         <div class="article-details">
-            <h2 class="article-title">ChipTanks-游戏设计</h2>
+            <h2 class="article-title">ChipTanks-基于C&amp;C&#43;&#43;混编的STM32OLED迷你游戏掌机个人项目开发</h2>
         </div>
     </a>
 </article>
