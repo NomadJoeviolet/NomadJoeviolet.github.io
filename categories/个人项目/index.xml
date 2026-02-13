@@ -7,7 +7,153 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Nomad</copyright>
-        <lastBuildDate>Thu, 27 Nov 2025 18:23:07 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 12 Feb 2026 18:23:07 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ChipTanks-游戏设计</title>
+        <link>https://NomadJoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/</link>
+        <pubDate>Thu, 12 Feb 2026 18:23:07 +0800</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/</guid>
+        <description>&lt;h2 id=&#34;-游戏介绍chip-tanks-芯片坦克&#34;&gt;🎮 游戏介绍：Chip Tanks (芯片坦克)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Chip Tanks&lt;/strong&gt;  是一款运行在 STM32 嵌入式平台上的  &lt;strong&gt;Roguelike 俯视视角弹幕射击游戏&lt;/strong&gt;。玩家将操控一辆微型坦克，在 OLED 屏幕呈现的战场上，迎战源自《山海经》与中国上古神话的机械化凶兽。&lt;/p&gt;
+&lt;p&gt;通过击败敌人获取经验，升级并抽取强力的  &lt;strong&gt;PerkCard（天赋卡）&lt;/strong&gt;，构建属于你的战斗流派，挑战强大的关卡 BOSS！&lt;/p&gt;
+&lt;h2 id=&#34;-游戏类型与核心机制&#34;&gt;🕹️ 游戏类型与核心机制
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;类型&lt;/strong&gt;：Roguelike / 弹幕射击 (STG) / 嵌入式游戏&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心循环&lt;/strong&gt;：战斗 -&amp;gt; 积累经验 -&amp;gt; 升级 -&amp;gt; &lt;strong&gt;三选一抽卡 (Perk)&lt;/strong&gt; -&amp;gt; 挑战 BOSS -&amp;gt; 进入下一章。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;热量系统 (Heat System)&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;坦克的射击受到“热量”限制。&lt;/li&gt;
+&lt;li&gt;普通子弹、火球、闪电链会产生不同程度的热量。&lt;/li&gt;
+&lt;li&gt;当热量达到上限时，坦克将&lt;strong&gt;过热无法射击&lt;/strong&gt;，必须等待冷却。&lt;/li&gt;
+&lt;li&gt;策略点：玩家需要在输出火力和控制热量之间寻找平衡。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自动回血&lt;/strong&gt;：坦克具备自我修复功能，在不受伤害一段时间后会缓慢恢复生命值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-操作指南&#34;&gt;🎮 操作指南
+&lt;/h2&gt;&lt;p&gt;游戏通过按键进行操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;移动控制&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Key 10&lt;/strong&gt;：向上移动 (UP) / 菜单上选&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Key 11&lt;/strong&gt;：向下移动 (DOWN) / 菜单下选&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Key 15&lt;/strong&gt;：向左移动 (LEFT)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Key 7&lt;/strong&gt;：向右移动 (RIGHT)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功能控制&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Key 3&lt;/strong&gt;：确认选择 (Select) —— 用于在升级界面选择 PerkCard。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;坦克会自动锁定并攻击，自动判定冷却和热量。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-perkcard-天赋卡-系统详解&#34;&gt;🃏 PerkCard (天赋卡) 系统详解
+&lt;/h2&gt;&lt;p&gt;PerkCard 是游戏的核心 Roguelike 元素。每当玩家升级（特定等级）时，系统会随机提供 3 张卡片供玩家选择。&lt;/p&gt;
+&lt;p&gt;以下是所有卡片的效果说明：&lt;/p&gt;
+&lt;h3 id=&#34;-生存与恢复类&#34;&gt;🛡️ 生存与恢复类
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;HEAL_SPEED_UP (回复速度提升)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：加快自动回血的频率。让你在受损后能更快开始修复。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HEAL_AMOUNT_UP (回复量提升)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：增加每次回血恢复的生命值数值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HEALTH_UP (生命上限提升)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：大幅提升坦克的最大生命值，并且&lt;strong&gt;瞬间回满所有生命值&lt;/strong&gt;。救命神卡。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;-攻击与火力类&#34;&gt;⚔️ 攻击与火力类
+&lt;/h3&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;&lt;strong&gt;ATTACK_UP (攻击力提升)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：直接增加所有子弹的基础伤害。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ATTACK_SPEED_UP (攻速提升)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：减少射击的冷却时间，让你能更频繁地发射子弹（需配合热量卡使用，否则容易过热）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;UNLOCK_FIREBALL (解锁：火球弹)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：解锁副武器&lt;strong&gt;火球&lt;/strong&gt;。火球击中敌人后会造成&lt;strong&gt;范围爆炸伤害&lt;/strong&gt;（AOE），适合清理成群的小怪。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;UNLOCK_LIGHTNING (解锁：闪电链)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：解锁副武器&lt;strong&gt;闪电链&lt;/strong&gt;。闪电具有极高的单体伤害倍率，是击杀 BOSS 的利器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FIREBALL_RANGE_UP (火球范围提升)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：扩大火球爆炸的伤害半径，增强 AOE 能力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LIGHTNING_MULTIPLIER_UP (闪电伤害倍率提升)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：大幅提升闪电链的伤害倍数，使其成为终极杀伤武器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;-热量管理类-核心机制&#34;&gt;🔥 热量管理类 (核心机制)
+&lt;/h3&gt;&lt;ol start=&#34;10&#34;&gt;
+&lt;li&gt;&lt;strong&gt;HEAT_CAPACITY_UP (热容上限提升)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：提升热量槽上限。允许你在过热前连续发射更多子弹。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HEAT_COOL_DOWN_UP (散热速度提升)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：加快热量的自然冷却速度。让你在停止射击后能更快恢复开火能力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;-机动类&#34;&gt;🚀 机动类
+&lt;/h3&gt;&lt;ol start=&#34;12&#34;&gt;
+&lt;li&gt;&lt;strong&gt;MOVE_SPEED_UP (移速提升)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：提升坦克的移动速度，更利于躲避密集的弹幕和敌人的冲撞。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;-敌人图鉴-山海经机械兽&#34;&gt;👾 敌人图鉴 (山海经机械兽)
+&lt;/h2&gt;&lt;p&gt;你将面对形态各异的敌人，它们拥有不同的攻击模式：&lt;/p&gt;
+&lt;h3 id=&#34;普通敌人&#34;&gt;普通敌人
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;飞廉 (Feilian)&lt;/strong&gt;：小型敌人。移动速度极快，轨迹飘忽不定，通常成群结队出现进行骚扰。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;蛊雕 (Gudiao)&lt;/strong&gt;：中型敌人。擅长远程伏击，从身体两侧发射高伤子弹，死亡时会发射一颗复仇火球。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;魑魅 (ChiMei)&lt;/strong&gt;：极小敌人。只会进行自杀式冲撞，速度极快，一旦接触造成大量伤害。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;精英敌人&#34;&gt;精英敌人
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;驳 (Bo)&lt;/strong&gt;：马形神兽，白身黑尾，头生独角。会使用&lt;strong&gt;冲锋践踏&lt;/strong&gt;直扑玩家，发射&lt;strong&gt;扇形虎爪弹幕&lt;/strong&gt;，以及释放&lt;strong&gt;鼓音震荡波&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;胜遇 (Shengyu)&lt;/strong&gt;：赤色野鸡状凶兽，擅长干扰。会在场地生成&lt;strong&gt;遮挡视野的水雾&lt;/strong&gt;，推出&lt;strong&gt;迷雾屏障&lt;/strong&gt;，并发射&lt;strong&gt;连续雷鸣子弹&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;狸力 (Lili)&lt;/strong&gt;：猪形神兽，与土系能力绑定。会发射&lt;strong&gt;土涌火球&lt;/strong&gt;，释放&lt;strong&gt;獠吠扇形震波&lt;/strong&gt;，并在随机位置埋设&lt;strong&gt;延时爆炸陷阱&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关卡-boss&#34;&gt;关卡 BOSS
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;饕餮 (Taotie)&lt;/strong&gt;：贪婪巨兽，四凶之一。血量极厚，会使用&lt;strong&gt;吞噬&lt;/strong&gt;技能将玩家吸向自己，或发起猛烈的&lt;strong&gt;冲撞&lt;/strong&gt;和&lt;strong&gt;碾压&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;梼杌 (Taowu)&lt;/strong&gt;：凶暴巨兽，四凶之一。擅长&lt;strong&gt;闪现&lt;/strong&gt;移动，能释放覆盖全屏的&lt;strong&gt;随机弹幕&lt;/strong&gt;和&lt;strong&gt;诡雷&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;相柳 (Xiangliu)&lt;/strong&gt;：灾难巨兽。九头蛇身，能同时发射&lt;strong&gt;九排弹幕&lt;/strong&gt;，释放闪电与火球，并能&lt;strong&gt;召唤&lt;/strong&gt;大量小怪协同作战。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;混沌 (Hundun)&lt;/strong&gt;：&lt;strong&gt;四凶之首&lt;/strong&gt;，无面目的原始巨兽。血量最高，会&lt;strong&gt;随机闪烁移动并发射八方向弹幕&lt;/strong&gt;，生成&lt;strong&gt;七窍封印干扰视野&lt;/strong&gt;，使用&lt;strong&gt;虚空牵引&lt;/strong&gt;将玩家拉向自身，释放&lt;strong&gt;螺旋式混沌漩涡&lt;/strong&gt;和&lt;strong&gt;时空裂隙弹幕墙&lt;/strong&gt;，以及终极技能&lt;strong&gt;归于混沌&lt;/strong&gt;——全屏弹幕攻击（血量越低缺口越小）。
+&lt;hr&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;最后，祝您在 Chip Tanks 的世界中武运昌隆&lt;/strong&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>ChipTanks-基于C&amp;C&#43;&#43;混编的STM32OLED迷你游戏掌机个人项目开发</title>
         <link>https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/</link>
         <pubDate>Thu, 27 Nov 2025 18:23:07 +0800</pubDate>
@@ -2652,145 +2798,6 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 </description>
         </item>
         <item>
-        <title>ChipTanks-玩法介绍</title>
-        <link>https://NomadJoeviolet.github.io/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/</link>
-        <pubDate>Thu, 27 Nov 2025 18:23:07 +0800</pubDate>
-        
-        <guid>https://NomadJoeviolet.github.io/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/</guid>
-        <description>&lt;h2 id=&#34;-游戏介绍chip-tanks-芯片坦克&#34;&gt;🎮 游戏介绍：Chip Tanks (芯片坦克)
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Chip Tanks&lt;/strong&gt;  是一款运行在 STM32 嵌入式平台上的  &lt;strong&gt;Roguelike 俯视视角弹幕射击游戏&lt;/strong&gt;。玩家将操控一辆微型坦克，在 OLED 屏幕呈现的战场上，迎战源自《山海经》与中国上古神话的机械化凶兽。&lt;/p&gt;
-&lt;p&gt;通过击败敌人获取经验，升级并抽取强力的  &lt;strong&gt;PerkCard（天赋卡）&lt;/strong&gt;，构建属于你的战斗流派，挑战强大的关卡 BOSS！&lt;/p&gt;
-&lt;h2 id=&#34;-游戏类型与核心机制&#34;&gt;🕹️ 游戏类型与核心机制
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;类型&lt;/strong&gt;：Roguelike / 弹幕射击 (STG) / 嵌入式游戏&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;核心循环&lt;/strong&gt;：战斗 -&amp;gt; 积累经验 -&amp;gt; 升级 -&amp;gt; &lt;strong&gt;三选一抽卡 (Perk)&lt;/strong&gt; -&amp;gt; 挑战 BOSS -&amp;gt; 进入下一章。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;热量系统 (Heat System)&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;坦克的射击受到“热量”限制。&lt;/li&gt;
-&lt;li&gt;普通子弹、火球、闪电链会产生不同程度的热量。&lt;/li&gt;
-&lt;li&gt;当热量达到上限时，坦克将&lt;strong&gt;过热无法射击&lt;/strong&gt;，必须等待冷却。&lt;/li&gt;
-&lt;li&gt;策略点：玩家需要在输出火力和控制热量之间寻找平衡。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;自动回血&lt;/strong&gt;：坦克具备自我修复功能，在不受伤害一段时间后会缓慢恢复生命值。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;-操作指南&#34;&gt;🎮 操作指南
-&lt;/h2&gt;&lt;p&gt;游戏通过按键进行操作：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;移动控制&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Key 10&lt;/strong&gt;：向上移动 (UP) / 菜单上选&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Key 11&lt;/strong&gt;：向下移动 (DOWN) / 菜单下选&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Key 15&lt;/strong&gt;：向左移动 (LEFT)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Key 7&lt;/strong&gt;：向右移动 (RIGHT)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;功能控制&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Key 3&lt;/strong&gt;：确认选择 (Select) —— 用于在升级界面选择 PerkCard。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;攻击&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;坦克会自动锁定并攻击，自动判定冷却和热量。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;-perkcard-天赋卡-系统详解&#34;&gt;🃏 PerkCard (天赋卡) 系统详解
-&lt;/h2&gt;&lt;p&gt;PerkCard 是游戏的核心 Roguelike 元素。每当玩家升级（特定等级）时，系统会随机提供 3 张卡片供玩家选择。&lt;/p&gt;
-&lt;p&gt;以下是所有卡片的效果说明：&lt;/p&gt;
-&lt;h3 id=&#34;-生存与恢复类&#34;&gt;🛡️ 生存与恢复类
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;HEAL_SPEED_UP (回复速度提升)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：加快自动回血的频率。让你在受损后能更快开始修复。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;HEAL_AMOUNT_UP (回复量提升)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：增加每次回血恢复的生命值数值。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;HEALTH_UP (生命上限提升)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：大幅提升坦克的最大生命值，并且&lt;strong&gt;瞬间回满所有生命值&lt;/strong&gt;。救命神卡。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;-攻击与火力类&#34;&gt;⚔️ 攻击与火力类
-&lt;/h3&gt;&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;&lt;strong&gt;ATTACK_UP (攻击力提升)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：直接增加所有子弹的基础伤害。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ATTACK_SPEED_UP (攻速提升)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：减少射击的冷却时间，让你能更频繁地发射子弹（需配合热量卡使用，否则容易过热）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;UNLOCK_FIREBALL (解锁：火球弹)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：解锁副武器&lt;strong&gt;火球&lt;/strong&gt;。火球击中敌人后会造成&lt;strong&gt;范围爆炸伤害&lt;/strong&gt;（AOE），适合清理成群的小怪。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;UNLOCK_LIGHTNING (解锁：闪电链)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：解锁副武器&lt;strong&gt;闪电链&lt;/strong&gt;。闪电具有极高的单体伤害倍率，是击杀 BOSS 的利器。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;FIREBALL_RANGE_UP (火球范围提升)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：扩大火球爆炸的伤害半径，增强 AOE 能力。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;LIGHTNING_MULTIPLIER_UP (闪电伤害倍率提升)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：大幅提升闪电链的伤害倍数，使其成为终极杀伤武器。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;-热量管理类-核心机制&#34;&gt;🔥 热量管理类 (核心机制)
-&lt;/h3&gt;&lt;ol start=&#34;10&#34;&gt;
-&lt;li&gt;&lt;strong&gt;HEAT_CAPACITY_UP (热容上限提升)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：提升热量槽上限。允许你在过热前连续发射更多子弹。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;HEAT_COOL_DOWN_UP (散热速度提升)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：加快热量的自然冷却速度。让你在停止射击后能更快恢复开火能力。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;-机动类&#34;&gt;🚀 机动类
-&lt;/h3&gt;&lt;ol start=&#34;12&#34;&gt;
-&lt;li&gt;&lt;strong&gt;MOVE_SPEED_UP (移速提升)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：提升坦克的移动速度，更利于躲避密集的弹幕和敌人的冲撞。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;-敌人图鉴-山海经机械兽&#34;&gt;👾 敌人图鉴 (山海经机械兽)
-&lt;/h2&gt;&lt;p&gt;你将面对形态各异的敌人，它们拥有不同的攻击模式：&lt;/p&gt;
-&lt;h3 id=&#34;普通敌人&#34;&gt;普通敌人
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;飞廉 (Feilian)&lt;/strong&gt;：小型敌人。移动速度极快，轨迹飘忽不定，通常成群结队出现进行骚扰。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;蛊雕 (Gudiao)&lt;/strong&gt;：中型敌人。擅长远程伏击，从身体两侧发射高伤子弹，死亡时会发射一颗复仇火球。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;魑魅 (ChiMei)&lt;/strong&gt;：极小敌人。只会进行自杀式冲撞，速度极快，一旦接触造成大量伤害。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;关卡-boss&#34;&gt;关卡 BOSS
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;饕餮 (Taotie)&lt;/strong&gt;：贪婪巨兽，四凶之一。血量极厚，会使用&lt;strong&gt;吞噬&lt;/strong&gt;技能将玩家吸向自己，或发起猛烈的&lt;strong&gt;冲撞&lt;/strong&gt;和&lt;strong&gt;碾压&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;梼杌 (Taowu)&lt;/strong&gt;：凶暴巨兽，四凶之一。擅长&lt;strong&gt;闪现&lt;/strong&gt;移动，能释放覆盖全屏的&lt;strong&gt;随机弹幕&lt;/strong&gt;和&lt;strong&gt;诡雷&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;相柳 (Xiangliu)&lt;/strong&gt;：灾难巨兽。九头蛇身，能同时发射&lt;strong&gt;九排弹幕&lt;/strong&gt;，释放闪电与火球，并能&lt;strong&gt;召唤&lt;/strong&gt;大量小怪协同作战。
-&lt;hr&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;最后，祝您在 Chip Tanks 的世界中武运昌隆&lt;/strong&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
         <title>ChipTanks-游戏设计</title>
         <link>https://NomadJoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/</link>
         <pubDate>Thu, 27 Nov 2025 18:23:07 +0800</pubDate>
@@ -2981,11 +2988,12 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;h3 id=&#34;敌人设计风格&#34;&gt;敌人设计风格
 &lt;/h3&gt;&lt;h4 id=&#34;定位&#34;&gt;定位
 &lt;/h4&gt;&lt;p&gt;&lt;strong&gt;Fodder (炮灰/骚扰)&lt;/strong&gt;：飞廉（高机动低伤）、魑魅（自爆卡车），主要用于干扰走位和消耗玩家精力。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Elite (精英/高威胁)&lt;/strong&gt;：蛊雕，拥有亡语机制（死后发火球），强迫玩家进行特定走位。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Elite (精英/高威胁)&lt;/strong&gt;：驳、胜遇、狸力，拥有多种攻击模式，强迫玩家进行特定走位和策略应对。蛊雕拥有亡语机制（死后发火球）。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Boss (首领)&lt;/strong&gt;：拥有多阶段或多技能循环。
 &lt;em&gt;饕餮&lt;/em&gt;：近战系 BOSS，强调位移控制（拉人、冲撞）。
 &lt;em&gt;梼杌&lt;/em&gt;：敏捷系 BOSS，强调反应速度（闪现、狂暴弹幕）。
-&lt;em&gt;相柳&lt;/em&gt;：法师/召唤系 BOSS，强调全屏躲避和处理小怪（AOE、召唤）。&lt;/p&gt;
+&lt;em&gt;相柳&lt;/em&gt;：法师/召唤系 BOSS，强调全屏躲避和处理小怪（AOE、召唤）。
+&lt;em&gt;混沌&lt;/em&gt;：四凶之首，混乱系 BOSS，强调视野干扰、随机弹幕和牵引玩家。&lt;/p&gt;
 &lt;h4 id=&#34;攻击机制与数值&#34;&gt;攻击机制与数值
 &lt;/h4&gt;&lt;h5 id=&#34;1-飞廉-feilianenemy&#34;&gt;1. 飞廉 (FeilianEnemy)
 &lt;/h5&gt;&lt;ul&gt;
@@ -3115,6 +3123,93 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h5 id=&#34;7-混沌-hundunenemy---四凶之首&#34;&gt;7. 混沌 (HundunEnemy) - 四凶之首
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：混乱与干扰型 BOSS（四凶之首）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：《山海经》记载其形如黄囊，赤如丹火，六足四翼，无面目；《庄子》有&amp;quot;七窍凿而混沌死&amp;quot;典故。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：64x64 (巨大)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HP&lt;/strong&gt;：最高血量（400 + Level×1200）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击力&lt;/strong&gt;：中高（8 + Level×6）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：低速但可瞬移。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：500ms。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击方式 (6 种模式)&lt;/strong&gt;：
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;混沌涌动&lt;/strong&gt;：随机闪烁移动，同时向 8 个方向发射普通子弹，低血量时夹杂火球。持续 3000ms，每 500ms 闪烁一次。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;七窍封印&lt;/strong&gt;：在屏幕上生成 7 个闪烁干扰区域遮挡视野，持续 2000ms（呼应&amp;quot;七窍凿而混沌死&amp;quot;典故）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;虚空牵引&lt;/strong&gt;：将玩家向混沌位置缓慢拉近，同时发射追踪火球。持续 2500ms，每 300ms 拉近一次。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;混沌漩涡&lt;/strong&gt;：螺旋式发射子弹，Y位置按正弦波扫射。持续 2000ms，每 150ms 发射一发。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;时空裂隙&lt;/strong&gt;：快速发射带随机缺口的弹幕墙，缺口位置每轮变化。持续 2500ms，每 550ms 发射一轮。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;归于混沌&lt;/strong&gt;：全屏弹幕攻击，中间有安全缺口，血量越低缺口越小。警告 500ms 后发射。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;8-驳-boenemy&#34;&gt;8. 驳 (BoEnemy)
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：精英级中型敌人&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：《山海经·西山经》记载，马形神兽，白身黑尾，头生独角，有虎牙虎爪，叫声如鼓，能捕食虎豹。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：24x24 (中)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HP&lt;/strong&gt;：40 + Level×200&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击力&lt;/strong&gt;：6 + Level×2&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：中速（2）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：300ms。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击方式 (3 种模式)&lt;/strong&gt;：
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;冲锋践踏&lt;/strong&gt;：向玩家方向快速直线冲锋，造成碰撞伤害。冲锋距离 40 像素，持续 800ms。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;虎牙利爪&lt;/strong&gt;：发射 3 发呈扇形的普通子弹（呼应&amp;quot;虎牙爪&amp;quot;）。持续 200ms。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;鼓音震荡&lt;/strong&gt;：发射一排横向冲击波子弹（呼应&amp;quot;音如鼓音&amp;quot;）。持续 300ms。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;9-胜遇-shengyuenemy&#34;&gt;9. 胜遇 (ShengyuEnemy)
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：精英级干扰型敌人&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：《山海经·西次三经》记载，赤色野鸡状凶兽，叫声独特，出现预示洪水灾厄。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：20x20 (中)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HP&lt;/strong&gt;：50 + Level×220&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击力&lt;/strong&gt;：10 + Level×4&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：中速（2）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：300ms。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击方式 (3 种模式)&lt;/strong&gt;：
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;水雾弥漫&lt;/strong&gt;：在场景中生成 2 个迷雾区域遮挡玩家视线（呼应&amp;quot;大水&amp;quot;典故）。持续 3000ms。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;洪波推涌&lt;/strong&gt;：往前推出一长条迷雾屏障，长度 110 像素，逐渐消散。持续 2800ms。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;赤羽雷鸣&lt;/strong&gt;：发射一串 5 发普通子弹（呼应&amp;quot;赤&amp;quot;色特征）。每 150ms 发射一发，持续 800ms。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;10-狸力-lilienemy&#34;&gt;10. 狸力 (LiliEnemy)
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;定位&lt;/strong&gt;：精英级土系敌人&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;原型&lt;/strong&gt;：《山海经·南山经》记载，猪形神兽，长有利爪，叫声如狗吠，出现预示大量土木工程。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数值设定&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;体型&lt;/strong&gt;：22x22 (中)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HP&lt;/strong&gt;：60 + Level×160&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击力&lt;/strong&gt;：6 + Level×3&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;移动&lt;/strong&gt;：中速（2）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;死亡动画&lt;/strong&gt;：300ms。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;攻击方式 (3 种模式)&lt;/strong&gt;：
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;土涌突刺&lt;/strong&gt;：在前方间隔发射火球弹（土块爆炸，呼应&amp;quot;土功&amp;quot;）。持续 1200ms，每 400ms 发射一发。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;獠吠震波&lt;/strong&gt;：发射 5 发扇形普通子弹阵（呼应&amp;quot;其音如狗吠&amp;quot;）。持续 400ms。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;穴地陷阱&lt;/strong&gt;：在随机位置标记 2 个陷阱，延迟 500ms 后爆炸发射火球。持续 800ms。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;所有角色数值设计&#34;&gt;所有角色数值设计
 &lt;/h3&gt;&lt;h4 id=&#34;玩家-leadingrole-数值公式&#34;&gt;玩家 (LeadingRole) 数值公式
 &lt;/h4&gt;&lt;p&gt;玩家的数值受基础属性、等级成长和 PerkCard（天赋卡）共同影响。&lt;/p&gt;
@@ -3145,11 +3240,13 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;li&gt;shootCooldownSpeed = 初始值 (4) + &lt;code&gt;Level&lt;/code&gt;  成长 (每 5 级+2) + &lt;code&gt;Perk: ATTACK_SPEED_UP&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;热量机制 (Heat):&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;热量机制 (Heat):&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;热量上限&lt;/code&gt; = &lt;code&gt;maxHeat&lt;/code&gt; (100) + &lt;code&gt;Level&lt;/code&gt;  成长 (每级+5) + &lt;code&gt;Perk: HEAT_CAPACITY_UP&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;冷却速率&lt;/code&gt; = &lt;strong&gt;每 500ms&lt;/strong&gt; 结算一次，减少 &lt;code&gt;heatCoolDownRate * 5&lt;/code&gt; 点热量；初始 &lt;code&gt;heatCoolDownRate = 4&lt;/code&gt;，每 2 级 +1，Perk: HEAT_COOL_DOWN_UP 每张 +2。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;单发热量&lt;/code&gt; = &lt;code&gt;heatPerShot&lt;/code&gt; (初始 &lt;strong&gt;15&lt;/strong&gt;，每 2 级 -1，最低不低于 1) × 枪械倍率（普通 1.0x / 火球 2.0x / 闪电 2.0x）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;热量机制 (Heat):&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;热量上限&lt;/code&gt; = &lt;code&gt;maxHeat&lt;/code&gt; (100) + &lt;code&gt;Level&lt;/code&gt;  成长 (每级+5) + &lt;code&gt;Perk: HEAT_CAPACITY_UP&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;冷却速率&lt;/code&gt; = &lt;strong&gt;每 2000ms&lt;/strong&gt; 结算一次，减少 &lt;code&gt;heatCoolDownRate * 10&lt;/code&gt; 点热量；初始 &lt;code&gt;heatCoolDownRate = 4&lt;/code&gt;，每 2 级 +1，Perk: HEAT_COOL_DOWN_UP 每张 +2。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;单发热量&lt;/code&gt; = &lt;code&gt;heatPerShot&lt;/code&gt; (初始 &lt;strong&gt;15&lt;/strong&gt;，每 2 级 -1，最低不低于 1) × 枪械倍率（普通 1.0x / 火球 2.0x / 闪电 1.5x）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;回血机制 (Regen):&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;触发间隔&lt;/code&gt; = &lt;code&gt;healResetTime&lt;/code&gt; (15000) / &lt;code&gt;healSpeed&lt;/code&gt; (3) = 5000ms&lt;/li&gt;
@@ -3178,7 +3275,7 @@ HP=BaseHP+(Level×HP_Growth)HP=BaseHP+(Level×HP_Growth)&lt;/li&gt;
 Atk=BaseAtk+(Level×Atk_Growth)Atk=BaseAtk+(Level×Atk_Growth)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;经验掉落 (XP):&lt;/strong&gt;&lt;br&gt;
 DropExp=BaseExp+(Level×Exp_Growth)DropExp=BaseExp+(Level×Exp_Growth)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;热量冷却:&lt;/strong&gt; 基类同一逻辑，每 500ms 结算一次，减少 &lt;code&gt;heatCoolDownRate * 5&lt;/code&gt; 点（敌人默认 &lt;code&gt;heatCoolDownRate = 10&lt;/code&gt;，见 enemyRole.cpp）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;热量冷却:&lt;/strong&gt; 基类同一逻辑，每 2000ms 结算一次，减少 &lt;code&gt;heatCoolDownRate * 10&lt;/code&gt; 点（敌人默认 &lt;code&gt;heatCoolDownRate = 10&lt;/code&gt;，见 enemyRole.cpp）。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;2-具体敌人数值-基于-enemyrolecpp&#34;&gt;2. 具体敌人数值 (基于 enemyRole.cpp)
 &lt;/h4&gt;&lt;table&gt;
@@ -3201,7 +3298,7 @@ DropExp=BaseExp+(Level×Exp_Growth)DropExp=BaseExp+(Level×Exp_Growth)&lt;/li&gt
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;蛊雕 (Gudiao)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;60 + Level×100&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;20 + Level×150&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;8 + Level×2&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;4 + Level×1&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;远程伏击，死后发火球&lt;/td&gt;
@@ -3214,25 +3311,53 @@ DropExp=BaseExp+(Level×Exp_Growth)DropExp=BaseExp+(Level×Exp_Growth)&lt;/li&gt
           &lt;td style=&#34;text-align: left&#34;&gt;自爆冲撞&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;驳 (Bo)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;40 + Level×200&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;6 + Level×2&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10 + Level×3&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;精英，冲锋/扇形射击&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;胜遇 (Shengyu)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;50 + Level×220&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10 + Level×4&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;6 + Level×2&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;精英，水雾干扰/洪波&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;狸力 (Lili)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;60 + Level×160&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;6 + Level×3&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;8 + Level×2&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;精英，土涌/陷阱&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;饕餮 (Taotie)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;350 + Level×1100&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;50 + Level×1700&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;2 + Level×4&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;10 + Level×10&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;吞噬/冲撞/碾压&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;BOSS，吞噬/冲撞/碾压&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;梼杌 (Taowu)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;130 + Level×800&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;10 + Level×5&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;30 + Level×1200&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10 + Level×6&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;7 + Level×5&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;闪现/弹幕爆发&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;BOSS，闪现/弹幕爆发&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;相柳 (Xiangliu)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;30 + Level×900&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;30 + Level×1300&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;3 + Level×5&lt;/td&gt;
           &lt;td style=&#34;text-align: left&#34;&gt;12 + Level×4&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;全屏 AOE/召唤&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;BOSS，全屏AOE/召唤&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;混沌 (Hundun)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;40 + Level×1400&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;8 + Level×6&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;15 + Level×8&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;BOSS（四凶之首），混乱弹幕&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
