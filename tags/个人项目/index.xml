@@ -35,15 +35,15 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;移动控制&lt;/strong&gt;：
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Key 10&lt;/strong&gt;：向上移动 (UP) / 菜单上选&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Key 11&lt;/strong&gt;：向下移动 (DOWN) / 菜单下选&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Key 15&lt;/strong&gt;：向左移动 (LEFT)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Key 7&lt;/strong&gt;：向右移动 (RIGHT)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;KeyLeft_up&lt;/strong&gt;：向上移动 (UP) / 菜单上选&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;KeyLeft_down&lt;/strong&gt;：向下移动 (DOWN) / 菜单下选&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;KeyLeft_left&lt;/strong&gt;：向左移动 (LEFT)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;KeyLeft_right&lt;/strong&gt;：向右移动 (RIGHT)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;功能控制&lt;/strong&gt;：
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Key 3&lt;/strong&gt;：确认选择 (Select) —— 用于在升级界面选择 PerkCard。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;KeyRight_all&lt;/strong&gt;：确认选择 (Select) —— 用于在升级界面选择 PerkCard。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;攻击&lt;/strong&gt;：
