@@ -313,12 +313,12 @@
           <ol>
             <li><a href="#381-默认拷贝赋值copy-assignment到底做了什么">3.8.1 默认拷贝赋值（Copy Assignment）到底做了什么</a></li>
             <li><a href="#382-拷贝赋值实现细节自赋值异常安全释放时机">3.8.2 拷贝赋值实现细节（自赋值、异常安全、释放时机）</a></li>
-            <li><a href="#383-硬拷贝与软拷贝你原笔记里的术语">3.8.3 硬拷贝与软拷贝（你原笔记里的术语）</a></li>
+            <li><a href="#383-硬拷贝与软拷贝">3.8.3 硬拷贝与软拷贝</a></li>
           </ol>
         </li>
         <li><a href="#39-this-指针与链式调用">3.9 this 指针与链式调用</a></li>
         <li><a href="#310-资源语义总收口这章必须带走的结论">3.10 资源语义总收口（这章必须带走的结论）</a></li>
-        <li><a href="#311-生命周期调用时序实验建议你亲手跑一遍">3.11 生命周期调用时序实验（建议你亲手跑一遍）</a></li>
+        <li><a href="#311-生命周期调用时序实验">3.11 生命周期调用时序实验</a></li>
       </ol>
     </li>
     <li><a href="#4-继承虚函数与多态">4. 继承、虚函数与多态</a>
@@ -402,7 +402,7 @@
           </ol>
         </li>
         <li><a href="#77-arm-none-eabi-场景提示">7.7 arm-none-eabi 场景提示</a></li>
-        <li><a href="#78-一页速查你实战可直接套">7.8 一页速查（你实战可直接套）</a></li>
+        <li><a href="#78-一页速查">7.8 一页速查</a></li>
         <li><a href="#79-本章小结">7.9 本章小结</a></li>
       </ol>
     </li>
@@ -518,10 +518,8 @@
 </div><p>补充：</p>
 <ol>
 <li>可嵌套：<code>project::driver::spi</code>。</li>
-<li>匿名命名空间常用于“当前源文件私有符号”。</li>
-</ol>
-<p>常见坑：</p>
-<ol>
+<li>匿名命名空间常用于“当前源文件私有符号”。
+常见坑：</li>
 <li>头文件里不要全局 <code>using namespace std;</code>。</li>
 <li>尽量局部 <code>using std::cout;</code>，避免污染。</li>
 </ol>
@@ -556,10 +554,8 @@
 </div><p>函数参数中的价值：</p>
 <ol>
 <li>避免拷贝开销。</li>
-<li>语义比裸指针更清晰。</li>
-</ol>
-<p>常见坑：</p>
-<ol>
+<li>语义比裸指针更清晰。
+常见坑：</li>
 <li>返回局部变量引用会悬空。</li>
 <li>把引用当“可空句柄”使用会出设计问题。</li>
 </ol>
@@ -691,8 +687,8 @@
 <li>默认参数和重载混用要谨慎，优先保证唯一匹配和可读性。</li>
 </ol>
 <h3 id="14-运算符重载operator-overload">1.4 运算符重载（Operator Overload）
-</h3><p>运算符重载是“把运算符表达式翻译成函数调用”。</p>
-<p>运算符重载本质仍是函数重载，只是函数名变成了 <code>operator+</code>、<code>operator&lt;&lt;</code> 这类形式。</p>
+</h3><p>运算符重载是“把运算符表达式翻译成函数调用”。
+运算符重载本质仍是函数重载，只是函数名变成了 <code>operator+</code>、<code>operator&lt;&lt;</code> 这类形式。</p>
 <h4 id="141-为什么需要运算符重载">1.4.1 为什么需要运算符重载
 </h4><p>内置运算符默认只面向基础类型。
 当我们有自定义类型（如复数、向量、矩阵）时，希望也能写自然表达式。</p>
@@ -842,7 +838,7 @@
 <li>友元/普通函数形式参数个数 = 原操作数个数。</li>
 </ol>
 <h4 id="145-重载--和-">1.4.5 重载 &laquo; 和 &raquo;
-</h4><p><code>&lt;&lt;</code>、<code>&gt;&gt;</code> 一般定义成友元函数，因为左操作数是流对象而不是你的类对象。</p>
+</h4><p><code>&lt;&lt;</code>、<code>&gt;&gt;</code> 一般定义成友元函数，因为左操作数是流对象而不是类对象。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -922,10 +918,8 @@
 <li>不能发明新运算符。</li>
 <li>不能改变优先级和结合性。</li>
 <li>不能改变操作数个数。</li>
-<li>至少一个操作数是自定义类型。</li>
-</ol>
-<p>实践建议：</p>
-<ol>
+<li>至少一个操作数是自定义类型。
+实践建议：</li>
 <li>优先成员函数或友元函数实现。</li>
 <li>重载要符合直觉语义，不要为了“炫技”重载。</li>
 <li>运算符语义必须稳定，避免误导阅读者。</li>
@@ -972,9 +966,9 @@
 <ol>
 <li><code>public</code>：外部接口。</li>
 <li><code>private</code>：实现细节。</li>
-<li><code>protected</code>：给继承层使用。</li>
+<li><code>protected</code>：给继承层使用。
+成员函数能访问同类对象私有成员：</li>
 </ol>
-<p>成员函数能访问同类对象私有成员：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1069,12 +1063,12 @@
 </ol>
 <h2 id="3-对象生命周期与资源语义">3. 对象生命周期与资源语义
 </h2><h3 id="31-引言为什么这章最关键">3.1 引言：为什么这章最关键
-</h3><p>你写 C++，最终都要回到两件事。</p>
+</h3><p>写C++，最终都要回到两件事。</p>
 <ol>
 <li>对象什么时候创建、什么时候销毁（生命周期）。</li>
 <li>资源由谁申请、由谁释放（资源语义）。</li>
 </ol>
-<p>这章如果吃透，后面你看 RAII、智能指针、异常安全、移动语义会顺很多。</p>
+<p>这章如果吃透，后面看 RAII、智能指针、异常安全、移动语义会顺很多。</p>
 <h3 id="32-构造函数与析构函数短文原味整合">3.2 构造函数与析构函数（短文原味整合）
 </h3><p>先说人话：</p>
 <ol>
@@ -1086,10 +1080,10 @@
 <li>构造函数名和类名相同，没有返回类型，也不能写 <code>void</code>。</li>
 <li>构造函数可以重载。</li>
 <li>析构函数名是 <code>~类名</code>，无参数，不允许重载，一个类只能有一个析构函数。</li>
-<li>如果程序员不写，编译器会生成默认版本（能不能满足你的资源需求是另一回事）。</li>
+<li>如果程序员不写，编译器会生成默认版本。</li>
 <li>一般把构造/析构放在 <code>public</code>，否则外部无法按预期创建或销毁对象。</li>
 </ol>
-<p>示例（和你短文风格一致，保留 complex 场景）：</p>
+<p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1119,8 +1113,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="33-默认构造无参构造全缺省构造">3.3 默认构造、无参构造、全缺省构造
-</h3><p>这一块是高频易错点。</p>
-<p>你可以同时写“无参构造”和“全缺省构造”，语法上属于重载；
+</h3><p>可以同时写“无参构造”和“全缺省构造”，语法上属于重载；
 但在调用点（比如 <code>ClassName obj;</code>）会出现二义性。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1181,10 +1174,8 @@
 <ol>
 <li><code>const</code> 成员。</li>
 <li>引用成员。</li>
-<li>成员对象没有默认构造函数。</li>
-</ol>
-<p>补一句工程经验：</p>
-<ol>
+<li>成员对象没有默认构造函数。
+补一句工程经验：</li>
 <li>成员初始化顺序按“声明顺序”而不是按初始化列表书写顺序。</li>
 <li>写错顺序会触发告警，复杂类里容易埋 bug。</li>
 </ol>
@@ -1209,15 +1200,13 @@
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>你要牢记：</p>
+</div><p>要牢记：</p>
 <ol>
 <li>析构函数在对象销毁时自动调用。</li>
 <li>局部对象离开作用域会析构。</li>
 <li><code>new</code> 出来的对象在 <code>delete</code> 时析构。</li>
-<li>资源类不写正确析构，泄漏风险极高。</li>
-</ol>
-<p>继承下的关键点：</p>
-<ol>
+<li>资源类不写正确析构，泄漏风险极高。
+继承下的关键点：</li>
 <li>如果类会被当成基类使用（通过基类指针删除派生对象），基类析构函数必须是虚函数。</li>
 <li>否则会出现“派生部分没析构完整”的严重问题。</li>
 </ol>
@@ -1293,16 +1282,15 @@
 <li>一旦类持有资源，要么自己定义拷贝/移动语义，要么直接禁拷贝。</li>
 </ol>
 <h4 id="371-默认操作补充默认拷贝构造与默认拷贝赋值">3.7.1 默认操作补充：默认拷贝构造与默认拷贝赋值
-</h4><p>这一段是你原笔记里非常关键的“默认操作”视角。</p>
-<p>如果你没有显式写，编译器通常会为类生成：</p>
+</h4><p>如果没有显式写，编译器通常会为类生成：</p>
 <ol>
 <li>默认拷贝构造函数。</li>
 <li>默认拷贝赋值运算符。</li>
 </ol>
 <p>它们的行为本质都是“逐成员拷贝”（member-wise copy）。</p>
 <p>这在纯值类型里常常够用；
-但在“自己管理动态内存/句柄”的类里，默认行为非常容易埋雷。</p>
-<p>如果你就是不希望类被拷贝，直接禁止：</p>
+但在“自己管理动态内存/句柄”的类里，默认行为非常容易埋雷。
+如果就是不希望类被拷贝，直接禁止：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1386,15 +1374,14 @@
 <li><code>T b = a;</code> 是拷贝构造（创建新对象）。</li>
 <li><code>b = a;</code> 是拷贝赋值（给已存在对象赋值）。</li>
 </ol>
-<p>如果不自己写，编译器给你的默认拷贝赋值同样是“逐成员拷贝”。</p>
+<p>如果不自己写，编译器的默认拷贝赋值同样是“逐成员拷贝”。</p>
 <p>对于资源类，常见后果：</p>
 <ol>
 <li>两个对象指向同一块堆内存。</li>
 <li>后续析构发生二次释放。</li>
 </ol>
 <h4 id="382-拷贝赋值实现细节自赋值异常安全释放时机">3.8.2 拷贝赋值实现细节（自赋值、异常安全、释放时机）
-</h4><p>你原笔记强调的两条底线非常实用：</p>
-<ol>
+</h4><ol>
 <li>避免自赋值。</li>
 <li>避免内存泄漏。</li>
 </ol>
@@ -1489,23 +1476,21 @@
 <li>新资源准备成功后再替换旧资源。</li>
 <li>任何时刻对象都保持可析构状态。</li>
 </ol>
-<h4 id="383-硬拷贝与软拷贝你原笔记里的术语">3.8.3 硬拷贝与软拷贝（你原笔记里的术语）
+<h4 id="383-硬拷贝与软拷贝">3.8.3 硬拷贝与软拷贝
 </h4><p>硬拷贝（Hard Copy）：</p>
 <ol>
 <li>每次拷贝都重新申请内存并复制内容。</li>
 <li>优点是语义简单，生命周期独立。</li>
-<li>缺点是大对象场景开销高。</li>
-</ol>
-<p>软拷贝（Soft Copy）：</p>
-<ol>
+<li>缺点是大对象场景开销高。
+软拷贝（Soft Copy）：</li>
 <li>多个对象共享同一资源。</li>
 <li>通过引用计数追踪所有者数量。</li>
-<li>最后一个所有者离开时释放资源。</li>
+<li>最后一个所有者离开时释放资源。
+现代 C++ 里，软拷贝通常直接交给 <code>std::shared_ptr</code>，不建议手写引用计数。</li>
 </ol>
-<p>现代 C++ 里，软拷贝通常直接交给 <code>std::shared_ptr</code>，不建议手写引用计数。</p>
 <h3 id="39-this-指针与链式调用">3.9 this 指针与链式调用
-</h3><p><code>this</code> 是当前对象地址。</p>
-<p>常见用途：</p>
+</h3><p><code>this</code> 是当前对象地址。
+常见用途：</p>
 <ol>
 <li>区分同名成员和形参。</li>
 <li>返回 <code>*this</code> 做链式调用。</li>
@@ -1540,13 +1525,13 @@
 </h3><ol>
 <li>构造管初始化，析构管清理，二者共同决定对象生命周期边界。</li>
 <li>只要类里有裸资源，就必须认真对待拷贝/移动/析构。</li>
-<li>默认拷贝只做成员拷贝，不会自动替你做“资源语义正确化”。</li>
+<li>默认拷贝只做成员拷贝，不会自动做“资源语义正确化”。</li>
 <li>深拷贝解决共享地址风险，移动语义解决不必要复制开销。</li>
 <li>这章和第6章（动态内存）是同一条主线：最终目标是可控、可证明的资源管理。</li>
 </ol>
-<h3 id="311-生命周期调用时序实验建议你亲手跑一遍">3.11 生命周期调用时序实验（建议你亲手跑一遍）
+<h3 id="311-生命周期调用时序实验">3.11 生命周期调用时序实验
 </h3><p>这一节是“看现象反推机制”。</p>
-<p>把下面代码单独建个文件跑一下，你会直观看到：</p>
+<p>把下面代码单独建个文件跑一下，会直观看到：</p>
 <ol>
 <li>哪些地方触发拷贝构造。</li>
 <li>哪些地方触发移动构造。</li>
@@ -1720,11 +1705,11 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>你会观察到这些规律：</p>
+</div><p>会观察到这些规律：</p>
 <ol>
 <li>有名字的对象表达式通常是左值，即便类型是右值引用。</li>
 <li><code>std::move</code> 只是类型转换，不会真的移动资源；真正移动发生在移动构造/移动赋值里。</li>
-<li>返回值优化可能让你“看不到预期中的拷贝/移动调用”，这是编译器优化，不是语义错误。</li>
+<li>返回值优化可能让“看不到预期中的拷贝/移动调用”，这是编译器优化，不是语义错误。</li>
 </ol>
 <p>实验建议：</p>
 <ol>
@@ -1770,11 +1755,36 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="42-继承方式对可见性的影响">4.2 继承方式对可见性的影响
-</h3><p>| 基类成员 | public继承 | protected继承 | private继承 |
-|  |  |  |  |
-| public | public | protected | private |
-| protected | protected | protected | private |
-| private | 不可直接访问 | 不可直接访问 | 不可直接访问 |</p>
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>基类成员</th>
+          <th>public继承</th>
+          <th>protected继承</th>
+          <th>private继承</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>public</td>
+          <td>public</td>
+          <td>protected</td>
+          <td>private</td>
+      </tr>
+      <tr>
+          <td>protected</td>
+          <td>protected</td>
+          <td>protected</td>
+          <td>private</td>
+      </tr>
+      <tr>
+          <td>private</td>
+          <td>不可直接访问</td>
+          <td>不可直接访问</td>
+          <td>不可直接访问</td>
+      </tr>
+  </tbody>
+</table></div>
 <h3 id="43-构造析构顺序继承">4.3 构造析构顺序（继承）
 </h3><p>规则：</p>
 <ol>
@@ -1859,7 +1869,7 @@
 </div><p>抽象类不可实例化，只能作为接口基类。</p>
 <h3 id="47-override-与-final">4.7 override 与 final
 </h3><ol>
-<li><code>override</code>：让编译器帮你检查是否真的重写。</li>
+<li><code>override</code>：让编译器帮忙检查是否真的重写。</li>
 <li><code>final</code>：禁止继续重写（函数）或继续继承（类）。</li>
 </ol>
 <p>常见坑：</p>
@@ -1868,8 +1878,7 @@
 <li>把参数不一致的同名函数误当“重写”。</li>
 </ol>
 <h3 id="48-继承场景下的动态内存管理">4.8 继承场景下的动态内存管理
-</h3><p>这部分对应你原笔记里“Inheritance and dynamic memory allocation”的核心结论。</p>
-<p>分两种情况：</p>
+</h3><p>分两种情况：</p>
 <ol>
 <li>只有基类管理动态内存：先把基类的资源语义写正确（构造/析构/拷贝/赋值/移动），子类通常按普通成员处理。</li>
 <li>子类也管理动态内存：子类必须在自己的拷贝构造、拷贝赋值、析构中处理新增资源，同时正确调用基类版本。</li>
@@ -1947,7 +1956,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>你在工程里可以用这套检查顺序：</p>
+</div><p>在工程里可以用这套检查顺序：</p>
 <ol>
 <li>基类资源是否安全。</li>
 <li>派生类新增资源是否独立处理。</li>
@@ -2006,7 +2015,7 @@
 </h3><p>实例化是“编译器根据实参类型，把模板变成具体函数/类”的过程。</p>
 <ol>
 <li>隐式实例化：在调用点由编译器自动生成。</li>
-<li>显式实例化：你主动要求编译器提前生成某个版本。</li>
+<li>显式实例化：主动要求编译器提前生成某个版本。</li>
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2056,9 +2065,9 @@
 </div><p>注意：</p>
 <ol>
 <li>函数模板不支持偏特化。</li>
-<li>类模板支持偏特化。</li>
+<li>类模板支持偏特化。
+函数模板如果想做“偏特化效果”，通常使用重载实现。</li>
 </ol>
-<p>函数模板如果想做“偏特化效果”，通常使用重载实现。</p>
 <h3 id="54-类模板class-template">5.4 类模板（Class Template）
 </h3><p>类模板是“按类型批量生成类定义”的模具。</p>
 <div class="highlight"><div class="chroma">
@@ -2256,8 +2265,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>本质：带模板调用运算符的函数对象。</p>
-<p>补充：</p>
+</div><p>本质：带模板调用运算符的函数对象。
+补充：</p>
 <ol>
 <li>lambda 默认 <code>operator()</code> 是 <code>const</code>。</li>
 <li>要修改按值捕获的变量，需要 <code>mutable</code>。</li>
@@ -2285,8 +2294,8 @@
 <li>引用捕获要注意生命周期，防止悬空引用。</li>
 </ol>
 <h3 id="59-完美转发万能引用">5.9 完美转发（万能引用）
-</h3><p>完美转发要解决“中间函数转发参数时丢失左值/右值属性”的问题。</p>
-<p>先看问题：</p>
+</h3><p>完美转发要解决“中间函数转发参数时丢失左值/右值属性”的问题。
+先看问题：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2339,12 +2348,32 @@
 <li>传左值：<code>T</code> 推导为 <code>Type&amp;</code>，参数类型经折叠后为 <code>Type&amp;</code>。</li>
 </ol>
 <h4 id="592-引用折叠规则">5.9.2 引用折叠规则
-</h4><p>| 形式 | 折叠结果 |
-|  |  |
-| <code>T&amp; &amp;</code> | <code>T&amp;</code> |
-| <code>T&amp; &amp;&amp;</code> | <code>T&amp;</code> |
-| <code>T&amp;&amp; &amp;</code> | <code>T&amp;</code> |
-| <code>T&amp;&amp; &amp;&amp;</code> | <code>T&amp;&amp;</code> |</p>
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>形式</th>
+          <th>折叠结果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>T&amp; &amp;</code></td>
+          <td><code>T&amp;</code></td>
+      </tr>
+      <tr>
+          <td><code>T&amp; &amp;&amp;</code></td>
+          <td><code>T&amp;</code></td>
+      </tr>
+      <tr>
+          <td><code>T&amp;&amp; &amp;</code></td>
+          <td><code>T&amp;</code></td>
+      </tr>
+      <tr>
+          <td><code>T&amp;&amp; &amp;&amp;</code></td>
+          <td><code>T&amp;&amp;</code></td>
+      </tr>
+  </tbody>
+</table></div>
 <h4 id="593-stdmove-与-stdforward-区别">5.9.3 std::move 与 std::forward 区别
 </h4><ol>
 <li><code>std::move</code>：无条件把表达式转成右值。</li>
@@ -2506,7 +2535,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>如果你想用“空指针判断”风格：</p>
+</div><p>如果想用“空指针判断”风格：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2624,14 +2653,13 @@
 </h4><p>当两个 <code>shared_ptr</code> 互相持有会循环引用，导致泄漏。<br>
 <code>weak_ptr</code> 不增加引用计数，用来观察资源而不拥有资源。</p>
 <h4 id="684-智能指针怎么理解最准确">6.8.4 智能指针怎么理解最准确
-</h4><p>沿用你原笔记那句非常好的理解：</p>
-<ol>
+</h4><ol>
 <li>智能指针“看起来像指针”。</li>
-<li>但它本质是类对象，内部封装了资源释放策略。</li>
+<li>但它本质是类对象，内部封装了资源释放策略。
+也就是说它不是“系统自动回收魔法”，而是 RAII 在模板类上的工程化落地。</li>
 </ol>
-<p>也就是说它不是“系统自动回收魔法”，而是 RAII 在模板类上的工程化落地。</p>
 <h4 id="685-delete-与-delete-在类对象数组中的区别">6.8.5 delete 与 delete[] 在类对象数组中的区别
-</h4><p>对内置类型你可能感觉差别不明显，但对类对象数组差别很大：</p>
+</h4><p>对内置类型可能感觉差别不明显，但对类对象数组差别很大：</p>
 <ol>
 <li><code>delete p</code> 只会按单对象路径处理，通常只调用一个析构流程。</li>
 <li><code>delete[] p</code> 会按数组元素数量逐个调用析构，再释放整块数组内存。</li>
@@ -2672,8 +2700,8 @@
 </ol>
 <h2 id="7-工程视角名字修饰与链接认知">7. 工程视角：名字修饰与链接认知
 </h2><h3 id="71-名字修饰name-mangling">7.1 名字修饰（Name Mangling）
-</h3><p>名字修饰是编译器在编译阶段给符号“重新命名”，目的是保证全局唯一并支持重载。</p>
-<p>在 C 里，函数名通常就是裸名字；
+</h3><p>名字修饰是编译器在编译阶段给符号“重新命名”，目的是保证全局唯一并支持重载。
+在 C 里，函数名通常就是裸名字；
 在 C++ 里，函数名会编码参数信息、命名空间信息、类作用域信息。</p>
 <p>示例：</p>
 <ol>
@@ -2689,7 +2717,7 @@
 <li>C++ 符号包含类型编码。</li>
 <li>两边规则不一致，链接器找不到对应符号。</li>
 </ol>
-<p>典型报错（你工程里最常见的就是这一类）：</p>
+<p>典型报错（工程里最常见的就是这一类）：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2734,20 +2762,20 @@
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>作用：告诉 C++ 编译器按 C 规则生成/查找符号。</p>
-<p>适用场景：</p>
+</div><p>作用：告诉 C++ 编译器按 C 规则生成/查找符号。
+适用场景：</p>
 <ol>
 <li>C/C++ 混编。</li>
 <li>嵌入式启动文件调用 C++ 工程接口。</li>
 <li>第三方 C 库接入。</li>
 </ol>
-<p>补充一个你工程里很实用的模式：</p>
+<p>补充一个工程里很实用的模式：</p>
 <ol>
 <li>C++ 内部保留类和模板实现。</li>
 <li>对外导出一组 C 风格 API（extern &ldquo;C&rdquo;）。</li>
-<li>C 侧只认识这组接口，不直接碰 C++ 类。</li>
+<li>C 侧只认识这组接口，不直接碰 C++ 类。
+示意：</li>
 </ol>
-<p>示意：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2788,9 +2816,9 @@
 <li>用符号工具看目标库/目标文件里有没有这个符号。</li>
 <li>有符号但名字不一致：优先检查 extern &ldquo;C&rdquo; 与声明一致性。</li>
 <li>名字一致但仍报错：检查链接命令是否带上对应库。</li>
-<li>还不行：检查链接顺序（尤其静态库）。</li>
+<li>还不行：检查链接顺序（尤其静态库）。
+常用命令（GNU工具链）：</li>
 </ol>
-<p>常用命令（GNU工具链）：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2831,13 +2859,13 @@
 </h4><p>现象：几乎必挂（名称、this指针、ABI都不匹配）。
 对策：用 C API 封装层间接调用 C++ 内部实现。</p>
 <h3 id="77-arm-none-eabi-场景提示">7.7 arm-none-eabi 场景提示
-</h3><p>在嵌入式（arm-none-eabi）里，这类问题更常见，因为你经常会遇到：</p>
+</h3><p>在嵌入式（arm-none-eabi）里，这类问题更常见，因为经常会遇到：</p>
 <ol>
 <li>启动文件/中断向量是 C 风格符号。</li>
 <li>驱动层是 C 与 C++ 混合。</li>
 <li>不同模块来自不同编译选项或不同语言源。</li>
 </ol>
-<p>建议你在工程里固定以下规范：</p>
+<p>建议在工程里固定以下规范：</p>
 <ol>
 <li>所有跨语言接口统一放在 <code>api.h</code> 并加 extern &ldquo;C&rdquo; 宏保护。</li>
 <li>每个静态库发布时附一份“导出符号清单”。</li>
@@ -2854,8 +2882,8 @@
 </span></span><span class="line"><span class="cl">arm-none-eabi-readelf -Ws build/xxx.elf <span class="p">|</span> grep foo
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="78-一页速查你实战可直接套">7.8 一页速查（你实战可直接套）
-</h3><p>当你再次遇到链接错误时，按这5步走：</p>
+</div><h3 id="78-一页速查">7.8 一页速查
+</h3><p>当再次遇到链接错误时，按这5步走：</p>
 <ol>
 <li>记下 undefined reference 里的符号名。</li>
 <li>在库里搜这个符号（nm/readelf）。</li>
@@ -2865,7 +2893,7 @@
 </ol>
 <h3 id="79-本章小结">7.9 本章小结
 </h3><ol>
-<li>名字修饰不是“理论知识”，它直接决定你链接能不能过。</li>
+<li>名字修饰不是“理论知识”，它直接决定链接能不能过。</li>
 <li>extern &ldquo;C&rdquo; 的本质是“统一符号规则”，不是语法装饰。</li>
 <li>工程排错要分层：声明层、编译层、链接层。</li>
 <li>先查符号再改代码，是混编排错最高效路径。</li>
