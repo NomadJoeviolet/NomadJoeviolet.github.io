@@ -3,7 +3,19 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://NomadJoeviolet.github.io/</loc>
-    <lastmod>2026-04-09T16:21:07+08:00</lastmod>
+    <lastmod>2026-04-09T19:44:59+08:00</lastmod>
+  </url><url>
+    <loc>https://NomadJoeviolet.github.io/categories/</loc>
+    <lastmod>2026-04-09T19:44:59+08:00</lastmod>
+  </url><url>
+    <loc>https://NomadJoeviolet.github.io/post/</loc>
+    <lastmod>2026-04-09T19:44:59+08:00</lastmod>
+  </url><url>
+    <loc>https://NomadJoeviolet.github.io/p/%E5%9F%BA%E4%BA%8Ecubemx%E7%9A%84stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2026-04-09T19:44:59+08:00</lastmod>
+  </url><url>
+    <loc>https://NomadJoeviolet.github.io/categories/%E5%9F%BA%E4%BA%8Ehal%E5%BA%93%E7%9A%84stm32%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2026-04-09T19:44:59+08:00</lastmod>
   </url><url>
     <loc>https://NomadJoeviolet.github.io/tags/base/</loc>
     <lastmod>2026-04-09T16:21:07+08:00</lastmod>
@@ -18,12 +30,6 @@
     <lastmod>2026-04-09T16:21:07+08:00</lastmod>
   </url><url>
     <loc>https://NomadJoeviolet.github.io/p/c-%E7%AC%94%E8%AE%B0%E5%90%88%E8%AE%A2%E6%9C%AC/</loc>
-    <lastmod>2026-04-09T16:21:07+08:00</lastmod>
-  </url><url>
-    <loc>https://NomadJoeviolet.github.io/categories/</loc>
-    <lastmod>2026-04-09T16:21:07+08:00</lastmod>
-  </url><url>
-    <loc>https://NomadJoeviolet.github.io/post/</loc>
     <lastmod>2026-04-09T16:21:07+08:00</lastmod>
   </url><url>
     <loc>https://NomadJoeviolet.github.io/tags/</loc>
@@ -53,12 +59,6 @@
     <loc>https://NomadJoeviolet.github.io/p/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/</loc>
     <lastmod>2025-11-07T23:37:07+08:00</lastmod>
   </url><url>
-    <loc>https://NomadJoeviolet.github.io/p/stm32fdcancan/</loc>
-    <lastmod>2025-09-20T13:04:46+08:00</lastmod>
-  </url><url>
-    <loc>https://NomadJoeviolet.github.io/categories/%E5%9F%BA%E4%BA%8Ehal%E5%BA%93%E7%9A%84stm32%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2025-09-20T13:04:46+08:00</lastmod>
-  </url><url>
     <loc>https://NomadJoeviolet.github.io/tags/%E6%88%90%E9%95%BF/</loc>
     <lastmod>2025-09-17T23:37:07+08:00</lastmod>
   </url><url>
@@ -74,29 +74,11 @@
     <loc>https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/</loc>
     <lastmod>2025-09-04T00:36:07+08:00</lastmod>
   </url><url>
-    <loc>https://NomadJoeviolet.github.io/p/stm32uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/</loc>
-    <lastmod>2025-06-27T14:53:35+08:00</lastmod>
-  </url><url>
-    <loc>https://NomadJoeviolet.github.io/tags/uart%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/</loc>
-    <lastmod>2025-06-27T14:53:35+08:00</lastmod>
-  </url><url>
-    <loc>https://NomadJoeviolet.github.io/tags/%E4%B8%AD%E6%96%AD/</loc>
-    <lastmod>2025-06-27T14:53:35+08:00</lastmod>
-  </url><url>
-    <loc>https://NomadJoeviolet.github.io/p/stm32tim%E5%AE%9A%E6%97%B6%E5%99%A8/</loc>
-    <lastmod>2025-06-26T17:26:06+08:00</lastmod>
-  </url><url>
-    <loc>https://NomadJoeviolet.github.io/tags/tim%E6%A8%A1%E5%9D%97/</loc>
-    <lastmod>2025-06-26T17:26:06+08:00</lastmod>
-  </url><url>
     <loc>https://NomadJoeviolet.github.io/p/cc-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E6%9E%81%E7%AE%80%E7%89%88/</loc>
     <lastmod>2025-06-26T15:35:46+08:00</lastmod>
   </url><url>
     <loc>https://NomadJoeviolet.github.io/p/%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9D%82%E7%9F%A5%E8%AF%86/</loc>
     <lastmod>2025-06-26T15:21:07+08:00</lastmod>
-  </url><url>
-    <loc>https://NomadJoeviolet.github.io/p/stm32%E4%B8%AD%E6%96%AD/</loc>
-    <lastmod>2025-06-25T21:48:07+08:00</lastmod>
   </url><url>
     <loc>https://NomadJoeviolet.github.io/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2025-06-24T23:16:11+08:00</lastmod>
@@ -107,26 +89,8 @@
     <loc>https://NomadJoeviolet.github.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2025-06-24T23:16:11+08:00</lastmod>
   </url><url>
-    <loc>https://NomadJoeviolet.github.io/p/can%E6%8E%A7%E5%88%B6%E5%99%A8%E5%92%8Ccan%E6%94%B6%E5%8F%91%E5%99%A8/</loc>
-    <lastmod>2025-06-24T23:11:52+08:00</lastmod>
-  </url><url>
-    <loc>https://NomadJoeviolet.github.io/tags/%E7%A1%AC%E4%BB%B6%E7%9F%A5%E8%AF%86/</loc>
-    <lastmod>2025-06-24T23:11:52+08:00</lastmod>
-  </url><url>
-    <loc>https://NomadJoeviolet.github.io/tags/adc%E6%A8%A1%E5%9D%97/</loc>
-    <lastmod>2025-06-24T22:44:59+08:00</lastmod>
-  </url><url>
-    <loc>https://NomadJoeviolet.github.io/p/stm32adc%E6%A8%A1%E5%9D%97/</loc>
-    <lastmod>2025-06-24T22:44:59+08:00</lastmod>
-  </url><url>
     <loc>https://NomadJoeviolet.github.io/p/cc-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/</loc>
     <lastmod>2025-06-24T22:30:22+08:00</lastmod>
-  </url><url>
-    <loc>https://NomadJoeviolet.github.io/tags/dma%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/</loc>
-    <lastmod>2025-06-18T19:52:33+08:00</lastmod>
-  </url><url>
-    <loc>https://NomadJoeviolet.github.io/p/stm32dma%E4%BD%BF%E7%94%A8%E4%B8%8E%E7%A9%BA%E9%97%B2%E4%B8%AD%E6%96%AD/</loc>
-    <lastmod>2025-06-18T19:52:33+08:00</lastmod>
   </url><url>
     <loc>https://NomadJoeviolet.github.io/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/</loc>
     <lastmod>2025-01-13T16:17:46+08:00</lastmod>
