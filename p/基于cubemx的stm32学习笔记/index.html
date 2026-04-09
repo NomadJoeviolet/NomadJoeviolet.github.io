@@ -1293,7 +1293,7 @@ rank指在ADC_Regular_ConversionMode中的rank设置</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="关于number-of-discontinuous-conversions">关于Number Of Discontinuous Conversions
-</h3><p>在STM32CubeMX中，<strong>Number Of Discontinuous Conversions</strong>（单次转换次数）是ADC（模数转换器）的一个配置选项，主要用于控制ADC在**非连续采样模式（Discontinuous Mode）**下的转换行为。以下是详细解释和使用方法：</p>
+</h3><p>在STM32CubeMX中，<strong>Number Of Discontinuous Conversions</strong>（单次转换次数）是ADC（模数转换器）的一个配置选项，主要用于控制ADC在<strong>非连续采样模式（Discontinuous Mode</strong>下的转换行为。以下是详细解释和使用方法：</p>
 <h4 id="1-功能含义">1. 功能含义
 </h4><ul>
 <li><strong>作用</strong>：<br>
@@ -1443,8 +1443,8 @@ rank指在ADC_Regular_ConversionMode中的rank设置</p>
 <li><strong>优势</strong>：灵活控制采样节奏，减少CPU负担，适合分组采样需求。</li>
 </ul>
 <p><a class="link" href="https://www.bilibili.com/video/BV1HY411D7Ar?vd_source=5a0790755035f26a67935abfbfcdfd5b"  target="_blank" rel="noopener"
-    >中科大RM电控合集：CAN通信+STM32CubeMX编程（B站）</a>
-<a class="link" href="https://blog.csdn.net/ShenZhen_zixian/article/details/132652405"  target="_blank" rel="noopener"
+    >中科大RM电控合集：CAN通信+STM32CubeMX编程（B站）</a></p>
+<p><a class="link" href="https://blog.csdn.net/ShenZhen_zixian/article/details/132652405"  target="_blank" rel="noopener"
     >STM32 CAN快速配置（HAL库版本）_stm32 can hal-CSDN博客</a></p>
 <p><a class="link" href="https://blog.csdn.net/mengenqing/article/details/132583180"  target="_blank" rel="noopener"
     >一文搞懂CAN和CAN FD总线协议_fdcan-CSDN博客</a></p>
@@ -2471,8 +2471,8 @@ Time Triggered Communication（时间触发通信）</p>
 </li>
 </ol>
 <h3 id="关于定时器的事件更新中断">关于定时器的事件更新中断
-</h3><p><a class="link" href="#%e5%ae%9a%e6%97%b6%e5%99%a8%e4%b8%ad%e6%96%ad%e8%a1%a5%e5%85%85" >关于定时器中断（本笔记内）</a>
-计数值到达自动重装载值时，触发更新中断
+</h3><p><a class="link" href="#%e5%ae%9a%e6%97%b6%e5%99%a8%e4%b8%ad%e6%96%ad%e8%a1%a5%e5%85%85" >关于定时器中断（本笔记内）</a></p>
+<p>计数值到达自动重装载值时，触发更新中断
 在Cube中开启<code>global interrupt</code>
 <img src="/p/%E5%9F%BA%E4%BA%8Ecubemx%E7%9A%84stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/STM32TIM%E5%AE%9A%E6%97%B6%E5%99%A8-%E4%B8%AD%E6%96%AD.png"
 	width="695"
@@ -3360,7 +3360,7 @@ PWM的频率为<code>1000Hz</code>，最大计数值为<code>1000-1</code></p>
 </div>
 </div><h4 id="dma模式-1">DMA模式
 </h4><p><a class="link" href="https://blog.csdn.net/m0_47010960/article/details/128000029"  target="_blank" rel="noopener"
-    >（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？_hal uart dma-CSDN博客</a></p>
+    >（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？hal uart dma-CSDN博客</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -3577,16 +3577,17 @@ PWM的频率为<code>1000Hz</code>，最大计数值为<code>1000-1</code></p>
 </div>
 </div><p><a class="link" href="https://shequ.stmicroelectronics.cn/thread-637349-1-1.html"  target="_blank" rel="noopener"
     >STM32 hal库串口空闲中断最新用法 - STM32团队 ST意法半导体中文论坛</a></p>
-<p>（非常详细）<a class="link" href="https://blog.csdn.net/as480133937/article/details/104927922"  target="_blank" rel="noopener"
-    >【STM32】 DMA原理，步骤超细详解，一文看懂DMA-CSDN博客</a></p>
+<p><a class="link" href="https://blog.csdn.net/as480133937/article/details/104927922"  target="_blank" rel="noopener"
+    >【STM32】 DMA原理，步骤超细详解，一文看懂DMA-CSDN博客</a>（非常详细）</p>
 <p><a class="link" href="https://www.iotword.com/25305.html"  target="_blank" rel="noopener"
     >STM32CubeIDE HAL库DMA与UART不定长数据接收实现：空闲中断详解-物联沃-IOTWORD物联网</a></p>
 <p><a class="link" href="https://blog.csdn.net/qq_47159466/article/details/124542339"  target="_blank" rel="noopener"
     >STM32 hal库串口空闲中断最新用法_stm32hal库串口空闲中断-CSDN博客</a></p>
 <p><a class="link" href="https://blog.csdn.net/soledade/article/details/129030082"  target="_blank" rel="noopener"
     >HAL库 串口空闲中断+DMA接收不定长数据 详解及踩坑_hal库串口空闲中断-CSDN博客</a></p>
-<p>（写的非常好，非常有助于提升底层理解）<a class="link" href="https://blog.csdn.net/m0_47010960/article/details/128000029"  target="_blank" rel="noopener"
-    >（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？_hal uart dma-CSDN博客</a></p>
+<p><a class="link" href="https://blog.csdn.net/m0_47010960/article/details/128000029"  target="_blank" rel="noopener"
+    >（stm32之HAL库）UART工作在DMA模式要打开串口中断吗？hal uart dma-CSDN博客</a></p>
+<p>（写的非常好，非常有助于提升底层理解）</p>
 <h2 id="dma补充">DMA（补充）
 </h2><blockquote>
 <p>说明：本节是 DMA 原理与细节补充，和上文“UART、DMA与空闲中断（综合）”互为补充。</p>
@@ -4676,12 +4677,16 @@ PWM的频率为<code>1000Hz</code>，最大计数值为<code>1000-1</code></p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="按键消抖-1">按键消抖
-</h3><p><img src="/%e6%8c%89%e9%94%ae%e6%8a%96%e5%8a%a8%e7%9a%84%e5%8e%bb%e9%99%a4.jpg"
-	
-	
-	
+</h3><p><img src="/p/%E5%9F%BA%E4%BA%8Ecubemx%E7%9A%84stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%8C%89%E9%94%AE%E6%8A%96%E5%8A%A8%E7%9A%84%E5%8E%BB%E9%99%A4.jpg"
+	width="1880"
+	height="1057"
+	srcset="/p/%E5%9F%BA%E4%BA%8Ecubemx%E7%9A%84stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%8C%89%E9%94%AE%E6%8A%96%E5%8A%A8%E7%9A%84%E5%8E%BB%E9%99%A4_hu1920332323901543496.jpg 480w, /p/%E5%9F%BA%E4%BA%8Ecubemx%E7%9A%84stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%8C%89%E9%94%AE%E6%8A%96%E5%8A%A8%E7%9A%84%E5%8E%BB%E9%99%A4_hu618690599907585652.jpg 1024w"
 	loading="lazy"
 	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
 	
 >
 此处是检测下降沿，使用的是上拉电平</p>
