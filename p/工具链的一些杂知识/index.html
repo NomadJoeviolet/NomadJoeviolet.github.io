@@ -4,26 +4,30 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="MDK介绍及其使用 一文教你使用MDK开发工具-CSDN博客\nMDK、KEIL、uVision 之间的区别\nMDK（ Microcontroller Development Kit ），也称 MDK-ARM 、KEIL MDK、KEIL For ARM，都是同一个东西。ARM 公司现在统一使用 MDK-ARM 的称呼，MDK 的设备数据库中有很多厂商的芯片，是专为微控制器开发的一款工具，为满足基于 MCU 进行嵌入式软件开发的工程师需求而设计，支持 ARM7，ARM9，Cortex-M4/M3/M1，Cortex-R0/R3/R4 等 ARM 微控制器内核。KEIL 是公司的名称，有时候也指 KEIL 公司的所有软件开发工具。Keil 公司在2005年被 ARM 公司收购。\n">
 <title>工具链的一些杂知识</title>
 
-<link rel='canonical' href='https://NomadJoeviolet.github.io/p/%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9D%82%E7%9F%A5%E8%AF%86/'>
-
-<link rel="stylesheet" href="/scss/style.min.1d228ea7690a965de9e7d8591cfa3a19afe76b85fa0ec74dcd88180add482f92.css"><meta property='og:title' content="工具链的一些杂知识">
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9D%82%E7%9F%A5%E8%AF%86/'><link rel="stylesheet" href="/scss/field-notes.min.c66b018ab2fe010d4124c4b8cf49707f4ed2bcafc92b5a3e4b33ce5c4a6bec99.css">
+<meta property='og:title' content="工具链的一些杂知识">
 <meta property='og:description' content="MDK介绍及其使用 一文教你使用MDK开发工具-CSDN博客\nMDK、KEIL、uVision 之间的区别\nMDK（ Microcontroller Development Kit ），也称 MDK-ARM 、KEIL MDK、KEIL For ARM，都是同一个东西。ARM 公司现在统一使用 MDK-ARM 的称呼，MDK 的设备数据库中有很多厂商的芯片，是专为微控制器开发的一款工具，为满足基于 MCU 进行嵌入式软件开发的工程师需求而设计，支持 ARM7，ARM9，Cortex-M4/M3/M1，Cortex-R0/R3/R4 等 ARM 微控制器内核。KEIL 是公司的名称，有时候也指 KEIL 公司的所有软件开发工具。Keil 公司在2005年被 ARM 公司收购。\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9D%82%E7%9F%A5%E8%AF%86/'>
 <meta property='og:site_name' content='NomadJoe'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='BASE' /><meta property='article:published_time' content='2025-06-26T15:21:07&#43;08:00'/><meta property='article:modified_time' content='2025-06-26T15:21:07&#43;08:00'/>
 <meta name="twitter:title" content="工具链的一些杂知识">
-<meta name="twitter:description" content="MDK介绍及其使用 一文教你使用MDK开发工具-CSDN博客\nMDK、KEIL、uVision 之间的区别\nMDK（ Microcontroller Development Kit ），也称 MDK-ARM 、KEIL MDK、KEIL For ARM，都是同一个东西。ARM 公司现在统一使用 MDK-ARM 的称呼，MDK 的设备数据库中有很多厂商的芯片，是专为微控制器开发的一款工具，为满足基于 MCU 进行嵌入式软件开发的工程师需求而设计，支持 ARM7，ARM9，Cortex-M4/M3/M1，Cortex-R0/R3/R4 等 ARM 微控制器内核。KEIL 是公司的名称，有时候也指 KEIL 公司的所有软件开发工具。Keil 公司在2005年被 ARM 公司收购。\n">
+<meta name="twitter:description" content="MDK介绍及其使用 一文教你使用MDK开发工具-CSDN博客
+MDK、KEIL、uVision 之间的区别
+MDK（ Microcontroller Development Kit ），也称 MDK-ARM 、KEIL MDK、KEIL For ARM，都是同一个东西。ARM 公司现在统一使用 MDK-ARM 的称呼，MDK 的设备数据库中有很多厂商的芯片，是专为微控制器开发的一款工具，为满足基于 MCU 进行嵌入式软件开发的工程师需求而设计，支持 ARM7，ARM9，Cortex-M4/M3/M1，Cortex-R0/R3/R4 等 ARM 微控制器内核。KEIL 是公司的名称，有时候也指 KEIL 公司的所有软件开发工具。Keil 公司在2005年被 ARM 公司收购。
+">
+    <meta name="twitter:card" content="summary">
+
     <link rel="shortcut icon" href="/favicon.ico" />
+<link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 
     </head>
-    <body class="
-    article-page
-    ">
+    <body class="field-notes article-page">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
             if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
+                localStorage.setItem(colorSchemeKey, "dark");
             }
         })();
     </script><script>
@@ -41,181 +45,35 @@
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
+<a class="skip-link" href="#main-content">跳到主要内容</a><header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-wordmark" href="/" aria-label="NomadJoe 首页">NJ<span aria-hidden="true">/</span>FIELD NOTES</a>
+        <button class="site-menu-toggle" id="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+            <span class="site-menu-toggle__label">菜单</span>
+        </button>
+        <nav class="primary-nav" data-testid="primary-nav" aria-label="主导航">
+            <ul id="primary-menu">
+                <li><a href="/">首页</a></li>
+                <li><a href="/archives/">笔记</a></li>
+                <li><a href="/categories/%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae/">项目</a></li>
+                <li><a href="/%E5%85%B3%E4%BA%8E/">关于</a></li>
+                <li><a href="/search/">搜索</a></li>
+            </ul>
+        </nav>
+        <div class="site-tools" aria-label="站点工具">
             
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hu5250448583294231844.png" width="300"
-                            height="257" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">🍥</span>
-                
-            </figure>
+                <a class="icon-control" href="/index.xml" aria-label="订阅 RSS"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+</a>
             
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">NomadJoe</a></h1>
-            <h2 class="site-description">to feel,to experience</h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://www.bilibili.com/'
-                        target="_blank"
-                        title="Biliili"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://github.com/CaiJimmy/hugo-theme-stack'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>友情链接</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="切换配色" aria-pressed="false">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -223,153 +81,107 @@
 
 
 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>暗色模式</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
+            </button>
         </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
+    </div>
+</header>
+<main id="main-content" class="site-main" data-testid="article-main">
+    <div class="reading-progress" data-testid="reading-progress" aria-hidden="true">
+        <span class="reading-progress__line"></span>
+        <span class="reading-progress__stone"></span>
+    </div>
+
+    <article class="article-reader">
+        <div class="article-reader__layout">
+            <div class="article-reader__document">
+                <header class="article-reader__header">
+    <p class="section-kicker">FIELD NOTE / OPEN LOG</p>
+    <h1 data-testid="article-title">工具链的一些杂知识</h1>
+
+    <div class="article-reader__meta">
+        <time datetime="2025-06-26">2025.06.26</time>
+        <span aria-hidden="true">/</span>
+        <time data-testid="article-reading-time" datetime="PT11M">11 分钟阅读</time>
+    </div>
+
+    
+        <ul class="article-reader__terms" aria-label="分类">
+            
+                <li><a href="/categories/base-study/">BASE Study</a></li>
+            
+        </ul>
+    
+
+    
+    
+</header>
+
+
+                <details class="article-toc-mobile">
+            <summary>目录</summary>
+            <div class="article-toc-mobile__content">
+                <nav id="TableOfContentsMobile" aria-label="目录">
   <ol>
     <li>
       <ol>
         <li>
           <ol>
-            <li><a href="#mdk介绍及其使用">MDK介绍及其使用</a></li>
-            <li><a href="#armclang">armclang</a></li>
-            <li><a href="#openocd">OpenOCD</a></li>
-            <li><a href="#ozone">Ozone</a></li>
-            <li><a href="#mingw">MinGW</a></li>
-            <li><a href="#llvm">LLVM</a></li>
-            <li><a href="#arm-none-eabi-gcc">arm-none-eabi-gcc</a></li>
-            <li><a href="#arm-none-eabi-gcc和armclang的区别">arm-none-eabi-gcc 和 armclang的区别</a></li>
-            <li><a href="#clangd">clangd</a></li>
-            <li><a href="#vscode的intellisense">VScode的IntelliSense</a></li>
-            <li><a href="#交叉编译器">交叉编译器</a></li>
-            <li><a href="#ninjamakecmake">ninja，make，cmake</a></li>
-            <li><a href="#hal库hardware-abstraction-layer-硬件抽象层库">HAL库（Hardware Abstraction Layer 硬件抽象层库）</a></li>
-            <li><a href="#cmsiscortex-microcontroller-software-interface-standard">CMSIS（Cortex Microcontroller Software Interface Standard）</a></li>
-            <li><a href="#hal-库与-cmsis-的关系">HAL 库与 CMSIS 的关系</a></li>
+            <li>
+              <ol>
+                <li><a href="#mdk介绍及其使用">MDK介绍及其使用</a></li>
+                <li><a href="#armclang">armclang</a></li>
+                <li><a href="#openocd">OpenOCD</a></li>
+                <li><a href="#ozone">Ozone</a></li>
+                <li><a href="#mingw">MinGW</a></li>
+                <li><a href="#llvm">LLVM</a></li>
+                <li><a href="#arm-none-eabi-gcc">arm-none-eabi-gcc</a></li>
+                <li><a href="#arm-none-eabi-gcc和armclang的区别">arm-none-eabi-gcc 和 armclang的区别</a></li>
+                <li><a href="#clangd">clangd</a></li>
+                <li><a href="#vscode的intellisense">VScode的IntelliSense</a></li>
+                <li><a href="#交叉编译器">交叉编译器</a></li>
+                <li><a href="#ninjamakecmake">ninja，make，cmake</a></li>
+                <li><a href="#hal库hardware-abstraction-layer-硬件抽象层库">HAL库（Hardware Abstraction Layer 硬件抽象层库）</a></li>
+                <li><a href="#cmsiscortex-microcontroller-software-interface-standard">CMSIS（Cortex Microcontroller Software Interface Standard）</a></li>
+                <li><a href="#hal-库与-cmsis-的关系">HAL 库与 CMSIS 的关系</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
       </ol>
     </li>
   </ol>
 </nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/base-study/" >
-                BASE Study
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9D%82%E7%9F%A5%E8%AF%86/">工具链的一些杂知识</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-06-26</time>
             </div>
-        
+        </details>
 
-        
-    </footer>
-    
-
-    
-</div>
-
-</header>
-
-    <section class="article-content">
-    
-    
-    <h4 id="mdk介绍及其使用">MDK介绍及其使用
-</h4><p><a class="link" href="https://blog.csdn.net/yychuyu/article/details/134980173"  target="_blank" rel="noopener"
+                <div class="article-content">
+                    <h4 id="mdk介绍及其使用">MDK介绍及其使用
+</h4>
+<p><a class="link" href="https://blog.csdn.net/yychuyu/article/details/134980173"  target="_blank" rel="noopener"
     >一文教你使用MDK开发工具-CSDN博客</a></p>
 <p>MDK、KEIL、uVision 之间的区别</p>
 <p>MDK（ Microcontroller Development Kit ），也称 MDK-ARM 、KEIL MDK、KEIL For ARM，都是同一个东西。ARM 公司现在统一使用 MDK-ARM 的称呼，MDK 的设备数据库中有很多厂商的芯片，是专为微控制器开发的一款工具，为满足基于 MCU 进行嵌入式软件开发的工程师需求而设计，支持 ARM7，ARM9，Cortex-M4/M3/M1，Cortex-R0/R3/R4 等 ARM 微控制器内核。KEIL 是公司的名称，有时候也指 KEIL 公司的所有软件开发工具。Keil 公司在2005年被 ARM 公司收购。</p>
 <p>uVision 是 KEIL 公司开发的一个集成开发环境（IDE）。它包括工程管理，源代码编辑，编译设置，下载调试和模拟仿真等功能，uVision 有 uVision2、uVision3、uVision4 和 uVision5 四个版本，目前最新的版本是 uVision5。它提供一个环境，让开发者易于操作。uVision 通用于 KEIL 的开发工具中，例如 MDK，PK51，PK166，DK251等。</p>
 <h4 id="armclang">armclang
-</h4><p>就是俗称的AC6
+</h4>
+<p>就是俗称的AC6
 armclang是ARM公司提供的一款C/C++编译器，专门用于为ARM架构的处理器生成高性能代码。该编译器通常与ARM的其他工具链一起使用，适合嵌入式系统开发。</p>
 <p>请注意，确保在项目中使用合适的工具和版本，并根据需求查阅最新的文档。</p>
 <h4 id="openocd">OpenOCD
-</h4><p><a class="link" href="https://zhuanlan.zhihu.com/p/41517198"  target="_blank" rel="noopener"
+</h4>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/41517198"  target="_blank" rel="noopener"
     >跟我一起学OpenOCD(一) - 知乎 (zhihu.com)</a></p>
 <p>OpenOCD是一个开源的调试/编程工具，主要用于嵌入式系统，它支持多种硬件设备和调试协议，如JTAG和SWD。它通常与GNU工具链结合使用，可以为开发人员提供硬件调试和烧录固件的功能。</p>
 <h4 id="ozone">Ozone
-</h4><p><a class="link" href="https://www.armbbs.cn/forum.php?mod=viewthread&amp;tid=95855&amp;highlight=Ozone"  target="_blank" rel="noopener"
+</h4>
+<p><a class="link" href="https://www.armbbs.cn/forum.php?mod=viewthread&amp;tid=95855&amp;highlight=Ozone"  target="_blank" rel="noopener"
     >Ozone使用介绍-基础功能 - 开发环境 - 硬汉嵌入式论坛 - Powered by Discuz! (armbbs.cn)</a></p>
 <h4 id="mingw">MinGW
-</h4><p>mingw 是一个为 Microsoft Windows 平台编译和运行 Unix 程序的工具套装，它提供了类似于 Unix 环境下的编译器、链接器等工具，以便在 Windows 平台上开发使用 GCC（GNU 编译器集合）和其他开源 Unix 工具的软件。</p>
+</h4>
+<p>mingw 是一个为 Microsoft Windows 平台编译和运行 Unix 程序的工具套装，它提供了类似于 Unix 环境下的编译器、链接器等工具，以便在 Windows 平台上开发使用 GCC（GNU 编译器集合）和其他开源 Unix 工具的软件。</p>
 <h4 id="llvm">LLVM
-</h4><p><a class="link" href="https://zhuanlan.zhihu.com/p/140462815"  target="_blank" rel="noopener"
+</h4>
+<p><a class="link" href="https://zhuanlan.zhihu.com/p/140462815"  target="_blank" rel="noopener"
     >LLVM基本概念入门 - 知乎</a></p>
 <p>来自于百度百科的解释</p>
 <ul>
@@ -377,9 +189,11 @@ armclang是ARM公司提供的一款C/C++编译器，专门用于为ARM架构的�
 </ul>
 <p>现在的LLVM是一个编译器框架。LLVM作为编译器框架，是需要各种功能模块支撑起来的，你可以将clang和lld都看做是LLVM的组成部分，框架的意思是，你可以基于LLVM提供的功能开发自己的模块，并集成在LLVM系统上，增加它的功能，或者就单纯自己开发软件工具，而利用LLVM来支撑底层实现。LLVM由一些库和工具组成，正因为它的这种设计思想，使它可以很容易和IDE集成（因为IDE软件可以直接调用库来实现一些如静态检查这些功能），也很容易构建生成各种功能的工具（因为新的工具只需要调用需要的库就行）</p>
 <h4 id="arm-none-eabi-gcc">arm-none-eabi-gcc
-</h4><p>arm-none-eabi-gcc 是一个专为 ARM 架构的嵌入式系统设计的 GCC 编译器版本。它可以生成裸机代码，适用于没有操作系统的应用程序。开发者常用它来编译针对 ARM Cortex 和其他 ARM 设备的软件。</p>
+</h4>
+<p>arm-none-eabi-gcc 是一个专为 ARM 架构的嵌入式系统设计的 GCC 编译器版本。它可以生成裸机代码，适用于没有操作系统的应用程序。开发者常用它来编译针对 ARM Cortex 和其他 ARM 设备的软件。</p>
 <h4 id="arm-none-eabi-gcc和armclang的区别">arm-none-eabi-gcc 和 armclang的区别
-</h4><p><code>arm-none-eabi-gcc</code> 和 <code>armclang</code> 是两种不同的编译工具链，主要用于嵌入式系统中基于 ARM 处理器的代码编译。它们之间存在一些关键的区别，以下是它们各自的特点及区别的简要概述：</p>
+</h4>
+<p><code>arm-none-eabi-gcc</code> 和 <code>armclang</code> 是两种不同的编译工具链，主要用于嵌入式系统中基于 ARM 处理器的代码编译。它们之间存在一些关键的区别，以下是它们各自的特点及区别的简要概述：</p>
 <ol>
 <li>
 <p><strong>开发者和背景</strong>：</p>
@@ -424,10 +238,12 @@ armclang是ARM公司提供的一款C/C++编译器，专门用于为ARM架构的�
 </ol>
 <p>在选择哪一个编译器进行项目开发时，需要考虑多个因素，如团队的熟悉度、项目需求对优化的依赖程度、成本（尤其是 armclang 可能涉及的许可成本）以及与其他工具的兼容性等。</p>
 <h4 id="clangd">clangd
-</h4><p>clangd是llvm项目推出的C++语言服务器，通过LSP(Language Server Protocal)协议向编辑器如vscode/vim/emacs提供语法补全、错误检测、跳转、格式化等等功能。C++的LSP曾经是<a class="link" href="https://zhida.zhihu.com/search?content_id=214022597&amp;content_type=Article&amp;match_order=1&amp;q=cquery&amp;zhida_source=entity"  target="_blank" rel="noopener"
+</h4>
+<p>clangd是llvm项目推出的C++语言服务器，通过LSP(Language Server Protocal)协议向编辑器如vscode/vim/emacs提供语法补全、错误检测、跳转、格式化等等功能。C++的LSP曾经是<a class="link" href="https://zhida.zhihu.com/search?content_id=214022597&amp;content_type=Article&amp;match_order=1&amp;q=cquery&amp;zhida_source=entity"  target="_blank" rel="noopener"
     >cquery</a>, ccls, clangd三足鼎立。但是clangd支持clang-tidy实时检查的功能是另外两者不具备的，而且cquery和ccls都是单个开发者主导的项目，clangd背后则是有llvm的背书。目前来看，“姓赵”的clangd在这场c++ lsp赛跑中已经有了不小的领先优势。</p>
 <h4 id="vscode的intellisense">VScode的IntelliSense
-</h4><p><strong>IntelliSense 是 VS Code 提供的智能代码补全和理解功能</strong>，它结合了代码补全、参数信息、快速信息和成员列表等功能，极大地提高了开发效率。</p>
+</h4>
+<p><strong>IntelliSense 是 VS Code 提供的智能代码补全和理解功能</strong>，它结合了代码补全、参数信息、快速信息和成员列表等功能，极大地提高了开发效率。</p>
 <p>IntelliSense 的核心组成</p>
 <ol>
 <li><strong>代码补全 (Code Completion)</strong>
@@ -459,7 +275,8 @@ armclang是ARM公司提供的一款C/C++编译器，专门用于为ARM架构的�
 </li>
 </ol>
 <h5 id="intellisense-的工作原理">IntelliSense 的工作原理
-</h5><p>VS Code 通过以下方式提供 IntelliSense：</p>
+</h5>
+<p>VS Code 通过以下方式提供 IntelliSense：</p>
 <ol>
 <li><strong>基于词法分析</strong>：简单的文本匹配补全</li>
 <li><strong>基于语言服务器协议 (LSP)</strong>：通过语言服务器获取深度分析</li>
@@ -467,11 +284,13 @@ armclang是ARM公司提供的一款C/C++编译器，专门用于为ARM架构的�
 <li><strong>基于标签 (Tag Parser)</strong>：如 C/C++ 扩展使用的方案</li>
 </ol>
 <h4 id="交叉编译器">交叉编译器
-</h4><p>在一种计算机环境中运行的编译程序，能编译出在另外一种环境下运行的代码，这个编译过程就叫交叉编译.简单地说，就是在一个平台上生成另一个平台上的可执行代码</p>
+</h4>
+<p>在一种计算机环境中运行的编译程序，能编译出在另外一种环境下运行的代码，这个编译过程就叫交叉编译.简单地说，就是在一个平台上生成另一个平台上的可执行代码</p>
 <p><a class="link" href="https://zhuanlan.zhihu.com/p/133779123"  target="_blank" rel="noopener"
     >arm 交叉编译器各种gcc 傻傻分不清楚：gnueabi,gnueabhf,none-eaib - 知乎</a></p>
 <h5 id="交叉编译工具链的命名规范">交叉编译工具链的命名规范
-</h5><p><strong>arch [-vendor]  [-os]  [-(gnu)eabi]</strong></p>
+</h5>
+<p><strong>arch [-vendor]  [-os]  [-(gnu)eabi]</strong></p>
 <p><strong>arch : 架构的意思，如ARM ，MIPS</strong></p>
 <p><strong>vendor： 工具链的提供厂商</strong></p>
 <p><strong>os： 支持的操作系统</strong></p>
@@ -483,37 +302,48 @@ armclang是ARM公司提供的一款C/C++编译器，专门用于为ARM架构的�
 none表示vendor是none，也就是不属于某一公司的
 （更多的解释是<code>none</code>是指无操作系统）</p>
 <h5 id="abi-和-eabi">ABI 和 EABI
-</h5><p><strong>ABI</strong>：二进制应用程序接口(Application Binary Interface (ABI) for the ARM Architecture)。在计算机中，应用二进制接口描述了应用程序（或者其他类型）和操作系统之间或其他应用程序的低级接口。</p>
+</h5>
+<p><strong>ABI</strong>：二进制应用程序接口(Application Binary Interface (ABI) for the ARM Architecture)。在计算机中，应用二进制接口描述了应用程序（或者其他类型）和操作系统之间或其他应用程序的低级接口。</p>
 <p><strong>EABI</strong>：嵌入式ABI。嵌入式应用二进制接口指定了文件格式、数据类型、寄存器使用、堆积组织优化和在一个嵌入式软件中的参数的标准约定。开发者使用自己的汇编语言也可以使用 EABI 作为与兼容的编译器生成的汇编语言的接口。</p>
 <p>两者主要区别是，ABI是计算机上的，EABI是嵌入式平台上（如ARM，MIPS等）</p>
 <h4 id="ninjamakecmake">ninja，make，cmake
-</h4><h5 id="cmake">cmake
-</h5><p>cmake是一个生成 .ninja 和 .makefile 的工具。cmake只需要用户通过对源码文件的简单描述（就是CMakeLists.txt文件），就能自动生成一个project的makefile文件或者ninja文件，然后就可以通过ninja或者make进行启动编译了，很多IDE都在用cmake作为项目管理工具。</p>
+</h4>
+<h5 id="cmake">cmake
+</h5>
+<p>cmake是一个生成 .ninja 和 .makefile 的工具。cmake只需要用户通过对源码文件的简单描述（就是CMakeLists.txt文件），就能自动生成一个project的makefile文件或者ninja文件，然后就可以通过ninja或者make进行启动编译了，很多IDE都在用cmake作为项目管理工具。</p>
 <h5 id="make与ninja">make与ninja
-</h5><p>make功能强大，可以给人看，ninja启动速度快，项目构建速度快，但不是给人看的
+</h5>
+<p>make功能强大，可以给人看，ninja启动速度快，项目构建速度快，但不是给人看的
 可以认为两者同级。</p>
 <h5 id="层级关系">层级关系
-</h5><ol>
+</h5>
+<ol>
 <li><strong>开发者层</strong>：编写CMakeLists.txt定义构建规则</li>
 <li><strong>生成器层</strong>：CMake解析配置，生成底层构建文件</li>
 <li><strong>执行器层</strong>：Make/Ninja执行具体构建命令</li>
 <li><strong>工具链层</strong>：编译器(如gcc)、链接器等实际执行编译</li>
 </ol>
 <h4 id="hal库hardware-abstraction-layer-硬件抽象层库">HAL库（Hardware Abstraction Layer 硬件抽象层库）
-</h4><h5 id="1-核心定义与归属">1. 核心定义与归属
-</h5><p>HAL 库是 <strong>STMicroelectronics（意法半导体）</strong> 为自家 <strong>STM32 系列微控制器（MCU）</strong> 量身打造的底层软件库，是 STM32 生态中核心的开发工具之一，基于 ARM 的 CMSIS 标准构建。</p>
+</h4>
+<h5 id="1-核心定义与归属">1. 核心定义与归属
+</h5>
+<p>HAL 库是 <strong>STMicroelectronics（意法半导体）</strong> 为自家 <strong>STM32 系列微控制器（MCU）</strong> 量身打造的底层软件库，是 STM32 生态中核心的开发工具之一，基于 ARM 的 CMSIS 标准构建。</p>
 <h5 id="2-核心组成模块">2. 核心组成模块
-</h5><ul>
+</h5>
+<ul>
 <li><strong>外设驱动模块</strong>：覆盖 STM32 所有常用外设（GPIO、UART、SPI、I2C、ADC、DAC、定时器、DMA、CAN、USB 等），每个外设都封装了完整的操作接口（初始化、配置、数据收发 / 采集、中断处理等）。</li>
 <li><strong>系统级功能模块</strong>：包含时钟树配置（HAL_RCC_XXX 系列函数）、中断控制器配置、低功耗模式（睡眠 / 停机 / 待机）管理、复位处理等核心系统功能。</li>
 <li><strong>工具链适配模块</strong>：兼容主流开发环境（STM32CubeIDE、Keil MDK、IAR EWARM），支持与 STM32CubeMX（图形化配置工具）联动，可自动生成初始化代码，大幅减少手动编码工作量。</li>
 <li><strong>辅助功能模块</strong>：提供延时函数（HAL_Delay）、错误处理机制、外设状态查询等通用工具函数，提升开发便捷性。</li>
 </ul>
 <h4 id="cmsiscortex-microcontroller-software-interface-standard">CMSIS（Cortex Microcontroller Software Interface Standard）
-</h4><h5 id="1-核心定义与归属-1">1. 核心定义与归属
-</h5><p>CMSIS 是 <strong>ARM 公司</strong> 制定的 <strong>行业统一软件接口标准</strong>（注意：不是具体的软件库，而是 “规范 / 协议”），面向所有基于 ARM Cortex-M 内核（M0/M0+/M3/M4/M7 等）的微控制器，所有主流 MCU 厂商（ST、NXP、Microchip、TI、瑞萨等）均需遵循该标准。</p>
+</h4>
+<h5 id="1-核心定义与归属-1">1. 核心定义与归属
+</h5>
+<p>CMSIS 是 <strong>ARM 公司</strong> 制定的 <strong>行业统一软件接口标准</strong>（注意：不是具体的软件库，而是 “规范 / 协议”），面向所有基于 ARM Cortex-M 内核（M0/M0+/M3/M4/M7 等）的微控制器，所有主流 MCU 厂商（ST、NXP、Microchip、TI、瑞萨等）均需遵循该标准。</p>
 <h5 id="2-核心组成模块关键子规范">2. 核心组成模块（关键子规范）
-</h5><ul>
+</h5>
+<ul>
 <li><strong>CMSIS-Core（内核核心层）</strong>：最基础、最核心的模块，定义了：
 <ul>
 <li>内核寄存器的统一访问接口（如 NVIC 中断控制器、Systick 定时器、MPU 内存保护单元的配置函数）；</li>
@@ -527,12 +357,14 @@ none表示vendor是none，也就是不属于某一公司的
 <li><strong>CMSIS-Pack（软件包格式层）</strong>：统一了 MCU 设备描述、驱动库、中间件、示例代码的打包格式，方便开发工具（如 Keil MDK、STM32CubeIDE）自动识别、导入和管理软件资源。</li>
 </ul>
 <h5 id="3-特点与适用场景">3. 特点与适用场景
-</h5><ul>
+</h5>
+<ul>
 <li>优点：通用性极强、跨平台性好、生态完善，是 Cortex-M MCU 开发的 “通用语言”，适用于所有基于 Cortex-M 内核的 MCU 项目，尤其适合需要跨厂商移植、使用中间件（RTOS/DSP）的复杂项目。</li>
 <li>缺点：仅定义接口规范，不提供具体的驱动实现（需厂商或第三方基于规范开发），开发者无法直接使用 CMSIS，必须结合厂商库（如 HAL 库）或第三方库才能落地。</li>
 </ul>
 <h4 id="hal-库与-cmsis-的关系">HAL 库与 CMSIS 的关系
-</h4><ol>
+</h4>
+<ol>
 <li><strong>层级关系</strong>：CMSIS 是 <strong>底层标准</strong>，HAL 库是 <strong>基于 CMSIS 标准的具体实现</strong>——HAL 库的内核操作（如中断配置、Systick 定时器、时钟初始化）完全遵循 CMSIS-Core 规范，外设驱动接口也兼容 CMSIS-Driver 模板。</li>
 <li><strong>作用互补</strong>：
 <ul>
@@ -544,48 +376,18 @@ none表示vendor是none，也就是不属于某一公司的
 简单总结：<strong>CMSIS 是 “通用接口规则”，HAL 库是 ST 按规则为 STM32 定制的 “工具包”</strong>，两者结合既保证了跨平台兼容性，又提升了 STM32 的开发效率。</li>
 </ol>
 
-</section>
+                </div>
 
-
-    <footer class="article-footer">
+                <footer class="article-reader__footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/base/">BASE</a>
-        
-    </section>
-
-
-    </footer>
-
-
-    
-        <link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
-            ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
-                defer
-                >
-            </script><script>
-    window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
-    
-</article>
-
+        <div class="article-reader__tags">
+            <p class="section-kicker">FIELD TAGS</p>
+            <ul aria-label="标签">
+                
+                    <li><a href="/tags/base/">BASE</a></li>
+                
+            </ul>
+        </div>
     
 
     
@@ -651,28 +453,72 @@ none表示vendor是none，也就是不属于某一公司的
     </div>
 </aside>
 
-     
-    
-        
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2025 - 
-        
-        2026 NomadJoe
-    </section>
-    
-    <section class="powerby">
-        
-            experience <br/>
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
-    </section>
 </footer>
 
+            </div>
+
+            <aside class="article-toc-rail">
+            <p class="section-kicker">ON THIS PAGE</p>
+            <nav id="TableOfContents" class="article-toc" data-testid="article-toc" aria-label="目录">
+  <ol>
+    <li>
+      <ol>
+        <li>
+          <ol>
+            <li>
+              <ol>
+                <li><a href="#mdk介绍及其使用">MDK介绍及其使用</a></li>
+                <li><a href="#armclang">armclang</a></li>
+                <li><a href="#openocd">OpenOCD</a></li>
+                <li><a href="#ozone">Ozone</a></li>
+                <li><a href="#mingw">MinGW</a></li>
+                <li><a href="#llvm">LLVM</a></li>
+                <li><a href="#arm-none-eabi-gcc">arm-none-eabi-gcc</a></li>
+                <li><a href="#arm-none-eabi-gcc和armclang的区别">arm-none-eabi-gcc 和 armclang的区别</a></li>
+                <li><a href="#clangd">clangd</a></li>
+                <li><a href="#vscode的intellisense">VScode的IntelliSense</a></li>
+                <li><a href="#交叉编译器">交叉编译器</a></li>
+                <li><a href="#ninjamakecmake">ninja，make，cmake</a></li>
+                <li><a href="#hal库hardware-abstraction-layer-硬件抽象层库">HAL库（Hardware Abstraction Layer 硬件抽象层库）</a></li>
+                <li><a href="#cmsiscortex-microcontroller-software-interface-standard">CMSIS（Cortex Microcontroller Software Interface Standard）</a></li>
+                <li><a href="#hal-库与-cmsis-的关系">HAL 库与 CMSIS 的关系</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </aside>
+        </div>
+
+        
+            <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+        
+    </article>
 
     
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -752,24 +598,13 @@ none表示vendor是none，也就是不属于某一公司的
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+        </main><footer class="field-footer">
+    <div class="field-footer__inner">
+        <p><span aria-hidden="true">©</span> 2026 NomadJoe</p>
+    </div>
+</footer>
+<script type="text/javascript" src="/ts/field-notes.bbb1f58da5208060e8df1b4e81dd161355cb9abe0e000402ac419570a346a495.js" integrity="sha256-u7H1jaUggGDo3xtOgd0WE1XLmr4OAAQCrEGVcKNGpJU=" defer></script>
 
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
 
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
+</body>
 </html>

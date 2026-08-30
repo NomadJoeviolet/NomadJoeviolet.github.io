@@ -14,7 +14,8 @@
         
         <guid>https://NomadJoeviolet.github.io/p/c-%E7%AC%94%E8%AE%B0%E5%90%88%E8%AE%A2%E6%9C%AC/</guid>
         <description>&lt;h2 id=&#34;0-笔记合订本&#34;&gt;0. 笔记合订本
-&lt;/h2&gt;&lt;p&gt;个人零散C++笔记合订在一起，方便个人查阅&lt;/p&gt;
+&lt;/h2&gt;
+&lt;p&gt;个人零散C++笔记合订在一起，方便个人查阅&lt;/p&gt;
 &lt;p&gt;建议顺序：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;先打基础：命名空间、引用、重载。&lt;/li&gt;
@@ -25,8 +26,10 @@
 &lt;li&gt;最后补工程：内存管理、名字修饰、extern &amp;ldquo;C&amp;rdquo;。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;1-基础语法与表达习惯&#34;&gt;1. 基础语法与表达习惯
-&lt;/h2&gt;&lt;h3 id=&#34;11-命名空间namespace&#34;&gt;1.1 命名空间（namespace）
-&lt;/h3&gt;&lt;p&gt;命名空间是“防重名分区”。&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;11-命名空间namespace&#34;&gt;1.1 命名空间（namespace）
+&lt;/h3&gt;
+&lt;p&gt;命名空间是“防重名分区”。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -60,7 +63,8 @@
 &lt;li&gt;尽量局部 &lt;code&gt;using std::cout;&lt;/code&gt;，避免污染。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;12-引用reference&#34;&gt;1.2 引用（Reference）
-&lt;/h3&gt;&lt;p&gt;引用是别名，不是新对象。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;引用是别名，不是新对象。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -96,11 +100,13 @@
 &lt;li&gt;把引用当“可空句柄”使用会出设计问题。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;13-函数重载overload&#34;&gt;1.3 函数重载（Overload）
-&lt;/h3&gt;&lt;p&gt;重载是“同一作用域下，同名函数按参数列表区分语义”。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;重载是“同一作用域下，同名函数按参数列表区分语义”。&lt;/p&gt;
 &lt;p&gt;重载（Overloading）的本质是编译期多态（静态多态）。
 它让我们用同一个函数名表达“同一类行为”，但针对不同参数类型/数量执行不同逻辑。&lt;/p&gt;
 &lt;h4 id=&#34;131-函数重载的成立条件&#34;&gt;1.3.1 函数重载的成立条件
-&lt;/h4&gt;&lt;p&gt;函数重载成立需要同时满足：&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;函数重载成立需要同时满足：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;同一作用域。&lt;/li&gt;
 &lt;li&gt;同名函数。&lt;/li&gt;
@@ -136,7 +142,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;132-带默认参数缺省参数的函数&#34;&gt;1.3.2 带默认参数（缺省参数）的函数
-&lt;/h4&gt;&lt;p&gt;默认参数可以减少调用时传参数量，但和重载一起用时容易冲突。&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;默认参数可以减少调用时传参数量，但和重载一起用时容易冲突。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -179,7 +186,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;133-重载--默认参数为什么会二义性&#34;&gt;1.3.3 重载 + 默认参数为什么会二义性
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -217,16 +225,19 @@
 &lt;li&gt;准确说法是：可以重载，但必须保证每个调用点只有唯一可匹配函数。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;134-小结函数重载&#34;&gt;1.3.4 小结（函数重载）
-&lt;/h4&gt;&lt;ol&gt;
+&lt;/h4&gt;
+&lt;ol&gt;
 &lt;li&gt;重载由编译器在编译期完成决议。&lt;/li&gt;
 &lt;li&gt;只改返回值不构成重载。&lt;/li&gt;
 &lt;li&gt;默认参数和重载混用要谨慎，优先保证唯一匹配和可读性。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;14-运算符重载operator-overload&#34;&gt;1.4 运算符重载（Operator Overload）
-&lt;/h3&gt;&lt;p&gt;运算符重载是“把运算符表达式翻译成函数调用”。
+&lt;/h3&gt;
+&lt;p&gt;运算符重载是“把运算符表达式翻译成函数调用”。
 运算符重载本质仍是函数重载，只是函数名变成了 &lt;code&gt;operator+&lt;/code&gt;、&lt;code&gt;operator&amp;lt;&amp;lt;&lt;/code&gt; 这类形式。&lt;/p&gt;
 &lt;h4 id=&#34;141-为什么需要运算符重载&#34;&gt;1.4.1 为什么需要运算符重载
-&lt;/h4&gt;&lt;p&gt;内置运算符默认只面向基础类型。
+&lt;/h4&gt;
+&lt;p&gt;内置运算符默认只面向基础类型。
 当我们有自定义类型（如复数、向量、矩阵）时，希望也能写自然表达式。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -239,7 +250,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;142-运算符重载的基本写法&#34;&gt;1.4.2 运算符重载的基本写法
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -288,7 +300,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;143-成员函数重载运算符&#34;&gt;1.4.3 成员函数重载运算符
-&lt;/h4&gt;&lt;p&gt;表达式：&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;表达式：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -332,7 +345,8 @@
 &lt;li&gt;二元成员运算符参数个数 = 原操作数个数 - 1（左操作数是 &lt;code&gt;this&lt;/code&gt;）。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;144-友元函数重载运算符&#34;&gt;1.4.4 友元函数重载运算符
-&lt;/h4&gt;&lt;p&gt;表达式：&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;表达式：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -374,7 +388,8 @@
 &lt;li&gt;友元/普通函数形式参数个数 = 原操作数个数。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;145-重载--和-&#34;&gt;1.4.5 重载 &amp;laquo; 和 &amp;raquo;
-&lt;/h4&gt;&lt;p&gt;&lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt;、&lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt; 一般定义成友元函数，因为左操作数是流对象而不是类对象。&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt;、&lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt; 一般定义成友元函数，因为左操作数是流对象而不是类对象。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -409,7 +424,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;146-单目运算符重载前置后置&#34;&gt;1.4.6 单目运算符重载（前置/后置++）
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -449,7 +465,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;重点：后置 &lt;code&gt;++&lt;/code&gt; 用额外 &lt;code&gt;int&lt;/code&gt; 占位参数区分。&lt;/p&gt;
 &lt;h4 id=&#34;147-运算符重载的规则与边界&#34;&gt;1.4.7 运算符重载的规则与边界
-&lt;/h4&gt;&lt;p&gt;必须遵守：&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;必须遵守：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;不能发明新运算符。&lt;/li&gt;
 &lt;li&gt;不能改变优先级和结合性。&lt;/li&gt;
@@ -461,15 +478,18 @@
 &lt;li&gt;运算符语义必须稳定，避免误导阅读者。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;148-小结运算符重载&#34;&gt;1.4.8 小结（运算符重载）
-&lt;/h4&gt;&lt;ol&gt;
+&lt;/h4&gt;
+&lt;ol&gt;
 &lt;li&gt;运算符重载是语法层优化，本质是函数调用。&lt;/li&gt;
 &lt;li&gt;成员方式和友元方式都常用，按场景选。&lt;/li&gt;
 &lt;li&gt;流运算符重载、前置后置++区分是高频考点。&lt;/li&gt;
 &lt;li&gt;重载目的应是“增强可读性”。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;2-类与对象总览&#34;&gt;2. 类与对象总览
-&lt;/h2&gt;&lt;h3 id=&#34;21-类与对象&#34;&gt;2.1 类与对象
-&lt;/h3&gt;&lt;p&gt;类是抽象模板，对象是具体实例。&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;21-类与对象&#34;&gt;2.1 类与对象
+&lt;/h3&gt;
+&lt;p&gt;类是抽象模板，对象是具体实例。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -498,7 +518,8 @@
 &lt;li&gt;对象实例化后，成员才占实际空间。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;22-访问权限与成员函数&#34;&gt;2.2 访问权限与成员函数
-&lt;/h3&gt;&lt;p&gt;访问修饰：&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;访问修饰：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;public&lt;/code&gt;：外部接口。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;private&lt;/code&gt;：实现细节。&lt;/li&gt;
@@ -530,7 +551,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;23-类外定义成员函数&#34;&gt;2.3 类外定义成员函数
-&lt;/h3&gt;&lt;p&gt;用作用域解析运算符 &lt;code&gt;::&lt;/code&gt;：&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;用作用域解析运算符 &lt;code&gt;::&lt;/code&gt;：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -560,7 +582,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;24-友元函数与友元类&#34;&gt;2.4 友元函数与友元类
-&lt;/h3&gt;&lt;p&gt;友元是“开权限的外部函数/类”，不是成员。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;友元是“开权限的外部函数/类”，不是成员。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -598,15 +621,18 @@
 &lt;li&gt;能少用就少用，优先保持封装边界。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;3-对象生命周期与资源语义&#34;&gt;3. 对象生命周期与资源语义
-&lt;/h2&gt;&lt;h3 id=&#34;31-引言为什么这章最关键&#34;&gt;3.1 引言：为什么这章最关键
-&lt;/h3&gt;&lt;p&gt;写C++，最终都要回到两件事。&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;31-引言为什么这章最关键&#34;&gt;3.1 引言：为什么这章最关键
+&lt;/h3&gt;
+&lt;p&gt;写C++，最终都要回到两件事。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;对象什么时候创建、什么时候销毁（生命周期）。&lt;/li&gt;
 &lt;li&gt;资源由谁申请、由谁释放（资源语义）。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;这章如果吃透，后面看 RAII、智能指针、异常安全、移动语义会顺很多。&lt;/p&gt;
 &lt;h3 id=&#34;32-构造函数与析构函数&#34;&gt;3.2 构造函数与析构函数
-&lt;/h3&gt;&lt;ol&gt;
+&lt;/h3&gt;
+&lt;ol&gt;
 &lt;li&gt;构造函数负责对象“出生时初始化”。&lt;/li&gt;
 &lt;li&gt;析构函数负责对象“离开前收尾清理”。&lt;/li&gt;
 &lt;/ol&gt;
@@ -648,7 +674,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;33-默认构造无参构造全缺省构造&#34;&gt;3.3 默认构造、无参构造、全缺省构造
-&lt;/h3&gt;&lt;p&gt;可以同时写“无参构造”和“全缺省构造”，语法上属于重载；
+&lt;/h3&gt;
+&lt;p&gt;可以同时写“无参构造”和“全缺省构造”，语法上属于重载；
 但在调用点（比如 &lt;code&gt;ClassName obj;&lt;/code&gt;）会出现二义性。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -681,7 +708,8 @@
 &lt;li&gt;工程里通常写“全缺省构造”更灵活。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;34-初始化列表不是语法糖是语义&#34;&gt;3.4 初始化列表：不是语法糖，是语义
-&lt;/h3&gt;&lt;p&gt;初始化列表是“直接初始化成员”；
+&lt;/h3&gt;
+&lt;p&gt;初始化列表是“直接初始化成员”；
 函数体赋值是“先默认构造再赋值”。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -715,7 +743,8 @@
 &lt;li&gt;写错顺序会触发告警，复杂类里容易埋 bug。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;35-析构函数资源释放的最后防线&#34;&gt;3.5 析构函数：资源释放的最后防线
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -746,7 +775,8 @@
 &lt;li&gt;否则会出现“派生部分没析构完整”的严重问题。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;36-拷贝构造函数何时触发为什么危险&#34;&gt;3.6 拷贝构造函数：何时触发、为什么危险
-&lt;/h3&gt;&lt;p&gt;定义：拷贝构造是“用一个已有对象初始化另一个新对象”。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;定义：拷贝构造是“用一个已有对象初始化另一个新对象”。&lt;/p&gt;
 &lt;p&gt;典型触发场景：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;T b = a;&lt;/code&gt;&lt;/li&gt;
@@ -800,7 +830,8 @@
 &lt;li&gt;一个对象改数据会影响另一个对象。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;37-编译器默认拷贝构造&#34;&gt;3.7 编译器默认拷贝构造
-&lt;/h3&gt;&lt;p&gt;编译器默认生成的拷贝构造，成员语义是“逐成员拷贝”。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;编译器默认生成的拷贝构造，成员语义是“逐成员拷贝”。&lt;/p&gt;
 &lt;p&gt;对于这些类型通常没问题：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;内置类型成员（&lt;code&gt;int&lt;/code&gt;、&lt;code&gt;double&lt;/code&gt; 等）。&lt;/li&gt;
@@ -817,7 +848,8 @@
 &lt;li&gt;一旦类持有资源，要么自己定义拷贝/移动语义，要么直接禁拷贝。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;371-默认操作补充默认拷贝构造与默认拷贝赋值&#34;&gt;3.7.1 默认操作补充：默认拷贝构造与默认拷贝赋值
-&lt;/h4&gt;&lt;p&gt;如果没有显式写，编译器通常会为类生成：&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;如果没有显式写，编译器通常会为类生成：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;默认拷贝构造函数。&lt;/li&gt;
 &lt;li&gt;默认拷贝赋值运算符。&lt;/li&gt;
@@ -848,7 +880,8 @@
 &lt;li&gt;如果写成按值传参，会导致递归调用拷贝构造本身。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;38-移动构造与移动语义&#34;&gt;3.8 移动构造与移动语义
-&lt;/h3&gt;&lt;p&gt;移动不是复制，而是资源所有权转移。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;移动不是复制，而是资源所有权转移。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -904,7 +937,8 @@
 &lt;li&gt;移动后对象不应再依赖原资源内容。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;381-默认拷贝赋值copy-assignment到底做了什么&#34;&gt;3.8.1 默认拷贝赋值（Copy Assignment）到底做了什么
-&lt;/h4&gt;&lt;p&gt;拷贝赋值和拷贝构造要分清：&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;拷贝赋值和拷贝构造要分清：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;T b = a;&lt;/code&gt; 是拷贝构造（创建新对象）。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;b = a;&lt;/code&gt; 是拷贝赋值（给已存在对象赋值）。&lt;/li&gt;
@@ -916,7 +950,8 @@
 &lt;li&gt;后续析构发生二次释放。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;382-拷贝赋值实现细节自赋值异常安全释放时机&#34;&gt;3.8.2 拷贝赋值实现细节（自赋值、异常安全、释放时机）
-&lt;/h4&gt;&lt;ol&gt;
+&lt;/h4&gt;
+&lt;ol&gt;
 &lt;li&gt;避免自赋值。&lt;/li&gt;
 &lt;li&gt;避免内存泄漏。&lt;/li&gt;
 &lt;/ol&gt;
@@ -1012,7 +1047,8 @@
 &lt;li&gt;任何时刻对象都保持可析构状态。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;383-硬拷贝与软拷贝&#34;&gt;3.8.3 硬拷贝与软拷贝
-&lt;/h4&gt;&lt;p&gt;硬拷贝（Hard Copy）：&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;硬拷贝（Hard Copy）：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;每次拷贝都重新申请内存并复制内容。&lt;/li&gt;
 &lt;li&gt;优点是语义简单，生命周期独立。&lt;/li&gt;
@@ -1024,7 +1060,8 @@
 现代 C++ 里，软拷贝通常直接交给 &lt;code&gt;std::shared_ptr&lt;/code&gt;，不建议手写引用计数。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;39-this-指针与链式调用&#34;&gt;3.9 this 指针与链式调用
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;this&lt;/code&gt; 是当前对象地址。
+&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;this&lt;/code&gt; 是当前对象地址。
 常见用途：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;区分同名成员和形参。&lt;/li&gt;
@@ -1057,7 +1094,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;310-资源语义总收口这章必须带走的结论&#34;&gt;3.10 资源语义总收口（这章必须带走的结论）
-&lt;/h3&gt;&lt;ol&gt;
+&lt;/h3&gt;
+&lt;ol&gt;
 &lt;li&gt;构造管初始化，析构管清理，二者共同决定对象生命周期边界。&lt;/li&gt;
 &lt;li&gt;只要类里有裸资源，就必须认真对待拷贝/移动/析构。&lt;/li&gt;
 &lt;li&gt;默认拷贝只做成员拷贝，不会自动做“资源语义正确化”。&lt;/li&gt;
@@ -1065,7 +1103,8 @@
 &lt;li&gt;这章和第6章（动态内存）是同一条主线：最终目标是可控、可证明的资源管理。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;311-生命周期调用时序实验&#34;&gt;3.11 生命周期调用时序实验
-&lt;/h3&gt;&lt;p&gt;这一节是“看现象反推机制”。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;这一节是“看现象反推机制”。&lt;/p&gt;
 &lt;p&gt;把下面代码单独建个文件跑一下，会直观看到：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;哪些地方触发拷贝构造。&lt;/li&gt;
@@ -1259,8 +1298,10 @@
 &lt;li&gt;看到“对象被 move 过还继续当正常对象用”，要检查后续逻辑是否依赖原资源。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;4-继承虚函数与多态&#34;&gt;4. 继承、虚函数与多态
-&lt;/h2&gt;&lt;h3 id=&#34;41-继承与派生&#34;&gt;4.1 继承与派生
-&lt;/h3&gt;&lt;p&gt;继承强调代码复用，派生强调能力扩展。&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;41-继承与派生&#34;&gt;4.1 继承与派生
+&lt;/h3&gt;
+&lt;p&gt;继承强调代码复用，派生强调能力扩展。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1290,7 +1331,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;42-继承方式对可见性的影响&#34;&gt;4.2 继承方式对可见性的影响
-&lt;/h3&gt;&lt;table&gt;
+&lt;/h3&gt;
+&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
           &lt;th&gt;基类成员&lt;/th&gt;
@@ -1321,14 +1363,16 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;43-构造析构顺序继承&#34;&gt;4.3 构造析构顺序（继承）
-&lt;/h3&gt;&lt;p&gt;规则：&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;规则：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;构造：先基类，后派生类。&lt;/li&gt;
 &lt;li&gt;析构：先派生类，后基类。&lt;/li&gt;
 &lt;li&gt;多继承时，基类构造顺序按继承列表声明顺序。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;44-多继承歧义与同名隐藏&#34;&gt;4.4 多继承歧义与同名隐藏
-&lt;/h3&gt;&lt;p&gt;当多个基类有同名成员会出现二义性，需要类名限定。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;当多个基类有同名成员会出现二义性，需要类名限定。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -1341,7 +1385,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;如果派生类声明同名函数，会隐藏基类同名重载集合，必要时用 &lt;code&gt;using Base::func;&lt;/code&gt;。&lt;/p&gt;
 &lt;h3 id=&#34;45-虚函数与动态绑定&#34;&gt;4.5 虚函数与动态绑定
-&lt;/h3&gt;&lt;p&gt;虚函数让调用版本在运行期决定。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;虚函数让调用版本在运行期决定。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1385,7 +1430,8 @@
 &lt;li&gt;基类指针/引用调用。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;46-抽象类与纯虚函数&#34;&gt;4.6 抽象类与纯虚函数
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -1403,7 +1449,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;抽象类不可实例化，只能作为接口基类。&lt;/p&gt;
 &lt;h3 id=&#34;47-override-与-final&#34;&gt;4.7 override 与 final
-&lt;/h3&gt;&lt;ol&gt;
+&lt;/h3&gt;
+&lt;ol&gt;
 &lt;li&gt;&lt;code&gt;override&lt;/code&gt;：让编译器帮忙检查是否真的重写。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;final&lt;/code&gt;：禁止继续重写（函数）或继续继承（类）。&lt;/li&gt;
 &lt;/ol&gt;
@@ -1413,7 +1460,8 @@
 &lt;li&gt;把参数不一致的同名函数误当“重写”。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;48-继承场景下的动态内存管理&#34;&gt;4.8 继承场景下的动态内存管理
-&lt;/h3&gt;&lt;p&gt;分两种情况：&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;分两种情况：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;只有基类管理动态内存：先把基类的资源语义写正确（构造/析构/拷贝/赋值/移动），子类通常按普通成员处理。&lt;/li&gt;
 &lt;li&gt;子类也管理动态内存：子类必须在自己的拷贝构造、拷贝赋值、析构中处理新增资源，同时正确调用基类版本。&lt;/li&gt;
@@ -1499,8 +1547,10 @@
 &lt;li&gt;赋值时是否先处理基类再处理子类。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;5-模板与泛型思维&#34;&gt;5. 模板与泛型思维
-&lt;/h2&gt;&lt;h3 id=&#34;51-函数模板&#34;&gt;5.1 函数模板
-&lt;/h3&gt;&lt;p&gt;函数模板是“生成函数的规则”，不是立刻生成好的函数本体。&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;51-函数模板&#34;&gt;5.1 函数模板
+&lt;/h3&gt;
+&lt;p&gt;函数模板是“生成函数的规则”，不是立刻生成好的函数本体。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -1547,7 +1597,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;52-模板实例化instantiation&#34;&gt;5.2 模板实例化（Instantiation）
-&lt;/h3&gt;&lt;p&gt;实例化是“编译器根据实参类型，把模板变成具体函数/类”的过程。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;实例化是“编译器根据实参类型，把模板变成具体函数/类”的过程。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;隐式实例化：在调用点由编译器自动生成。&lt;/li&gt;
 &lt;li&gt;显式实例化：主动要求编译器提前生成某个版本。&lt;/li&gt;
@@ -1571,9 +1622,11 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;53-特化specialization&#34;&gt;5.3 特化（Specialization）
-&lt;/h3&gt;&lt;p&gt;实例化是“按原规则生成”，特化是“对某些类型单独定制实现”。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;实例化是“按原规则生成”，特化是“对某些类型单独定制实现”。&lt;/p&gt;
 &lt;h4 id=&#34;531-函数模板全特化&#34;&gt;5.3.1 函数模板全特化
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -1604,7 +1657,8 @@
 函数模板如果想做“偏特化效果”，通常使用重载实现。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;54-类模板class-template&#34;&gt;5.4 类模板（Class Template）
-&lt;/h3&gt;&lt;p&gt;类模板是“按类型批量生成类定义”的模具。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;类模板是“按类型批量生成类定义”的模具。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1640,7 +1694,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;541-类模板成员函数类外定义&#34;&gt;5.4.1 类模板成员函数类外定义
-&lt;/h4&gt;&lt;p&gt;类外定义时要重复模板声明，并写 &lt;code&gt;类名&amp;lt;T&amp;gt;::函数&lt;/code&gt;。&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;类外定义时要重复模板声明，并写 &lt;code&gt;类名&amp;lt;T&amp;gt;::函数&lt;/code&gt;。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1686,7 +1741,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;55-类模板特化与偏特化&#34;&gt;5.5 类模板特化与偏特化
-&lt;/h3&gt;&lt;p&gt;类模板全特化后，本质就是一个新类，不会自动继承主模板实现。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;类模板全特化后，本质就是一个新类，不会自动继承主模板实现。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1732,7 +1788,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;56-非类型模板参数non-type-template-parameter&#34;&gt;5.6 非类型模板参数（Non-type Template Parameter）
-&lt;/h3&gt;&lt;p&gt;模板参数不一定是“类型”，也可以是“编译期常量值”。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;模板参数不一定是“类型”，也可以是“编译期常量值”。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -1757,7 +1814,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;常见非类型模板参数：整数、枚举、指针、引用、&lt;code&gt;std::nullptr_t&lt;/code&gt;（标准版本支持范围不同）。&lt;/p&gt;
 &lt;h3 id=&#34;57-模板嵌套模板参数也是模板&#34;&gt;5.7 模板嵌套（模板参数也是模板）
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -1787,7 +1845,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;应用场景：策略类、容器适配器、可插拔泛型组件。&lt;/p&gt;
 &lt;h3 id=&#34;58-泛型-lambda&#34;&gt;5.8 泛型 lambda
-&lt;/h3&gt;&lt;p&gt;泛型 lambda 是“匿名模板函数对象”。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;泛型 lambda 是“匿名模板函数对象”。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -1829,7 +1888,8 @@
 &lt;li&gt;引用捕获要注意生命周期，防止悬空引用。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;59-完美转发万能引用&#34;&gt;5.9 完美转发（万能引用）
-&lt;/h3&gt;&lt;p&gt;完美转发要解决“中间函数转发参数时丢失左值/右值属性”的问题。
+&lt;/h3&gt;
+&lt;p&gt;完美转发要解决“中间函数转发参数时丢失左值/右值属性”的问题。
 先看问题：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1877,13 +1937,15 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;591-万能引用转发引用推导规则&#34;&gt;5.9.1 万能引用（转发引用）推导规则
-&lt;/h4&gt;&lt;p&gt;在模板参数推导场景下，&lt;code&gt;T&amp;amp;&amp;amp;&lt;/code&gt; 不是普通右值引用，而是万能引用：&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;在模板参数推导场景下，&lt;code&gt;T&amp;amp;&amp;amp;&lt;/code&gt; 不是普通右值引用，而是万能引用：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;传右值：&lt;code&gt;T&lt;/code&gt; 推导为 &lt;code&gt;Type&lt;/code&gt;，参数类型是 &lt;code&gt;Type&amp;amp;&amp;amp;&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;传左值：&lt;code&gt;T&lt;/code&gt; 推导为 &lt;code&gt;Type&amp;amp;&lt;/code&gt;，参数类型经折叠后为 &lt;code&gt;Type&amp;amp;&lt;/code&gt;。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;592-引用折叠规则&#34;&gt;5.9.2 引用折叠规则
-&lt;/h4&gt;&lt;table&gt;
+&lt;/h4&gt;
+&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
           &lt;th&gt;形式&lt;/th&gt;
@@ -1910,14 +1972,16 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h4 id=&#34;593-stdmove-与-stdforward-区别&#34;&gt;5.9.3 std::move 与 std::forward 区别
-&lt;/h4&gt;&lt;ol&gt;
+&lt;/h4&gt;
+&lt;ol&gt;
 &lt;li&gt;&lt;code&gt;std::move&lt;/code&gt;：无条件把表达式转成右值。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;std::forward&amp;lt;T&amp;gt;&lt;/code&gt;：按 &lt;code&gt;T&lt;/code&gt; 的推导结果“有条件地”保持左/右值属性。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;code&gt;std::move&lt;/code&gt; 常用于“我明确要转移资源”；
 &lt;code&gt;std::forward&lt;/code&gt; 常用于“模板中转发实参原有属性”。&lt;/p&gt;
 &lt;h4 id=&#34;594-常见坑&#34;&gt;5.9.4 常见坑
-&lt;/h4&gt;&lt;p&gt;关键点：&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;关键点：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;T&amp;amp;&amp;amp;&lt;/code&gt; 在模板推导中是转发引用。&lt;/li&gt;
 &lt;li&gt;传左值时 &lt;code&gt;T&lt;/code&gt; 推导为 &lt;code&gt;Type&amp;amp;&lt;/code&gt;。&lt;/li&gt;
@@ -1930,7 +1994,8 @@
 &lt;li&gt;误把“引用本身是右值引用类型”和“表达式值类别是右值”混为一谈。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;510-本章小结&#34;&gt;5.10 本章小结
-&lt;/h3&gt;&lt;ol&gt;
+&lt;/h3&gt;
+&lt;ol&gt;
 &lt;li&gt;模板是“规则”，实例化才是“具体代码”。&lt;/li&gt;
 &lt;li&gt;实例化和特化是两个不同概念，不要混用。&lt;/li&gt;
 &lt;li&gt;函数模板偏特化不支持，类模板偏特化支持。&lt;/li&gt;
@@ -1938,8 +2003,10 @@
 &lt;li&gt;模板学习核心不是语法堆砌，而是“类型推导 + 语义保持”。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;6-动态内存与资源管理&#34;&gt;6. 动态内存与资源管理
-&lt;/h2&gt;&lt;h3 id=&#34;61-new--delete-基础&#34;&gt;6.1 new / delete 基础
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;new&lt;/code&gt; 负责申请并初始化对象，&lt;code&gt;delete&lt;/code&gt; 负责销毁并释放对象内存。&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;61-new--delete-基础&#34;&gt;6.1 new / delete 基础
+&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;new&lt;/code&gt; 负责申请并初始化对象，&lt;code&gt;delete&lt;/code&gt; 负责销毁并释放对象内存。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -1967,7 +2034,8 @@
 &lt;li&gt;&lt;code&gt;malloc/free&lt;/code&gt; 只管字节分配回收，不调用构造/析构。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;62-手动内存管理的三条底线&#34;&gt;6.2 手动内存管理的三条底线
-&lt;/h3&gt;&lt;ol&gt;
+&lt;/h3&gt;
+&lt;ol&gt;
 &lt;li&gt;只释放自己申请到的首地址。&lt;/li&gt;
 &lt;li&gt;只释放一次。&lt;/li&gt;
 &lt;li&gt;释放后立刻置空，避免悬空指针再次访问。&lt;/li&gt;
@@ -1991,7 +2059,8 @@
 &lt;li&gt;重复释放：&lt;code&gt;delete&lt;/code&gt; 已释放指针。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;63-动态数组与释放规范&#34;&gt;6.3 动态数组与释放规范
-&lt;/h3&gt;&lt;p&gt;一维动态数组：&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;一维动态数组：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -2018,7 +2087,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;注意：数组必须 &lt;code&gt;delete[]&lt;/code&gt;，不能用 &lt;code&gt;delete&lt;/code&gt;。&lt;/p&gt;
 &lt;h3 id=&#34;64-多维数组分配与释放顺序&#34;&gt;6.4 多维数组分配与释放顺序
-&lt;/h3&gt;&lt;p&gt;二维动态数组常见写法：先分配“行指针数组”，再逐行分配列空间。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;二维动态数组常见写法：先分配“行指针数组”，再逐行分配列空间。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -2051,7 +2121,8 @@
 &lt;li&gt;最后释放最外层。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;65-分配失败处理与异常&#34;&gt;6.5 分配失败处理与异常
-&lt;/h3&gt;&lt;p&gt;现代 C++ 默认 &lt;code&gt;new&lt;/code&gt; 失败会抛 &lt;code&gt;std::bad_alloc&lt;/code&gt;。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;现代 C++ 默认 &lt;code&gt;new&lt;/code&gt; 失败会抛 &lt;code&gt;std::bad_alloc&lt;/code&gt;。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -2088,7 +2159,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;66-资源泄漏与异常安全&#34;&gt;6.6 资源泄漏与异常安全
-&lt;/h3&gt;&lt;p&gt;手动 &lt;code&gt;new/delete&lt;/code&gt; 最大风险之一是：中间抛异常导致 &lt;code&gt;delete&lt;/code&gt; 走不到。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;手动 &lt;code&gt;new/delete&lt;/code&gt; 最大风险之一是：中间抛异常导致 &lt;code&gt;delete&lt;/code&gt; 走不到。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -2107,7 +2179,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;这就是为什么现代 C++ 推崇 RAII：把释放动作放到析构函数里，让作用域结束自动回收。&lt;/p&gt;
 &lt;h3 id=&#34;67-raii-与资源管理类&#34;&gt;6.7 RAII 与资源管理类
-&lt;/h3&gt;&lt;p&gt;把资源生命周期绑定到对象生命周期。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;把资源生命周期绑定到对象生命周期。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -2151,9 +2224,11 @@
 &lt;li&gt;禁止不安全拷贝，避免双重释放。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;68-从裸指针到智能指针&#34;&gt;6.8 从裸指针到智能指针
-&lt;/h3&gt;&lt;p&gt;工程里建议优先使用智能指针而不是手写 &lt;code&gt;new/delete&lt;/code&gt;。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;工程里建议优先使用智能指针而不是手写 &lt;code&gt;new/delete&lt;/code&gt;。&lt;/p&gt;
 &lt;h4 id=&#34;681-unique_ptr独占所有权&#34;&gt;6.8.1 unique_ptr（独占所有权）
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -2169,7 +2244,8 @@
 &lt;li&gt;适合明确单一所有者场景。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;682-shared_ptr共享所有权&#34;&gt;6.8.2 shared_ptr（共享所有权）
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -2185,16 +2261,19 @@
 &lt;li&gt;引用计数归零时自动释放。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;683-weak_ptr打破循环引用&#34;&gt;6.8.3 weak_ptr（打破循环引用）
-&lt;/h4&gt;&lt;p&gt;当两个 &lt;code&gt;shared_ptr&lt;/code&gt; 互相持有会循环引用，导致泄漏。&lt;br&gt;
+&lt;/h4&gt;
+&lt;p&gt;当两个 &lt;code&gt;shared_ptr&lt;/code&gt; 互相持有会循环引用，导致泄漏。&lt;br&gt;
 &lt;code&gt;weak_ptr&lt;/code&gt; 不增加引用计数，用来观察资源而不拥有资源。&lt;/p&gt;
 &lt;h4 id=&#34;684-智能指针怎么理解最准确&#34;&gt;6.8.4 智能指针怎么理解最准确
-&lt;/h4&gt;&lt;ol&gt;
+&lt;/h4&gt;
+&lt;ol&gt;
 &lt;li&gt;智能指针“看起来像指针”。&lt;/li&gt;
 &lt;li&gt;但它本质是类对象，内部封装了资源释放策略。
 也就是说它不是“系统自动回收魔法”，而是 RAII 在模板类上的工程化落地。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;685-delete-与-delete-在类对象数组中的区别&#34;&gt;6.8.5 delete 与 delete[] 在类对象数组中的区别
-&lt;/h4&gt;&lt;p&gt;对内置类型可能感觉差别不明显，但对类对象数组差别很大：&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;对内置类型可能感觉差别不明显，但对类对象数组差别很大：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;delete p&lt;/code&gt; 只会按单对象路径处理，通常只调用一个析构流程。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;delete[] p&lt;/code&gt; 会按数组元素数量逐个调用析构，再释放整块数组内存。&lt;/li&gt;
@@ -2206,7 +2285,8 @@
 &lt;li&gt;尤其类对象数组，配错不仅是泄漏，还可能造成资源清理不完整。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;69-动态内存与拷贝移动语义的关系&#34;&gt;6.9 动态内存与拷贝/移动语义的关系
-&lt;/h3&gt;&lt;p&gt;只要类里有裸资源（如 &lt;code&gt;int*&lt;/code&gt;、&lt;code&gt;char*&lt;/code&gt;），就要认真处理：&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;只要类里有裸资源（如 &lt;code&gt;int*&lt;/code&gt;、&lt;code&gt;char*&lt;/code&gt;），就要认真处理：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;拷贝构造。&lt;/li&gt;
 &lt;li&gt;拷贝赋值。&lt;/li&gt;
@@ -2217,7 +2297,8 @@
 &lt;p&gt;也就是常说的规则五（Rule of Five）。&lt;/p&gt;
 &lt;p&gt;如果用 &lt;code&gt;std::vector&lt;/code&gt;、&lt;code&gt;std::string&lt;/code&gt;、智能指针托管资源，通常更容易走向规则零（Rule of Zero）。&lt;/p&gt;
 &lt;h3 id=&#34;610-本章排错清单&#34;&gt;6.10 本章排错清单
-&lt;/h3&gt;&lt;p&gt;遇到内存问题时，按这个顺序查：&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;遇到内存问题时，按这个顺序查：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;new/delete&lt;/code&gt; 和 &lt;code&gt;new[]/delete[]&lt;/code&gt; 是否配对。&lt;/li&gt;
 &lt;li&gt;是否有重复释放。&lt;/li&gt;
@@ -2226,7 +2307,8 @@
 &lt;li&gt;是否有共享所有权循环引用。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;611-本章小结&#34;&gt;6.11 本章小结
-&lt;/h3&gt;&lt;ol&gt;
+&lt;/h3&gt;
+&lt;ol&gt;
 &lt;li&gt;手动内存管理要严格遵守“配对、一次、置空”。&lt;/li&gt;
 &lt;li&gt;多维数组释放顺序必须与分配顺序相反。&lt;/li&gt;
 &lt;li&gt;现代 C++ 默认用异常报告分配失败。&lt;/li&gt;
@@ -2234,8 +2316,10 @@
 &lt;li&gt;工程中优先智能指针和标准容器，尽量减少裸 &lt;code&gt;new/delete&lt;/code&gt;。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;7-工程视角名字修饰与链接认知&#34;&gt;7. 工程视角：名字修饰与链接认知
-&lt;/h2&gt;&lt;h3 id=&#34;71-名字修饰name-mangling&#34;&gt;7.1 名字修饰（Name Mangling）
-&lt;/h3&gt;&lt;p&gt;名字修饰是编译器在编译阶段给符号“重新命名”，目的是保证全局唯一并支持重载。
+&lt;/h2&gt;
+&lt;h3 id=&#34;71-名字修饰name-mangling&#34;&gt;7.1 名字修饰（Name Mangling）
+&lt;/h3&gt;
+&lt;p&gt;名字修饰是编译器在编译阶段给符号“重新命名”，目的是保证全局唯一并支持重载。
 在 C 里，函数名通常就是裸名字；
 在 C++ 里，函数名会编码参数信息、命名空间信息、类作用域信息。&lt;/p&gt;
 &lt;p&gt;示例：&lt;/p&gt;
@@ -2246,7 +2330,8 @@
 &lt;/ol&gt;
 &lt;p&gt;这也是 C++ 能重载而 C 不能重载的底层原因之一。&lt;/p&gt;
 &lt;h3 id=&#34;72-cc-混编为什么会链接失败&#34;&gt;7.2 C/C++ 混编为什么会链接失败
-&lt;/h3&gt;&lt;p&gt;原因：&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;原因：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;C 的符号规则简单。&lt;/li&gt;
 &lt;li&gt;C++ 符号包含类型编码。&lt;/li&gt;
@@ -2265,7 +2350,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;本质上都是“声明时预期的符号名”和“库里真实导出的符号名”对不上。&lt;/p&gt;
 &lt;h3 id=&#34;73-先分清这3层问题&#34;&gt;7.3 先分清这3层问题
-&lt;/h3&gt;&lt;p&gt;实际排错时，不要一上来就改代码，先判断是哪个层面出问题：&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;实际排错时，不要一上来就改代码，先判断是哪个层面出问题：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;声明层问题：头文件声明不一致（如少了 extern &amp;ldquo;C&amp;rdquo;）。&lt;/li&gt;
 &lt;li&gt;编译层问题：C 文件被 C++ 编译器处理，或反过来。&lt;/li&gt;
@@ -2273,7 +2359,8 @@
 &lt;/ol&gt;
 &lt;p&gt;这三层判断清楚，排错速度会快很多。&lt;/p&gt;
 &lt;h3 id=&#34;74-extern-c&#34;&gt;7.4 extern &amp;ldquo;C&amp;rdquo;
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -2345,7 +2432,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;这样做的好处：接口稳定，语言边界清晰，链接问题可控。&lt;/p&gt;
 &lt;h3 id=&#34;75-工程排错流程&#34;&gt;7.5 工程排错流程
-&lt;/h3&gt;&lt;p&gt;可以按下面固定流程走，几乎覆盖 80% 混编链接问题：&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;可以按下面固定流程走，几乎覆盖 80% 混编链接问题：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;先看报错里“找不到的符号名”到底长什么样。&lt;/li&gt;
 &lt;li&gt;用符号工具看目标库/目标文件里有没有这个符号。&lt;/li&gt;
@@ -2373,11 +2461,14 @@
 &lt;li&gt;符号有但类型不对（U/T/W等），要继续追定义位置。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;76-常见错误清单与对策&#34;&gt;7.6 常见错误清单与对策
-&lt;/h3&gt;&lt;h4 id=&#34;761-头文件忘了加-extern-c-宏保护&#34;&gt;7.6.1 头文件忘了加 extern &amp;ldquo;C&amp;rdquo; 宏保护
-&lt;/h4&gt;&lt;p&gt;现象：C++ 调 C 库链接失败。
+&lt;/h3&gt;
+&lt;h4 id=&#34;761-头文件忘了加-extern-c-宏保护&#34;&gt;7.6.1 头文件忘了加 extern &amp;ldquo;C&amp;rdquo; 宏保护
+&lt;/h4&gt;
+&lt;p&gt;现象：C++ 调 C 库链接失败。
 对策：把 extern &amp;ldquo;C&amp;rdquo; 包装放进头文件，而不是只写在某个 cpp 里。&lt;/p&gt;
 &lt;h4 id=&#34;762-把-c-文件当-c-编译&#34;&gt;7.6.2 把 C 文件当 C++ 编译
-&lt;/h4&gt;&lt;p&gt;现象：同名函数符号变成 C++ 风格，导致原本 C 侧找不到。
+&lt;/h4&gt;
+&lt;p&gt;现象：同名函数符号变成 C++ 风格，导致原本 C 侧找不到。
 对策：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;明确 &lt;code&gt;.c&lt;/code&gt; 用 C 编译器。&lt;/li&gt;
@@ -2385,16 +2476,20 @@
 &lt;li&gt;检查构建系统里每个源文件的语言设置。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;763-声明签名和定义签名不一致&#34;&gt;7.6.3 声明签名和定义签名不一致
-&lt;/h4&gt;&lt;p&gt;现象：看起来函数名一样，实际符号编码不同。
+&lt;/h4&gt;
+&lt;p&gt;现象：看起来函数名一样，实际符号编码不同。
 对策：统一头文件声明，不要手写重复声明。&lt;/p&gt;
 &lt;h4 id=&#34;764-静态库链接顺序错误&#34;&gt;7.6.4 静态库链接顺序错误
-&lt;/h4&gt;&lt;p&gt;现象：库里明明有符号，还是 undefined reference。
+&lt;/h4&gt;
+&lt;p&gt;现象：库里明明有符号，还是 undefined reference。
 对策：一般遵循“先目标对象，后依赖库”的顺序。&lt;/p&gt;
 &lt;h4 id=&#34;765-c-侧直接调用-c-类成员&#34;&gt;7.6.5 C 侧直接调用 C++ 类成员
-&lt;/h4&gt;&lt;p&gt;现象：几乎必挂（名称、this指针、ABI都不匹配）。
+&lt;/h4&gt;
+&lt;p&gt;现象：几乎必挂（名称、this指针、ABI都不匹配）。
 对策：用 C API 封装层间接调用 C++ 内部实现。&lt;/p&gt;
 &lt;h3 id=&#34;77-arm-none-eabi-场景提示&#34;&gt;7.7 arm-none-eabi 场景提示
-&lt;/h3&gt;&lt;p&gt;在嵌入式（arm-none-eabi）里，这类问题更常见，因为经常会遇到：&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;在嵌入式（arm-none-eabi）里，这类问题更常见，因为经常会遇到：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;启动文件/中断向量是 C 风格符号。&lt;/li&gt;
 &lt;li&gt;驱动层是 C 与 C++ 混合。&lt;/li&gt;
@@ -2418,7 +2513,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;78-一页速查&#34;&gt;7.8 一页速查
-&lt;/h3&gt;&lt;p&gt;当再次遇到链接错误时，按这5步走：&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;当再次遇到链接错误时，按这5步走：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;记下 undefined reference 里的符号名。&lt;/li&gt;
 &lt;li&gt;在库里搜这个符号（nm/readelf）。&lt;/li&gt;
@@ -2427,7 +2523,8 @@
 &lt;li&gt;若是 C 调 C++，补 C 接口封装层，不直接跨语言调类成员。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;79-本章小结&#34;&gt;7.9 本章小结
-&lt;/h3&gt;&lt;ol&gt;
+&lt;/h3&gt;
+&lt;ol&gt;
 &lt;li&gt;名字修饰不是“理论知识”，它直接决定链接能不能过。&lt;/li&gt;
 &lt;li&gt;extern &amp;ldquo;C&amp;rdquo; 的本质是“统一符号规则”，不是语法装饰。&lt;/li&gt;
 &lt;li&gt;工程排错要分层：声明层、编译层、链接层。&lt;/li&gt;
@@ -2435,7 +2532,8 @@
 &lt;li&gt;在嵌入式工程中，建立固定接口规范比临时修Bug更重要。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;8-设计模式&#34;&gt;8. 设计模式
-&lt;/h2&gt;&lt;ol&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
 &lt;li&gt;模板方法：流程固定，步骤可变。&lt;/li&gt;
 &lt;li&gt;策略模式：算法可替换，减少 if-else。&lt;/li&gt;
 &lt;li&gt;观察者模式：事件通知，一对多联动。&lt;/li&gt;
@@ -2444,7 +2542,8 @@
 建议：每个模式都做“重构前 vs 重构后”代码对照。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;9-高频bug速查&#34;&gt;9. 高频bug速查
-&lt;/h2&gt;&lt;ol&gt;
+&lt;/h2&gt;
+&lt;ol&gt;
 &lt;li&gt;基类析构函数非虚，却通过基类指针删除派生对象。&lt;/li&gt;
 &lt;li&gt;资源类只做浅拷贝，导致二次释放。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;new[]&lt;/code&gt; 后用 &lt;code&gt;delete&lt;/code&gt;。&lt;/li&gt;
@@ -2462,9 +2561,12 @@
         
         <guid>https://NomadJoeviolet.github.io/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/</guid>
         <description>&lt;h3 id=&#34;类和对象&#34;&gt;类和对象
-&lt;/h3&gt;&lt;h4 id=&#34;类的基本知识&#34;&gt;类的基本知识
-&lt;/h4&gt;&lt;h5 id=&#34;类的构造函数&#34;&gt;类的构造函数
-&lt;/h5&gt;&lt;p&gt;构造函数的名字和类名相同，没有返回类型。对象创建时会自动调用，用来保证对象一出生就是“可用状态”。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;h4 id=&#34;类的基本知识&#34;&gt;类的基本知识
+&lt;/h4&gt;
+&lt;h5 id=&#34;类的构造函数&#34;&gt;类的构造函数
+&lt;/h5&gt;
+&lt;p&gt;构造函数的名字和类名相同，没有返回类型。对象创建时会自动调用，用来保证对象一出生就是“可用状态”。&lt;/p&gt;
 &lt;p&gt;常见形式：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;默认构造函数（无参）&lt;/li&gt;
@@ -2503,7 +2605,8 @@
 &lt;li&gt;成员初始化顺序由“声明顺序”决定，不是初始化列表书写顺序。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h5 id=&#34;类的拷贝构造函数&#34;&gt;类的拷贝构造函数
-&lt;/h5&gt;&lt;p&gt;拷贝构造就是“用一个同类型老对象，生成一个新对象”。&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;拷贝构造就是“用一个同类型老对象，生成一个新对象”。&lt;/p&gt;
 &lt;p&gt;典型签名：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2559,7 +2662,8 @@
 &lt;li&gt;深拷贝：复制资源本体，每个对象各管各的资源。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h5 id=&#34;类的移动构造函数&#34;&gt;类的移动构造函数
-&lt;/h5&gt;&lt;p&gt;移动构造不是“复制资源”，而是“接管资源”。&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;移动构造不是“复制资源”，而是“接管资源”。&lt;/p&gt;
 &lt;p&gt;典型签名：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2616,7 +2720,8 @@
 &lt;li&gt;被移动对象必须保持“可析构、可赋值”的有效但未指定状态。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h5 id=&#34;类的析构函数&#34;&gt;类的析构函数
-&lt;/h5&gt;&lt;p&gt;析构函数就是对象的“收尾清理”。&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;析构函数就是对象的“收尾清理”。&lt;/p&gt;
 &lt;p&gt;典型签名：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2659,7 +2764,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;常见坑：资源管理类通常遵循“规则五（Rule of Five）”，即拷贝构造、拷贝赋值、移动构造、移动赋值、析构这五个函数要整体考虑。&lt;/p&gt;
 &lt;h4 id=&#34;类的继承与多态&#34;&gt;类的继承与多态
-&lt;/h4&gt;&lt;p&gt;多态实现的前提&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;多态实现的前提&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;类的成员函数有虚函数&lt;/li&gt;
 &lt;li&gt;公有继承的派生类&lt;/li&gt;
@@ -2684,8 +2790,10 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;不可实例化，需要派生一个类且重写虚函数，实例化派生类&lt;/p&gt;
 &lt;h4 id=&#34;类的进阶知识&#34;&gt;类的进阶知识
-&lt;/h4&gt;&lt;h5 id=&#34;override和final限定符&#34;&gt;override和final限定符
-&lt;/h5&gt;&lt;p&gt;&lt;code&gt;override&lt;/code&gt; 和 &lt;code&gt;final&lt;/code&gt; 是 &lt;code&gt;C++11&lt;/code&gt; 引入的上下文关键字。&lt;/p&gt;
+&lt;/h4&gt;
+&lt;h5 id=&#34;override和final限定符&#34;&gt;override和final限定符
+&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;override&lt;/code&gt; 和 &lt;code&gt;final&lt;/code&gt; 是 &lt;code&gt;C++11&lt;/code&gt; 引入的上下文关键字。&lt;/p&gt;
 &lt;p&gt;在派生类中重写虚函数时，使用 &lt;code&gt;override&lt;/code&gt; 可以让编译器检查函数签名是否真的匹配基类，防止“看起来像重写，其实是重载”的错误。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;final&lt;/code&gt; 可以阻止继续重写：&lt;/p&gt;
 &lt;ol&gt;
@@ -2718,7 +2826,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h5 id=&#34;静态成员&#34;&gt;静态成员
-&lt;/h5&gt;&lt;p&gt;静态成员属于类本身，不属于某个对象。&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;静态成员属于类本身，不属于某个对象。&lt;/p&gt;
 &lt;p&gt;静态成员变量不依赖对象存在，通常用于：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;统计同类对象数量。&lt;/li&gt;
@@ -2759,7 +2868,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;静态成员函数里没有 &lt;code&gt;this&lt;/code&gt; 指针，所以不能直接访问非静态成员；但可以通过传入对象，再间接访问对象成员。&lt;/p&gt;
 &lt;h5 id=&#34;const成员函数&#34;&gt;const成员函数
-&lt;/h5&gt;&lt;p&gt;&lt;code&gt;const&lt;/code&gt; 成员函数承诺“不会修改对象可观察状态”。&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;const&lt;/code&gt; 成员函数承诺“不会修改对象可观察状态”。&lt;/p&gt;
 &lt;p&gt;本质上可以理解为：&lt;code&gt;this&lt;/code&gt; 的类型变成了 &lt;code&gt;const ClassName*&lt;/code&gt;。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2801,7 +2911,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h5 id=&#34;this指针&#34;&gt;this指针
-&lt;/h5&gt;&lt;p&gt;&lt;code&gt;this&lt;/code&gt; 就是“当前对象自己的地址”。&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;this&lt;/code&gt; 就是“当前对象自己的地址”。&lt;/p&gt;
 &lt;p&gt;在非静态成员函数中，编译器会隐式传入 &lt;code&gt;this&lt;/code&gt; 指针。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;普通成员函数中：&lt;code&gt;this&lt;/code&gt; 类型近似 &lt;code&gt;ClassName*&lt;/code&gt;。&lt;/li&gt;
@@ -2839,7 +2950,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h5 id=&#34;访问父类中的函数&#34;&gt;访问父类中的函数
-&lt;/h5&gt;&lt;p&gt;在子类中调用父类版本函数，可以使用作用域解析运算符：&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;在子类中调用父类版本函数，可以使用作用域解析运算符：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -2878,7 +2990,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h5 id=&#34;友元函数与类&#34;&gt;友元函数与类
-&lt;/h5&gt;&lt;p&gt;友元是“被特批访问私有成员的外部函数/类”。&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;友元是“被特批访问私有成员的外部函数/类”。&lt;/p&gt;
 &lt;p&gt;友元不属于类成员，但可以访问类的 &lt;code&gt;private/protected&lt;/code&gt;。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2916,8 +3029,10 @@
 &lt;li&gt;友元是“打洞”机制，能不用就少用，优先保持封装性。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;模板&#34;&gt;模板
-&lt;/h3&gt;&lt;h4 id=&#34;函数模板&#34;&gt;函数模板
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/%E7%8E%B0%E4%BB%A3C&amp;#43;&amp;#43;%E5%AD%A6%E4%B9%A0-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF.png&#34;
+&lt;/h3&gt;
+&lt;h4 id=&#34;函数模板&#34;&gt;函数模板
+&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/%E7%8E%B0%E4%BB%A3C&amp;#43;&amp;#43;%E5%AD%A6%E4%B9%A0-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF.png&#34;
 	width=&#34;1226&#34;
 	height=&#34;305&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/%E7%8E%B0%E4%BB%A3C&amp;#43;&amp;#43;%E5%AD%A6%E4%B9%A0-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF_hu3933510204040298527.png 480w, https://NomadJoeviolet.github.io/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/%E7%8E%B0%E4%BB%A3C&amp;#43;&amp;#43;%E5%AD%A6%E4%B9%A0-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF_hu3470704922015443615.png 1024w&#34;
@@ -2930,7 +3045,8 @@
 	
 &gt;&lt;/p&gt;
 &lt;h5 id=&#34;基本概念&#34;&gt;基本概念
-&lt;/h5&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -2971,7 +3087,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;补充：&lt;code&gt;class&lt;/code&gt; 和 &lt;code&gt;typename&lt;/code&gt; 在模板参数列表中等价，二者都可以用。&lt;/p&gt;
 &lt;h5 id=&#34;显式实例化&#34;&gt;显式实例化
-&lt;/h5&gt;&lt;p&gt;显式实例化是“我提前告诉编译器：这个类型版本一定要生成”。&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;显式实例化是“我提前告诉编译器：这个类型版本一定要生成”。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -2982,12 +3099,14 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;如果不显式实例化，通常由编译器根据调用点进行隐式实例化。&lt;/p&gt;
 &lt;h5 id=&#34;实例化与特化的区别&#34;&gt;实例化与特化的区别
-&lt;/h5&gt;&lt;ol&gt;
+&lt;/h5&gt;
+&lt;ol&gt;
 &lt;li&gt;实例化（Instantiation）：按模板规则“生成代码”。&lt;/li&gt;
 &lt;li&gt;特化（Specialization）：为某些特定类型“单独写实现”。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h5 id=&#34;特化specialization&#34;&gt;特化(Specialization)
-&lt;/h5&gt;&lt;p&gt;特化分为全特化和偏特化：&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;特化分为全特化和偏特化：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;函数模板：只支持全特化，不支持偏特化（可用重载替代）。&lt;/li&gt;
 &lt;li&gt;类模板：支持全特化和偏特化。&lt;/li&gt;
@@ -3009,8 +3128,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;类模板&#34;&gt;类模板
-&lt;/h4&gt;&lt;h5 id=&#34;基本概念-1&#34;&gt;基本概念
-&lt;/h5&gt;&lt;p&gt;类模板就是“按类型生成类”的模具。&lt;/p&gt;
+&lt;/h4&gt;
+&lt;h5 id=&#34;基本概念-1&#34;&gt;基本概念
+&lt;/h5&gt;
+&lt;p&gt;类模板就是“按类型生成类”的模具。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -3077,7 +3198,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h5 id=&#34;类模板的特化&#34;&gt;类模板的特化
-&lt;/h5&gt;&lt;p&gt;类模板全特化后，本质是一个全新的类定义，不会自动继承主模板实现。&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;类模板全特化后，本质是一个全新的类定义，不会自动继承主模板实现。&lt;/p&gt;
 &lt;p&gt;此外类模板还支持偏特化（部分特化）：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -3108,7 +3230,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h5 id=&#34;非类型模板参数&#34;&gt;非类型模板参数
-&lt;/h5&gt;&lt;p&gt;模板参数不一定是类型，也可以是常量值。&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;模板参数不一定是类型，也可以是常量值。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -3133,7 +3256,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;常见非类型模板参数：整数、枚举、指针、引用、&lt;code&gt;std::nullptr_t&lt;/code&gt;（不同标准版本支持范围略有差异）。&lt;/p&gt;
 &lt;h5 id=&#34;模板嵌套&#34;&gt;模板嵌套
-&lt;/h5&gt;&lt;p&gt;类模板的参数还可以是一个模板&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;类模板的参数还可以是一个模板&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -3168,11 +3292,13 @@
 &lt;li&gt;模板是后面泛型 lambda、完美转发的基础能力，后面章节会用到这里的类型推导思想。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;lambda表达式&#34;&gt;lambda表达式
-&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV13MmUYUE9S/?vd_source=5a0790755035f26a67935abfbfcdfd5b&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV13MmUYUE9S/?vd_source=5a0790755035f26a67935abfbfcdfd5b&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;一起来学C++ 32.Lambda表达式_哔哩哔哩_bilibili&lt;/a&gt;
 &lt;code&gt;C++14&lt;/code&gt;以后引入了泛型lambda&lt;/p&gt;
 &lt;h4 id=&#34;定义方式&#34;&gt;定义方式
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -3209,7 +3335,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;本质&#34;&gt;本质
-&lt;/h4&gt;&lt;p&gt;lambda表达式的本质是函数对象的一种快捷定义方式，同时会有的捕获变量的成员变量&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;lambda表达式的本质是函数对象的一种快捷定义方式，同时会有的捕获变量的成员变量&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -3248,7 +3375,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;按值捕获按引用捕获&#34;&gt;按值捕获&amp;amp;按引用捕获
-&lt;/h4&gt;&lt;p&gt;捕获变量有两种方式，按值捕获 和 按引用捕获&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;捕获变量有两种方式，按值捕获 和 按引用捕获&lt;/p&gt;
 &lt;p&gt;按值捕获，初始化时只是复制了x,y的值&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -3352,7 +3480,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;泛型lambda&#34;&gt;泛型lambda
-&lt;/h4&gt;&lt;p&gt;在&lt;code&gt;C++14&lt;/code&gt;标准以后，引入了泛型&lt;code&gt;lambda&lt;/code&gt;,实现的方法是在函数的参数类型中使用&lt;code&gt;auto&lt;/code&gt;关键字&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;在&lt;code&gt;C++14&lt;/code&gt;标准以后，引入了泛型&lt;code&gt;lambda&lt;/code&gt;,实现的方法是在函数的参数类型中使用&lt;code&gt;auto&lt;/code&gt;关键字&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -3377,8 +3506,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;右值引用与移动语义&#34;&gt;右值引用与移动语义
-&lt;/h3&gt;&lt;h4 id=&#34;左值与右值&#34;&gt;左值与右值
-&lt;/h4&gt;&lt;p&gt;左值能放在表达式的左侧，能够代表一块存储区域，判断左值的方式一般是 能否获得这个表达式的引用或者取地址&lt;/p&gt;
+&lt;/h3&gt;
+&lt;h4 id=&#34;左值与右值&#34;&gt;左值与右值
+&lt;/h4&gt;
+&lt;p&gt;左值能放在表达式的左侧，能够代表一块存储区域，判断左值的方式一般是 能否获得这个表达式的引用或者取地址&lt;/p&gt;
 &lt;p&gt;计算中间结果等存放在临时中间对象中的是右值（纯右值）&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -3396,7 +3527,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;在&lt;code&gt;C++11&lt;/code&gt;之后，有&lt;code&gt;glvalue&lt;/code&gt;（泛左值）和&lt;code&gt;prvalue&lt;/code&gt;（纯右值），泛左值有被分为&lt;code&gt;lvalue&lt;/code&gt;（左值）和&lt;code&gt;xvalue(eXpiring value)&lt;/code&gt;（亡值）&lt;/p&gt;
 &lt;h4 id=&#34;右值引用&#34;&gt;右值引用
-&lt;/h4&gt;&lt;p&gt;使用&lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;来定义右值的引用，右值的引用只能绑定右值&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;使用&lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;来定义右值的引用，右值的引用只能绑定右值&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -3421,7 +3553,8 @@
 其原因是 拷贝省略（&lt;code&gt;Copy Elison&lt;/code&gt;）的优化，直接省略临时对象的创建，并直接在目标的存储位置构造对象&lt;/p&gt;
 &lt;p&gt;在函数返回等场景也会有优化，都是省略临时对象的创建，例如返回值优化（&lt;code&gt;Return Value Optimization(RVO)&lt;/code&gt;），具名返回值优化（&lt;code&gt;Named Return Value Optimization(NRVO)&lt;/code&gt;）等&lt;/p&gt;
 &lt;h4 id=&#34;移动语义&#34;&gt;移动语义
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -3455,7 +3588,8 @@
 &lt;/div&gt;&lt;p&gt;上面的&lt;code&gt;move&lt;/code&gt;函数的作用是将 传入的参数转换为 右值引用 并返回，在上面的场景中，&lt;code&gt;std::move&lt;/code&gt;的返回的右值引用就是一个亡值（&lt;code&gt;xvalue&lt;/code&gt;即将消亡的值）&lt;/p&gt;
 &lt;p&gt;移动语义常用的场景是智能指针的&lt;code&gt;unique_ptr&lt;/code&gt;的控制权转移，另一个常见场景是在通用模板库中，例如&lt;code&gt;std::vector&lt;/code&gt;就支持移动语义，方便将右值的指针等转移到容器里&lt;/p&gt;
 &lt;h3 id=&#34;完美转发&#34;&gt;完美转发
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -3693,8 +3827,10 @@
 &lt;/div&gt;&lt;p&gt;也就是此时&lt;code&gt;forward&lt;/code&gt;函数返回了传入值&lt;code&gt;t&lt;/code&gt;的左值引用&lt;/p&gt;
 &lt;p&gt;总结，通过使用模板的万能引用结合&lt;code&gt;std::forward&lt;/code&gt;函数实现参数在调用过程中按照参数原有类型进行传递，这就是完美转发的大致原理&lt;/p&gt;
 &lt;h3 id=&#34;左值右值与完美转发的总结&#34;&gt;左值右值与完美转发的总结
-&lt;/h3&gt;&lt;h4 id=&#34;1-左值-lvalue-vs-右值-rvalue&#34;&gt;1. 左值 (Lvalue) vs 右值 (Rvalue)
-&lt;/h4&gt;&lt;p&gt;判断左值和右值，最简单的方法是看**“它是否有名字”&lt;strong&gt;以及&lt;/strong&gt;“你能否取它的地址”**。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;h4 id=&#34;1-左值-lvalue-vs-右值-rvalue&#34;&gt;1. 左值 (Lvalue) vs 右值 (Rvalue)
+&lt;/h4&gt;
+&lt;p&gt;判断左值和右值，最简单的方法是看**“它是否有名字”&lt;strong&gt;以及&lt;/strong&gt;“你能否取它的地址”**。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;左值 (Lvalue)&lt;/strong&gt;：
 &lt;ul&gt;
@@ -3712,13 +3848,15 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;2-左值引用-vs-右值引用&#34;&gt;2. 左值引用 vs 右值引用
-&lt;/h4&gt;&lt;p&gt;引用就是&lt;strong&gt;别名&lt;/strong&gt;。&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;引用就是&lt;strong&gt;别名&lt;/strong&gt;。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;左值引用 (T&amp;amp;)&lt;/strong&gt;：只能绑定到左值。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;右值引用 (T&amp;amp;&amp;amp;)&lt;/strong&gt;：只能绑定到右值。它的存在是为了&lt;strong&gt;给将死的临时对象续命&lt;/strong&gt;，或者为了&lt;strong&gt;窃取它的资源&lt;/strong&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;3完美转发&#34;&gt;3.完美转发
-&lt;/h4&gt;&lt;p&gt;完美转发要解决的问题是：&lt;strong&gt;当函数作为“中间商”传递参数时，参数的“左/右值属性”会丢失。&lt;/strong&gt;&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;完美转发要解决的问题是：&lt;strong&gt;当函数作为“中间商”传递参数时，参数的“左/右值属性”会丢失。&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -3761,14 +3899,16 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;结论&lt;/strong&gt;：无论你传给 wrapper 的是左值还是右值，&lt;strong&gt;只要到了 wrapper 内部，参数 arg 永远是左值&lt;/strong&gt;。如果不用完美转发，永远调用的都是 real_func 的左值版本。&lt;/p&gt;
 &lt;h4 id=&#34;4-万能引用-universal-reference--forwarding-reference&#34;&gt;4. 万能引用 (Universal Reference / Forwarding Reference)
-&lt;/h4&gt;&lt;p&gt;C++11 规定：如果一个&lt;strong&gt;模板参数&lt;/strong&gt;的类型是 T&amp;amp;&amp;amp;，且 T 是需要推导的，那么它就不是单纯的“右值引用”，而是&lt;strong&gt;万能引用&lt;/strong&gt;。
+&lt;/h4&gt;
+&lt;p&gt;C++11 规定：如果一个&lt;strong&gt;模板参数&lt;/strong&gt;的类型是 T&amp;amp;&amp;amp;，且 T 是需要推导的，那么它就不是单纯的“右值引用”，而是&lt;strong&gt;万能引用&lt;/strong&gt;。
 &lt;strong&gt;推导规则（牢记）：&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;传入左值&lt;/strong&gt;：T 被推导为 Type&amp;amp;。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;传入右值&lt;/strong&gt;：T 被推导为 Type (即原始类型)。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;5-引用折叠-reference-collapsing&#34;&gt;5. 引用折叠 (Reference Collapsing)
-&lt;/h4&gt;&lt;p&gt;既然 T 可能被推导为引用，那 T&amp;amp;&amp;amp; 就会出现 Type&amp;amp; &amp;amp;&amp;amp; 这种奇怪的东西。C++ 编译器会进行“折叠”：&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;既然 T 可能被推导为引用，那 T&amp;amp;&amp;amp; 就会出现 Type&amp;amp; &amp;amp;&amp;amp; 这种奇怪的东西。C++ 编译器会进行“折叠”：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;只要遇到一个 &amp;amp; (左值引用)，结果就是左值引用。&lt;/li&gt;
 &lt;li&gt;只有两个都是 &amp;amp;&amp;amp; (右值引用)，结果才是右值引用。&lt;/li&gt;
@@ -3804,7 +3944,8 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h4 id=&#34;6-stdforward&#34;&gt;6. std::forward
-&lt;/h4&gt;&lt;p&gt;即使通过万能引用和引用折叠，我们得到了正确的&lt;strong&gt;类型&lt;/strong&gt;（是 string&amp;amp; 还是 string&amp;amp;&amp;amp;），但在 wrapper 函数体内，变量 arg 本身依然是&lt;strong&gt;左值&lt;/strong&gt;（因为它有名字）。&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;即使通过万能引用和引用折叠，我们得到了正确的&lt;strong&gt;类型&lt;/strong&gt;（是 string&amp;amp; 还是 string&amp;amp;&amp;amp;），但在 wrapper 函数体内，变量 arg 本身依然是&lt;strong&gt;左值&lt;/strong&gt;（因为它有名字）。&lt;/p&gt;
 &lt;p&gt;我们需要一种机制：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;如果 T 是左值引用，把 arg 保持为左值。&lt;/li&gt;
@@ -3845,14 +3986,16 @@
 &lt;li&gt;&lt;strong&gt;结果&lt;/strong&gt;：强制转换为右值引用（即右值）。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;总结&#34;&gt;总结
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;完美转发&lt;/strong&gt;&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;完美转发&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;万能引用 (T&amp;amp;&amp;amp;)&lt;/strong&gt;：负责根据实参，把 T 推导成“包含左/右值信息”的类型（Type&amp;amp; 或 Type）。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;引用折叠&lt;/strong&gt;：负责处理 &amp;amp; 和 &amp;amp;&amp;amp; 的冲突，确定参数 arg 的最终类型。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;std::forward&amp;lt;T&amp;gt;&lt;/code&gt;：负责在最后一步，根据 &lt;code&gt;T &lt;/code&gt;的类型，决定是否要对&lt;code&gt; arg&lt;/code&gt; 进行 &lt;code&gt;static_cast&amp;lt;Type&amp;amp;&amp;amp;&amp;gt;&lt;/code&gt; (即 &lt;code&gt;move&lt;/code&gt;)。如果 &lt;code&gt;T &lt;/code&gt;是左值引用，它就不转；如果 &lt;code&gt;T &lt;/code&gt;是普通类型，它就强转为右值。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;函数封装与绑定&#34;&gt;函数封装与绑定
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;std::function&lt;/code&gt;是一个通用的多态函数封装器，可将函数指针，函数对象，lambda函数等进行封装&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;std::function&lt;/code&gt;是一个通用的多态函数封装器，可将函数指针，函数对象，lambda函数等进行封装&lt;/p&gt;
 &lt;p&gt;在&lt;code&gt;std&lt;/code&gt;中&lt;code&gt;std::function&lt;/code&gt;用到的是定义是类模板的部分特化，如下&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -3958,8 +4101,10 @@
 &lt;/div&gt;&lt;p&gt;需要注意，此处的绑定的是绑定的右值引用，实现的效果是传递值&lt;/p&gt;
 &lt;p&gt;一句话总结，就是 与参数绑定，形成一个新的可调用对象&lt;/p&gt;
 &lt;h3 id=&#34;常量表达式和constexpr&#34;&gt;常量表达式和constexpr
-&lt;/h3&gt;&lt;h3 id=&#34;函数式编程&#34;&gt;函数式编程
-&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1nf421B7Wk/?vd_source=b833d3fb67c0663c4d5e48c9953b427c&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/h3&gt;
+&lt;h3 id=&#34;函数式编程&#34;&gt;函数式编程
+&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1nf421B7Wk/?vd_source=b833d3fb67c0663c4d5e48c9953b427c&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;【现代C++】函数式编程优雅实现信号槽_哔哩哔哩_bilibili&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
@@ -3970,7 +4115,8 @@
         
         <guid>https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/</guid>
         <description>&lt;h2 id=&#34;前言&#34;&gt;前言
-&lt;/h2&gt;&lt;p&gt;非常适合集成各类库后去雕琢，练习 C&amp;amp;C++混编和设计模式，C++动态内存分配等，很爽的练手项目&lt;/p&gt;
+&lt;/h2&gt;
+&lt;p&gt;非常适合集成各类库后去雕琢，练习 C&amp;amp;C++混编和设计模式，C++动态内存分配等，很爽的练手项目&lt;/p&gt;
 &lt;p&gt;仓库：&lt;a class=&#34;link&#34; href=&#34;https://github.com/NomadJoeviolet/ChipTanks&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;NomadJoeviolet/ChipTanks: OLED屏幕的Rouglike弹幕射击游戏&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;项目代码状况&lt;/p&gt;
@@ -4007,16 +4153,19 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;游戏设计&#34;&gt;游戏设计
-&lt;/h2&gt;&lt;p&gt;玩法介绍：&lt;a class=&#34;link&#34; href=&#34;https://nomadjoeviolet.github.io/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/h2&gt;
+&lt;p&gt;玩法介绍：&lt;a class=&#34;link&#34; href=&#34;https://nomadjoeviolet.github.io/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ChipTanks-玩法介绍&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;游戏设计：&lt;a class=&#34;link&#34; href=&#34;https://nomadjoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;ChipTanks-游戏设计&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;硬件选型&#34;&gt;硬件选型
-&lt;/h2&gt;&lt;p&gt;使用的OLED屏的显示驱动为SSD1306
+&lt;/h2&gt;
+&lt;p&gt;使用的OLED屏的显示驱动为SSD1306
 主控板为stm32f103c8t6
 使用4 * 4 矩阵键盘&lt;/p&gt;
 &lt;h2 id=&#34;开发工具链&#34;&gt;开发工具链
-&lt;/h2&gt;&lt;p&gt;使用 VSCode+Intellisence+CubeMX+CMake+Ninja+arm-none-eabi+Ozone+Jlink的高自定义开发工具链&lt;/p&gt;
+&lt;/h2&gt;
+&lt;p&gt;使用 VSCode+Intellisence+CubeMX+CMake+Ninja+arm-none-eabi+Ozone+Jlink的高自定义开发工具链&lt;/p&gt;
 &lt;p&gt;代码编辑器采用VSCode，语言服务器使用VSCode的Intellisence来实现智能代码补全和理解功能，用CubeMX生成硬件抽象层代码，CMake和Ninja作为项目构建工具，使用arm-none-eabi编译器，烧录和调试使用Ozone，硬件烧录器使用Jlink&lt;/p&gt;
 &lt;p&gt;CubeMX使用的版本为&lt;code&gt;6.15.0&lt;/code&gt;
 CMake使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
@@ -4073,11 +4222,14 @@ CMake使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;第三方库引入&#34;&gt;第三方库引入
-&lt;/h2&gt;&lt;p&gt;引入FreeRTOS和dsp库以及etl库&lt;/p&gt;
+&lt;/h2&gt;
+&lt;p&gt;引入FreeRTOS和dsp库以及etl库&lt;/p&gt;
 &lt;p&gt;引入FreeRTOS用来处理多线程任务，引入dsp库用来加速部分运算（主要想用来加速 游戏实体 碰撞检测）（实际基本上没用，当做练手了），引入etl库来做到 零开销的使用 C++ 容器 提高开发效率，其确定性内存管理 (Deterministic Memory)在&lt;strong&gt;栈上&lt;/strong&gt;或&lt;strong&gt;静态区&lt;/strong&gt;分配固定大小的内存，而不是在堆上动态扩容，能完全避免了内存碎片问题，且内存占用在编译期就是已知的，非常适合 RAM 有限的 STM32，同时有容器去实现设计模式等会更加高效。&lt;/p&gt;
 &lt;h2 id=&#34;代码实现&#34;&gt;代码实现
-&lt;/h2&gt;&lt;h3 id=&#34;动态内存分配在嵌入式平台上的解决&#34;&gt;动态内存分配在嵌入式平台上的解决
-&lt;/h3&gt;&lt;p&gt;因嵌入式平台的内存资源非常有限，同时还要保证FreeRTOS的线程安全，需要对C++的动态内存分配（&lt;code&gt;new&lt;/code&gt;和&lt;code&gt;delete&lt;/code&gt;）进行重载，重载为&lt;code&gt;pvPortMalloc(size)&lt;/code&gt;和&lt;code&gt;vPortFree(ptr)&lt;/code&gt;，FreeRTOS线程安全的分配方式，从FreeRTOS的堆里面分配&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;动态内存分配在嵌入式平台上的解决&#34;&gt;动态内存分配在嵌入式平台上的解决
+&lt;/h3&gt;
+&lt;p&gt;因嵌入式平台的内存资源非常有限，同时还要保证FreeRTOS的线程安全，需要对C++的动态内存分配（&lt;code&gt;new&lt;/code&gt;和&lt;code&gt;delete&lt;/code&gt;）进行重载，重载为&lt;code&gt;pvPortMalloc(size)&lt;/code&gt;和&lt;code&gt;vPortFree(ptr)&lt;/code&gt;，FreeRTOS线程安全的分配方式，从FreeRTOS的堆里面分配&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -4202,8 +4354,10 @@ CMake使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &gt;&lt;/p&gt;
 &lt;p&gt;由此可以直接看出重载后动态内存分配可以保证系统栈和线程的安全&lt;/p&gt;
 &lt;h3 id=&#34;项目文件结构&#34;&gt;项目文件结构
-&lt;/h3&gt;&lt;h4 id=&#34;整体结构&#34;&gt;整体结构
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h3&gt;
+&lt;h4 id=&#34;整体结构&#34;&gt;整体结构
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -4272,7 +4426,8 @@ CMake使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;app结构&#34;&gt;App结构
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -4337,7 +4492,8 @@ CMake使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;架构与设计思路&#34;&gt;架构与设计思路
-&lt;/h3&gt;&lt;p&gt;主要采用 &lt;strong&gt;面向对象（OOP）&lt;/strong&gt; 的设计思路，结合FreeRTOS实时操作系统，构建简单的嵌入式游戏框架。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;主要采用 &lt;strong&gt;面向对象（OOP）&lt;/strong&gt; 的设计思路，结合FreeRTOS实时操作系统，构建简单的嵌入式游戏框架。&lt;/p&gt;
 &lt;p&gt;主要分为5各层级：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;硬件抽象层：基于HAL库的对底层硬件的抽象，对外设硬件操作进行再次封装&lt;/li&gt;
@@ -4347,7 +4503,8 @@ CMake使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;li&gt;应用逻辑层（App Logic）：多线程任务处理，游戏业务逻辑&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;硬件抽象层&#34;&gt;硬件抽象层
-&lt;/h4&gt;&lt;p&gt;在HAL库基础上，对外设进行面向对象的进一步封装&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;在HAL库基础上，对外设进行面向对象的进一步封装&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;OLED&lt;/strong&gt;(使用的keysking的开源库):
 提供OLED_DrawImage，OLED_PrintString 等绘图 API。
 包含字库 (&lt;code&gt;font.c&lt;/code&gt;)，支持文本显示。
@@ -4356,19 +4513,23 @@ CMake使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 提供按键扫描逻辑。
 作为游戏的&lt;strong&gt;输入设备&lt;/strong&gt;，将物理按键映射为游戏内的控制信号&lt;/p&gt;
 &lt;h4 id=&#34;核心数据层&#34;&gt;核心数据层
-&lt;/h4&gt;&lt;p&gt;定义了所有游戏实体共用的数据结构，如 &lt;code&gt;HealthData&lt;/code&gt;（血量）、&lt;code&gt;AttackData&lt;/code&gt;（攻击）、&lt;code&gt;SpatialData&lt;/code&gt;（位置与大小）、&lt;code&gt;HeatData&lt;/code&gt;（热量）等。
+&lt;/h4&gt;
+&lt;p&gt;定义了所有游戏实体共用的数据结构，如 &lt;code&gt;HealthData&lt;/code&gt;（血量）、&lt;code&gt;AttackData&lt;/code&gt;（攻击）、&lt;code&gt;SpatialData&lt;/code&gt;（位置与大小）、&lt;code&gt;HeatData&lt;/code&gt;（热量）等。
 使用 &lt;code&gt;struct&lt;/code&gt; 组合数据，便于在不同类之间传递和管理状态。
 定义了 &lt;code&gt;RoleIdentity&lt;/code&gt;（身份）、（子弹类型）等关键枚举。&lt;/p&gt;
 &lt;h4 id=&#34;游戏实体层&#34;&gt;游戏实体层
-&lt;/h4&gt;&lt;p&gt;这是游戏逻辑的核心部分，采用了&lt;strong&gt;继承与多态&lt;/strong&gt;的设计。&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;这是游戏逻辑的核心部分，采用了&lt;strong&gt;继承与多态&lt;/strong&gt;的设计。&lt;/p&gt;
 &lt;h5 id=&#34;基类设计&#34;&gt;&lt;strong&gt;基类设计&lt;/strong&gt;:
-&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;IRole&lt;/code&gt; （role.hpp&lt;/strong&gt;）: 所有角色（玩家和敌人）的基类。包含 &lt;code&gt;RoleData&lt;/code&gt; 指针，管理角色的所有属性。
+&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;IRole&lt;/code&gt; （role.hpp&lt;/strong&gt;）: 所有角色（玩家和敌人）的基类。包含 &lt;code&gt;RoleData&lt;/code&gt; 指针，管理角色的所有属性。
 定义了虚函数接口：&lt;code&gt;init()&lt;/code&gt;, &lt;code&gt;think()&lt;/code&gt;, &lt;code&gt;doAction()&lt;/code&gt;, &lt;code&gt;drawRole()&lt;/code&gt;, &lt;code&gt;die()&lt;/code&gt;, &lt;code&gt;shoot()&lt;/code&gt;。
 实现了通用的物理逻辑：&lt;code&gt;move()&lt;/code&gt;（移动与边界检查）、&lt;code&gt;update()&lt;/code&gt;（状态更新）、&lt;code&gt;createBullet()&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;IBullet&lt;/code&gt; (bullet.hpp)&lt;/strong&gt;: 所有子弹的基类。
 定义了 &lt;code&gt;move()&lt;/code&gt;, &lt;code&gt;update()&lt;/code&gt;, &lt;code&gt;drawBullet()&lt;/code&gt;, &lt;code&gt;die()&lt;/code&gt; 等接口。&lt;/p&gt;
 &lt;h5 id=&#34;派生类设计&#34;&gt;&lt;strong&gt;派生类设计&lt;/strong&gt;:
-&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;&lt;code&gt;LeadingRole&lt;/code&gt; (&lt;code&gt;leadingRole.cpp&lt;/code&gt;)&lt;/strong&gt;: 玩家控制的主角。
+&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;LeadingRole&lt;/code&gt; (&lt;code&gt;leadingRole.cpp&lt;/code&gt;)&lt;/strong&gt;: 玩家控制的主角。
 实现了复杂的升级逻辑 (&lt;code&gt;levelUp&lt;/code&gt;)、热量控制和多武器切换。
 单例模式或全局对象管理（通常作为唯一主角存在）。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;EnemyRole&lt;/code&gt; (&lt;code&gt;enemyRole.hpp&lt;/code&gt;)&lt;/strong&gt;: 各种敌人的实现。
@@ -4377,8 +4538,10 @@ CMake使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;strong&gt;&lt;code&gt;XiangliuEnemy&lt;/code&gt;&lt;/strong&gt; (BOSS): 召唤与全屏弹幕。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;BasicBullet&lt;/code&gt; / &lt;code&gt;FireBallBullet&lt;/code&gt; / &lt;code&gt;LightningLineBullet&lt;/code&gt;&lt;/strong&gt;: 不同类型的子弹实现，具有不同的伤害逻辑和特效。&lt;/p&gt;
 &lt;h4 id=&#34;管理器层&#34;&gt;管理器层
-&lt;/h4&gt;&lt;h5 id=&#34;1gameentitymanager-gameentitymanagerhpp&#34;&gt;1.&lt;strong&gt;&lt;code&gt;GameEntityManager&lt;/code&gt; (&lt;code&gt;gameEntityManager.hpp&lt;/code&gt;)&lt;/strong&gt;:
-&lt;/h5&gt;&lt;p&gt;核心职责:
+&lt;/h4&gt;
+&lt;h5 id=&#34;1gameentitymanager-gameentitymanagerhpp&#34;&gt;1.&lt;strong&gt;&lt;code&gt;GameEntityManager&lt;/code&gt; (&lt;code&gt;gameEntityManager.hpp&lt;/code&gt;)&lt;/strong&gt;:
+&lt;/h5&gt;
+&lt;p&gt;核心职责:
 维护所有活跃的角色和子弹容器，使用固定容量的嵌入式向量。包含角色池（最多20个）和子弹池（最多100个），以及游戏结束标记。提供注册新增实体、分阶段的行为与状态更新、碰撞与范围伤害检测、统一渲染、失效实体清理、获取主角指针和经验投递等功能。行为与状态分离，更新顺序通常为：角色行为、子弹行为、角色状态、子弹状态、清理、渲染。碰撞使用轴对齐包围盒，子弹碰撞允许穿透；范围伤害使用圆形距离判定。所有容器操作使用临界区保护以确保一致性。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -4401,7 +4564,8 @@ CMake使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;li&gt;&lt;code&gt;getPlayerRole()&lt;/code&gt;：获取主角的指针&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h5 id=&#34;2gameperkcardmanagergameperkcardmanagerhpp&#34;&gt;2.&lt;code&gt;GamePerkCardManager&lt;/code&gt; (&lt;code&gt;gamePerkCardManager.hpp&lt;/code&gt;)
-&lt;/h5&gt;&lt;p&gt;核心职责：
+&lt;/h5&gt;
+&lt;p&gt;核心职责：
 管理 Rogue-like 的随机强化流程，包括卡片仓库管理、抽取待选卡、选择应用以及未选卡回库。使用两个固定容量的嵌入式向量存储卡片仓库与选卡槽，并维护选卡状态、选中索引与数量。初始化时按配置表生成卡片；触发选卡会随机抽取最多三张并进入选卡状态；选择后将效果应用到玩家（如提高生命、攻击、攻速、移动速度、散热效率，或解锁火球与闪电，或提升范围与伤害倍率），随后将未选卡退回仓库并退出选卡状态。选卡界面显示卡名并有选中指示器。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -4421,7 +4585,8 @@ CMake使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;li&gt;&lt;code&gt;drawSelectionUI&lt;/code&gt;：绘制选卡界面的UI&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h5 id=&#34;3gameprogressmanagergameprogressmanagerhpp&#34;&gt;3.&lt;code&gt;GameProgressManager&lt;/code&gt; (&lt;code&gt;gameProgressManager.hpp&lt;/code&gt;)
-&lt;/h5&gt;&lt;p&gt;核心职责：
+&lt;/h5&gt;
+&lt;p&gt;核心职责：
 控制游戏整体流程，包括关卡推进、波次刷新、Boss 触发与展示、胜利/失败判定，以及开场/通关/警告等过场的展示与计时。与实体管理器和卡片管理器协作，驱动每一波敌人生成与选卡节点的触发。
 功能&lt;/p&gt;
 &lt;ol&gt;
@@ -4433,14 +4598,18 @@ CMake使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;li&gt;&lt;code&gt;drawShowBoss()&lt;/code&gt;：绘制 Boss 海报或挑战警告&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;应用逻辑层&#34;&gt;应用逻辑层
-&lt;/h4&gt;&lt;p&gt;&lt;code&gt;threads.cpp&lt;/code&gt;: 有三个核心任务线程来驱动整体逻辑&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;threads.cpp&lt;/code&gt;: 有三个核心任务线程来驱动整体逻辑&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;oledTaskThread&lt;/code&gt;: 负责渲染时序。根据状态（开场、通关、Boss 展示、选卡、正常战斗）选择对应绘制路径；最终输出帧并控制刷新频率。
 &lt;code&gt;keyScanThread&lt;/code&gt;: 负责输入采集与分发。非选卡状态下更新玩家动作（上下左右）；选卡状态下移动 UI 光标并执行选中操作；根据游戏/过场状态决定是否响应按键。
 &lt;code&gt;gameControlThread&lt;/code&gt;: 负责主控流程与核心时序。Game Over 时重置游戏；正常状态下在非选卡与非过场时推进进度、执行实体行为与状态更新、清理无效实体。&lt;/p&gt;
 &lt;h3 id=&#34;各层级和功能的代码实现与解析&#34;&gt;各层级和功能的代码实现与解析
-&lt;/h3&gt;&lt;h4 id=&#34;硬件抽象层-1&#34;&gt;硬件抽象层
-&lt;/h4&gt;&lt;h5 id=&#34;key&#34;&gt;KEY
-&lt;/h5&gt;&lt;p&gt;当前按键采用“左右各 4 独立键，低电平按下”方案，不再是 4x4 矩阵。CubeMX 已将引脚配置为上拉输入，扫描直接读电平即可。左右各有独立状态缓存，方向枚举在上层做映射。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;h4 id=&#34;硬件抽象层-1&#34;&gt;硬件抽象层
+&lt;/h4&gt;
+&lt;h5 id=&#34;key&#34;&gt;KEY
+&lt;/h5&gt;
+&lt;p&gt;当前按键采用“左右各 4 独立键，低电平按下”方案，不再是 4x4 矩阵。CubeMX 已将引脚配置为上拉输入，扫描直接读电平即可。左右各有独立状态缓存，方向枚举在上层做映射。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -4590,9 +4759,11 @@ CMake使用的版本为&lt;code&gt;4.1.0&lt;/code&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h5 id=&#34;oled&#34;&gt;OLED
-&lt;/h5&gt;&lt;p&gt;使用的是keysking的开源，该代码中提供OLED的驱动和绘画渲染的API，直接使用即可&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;使用的是keysking的开源，该代码中提供OLED的驱动和绘画渲染的API，直接使用即可&lt;/p&gt;
 &lt;h4 id=&#34;核心数据层-1&#34;&gt;核心数据层
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;概览&lt;/strong&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;概览&lt;/strong&gt;
 定义了游戏所需的基础数据类型：身份、子弹类型、动作/移动/攻击/死亡/空间等数据结构，以及角色与子弹的数据聚合体。
 “纯数据载体”，不含行为方法；行为由上层实体类与管理器驱动。
 时间与数值单位采用“毫秒 + 小整型”为主，满足嵌入式 MCU 资源约束。
@@ -5167,7 +5338,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;游戏实体层-1&#34;&gt;游戏实体层
-&lt;/h4&gt;&lt;p&gt;实体层以抽象的角色基类为核心，所有角色共享一套数据驱动的状态与行为流程：初始化、决策、执行、推进与渲染。&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;实体层以抽象的角色基类为核心，所有角色共享一套数据驱动的状态与行为流程：初始化、决策、执行、推进与渲染。&lt;/p&gt;
 &lt;p&gt;玩家与敌人分别在其派生类中实现具体的思考与行动——玩家由输入驱动，敌人由定时与模式切换驱动。当角色需要开火时，通过角色基类提供的子弹工厂按类型生成不同机制的弹药：普通弹以基础伤害直击，火球弹在直击之外叠加范围溅射，闪电链以倍数加成的穿透伤害形成压制。&lt;/p&gt;
 &lt;p&gt;角色推进采用“参考位置 + 碰撞回退”的模式：先根据移动意图计算参考坐标，再用轴对齐包围盒检测并按碰撞方向和连续碰撞次数逐步回退，避免卡边。&lt;/p&gt;
 &lt;p&gt;数值系统围绕冷却、热量和回血三条独立的时序通道运行：冷却按步长与速度递减至零方可再次射击，热量每固定周期按散热速率衰减，回血以计时器触发离散恢复。&lt;/p&gt;
@@ -5426,7 +5598,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;其余代码就不展示了，基本就是复制，只需根据需求对虚接口进行重写即可&lt;/p&gt;
 &lt;h4 id=&#34;管理器层-1&#34;&gt;管理器层
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;该层级的设计主要是针对整个游戏运行的职责进行划分解耦&lt;/strong&gt;，&lt;code&gt;GameEntityManager&lt;/code&gt;,&lt;code&gt;GameProgressManager&lt;/code&gt;,&lt;code&gt;GamePerkCardManager&lt;/code&gt;三者协作的关键在于清晰的职责边界与状态门控：进度与选卡控制何时推进逻辑或暂停到过场/选卡，实体管理器提供确定性更新与资源回收，卡片管理器以数据驱动改变玩家的RoleData&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;该层级的设计主要是针对整个游戏运行的职责进行划分解耦&lt;/strong&gt;，&lt;code&gt;GameEntityManager&lt;/code&gt;,&lt;code&gt;GameProgressManager&lt;/code&gt;,&lt;code&gt;GamePerkCardManager&lt;/code&gt;三者协作的关键在于清晰的职责边界与状态门控：进度与选卡控制何时推进逻辑或暂停到过场/选卡，实体管理器提供确定性更新与资源回收，卡片管理器以数据驱动改变玩家的RoleData&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;GameEntityManager&lt;/code&gt;统一掌控角色与子弹的生命周期与时序，采用固定容量的嵌入式向量存储多态指针，所有增删与遍历在临界区内执行，按“行动→状态→清理→渲染”的分阶段流程驱动：行动阶段调用角色/子弹的思考与动作，状态阶段推进位置与AABB碰撞、伤害与范围伤害并对玩家执行升级检查，清理阶段删除失效实体并向玩家结算经验，渲染阶段输出图像。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -6487,7 +6660,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;应用逻辑层-1&#34;&gt;应用逻辑层
-&lt;/h4&gt;&lt;p&gt;按“主循环驱动、输入分发、渲染输出”三类职责拆分成独立的 FreeRTOS 任务，全局状态作为门控，保证在过场、选卡、战斗三种模式之间平滑切换。&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;按“主循环驱动、输入分发、渲染输出”三类职责拆分成独立的 FreeRTOS 任务，全局状态作为门控，保证在过场、选卡、战斗三种模式之间平滑切换。&lt;/p&gt;
 &lt;p&gt;核心数据与行为推进集中在 &lt;code&gt;gameControlThread&lt;/code&gt;，输入解析与状态写入在 &lt;code&gt;keyScanThread&lt;/code&gt;，画面组合与输出在 &lt;code&gt;oledTaskThread&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;给出伪代码如下：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -6591,7 +6765,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;timer定时器的设计&#34;&gt;timer定时器的设计
-&lt;/h4&gt;&lt;p&gt;代码比较重点一个设计在于timer计时器，每一帧增加或减少帧间隔的时间（相当于决定多少帧触发某一个动作，可以用此来作为一个门控）&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;代码比较重点一个设计在于timer计时器，每一帧增加或减少帧间隔的时间（相当于决定多少帧触发某一个动作，可以用此来作为一个门控）&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;shootCooldownTimer：射击冷却倒计时，归零前禁止再次开火。&lt;/li&gt;
 &lt;li&gt;heatCoolDownTimer：热量冷却触发间隔计时，累计到阈值（200ms）降低一次热量。&lt;/li&gt;
@@ -6619,35 +6794,44 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/question/483714509/answer/1947608534729597210&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;C++ 如何进阶？如何准备 C++ 面试？ - 知乎&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;程序基本常识&#34;&gt;程序基本常识
-&lt;/h2&gt;&lt;h4 id=&#34;编译与链接&#34;&gt;编译与链接
-&lt;/h4&gt;&lt;p&gt;C语言编译原理涉及将C语言代码转换为机器语言的过程。这个过程包括预处理、编译、汇编和链接。编译器在这个过程中对源代码进行优化和转换，生成可执行文件，主要包括以下几个阶段：&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h4 id=&#34;编译与链接&#34;&gt;编译与链接
+&lt;/h4&gt;
+&lt;p&gt;C语言编译原理涉及将C语言代码转换为机器语言的过程。这个过程包括预处理、编译、汇编和链接。编译器在这个过程中对源代码进行优化和转换，生成可执行文件，主要包括以下几个阶段：&lt;/p&gt;
 &lt;h5 id=&#34;1预处理preprocessing&#34;&gt;1.  预处理（Preprocessing）
-&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：处理源代码文件中的预处理指令，如#include和#define&lt;br&gt;
+&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：处理源代码文件中的预处理指令，如#include和#define&lt;br&gt;
 &lt;strong&gt;过程&lt;/strong&gt;：替换宏定义，处理条件编译指令，包含头文件内容&lt;br&gt;
 &lt;strong&gt;工具&lt;/strong&gt;：预处理器，如cpp、armclang&lt;/p&gt;
 &lt;h5 id=&#34;2编译compilation&#34;&gt;2.编译（Compilation）
-&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：将预处理后的源代码转换成汇编语言&lt;br&gt;
+&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：将预处理后的源代码转换成汇编语言&lt;br&gt;
 &lt;strong&gt;过程&lt;/strong&gt;：进行语法分析和语义分析，生成汇编代码&lt;br&gt;
 &lt;strong&gt;工具&lt;/strong&gt;：编译器，如GCC、armclang&lt;/p&gt;
 &lt;h5 id=&#34;3汇编assembly&#34;&gt;3.汇编（Assembly）
-&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：将汇编语言转换成机器语言，即目标代码（Object Code）&lt;br&gt;
+&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：将汇编语言转换成机器语言，即目标代码（Object Code）&lt;br&gt;
 &lt;strong&gt;过程&lt;/strong&gt;：汇编器将汇编指令转换为机器码&lt;br&gt;
 &lt;strong&gt;工具&lt;/strong&gt;：汇编器，如as、armasm&lt;/p&gt;
 &lt;h5 id=&#34;4链接linking&#34;&gt;4.链接（Linking）
-&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：将多个目标代码文件和库文件合并成一个单独的可执行文件&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：将多个目标代码文件和库文件合并成一个单独的可执行文件&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;过程&lt;/strong&gt;：&lt;br&gt;
 解决外部符号引用，如函数和全局变量&lt;br&gt;
 合并不同模块中的相同段（如.text，.data）&lt;br&gt;
 生成最终的可执行文件或库文件&lt;br&gt;
 &lt;strong&gt;工具&lt;/strong&gt;：链接器，如ld、armlink&lt;/p&gt;
 &lt;h4 id=&#34;编译器与链接器&#34;&gt;编译器与链接器
-&lt;/h4&gt;&lt;p&gt;在整个编译过程中，编译器和链接器是核心组件，一般的环境配置也主要针对这二者展开：&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;在整个编译过程中，编译器和链接器是核心组件，一般的环境配置也主要针对这二者展开：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;编译器（Compiler）&lt;/strong&gt;：负责将源代码转换成汇编代码或直接生成目标代码。编译器的高级优化包括循环优化、常数传播、死码删除等&lt;br&gt;
 &lt;strong&gt;链接器（Linker）&lt;/strong&gt;：负责将多个目标代码文件整合为一个可执行文件。链接器处理符号解析、重定位等任务&lt;/p&gt;
 &lt;h4 id=&#34;错误&#34;&gt;错误
-&lt;/h4&gt;&lt;p&gt;编译错误，链接错误，运行错误&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;编译错误，链接错误，运行错误&lt;/p&gt;
 &lt;h4 id=&#34;预处理与宏&#34;&gt;预处理与宏
-&lt;/h4&gt;&lt;p&gt;预处理，对宏定义进行替换
+&lt;/h4&gt;
+&lt;p&gt;预处理，对宏定义进行替换
 宏就是字符替换&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -6658,7 +6842,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;初始化&#34;&gt;初始化
-&lt;/h4&gt;&lt;p&gt;c++11开始支持的初始化&lt;code&gt;{}&lt;/code&gt;和&lt;code&gt;()&lt;/code&gt;&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;c++11开始支持的初始化&lt;code&gt;{}&lt;/code&gt;和&lt;code&gt;()&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -6674,11 +6859,15 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;data-types-and-arithmetic-operators&#34;&gt;Data-Types-and-Arithmetic-Operators
-&lt;/h2&gt;&lt;h3 id=&#34;integer-numbers&#34;&gt;integer-numbers
-&lt;/h3&gt;&lt;h4 id=&#34;int&#34;&gt;int
-&lt;/h4&gt;&lt;p&gt;注意在不同平台上，&lt;code&gt;int&lt;/code&gt;，&lt;code&gt;short int&lt;/code&gt;，&lt;code&gt;long int&lt;/code&gt;，&lt;code&gt;long long&lt;/code&gt;的定义是不同的&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;integer-numbers&#34;&gt;integer-numbers
+&lt;/h3&gt;
+&lt;h4 id=&#34;int&#34;&gt;int
+&lt;/h4&gt;
+&lt;p&gt;注意在不同平台上，&lt;code&gt;int&lt;/code&gt;，&lt;code&gt;short int&lt;/code&gt;，&lt;code&gt;long int&lt;/code&gt;，&lt;code&gt;long long&lt;/code&gt;的定义是不同的&lt;/p&gt;
 &lt;h4 id=&#34;sizeof&#34;&gt;sizeof()
-&lt;/h4&gt;&lt;p&gt;&lt;code&gt;sizeof&lt;/code&gt;是一个操作符，不是函数&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;sizeof&lt;/code&gt;是一个操作符，不是函数&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -6692,7 +6881,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;char&#34;&gt;char
-&lt;/h4&gt;&lt;p&gt;&lt;code&gt;char&lt;/code&gt;本质上是一个8位的整数，可以用有符合和无符号修饰符修饰&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;char&lt;/code&gt;本质上是一个8位的整数，可以用有符合和无符号修饰符修饰&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -6708,7 +6898,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;&lt;p&gt;注意&lt;code&gt;char&lt;/code&gt;在不同平台上不一定是&lt;code&gt;signed char&lt;/code&gt;，有可能是&lt;code&gt;unsigned char&lt;/code&gt;
 一般&lt;code&gt;char&lt;/code&gt;是&lt;code&gt;int8_t&lt;/code&gt;&lt;/p&gt;
 &lt;h4 id=&#34;bool&#34;&gt;bool
-&lt;/h4&gt;&lt;p&gt;&lt;code&gt;bool&lt;/code&gt;数据类型，1&lt;code&gt;byte&lt;/code&gt;而不是1&lt;code&gt;bit&lt;/code&gt;，同时这是&lt;code&gt;c++&lt;/code&gt;里的数据类型&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;bool&lt;/code&gt;数据类型，1&lt;code&gt;byte&lt;/code&gt;而不是1&lt;code&gt;bit&lt;/code&gt;，同时这是&lt;code&gt;c++&lt;/code&gt;里的数据类型&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;c&lt;/code&gt;语言中需要&lt;code&gt;#include &amp;lt;stdbool.h&amp;gt;&lt;/code&gt;来引入&lt;code&gt;bool&lt;/code&gt;数据类型，或者有以下代码来使用&lt;code&gt;bool&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -6735,7 +6926,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;输出&lt;code&gt;test&lt;/code&gt;，会发现&lt;code&gt;test&lt;/code&gt;是1&lt;/p&gt;
 &lt;h4 id=&#34;cstdint&#34;&gt;cstdint
-&lt;/h4&gt;&lt;p&gt;&lt;code&gt;c++11&lt;/code&gt;之后引入&lt;code&gt;&amp;lt;ctsdint&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;c++11&lt;/code&gt;之后引入&lt;code&gt;&amp;lt;ctsdint&amp;gt;&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -6782,8 +6974,10 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;floating-point-numbers&#34;&gt;floating-point-numbers
-&lt;/h3&gt;&lt;h4 id=&#34;float&#34;&gt;float
-&lt;/h4&gt;&lt;p&gt;单精度浮点数，&lt;code&gt;float&lt;/code&gt;类型的数据一定会带有误差
+&lt;/h3&gt;
+&lt;h4 id=&#34;float&#34;&gt;float
+&lt;/h4&gt;
+&lt;p&gt;单精度浮点数，&lt;code&gt;float&lt;/code&gt;类型的数据一定会带有误差
 32&lt;code&gt;bits&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -6873,15 +7067,18 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;&lt;p&gt;原因是&lt;code&gt;float&lt;/code&gt;类型本质是在采样点，该例子中中+10的采样点间隔不够，数值不发生变化
 &lt;strong&gt;浮点数是取一些间隔值&lt;/strong&gt;&lt;/p&gt;
 &lt;h5 id=&#34;关于ff&#34;&gt;关于.f/.F
-&lt;/h5&gt;&lt;p&gt;在 C++ 中，&lt;code&gt;1.0f&lt;/code&gt; 和 &lt;code&gt;1.0F&lt;/code&gt; 都表示单精度浮点数（&lt;code&gt;float&lt;/code&gt; 类型），两者在功能上是完全等价的，唯一的区别是字母 &lt;code&gt;f&lt;/code&gt; 的大小写不同。&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;在 C++ 中，&lt;code&gt;1.0f&lt;/code&gt; 和 &lt;code&gt;1.0F&lt;/code&gt; 都表示单精度浮点数（&lt;code&gt;float&lt;/code&gt; 类型），两者在功能上是完全等价的，唯一的区别是字母 &lt;code&gt;f&lt;/code&gt; 的大小写不同。&lt;/p&gt;
 &lt;h6 id=&#34;说明&#34;&gt;说明：
-&lt;/h6&gt;&lt;ul&gt;
+&lt;/h6&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;1.0f&lt;/code&gt; 和 &lt;code&gt;1.0F&lt;/code&gt; 都表示 &lt;code&gt;float&lt;/code&gt; 类型的字面量，值为 &lt;code&gt;1.0&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;如果不加后缀 &lt;code&gt;f&lt;/code&gt; 或 &lt;code&gt;F&lt;/code&gt;，例如 &lt;code&gt;1.0&lt;/code&gt;，则默认是 &lt;code&gt;double&lt;/code&gt; 类型（双精度浮点数）。&lt;/li&gt;
 &lt;li&gt;类似地，&lt;code&gt;1.0L&lt;/code&gt; 或 &lt;code&gt;1.0l&lt;/code&gt; 表示 &lt;code&gt;long double&lt;/code&gt; 类型（扩展精度浮点数）。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h6 id=&#34;示例&#34;&gt;示例：
-&lt;/h6&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h6&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -6896,15 +7093,18 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h6 id=&#34;为什么有两种写法&#34;&gt;为什么有两种写法？
-&lt;/h6&gt;&lt;p&gt;C++ 允许 &lt;code&gt;f&lt;/code&gt; 和 &lt;code&gt;F&lt;/code&gt; 两种写法，主要是为了代码风格的一致性。例如：&lt;/p&gt;
+&lt;/h6&gt;
+&lt;p&gt;C++ 允许 &lt;code&gt;f&lt;/code&gt; 和 &lt;code&gt;F&lt;/code&gt; 两种写法，主要是为了代码风格的一致性。例如：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;某些编码规范可能推荐使用大写 &lt;code&gt;F&lt;/code&gt; 以增强可读性（避免与数字 &lt;code&gt;1&lt;/code&gt; 混淆）。&lt;/li&gt;
 &lt;li&gt;而小写 &lt;code&gt;f&lt;/code&gt; 更常见，因为更简洁。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h6 id=&#34;总结&#34;&gt;总结：
-&lt;/h6&gt;&lt;p&gt;&lt;code&gt;1.0f&lt;/code&gt; 和 &lt;code&gt;1.0F&lt;/code&gt; 在 C++ 中完全等价，选择哪一种取决于个人或团队的代码风格偏好。&lt;/p&gt;
+&lt;/h6&gt;
+&lt;p&gt;&lt;code&gt;1.0f&lt;/code&gt; 和 &lt;code&gt;1.0F&lt;/code&gt; 在 C++ 中完全等价，选择哪一种取决于个人或团队的代码风格偏好。&lt;/p&gt;
 &lt;h5 id=&#34;浮点数不要直接相等&#34;&gt;浮点数不要直接相等
-&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;浮点数都是近似，不是精确的数值&lt;/strong&gt;，所以不适合用&lt;code&gt;==&lt;/code&gt;判断相等&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;浮点数都是近似，不是精确的数值&lt;/strong&gt;，所以不适合用&lt;code&gt;==&lt;/code&gt;判断相等&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -6916,7 +7116,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;inf-and-nan&#34;&gt;inf and nan
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -6930,14 +7131,18 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;code&gt;nan&lt;/code&gt;：not a number ( Exponent=11111111 , fraction!=0 )
 如果计算过程中出现了&lt;code&gt;inf&lt;/code&gt;或者&lt;code&gt;nan&lt;/code&gt;,后续的计算会产生问题&lt;/p&gt;
 &lt;h4 id=&#34;double&#34;&gt;double
-&lt;/h4&gt;&lt;p&gt;双精度浮点数，64&lt;code&gt;bits&lt;/code&gt;&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;双精度浮点数，64&lt;code&gt;bits&lt;/code&gt;&lt;/p&gt;
 &lt;h4 id=&#34;long-double&#34;&gt;long double
-&lt;/h4&gt;&lt;p&gt;如果系统支持，128&lt;code&gt;bits&lt;/code&gt;
+&lt;/h4&gt;
+&lt;p&gt;如果系统支持，128&lt;code&gt;bits&lt;/code&gt;
 否则，64&lt;code&gt;bits&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&#34;arithmetic-operators&#34;&gt;Arithmetic Operators
-&lt;/h3&gt;&lt;p&gt;算数运算，对计算的实现要有所理解，才能避免出现一些错误&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;算数运算，对计算的实现要有所理解，才能避免出现一些错误&lt;/p&gt;
 &lt;h4 id=&#34;constant-numbers&#34;&gt;Constant-numbers
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -6978,7 +7183,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;const类型限定符&#34;&gt;const类型限定符
-&lt;/h4&gt;&lt;p&gt;在变量前加了&lt;code&gt;const&lt;/code&gt;限定符，变量的值就不可以被修改了&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;在变量前加了&lt;code&gt;const&lt;/code&gt;限定符，变量的值就不可以被修改了&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -6990,7 +7196,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;heading&#34;&gt;
-&lt;/h4&gt;&lt;p&gt;运算符优先级&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;运算符优先级&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7058,7 +7265,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;类型转换&#34;&gt;类型转换
-&lt;/h4&gt;&lt;p&gt;浮点类型转整型，会直接舍弃小数位，保留整数位&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;浮点类型转整型，会直接舍弃小数位，保留整数位&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7084,10 +7292,12 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;除法两边都是整数，做的是整数除法&lt;/p&gt;
 &lt;h4 id=&#34;data-loss&#34;&gt;Data loss
-&lt;/h4&gt;&lt;p&gt;占用字节低的数据类型  转换到  占用字节高的数据类型，不会有数据丢失&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;占用字节低的数据类型  转换到  占用字节高的数据类型，不会有数据丢失&lt;/p&gt;
 &lt;p&gt;占用字节高的数据类型  转换到  占用字节低的数据类型，就会有数据丢失&lt;/p&gt;
 &lt;h3 id=&#34;auto&#34;&gt;Auto
-&lt;/h3&gt;&lt;p&gt;auto( since C++11 )
+&lt;/h3&gt;
+&lt;p&gt;auto( since C++11 )
 &lt;code&gt;auto is placeholder type specifier&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -7113,11 +7323,14 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;branching-and-looping-statements&#34;&gt;Branching-and-Looping-Statements
-&lt;/h2&gt;&lt;p&gt;循环和分支结构&lt;/p&gt;
+&lt;/h2&gt;
+&lt;p&gt;循环和分支结构&lt;/p&gt;
 &lt;h4 id=&#34;if-else&#34;&gt;if else
-&lt;/h4&gt;&lt;p&gt;如果没有花括号去约束，&lt;code&gt;else&lt;/code&gt;会与最近的&lt;code&gt;if&lt;/code&gt;配对&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;如果没有花括号去约束，&lt;code&gt;else&lt;/code&gt;会与最近的&lt;code&gt;if&lt;/code&gt;配对&lt;/p&gt;
 &lt;h4 id=&#34;三目运算符&#34;&gt;三目运算符
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -7130,7 +7343,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;logical-expressions&#34;&gt;Logical Expressions
-&lt;/h4&gt;&lt;p&gt;&lt;code&gt;!&lt;/code&gt;&amp;gt;&lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;&amp;gt;&lt;code&gt;||&lt;/code&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;!&lt;/code&gt;&amp;gt;&lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;&amp;gt;&lt;code&gt;||&lt;/code&gt;
 如果逻辑运算两边不是布尔，则会隐式转换为布尔&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -7156,7 +7370,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;while-loop&#34;&gt;while loop
-&lt;/h4&gt;&lt;p&gt;如果条件为&lt;code&gt;true&lt;/code&gt;，就会执行循环&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;如果条件为&lt;code&gt;true&lt;/code&gt;，就会执行循环&lt;/p&gt;
 &lt;p&gt;循环执行中间可以用&lt;code&gt;break&lt;/code&gt;打断循环，或者用&lt;code&gt;continue&lt;/code&gt;跳过当前循环&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -7192,9 +7407,11 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;do-while-loop&#34;&gt;do-while loop
-&lt;/h4&gt;&lt;p&gt;先执行一次循环，再判断条件&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;先执行一次循环，再判断条件&lt;/p&gt;
 &lt;h4 id=&#34;for-loop&#34;&gt;for loop
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -7206,7 +7423,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;初始化表达式，条件表达式，迭代表达式&lt;/p&gt;
 &lt;h4 id=&#34;endless-loop&#34;&gt;endless-loop
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -7227,7 +7445,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;goto-and-switch-statement&#34;&gt;goto-and-switch Statement
-&lt;/h4&gt;&lt;p&gt;&lt;code&gt;case&lt;/code&gt;相当于&lt;code&gt;goto&lt;/code&gt;的&lt;code&gt;label&lt;/code&gt;&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;case&lt;/code&gt;相当于&lt;code&gt;goto&lt;/code&gt;的&lt;code&gt;label&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7251,8 +7470,10 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;data-structures&#34;&gt;Data-Structures
-&lt;/h2&gt;&lt;h3 id=&#34;array&#34;&gt;Array
-&lt;/h3&gt;&lt;p&gt;在&lt;code&gt;C&lt;/code&gt;和&lt;code&gt;C++&lt;/code&gt;中，数组就是一块连续的内存
+&lt;/h2&gt;
+&lt;h3 id=&#34;array&#34;&gt;Array
+&lt;/h3&gt;
+&lt;p&gt;在&lt;code&gt;C&lt;/code&gt;和&lt;code&gt;C++&lt;/code&gt;中，数组就是一块连续的内存
 数组的名字指向数组的首地址&lt;/p&gt;
 &lt;p&gt;初始化&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -7276,7 +7497,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;但如果超出应用程序的内存边界时，会被操作系统杀死&lt;/p&gt;
 &lt;h4 id=&#34;变长数组&#34;&gt;变长数组
-&lt;/h4&gt;&lt;p&gt;其长度由变量决定，在运行时决定而非编译时决定&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;其长度由变量决定，在运行时决定而非编译时决定&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7296,7 +7518,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;array-of-unkown-size&#34;&gt;Array of unkown size
-&lt;/h4&gt;&lt;p&gt;未知长度的数组&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;未知长度的数组&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7314,7 +7537,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;二维数组&#34;&gt;二维数组
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -7327,10 +7551,13 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;const-arrays&#34;&gt;const-Arrays
-&lt;/h4&gt;&lt;p&gt;&lt;code&gt;const&lt;/code&gt;修饰的数组不允许被修改&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;const&lt;/code&gt;修饰的数组不允许被修改&lt;/p&gt;
 &lt;h3 id=&#34;strings&#34;&gt;Strings
-&lt;/h3&gt;&lt;h4 id=&#34;array-style-strings&#34;&gt;Array-style strings
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h3&gt;
+&lt;h4 id=&#34;array-style-strings&#34;&gt;Array-style strings
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -7354,7 +7581,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;code&gt;strlen(Man)==3&lt;/code&gt;，因为有&lt;code&gt;\0&lt;/code&gt;限制&lt;/p&gt;
 &lt;h4 id=&#34;string-class&#34;&gt;string class
-&lt;/h4&gt;&lt;p&gt;同样没有越界检查&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;同样没有越界检查&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7366,8 +7594,10 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;structunionenum&#34;&gt;Struct&amp;amp;Union&amp;amp;Enum
-&lt;/h3&gt;&lt;h4 id=&#34;struct&#34;&gt;Struct
-&lt;/h4&gt;&lt;p&gt;注意有内存对齐&lt;/p&gt;
+&lt;/h3&gt;
+&lt;h4 id=&#34;struct&#34;&gt;Struct
+&lt;/h4&gt;
+&lt;p&gt;注意有内存对齐&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7393,7 +7623,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;union&#34;&gt;Union
-&lt;/h4&gt;&lt;p&gt;&lt;code&gt;Union&lt;/code&gt;所有成员共享一个内存，以最大的成员变量为准
+&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;Union&lt;/code&gt;所有成员共享一个内存，以最大的成员变量为准
 相当于同一个数据多个名字&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -7422,7 +7653,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 	
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;enum&#34;&gt;Enum
-&lt;/h4&gt;&lt;p&gt;枚举类型&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;枚举类型&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7438,7 +7670,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;typedef&#34;&gt;typedef
-&lt;/h3&gt;&lt;p&gt;用于创建别名&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;用于创建别名&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7448,8 +7681,10 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;memory-and-pointer&#34;&gt;Memory and Pointer
-&lt;/h2&gt;&lt;h3 id=&#34;pointers&#34;&gt;Pointers
-&lt;/h3&gt;&lt;p&gt;指针变量存储的是一个地址
+&lt;/h2&gt;
+&lt;h3 id=&#34;pointers&#34;&gt;Pointers
+&lt;/h3&gt;
+&lt;p&gt;指针变量存储的是一个地址
 &lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E6%8C%87%E9%92%88.png&#34;
 	width=&#34;789&#34;
 	height=&#34;479&#34;
@@ -7474,7 +7709,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;pointers-of-pointers&#34;&gt;Pointers of Pointers
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -7487,7 +7723,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;const-pointers&#34;&gt;const pointers
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
@@ -7520,7 +7757,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;换行转义符&#34;&gt;换行转义符
-&lt;/h3&gt;&lt;p&gt;虽然实际上是3行，但是在语义上是1行&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;虽然实际上是3行，但是在语义上是1行&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7534,7 +7772,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;allocate-memoryc-style&#34;&gt;Allocate-memory:C-style
-&lt;/h3&gt;&lt;p&gt;只是示意图，在不同系统下会有区别
+&lt;/h3&gt;
+&lt;p&gt;只是示意图，在不同系统下会有区别
 &lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-program-memory.png&#34;
 	width=&#34;254&#34;
 	height=&#34;570&#34;
@@ -7566,7 +7805,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;内存泄漏问题&#34;&gt;内存泄漏问题
-&lt;/h4&gt;&lt;p&gt;第一次申请的内存无法进行管理了，无法回收&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;第一次申请的内存无法进行管理了，无法回收&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7599,8 +7839,10 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;allocate-memoryc-style-1&#34;&gt;Allocate-memory:C++-style
-&lt;/h3&gt;&lt;h4 id=&#34;operator-new-and-new&#34;&gt;operator &lt;code&gt;new&lt;/code&gt; and &lt;code&gt;new[]&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;申请内存，比&lt;code&gt;malloc&lt;/code&gt;功能更丰富
+&lt;/h3&gt;
+&lt;h4 id=&#34;operator-new-and-new&#34;&gt;operator &lt;code&gt;new&lt;/code&gt; and &lt;code&gt;new[]&lt;/code&gt;
+&lt;/h4&gt;
+&lt;p&gt;申请内存，比&lt;code&gt;malloc&lt;/code&gt;功能更丰富
 &lt;code&gt;new&lt;/code&gt;是一个操作符&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -7629,7 +7871,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;operator-delete-and-delete&#34;&gt;operator &lt;code&gt;delete&lt;/code&gt; and &lt;code&gt;delete[]&lt;/code&gt;
-&lt;/h4&gt;&lt;p&gt;对于数组和普通变量而言，没有区别&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;对于数组和普通变量而言，没有区别&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7672,13 +7915,17 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;basics-of-functions&#34;&gt;Basics of Functions
-&lt;/h2&gt;&lt;h3 id=&#34;functions&#34;&gt;Functions
-&lt;/h3&gt;&lt;p&gt;函数是为了让编程更加模块化而设计的&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;functions&#34;&gt;Functions
+&lt;/h3&gt;
+&lt;p&gt;函数是为了让编程更加模块化而设计的&lt;/p&gt;
 &lt;h3 id=&#34;parameters&#34;&gt;Parameters
-&lt;/h3&gt;&lt;p&gt;传参的两种方式，值传递和引用传递
+&lt;/h3&gt;
+&lt;p&gt;传参的两种方式，值传递和引用传递
 值传递的值可以认为是一个函数内的局部变量&lt;/p&gt;
 &lt;h4 id=&#34;值传递&#34;&gt;值传递
-&lt;/h4&gt;&lt;p&gt;值传递的值可以认为是一个函数内的局部变量&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;值传递的值可以认为是一个函数内的局部变量&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -7707,7 +7954,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;code&gt;x&lt;/code&gt;是&lt;code&gt;num1&lt;/code&gt;的一份拷贝（会涉及拷贝构造函数）&lt;/p&gt;
 &lt;h4 id=&#34;引用传递-reference&#34;&gt;引用传递-Reference
-&lt;/h4&gt;&lt;p&gt;引用是一个变量的 别名&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;引用是一个变量的 别名&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7741,7 +7989,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;在函数传递一个内存占用巨大的参数时，采用值传递，拷贝的变量会占用大量内存，这个时候可以使用指针或者引用&lt;/strong&gt;&lt;/p&gt;
 &lt;h4 id=&#34;指针与引用的区别&#34;&gt;指针与引用的区别
-&lt;/h4&gt;&lt;p&gt;引用相较于指针更加安全
+&lt;/h4&gt;
+&lt;p&gt;引用相较于指针更加安全
 &lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E6%8C%87%E9%92%88%E4%B8%8E%E5%BC%95%E7%94%A8.png&#34;
 	width=&#34;738&#34;
 	height=&#34;384&#34;
@@ -7755,7 +8004,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 	
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;return-statement&#34;&gt;Return-statement
-&lt;/h3&gt;&lt;p&gt;如果&lt;code&gt;return&lt;/code&gt;一个数据很大，可以采用以下的方式&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;如果&lt;code&gt;return&lt;/code&gt;一个数据很大，可以采用以下的方式&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7773,7 +8023,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;inline-functions&#34;&gt;Inline-functions
-&lt;/h3&gt;&lt;p&gt;内联函数，众所周知，函数的调用是有代价的，需要将一部分数据压入栈中，跳转执行完后再回来出栈&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;内联函数，众所周知，函数的调用是有代价的，需要将一部分数据压入栈中，跳转执行完后再回来出栈&lt;/p&gt;
 &lt;p&gt;如果一个微小的函数且被频繁调用，这个代价就会变得不可忽视，此时可以使用内联函数（空间换时间的典型案例）&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -7791,7 +8042,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;需要注意的是&lt;code&gt;inline&lt;/code&gt;是&lt;strong&gt;建议&lt;/strong&gt;编译器以内联&lt;code&gt;inline&lt;/code&gt;的方式编译这个函数（所以有可能编译器会不听你的建议）&lt;/p&gt;
 &lt;h4 id=&#34;内联函数宏-的区别&#34;&gt;内联函数&amp;amp;宏 的区别
-&lt;/h4&gt;&lt;p&gt;与宏定义是有去别的，宏定义是在预编译之前的文本替换，有较大的安全性问题&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;与宏定义是有去别的，宏定义是在预编译之前的文本替换，有较大的安全性问题&lt;/p&gt;
 &lt;p&gt;注意，宏是在做文本替换，一定要警惕文本替换后的运算符优先级问题&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -7850,8 +8102,10 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;advances-in-functions&#34;&gt;Advances in Functions
-&lt;/h2&gt;&lt;h4 id=&#34;default-arguments&#34;&gt;Default-arguments
-&lt;/h4&gt;&lt;p&gt;默认参数是&lt;code&gt;C++&lt;/code&gt;的特性，&lt;code&gt;C&lt;/code&gt;并不支持&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h4 id=&#34;default-arguments&#34;&gt;Default-arguments
+&lt;/h4&gt;
+&lt;p&gt;默认参数是&lt;code&gt;C++&lt;/code&gt;的特性，&lt;code&gt;C&lt;/code&gt;并不支持&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7865,7 +8119,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;function-overloading&#34;&gt;Function-Overloading
-&lt;/h4&gt;&lt;p&gt;函数重载是只有&lt;code&gt;C++&lt;/code&gt;才支持的特性，&lt;code&gt;C&lt;/code&gt;并不支持
+&lt;/h4&gt;
+&lt;p&gt;函数重载是只有&lt;code&gt;C++&lt;/code&gt;才支持的特性，&lt;code&gt;C&lt;/code&gt;并不支持
 与&lt;code&gt;C++&lt;/code&gt;和&lt;code&gt;C&lt;/code&gt;函数名符号修饰有关&lt;/p&gt;
 &lt;p&gt;需要注意的是，&lt;code&gt;C++&lt;/code&gt;的函数重载只允许将参数重载，而不能重载返回值&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -7882,7 +8137,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;同时要注意，函数调用不要出现歧义，一旦出现歧义，编译器会停止工作，无法编译通过&lt;/p&gt;
 &lt;h4 id=&#34;function-templates&#34;&gt;Function-templates
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;函数模板生成的函数是模板函数&lt;/strong&gt;，模板函数是函数模板被实例化以后生成的&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;函数模板生成的函数是模板函数&lt;/strong&gt;，模板函数是函数模板被实例化以后生成的&lt;/p&gt;
 &lt;p&gt;此处的&lt;code&gt;T&lt;/code&gt;是定义的一个泛型&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -7972,8 +8228,10 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;function-pointers-and-references&#34;&gt;Function-Pointers and References
-&lt;/h4&gt;&lt;h5 id=&#34;function-pointers&#34;&gt;Function-Pointers
-&lt;/h5&gt;&lt;p&gt;函数指针是一个指针，指向函数，也就是指向执行指令的地址
+&lt;/h4&gt;
+&lt;h5 id=&#34;function-pointers&#34;&gt;Function-Pointers
+&lt;/h5&gt;
+&lt;p&gt;函数指针是一个指针，指向函数，也就是指向执行指令的地址
 指针函数的类型需要与其指向的函数类型完全匹配&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -8003,7 +8261,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;常见的应用案例是将函数作为一个参数传递到另外一个函数里面，作为回调函数&lt;/p&gt;
 &lt;h5 id=&#34;function-references&#34;&gt;Function-references
-&lt;/h5&gt;&lt;p&gt;函数引用，需要注意函数引用在初始化的时候需要定死&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;函数引用，需要注意函数引用在初始化的时候需要定死&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -8017,7 +8276,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;recursive-functions&#34;&gt;Recursive-Functions
-&lt;/h4&gt;&lt;p&gt;递归函数，自己调用自己，需要有递归终止条件，否则一直递归会爆栈&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;递归函数，自己调用自己，需要有递归终止条件，否则一直递归会爆栈&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -8042,11 +8302,14 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;函数的每一次调用需要压栈进行数据保存，无穷递归就会导致爆栈&lt;/p&gt;
 &lt;h2 id=&#34;speedup-your-program&#34;&gt;Speedup-Your-Program
-&lt;/h2&gt;&lt;h3 id=&#34;c-and-cpp-with-arm&#34;&gt;C-and-Cpp-with-arm
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;C&lt;/code&gt;和&lt;code&gt;C++&lt;/code&gt;语言是由明确的语言规范的，是具有平台无关性的，能通过编译器编译成平台相关的可执行程序&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;c-and-cpp-with-arm&#34;&gt;C-and-Cpp-with-arm
+&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;C&lt;/code&gt;和&lt;code&gt;C++&lt;/code&gt;语言是由明确的语言规范的，是具有平台无关性的，能通过编译器编译成平台相关的可执行程序&lt;/p&gt;
 &lt;p&gt;机器人或者说是智能设备领域全是&lt;code&gt;arm&lt;/code&gt;的天下&lt;/p&gt;
 &lt;h3 id=&#34;speedup-your-program-1&#34;&gt;Speedup-Your-Program
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;Simple is Beautiful&lt;/code&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;Simple is Beautiful&lt;/code&gt;
 代码优化常用策略上，优化代码一定要考虑到内存&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;大量的内存读写带来的时间浪费&lt;/li&gt;
@@ -8087,8 +8350,10 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 	
 &gt;&lt;/p&gt;
 &lt;h2 id=&#34;basics-of-classes&#34;&gt;Basics of Classes
-&lt;/h2&gt;&lt;h3 id=&#34;classes-and-objects&#34;&gt;classes-and-objects
-&lt;/h3&gt;&lt;p&gt;类的对象去操作成员会更加的安全
+&lt;/h2&gt;
+&lt;h3 id=&#34;classes-and-objects&#34;&gt;classes-and-objects
+&lt;/h3&gt;
+&lt;p&gt;类的对象去操作成员会更加的安全
 类的成员函数在类内声明时，默认是&lt;code&gt;inline&lt;/code&gt;函数
 所以简单的函数在类内实现，复杂函数在类外实现&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -8142,10 +8407,12 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;constructors-and-destructors&#34;&gt;Constructors-and-Destructors
-&lt;/h3&gt;&lt;p&gt;构造函数与析构函数
+&lt;/h3&gt;
+&lt;p&gt;构造函数与析构函数
 构造函数可以有很多个，析构函数只能有一个&lt;/p&gt;
 &lt;h5 id=&#34;构造函数constructors&#34;&gt;构造函数Constructors
-&lt;/h5&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -8160,7 +8427,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;p&gt;定义构造函数需要定义在&lt;code&gt;public&lt;/code&gt;里面&lt;/p&gt;
 &lt;p&gt;每个&lt;code&gt;new&lt;/code&gt;出来的对象，都会调用构造函数进行初始化&lt;/p&gt;
 &lt;h5 id=&#34;析构函数destructors&#34;&gt;析构函数Destructors
-&lt;/h5&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h5&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -8195,7 +8463,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;this-pointer&#34;&gt;this-Pointer
-&lt;/h3&gt;&lt;p&gt;对于类而言，函数的指令只有一份
+&lt;/h3&gt;
+&lt;p&gt;对于类而言，函数的指令只有一份
 &lt;code&gt;All methods in a function have a this-pointer&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -8226,8 +8495,10 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;const-and-static-members&#34;&gt;const-and-static-Members
-&lt;/h3&gt;&lt;h5 id=&#34;const-members&#34;&gt;const Members
-&lt;/h5&gt;&lt;p&gt;常量成员变量不能被修改，常量成员函数不能去修改成员变量&lt;/p&gt;
+&lt;/h3&gt;
+&lt;h5 id=&#34;const-members&#34;&gt;const Members
+&lt;/h5&gt;
+&lt;p&gt;常量成员变量不能被修改，常量成员函数不能去修改成员变量&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -8253,7 +8524,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h5 id=&#34;static-members&#34;&gt;static Members
-&lt;/h5&gt;&lt;p&gt;静态成员变量和静态成员函数并不绑定在某一个实例上
+&lt;/h5&gt;
+&lt;p&gt;静态成员变量和静态成员函数并不绑定在某一个实例上
 类的静态变量属于类，不属于实例化的对象
 静态函数不能访问实例成员，也不能修改非静态数据&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -8291,8 +8563,10 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;advances-in-classes&#34;&gt;Advances in Classes
-&lt;/h2&gt;&lt;h3 id=&#34;operator-overloading&#34;&gt;Operator-overloading
-&lt;/h3&gt;&lt;p&gt;运算符重载&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;operator-overloading&#34;&gt;Operator-overloading
+&lt;/h3&gt;
+&lt;p&gt;运算符重载&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -8369,7 +8643,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;friend-functions&#34;&gt;Friend-Functions
-&lt;/h3&gt;&lt;p&gt;友元函数的声明在类内，能访问类的私有变量和私有函数，但是它不是类的成员，是一个特殊的函数&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;友元函数的声明在类内，能访问类的私有变量和私有函数，但是它不是类的成员，是一个特殊的函数&lt;/p&gt;
 &lt;p&gt;友元函数的定义可以在类内紧跟声明，也可以在类外&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Operator &amp;lt;&amp;lt; &lt;/code&gt;也能被重载，一般采用友元函数形式重载&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -8400,7 +8675,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;输入输出流的返回一定是输入输出流的引用，为了能够链式调用&lt;/p&gt;
 &lt;h3 id=&#34;user-defined-type-conversion&#34;&gt;user-defined-type-conversion
-&lt;/h3&gt;&lt;p&gt;类转基本数据类型，运算符重载&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;类转基本数据类型，运算符重载&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -8463,7 +8739,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;increment&#34;&gt;Increment
-&lt;/h3&gt;&lt;p&gt;有前置(++i)和后置(i++)&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;有前置(++i)和后置(i++)&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -8499,9 +8776,12 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;dynamic-memory-management-in-classes&#34;&gt;Dynamic-Memory-Management-in-Classes
-&lt;/h2&gt;&lt;h3 id=&#34;some-default-operations&#34;&gt;Some-default-operations
-&lt;/h3&gt;&lt;h4 id=&#34;default-constructors&#34;&gt;Default-Constructors
-&lt;/h4&gt;&lt;p&gt;默认构造函数&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;some-default-operations&#34;&gt;Some-default-operations
+&lt;/h3&gt;
+&lt;h4 id=&#34;default-constructors&#34;&gt;Default-Constructors
+&lt;/h4&gt;
+&lt;p&gt;默认构造函数&lt;/p&gt;
 &lt;p&gt;如果一个类没有任何构造函数，编译器就会生成一个空的构造函数，如果给类定义了构造函数，编译器就不会生成默认构造函数&lt;/p&gt;
 &lt;p&gt;需要避免歧义&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -8527,9 +8807,11 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;implicitly-defined-destructor&#34;&gt;Implicitly-defined-Destructor
-&lt;/h4&gt;&lt;p&gt;隐式定义的析构函数，没有显式定义析构函数，编译器会去定义一个空的析构函数&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;隐式定义的析构函数，没有显式定义析构函数，编译器会去定义一个空的析构函数&lt;/p&gt;
 &lt;h4 id=&#34;default-copy-constructors&#34;&gt;Default-Copy-Constructors
-&lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://mp.weixin.qq.com/s/uk12AxukYzxpROlw_bqgzA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/h4&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://mp.weixin.qq.com/s/uk12AxukYzxpROlw_bqgzA&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;大疆C++一面：C++什么时候生成默认拷贝构造函数？&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;拷贝构造函数的参数必须是&lt;code&gt;const&lt;/code&gt;引用（避免无限递归调用）
 拷贝构造函数定义如下&lt;/p&gt;
@@ -8564,7 +8846,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;default-copy-assignment&#34;&gt;Default-Copy-Assignment
-&lt;/h4&gt;&lt;p&gt;&lt;code&gt;Assignment operators:=,+=,-=&lt;/code&gt;&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;Assignment operators:=,+=,-=&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -8598,7 +8881,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;copy-assignment&#34;&gt;Copy-Assignment
-&lt;/h3&gt;&lt;p&gt;注意赋值运算符在内存管理上的细节&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;注意赋值运算符在内存管理上的细节&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;避免自赋值&lt;/li&gt;
 &lt;li&gt;赋值前先回收，避免内存泄漏&lt;/li&gt;
@@ -8690,17 +8974,22 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;an-example-with-dynamic-memory&#34;&gt;An-Example-with-Dynamic-Memory
-&lt;/h3&gt;&lt;p&gt;注意深拷贝与浅拷贝的问题，导致重复释放同一块内存
+&lt;/h3&gt;
+&lt;p&gt;注意深拷贝与浅拷贝的问题，导致重复释放同一块内存
 这种错误最容易由 默认拷贝构造函数 和 默认赋值运算符重载 导致&lt;/p&gt;
 &lt;h3 id=&#34;hard-copy&#34;&gt;Hard-Copy
-&lt;/h3&gt;&lt;p&gt;每次创建和赋值的时候都去重新申请内存
+&lt;/h3&gt;
+&lt;p&gt;每次创建和赋值的时候都去重新申请内存
 缺点在于如果每次申请的内存较大会很耗时&lt;/p&gt;
 &lt;h3 id=&#34;soft-copy&#34;&gt;Soft-Copy
-&lt;/h3&gt;&lt;p&gt;如果是赋值操作，或者 拷贝构造，可以让两个变量共享同一块内存，同时用过一个变量去记录该块内存的引用数量&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;如果是赋值操作，或者 拷贝构造，可以让两个变量共享同一块内存，同时用过一个变量去记录该块内存的引用数量&lt;/p&gt;
 &lt;h3 id=&#34;smart-pointers&#34;&gt;Smart-Pointers
-&lt;/h3&gt;&lt;p&gt;使用智能指针的话，可以只管申请，不管释放，系统会自动帮你释放，释放&lt;code&gt;delete&lt;/code&gt;会调用对应的析构函数&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;使用智能指针的话，可以只管申请，不管释放，系统会自动帮你释放，释放&lt;code&gt;delete&lt;/code&gt;会调用对应的析构函数&lt;/p&gt;
 &lt;h4 id=&#34;stdshared_ptr&#34;&gt;std::shared_ptr
-&lt;/h4&gt;&lt;p&gt;定义&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;定义&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -8715,7 +9004,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;多个指针指向的是同一个对象，共享&lt;/p&gt;
 &lt;h4 id=&#34;stdunique_ptr&#34;&gt;std::unique_ptr
-&lt;/h4&gt;&lt;p&gt;指针指向一个对象后，就不允许分享&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;指针指向一个对象后，就不允许分享&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -8733,7 +9023,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;how-to-understand-smart-pointers&#34;&gt;How-to-Understand-Smart-Pointers
-&lt;/h4&gt;&lt;p&gt;智能指针的定义，是指针的同时还是一个对象&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;智能指针的定义，是指针的同时还是一个对象&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -8747,8 +9038,10 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;class-inheritance&#34;&gt;Class-Inheritance
-&lt;/h2&gt;&lt;h3 id=&#34;improve-your-source-code&#34;&gt;Improve-your-source-code
-&lt;/h3&gt;&lt;ol&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;improve-your-source-code&#34;&gt;Improve-your-source-code
+&lt;/h3&gt;
+&lt;ol&gt;
 &lt;li&gt;在赋值操作上，很多时候一个一个赋值不如&lt;code&gt;memcopy&lt;/code&gt;直接将内存的内容复制过去效率高&lt;/li&gt;
 &lt;li&gt;二维数组最好用一维数组去表达，因为这样不用多次去申请一维的内存，多次申请的一维数据不保证连续，会降低读取速率&lt;/li&gt;
 &lt;li&gt;一个函数，一定要去检查函数的参数是否有效&lt;/li&gt;
@@ -8757,12 +9050,15 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;li&gt;函数的输入参数，不需要修改的加&lt;code&gt;const&lt;/code&gt;关键字&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;derived-class&#34;&gt;Derived-class
-&lt;/h3&gt;&lt;p&gt;Base class(parent)，Derived class(child)
+&lt;/h3&gt;
+&lt;p&gt;Base class(parent)，Derived class(child)
 一个是基类（父类），一个是派生类（子类）&lt;/p&gt;
 &lt;p&gt;可以多层继承和多个继承&lt;/p&gt;
 &lt;h4 id=&#34;构造函数与析构函数在子类中的执行&#34;&gt;构造函数与析构函数在子类中的执行
-&lt;/h4&gt;&lt;h5 id=&#34;构造函数&#34;&gt;构造函数
-&lt;/h5&gt;&lt;p&gt;子类的构造函数执行的第一刻，父类的构造函数先执行&lt;/p&gt;
+&lt;/h4&gt;
+&lt;h5 id=&#34;构造函数&#34;&gt;构造函数
+&lt;/h5&gt;
+&lt;p&gt;子类的构造函数执行的第一刻，父类的构造函数先执行&lt;/p&gt;
 &lt;p&gt;下面子类的构造函数执行顺序：Base的构造函数-&amp;gt;MAN的赋值-&amp;gt;最后是子类构造函数内部&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -8785,7 +9081,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h5 id=&#34;析构函数&#34;&gt;析构函数
-&lt;/h5&gt;&lt;p&gt;子类的析构函数会先执行子类的析构函数，再执行父类的构造函数&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;子类的析构函数会先执行子类的析构函数，再执行父类的构造函数&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -8813,7 +9110,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;acess-control&#34;&gt;Acess-Control
-&lt;/h3&gt;&lt;p&gt;访问控制
+&lt;/h3&gt;
+&lt;p&gt;访问控制
 &lt;code&gt;private&lt;/code&gt;只能类内访问，&lt;code&gt;protected&lt;/code&gt;可以在类内和子类里面访问&lt;/p&gt;
 &lt;p&gt;关于继承方式：有三种继承方式，&lt;code&gt;public&lt;/code&gt;，&lt;code&gt;protected&lt;/code&gt;，&lt;code&gt;private&lt;/code&gt;
 &lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;#43;&amp;#43;%E7%BB%A7%E6%89%BF%E4%B8%8E%E6%B4%BE%E7%94%9F-%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8Fsummary.png&#34;
@@ -8829,7 +9127,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 	
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;virtual-functions&#34;&gt;Virtual-Functions
-&lt;/h3&gt;&lt;p&gt;虚函数&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;虚函数&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -8934,7 +9233,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;&lt;p&gt;来告诉编译器这是一个纯虚函数，拥有纯虚函数的类就不能创建对象&lt;/p&gt;
 &lt;p&gt;另外，析构函数也是一个虚函数&lt;/p&gt;
 &lt;h3 id=&#34;inheritance-and-dynamic-memory-allocation&#34;&gt;Inheritance-and-dynamic-memory-allocation
-&lt;/h3&gt;&lt;p&gt;如果一个子类只有基类有动态内存申请，就不用考虑子类，只需要解决基类的问题，自定义写 构造函数，赋值运算符重载，拷贝构造函数&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;如果一个子类只有基类有动态内存申请，就不用考虑子类，只需要解决基类的问题，自定义写 构造函数，赋值运算符重载，拷贝构造函数&lt;/p&gt;
 &lt;p&gt;如果子类有动态内存申请，解决方案一样，重新把 构造函数，拷贝构造函数，赋值运算符重载 定义即可&lt;/p&gt;
 &lt;p&gt;下面用伪代码展示&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -8988,9 +9288,11 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;class-templates-and-std-library&#34;&gt;Class-Templates-and-Std-Library
-&lt;/h2&gt;&lt;p&gt;模板十分实用，前面有函数模板，此处是类模板&lt;/p&gt;
+&lt;/h2&gt;
+&lt;p&gt;模板十分实用，前面有函数模板，此处是类模板&lt;/p&gt;
 &lt;h3 id=&#34;函数模板回顾&#34;&gt;函数模板回顾
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;函数模板生成的函数是模板函数&lt;/strong&gt;，模板函数是函数模板被实例化以后生成的&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;函数模板生成的函数是模板函数&lt;/strong&gt;，模板函数是函数模板被实例化以后生成的&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -9017,7 +9319,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;类模板和模板类也是类似的&lt;/p&gt;
 &lt;h3 id=&#34;class-template&#34;&gt;class-template
-&lt;/h3&gt;&lt;p&gt;类模板的定义&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;类模板的定义&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -9103,7 +9406,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;模板的参数&#34;&gt;模板的参数
-&lt;/h3&gt;&lt;p&gt;declare a template&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;declare a template&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -9119,7 +9423,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;li&gt;&lt;code&gt;non-type template parameters(定值，float,int类型的定值，例如1.0f，值参数)&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;template-non-type-parameters&#34;&gt;Template-Non-Type-Parameters
-&lt;/h3&gt;&lt;p&gt;模板的非类型参数
+&lt;/h3&gt;
+&lt;p&gt;模板的非类型参数
 此处相当于在编译时就要确定矩阵有多少行多少列，而不是动态申请
 因为不需要动态申请，也就没有必要析构的时候删除&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -9179,7 +9484,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;class-template-specialization&#34;&gt;Class-template-specialization
-&lt;/h3&gt;&lt;p&gt;类模板的特化&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;类模板的特化&lt;/p&gt;
 &lt;p&gt;一个&lt;code&gt;MyVector&lt;/code&gt;的类模板&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -9282,7 +9588,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;std-classes&#34;&gt;std-classes
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;std::string&lt;/code&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;std::string&lt;/code&gt;
 &lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-std%E5%B8%B8%E7%94%A8%E7%9A%84%E6%A8%A1%E6%9D%BF%E7%B1%BB.png&#34;
 	width=&#34;805&#34;
 	height=&#34;440&#34;
@@ -9334,8 +9641,10 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 	
 &gt;&lt;/p&gt;
 &lt;h2 id=&#34;error-handling&#34;&gt;Error-Handling
-&lt;/h2&gt;&lt;h3 id=&#34;standard-output-stream-and-standard-error-stream&#34;&gt;Standard-Output-Stream-and-Standard-Error-Stream
-&lt;/h3&gt;&lt;p&gt;标准输出流与标准错误流
+&lt;/h2&gt;
+&lt;h3 id=&#34;standard-output-stream-and-standard-error-stream&#34;&gt;Standard-Output-Stream-and-Standard-Error-Stream
+&lt;/h3&gt;
+&lt;p&gt;标准输出流与标准错误流
 &lt;code&gt;C&amp;amp;C++&lt;/code&gt;的输出流与错误流
 &lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-C&amp;amp;C&amp;#43;&amp;#43;%E8%BE%93%E5%87%BA%E6%B5%81%E4%B8%8E%E9%94%99%E8%AF%AF%E6%B5%81.png&#34;
 	width=&#34;673&#34;
@@ -9351,7 +9660,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &gt;
 标准输出流的内容可以通过管道输出到其他文件，而标准错误流不会&lt;/p&gt;
 &lt;h3 id=&#34;重定向&#34;&gt;重定向
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81.png&#34;
+&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81.png&#34;
 	width=&#34;490&#34;
 	height=&#34;242&#34;
 	srcset=&#34;https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81_hu1019439950282887564.png 480w, https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;amp;C&amp;#43;&amp;#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81_hu3431468540221987376.png 1024w&#34;
@@ -9385,9 +9695,11 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;由此可以看出关于日志的重要性，以及日志是什么&lt;/p&gt;
 &lt;h3 id=&#34;assert&#34;&gt;assert
-&lt;/h3&gt;&lt;p&gt;在编译过程中，方便&lt;code&gt;debug&lt;/code&gt;的工具&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;在编译过程中，方便&lt;code&gt;debug&lt;/code&gt;的工具&lt;/p&gt;
 &lt;h3 id=&#34;exceptions&#34;&gt;Exceptions
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;catch&lt;/code&gt;，&lt;code&gt;try&lt;/code&gt;与&lt;code&gt;throw&lt;/code&gt;&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;catch&lt;/code&gt;，&lt;code&gt;try&lt;/code&gt;与&lt;code&gt;throw&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -9441,8 +9753,10 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;code&gt;throw&lt;/code&gt;可以扔一个类，&lt;code&gt;std&lt;/code&gt;标准可有提供&lt;code&gt;std::exception&lt;/code&gt;的类&lt;/p&gt;
 &lt;h2 id=&#34;nested-classes-and-rtti&#34;&gt;Nested-Classes-and-RTTI
-&lt;/h2&gt;&lt;h3 id=&#34;friend-classes&#34;&gt;Friend-Classes
-&lt;/h3&gt;&lt;p&gt;复习一下友元函数，注意有顺序问题&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;friend-classes&#34;&gt;Friend-Classes
+&lt;/h3&gt;
+&lt;p&gt;复习一下友元函数，注意有顺序问题&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -9495,7 +9809,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;friend-member-functions&#34;&gt;Friend-Member-Functions
-&lt;/h3&gt;&lt;p&gt;可以用来实现最小授权，另一个类的某一个成员函数可以访问&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;可以用来实现最小授权，另一个类的某一个成员函数可以访问&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -9530,7 +9845,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;注意顺序问题以及先声明再实现的处理方法&lt;/p&gt;
 &lt;h3 id=&#34;nested-types&#34;&gt;Nested-Types
-&lt;/h3&gt;&lt;p&gt;内部类型，此处的&lt;code&gt;enum DataTYpe&lt;/code&gt;即是内部类型，作用是这个枚举类型仅&lt;code&gt;Mat&lt;/code&gt;类能用&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;内部类型，此处的&lt;code&gt;enum DataTYpe&lt;/code&gt;即是内部类型，作用是这个枚举类型仅&lt;code&gt;Mat&lt;/code&gt;类能用&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -9568,7 +9884,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;nested-classes&#34;&gt;Nested-Classes
-&lt;/h3&gt;&lt;p&gt;与内部类型的类似，不用过多赘述，著需要注意在使用时加上前缀&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;与内部类型的类似，不用过多赘述，著需要注意在使用时加上前缀&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -9578,7 +9895,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;runtime-type-identificationrtti&#34;&gt;Runtime-Type-Identification(RTTI)
-&lt;/h3&gt;&lt;p&gt;运行时的类型鉴别&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;运行时的类型鉴别&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -9666,7 +9984,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h4 id=&#34;more-type-cast-operations&#34;&gt;More-Type-Cast-Operations
-&lt;/h4&gt;&lt;p&gt;&lt;code&gt;const_cast&lt;/code&gt;:Type cast for const or volatile value .&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;const_cast&lt;/code&gt;:Type cast for const or volatile value .&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;static_cast&lt;/code&gt;:如果两类型能够隐式转换，则发生转换，否则不能转&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -9694,17 +10013,21 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;code-optimization&#34;&gt;Code-Optimization
-&lt;/h2&gt;&lt;h3 id=&#34;register-and-cache&#34;&gt;Register-and-Cache
-&lt;/h3&gt;&lt;p&gt;三级，&lt;code&gt;Register&lt;/code&gt;,&lt;code&gt;Cache&lt;/code&gt;,&lt;code&gt;Memory&lt;/code&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;register-and-cache&#34;&gt;Register-and-Cache
+&lt;/h3&gt;
+&lt;p&gt;三级，&lt;code&gt;Register&lt;/code&gt;,&lt;code&gt;Cache&lt;/code&gt;,&lt;code&gt;Memory&lt;/code&gt;
 一般通过&lt;code&gt;Latency延迟&lt;/code&gt;,&lt;code&gt;Bandwidth带宽&lt;/code&gt;这两个指标来衡量&lt;/p&gt;
 &lt;p&gt;在访问内存中连续数据的情况下，访问速度会更快
 现代多核的&lt;code&gt;CPU&lt;/code&gt;在缓冲区的设置上会更复杂，会分为专门存放指令的区域和专门存放数据的区域，同时多核会有共享的缓存区&lt;/p&gt;
 &lt;h3 id=&#34;locality-of-reference&#34;&gt;Locality-of-Reference
-&lt;/h3&gt;&lt;p&gt;局部性主要有时间局部性和空间局部性，局部性是观察程序的运行得出的
+&lt;/h3&gt;
+&lt;p&gt;局部性主要有时间局部性和空间局部性，局部性是观察程序的运行得出的
 时间局部性是指同一块内存在一两个指令周期后很有可能会被再次访问
 空间局部性是指被访问的一块内存，其周围也会很有可能被访问&lt;/p&gt;
 &lt;h3 id=&#34;计算cpu优化效率&#34;&gt;计算&lt;code&gt;CPU&lt;/code&gt;优化效率
-&lt;/h3&gt;&lt;p&gt;&lt;code&gt;Peak_FLOPS=2*Frequency*cores*每周期发送的指令*(指令宽度/数据宽度)&lt;/code&gt;&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;Peak_FLOPS=2*Frequency*cores*每周期发送的指令*(指令宽度/数据宽度)&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;3G&lt;code&gt;Hz&lt;/code&gt;，&lt;code&gt;24&lt;/code&gt;核，每周期发送2指令，指令宽度512比特
 假设算的是&lt;code&gt;double&lt;/code&gt;（64比特）&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;FLOPS=2*3G*24*2*(512/64)&lt;/code&gt;&lt;/p&gt;
@@ -9714,8 +10037,10 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;p&gt;衡量优化效率
 &lt;code&gt;Efficiency=Eddected_Performance/Peak_Performance&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;个人的补充与总结&#34;&gt;个人的补充与总结
-&lt;/h2&gt;&lt;h3 id=&#34;关于include&#34;&gt;关于Include
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h2&gt;
+&lt;h3 id=&#34;关于include&#34;&gt;关于Include
+&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
@@ -9726,11 +10051,13 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h3 id=&#34;关于类&#34;&gt;关于类
-&lt;/h3&gt;&lt;ul&gt;
+&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;类内成员函数可在&lt;strong&gt;类内定义（默认内联）&lt;/strong&gt; 或类外定义&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;关于模板&#34;&gt;关于模板
-&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/question/444534843&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/question/444534843&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;c++模板编程应该把实现放在头文件中吗，这样写会不会让头文件变得很难看？ - 知乎&lt;/a&gt;
 借用其中的一个回答&lt;/p&gt;
 &lt;blockquote&gt;
@@ -9781,7 +10108,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 模板（包括特化）的使用者通常会通过头文件获取完整定义，无需关心实现文件的链接细节。将特化放在头文件中，能让代码结构更清晰，减少外部依赖&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;类模板和函数模板的例子&#34;&gt;类模板和函数模板的例子
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -9892,7 +10220,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
         <description>&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/140063999&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;一文轻松理解内存对齐 - 知乎&lt;/a&gt;&lt;/p&gt;
 &lt;h5 id=&#34;结构体struct对齐&#34;&gt; &lt;strong&gt;结构体（struct）对齐&lt;/strong&gt;
-&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;规则 1&lt;/strong&gt;：成员地址 = &lt;code&gt;min(自身对齐值, 有效对齐值)&lt;/code&gt; 的倍数&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;&lt;strong&gt;规则 1&lt;/strong&gt;：成员地址 = &lt;code&gt;min(自身对齐值, 有效对齐值)&lt;/code&gt; 的倍数&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;规则 2&lt;/strong&gt;：结构体总大小 = 最大成员对齐值的整数倍&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;规则 3&lt;/strong&gt;：成员排列顺序影响最终大小&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -9987,7 +10316,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/88255667#:~:text=C/C&amp;#43;&amp;#43;%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B%201%201.%E9%A2%84%E5%A4%84%E7%90%86%20%28Preprocessing%29%20%E9%A2%84%E5%A4%84%E7%90%86%E7%94%A8%E4%BA%8E%E5%B0%86%E6%89%80%E6%9C%89%E7%9A%84#include%20%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BB%A5%E5%8F%8A%E5%AE%8F%E5%AE%9A%E4%B9%89%E6%9B%BF%E6%8D%A2%E6%88%90%E5%85%B6%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%86%85%E5%AE%B9%20%EF%BC%8C%E9%A2%84%E5%A4%84%E7%90%86%E4%B9%8B%E5%90%8E%E5%BE%97%E5%88%B0%E7%9A%84%E4%BB%8D%E7%84%B6%E6%98%AF%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%8C%E4%BD%86%E6%96%87%E4%BB%B6%E4%BD%93%E7%A7%AF%E4%BC%9A%E5%A4%A7%E5%BE%88%E5%A4%9A%E3%80%82%20...,%E6%88%90%E6%9C%80%E7%BB%88%E7%9A%84%20%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%20%28executable%20file%29%E3%80%82%20...%205%205.%E6%95%B0%E6%8D%AE%E5%92%8C%E6%8C%87%E4%BB%A4%20&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;C/C++编译链接 - 知乎 (zhihu.com)&lt;/a&gt;(进阶)&lt;/p&gt;
 &lt;h2 id=&#34;关于编译器与不同系统的文件&#34;&gt;关于编译器与不同系统的文件
-&lt;/h2&gt;&lt;p&gt;一般编译器可以分为前端和后端，前端主要负责 语义分析，后端主要负责 代码生成&lt;/p&gt;
+&lt;/h2&gt;
+&lt;p&gt;一般编译器可以分为前端和后端，前端主要负责 语义分析，后端主要负责 代码生成&lt;/p&gt;
 &lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
@@ -10036,7 +10366,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;p&gt;&lt;code&gt;LLVM&lt;/code&gt;同时有编译器和链接器（例如：&lt;code&gt;armclang&lt;/code&gt;和&lt;code&gt;armlink&lt;/code&gt;）&lt;/p&gt;
 &lt;p&gt;运行程序的运行阶段，是让加载器将最后生成的可执行文件放到内存中&lt;/p&gt;
 &lt;h2 id=&#34;gccgnugcc与g&#34;&gt;GCC、GNU、gcc与g++
-&lt;/h2&gt;&lt;p&gt;GNU：一个操作系统，具体内容不重要，感兴趣可以参考：&lt;/p&gt;
+&lt;/h2&gt;
+&lt;p&gt;GNU：一个操作系统，具体内容不重要，感兴趣可以参考：&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://link.zhihu.com/?target=https%3A//blog.csdn.net/qq_43617936/article/details/104504992&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;GCC、GNU到底啥意思？_一只杨阳羊的博客-CSDN博客​blog.csdn.net/qq_43617936/article/details/104504992&lt;img src=&#34;https://pica.zhimg.com/v2-b75437690db0fe8938d0fd10bf83821e_180x120.jpg&#34;
 	
@@ -10056,7 +10387,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 对于 &lt;code&gt;*.c&lt;/code&gt; 和 &lt;code&gt;*.cpp&lt;/code&gt; 文件，gcc分别当作 c 和 cpp文件编译，而g++则统一当作cpp文件编译&lt;/p&gt;
 &lt;p&gt;![[Pasted image 20241126223616.png]]&lt;/p&gt;
 &lt;h3 id=&#34;gdbgdb&#34;&gt;GDB(gdb)
-&lt;/h3&gt;&lt;p&gt;GDB（gdb）全称“GNU symbolic debugger”，是 Linux 下常用的程序调试器。 为了能够使用 gdb 调试，需要在代码编译的时候加上&lt;code&gt;-g&lt;/code&gt;，如&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;GDB（gdb）全称“GNU symbolic debugger”，是 Linux 下常用的程序调试器。 为了能够使用 gdb 调试，需要在代码编译的时候加上&lt;code&gt;-g&lt;/code&gt;，如&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -10066,12 +10398,15 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;常用指令&#34;&gt;常用指令
-&lt;/h2&gt;&lt;p&gt;![[Pasted image 20241027090624.png]]&lt;/p&gt;
-&lt;h1 id=&#34;编译过程&#34;&gt;编译过程
-&lt;/h1&gt;&lt;p&gt;![[Pasted image 20241027085312.png]]&lt;/p&gt;
+&lt;/h2&gt;
+&lt;p&gt;![[Pasted image 20241027090624.png]]&lt;/p&gt;
+&lt;h2 id=&#34;编译过程&#34;&gt;编译过程
+&lt;/h2&gt;
+&lt;p&gt;![[Pasted image 20241027085312.png]]&lt;/p&gt;
 &lt;p&gt;![[Pasted image 20241027092346.png]]&lt;/p&gt;
 &lt;h2 id=&#34;step1-预处理&#34;&gt;step1. 预处理
-&lt;/h2&gt;&lt;p&gt;![[Pasted image 20241026230159.png]]
+&lt;/h2&gt;
+&lt;p&gt;![[Pasted image 20241026230159.png]]
 &lt;strong&gt;命令：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -10088,7 +10423,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;li&gt;&lt;strong&gt;include 导入的头文件替换&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;预处理实例对比&#34;&gt;预处理实例对比
-&lt;/h3&gt;&lt;p&gt;.cpp 文件
+&lt;/h3&gt;
+&lt;p&gt;.cpp 文件
 ![[Pasted image 20241026230758.png]]&lt;/p&gt;
 &lt;p&gt;预处理后的 .i 文件&lt;/p&gt;
 &lt;p&gt;还有替换的&lt;/p&gt;
@@ -10107,7 +10443,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 预处理，顾名思义就是编译前的一些准备工作&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;预编译把一些&lt;code&gt;#define&lt;/code&gt;的宏定义完成文本替换，然后将&lt;/strong&gt;&lt;code&gt;#include&lt;/code&gt;&lt;strong&gt;的文件里的内容复制到&lt;code&gt;.cpp&lt;/code&gt;文件里，如果&lt;code&gt;.h&lt;/code&gt;文件里还有&lt;code&gt;.h&lt;/code&gt;文件，就递归展开&lt;/strong&gt;。在预处理这一步，代码注释直接被忽略，不会进入到后续的处理中，所以注释在程序中不会执行&lt;/p&gt;
 &lt;h2 id=&#34;step2-编译阶段&#34;&gt;step2. 编译阶段
-&lt;/h2&gt;&lt;p&gt;![[Pasted image 20241027001928.png]]&lt;/p&gt;
+&lt;/h2&gt;
+&lt;p&gt;![[Pasted image 20241027001928.png]]&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;命令：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -10137,7 +10474,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;strong&gt;编译不是指程序从源文件到二进制程序的全部过程，而是指将经过预处理之后的程序转换成特定&lt;a class=&#34;link&#34; href=&#34;https://zhida.zhihu.com/search?content_id=225473028&amp;amp;content_type=Article&amp;amp;match_order=2&amp;amp;q=%E6%B1%87%E7%BC%96%E4%BB%A3%E7%A0%81&amp;amp;zhida_source=entity&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;汇编代码&lt;/a&gt;(assembly code)的过程&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&#34;step3-汇编阶段&#34;&gt;step3. 汇编阶段
-&lt;/h2&gt;&lt;p&gt;![[Pasted image 20241027002224.png]]
+&lt;/h2&gt;
+&lt;p&gt;![[Pasted image 20241027002224.png]]
 &lt;strong&gt;命令：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -10152,7 +10490,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;li&gt;将 .s 文件，汇编成二进制文件（二进制文件不可执行）&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;step4-链接阶段&#34;&gt;step4. 链接阶段
-&lt;/h2&gt;&lt;p&gt;![[Pasted image 20241027002618.png]]&lt;/p&gt;
+&lt;/h2&gt;
+&lt;p&gt;![[Pasted image 20241027002618.png]]&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;命令：&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -10171,14 +10510,16 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;p&gt;C++程序编译的时候其实只识别.cpp文件。每个cpp文件都会分别编译一次，生成一个.o或者.obj文件。这个时候，链接器除了将目标文件和系统组件组合起来，还需要将编译器生成的多个.o或者.obj文件组合起来。&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;g++&lt;/code&gt;自动链接了系统组件，我们只需要把自定义函数的目标文件与&lt;code&gt;main.o&lt;/code&gt;链接即可&lt;/p&gt;
 &lt;h3 id=&#34;链接的其他过程&#34;&gt;链接的其他过程
-&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/88255667#:~:text=C/C&amp;#43;&amp;#43;%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B%201%201.%E9%A2%84%E5%A4%84%E7%90%86%20%28Preprocessing%29%20%E9%A2%84%E5%A4%84%E7%90%86%E7%94%A8%E4%BA%8E%E5%B0%86%E6%89%80%E6%9C%89%E7%9A%84#include%20%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BB%A5%E5%8F%8A%E5%AE%8F%E5%AE%9A%E4%B9%89%E6%9B%BF%E6%8D%A2%E6%88%90%E5%85%B6%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%86%85%E5%AE%B9%20%EF%BC%8C%E9%A2%84%E5%A4%84%E7%90%86%E4%B9%8B%E5%90%8E%E5%BE%97%E5%88%B0%E7%9A%84%E4%BB%8D%E7%84%B6%E6%98%AF%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%8C%E4%BD%86%E6%96%87%E4%BB%B6%E4%BD%93%E7%A7%AF%E4%BC%9A%E5%A4%A7%E5%BE%88%E5%A4%9A%E3%80%82%20...,%E6%88%90%E6%9C%80%E7%BB%88%E7%9A%84%20%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%20%28executable%20file%29%E3%80%82%20...%205%205.%E6%95%B0%E6%8D%AE%E5%92%8C%E6%8C%87%E4%BB%A4%20&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/88255667#:~:text=C/C&amp;#43;&amp;#43;%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E9%93%BE%E6%8E%A5%E8%BF%87%E7%A8%8B%201%201.%E9%A2%84%E5%A4%84%E7%90%86%20%28Preprocessing%29%20%E9%A2%84%E5%A4%84%E7%90%86%E7%94%A8%E4%BA%8E%E5%B0%86%E6%89%80%E6%9C%89%E7%9A%84#include%20%E5%A4%B4%E6%96%87%E4%BB%B6%E4%BB%A5%E5%8F%8A%E5%AE%8F%E5%AE%9A%E4%B9%89%E6%9B%BF%E6%8D%A2%E6%88%90%E5%85%B6%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%86%85%E5%AE%B9%20%EF%BC%8C%E9%A2%84%E5%A4%84%E7%90%86%E4%B9%8B%E5%90%8E%E5%BE%97%E5%88%B0%E7%9A%84%E4%BB%8D%E7%84%B6%E6%98%AF%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%8C%E4%BD%86%E6%96%87%E4%BB%B6%E4%BD%93%E7%A7%AF%E4%BC%9A%E5%A4%A7%E5%BE%88%E5%A4%9A%E3%80%82%20...,%E6%88%90%E6%9C%80%E7%BB%88%E7%9A%84%20%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%20%28executable%20file%29%E3%80%82%20...%205%205.%E6%95%B0%E6%8D%AE%E5%92%8C%E6%8C%87%E4%BB%A4%20&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;C/C++编译链接 - 知乎 (zhihu.com)&lt;/a&gt;(进阶)&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;合并段&lt;/strong&gt;
 ![[Pasted image 20241027092742.png]]&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;调整段偏移&lt;/strong&gt;
 ![[Pasted image 20241027092757.png]]&lt;/p&gt;
 &lt;h2 id=&#34;多文件g编译指令&#34;&gt;多文件g++编译指令
-&lt;/h2&gt;&lt;p&gt;![[Pasted image 20241027222011.png]]&lt;/p&gt;
+&lt;/h2&gt;
+&lt;p&gt;![[Pasted image 20241027222011.png]]&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -10191,13 +10532,17 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 -I includes 是 库文件所在的目录&lt;/p&gt;
 &lt;p&gt;![[Pasted image 20241126230718.png]]&lt;/p&gt;
 &lt;h2 id=&#34;杂谈&#34;&gt;杂谈
-&lt;/h2&gt;&lt;h4 id=&#34;关于库文件&#34;&gt;关于库文件
-&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241126224636.png]]&lt;/p&gt;
+&lt;/h2&gt;
+&lt;h4 id=&#34;关于库文件&#34;&gt;关于库文件
+&lt;/h4&gt;
+&lt;p&gt;![[Pasted image 20241126224636.png]]&lt;/p&gt;
 &lt;p&gt;![[Pasted image 20241126224803.png]]&lt;/p&gt;
 &lt;h4 id=&#34;关于可执行文件&#34;&gt;关于可执行文件
-&lt;/h4&gt;&lt;p&gt;![[Pasted image 20241126225616.png]]&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;![[Pasted image 20241126225616.png]]&lt;/p&gt;
 &lt;h4 id=&#34;关于c与c联合生成可执行文件&#34;&gt;关于C与C++联合生成可执行文件
-&lt;/h4&gt;&lt;p&gt;在C++中，告诉编译器以C的标准进行编译
+&lt;/h4&gt;
+&lt;p&gt;在C++中，告诉编译器以C的标准进行编译
 &lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_46606290/article/details/119973574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -10268,9 +10613,11 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;如果编译器是 C++ 编译器，__&lt;em&gt;cplusplus&lt;/em&gt; 宏会被定义，&lt;em&gt;extern &amp;ldquo;C&amp;rdquo;&lt;/em&gt; 块将会被包含，这告诉编译器按照 C 语言的规则来处理函数名称，而不是 C++ 的规则。这样做的目的是为了保持与已经存在的 C 代码库的兼容性，特别是当使用 C++ 编写新代码时。&lt;/p&gt;
 &lt;h4 id=&#34;__cplusplus宏定义作用&#34;&gt;__cplusplus宏定义作用
-&lt;/h4&gt;&lt;p&gt;在 C++ 中，__&lt;em&gt;cplusplus&lt;/em&gt; 是一个预定义的宏，它用于确定正在使用的 C++ 标准的版本。这个宏的存在使得 C++ 代码能够以标准 C 形式输出，即以 C 的形式被调用，这对于跨平台编程和与 C 语言的兼容性至关重要。&lt;/p&gt;
+&lt;/h4&gt;
+&lt;p&gt;在 C++ 中，__&lt;em&gt;cplusplus&lt;/em&gt; 是一个预定义的宏，它用于确定正在使用的 C++ 标准的版本。这个宏的存在使得 C++ 代码能够以标准 C 形式输出，即以 C 的形式被调用，这对于跨平台编程和与 C 语言的兼容性至关重要。&lt;/p&gt;
 &lt;h5 id=&#34;宏的定义和使用&#34;&gt;宏的定义和使用
-&lt;/h5&gt;&lt;p&gt;__&lt;em&gt;cplusplus&lt;/em&gt; 宏通常在编写涉及 C 和 C++ 混合编程的头文件时使用。当 C++ 代码需要被 C 编译器调用时，使用这个宏可以确保 C++ 中的名称修饰（name mangling）不会发生，从而允许 C 代码安全地调用 C++ 函数。例如：&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;__&lt;em&gt;cplusplus&lt;/em&gt; 宏通常在编写涉及 C 和 C++ 混合编程的头文件时使用。当 C++ 代码需要被 C 编译器调用时，使用这个宏可以确保 C++ 中的名称修饰（name mangling）不会发生，从而允许 C 代码安全地调用 C++ 函数。例如：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -10298,7 +10645,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;&lt;p&gt;![[Pasted image 20241213212614.png]]&lt;/p&gt;
 &lt;p&gt;在这个例子中，如果编译器是 C++ 编译器，__&lt;em&gt;cplusplus&lt;/em&gt; 宏会被定义，&lt;em&gt;extern &amp;ldquo;C&amp;rdquo;&lt;/em&gt; 块将会被包含，这告诉编译器按照 C 语言的规则来处理函数名称，而不是 C++ 的规则。这样做的目的是为了保持与已经存在的 C 代码库的兼容性，特别是当使用 C++ 编写新代码时。&lt;/p&gt;
 &lt;h5 id=&#34;宏的值&#34;&gt;宏的值
-&lt;/h5&gt;&lt;p&gt;__&lt;em&gt;cplusplus&lt;/em&gt; 宏的值表示 C++ 标准的版本，例如：&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;__&lt;em&gt;cplusplus&lt;/em&gt; 宏的值表示 C++ 标准的版本，例如：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;C++98 标准：199711L&lt;/li&gt;
 &lt;li&gt;C++11 标准：201103L&lt;/li&gt;
@@ -10308,7 +10656,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 不同的编译器，如 GCC、Clang 或 Visual C++，都遵循这些标准，并在编译时定义相应的 __&lt;em&gt;cplusplus&lt;/em&gt; 值。这个宏的值可以用来确定编译器支持的 C++ 版本，从而在编写代码时做出相应的兼容性处理。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h5 id=&#34;实际应用&#34;&gt;实际应用
-&lt;/h5&gt;&lt;p&gt;在实际应用中，__&lt;em&gt;cplusplus&lt;/em&gt; 宏确保了 C++ 代码可以与 C 代码无缝集成。例如，如果有一个用 C 语言编写的库，它的头文件是 &lt;em&gt;f.h&lt;/em&gt;，产生的库文件是 &lt;em&gt;f.lib&lt;/em&gt;，那么在 C++ 中使用这个库文件时，需要这样写：&lt;/p&gt;
+&lt;/h5&gt;
+&lt;p&gt;在实际应用中，__&lt;em&gt;cplusplus&lt;/em&gt; 宏确保了 C++ 代码可以与 C 代码无缝集成。例如，如果有一个用 C 语言编写的库，它的头文件是 &lt;em&gt;f.h&lt;/em&gt;，产生的库文件是 &lt;em&gt;f.lib&lt;/em&gt;，那么在 C++ 中使用这个库文件时，需要这样写：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -10324,7 +10673,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;/div&gt;&lt;p&gt;这样，C++ 编译器就会知道如何正确地链接和调用 C 语言编写的函数。如果没有使用 __&lt;em&gt;cplusplus&lt;/em&gt; 宏，可能会出现链接错误，因为 C++ 编译器和 C 编译器对函数名称的处理方式不同。&lt;/p&gt;
 &lt;p&gt;总结来说，__&lt;em&gt;cplusplus&lt;/em&gt; 宏是 C++ 语言为了兼容 C 语言和支持混合编程而提供的一个重要工具。它允许开发者在保持 C++ 功能的同时，确保代码能够在不同的编程环境中正确运行。&lt;/p&gt;
 &lt;h4 id=&#34;关于extern关键字&#34;&gt;关于extern关键字
-&lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_46606290/article/details/119973574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/h4&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_46606290/article/details/119973574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客&lt;/a&gt;
 ![[Pasted image 20241213212619.png]]&lt;/p&gt;
 </description>
@@ -10345,13 +10695,15 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_46606290/article/details/119973574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;符号修饰&#34;&gt;符号修饰
-&lt;/h2&gt;&lt;p&gt;在C/C++中，一个程序要运行起来，需要经历以下几个阶段：预处理、编译、汇编、链接。&lt;/p&gt;
+&lt;/h2&gt;
+&lt;p&gt;在C/C++中，一个程序要运行起来，需要经历以下几个阶段：预处理、编译、汇编、链接。&lt;/p&gt;
 &lt;p&gt;名字修饰（Name Mangling）是一种在&lt;code&gt;编译&lt;/code&gt;过程中，将函数、变量的名称重新改编的机制，简单来说就是编译器为了区分各个函数，将函数通过一定算法，重新修饰为一个全局唯一的名称。&lt;/p&gt;
 &lt;p&gt;由于C++和C的名字修饰规则不同（&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/helena1993/article/details/124149052&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;不同操作系统下的编译器的名字修饰方式也会不同&lt;/a&gt;），导致C++可以支持函数重载，而C不支持函数重载&lt;/p&gt;
 &lt;p&gt;可以简单理解，c++中支持函数重载，c语言不支持函数重载，这造成了c++和c语言的函数名解析不同（名字修饰/符号修饰）。c语言函数名就是函数名，c++的函数名是函数名+参数组合起来的。&lt;/p&gt;
 &lt;h4 id=&#34;c与c符号修饰的实例&#34;&gt;C与C++符号修饰的实例
-&lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/ArsenalfanInECNU/p/18499811&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/h4&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/ArsenalfanInECNU/p/18499811&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;extern &amp;ldquo;c&amp;quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园&lt;/a&gt;
 （直接copy自该博客）&lt;/p&gt;
 &lt;p&gt;比如，函数&lt;code&gt;void func(double a)&lt;/code&gt; 在&lt;code&gt;C&lt;/code&gt;和&lt;code&gt;C++&lt;/code&gt;中的编译阶段函数名称会被解析成什么呢？&lt;/p&gt;
@@ -10366,7 +10718,8 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt;的作用就是修改了符号表的生成方式，将c++符号的生成方式换成了c的生成方式。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;即c库中生成的符号是c编译器的符号， 因此c语言可以直接链接。而c++程序需要使用&lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt;让编译器使用c的符号命名方式去进行链接，这样才能找到对应的符号。&lt;/p&gt;
 &lt;h2 id=&#34;extern-c&#34;&gt;extern &amp;ldquo;C&amp;rdquo;
-&lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_46606290/article/details/119973574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/m0_46606290/article/details/119973574&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;看这一篇就够了
 看实例&lt;/p&gt;
@@ -10376,16 +10729,19 @@ Perk 卡片直接修改 &lt;code&gt;RoleData&lt;/code&gt;内子段（例如血�
 &lt;li&gt;c中调用c++成员函数，需要一个接口函数&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;arm-none-eabi的符号修饰&#34;&gt;arm-none-eabi的符号修饰
-&lt;/h2&gt;&lt;p&gt;在嵌入式开发中，&lt;code&gt;arm-none-eabi&lt;/code&gt; 工具链（针对 ARM 架构的裸机 / 嵌入式交叉编译工具）的&lt;strong&gt;符号修饰（Name Mangling）&lt;/strong&gt; 主要由编译器（通常是 GCC）根据语言特性（C/C++）和目标 ABI（应用程序二进制接口）决定，目的是生成唯一的符号名，以支持函数重载、命名空间、类型信息等特性。&lt;/p&gt;
+&lt;/h2&gt;
+&lt;p&gt;在嵌入式开发中，&lt;code&gt;arm-none-eabi&lt;/code&gt; 工具链（针对 ARM 架构的裸机 / 嵌入式交叉编译工具）的&lt;strong&gt;符号修饰（Name Mangling）&lt;/strong&gt; 主要由编译器（通常是 GCC）根据语言特性（C/C++）和目标 ABI（应用程序二进制接口）决定，目的是生成唯一的符号名，以支持函数重载、命名空间、类型信息等特性。&lt;/p&gt;
 &lt;h3 id=&#34;1-c-语言的符号修饰&#34;&gt;1. C 语言的符号修饰
-&lt;/h3&gt;&lt;p&gt;C 语言不支持函数重载和命名空间，因此符号修饰非常简单，通常仅在函数名前添加下划线（&lt;code&gt;_&lt;/code&gt;），或直接使用原函数名，具体取决于目标 ABI（如 ARM 的 APCS、EABI 等）。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;C 语言不支持函数重载和命名空间，因此符号修饰非常简单，通常仅在函数名前添加下划线（&lt;code&gt;_&lt;/code&gt;），或直接使用原函数名，具体取决于目标 ABI（如 ARM 的 APCS、EABI 等）。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;示例：&lt;br&gt;
 C 函数 &lt;code&gt;void foo(int a)&lt;/code&gt; 经过 &lt;code&gt;arm-none-eabi-gcc&lt;/code&gt; 编译后，符号通常为 &lt;code&gt;foo&lt;/code&gt;
 这也是为什么在汇编中调用 C 函数时，通常需要引用带下划线的符号&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;2-c-的符号修饰命名粉碎&#34;&gt;2. C++ 的符号修饰（命名粉碎）
-&lt;/h3&gt;&lt;p&gt;C++ 支持函数重载、类、命名空间、模板等特性，因此需要更复杂的符号修饰规则（称为 “命名粉碎”），以确保每个重载函数 / 方法生成唯一的符号。&lt;code&gt;arm-none-eabi-g++&lt;/code&gt; 遵循 GCC 的 C++ 符号修饰规则，基本格式为：&lt;br&gt;
+&lt;/h3&gt;
+&lt;p&gt;C++ 支持函数重载、类、命名空间、模板等特性，因此需要更复杂的符号修饰规则（称为 “命名粉碎”），以确保每个重载函数 / 方法生成唯一的符号。&lt;code&gt;arm-none-eabi-g++&lt;/code&gt; 遵循 GCC 的 C++ 符号修饰规则，基本格式为：&lt;br&gt;
 &lt;code&gt;_Z[命名空间/类前缀][函数名长度][函数名][参数类型编码]&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;关键规则解析：
@@ -10413,7 +10769,8 @@ C 函数 &lt;code&gt;void foo(int a)&lt;/code&gt; 经过 &lt;code&gt;arm-none
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;3-c-和-c-混合编程的符号兼容&#34;&gt;3. C 和 C++ 混合编程的符号兼容
-&lt;/h3&gt;&lt;p&gt;当 C++ 代码调用 C 函数（或反之）时，需使用 &lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt; 声明，以禁用 C++ 的符号修饰，确保链接时匹配 C 风格的符号。&lt;/p&gt;
+&lt;/h3&gt;
+&lt;p&gt;当 C++ 代码调用 C 函数（或反之）时，需使用 &lt;code&gt;extern &amp;quot;C&amp;quot;&lt;/code&gt; 声明，以禁用 C++ 的符号修饰，确保链接时匹配 C 风格的符号。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;示例：&lt;/li&gt;
 &lt;/ul&gt;

@@ -4,26 +4,28 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园 C++&ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客 C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客 C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客\n">
 <title>C&#43;&#43; 的名字修饰（符号修饰）</title>
 
-<link rel='canonical' href='https://NomadJoeviolet.github.io/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/'>
-
-<link rel="stylesheet" href="/scss/style.min.1d228ea7690a965de9e7d8591cfa3a19afe76b85fa0ec74dcd88180add482f92.css"><meta property='og:title' content="C++ 的名字修饰（符号修饰）">
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/'><link rel="stylesheet" href="/scss/field-notes.min.c66b018ab2fe010d4124c4b8cf49707f4ed2bcafc92b5a3e4b33ce5c4a6bec99.css">
+<meta property='og:title' content="C++ 的名字修饰（符号修饰）">
 <meta property='og:description' content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园 C++&ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客 C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客 C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/'>
 <meta property='og:site_name' content='NomadJoe'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&amp;C&#43;&#43;' /><meta property='article:published_time' content='2025-01-13T16:17:46&#43;08:00'/><meta property='article:modified_time' content='2025-01-13T16:17:46&#43;08:00'/>
-<meta name="twitter:title" content="C++ 的名字修饰（符号修饰）">
-<meta name="twitter:description" content="【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园 C++&ndash;名字修饰_c++的函数名修饰是在哪个阶段进行的-CSDN博客 C/C++ 函数签名与名字修饰（符号修饰）-CSDN博客 C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客\n">
+<meta name="twitter:title" content="C&#43;&#43; 的名字修饰（符号修饰）">
+<meta name="twitter:description" content="【关于C和C&#43;&#43;混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b extern &ldquo;c&quot;的用法：c与c&#43;&#43;的互相调用 - 青山牧云人 - 博客园 C&#43;&#43;&ndash;名字修饰_c&#43;&#43;的函数名修饰是在哪个阶段进行的-CSDN博客 C/C&#43;&#43; 函数签名与名字修饰（符号修饰）-CSDN博客 C/C&#43;&#43;中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客
+">
+    <meta name="twitter:card" content="summary">
+
     <link rel="shortcut icon" href="/favicon.ico" />
+<link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 
     </head>
-    <body class="
-    article-page
-    ">
+    <body class="field-notes article-page">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
             if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
+                localStorage.setItem(colorSchemeKey, "dark");
             }
         })();
     </script><script>
@@ -41,181 +43,35 @@
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
+<a class="skip-link" href="#main-content">跳到主要内容</a><header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-wordmark" href="/" aria-label="NomadJoe 首页">NJ<span aria-hidden="true">/</span>FIELD NOTES</a>
+        <button class="site-menu-toggle" id="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+            <span class="site-menu-toggle__label">菜单</span>
+        </button>
+        <nav class="primary-nav" data-testid="primary-nav" aria-label="主导航">
+            <ul id="primary-menu">
+                <li><a href="/">首页</a></li>
+                <li><a href="/archives/">笔记</a></li>
+                <li><a href="/categories/%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae/">项目</a></li>
+                <li><a href="/%E5%85%B3%E4%BA%8E/">关于</a></li>
+                <li><a href="/search/">搜索</a></li>
+            </ul>
+        </nav>
+        <div class="site-tools" aria-label="站点工具">
             
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hu5250448583294231844.png" width="300"
-                            height="257" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">🍥</span>
-                
-            </figure>
+                <a class="icon-control" href="/index.xml" aria-label="订阅 RSS"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+</a>
             
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">NomadJoe</a></h1>
-            <h2 class="site-description">to feel,to experience</h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://www.bilibili.com/'
-                        target="_blank"
-                        title="Biliili"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://github.com/CaiJimmy/hugo-theme-stack'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>友情链接</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="切换配色" aria-pressed="false">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -223,127 +79,75 @@
 
 
 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>暗色模式</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
+            </button>
         </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
+    </div>
+</header>
+<main id="main-content" class="site-main" data-testid="article-main">
+    <div class="reading-progress" data-testid="reading-progress" aria-hidden="true">
+        <span class="reading-progress__line"></span>
+        <span class="reading-progress__stone"></span>
+    </div>
+
+    <article class="article-reader">
+        <div class="article-reader__layout">
+            <div class="article-reader__document">
+                <header class="article-reader__header">
+    <p class="section-kicker">FIELD NOTE / OPEN LOG</p>
+    <h1 data-testid="article-title">C&#43;&#43; 的名字修饰（符号修饰）</h1>
+
+    <div class="article-reader__meta">
+        <time datetime="2025-01-13">2025.01.13</time>
+        <span aria-hidden="true">/</span>
+        <time data-testid="article-reading-time" datetime="PT5M">5 分钟阅读</time>
+    </div>
+
+    
+        <ul class="article-reader__terms" aria-label="分类">
+            
+                <li><a href="/categories/cc&#43;&#43;-study/">C&amp;C&#43;&#43; Study</a></li>
+            
+        </ul>
+    
+
+    
+    
+</header>
+
+
+                <details class="article-toc-mobile">
+            <summary>目录</summary>
+            <div class="article-toc-mobile__content">
+                <nav id="TableOfContentsMobile" aria-label="目录">
   <ol>
-    <li><a href="#符号修饰">符号修饰</a>
+    <li>
       <ol>
-        <li>
+        <li><a href="#符号修饰">符号修饰</a>
           <ol>
-            <li><a href="#c与c符号修饰的实例">C与C++符号修饰的实例</a></li>
+            <li>
+              <ol>
+                <li><a href="#c与c符号修饰的实例">C与C++符号修饰的实例</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#extern-c">extern &ldquo;C&rdquo;</a></li>
+        <li><a href="#arm-none-eabi的符号修饰">arm-none-eabi的符号修饰</a>
+          <ol>
+            <li><a href="#1-c-语言的符号修饰">1. C 语言的符号修饰</a></li>
+            <li><a href="#2-c-的符号修饰命名粉碎">2. C++ 的符号修饰（命名粉碎）</a></li>
+            <li><a href="#3-c-和-c-混合编程的符号兼容">3. C 和 C++ 混合编程的符号兼容</a></li>
           </ol>
         </li>
       </ol>
     </li>
-    <li><a href="#extern-c">extern &ldquo;C&rdquo;</a></li>
-    <li><a href="#arm-none-eabi的符号修饰">arm-none-eabi的符号修饰</a>
-      <ol>
-        <li><a href="#1-c-语言的符号修饰">1. C 语言的符号修饰</a></li>
-        <li><a href="#2-c-的符号修饰命名粉碎">2. C++ 的符号修饰（命名粉碎）</a></li>
-        <li><a href="#3-c-和-c-混合编程的符号兼容">3. C 和 C++ 混合编程的符号兼容</a></li>
-      </ol>
-    </li>
   </ol>
 </nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/cc&#43;&#43;-study/" >
-                C&amp;C&#43;&#43; Study
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/">C&#43;&#43; 的名字修饰（符号修饰）</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-01-13</time>
             </div>
-        
+        </details>
 
-        
-    </footer>
-    
-
-    
-</div>
-
-</header>
-
-    <section class="article-content">
-    
-    
-    <p>【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b
+                <div class="article-content">
+                    <p>【关于C和C++混合编程中编译和链接的问题】https://www.bilibili.com/video/BV1Zm4y1E7nm?vd_source=5a0790755035f26a67935abfbfcdfd5b
 <a class="link" href="https://www.cnblogs.com/ArsenalfanInECNU/p/18499811"  target="_blank" rel="noopener"
     >extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园</a>
 <a class="link" href="https://blog.csdn.net/it_is_me_a/article/details/81979537"  target="_blank" rel="noopener"
@@ -353,13 +157,15 @@
 <a class="link" href="https://blog.csdn.net/m0_46606290/article/details/119973574"  target="_blank" rel="noopener"
     >C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客</a></p>
 <h2 id="符号修饰">符号修饰
-</h2><p>在C/C++中，一个程序要运行起来，需要经历以下几个阶段：预处理、编译、汇编、链接。</p>
+</h2>
+<p>在C/C++中，一个程序要运行起来，需要经历以下几个阶段：预处理、编译、汇编、链接。</p>
 <p>名字修饰（Name Mangling）是一种在<code>编译</code>过程中，将函数、变量的名称重新改编的机制，简单来说就是编译器为了区分各个函数，将函数通过一定算法，重新修饰为一个全局唯一的名称。</p>
 <p>由于C++和C的名字修饰规则不同（<a class="link" href="https://blog.csdn.net/helena1993/article/details/124149052"  target="_blank" rel="noopener"
     >不同操作系统下的编译器的名字修饰方式也会不同</a>），导致C++可以支持函数重载，而C不支持函数重载</p>
 <p>可以简单理解，c++中支持函数重载，c语言不支持函数重载，这造成了c++和c语言的函数名解析不同（名字修饰/符号修饰）。c语言函数名就是函数名，c++的函数名是函数名+参数组合起来的。</p>
 <h4 id="c与c符号修饰的实例">C与C++符号修饰的实例
-</h4><p><a class="link" href="https://www.cnblogs.com/ArsenalfanInECNU/p/18499811"  target="_blank" rel="noopener"
+</h4>
+<p><a class="link" href="https://www.cnblogs.com/ArsenalfanInECNU/p/18499811"  target="_blank" rel="noopener"
     >extern &ldquo;c&quot;的用法：c与c++的互相调用 - 青山牧云人 - 博客园</a>
 （直接copy自该博客）</p>
 <p>比如，函数<code>void func(double a)</code> 在<code>C</code>和<code>C++</code>中的编译阶段函数名称会被解析成什么呢？</p>
@@ -374,7 +180,8 @@
 <p><strong><code>extern &quot;C&quot;</code>的作用就是修改了符号表的生成方式，将c++符号的生成方式换成了c的生成方式。</strong></p>
 <p>即c库中生成的符号是c编译器的符号， 因此c语言可以直接链接。而c++程序需要使用<code>extern &quot;C&quot;</code>让编译器使用c的符号命名方式去进行链接，这样才能找到对应的符号。</p>
 <h2 id="extern-c">extern &ldquo;C&rdquo;
-</h2><p><a class="link" href="https://blog.csdn.net/m0_46606290/article/details/119973574"  target="_blank" rel="noopener"
+</h2>
+<p><a class="link" href="https://blog.csdn.net/m0_46606290/article/details/119973574"  target="_blank" rel="noopener"
     >C/C++中的 extern 和extern“C“关键字的理解和使用（对比两者的异同）_c extern c-CSDN博客</a></p>
 <p>看这一篇就够了
 看实例</p>
@@ -384,16 +191,19 @@
 <li>c中调用c++成员函数，需要一个接口函数</li>
 </ol>
 <h2 id="arm-none-eabi的符号修饰">arm-none-eabi的符号修饰
-</h2><p>在嵌入式开发中，<code>arm-none-eabi</code> 工具链（针对 ARM 架构的裸机 / 嵌入式交叉编译工具）的<strong>符号修饰（Name Mangling）</strong> 主要由编译器（通常是 GCC）根据语言特性（C/C++）和目标 ABI（应用程序二进制接口）决定，目的是生成唯一的符号名，以支持函数重载、命名空间、类型信息等特性。</p>
+</h2>
+<p>在嵌入式开发中，<code>arm-none-eabi</code> 工具链（针对 ARM 架构的裸机 / 嵌入式交叉编译工具）的<strong>符号修饰（Name Mangling）</strong> 主要由编译器（通常是 GCC）根据语言特性（C/C++）和目标 ABI（应用程序二进制接口）决定，目的是生成唯一的符号名，以支持函数重载、命名空间、类型信息等特性。</p>
 <h3 id="1-c-语言的符号修饰">1. C 语言的符号修饰
-</h3><p>C 语言不支持函数重载和命名空间，因此符号修饰非常简单，通常仅在函数名前添加下划线（<code>_</code>），或直接使用原函数名，具体取决于目标 ABI（如 ARM 的 APCS、EABI 等）。</p>
+</h3>
+<p>C 语言不支持函数重载和命名空间，因此符号修饰非常简单，通常仅在函数名前添加下划线（<code>_</code>），或直接使用原函数名，具体取决于目标 ABI（如 ARM 的 APCS、EABI 等）。</p>
 <ul>
 <li>示例：<br>
 C 函数 <code>void foo(int a)</code> 经过 <code>arm-none-eabi-gcc</code> 编译后，符号通常为 <code>foo</code>
 这也是为什么在汇编中调用 C 函数时，通常需要引用带下划线的符号</li>
 </ul>
 <h3 id="2-c-的符号修饰命名粉碎">2. C++ 的符号修饰（命名粉碎）
-</h3><p>C++ 支持函数重载、类、命名空间、模板等特性，因此需要更复杂的符号修饰规则（称为 “命名粉碎”），以确保每个重载函数 / 方法生成唯一的符号。<code>arm-none-eabi-g++</code> 遵循 GCC 的 C++ 符号修饰规则，基本格式为：<br>
+</h3>
+<p>C++ 支持函数重载、类、命名空间、模板等特性，因此需要更复杂的符号修饰规则（称为 “命名粉碎”），以确保每个重载函数 / 方法生成唯一的符号。<code>arm-none-eabi-g++</code> 遵循 GCC 的 C++ 符号修饰规则，基本格式为：<br>
 <code>_Z[命名空间/类前缀][函数名长度][函数名][参数类型编码]</code></p>
 <ul>
 <li>关键规则解析：
@@ -421,7 +231,8 @@ C 函数 <code>void foo(int a)</code> 经过 <code>arm-none-eabi-gcc</code> 
 </li>
 </ul>
 <h3 id="3-c-和-c-混合编程的符号兼容">3. C 和 C++ 混合编程的符号兼容
-</h3><p>当 C++ 代码调用 C 函数（或反之）时，需使用 <code>extern &quot;C&quot;</code> 声明，以禁用 C++ 的符号修饰，确保链接时匹配 C 风格的符号。</p>
+</h3>
+<p>当 C++ 代码调用 C 函数（或反之）时，需使用 <code>extern &quot;C&quot;</code> 声明，以禁用 C++ 的符号修饰，确保链接时匹配 C 风格的符号。</p>
 <ul>
 <li>示例：</li>
 </ul>
@@ -464,48 +275,18 @@ C 函数 <code>void foo(int a)</code> 经过 <code>arm-none-eabi-gcc</code> 
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
-</section>
+                </div>
 
-
-    <footer class="article-footer">
+                <footer class="article-reader__footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/cc&#43;&#43;/">C&amp;C&#43;&#43;</a>
-        
-    </section>
-
-
-    </footer>
-
-
-    
-        <link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
-            ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
-                defer
-                >
-            </script><script>
-    window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
-    
-</article>
-
+        <div class="article-reader__tags">
+            <p class="section-kicker">FIELD TAGS</p>
+            <ul aria-label="标签">
+                
+                    <li><a href="/tags/cc&#43;&#43;/">C&amp;C&#43;&#43;</a></li>
+                
+            </ul>
+        </div>
     
 
     
@@ -584,28 +365,66 @@ C 函数 <code>void foo(int a)</code> 经过 <code>arm-none-eabi-gcc</code> 
     </div>
 </aside>
 
-     
-    
-        
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2025 - 
-        
-        2026 NomadJoe
-    </section>
-    
-    <section class="powerby">
-        
-            experience <br/>
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
-    </section>
 </footer>
 
+            </div>
+
+            <aside class="article-toc-rail">
+            <p class="section-kicker">ON THIS PAGE</p>
+            <nav id="TableOfContents" class="article-toc" data-testid="article-toc" aria-label="目录">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#符号修饰">符号修饰</a>
+          <ol>
+            <li>
+              <ol>
+                <li><a href="#c与c符号修饰的实例">C与C++符号修饰的实例</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#extern-c">extern &ldquo;C&rdquo;</a></li>
+        <li><a href="#arm-none-eabi的符号修饰">arm-none-eabi的符号修饰</a>
+          <ol>
+            <li><a href="#1-c-语言的符号修饰">1. C 语言的符号修饰</a></li>
+            <li><a href="#2-c-的符号修饰命名粉碎">2. C++ 的符号修饰（命名粉碎）</a></li>
+            <li><a href="#3-c-和-c-混合编程的符号兼容">3. C 和 C++ 混合编程的符号兼容</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </aside>
+        </div>
+
+        
+            <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+        
+    </article>
 
     
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -685,24 +504,13 @@ C 函数 <code>void foo(int a)</code> 经过 <code>arm-none-eabi-gcc</code> 
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+        </main><footer class="field-footer">
+    <div class="field-footer__inner">
+        <p><span aria-hidden="true">©</span> 2026 NomadJoe</p>
+    </div>
+</footer>
+<script type="text/javascript" src="/ts/field-notes.bbb1f58da5208060e8df1b4e81dd161355cb9abe0e000402ac419570a346a495.js" integrity="sha256-u7H1jaUggGDo3xtOgd0WE1XLmr4OAAQCrEGVcKNGpJU=" defer></script>
 
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
 
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
+</body>
 </html>

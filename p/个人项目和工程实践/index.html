@@ -4,26 +4,28 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="RM步兵基本功能实现 该项目是一个基于 STM32G4 系列微控制器的载具控制与外设测试工程，面向步兵（Infantry Fighting Vehicle）相关子系统的开发与验证。项目包含底盘、云台与整车测试工程，集成了传感器融合算法、电机控制、CAN/FD 通信及外设驱动，实现运动控制、姿态估计和通信管理的参考实现与调试用例。\n">
 <title>个人项目和工程实践</title>
 
-<link rel='canonical' href='https://NomadJoeviolet.github.io/p/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/'>
-
-<link rel="stylesheet" href="/scss/style.min.1d228ea7690a965de9e7d8591cfa3a19afe76b85fa0ec74dcd88180add482f92.css"><meta property='og:title' content="个人项目和工程实践">
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/'><link rel="stylesheet" href="/scss/field-notes.min.c66b018ab2fe010d4124c4b8cf49707f4ed2bcafc92b5a3e4b33ce5c4a6bec99.css">
+<meta property='og:title' content="个人项目和工程实践">
 <meta property='og:description' content="RM步兵基本功能实现 该项目是一个基于 STM32G4 系列微控制器的载具控制与外设测试工程，面向步兵（Infantry Fighting Vehicle）相关子系统的开发与验证。项目包含底盘、云台与整车测试工程，集成了传感器融合算法、电机控制、CAN/FD 通信及外设驱动，实现运动控制、姿态估计和通信管理的参考实现与调试用例。\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/'>
 <meta property='og:site_name' content='NomadJoe'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-07T23:37:07&#43;08:00'/><meta property='article:modified_time' content='2025-11-07T23:37:07&#43;08:00'/>
 <meta name="twitter:title" content="个人项目和工程实践">
-<meta name="twitter:description" content="RM步兵基本功能实现 该项目是一个基于 STM32G4 系列微控制器的载具控制与外设测试工程，面向步兵（Infantry Fighting Vehicle）相关子系统的开发与验证。项目包含底盘、云台与整车测试工程，集成了传感器融合算法、电机控制、CAN/FD 通信及外设驱动，实现运动控制、姿态估计和通信管理的参考实现与调试用例。\n">
+<meta name="twitter:description" content="RM步兵基本功能实现 该项目是一个基于 STM32G4 系列微控制器的载具控制与外设测试工程，面向步兵（Infantry Fighting Vehicle）相关子系统的开发与验证。项目包含底盘、云台与整车测试工程，集成了传感器融合算法、电机控制、CAN/FD 通信及外设驱动，实现运动控制、姿态估计和通信管理的参考实现与调试用例。
+">
+    <meta name="twitter:card" content="summary">
+
     <link rel="shortcut icon" href="/favicon.ico" />
+<link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 
     </head>
-    <body class="
-    article-page
-    ">
+    <body class="field-notes article-page">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
             if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
+                localStorage.setItem(colorSchemeKey, "dark");
             }
         })();
     </script><script>
@@ -41,181 +43,35 @@
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
+<a class="skip-link" href="#main-content">跳到主要内容</a><header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-wordmark" href="/" aria-label="NomadJoe 首页">NJ<span aria-hidden="true">/</span>FIELD NOTES</a>
+        <button class="site-menu-toggle" id="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+            <span class="site-menu-toggle__label">菜单</span>
+        </button>
+        <nav class="primary-nav" data-testid="primary-nav" aria-label="主导航">
+            <ul id="primary-menu">
+                <li><a href="/">首页</a></li>
+                <li><a href="/archives/">笔记</a></li>
+                <li><a href="/categories/%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae/">项目</a></li>
+                <li><a href="/%E5%85%B3%E4%BA%8E/">关于</a></li>
+                <li><a href="/search/">搜索</a></li>
+            </ul>
+        </nav>
+        <div class="site-tools" aria-label="站点工具">
             
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hu5250448583294231844.png" width="300"
-                            height="257" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">🍥</span>
-                
-            </figure>
+                <a class="icon-control" href="/index.xml" aria-label="订阅 RSS"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+</a>
             
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">NomadJoe</a></h1>
-            <h2 class="site-description">to feel,to experience</h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://www.bilibili.com/'
-                        target="_blank"
-                        title="Biliili"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://github.com/CaiJimmy/hugo-theme-stack'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>友情链接</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="切换配色" aria-pressed="false">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -223,142 +79,115 @@
 
 
 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>暗色模式</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
+            </button>
         </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
+    </div>
+</header>
+<main id="main-content" class="site-main" data-testid="article-main">
+    <div class="reading-progress" data-testid="reading-progress" aria-hidden="true">
+        <span class="reading-progress__line"></span>
+        <span class="reading-progress__stone"></span>
+    </div>
+
+    <article class="article-reader">
+        <div class="article-reader__layout">
+            <div class="article-reader__document">
+                <header class="article-reader__header">
+    <p class="section-kicker">FIELD NOTE / OPEN LOG</p>
+    <h1 data-testid="article-title">个人项目和工程实践</h1>
+
+    <div class="article-reader__meta">
+        <time datetime="2025-11-07">2025.11.07</time>
+        <span aria-hidden="true">/</span>
+        <time data-testid="article-reading-time" datetime="PT2M">2 分钟阅读</time>
+    </div>
+
+    
+        <ul class="article-reader__terms" aria-label="分类">
+            
+                <li><a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B/">个人简介</a></li>
+            
+        </ul>
+    
+
+    
+    
+</header>
+
+
+                <details class="article-toc-mobile">
+            <summary>目录</summary>
+            <div class="article-toc-mobile__content">
+                <nav id="TableOfContentsMobile" aria-label="目录">
   <ol>
     <li>
       <ol>
-        <li><a href="#rm步兵基本功能实现">RM步兵基本功能实现</a></li>
-        <li><a href="#个人电机库">个人电机库</a></li>
-        <li><a href="#chiptanks--stm32-oled-迷你射击游戏">ChipTanks —— STM32 OLED 迷你射击游戏</a></li>
+        <li>
+          <ol>
+            <li><a href="#rm步兵基本功能实现">RM步兵基本功能实现</a></li>
+            <li><a href="#个人电机库">个人电机库</a></li>
+            <li><a href="#chiptanks--stm32-oled-迷你射击游戏">ChipTanks —— STM32 OLED 迷你射击游戏</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
   </ol>
 </nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B/" >
-                个人简介
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">个人项目和工程实践</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-11-07</time>
             </div>
-        
+        </details>
 
-        
-    </footer>
-    
-
-    
-</div>
-
-</header>
-
-    <section class="article-content">
-    
-    
-    <h3 id="rm步兵基本功能实现">RM步兵基本功能实现
-</h3><p>该项目是一个基于 STM32G4 系列微控制器的载具控制与外设测试工程，面向步兵（Infantry Fighting Vehicle）相关子系统的开发与验证。项目包含底盘、云台与整车测试工程，集成了传感器融合算法、电机控制、CAN/FD 通信及外设驱动，实现运动控制、姿态估计和通信管理的参考实现与调试用例。</p>
+                <div class="article-content">
+                    <h3 id="rm步兵基本功能实现">RM步兵基本功能实现
+</h3>
+<p>该项目是一个基于 STM32G4 系列微控制器的载具控制与外设测试工程，面向步兵（Infantry Fighting Vehicle）相关子系统的开发与验证。项目包含底盘、云台与整车测试工程，集成了传感器融合算法、电机控制、CAN/FD 通信及外设驱动，实现运动控制、姿态估计和通信管理的参考实现与调试用例。</p>
 <p>仓库：<a class="link" href="https://github.com/NomadJoeviolet/RM_test_Infantry_Fighting_Vehicle"  target="_blank" rel="noopener"
     >NomadJoeviolet/RM_test_Infantry_Fighting_Vehicle</a></p>
 <h3 id="个人电机库">个人电机库
-</h3><p>该项目是一个基于 STM32 + HAL + FreeRTOS 的嵌入式电机驱动测试库，主要用于验证和调试 DJI 一拖四（one-to-four）系列 CAN 电机。它提供一个专为 DJI 协议设计的  CanMotorManager，用以统一管理最多 4 个电机的 CAN 收发与数据解析；同时包含可复用的控制算法（如 PID）、多线程示例以及对 ETL、CMSIS‑DSP 和 FreeRTOS 的集成支持，便于在受限资源下实现高效、可扩展的电机控制与测试。</p>
+</h3>
+<p>该项目是一个基于 STM32 + HAL + FreeRTOS 的嵌入式电机驱动测试库，主要用于验证和调试 DJI 一拖四（one-to-four）系列 CAN 电机。它提供一个专为 DJI 协议设计的  CanMotorManager，用以统一管理最多 4 个电机的 CAN 收发与数据解析；同时包含可复用的控制算法（如 PID）、多线程示例以及对 ETL、CMSIS‑DSP 和 FreeRTOS 的集成支持，便于在受限资源下实现高效、可扩展的电机控制与测试。</p>
 <p>仓库：<a class="link" href="https://github.com/NomadJoeviolet/MotorsLib"  target="_blank" rel="noopener"
     >NomadJoeviolet/MotorsLib</a></p>
 <h3 id="chiptanks--stm32-oled-迷你射击游戏">ChipTanks —— STM32 OLED 迷你射击游戏
-</h3><p>该项目是一个基于 STM32F103 与 128×64 OLED 的迷你射击游戏，采用 C/C++ 混编与 FreeRTOS 任务模型，结合 ETL 实现固定容量容器与确定性更新。核心包括实体管理（角色/子弹分层、行动/状态/清理/渲染四阶段）、关卡与波次推进、Roguelike 选卡增益，以及按键输入与渲染线程分离的主循环。</p>
+</h3>
+<p>该项目是一个基于 STM32F103 与 128×64 OLED 的迷你射击游戏，采用 C/C++ 混编与 FreeRTOS 任务模型，结合 ETL 实现固定容量容器与确定性更新。核心包括实体管理（角色/子弹分层、行动/状态/清理/渲染四阶段）、关卡与波次推进、Roguelike 选卡增益，以及按键输入与渲染线程分离的主循环。</p>
 <p>仓库：<a class="link" href="https://github.com/NomadJoeviolet/ChipTanks"  target="_blank" rel="noopener"
     >NomadJoeviolet/ChipTanks</a></p>
 <p>项目总结博客：<a class="link" href="https://nomadjoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/"  target="_blank" rel="noopener"
     >ChipTanks-基于C&amp;C++混编的STM32OLED迷你游戏掌机个人项目开发</a></p>
 
-</section>
+                </div>
 
-
-    <footer class="article-footer">
+                <footer class="article-reader__footer">
     
 
-    </footer>
-
-
     
-        <link 
+
+</footer>
+
+            </div>
+
+            <aside class="article-toc-rail">
+            <p class="section-kicker">ON THIS PAGE</p>
+            <nav id="TableOfContents" class="article-toc" data-testid="article-toc" aria-label="目录">
+  <ol>
+    <li>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#rm步兵基本功能实现">RM步兵基本功能实现</a></li>
+            <li><a href="#个人电机库">个人电机库</a></li>
+            <li><a href="#chiptanks--stm32-oled-迷你射击游戏">ChipTanks —— STM32 OLED 迷你射击游戏</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </aside>
+        </div>
+
+        
+            <link 
                 rel="stylesheet" 
                 href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
             ><script 
@@ -381,35 +210,8 @@
             ignoredClasses: ["gist"]
         });})
 </script>
-    
-</article>
-
-    
-
-    
-
-     
-    
         
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2025 - 
-        
-        2026 NomadJoe
-    </section>
-    
-    <section class="powerby">
-        
-            experience <br/>
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
-    </section>
-</footer>
-
+    </article>
 
     
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -489,24 +291,13 @@
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+        </main><footer class="field-footer">
+    <div class="field-footer__inner">
+        <p><span aria-hidden="true">©</span> 2026 NomadJoe</p>
+    </div>
+</footer>
+<script type="text/javascript" src="/ts/field-notes.bbb1f58da5208060e8df1b4e81dd161355cb9abe0e000402ac419570a346a495.js" integrity="sha256-u7H1jaUggGDo3xtOgd0WE1XLmr4OAAQCrEGVcKNGpJU=" defer></script>
 
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
 
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
+</body>
 </html>

@@ -4,26 +4,30 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="类和对象 类的基本知识 类的构造函数 构造函数的名字和类名相同，没有返回类型。对象创建时会自动调用，用来保证对象一出生就是“可用状态”。\n常见形式：\n默认构造函数（无参） 带参构造函数 委托构造函数（构造函数里调用同类其他构造函数，C++11） 1 2 3 4 5 6 7 8 9 10 class Person { private: std::string name; int age; public: Person() : name(&#34;unknown&#34;), age(0) {} Person(std::string n, int a) : name(std::move(n)), age(a) {} Person(std::string n) : Person(std::move(n), 18) {} }; 常见坑：\n">
 <title>现代C&#43;&#43;学习</title>
 
-<link rel='canonical' href='https://NomadJoeviolet.github.io/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/'>
-
-<link rel="stylesheet" href="/scss/style.min.1d228ea7690a965de9e7d8591cfa3a19afe76b85fa0ec74dcd88180add482f92.css"><meta property='og:title' content="现代C++学习">
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/'><link rel="stylesheet" href="/scss/field-notes.min.c66b018ab2fe010d4124c4b8cf49707f4ed2bcafc92b5a3e4b33ce5c4a6bec99.css">
+<meta property='og:title' content="现代C++学习">
 <meta property='og:description' content="类和对象 类的基本知识 类的构造函数 构造函数的名字和类名相同，没有返回类型。对象创建时会自动调用，用来保证对象一出生就是“可用状态”。\n常见形式：\n默认构造函数（无参） 带参构造函数 委托构造函数（构造函数里调用同类其他构造函数，C++11） 1 2 3 4 5 6 7 8 9 10 class Person { private: std::string name; int age; public: Person() : name(&#34;unknown&#34;), age(0) {} Person(std::string n, int a) : name(std::move(n)), age(a) {} Person(std::string n) : Person(std::move(n), 18) {} }; 常见坑：\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/'>
 <meta property='og:site_name' content='NomadJoe'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&amp;C&#43;&#43;' /><meta property='article:published_time' content='2026-04-06T15:35:46&#43;08:00'/><meta property='article:modified_time' content='2026-04-06T15:35:46&#43;08:00'/>
-<meta name="twitter:title" content="现代C++学习">
-<meta name="twitter:description" content="类和对象 类的基本知识 类的构造函数 构造函数的名字和类名相同，没有返回类型。对象创建时会自动调用，用来保证对象一出生就是“可用状态”。\n常见形式：\n默认构造函数（无参） 带参构造函数 委托构造函数（构造函数里调用同类其他构造函数，C++11） 1 2 3 4 5 6 7 8 9 10 class Person { private: std::string name; int age; public: Person() : name(&#34;unknown&#34;), age(0) {} Person(std::string n, int a) : name(std::move(n)), age(a) {} Person(std::string n) : Person(std::move(n), 18) {} }; 常见坑：\n">
+<meta name="twitter:title" content="现代C&#43;&#43;学习">
+<meta name="twitter:description" content="类和对象 类的基本知识 类的构造函数 构造函数的名字和类名相同，没有返回类型。对象创建时会自动调用，用来保证对象一出生就是“可用状态”。
+常见形式：
+默认构造函数（无参） 带参构造函数 委托构造函数（构造函数里调用同类其他构造函数，C&#43;&#43;11） 1 2 3 4 5 6 7 8 9 10 class Person { private: std::string name; int age; public: Person() : name(&#34;unknown&#34;), age(0) {} Person(std::string n, int a) : name(std::move(n)), age(a) {} Person(std::string n) : Person(std::move(n), 18) {} }; 常见坑：
+">
+    <meta name="twitter:card" content="summary">
+
     <link rel="shortcut icon" href="/favicon.ico" />
+<link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 
     </head>
-    <body class="
-    article-page
-    ">
+    <body class="field-notes article-page">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
             if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
+                localStorage.setItem(colorSchemeKey, "dark");
             }
         })();
     </script><script>
@@ -41,181 +45,35 @@
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
+<a class="skip-link" href="#main-content">跳到主要内容</a><header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-wordmark" href="/" aria-label="NomadJoe 首页">NJ<span aria-hidden="true">/</span>FIELD NOTES</a>
+        <button class="site-menu-toggle" id="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+            <span class="site-menu-toggle__label">菜单</span>
+        </button>
+        <nav class="primary-nav" data-testid="primary-nav" aria-label="主导航">
+            <ul id="primary-menu">
+                <li><a href="/">首页</a></li>
+                <li><a href="/archives/">笔记</a></li>
+                <li><a href="/categories/%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae/">项目</a></li>
+                <li><a href="/%E5%85%B3%E4%BA%8E/">关于</a></li>
+                <li><a href="/search/">搜索</a></li>
+            </ul>
+        </nav>
+        <div class="site-tools" aria-label="站点工具">
             
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hu5250448583294231844.png" width="300"
-                            height="257" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">🍥</span>
-                
-            </figure>
+                <a class="icon-control" href="/index.xml" aria-label="订阅 RSS"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+</a>
             
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">NomadJoe</a></h1>
-            <h2 class="site-description">to feel,to experience</h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://www.bilibili.com/'
-                        target="_blank"
-                        title="Biliili"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://github.com/CaiJimmy/hugo-theme-stack'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>友情链接</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="切换配色" aria-pressed="false">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -223,160 +81,111 @@
 
 
 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>暗色模式</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
+            </button>
         </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
+    </div>
+</header>
+<main id="main-content" class="site-main" data-testid="article-main">
+    <div class="reading-progress" data-testid="reading-progress" aria-hidden="true">
+        <span class="reading-progress__line"></span>
+        <span class="reading-progress__stone"></span>
+    </div>
+
+    <article class="article-reader">
+        <div class="article-reader__layout">
+            <div class="article-reader__document">
+                <header class="article-reader__header">
+    <p class="section-kicker">FIELD NOTE / OPEN LOG</p>
+    <h1 data-testid="article-title">现代C&#43;&#43;学习</h1>
+
+    <div class="article-reader__meta">
+        <time datetime="2026-04-06">2026.04.06</time>
+        <span aria-hidden="true">/</span>
+        <time data-testid="article-reading-time" datetime="PT16M">16 分钟阅读</time>
+    </div>
+
+    
+        <ul class="article-reader__terms" aria-label="分类">
+            
+                <li><a href="/categories/cc&#43;&#43;-study/">C&amp;C&#43;&#43; Study</a></li>
+            
+        </ul>
+    
+
+    
+    
+</header>
+
+
+                <details class="article-toc-mobile">
+            <summary>目录</summary>
+            <div class="article-toc-mobile__content">
+                <nav id="TableOfContentsMobile" aria-label="目录">
   <ol>
     <li>
       <ol>
-        <li><a href="#类和对象">类和对象</a>
+        <li>
           <ol>
-            <li><a href="#类的基本知识">类的基本知识</a></li>
-            <li><a href="#类的继承与多态">类的继承与多态</a></li>
-            <li><a href="#类的进阶知识">类的进阶知识</a></li>
+            <li><a href="#类和对象">类和对象</a>
+              <ol>
+                <li><a href="#类的基本知识">类的基本知识</a></li>
+                <li><a href="#类的继承与多态">类的继承与多态</a></li>
+                <li><a href="#类的进阶知识">类的进阶知识</a></li>
+              </ol>
+            </li>
+            <li><a href="#模板">模板</a>
+              <ol>
+                <li><a href="#函数模板">函数模板</a></li>
+                <li><a href="#类模板">类模板</a></li>
+              </ol>
+            </li>
+            <li><a href="#lambda表达式">lambda表达式</a>
+              <ol>
+                <li><a href="#定义方式">定义方式</a></li>
+                <li><a href="#本质">本质</a></li>
+                <li><a href="#按值捕获按引用捕获">按值捕获&amp;按引用捕获</a></li>
+                <li><a href="#泛型lambda">泛型lambda</a></li>
+              </ol>
+            </li>
+            <li><a href="#右值引用与移动语义">右值引用与移动语义</a>
+              <ol>
+                <li><a href="#左值与右值">左值与右值</a></li>
+                <li><a href="#右值引用">右值引用</a></li>
+                <li><a href="#移动语义">移动语义</a></li>
+              </ol>
+            </li>
+            <li><a href="#完美转发">完美转发</a></li>
+            <li><a href="#左值右值与完美转发的总结">左值右值与完美转发的总结</a>
+              <ol>
+                <li><a href="#1-左值-lvalue-vs-右值-rvalue">1. 左值 (Lvalue) vs 右值 (Rvalue)</a></li>
+                <li><a href="#2-左值引用-vs-右值引用">2. 左值引用 vs 右值引用</a></li>
+                <li><a href="#3完美转发">3.完美转发</a></li>
+                <li><a href="#4-万能引用-universal-reference--forwarding-reference">4. 万能引用 (Universal Reference / Forwarding Reference)</a></li>
+                <li><a href="#5-引用折叠-reference-collapsing">5. 引用折叠 (Reference Collapsing)</a></li>
+                <li><a href="#6-stdforward">6. std::forward</a></li>
+                <li><a href="#总结">总结</a></li>
+              </ol>
+            </li>
+            <li><a href="#函数封装与绑定">函数封装与绑定</a></li>
+            <li><a href="#常量表达式和constexpr">常量表达式和constexpr</a></li>
+            <li><a href="#函数式编程">函数式编程</a></li>
           </ol>
         </li>
-        <li><a href="#模板">模板</a>
-          <ol>
-            <li><a href="#函数模板">函数模板</a></li>
-            <li><a href="#类模板">类模板</a></li>
-          </ol>
-        </li>
-        <li><a href="#lambda表达式">lambda表达式</a>
-          <ol>
-            <li><a href="#定义方式">定义方式</a></li>
-            <li><a href="#本质">本质</a></li>
-            <li><a href="#按值捕获按引用捕获">按值捕获&amp;按引用捕获</a></li>
-            <li><a href="#泛型lambda">泛型lambda</a></li>
-          </ol>
-        </li>
-        <li><a href="#右值引用与移动语义">右值引用与移动语义</a>
-          <ol>
-            <li><a href="#左值与右值">左值与右值</a></li>
-            <li><a href="#右值引用">右值引用</a></li>
-            <li><a href="#移动语义">移动语义</a></li>
-          </ol>
-        </li>
-        <li><a href="#完美转发">完美转发</a></li>
-        <li><a href="#左值右值与完美转发的总结">左值右值与完美转发的总结</a>
-          <ol>
-            <li><a href="#1-左值-lvalue-vs-右值-rvalue">1. 左值 (Lvalue) vs 右值 (Rvalue)</a></li>
-            <li><a href="#2-左值引用-vs-右值引用">2. 左值引用 vs 右值引用</a></li>
-            <li><a href="#3完美转发">3.完美转发</a></li>
-            <li><a href="#4-万能引用-universal-reference--forwarding-reference">4. 万能引用 (Universal Reference / Forwarding Reference)</a></li>
-            <li><a href="#5-引用折叠-reference-collapsing">5. 引用折叠 (Reference Collapsing)</a></li>
-            <li><a href="#6-stdforward">6. std::forward</a></li>
-            <li><a href="#总结">总结</a></li>
-          </ol>
-        </li>
-        <li><a href="#函数封装与绑定">函数封装与绑定</a></li>
-        <li><a href="#常量表达式和constexpr">常量表达式和constexpr</a></li>
-        <li><a href="#函数式编程">函数式编程</a></li>
       </ol>
     </li>
   </ol>
 </nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/cc&#43;&#43;-study/" >
-                C&amp;C&#43;&#43; Study
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/">现代C&#43;&#43;学习</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2026-04-06</time>
             </div>
-        
+        </details>
 
-        
-    </footer>
-    
-
-    
-</div>
-
-</header>
-
-    <section class="article-content">
-    
-    
-    <h3 id="类和对象">类和对象
-</h3><h4 id="类的基本知识">类的基本知识
-</h4><h5 id="类的构造函数">类的构造函数
-</h5><p>构造函数的名字和类名相同，没有返回类型。对象创建时会自动调用，用来保证对象一出生就是“可用状态”。</p>
+                <div class="article-content">
+                    <h3 id="类和对象">类和对象
+</h3>
+<h4 id="类的基本知识">类的基本知识
+</h4>
+<h5 id="类的构造函数">类的构造函数
+</h5>
+<p>构造函数的名字和类名相同，没有返回类型。对象创建时会自动调用，用来保证对象一出生就是“可用状态”。</p>
 <p>常见形式：</p>
 <ol>
 <li>默认构造函数（无参）</li>
@@ -415,7 +224,8 @@
 <li>成员初始化顺序由“声明顺序”决定，不是初始化列表书写顺序。</li>
 </ol>
 <h5 id="类的拷贝构造函数">类的拷贝构造函数
-</h5><p>拷贝构造就是“用一个同类型老对象，生成一个新对象”。</p>
+</h5>
+<p>拷贝构造就是“用一个同类型老对象，生成一个新对象”。</p>
 <p>典型签名：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -471,7 +281,8 @@
 <li>深拷贝：复制资源本体，每个对象各管各的资源。</li>
 </ol>
 <h5 id="类的移动构造函数">类的移动构造函数
-</h5><p>移动构造不是“复制资源”，而是“接管资源”。</p>
+</h5>
+<p>移动构造不是“复制资源”，而是“接管资源”。</p>
 <p>典型签名：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -528,7 +339,8 @@
 <li>被移动对象必须保持“可析构、可赋值”的有效但未指定状态。</li>
 </ol>
 <h5 id="类的析构函数">类的析构函数
-</h5><p>析构函数就是对象的“收尾清理”。</p>
+</h5>
+<p>析构函数就是对象的“收尾清理”。</p>
 <p>典型签名：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -571,7 +383,8 @@
 </div>
 </div><p>常见坑：资源管理类通常遵循“规则五（Rule of Five）”，即拷贝构造、拷贝赋值、移动构造、移动赋值、析构这五个函数要整体考虑。</p>
 <h4 id="类的继承与多态">类的继承与多态
-</h4><p>多态实现的前提</p>
+</h4>
+<p>多态实现的前提</p>
 <ol>
 <li>类的成员函数有虚函数</li>
 <li>公有继承的派生类</li>
@@ -596,8 +409,10 @@
 </div>
 </div><p>不可实例化，需要派生一个类且重写虚函数，实例化派生类</p>
 <h4 id="类的进阶知识">类的进阶知识
-</h4><h5 id="override和final限定符">override和final限定符
-</h5><p><code>override</code> 和 <code>final</code> 是 <code>C++11</code> 引入的上下文关键字。</p>
+</h4>
+<h5 id="override和final限定符">override和final限定符
+</h5>
+<p><code>override</code> 和 <code>final</code> 是 <code>C++11</code> 引入的上下文关键字。</p>
 <p>在派生类中重写虚函数时，使用 <code>override</code> 可以让编译器检查函数签名是否真的匹配基类，防止“看起来像重写，其实是重载”的错误。</p>
 <p><code>final</code> 可以阻止继续重写：</p>
 <ol>
@@ -630,7 +445,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="静态成员">静态成员
-</h5><p>静态成员属于类本身，不属于某个对象。</p>
+</h5>
+<p>静态成员属于类本身，不属于某个对象。</p>
 <p>静态成员变量不依赖对象存在，通常用于：</p>
 <ol>
 <li>统计同类对象数量。</li>
@@ -671,7 +487,8 @@
 </div>
 </div><p>静态成员函数里没有 <code>this</code> 指针，所以不能直接访问非静态成员；但可以通过传入对象，再间接访问对象成员。</p>
 <h5 id="const成员函数">const成员函数
-</h5><p><code>const</code> 成员函数承诺“不会修改对象可观察状态”。</p>
+</h5>
+<p><code>const</code> 成员函数承诺“不会修改对象可观察状态”。</p>
 <p>本质上可以理解为：<code>this</code> 的类型变成了 <code>const ClassName*</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -713,7 +530,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="this指针">this指针
-</h5><p><code>this</code> 就是“当前对象自己的地址”。</p>
+</h5>
+<p><code>this</code> 就是“当前对象自己的地址”。</p>
 <p>在非静态成员函数中，编译器会隐式传入 <code>this</code> 指针。</p>
 <ol>
 <li>普通成员函数中：<code>this</code> 类型近似 <code>ClassName*</code>。</li>
@@ -751,7 +569,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="访问父类中的函数">访问父类中的函数
-</h5><p>在子类中调用父类版本函数，可以使用作用域解析运算符：</p>
+</h5>
+<p>在子类中调用父类版本函数，可以使用作用域解析运算符：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -790,7 +609,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="友元函数与类">友元函数与类
-</h5><p>友元是“被特批访问私有成员的外部函数/类”。</p>
+</h5>
+<p>友元是“被特批访问私有成员的外部函数/类”。</p>
 <p>友元不属于类成员，但可以访问类的 <code>private/protected</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -828,8 +648,10 @@
 <li>友元是“打洞”机制，能不用就少用，优先保持封装性。</li>
 </ol>
 <h3 id="模板">模板
-</h3><h4 id="函数模板">函数模板
-</h4><p><img src="/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/%E7%8E%B0%E4%BB%A3C&#43;&#43;%E5%AD%A6%E4%B9%A0-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF.png"
+</h3>
+<h4 id="函数模板">函数模板
+</h4>
+<p><img src="/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/%E7%8E%B0%E4%BB%A3C&#43;&#43;%E5%AD%A6%E4%B9%A0-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF.png"
 	width="1226"
 	height="305"
 	srcset="/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/%E7%8E%B0%E4%BB%A3C&#43;&#43;%E5%AD%A6%E4%B9%A0-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF_hu3933510204040298527.png 480w, /p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/%E7%8E%B0%E4%BB%A3C&#43;&#43;%E5%AD%A6%E4%B9%A0-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF_hu3470704922015443615.png 1024w"
@@ -842,7 +664,8 @@
 	
 ></p>
 <h5 id="基本概念">基本概念
-</h5><div class="highlight"><div class="chroma">
+</h5>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -883,7 +706,8 @@
 </div>
 </div><p>补充：<code>class</code> 和 <code>typename</code> 在模板参数列表中等价，二者都可以用。</p>
 <h5 id="显式实例化">显式实例化
-</h5><p>显式实例化是“我提前告诉编译器：这个类型版本一定要生成”。</p>
+</h5>
+<p>显式实例化是“我提前告诉编译器：这个类型版本一定要生成”。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -894,12 +718,14 @@
 </div>
 </div><p>如果不显式实例化，通常由编译器根据调用点进行隐式实例化。</p>
 <h5 id="实例化与特化的区别">实例化与特化的区别
-</h5><ol>
+</h5>
+<ol>
 <li>实例化（Instantiation）：按模板规则“生成代码”。</li>
 <li>特化（Specialization）：为某些特定类型“单独写实现”。</li>
 </ol>
 <h5 id="特化specialization">特化(Specialization)
-</h5><p>特化分为全特化和偏特化：</p>
+</h5>
+<p>特化分为全特化和偏特化：</p>
 <ol>
 <li>函数模板：只支持全特化，不支持偏特化（可用重载替代）。</li>
 <li>类模板：支持全特化和偏特化。</li>
@@ -921,8 +747,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="类模板">类模板
-</h4><h5 id="基本概念-1">基本概念
-</h5><p>类模板就是“按类型生成类”的模具。</p>
+</h4>
+<h5 id="基本概念-1">基本概念
+</h5>
+<p>类模板就是“按类型生成类”的模具。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -989,7 +817,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="类模板的特化">类模板的特化
-</h5><p>类模板全特化后，本质是一个全新的类定义，不会自动继承主模板实现。</p>
+</h5>
+<p>类模板全特化后，本质是一个全新的类定义，不会自动继承主模板实现。</p>
 <p>此外类模板还支持偏特化（部分特化）：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1020,7 +849,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="非类型模板参数">非类型模板参数
-</h5><p>模板参数不一定是类型，也可以是常量值。</p>
+</h5>
+<p>模板参数不一定是类型，也可以是常量值。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1045,7 +875,8 @@
 </div>
 </div><p>常见非类型模板参数：整数、枚举、指针、引用、<code>std::nullptr_t</code>（不同标准版本支持范围略有差异）。</p>
 <h5 id="模板嵌套">模板嵌套
-</h5><p>类模板的参数还可以是一个模板</p>
+</h5>
+<p>类模板的参数还可以是一个模板</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1080,11 +911,13 @@
 <li>模板是后面泛型 lambda、完美转发的基础能力，后面章节会用到这里的类型推导思想。</li>
 </ol>
 <h3 id="lambda表达式">lambda表达式
-</h3><p><a class="link" href="https://www.bilibili.com/video/BV13MmUYUE9S/?vd_source=5a0790755035f26a67935abfbfcdfd5b"  target="_blank" rel="noopener"
+</h3>
+<p><a class="link" href="https://www.bilibili.com/video/BV13MmUYUE9S/?vd_source=5a0790755035f26a67935abfbfcdfd5b"  target="_blank" rel="noopener"
     >一起来学C++ 32.Lambda表达式_哔哩哔哩_bilibili</a>
 <code>C++14</code>以后引入了泛型lambda</p>
 <h4 id="定义方式">定义方式
-</h4><div class="highlight"><div class="chroma">
+</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1121,7 +954,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="本质">本质
-</h4><p>lambda表达式的本质是函数对象的一种快捷定义方式，同时会有的捕获变量的成员变量</p>
+</h4>
+<p>lambda表达式的本质是函数对象的一种快捷定义方式，同时会有的捕获变量的成员变量</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1160,7 +994,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="按值捕获按引用捕获">按值捕获&amp;按引用捕获
-</h4><p>捕获变量有两种方式，按值捕获 和 按引用捕获</p>
+</h4>
+<p>捕获变量有两种方式，按值捕获 和 按引用捕获</p>
 <p>按值捕获，初始化时只是复制了x,y的值</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1264,7 +1099,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="泛型lambda">泛型lambda
-</h4><p>在<code>C++14</code>标准以后，引入了泛型<code>lambda</code>,实现的方法是在函数的参数类型中使用<code>auto</code>关键字</p>
+</h4>
+<p>在<code>C++14</code>标准以后，引入了泛型<code>lambda</code>,实现的方法是在函数的参数类型中使用<code>auto</code>关键字</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1289,8 +1125,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="右值引用与移动语义">右值引用与移动语义
-</h3><h4 id="左值与右值">左值与右值
-</h4><p>左值能放在表达式的左侧，能够代表一块存储区域，判断左值的方式一般是 能否获得这个表达式的引用或者取地址</p>
+</h3>
+<h4 id="左值与右值">左值与右值
+</h4>
+<p>左值能放在表达式的左侧，能够代表一块存储区域，判断左值的方式一般是 能否获得这个表达式的引用或者取地址</p>
 <p>计算中间结果等存放在临时中间对象中的是右值（纯右值）</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1308,7 +1146,8 @@
 </div>
 </div><p>在<code>C++11</code>之后，有<code>glvalue</code>（泛左值）和<code>prvalue</code>（纯右值），泛左值有被分为<code>lvalue</code>（左值）和<code>xvalue(eXpiring value)</code>（亡值）</p>
 <h4 id="右值引用">右值引用
-</h4><p>使用<code>&amp;&amp;</code>来定义右值的引用，右值的引用只能绑定右值</p>
+</h4>
+<p>使用<code>&amp;&amp;</code>来定义右值的引用，右值的引用只能绑定右值</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1333,7 +1172,8 @@
 其原因是 拷贝省略（<code>Copy Elison</code>）的优化，直接省略临时对象的创建，并直接在目标的存储位置构造对象</p>
 <p>在函数返回等场景也会有优化，都是省略临时对象的创建，例如返回值优化（<code>Return Value Optimization(RVO)</code>），具名返回值优化（<code>Named Return Value Optimization(NRVO)</code>）等</p>
 <h4 id="移动语义">移动语义
-</h4><div class="highlight"><div class="chroma">
+</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1367,7 +1207,8 @@
 </div><p>上面的<code>move</code>函数的作用是将 传入的参数转换为 右值引用 并返回，在上面的场景中，<code>std::move</code>的返回的右值引用就是一个亡值（<code>xvalue</code>即将消亡的值）</p>
 <p>移动语义常用的场景是智能指针的<code>unique_ptr</code>的控制权转移，另一个常见场景是在通用模板库中，例如<code>std::vector</code>就支持移动语义，方便将右值的指针等转移到容器里</p>
 <h3 id="完美转发">完美转发
-</h3><div class="highlight"><div class="chroma">
+</h3>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1498,7 +1339,7 @@
 </div><p>当传入的参数为左值时，<strong>模板参数T</strong>会被推导为实参类型的引用，即<code>T=string&amp;</code></p>
 <p>在<code>C++</code>语法中引用的引用是不被允许的，由此引出的会是 引用折叠规则</p>
 <p>引用折叠规则</p>
-<div class="table-wrapper"><table>
+<table>
   <thead>
       <tr>
           <th>T &amp; &amp;</th>
@@ -1519,7 +1360,7 @@
           <td>T &amp;&amp;</td>
       </tr>
   </tbody>
-</table></div>
+</table>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1605,8 +1446,10 @@
 </div><p>也就是此时<code>forward</code>函数返回了传入值<code>t</code>的左值引用</p>
 <p>总结，通过使用模板的万能引用结合<code>std::forward</code>函数实现参数在调用过程中按照参数原有类型进行传递，这就是完美转发的大致原理</p>
 <h3 id="左值右值与完美转发的总结">左值右值与完美转发的总结
-</h3><h4 id="1-左值-lvalue-vs-右值-rvalue">1. 左值 (Lvalue) vs 右值 (Rvalue)
-</h4><p>判断左值和右值，最简单的方法是看**“它是否有名字”<strong>以及</strong>“你能否取它的地址”**。</p>
+</h3>
+<h4 id="1-左值-lvalue-vs-右值-rvalue">1. 左值 (Lvalue) vs 右值 (Rvalue)
+</h4>
+<p>判断左值和右值，最简单的方法是看**“它是否有名字”<strong>以及</strong>“你能否取它的地址”**。</p>
 <ul>
 <li><strong>左值 (Lvalue)</strong>：
 <ul>
@@ -1624,13 +1467,15 @@
 </li>
 </ul>
 <h4 id="2-左值引用-vs-右值引用">2. 左值引用 vs 右值引用
-</h4><p>引用就是<strong>别名</strong>。</p>
+</h4>
+<p>引用就是<strong>别名</strong>。</p>
 <ul>
 <li><strong>左值引用 (T&amp;)</strong>：只能绑定到左值。</li>
 <li><strong>右值引用 (T&amp;&amp;)</strong>：只能绑定到右值。它的存在是为了<strong>给将死的临时对象续命</strong>，或者为了<strong>窃取它的资源</strong>。</li>
 </ul>
 <h4 id="3完美转发">3.完美转发
-</h4><p>完美转发要解决的问题是：<strong>当函数作为“中间商”传递参数时，参数的“左/右值属性”会丢失。</strong></p>
+</h4>
+<p>完美转发要解决的问题是：<strong>当函数作为“中间商”传递参数时，参数的“左/右值属性”会丢失。</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1673,19 +1518,21 @@
 </div>
 </div><p><strong>结论</strong>：无论你传给 wrapper 的是左值还是右值，<strong>只要到了 wrapper 内部，参数 arg 永远是左值</strong>。如果不用完美转发，永远调用的都是 real_func 的左值版本。</p>
 <h4 id="4-万能引用-universal-reference--forwarding-reference">4. 万能引用 (Universal Reference / Forwarding Reference)
-</h4><p>C++11 规定：如果一个<strong>模板参数</strong>的类型是 T&amp;&amp;，且 T 是需要推导的，那么它就不是单纯的“右值引用”，而是<strong>万能引用</strong>。
+</h4>
+<p>C++11 规定：如果一个<strong>模板参数</strong>的类型是 T&amp;&amp;，且 T 是需要推导的，那么它就不是单纯的“右值引用”，而是<strong>万能引用</strong>。
 <strong>推导规则（牢记）：</strong></p>
 <ol>
 <li><strong>传入左值</strong>：T 被推导为 Type&amp;。</li>
 <li><strong>传入右值</strong>：T 被推导为 Type (即原始类型)。</li>
 </ol>
 <h4 id="5-引用折叠-reference-collapsing">5. 引用折叠 (Reference Collapsing)
-</h4><p>既然 T 可能被推导为引用，那 T&amp;&amp; 就会出现 Type&amp; &amp;&amp; 这种奇怪的东西。C++ 编译器会进行“折叠”：</p>
+</h4>
+<p>既然 T 可能被推导为引用，那 T&amp;&amp; 就会出现 Type&amp; &amp;&amp; 这种奇怪的东西。C++ 编译器会进行“折叠”：</p>
 <ul>
 <li>只要遇到一个 &amp; (左值引用)，结果就是左值引用。</li>
 <li>只有两个都是 &amp;&amp; (右值引用)，结果才是右值引用。</li>
 </ul>
-<div class="table-wrapper"><table>
+<table>
   <thead>
       <tr>
           <th></th>
@@ -1714,9 +1561,10 @@
           <td>右值引用</td>
       </tr>
   </tbody>
-</table></div>
+</table>
 <h4 id="6-stdforward">6. std::forward
-</h4><p>即使通过万能引用和引用折叠，我们得到了正确的<strong>类型</strong>（是 string&amp; 还是 string&amp;&amp;），但在 wrapper 函数体内，变量 arg 本身依然是<strong>左值</strong>（因为它有名字）。</p>
+</h4>
+<p>即使通过万能引用和引用折叠，我们得到了正确的<strong>类型</strong>（是 string&amp; 还是 string&amp;&amp;），但在 wrapper 函数体内，变量 arg 本身依然是<strong>左值</strong>（因为它有名字）。</p>
 <p>我们需要一种机制：</p>
 <ul>
 <li>如果 T 是左值引用，把 arg 保持为左值。</li>
@@ -1757,14 +1605,16 @@
 <li><strong>结果</strong>：强制转换为右值引用（即右值）。</li>
 </ol>
 <h4 id="总结">总结
-</h4><p><strong>完美转发</strong></p>
+</h4>
+<p><strong>完美转发</strong></p>
 <ol>
 <li><strong>万能引用 (T&amp;&amp;)</strong>：负责根据实参，把 T 推导成“包含左/右值信息”的类型（Type&amp; 或 Type）。</li>
 <li><strong>引用折叠</strong>：负责处理 &amp; 和 &amp;&amp; 的冲突，确定参数 arg 的最终类型。</li>
 <li><code>std::forward&lt;T&gt;</code>：负责在最后一步，根据 <code>T </code>的类型，决定是否要对<code> arg</code> 进行 <code>static_cast&lt;Type&amp;&amp;&gt;</code> (即 <code>move</code>)。如果 <code>T </code>是左值引用，它就不转；如果 <code>T </code>是普通类型，它就强转为右值。</li>
 </ol>
 <h3 id="函数封装与绑定">函数封装与绑定
-</h3><p><code>std::function</code>是一个通用的多态函数封装器，可将函数指针，函数对象，lambda函数等进行封装</p>
+</h3>
+<p><code>std::function</code>是一个通用的多态函数封装器，可将函数指针，函数对象，lambda函数等进行封装</p>
 <p>在<code>std</code>中<code>std::function</code>用到的是定义是类模板的部分特化，如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1870,52 +1720,24 @@
 </div><p>需要注意，此处的绑定的是绑定的右值引用，实现的效果是传递值</p>
 <p>一句话总结，就是 与参数绑定，形成一个新的可调用对象</p>
 <h3 id="常量表达式和constexpr">常量表达式和constexpr
-</h3><h3 id="函数式编程">函数式编程
-</h3><p><a class="link" href="https://www.bilibili.com/video/BV1nf421B7Wk/?vd_source=b833d3fb67c0663c4d5e48c9953b427c"  target="_blank" rel="noopener"
+</h3>
+<h3 id="函数式编程">函数式编程
+</h3>
+<p><a class="link" href="https://www.bilibili.com/video/BV1nf421B7Wk/?vd_source=b833d3fb67c0663c4d5e48c9953b427c"  target="_blank" rel="noopener"
     >【现代C++】函数式编程优雅实现信号槽_哔哩哔哩_bilibili</a></p>
 
-</section>
+                </div>
 
-
-    <footer class="article-footer">
+                <footer class="article-reader__footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/cc&#43;&#43;/">C&amp;C&#43;&#43;</a>
-        
-    </section>
-
-
-    </footer>
-
-
-    
-        <link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
-            ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
-                defer
-                >
-            </script><script>
-    window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
-    
-</article>
-
+        <div class="article-reader__tags">
+            <p class="section-kicker">FIELD TAGS</p>
+            <ul aria-label="标签">
+                
+                    <li><a href="/tags/cc&#43;&#43;/">C&amp;C&#43;&#43;</a></li>
+                
+            </ul>
+        </div>
     
 
     
@@ -1994,28 +1816,96 @@
     </div>
 </aside>
 
-     
-    
-        
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2025 - 
-        
-        2026 NomadJoe
-    </section>
-    
-    <section class="powerby">
-        
-            experience <br/>
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
-    </section>
 </footer>
 
+            </div>
+
+            <aside class="article-toc-rail">
+            <p class="section-kicker">ON THIS PAGE</p>
+            <nav id="TableOfContents" class="article-toc" data-testid="article-toc" aria-label="目录">
+  <ol>
+    <li>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#类和对象">类和对象</a>
+              <ol>
+                <li><a href="#类的基本知识">类的基本知识</a></li>
+                <li><a href="#类的继承与多态">类的继承与多态</a></li>
+                <li><a href="#类的进阶知识">类的进阶知识</a></li>
+              </ol>
+            </li>
+            <li><a href="#模板">模板</a>
+              <ol>
+                <li><a href="#函数模板">函数模板</a></li>
+                <li><a href="#类模板">类模板</a></li>
+              </ol>
+            </li>
+            <li><a href="#lambda表达式">lambda表达式</a>
+              <ol>
+                <li><a href="#定义方式">定义方式</a></li>
+                <li><a href="#本质">本质</a></li>
+                <li><a href="#按值捕获按引用捕获">按值捕获&amp;按引用捕获</a></li>
+                <li><a href="#泛型lambda">泛型lambda</a></li>
+              </ol>
+            </li>
+            <li><a href="#右值引用与移动语义">右值引用与移动语义</a>
+              <ol>
+                <li><a href="#左值与右值">左值与右值</a></li>
+                <li><a href="#右值引用">右值引用</a></li>
+                <li><a href="#移动语义">移动语义</a></li>
+              </ol>
+            </li>
+            <li><a href="#完美转发">完美转发</a></li>
+            <li><a href="#左值右值与完美转发的总结">左值右值与完美转发的总结</a>
+              <ol>
+                <li><a href="#1-左值-lvalue-vs-右值-rvalue">1. 左值 (Lvalue) vs 右值 (Rvalue)</a></li>
+                <li><a href="#2-左值引用-vs-右值引用">2. 左值引用 vs 右值引用</a></li>
+                <li><a href="#3完美转发">3.完美转发</a></li>
+                <li><a href="#4-万能引用-universal-reference--forwarding-reference">4. 万能引用 (Universal Reference / Forwarding Reference)</a></li>
+                <li><a href="#5-引用折叠-reference-collapsing">5. 引用折叠 (Reference Collapsing)</a></li>
+                <li><a href="#6-stdforward">6. std::forward</a></li>
+                <li><a href="#总结">总结</a></li>
+              </ol>
+            </li>
+            <li><a href="#函数封装与绑定">函数封装与绑定</a></li>
+            <li><a href="#常量表达式和constexpr">常量表达式和constexpr</a></li>
+            <li><a href="#函数式编程">函数式编程</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </aside>
+        </div>
+
+        
+            <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+        
+    </article>
 
     
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -2095,24 +1985,13 @@
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+        </main><footer class="field-footer">
+    <div class="field-footer__inner">
+        <p><span aria-hidden="true">©</span> 2026 NomadJoe</p>
+    </div>
+</footer>
+<script type="text/javascript" src="/ts/field-notes.bbb1f58da5208060e8df1b4e81dd161355cb9abe0e000402ac419570a346a495.js" integrity="sha256-u7H1jaUggGDo3xtOgd0WE1XLmr4OAAQCrEGVcKNGpJU=" defer></script>
 
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
 
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
+</body>
 </html>

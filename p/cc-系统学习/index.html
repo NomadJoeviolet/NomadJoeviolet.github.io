@@ -4,26 +4,28 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基于 南科大 于仕琪老师的课程学习笔记 【快速学习C和C++，基础语法和优化策略，学了不再怕指针(南科大计算机系原版)】https://www.bilibili.com/video/BV1Vf4y1P7pq?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
 <title>C&amp;C&#43;&#43; 系统学习</title>
 
-<link rel='canonical' href='https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/'>
-
-<link rel="stylesheet" href="/scss/style.min.1d228ea7690a965de9e7d8591cfa3a19afe76b85fa0ec74dcd88180add482f92.css"><meta property='og:title' content="C&C++ 系统学习">
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/'><link rel="stylesheet" href="/scss/field-notes.min.c66b018ab2fe010d4124c4b8cf49707f4ed2bcafc92b5a3e4b33ce5c4a6bec99.css">
+<meta property='og:title' content="C&C++ 系统学习">
 <meta property='og:description' content="基于 南科大 于仕琪老师的课程学习笔记 【快速学习C和C++，基础语法和优化策略，学了不再怕指针(南科大计算机系原版)】https://www.bilibili.com/video/BV1Vf4y1P7pq?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/'>
 <meta property='og:site_name' content='NomadJoe'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&amp;C&#43;&#43;' /><meta property='article:tag' content='BASE' /><meta property='article:published_time' content='2025-09-17T17:31:07&#43;08:00'/><meta property='article:modified_time' content='2025-09-17T17:31:07&#43;08:00'/>
-<meta name="twitter:title" content="C&C++ 系统学习">
-<meta name="twitter:description" content="基于 南科大 于仕琪老师的课程学习笔记 【快速学习C和C++，基础语法和优化策略，学了不再怕指针(南科大计算机系原版)】https://www.bilibili.com/video/BV1Vf4y1P7pq?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
+<meta name="twitter:title" content="C&amp;C&#43;&#43; 系统学习">
+<meta name="twitter:description" content="基于 南科大 于仕琪老师的课程学习笔记 【快速学习C和C&#43;&#43;，基础语法和优化策略，学了不再怕指针(南科大计算机系原版)】https://www.bilibili.com/video/BV1Vf4y1P7pq?vd_source=5a0790755035f26a67935abfbfcdfd5b
+">
+    <meta name="twitter:card" content="summary">
+
     <link rel="shortcut icon" href="/favicon.ico" />
+<link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 
     </head>
-    <body class="
-    article-page
-    ">
+    <body class="field-notes article-page">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
             if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
+                localStorage.setItem(colorSchemeKey, "dark");
             }
         })();
     </script><script>
@@ -41,181 +43,35 @@
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
+<a class="skip-link" href="#main-content">跳到主要内容</a><header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-wordmark" href="/" aria-label="NomadJoe 首页">NJ<span aria-hidden="true">/</span>FIELD NOTES</a>
+        <button class="site-menu-toggle" id="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+            <span class="site-menu-toggle__label">菜单</span>
+        </button>
+        <nav class="primary-nav" data-testid="primary-nav" aria-label="主导航">
+            <ul id="primary-menu">
+                <li><a href="/">首页</a></li>
+                <li><a href="/archives/">笔记</a></li>
+                <li><a href="/categories/%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae/">项目</a></li>
+                <li><a href="/%E5%85%B3%E4%BA%8E/">关于</a></li>
+                <li><a href="/search/">搜索</a></li>
+            </ul>
+        </nav>
+        <div class="site-tools" aria-label="站点工具">
             
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hu5250448583294231844.png" width="300"
-                            height="257" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">🍥</span>
-                
-            </figure>
+                <a class="icon-control" href="/index.xml" aria-label="订阅 RSS"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+</a>
             
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">NomadJoe</a></h1>
-            <h2 class="site-description">to feel,to experience</h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://www.bilibili.com/'
-                        target="_blank"
-                        title="Biliili"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://github.com/CaiJimmy/hugo-theme-stack'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>友情链接</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="切换配色" aria-pressed="false">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -223,402 +79,357 @@
 
 
 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>暗色模式</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
+            </button>
         </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
+    </div>
+</header>
+<main id="main-content" class="site-main" data-testid="article-main">
+    <div class="reading-progress" data-testid="reading-progress" aria-hidden="true">
+        <span class="reading-progress__line"></span>
+        <span class="reading-progress__stone"></span>
+    </div>
+
+    <article class="article-reader">
+        <div class="article-reader__layout">
+            <div class="article-reader__document">
+                <header class="article-reader__header">
+    <p class="section-kicker">FIELD NOTE / OPEN LOG</p>
+    <h1 data-testid="article-title">C&amp;C&#43;&#43; 系统学习</h1>
+
+    <div class="article-reader__meta">
+        <time datetime="2025-09-17">2025.09.17</time>
+        <span aria-hidden="true">/</span>
+        <time data-testid="article-reading-time" datetime="PT28M">28 分钟阅读</time>
+    </div>
+
+    
+        <ul class="article-reader__terms" aria-label="分类">
+            
+                <li><a href="/categories/cc&#43;&#43;-study/">C&amp;C&#43;&#43; Study</a></li>
+            
+                <li><a href="/categories/base-study/">BASE Study</a></li>
+            
+        </ul>
+    
+
+    
+    
+</header>
+
+
+                <details class="article-toc-mobile">
+            <summary>目录</summary>
+            <div class="article-toc-mobile__content">
+                <nav id="TableOfContentsMobile" aria-label="目录">
   <ol>
-    <li><a href="#程序基本常识">程序基本常识</a>
+    <li>
       <ol>
-        <li>
+        <li><a href="#程序基本常识">程序基本常识</a>
           <ol>
-            <li><a href="#编译与链接">编译与链接</a></li>
-            <li><a href="#编译器与链接器">编译器与链接器</a></li>
-            <li><a href="#错误">错误</a></li>
-            <li><a href="#预处理与宏">预处理与宏</a></li>
-            <li><a href="#初始化">初始化</a></li>
+            <li>
+              <ol>
+                <li><a href="#编译与链接">编译与链接</a></li>
+                <li><a href="#编译器与链接器">编译器与链接器</a></li>
+                <li><a href="#错误">错误</a></li>
+                <li><a href="#预处理与宏">预处理与宏</a></li>
+                <li><a href="#初始化">初始化</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
-      </ol>
-    </li>
-    <li><a href="#data-types-and-arithmetic-operators">Data-Types-and-Arithmetic-Operators</a>
-      <ol>
-        <li><a href="#integer-numbers">integer-numbers</a>
+        <li><a href="#data-types-and-arithmetic-operators">Data-Types-and-Arithmetic-Operators</a>
           <ol>
-            <li><a href="#int">int</a></li>
-            <li><a href="#sizeof">sizeof()</a></li>
-            <li><a href="#char">char</a></li>
-            <li><a href="#bool">bool</a></li>
-            <li><a href="#cstdint">cstdint</a></li>
+            <li><a href="#integer-numbers">integer-numbers</a>
+              <ol>
+                <li><a href="#int">int</a></li>
+                <li><a href="#sizeof">sizeof()</a></li>
+                <li><a href="#char">char</a></li>
+                <li><a href="#bool">bool</a></li>
+                <li><a href="#cstdint">cstdint</a></li>
+              </ol>
+            </li>
+            <li><a href="#floating-point-numbers">floating-point-numbers</a>
+              <ol>
+                <li><a href="#float">float</a></li>
+                <li><a href="#inf-and-nan">inf and nan</a></li>
+                <li><a href="#double">double</a></li>
+                <li><a href="#long-double">long double</a></li>
+              </ol>
+            </li>
+            <li><a href="#arithmetic-operators">Arithmetic Operators</a>
+              <ol>
+                <li><a href="#constant-numbers">Constant-numbers</a></li>
+                <li><a href="#const类型限定符">const类型限定符</a></li>
+                <li><a href="#heading"></a></li>
+                <li><a href="#类型转换">类型转换</a></li>
+                <li><a href="#data-loss">Data loss</a></li>
+              </ol>
+            </li>
+            <li><a href="#auto">Auto</a></li>
           </ol>
         </li>
-        <li><a href="#floating-point-numbers">floating-point-numbers</a>
+        <li><a href="#branching-and-looping-statements">Branching-and-Looping-Statements</a>
           <ol>
-            <li><a href="#float">float</a></li>
-            <li><a href="#inf-and-nan">inf and nan</a></li>
-            <li><a href="#double">double</a></li>
-            <li><a href="#long-double">long double</a></li>
+            <li>
+              <ol>
+                <li><a href="#if-else">if else</a></li>
+                <li><a href="#三目运算符">三目运算符</a></li>
+                <li><a href="#logical-expressions">Logical Expressions</a></li>
+                <li><a href="#while-loop">while loop</a></li>
+                <li><a href="#do-while-loop">do-while loop</a></li>
+                <li><a href="#for-loop">for loop</a></li>
+                <li><a href="#endless-loop">endless-loop</a></li>
+                <li><a href="#goto-and-switch-statement">goto-and-switch Statement</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
-        <li><a href="#arithmetic-operators">Arithmetic Operators</a>
+        <li><a href="#data-structures">Data-Structures</a>
           <ol>
-            <li><a href="#constant-numbers">Constant-numbers</a></li>
-            <li><a href="#const类型限定符">const类型限定符</a></li>
-            <li><a href="#heading"></a></li>
-            <li><a href="#类型转换">类型转换</a></li>
-            <li><a href="#data-loss">Data loss</a></li>
+            <li><a href="#array">Array</a>
+              <ol>
+                <li><a href="#变长数组">变长数组</a></li>
+                <li><a href="#array-of-unkown-size">Array of unkown size</a></li>
+                <li><a href="#二维数组">二维数组</a></li>
+                <li><a href="#const-arrays">const-Arrays</a></li>
+              </ol>
+            </li>
+            <li><a href="#strings">Strings</a>
+              <ol>
+                <li><a href="#array-style-strings">Array-style strings</a></li>
+                <li><a href="#string-class">string class</a></li>
+              </ol>
+            </li>
+            <li><a href="#structunionenum">Struct&amp;Union&amp;Enum</a>
+              <ol>
+                <li><a href="#struct">Struct</a></li>
+                <li><a href="#union">Union</a></li>
+                <li><a href="#enum">Enum</a></li>
+              </ol>
+            </li>
+            <li><a href="#typedef">typedef</a></li>
           </ol>
         </li>
-        <li><a href="#auto">Auto</a></li>
-      </ol>
-    </li>
-    <li><a href="#branching-and-looping-statements">Branching-and-Looping-Statements</a>
-      <ol>
-        <li>
+        <li><a href="#memory-and-pointer">Memory and Pointer</a>
           <ol>
-            <li><a href="#if-else">if else</a></li>
-            <li><a href="#三目运算符">三目运算符</a></li>
-            <li><a href="#logical-expressions">Logical Expressions</a></li>
-            <li><a href="#while-loop">while loop</a></li>
-            <li><a href="#do-while-loop">do-while loop</a></li>
-            <li><a href="#for-loop">for loop</a></li>
-            <li><a href="#endless-loop">endless-loop</a></li>
-            <li><a href="#goto-and-switch-statement">goto-and-switch Statement</a></li>
+            <li><a href="#pointers">Pointers</a>
+              <ol>
+                <li><a href="#pointers-of-pointers">Pointers of Pointers</a></li>
+                <li><a href="#const-pointers">const pointers</a></li>
+              </ol>
+            </li>
+            <li><a href="#换行转义符">换行转义符</a></li>
+            <li><a href="#allocate-memoryc-style">Allocate-memory:C-style</a>
+              <ol>
+                <li><a href="#内存泄漏问题">内存泄漏问题</a></li>
+              </ol>
+            </li>
+            <li><a href="#allocate-memoryc-style-1">Allocate-memory:C++-style</a>
+              <ol>
+                <li><a href="#operator-new-and-new">operator <code>new</code> and <code>new[]</code></a></li>
+                <li><a href="#operator-delete-and-delete">operator <code>delete</code> and <code>delete[]</code></a></li>
+              </ol>
+            </li>
           </ol>
         </li>
-      </ol>
-    </li>
-    <li><a href="#data-structures">Data-Structures</a>
-      <ol>
-        <li><a href="#array">Array</a>
+        <li><a href="#basics-of-functions">Basics of Functions</a>
           <ol>
-            <li><a href="#变长数组">变长数组</a></li>
-            <li><a href="#array-of-unkown-size">Array of unkown size</a></li>
-            <li><a href="#二维数组">二维数组</a></li>
-            <li><a href="#const-arrays">const-Arrays</a></li>
+            <li><a href="#functions">Functions</a></li>
+            <li><a href="#parameters">Parameters</a>
+              <ol>
+                <li><a href="#值传递">值传递</a></li>
+                <li><a href="#引用传递-reference">引用传递-Reference</a></li>
+                <li><a href="#指针与引用的区别">指针与引用的区别</a></li>
+              </ol>
+            </li>
+            <li><a href="#return-statement">Return-statement</a></li>
+            <li><a href="#inline-functions">Inline-functions</a>
+              <ol>
+                <li><a href="#内联函数宏-的区别">内联函数&amp;宏 的区别</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
-        <li><a href="#strings">Strings</a>
+        <li><a href="#advances-in-functions">Advances in Functions</a>
           <ol>
-            <li><a href="#array-style-strings">Array-style strings</a></li>
-            <li><a href="#string-class">string class</a></li>
+            <li>
+              <ol>
+                <li><a href="#default-arguments">Default-arguments</a></li>
+                <li><a href="#function-overloading">Function-Overloading</a></li>
+                <li><a href="#function-templates">Function-templates</a></li>
+                <li><a href="#function-pointers-and-references">Function-Pointers and References</a></li>
+                <li><a href="#recursive-functions">Recursive-Functions</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
-        <li><a href="#structunionenum">Struct&amp;Union&amp;Enum</a>
+        <li><a href="#speedup-your-program">Speedup-Your-Program</a>
           <ol>
-            <li><a href="#struct">Struct</a></li>
-            <li><a href="#union">Union</a></li>
-            <li><a href="#enum">Enum</a></li>
+            <li><a href="#c-and-cpp-with-arm">C-and-Cpp-with-arm</a></li>
+            <li><a href="#speedup-your-program-1">Speedup-Your-Program</a></li>
           </ol>
         </li>
-        <li><a href="#typedef">typedef</a></li>
-      </ol>
-    </li>
-    <li><a href="#memory-and-pointer">Memory and Pointer</a>
-      <ol>
-        <li><a href="#pointers">Pointers</a>
+        <li><a href="#basics-of-classes">Basics of Classes</a>
           <ol>
-            <li><a href="#pointers-of-pointers">Pointers of Pointers</a></li>
-            <li><a href="#const-pointers">const pointers</a></li>
+            <li><a href="#classes-and-objects">classes-and-objects</a></li>
+            <li><a href="#constructors-and-destructors">Constructors-and-Destructors</a>
+              <ol>
+                <li></li>
+              </ol>
+            </li>
+            <li><a href="#this-pointer">this-Pointer</a></li>
+            <li><a href="#const-and-static-members">const-and-static-Members</a>
+              <ol>
+                <li></li>
+              </ol>
+            </li>
           </ol>
         </li>
-        <li><a href="#换行转义符">换行转义符</a></li>
-        <li><a href="#allocate-memoryc-style">Allocate-memory:C-style</a>
+        <li><a href="#advances-in-classes">Advances in Classes</a>
           <ol>
-            <li><a href="#内存泄漏问题">内存泄漏问题</a></li>
+            <li><a href="#operator-overloading">Operator-overloading</a></li>
+            <li><a href="#friend-functions">Friend-Functions</a></li>
+            <li><a href="#user-defined-type-conversion">user-defined-type-conversion</a></li>
+            <li><a href="#increment">Increment</a></li>
           </ol>
         </li>
-        <li><a href="#allocate-memoryc-style-1">Allocate-memory:C++-style</a>
+        <li><a href="#dynamic-memory-management-in-classes">Dynamic-Memory-Management-in-Classes</a>
           <ol>
-            <li><a href="#operator-new-and-new">operator <code>new</code> and <code>new[]</code></a></li>
-            <li><a href="#operator-delete-and-delete">operator <code>delete</code> and <code>delete[]</code></a></li>
+            <li><a href="#some-default-operations">Some-default-operations</a>
+              <ol>
+                <li><a href="#default-constructors">Default-Constructors</a></li>
+                <li><a href="#implicitly-defined-destructor">Implicitly-defined-Destructor</a></li>
+                <li><a href="#default-copy-constructors">Default-Copy-Constructors</a></li>
+                <li><a href="#default-copy-assignment">Default-Copy-Assignment</a></li>
+              </ol>
+            </li>
+            <li><a href="#copy-assignment">Copy-Assignment</a></li>
+            <li><a href="#an-example-with-dynamic-memory">An-Example-with-Dynamic-Memory</a></li>
+            <li><a href="#hard-copy">Hard-Copy</a></li>
+            <li><a href="#soft-copy">Soft-Copy</a></li>
+            <li><a href="#smart-pointers">Smart-Pointers</a>
+              <ol>
+                <li><a href="#stdshared_ptr">std::shared_ptr</a></li>
+                <li><a href="#stdunique_ptr">std::unique_ptr</a></li>
+                <li><a href="#how-to-understand-smart-pointers">How-to-Understand-Smart-Pointers</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
-      </ol>
-    </li>
-    <li><a href="#basics-of-functions">Basics of Functions</a>
-      <ol>
-        <li><a href="#functions">Functions</a></li>
-        <li><a href="#parameters">Parameters</a>
+        <li><a href="#class-inheritance">Class-Inheritance</a>
           <ol>
-            <li><a href="#值传递">值传递</a></li>
-            <li><a href="#引用传递-reference">引用传递-Reference</a></li>
-            <li><a href="#指针与引用的区别">指针与引用的区别</a></li>
+            <li><a href="#improve-your-source-code">Improve-your-source-code</a></li>
+            <li><a href="#derived-class">Derived-class</a>
+              <ol>
+                <li><a href="#构造函数与析构函数在子类中的执行">构造函数与析构函数在子类中的执行</a></li>
+              </ol>
+            </li>
+            <li><a href="#acess-control">Acess-Control</a></li>
+            <li><a href="#virtual-functions">Virtual-Functions</a></li>
+            <li><a href="#inheritance-and-dynamic-memory-allocation">Inheritance-and-dynamic-memory-allocation</a></li>
           </ol>
         </li>
-        <li><a href="#return-statement">Return-statement</a></li>
-        <li><a href="#inline-functions">Inline-functions</a>
+        <li><a href="#class-templates-and-std-library">Class-Templates-and-Std-Library</a>
           <ol>
-            <li><a href="#内联函数宏-的区别">内联函数&amp;宏 的区别</a></li>
+            <li><a href="#函数模板回顾">函数模板回顾</a></li>
+            <li><a href="#class-template">class-template</a></li>
+            <li><a href="#模板的参数">模板的参数</a></li>
+            <li><a href="#template-non-type-parameters">Template-Non-Type-Parameters</a></li>
+            <li><a href="#class-template-specialization">Class-template-specialization</a></li>
+            <li><a href="#std-classes">std-classes</a></li>
           </ol>
         </li>
-      </ol>
-    </li>
-    <li><a href="#advances-in-functions">Advances in Functions</a>
-      <ol>
-        <li>
+        <li><a href="#error-handling">Error-Handling</a>
           <ol>
-            <li><a href="#default-arguments">Default-arguments</a></li>
-            <li><a href="#function-overloading">Function-Overloading</a></li>
-            <li><a href="#function-templates">Function-templates</a></li>
-            <li><a href="#function-pointers-and-references">Function-Pointers and References</a></li>
-            <li><a href="#recursive-functions">Recursive-Functions</a></li>
+            <li><a href="#standard-output-stream-and-standard-error-stream">Standard-Output-Stream-and-Standard-Error-Stream</a></li>
+            <li><a href="#重定向">重定向</a></li>
+            <li><a href="#assert">assert</a></li>
+            <li><a href="#exceptions">Exceptions</a></li>
           </ol>
         </li>
-      </ol>
-    </li>
-    <li><a href="#speedup-your-program">Speedup-Your-Program</a>
-      <ol>
-        <li><a href="#c-and-cpp-with-arm">C-and-Cpp-with-arm</a></li>
-        <li><a href="#speedup-your-program-1">Speedup-Your-Program</a></li>
-      </ol>
-    </li>
-    <li><a href="#basics-of-classes">Basics of Classes</a>
-      <ol>
-        <li><a href="#classes-and-objects">classes-and-objects</a></li>
-        <li><a href="#constructors-and-destructors">Constructors-and-Destructors</a>
+        <li><a href="#nested-classes-and-rtti">Nested-Classes-and-RTTI</a>
           <ol>
-            <li></li>
+            <li><a href="#friend-classes">Friend-Classes</a></li>
+            <li><a href="#friend-member-functions">Friend-Member-Functions</a></li>
+            <li><a href="#nested-types">Nested-Types</a></li>
+            <li><a href="#nested-classes">Nested-Classes</a></li>
+            <li><a href="#runtime-type-identificationrtti">Runtime-Type-Identification(RTTI)</a>
+              <ol>
+                <li><a href="#more-type-cast-operations">More-Type-Cast-Operations</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
-        <li><a href="#this-pointer">this-Pointer</a></li>
-        <li><a href="#const-and-static-members">const-and-static-Members</a>
+        <li><a href="#code-optimization">Code-Optimization</a>
           <ol>
-            <li></li>
+            <li><a href="#register-and-cache">Register-and-Cache</a></li>
+            <li><a href="#locality-of-reference">Locality-of-Reference</a></li>
+            <li><a href="#计算cpu优化效率">计算<code>CPU</code>优化效率</a></li>
           </ol>
         </li>
-      </ol>
-    </li>
-    <li><a href="#advances-in-classes">Advances in Classes</a>
-      <ol>
-        <li><a href="#operator-overloading">Operator-overloading</a></li>
-        <li><a href="#friend-functions">Friend-Functions</a></li>
-        <li><a href="#user-defined-type-conversion">user-defined-type-conversion</a></li>
-        <li><a href="#increment">Increment</a></li>
-      </ol>
-    </li>
-    <li><a href="#dynamic-memory-management-in-classes">Dynamic-Memory-Management-in-Classes</a>
-      <ol>
-        <li><a href="#some-default-operations">Some-default-operations</a>
+        <li><a href="#个人的补充与总结">个人的补充与总结</a>
           <ol>
-            <li><a href="#default-constructors">Default-Constructors</a></li>
-            <li><a href="#implicitly-defined-destructor">Implicitly-defined-Destructor</a></li>
-            <li><a href="#default-copy-constructors">Default-Copy-Constructors</a></li>
-            <li><a href="#default-copy-assignment">Default-Copy-Assignment</a></li>
-          </ol>
-        </li>
-        <li><a href="#copy-assignment">Copy-Assignment</a></li>
-        <li><a href="#an-example-with-dynamic-memory">An-Example-with-Dynamic-Memory</a></li>
-        <li><a href="#hard-copy">Hard-Copy</a></li>
-        <li><a href="#soft-copy">Soft-Copy</a></li>
-        <li><a href="#smart-pointers">Smart-Pointers</a>
-          <ol>
-            <li><a href="#stdshared_ptr">std::shared_ptr</a></li>
-            <li><a href="#stdunique_ptr">std::unique_ptr</a></li>
-            <li><a href="#how-to-understand-smart-pointers">How-to-Understand-Smart-Pointers</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#class-inheritance">Class-Inheritance</a>
-      <ol>
-        <li><a href="#improve-your-source-code">Improve-your-source-code</a></li>
-        <li><a href="#derived-class">Derived-class</a>
-          <ol>
-            <li><a href="#构造函数与析构函数在子类中的执行">构造函数与析构函数在子类中的执行</a></li>
-          </ol>
-        </li>
-        <li><a href="#acess-control">Acess-Control</a></li>
-        <li><a href="#virtual-functions">Virtual-Functions</a></li>
-        <li><a href="#inheritance-and-dynamic-memory-allocation">Inheritance-and-dynamic-memory-allocation</a></li>
-      </ol>
-    </li>
-    <li><a href="#class-templates-and-std-library">Class-Templates-and-Std-Library</a>
-      <ol>
-        <li><a href="#函数模板回顾">函数模板回顾</a></li>
-        <li><a href="#class-template">class-template</a></li>
-        <li><a href="#模板的参数">模板的参数</a></li>
-        <li><a href="#template-non-type-parameters">Template-Non-Type-Parameters</a></li>
-        <li><a href="#class-template-specialization">Class-template-specialization</a></li>
-        <li><a href="#std-classes">std-classes</a></li>
-      </ol>
-    </li>
-    <li><a href="#error-handling">Error-Handling</a>
-      <ol>
-        <li><a href="#standard-output-stream-and-standard-error-stream">Standard-Output-Stream-and-Standard-Error-Stream</a></li>
-        <li><a href="#重定向">重定向</a></li>
-        <li><a href="#assert">assert</a></li>
-        <li><a href="#exceptions">Exceptions</a></li>
-      </ol>
-    </li>
-    <li><a href="#nested-classes-and-rtti">Nested-Classes-and-RTTI</a>
-      <ol>
-        <li><a href="#friend-classes">Friend-Classes</a></li>
-        <li><a href="#friend-member-functions">Friend-Member-Functions</a></li>
-        <li><a href="#nested-types">Nested-Types</a></li>
-        <li><a href="#nested-classes">Nested-Classes</a></li>
-        <li><a href="#runtime-type-identificationrtti">Runtime-Type-Identification(RTTI)</a>
-          <ol>
-            <li><a href="#more-type-cast-operations">More-Type-Cast-Operations</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#code-optimization">Code-Optimization</a>
-      <ol>
-        <li><a href="#register-and-cache">Register-and-Cache</a></li>
-        <li><a href="#locality-of-reference">Locality-of-Reference</a></li>
-        <li><a href="#计算cpu优化效率">计算<code>CPU</code>优化效率</a></li>
-      </ol>
-    </li>
-    <li><a href="#个人的补充与总结">个人的补充与总结</a>
-      <ol>
-        <li><a href="#关于include">关于Include</a></li>
-        <li><a href="#关于类">关于类</a></li>
-        <li><a href="#关于模板">关于模板</a>
-          <ol>
-            <li><a href="#类模板和函数模板的例子">类模板和函数模板的例子</a></li>
+            <li><a href="#关于include">关于Include</a></li>
+            <li><a href="#关于类">关于类</a></li>
+            <li><a href="#关于模板">关于模板</a>
+              <ol>
+                <li><a href="#类模板和函数模板的例子">类模板和函数模板的例子</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
       </ol>
     </li>
   </ol>
 </nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/cc&#43;&#43;-study/" >
-                C&amp;C&#43;&#43; Study
-            </a>
-        
-            <a href="/categories/base-study/" >
-                BASE Study
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/">C&amp;C&#43;&#43; 系统学习</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-09-17</time>
             </div>
-        
+        </details>
 
-        
-    </footer>
-    
-
-    
-</div>
-
-</header>
-
-    <section class="article-content">
-    
-    
-    <p>基于 南科大 于仕琪老师的课程学习笔记
+                <div class="article-content">
+                    <p>基于 南科大 于仕琪老师的课程学习笔记
 【快速学习C和C++，基础语法和优化策略，学了不再怕指针(南科大计算机系原版)】https://www.bilibili.com/video/BV1Vf4y1P7pq?vd_source=5a0790755035f26a67935abfbfcdfd5b</p>
 <p>推荐文章
 <a class="link" href="https://www.zhihu.com/question/483714509/answer/1947608534729597210"  target="_blank" rel="noopener"
     >C++ 如何进阶？如何准备 C++ 面试？ - 知乎</a></p>
 <h2 id="程序基本常识">程序基本常识
-</h2><h4 id="编译与链接">编译与链接
-</h4><p>C语言编译原理涉及将C语言代码转换为机器语言的过程。这个过程包括预处理、编译、汇编和链接。编译器在这个过程中对源代码进行优化和转换，生成可执行文件，主要包括以下几个阶段：</p>
+</h2>
+<h4 id="编译与链接">编译与链接
+</h4>
+<p>C语言编译原理涉及将C语言代码转换为机器语言的过程。这个过程包括预处理、编译、汇编和链接。编译器在这个过程中对源代码进行优化和转换，生成可执行文件，主要包括以下几个阶段：</p>
 <h5 id="1预处理preprocessing">1.  预处理（Preprocessing）
-</h5><p><strong>作用</strong>：处理源代码文件中的预处理指令，如#include和#define<br>
+</h5>
+<p><strong>作用</strong>：处理源代码文件中的预处理指令，如#include和#define<br>
 <strong>过程</strong>：替换宏定义，处理条件编译指令，包含头文件内容<br>
 <strong>工具</strong>：预处理器，如cpp、armclang</p>
 <h5 id="2编译compilation">2.编译（Compilation）
-</h5><p><strong>作用</strong>：将预处理后的源代码转换成汇编语言<br>
+</h5>
+<p><strong>作用</strong>：将预处理后的源代码转换成汇编语言<br>
 <strong>过程</strong>：进行语法分析和语义分析，生成汇编代码<br>
 <strong>工具</strong>：编译器，如GCC、armclang</p>
 <h5 id="3汇编assembly">3.汇编（Assembly）
-</h5><p><strong>作用</strong>：将汇编语言转换成机器语言，即目标代码（Object Code）<br>
+</h5>
+<p><strong>作用</strong>：将汇编语言转换成机器语言，即目标代码（Object Code）<br>
 <strong>过程</strong>：汇编器将汇编指令转换为机器码<br>
 <strong>工具</strong>：汇编器，如as、armasm</p>
 <h5 id="4链接linking">4.链接（Linking）
-</h5><p><strong>作用</strong>：将多个目标代码文件和库文件合并成一个单独的可执行文件</p>
+</h5>
+<p><strong>作用</strong>：将多个目标代码文件和库文件合并成一个单独的可执行文件</p>
 <p><strong>过程</strong>：<br>
 解决外部符号引用，如函数和全局变量<br>
 合并不同模块中的相同段（如.text，.data）<br>
 生成最终的可执行文件或库文件<br>
 <strong>工具</strong>：链接器，如ld、armlink</p>
 <h4 id="编译器与链接器">编译器与链接器
-</h4><p>在整个编译过程中，编译器和链接器是核心组件，一般的环境配置也主要针对这二者展开：</p>
+</h4>
+<p>在整个编译过程中，编译器和链接器是核心组件，一般的环境配置也主要针对这二者展开：</p>
 <p><strong>编译器（Compiler）</strong>：负责将源代码转换成汇编代码或直接生成目标代码。编译器的高级优化包括循环优化、常数传播、死码删除等<br>
 <strong>链接器（Linker）</strong>：负责将多个目标代码文件整合为一个可执行文件。链接器处理符号解析、重定位等任务</p>
 <h4 id="错误">错误
-</h4><p>编译错误，链接错误，运行错误</p>
+</h4>
+<p>编译错误，链接错误，运行错误</p>
 <h4 id="预处理与宏">预处理与宏
-</h4><p>预处理，对宏定义进行替换
+</h4>
+<p>预处理，对宏定义进行替换
 宏就是字符替换</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -629,7 +440,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="初始化">初始化
-</h4><p>c++11开始支持的初始化<code>{}</code>和<code>()</code></p>
+</h4>
+<p>c++11开始支持的初始化<code>{}</code>和<code>()</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -645,11 +457,15 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="data-types-and-arithmetic-operators">Data-Types-and-Arithmetic-Operators
-</h2><h3 id="integer-numbers">integer-numbers
-</h3><h4 id="int">int
-</h4><p>注意在不同平台上，<code>int</code>，<code>short int</code>，<code>long int</code>，<code>long long</code>的定义是不同的</p>
+</h2>
+<h3 id="integer-numbers">integer-numbers
+</h3>
+<h4 id="int">int
+</h4>
+<p>注意在不同平台上，<code>int</code>，<code>short int</code>，<code>long int</code>，<code>long long</code>的定义是不同的</p>
 <h4 id="sizeof">sizeof()
-</h4><p><code>sizeof</code>是一个操作符，不是函数</p>
+</h4>
+<p><code>sizeof</code>是一个操作符，不是函数</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -663,7 +479,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="char">char
-</h4><p><code>char</code>本质上是一个8位的整数，可以用有符合和无符号修饰符修饰</p>
+</h4>
+<p><code>char</code>本质上是一个8位的整数，可以用有符合和无符号修饰符修饰</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -679,7 +496,8 @@
 </div><p>注意<code>char</code>在不同平台上不一定是<code>signed char</code>，有可能是<code>unsigned char</code>
 一般<code>char</code>是<code>int8_t</code></p>
 <h4 id="bool">bool
-</h4><p><code>bool</code>数据类型，1<code>byte</code>而不是1<code>bit</code>，同时这是<code>c++</code>里的数据类型</p>
+</h4>
+<p><code>bool</code>数据类型，1<code>byte</code>而不是1<code>bit</code>，同时这是<code>c++</code>里的数据类型</p>
 <p><code>c</code>语言中需要<code>#include &lt;stdbool.h&gt;</code>来引入<code>bool</code>数据类型，或者有以下代码来使用<code>bool</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -706,7 +524,8 @@
 </div>
 </div><p>输出<code>test</code>，会发现<code>test</code>是1</p>
 <h4 id="cstdint">cstdint
-</h4><p><code>c++11</code>之后引入<code>&lt;ctsdint&gt;</code></p>
+</h4>
+<p><code>c++11</code>之后引入<code>&lt;ctsdint&gt;</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -753,8 +572,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="floating-point-numbers">floating-point-numbers
-</h3><h4 id="float">float
-</h4><p>单精度浮点数，<code>float</code>类型的数据一定会带有误差
+</h3>
+<h4 id="float">float
+</h4>
+<p>单精度浮点数，<code>float</code>类型的数据一定会带有误差
 32<code>bits</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -844,15 +665,18 @@
 </div><p>原因是<code>float</code>类型本质是在采样点，该例子中中+10的采样点间隔不够，数值不发生变化
 <strong>浮点数是取一些间隔值</strong></p>
 <h5 id="关于ff">关于.f/.F
-</h5><p>在 C++ 中，<code>1.0f</code> 和 <code>1.0F</code> 都表示单精度浮点数（<code>float</code> 类型），两者在功能上是完全等价的，唯一的区别是字母 <code>f</code> 的大小写不同。</p>
+</h5>
+<p>在 C++ 中，<code>1.0f</code> 和 <code>1.0F</code> 都表示单精度浮点数（<code>float</code> 类型），两者在功能上是完全等价的，唯一的区别是字母 <code>f</code> 的大小写不同。</p>
 <h6 id="说明">说明：
-</h6><ul>
+</h6>
+<ul>
 <li><code>1.0f</code> 和 <code>1.0F</code> 都表示 <code>float</code> 类型的字面量，值为 <code>1.0</code>。</li>
 <li>如果不加后缀 <code>f</code> 或 <code>F</code>，例如 <code>1.0</code>，则默认是 <code>double</code> 类型（双精度浮点数）。</li>
 <li>类似地，<code>1.0L</code> 或 <code>1.0l</code> 表示 <code>long double</code> 类型（扩展精度浮点数）。</li>
 </ul>
 <h6 id="示例">示例：
-</h6><div class="highlight"><div class="chroma">
+</h6>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -867,15 +691,18 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h6 id="为什么有两种写法">为什么有两种写法？
-</h6><p>C++ 允许 <code>f</code> 和 <code>F</code> 两种写法，主要是为了代码风格的一致性。例如：</p>
+</h6>
+<p>C++ 允许 <code>f</code> 和 <code>F</code> 两种写法，主要是为了代码风格的一致性。例如：</p>
 <ul>
 <li>某些编码规范可能推荐使用大写 <code>F</code> 以增强可读性（避免与数字 <code>1</code> 混淆）。</li>
 <li>而小写 <code>f</code> 更常见，因为更简洁。</li>
 </ul>
 <h6 id="总结">总结：
-</h6><p><code>1.0f</code> 和 <code>1.0F</code> 在 C++ 中完全等价，选择哪一种取决于个人或团队的代码风格偏好。</p>
+</h6>
+<p><code>1.0f</code> 和 <code>1.0F</code> 在 C++ 中完全等价，选择哪一种取决于个人或团队的代码风格偏好。</p>
 <h5 id="浮点数不要直接相等">浮点数不要直接相等
-</h5><p><strong>浮点数都是近似，不是精确的数值</strong>，所以不适合用<code>==</code>判断相等</p>
+</h5>
+<p><strong>浮点数都是近似，不是精确的数值</strong>，所以不适合用<code>==</code>判断相等</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -887,7 +714,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="inf-and-nan">inf and nan
-</h4><div class="highlight"><div class="chroma">
+</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -901,14 +729,18 @@
 <code>nan</code>：not a number ( Exponent=11111111 , fraction!=0 )
 如果计算过程中出现了<code>inf</code>或者<code>nan</code>,后续的计算会产生问题</p>
 <h4 id="double">double
-</h4><p>双精度浮点数，64<code>bits</code></p>
+</h4>
+<p>双精度浮点数，64<code>bits</code></p>
 <h4 id="long-double">long double
-</h4><p>如果系统支持，128<code>bits</code>
+</h4>
+<p>如果系统支持，128<code>bits</code>
 否则，64<code>bits</code></p>
 <h3 id="arithmetic-operators">Arithmetic Operators
-</h3><p>算数运算，对计算的实现要有所理解，才能避免出现一些错误</p>
+</h3>
+<p>算数运算，对计算的实现要有所理解，才能避免出现一些错误</p>
 <h4 id="constant-numbers">Constant-numbers
-</h4><div class="highlight"><div class="chroma">
+</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -949,7 +781,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="const类型限定符">const类型限定符
-</h4><p>在变量前加了<code>const</code>限定符，变量的值就不可以被修改了</p>
+</h4>
+<p>在变量前加了<code>const</code>限定符，变量的值就不可以被修改了</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -961,7 +794,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="heading">
-</h4><p>运算符优先级</p>
+</h4>
+<p>运算符优先级</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1029,7 +863,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="类型转换">类型转换
-</h4><p>浮点类型转整型，会直接舍弃小数位，保留整数位</p>
+</h4>
+<p>浮点类型转整型，会直接舍弃小数位，保留整数位</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1055,10 +890,12 @@
 </div>
 </div><p>除法两边都是整数，做的是整数除法</p>
 <h4 id="data-loss">Data loss
-</h4><p>占用字节低的数据类型  转换到  占用字节高的数据类型，不会有数据丢失</p>
+</h4>
+<p>占用字节低的数据类型  转换到  占用字节高的数据类型，不会有数据丢失</p>
 <p>占用字节高的数据类型  转换到  占用字节低的数据类型，就会有数据丢失</p>
 <h3 id="auto">Auto
-</h3><p>auto( since C++11 )
+</h3>
+<p>auto( since C++11 )
 <code>auto is placeholder type specifier</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1084,11 +921,14 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="branching-and-looping-statements">Branching-and-Looping-Statements
-</h2><p>循环和分支结构</p>
+</h2>
+<p>循环和分支结构</p>
 <h4 id="if-else">if else
-</h4><p>如果没有花括号去约束，<code>else</code>会与最近的<code>if</code>配对</p>
+</h4>
+<p>如果没有花括号去约束，<code>else</code>会与最近的<code>if</code>配对</p>
 <h4 id="三目运算符">三目运算符
-</h4><div class="highlight"><div class="chroma">
+</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1101,7 +941,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="logical-expressions">Logical Expressions
-</h4><p><code>!</code>&gt;<code>&amp;&amp;</code>&gt;<code>||</code>
+</h4>
+<p><code>!</code>&gt;<code>&amp;&amp;</code>&gt;<code>||</code>
 如果逻辑运算两边不是布尔，则会隐式转换为布尔</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1127,7 +968,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="while-loop">while loop
-</h4><p>如果条件为<code>true</code>，就会执行循环</p>
+</h4>
+<p>如果条件为<code>true</code>，就会执行循环</p>
 <p>循环执行中间可以用<code>break</code>打断循环，或者用<code>continue</code>跳过当前循环</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1163,9 +1005,11 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="do-while-loop">do-while loop
-</h4><p>先执行一次循环，再判断条件</p>
+</h4>
+<p>先执行一次循环，再判断条件</p>
 <h4 id="for-loop">for loop
-</h4><div class="highlight"><div class="chroma">
+</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1177,7 +1021,8 @@
 </div>
 </div><p>初始化表达式，条件表达式，迭代表达式</p>
 <h4 id="endless-loop">endless-loop
-</h4><div class="highlight"><div class="chroma">
+</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1198,7 +1043,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="goto-and-switch-statement">goto-and-switch Statement
-</h4><p><code>case</code>相当于<code>goto</code>的<code>label</code></p>
+</h4>
+<p><code>case</code>相当于<code>goto</code>的<code>label</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1222,8 +1068,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="data-structures">Data-Structures
-</h2><h3 id="array">Array
-</h3><p>在<code>C</code>和<code>C++</code>中，数组就是一块连续的内存
+</h2>
+<h3 id="array">Array
+</h3>
+<p>在<code>C</code>和<code>C++</code>中，数组就是一块连续的内存
 数组的名字指向数组的首地址</p>
 <p>初始化</p>
 <div class="highlight"><div class="chroma">
@@ -1247,7 +1095,8 @@
 </div>
 </div><p>但如果超出应用程序的内存边界时，会被操作系统杀死</p>
 <h4 id="变长数组">变长数组
-</h4><p>其长度由变量决定，在运行时决定而非编译时决定</p>
+</h4>
+<p>其长度由变量决定，在运行时决定而非编译时决定</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1267,7 +1116,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="array-of-unkown-size">Array of unkown size
-</h4><p>未知长度的数组</p>
+</h4>
+<p>未知长度的数组</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1285,7 +1135,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="二维数组">二维数组
-</h4><div class="highlight"><div class="chroma">
+</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1298,10 +1149,13 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="const-arrays">const-Arrays
-</h4><p><code>const</code>修饰的数组不允许被修改</p>
+</h4>
+<p><code>const</code>修饰的数组不允许被修改</p>
 <h3 id="strings">Strings
-</h3><h4 id="array-style-strings">Array-style strings
-</h4><div class="highlight"><div class="chroma">
+</h3>
+<h4 id="array-style-strings">Array-style strings
+</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1325,7 +1179,8 @@
 </div>
 </div><p><code>strlen(Man)==3</code>，因为有<code>\0</code>限制</p>
 <h4 id="string-class">string class
-</h4><p>同样没有越界检查</p>
+</h4>
+<p>同样没有越界检查</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1337,8 +1192,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="structunionenum">Struct&amp;Union&amp;Enum
-</h3><h4 id="struct">Struct
-</h4><p>注意有内存对齐</p>
+</h3>
+<h4 id="struct">Struct
+</h4>
+<p>注意有内存对齐</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1364,7 +1221,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="union">Union
-</h4><p><code>Union</code>所有成员共享一个内存，以最大的成员变量为准
+</h4>
+<p><code>Union</code>所有成员共享一个内存，以最大的成员变量为准
 相当于同一个数据多个名字</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1393,7 +1251,8 @@
 	
 ></p>
 <h4 id="enum">Enum
-</h4><p>枚举类型</p>
+</h4>
+<p>枚举类型</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1409,7 +1268,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="typedef">typedef
-</h3><p>用于创建别名</p>
+</h3>
+<p>用于创建别名</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1419,8 +1279,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="memory-and-pointer">Memory and Pointer
-</h2><h3 id="pointers">Pointers
-</h3><p>指针变量存储的是一个地址
+</h2>
+<h3 id="pointers">Pointers
+</h3>
+<p>指针变量存储的是一个地址
 <img src="/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;C&#43;&#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E6%8C%87%E9%92%88.png"
 	width="789"
 	height="479"
@@ -1445,7 +1307,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="pointers-of-pointers">Pointers of Pointers
-</h4><div class="highlight"><div class="chroma">
+</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1458,7 +1321,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="const-pointers">const pointers
-</h4><div class="highlight"><div class="chroma">
+</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -1491,7 +1355,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="换行转义符">换行转义符
-</h3><p>虽然实际上是3行，但是在语义上是1行</p>
+</h3>
+<p>虽然实际上是3行，但是在语义上是1行</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1505,7 +1370,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="allocate-memoryc-style">Allocate-memory:C-style
-</h3><p>只是示意图，在不同系统下会有区别
+</h3>
+<p>只是示意图，在不同系统下会有区别
 <img src="/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;C&#43;&#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-program-memory.png"
 	width="254"
 	height="570"
@@ -1537,7 +1403,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="内存泄漏问题">内存泄漏问题
-</h4><p>第一次申请的内存无法进行管理了，无法回收</p>
+</h4>
+<p>第一次申请的内存无法进行管理了，无法回收</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1570,8 +1437,10 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="allocate-memoryc-style-1">Allocate-memory:C++-style
-</h3><h4 id="operator-new-and-new">operator <code>new</code> and <code>new[]</code>
-</h4><p>申请内存，比<code>malloc</code>功能更丰富
+</h3>
+<h4 id="operator-new-and-new">operator <code>new</code> and <code>new[]</code>
+</h4>
+<p>申请内存，比<code>malloc</code>功能更丰富
 <code>new</code>是一个操作符</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1600,7 +1469,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="operator-delete-and-delete">operator <code>delete</code> and <code>delete[]</code>
-</h4><p>对于数组和普通变量而言，没有区别</p>
+</h4>
+<p>对于数组和普通变量而言，没有区别</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1643,13 +1513,17 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="basics-of-functions">Basics of Functions
-</h2><h3 id="functions">Functions
-</h3><p>函数是为了让编程更加模块化而设计的</p>
+</h2>
+<h3 id="functions">Functions
+</h3>
+<p>函数是为了让编程更加模块化而设计的</p>
 <h3 id="parameters">Parameters
-</h3><p>传参的两种方式，值传递和引用传递
+</h3>
+<p>传参的两种方式，值传递和引用传递
 值传递的值可以认为是一个函数内的局部变量</p>
 <h4 id="值传递">值传递
-</h4><p>值传递的值可以认为是一个函数内的局部变量</p>
+</h4>
+<p>值传递的值可以认为是一个函数内的局部变量</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1678,7 +1552,8 @@
 </div>
 </div><p><code>x</code>是<code>num1</code>的一份拷贝（会涉及拷贝构造函数）</p>
 <h4 id="引用传递-reference">引用传递-Reference
-</h4><p>引用是一个变量的 别名</p>
+</h4>
+<p>引用是一个变量的 别名</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1712,7 +1587,8 @@
 </div>
 </div><p><strong>在函数传递一个内存占用巨大的参数时，采用值传递，拷贝的变量会占用大量内存，这个时候可以使用指针或者引用</strong></p>
 <h4 id="指针与引用的区别">指针与引用的区别
-</h4><p>引用相较于指针更加安全
+</h4>
+<p>引用相较于指针更加安全
 <img src="/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;C&#43;&#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E6%8C%87%E9%92%88%E4%B8%8E%E5%BC%95%E7%94%A8.png"
 	width="738"
 	height="384"
@@ -1726,7 +1602,8 @@
 	
 ></p>
 <h3 id="return-statement">Return-statement
-</h3><p>如果<code>return</code>一个数据很大，可以采用以下的方式</p>
+</h3>
+<p>如果<code>return</code>一个数据很大，可以采用以下的方式</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1744,7 +1621,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="inline-functions">Inline-functions
-</h3><p>内联函数，众所周知，函数的调用是有代价的，需要将一部分数据压入栈中，跳转执行完后再回来出栈</p>
+</h3>
+<p>内联函数，众所周知，函数的调用是有代价的，需要将一部分数据压入栈中，跳转执行完后再回来出栈</p>
 <p>如果一个微小的函数且被频繁调用，这个代价就会变得不可忽视，此时可以使用内联函数（空间换时间的典型案例）</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1762,7 +1640,8 @@
 </div>
 </div><p>需要注意的是<code>inline</code>是<strong>建议</strong>编译器以内联<code>inline</code>的方式编译这个函数（所以有可能编译器会不听你的建议）</p>
 <h4 id="内联函数宏-的区别">内联函数&amp;宏 的区别
-</h4><p>与宏定义是有去别的，宏定义是在预编译之前的文本替换，有较大的安全性问题</p>
+</h4>
+<p>与宏定义是有去别的，宏定义是在预编译之前的文本替换，有较大的安全性问题</p>
 <p>注意，宏是在做文本替换，一定要警惕文本替换后的运算符优先级问题</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1821,8 +1700,10 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="advances-in-functions">Advances in Functions
-</h2><h4 id="default-arguments">Default-arguments
-</h4><p>默认参数是<code>C++</code>的特性，<code>C</code>并不支持</p>
+</h2>
+<h4 id="default-arguments">Default-arguments
+</h4>
+<p>默认参数是<code>C++</code>的特性，<code>C</code>并不支持</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1836,7 +1717,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="function-overloading">Function-Overloading
-</h4><p>函数重载是只有<code>C++</code>才支持的特性，<code>C</code>并不支持
+</h4>
+<p>函数重载是只有<code>C++</code>才支持的特性，<code>C</code>并不支持
 与<code>C++</code>和<code>C</code>函数名符号修饰有关</p>
 <p>需要注意的是，<code>C++</code>的函数重载只允许将参数重载，而不能重载返回值</p>
 <div class="highlight"><div class="chroma">
@@ -1853,7 +1735,8 @@
 </div>
 </div><p>同时要注意，函数调用不要出现歧义，一旦出现歧义，编译器会停止工作，无法编译通过</p>
 <h4 id="function-templates">Function-templates
-</h4><p><strong>函数模板生成的函数是模板函数</strong>，模板函数是函数模板被实例化以后生成的</p>
+</h4>
+<p><strong>函数模板生成的函数是模板函数</strong>，模板函数是函数模板被实例化以后生成的</p>
 <p>此处的<code>T</code>是定义的一个泛型</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1943,8 +1826,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="function-pointers-and-references">Function-Pointers and References
-</h4><h5 id="function-pointers">Function-Pointers
-</h5><p>函数指针是一个指针，指向函数，也就是指向执行指令的地址
+</h4>
+<h5 id="function-pointers">Function-Pointers
+</h5>
+<p>函数指针是一个指针，指向函数，也就是指向执行指令的地址
 指针函数的类型需要与其指向的函数类型完全匹配</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1974,7 +1859,8 @@
 </div>
 </div><p>常见的应用案例是将函数作为一个参数传递到另外一个函数里面，作为回调函数</p>
 <h5 id="function-references">Function-references
-</h5><p>函数引用，需要注意函数引用在初始化的时候需要定死</p>
+</h5>
+<p>函数引用，需要注意函数引用在初始化的时候需要定死</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1988,7 +1874,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="recursive-functions">Recursive-Functions
-</h4><p>递归函数，自己调用自己，需要有递归终止条件，否则一直递归会爆栈</p>
+</h4>
+<p>递归函数，自己调用自己，需要有递归终止条件，否则一直递归会爆栈</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2013,11 +1900,14 @@
 </div>
 </div><p>函数的每一次调用需要压栈进行数据保存，无穷递归就会导致爆栈</p>
 <h2 id="speedup-your-program">Speedup-Your-Program
-</h2><h3 id="c-and-cpp-with-arm">C-and-Cpp-with-arm
-</h3><p><code>C</code>和<code>C++</code>语言是由明确的语言规范的，是具有平台无关性的，能通过编译器编译成平台相关的可执行程序</p>
+</h2>
+<h3 id="c-and-cpp-with-arm">C-and-Cpp-with-arm
+</h3>
+<p><code>C</code>和<code>C++</code>语言是由明确的语言规范的，是具有平台无关性的，能通过编译器编译成平台相关的可执行程序</p>
 <p>机器人或者说是智能设备领域全是<code>arm</code>的天下</p>
 <h3 id="speedup-your-program-1">Speedup-Your-Program
-</h3><p><code>Simple is Beautiful</code>
+</h3>
+<p><code>Simple is Beautiful</code>
 代码优化常用策略上，优化代码一定要考虑到内存</p>
 <ol>
 <li>大量的内存读写带来的时间浪费</li>
@@ -2058,8 +1948,10 @@
 	
 ></p>
 <h2 id="basics-of-classes">Basics of Classes
-</h2><h3 id="classes-and-objects">classes-and-objects
-</h3><p>类的对象去操作成员会更加的安全
+</h2>
+<h3 id="classes-and-objects">classes-and-objects
+</h3>
+<p>类的对象去操作成员会更加的安全
 类的成员函数在类内声明时，默认是<code>inline</code>函数
 所以简单的函数在类内实现，复杂函数在类外实现</p>
 <div class="highlight"><div class="chroma">
@@ -2113,10 +2005,12 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="constructors-and-destructors">Constructors-and-Destructors
-</h3><p>构造函数与析构函数
+</h3>
+<p>构造函数与析构函数
 构造函数可以有很多个，析构函数只能有一个</p>
 <h5 id="构造函数constructors">构造函数Constructors
-</h5><div class="highlight"><div class="chroma">
+</h5>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -2131,7 +2025,8 @@
 <p>定义构造函数需要定义在<code>public</code>里面</p>
 <p>每个<code>new</code>出来的对象，都会调用构造函数进行初始化</p>
 <h5 id="析构函数destructors">析构函数Destructors
-</h5><div class="highlight"><div class="chroma">
+</h5>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -2166,7 +2061,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="this-pointer">this-Pointer
-</h3><p>对于类而言，函数的指令只有一份
+</h3>
+<p>对于类而言，函数的指令只有一份
 <code>All methods in a function have a this-pointer</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2197,8 +2093,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="const-and-static-members">const-and-static-Members
-</h3><h5 id="const-members">const Members
-</h5><p>常量成员变量不能被修改，常量成员函数不能去修改成员变量</p>
+</h3>
+<h5 id="const-members">const Members
+</h5>
+<p>常量成员变量不能被修改，常量成员函数不能去修改成员变量</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2224,7 +2122,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="static-members">static Members
-</h5><p>静态成员变量和静态成员函数并不绑定在某一个实例上
+</h5>
+<p>静态成员变量和静态成员函数并不绑定在某一个实例上
 类的静态变量属于类，不属于实例化的对象
 静态函数不能访问实例成员，也不能修改非静态数据</p>
 <div class="highlight"><div class="chroma">
@@ -2262,8 +2161,10 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="advances-in-classes">Advances in Classes
-</h2><h3 id="operator-overloading">Operator-overloading
-</h3><p>运算符重载</p>
+</h2>
+<h3 id="operator-overloading">Operator-overloading
+</h3>
+<p>运算符重载</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2340,7 +2241,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="friend-functions">Friend-Functions
-</h3><p>友元函数的声明在类内，能访问类的私有变量和私有函数，但是它不是类的成员，是一个特殊的函数</p>
+</h3>
+<p>友元函数的声明在类内，能访问类的私有变量和私有函数，但是它不是类的成员，是一个特殊的函数</p>
 <p>友元函数的定义可以在类内紧跟声明，也可以在类外</p>
 <p><code>Operator &lt;&lt; </code>也能被重载，一般采用友元函数形式重载</p>
 <div class="highlight"><div class="chroma">
@@ -2371,7 +2273,8 @@
 </div>
 </div><p>输入输出流的返回一定是输入输出流的引用，为了能够链式调用</p>
 <h3 id="user-defined-type-conversion">user-defined-type-conversion
-</h3><p>类转基本数据类型，运算符重载</p>
+</h3>
+<p>类转基本数据类型，运算符重载</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2434,7 +2337,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="increment">Increment
-</h3><p>有前置(++i)和后置(i++)</p>
+</h3>
+<p>有前置(++i)和后置(i++)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2470,9 +2374,12 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="dynamic-memory-management-in-classes">Dynamic-Memory-Management-in-Classes
-</h2><h3 id="some-default-operations">Some-default-operations
-</h3><h4 id="default-constructors">Default-Constructors
-</h4><p>默认构造函数</p>
+</h2>
+<h3 id="some-default-operations">Some-default-operations
+</h3>
+<h4 id="default-constructors">Default-Constructors
+</h4>
+<p>默认构造函数</p>
 <p>如果一个类没有任何构造函数，编译器就会生成一个空的构造函数，如果给类定义了构造函数，编译器就不会生成默认构造函数</p>
 <p>需要避免歧义</p>
 <div class="highlight"><div class="chroma">
@@ -2498,9 +2405,11 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="implicitly-defined-destructor">Implicitly-defined-Destructor
-</h4><p>隐式定义的析构函数，没有显式定义析构函数，编译器会去定义一个空的析构函数</p>
+</h4>
+<p>隐式定义的析构函数，没有显式定义析构函数，编译器会去定义一个空的析构函数</p>
 <h4 id="default-copy-constructors">Default-Copy-Constructors
-</h4><p><a class="link" href="https://mp.weixin.qq.com/s/uk12AxukYzxpROlw_bqgzA"  target="_blank" rel="noopener"
+</h4>
+<p><a class="link" href="https://mp.weixin.qq.com/s/uk12AxukYzxpROlw_bqgzA"  target="_blank" rel="noopener"
     >大疆C++一面：C++什么时候生成默认拷贝构造函数？</a></p>
 <p>拷贝构造函数的参数必须是<code>const</code>引用（避免无限递归调用）
 拷贝构造函数定义如下</p>
@@ -2535,7 +2444,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="default-copy-assignment">Default-Copy-Assignment
-</h4><p><code>Assignment operators:=,+=,-=</code></p>
+</h4>
+<p><code>Assignment operators:=,+=,-=</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2569,7 +2479,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="copy-assignment">Copy-Assignment
-</h3><p>注意赋值运算符在内存管理上的细节</p>
+</h3>
+<p>注意赋值运算符在内存管理上的细节</p>
 <ol>
 <li>避免自赋值</li>
 <li>赋值前先回收，避免内存泄漏</li>
@@ -2661,17 +2572,22 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="an-example-with-dynamic-memory">An-Example-with-Dynamic-Memory
-</h3><p>注意深拷贝与浅拷贝的问题，导致重复释放同一块内存
+</h3>
+<p>注意深拷贝与浅拷贝的问题，导致重复释放同一块内存
 这种错误最容易由 默认拷贝构造函数 和 默认赋值运算符重载 导致</p>
 <h3 id="hard-copy">Hard-Copy
-</h3><p>每次创建和赋值的时候都去重新申请内存
+</h3>
+<p>每次创建和赋值的时候都去重新申请内存
 缺点在于如果每次申请的内存较大会很耗时</p>
 <h3 id="soft-copy">Soft-Copy
-</h3><p>如果是赋值操作，或者 拷贝构造，可以让两个变量共享同一块内存，同时用过一个变量去记录该块内存的引用数量</p>
+</h3>
+<p>如果是赋值操作，或者 拷贝构造，可以让两个变量共享同一块内存，同时用过一个变量去记录该块内存的引用数量</p>
 <h3 id="smart-pointers">Smart-Pointers
-</h3><p>使用智能指针的话，可以只管申请，不管释放，系统会自动帮你释放，释放<code>delete</code>会调用对应的析构函数</p>
+</h3>
+<p>使用智能指针的话，可以只管申请，不管释放，系统会自动帮你释放，释放<code>delete</code>会调用对应的析构函数</p>
 <h4 id="stdshared_ptr">std::shared_ptr
-</h4><p>定义</p>
+</h4>
+<p>定义</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2686,7 +2602,8 @@
 </div>
 </div><p>多个指针指向的是同一个对象，共享</p>
 <h4 id="stdunique_ptr">std::unique_ptr
-</h4><p>指针指向一个对象后，就不允许分享</p>
+</h4>
+<p>指针指向一个对象后，就不允许分享</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2704,7 +2621,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="how-to-understand-smart-pointers">How-to-Understand-Smart-Pointers
-</h4><p>智能指针的定义，是指针的同时还是一个对象</p>
+</h4>
+<p>智能指针的定义，是指针的同时还是一个对象</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2718,8 +2636,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="class-inheritance">Class-Inheritance
-</h2><h3 id="improve-your-source-code">Improve-your-source-code
-</h3><ol>
+</h2>
+<h3 id="improve-your-source-code">Improve-your-source-code
+</h3>
+<ol>
 <li>在赋值操作上，很多时候一个一个赋值不如<code>memcopy</code>直接将内存的内容复制过去效率高</li>
 <li>二维数组最好用一维数组去表达，因为这样不用多次去申请一维的内存，多次申请的一维数据不保证连续，会降低读取速率</li>
 <li>一个函数，一定要去检查函数的参数是否有效</li>
@@ -2728,12 +2648,15 @@
 <li>函数的输入参数，不需要修改的加<code>const</code>关键字</li>
 </ol>
 <h3 id="derived-class">Derived-class
-</h3><p>Base class(parent)，Derived class(child)
+</h3>
+<p>Base class(parent)，Derived class(child)
 一个是基类（父类），一个是派生类（子类）</p>
 <p>可以多层继承和多个继承</p>
 <h4 id="构造函数与析构函数在子类中的执行">构造函数与析构函数在子类中的执行
-</h4><h5 id="构造函数">构造函数
-</h5><p>子类的构造函数执行的第一刻，父类的构造函数先执行</p>
+</h4>
+<h5 id="构造函数">构造函数
+</h5>
+<p>子类的构造函数执行的第一刻，父类的构造函数先执行</p>
 <p>下面子类的构造函数执行顺序：Base的构造函数-&gt;MAN的赋值-&gt;最后是子类构造函数内部</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2756,7 +2679,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="析构函数">析构函数
-</h5><p>子类的析构函数会先执行子类的析构函数，再执行父类的构造函数</p>
+</h5>
+<p>子类的析构函数会先执行子类的析构函数，再执行父类的构造函数</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2784,7 +2708,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="acess-control">Acess-Control
-</h3><p>访问控制
+</h3>
+<p>访问控制
 <code>private</code>只能类内访问，<code>protected</code>可以在类内和子类里面访问</p>
 <p>关于继承方式：有三种继承方式，<code>public</code>，<code>protected</code>，<code>private</code>
 <img src="/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&#43;&#43;%E7%BB%A7%E6%89%BF%E4%B8%8E%E6%B4%BE%E7%94%9F-%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8Fsummary.png"
@@ -2800,7 +2725,8 @@
 	
 ></p>
 <h3 id="virtual-functions">Virtual-Functions
-</h3><p>虚函数</p>
+</h3>
+<p>虚函数</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2905,7 +2831,8 @@
 </div><p>来告诉编译器这是一个纯虚函数，拥有纯虚函数的类就不能创建对象</p>
 <p>另外，析构函数也是一个虚函数</p>
 <h3 id="inheritance-and-dynamic-memory-allocation">Inheritance-and-dynamic-memory-allocation
-</h3><p>如果一个子类只有基类有动态内存申请，就不用考虑子类，只需要解决基类的问题，自定义写 构造函数，赋值运算符重载，拷贝构造函数</p>
+</h3>
+<p>如果一个子类只有基类有动态内存申请，就不用考虑子类，只需要解决基类的问题，自定义写 构造函数，赋值运算符重载，拷贝构造函数</p>
 <p>如果子类有动态内存申请，解决方案一样，重新把 构造函数，拷贝构造函数，赋值运算符重载 定义即可</p>
 <p>下面用伪代码展示</p>
 <div class="highlight"><div class="chroma">
@@ -2959,9 +2886,11 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="class-templates-and-std-library">Class-Templates-and-Std-Library
-</h2><p>模板十分实用，前面有函数模板，此处是类模板</p>
+</h2>
+<p>模板十分实用，前面有函数模板，此处是类模板</p>
 <h3 id="函数模板回顾">函数模板回顾
-</h3><p><strong>函数模板生成的函数是模板函数</strong>，模板函数是函数模板被实例化以后生成的</p>
+</h3>
+<p><strong>函数模板生成的函数是模板函数</strong>，模板函数是函数模板被实例化以后生成的</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2988,7 +2917,8 @@
 </div>
 </div><p>类模板和模板类也是类似的</p>
 <h3 id="class-template">class-template
-</h3><p>类模板的定义</p>
+</h3>
+<p>类模板的定义</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3074,7 +3004,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="模板的参数">模板的参数
-</h3><p>declare a template</p>
+</h3>
+<p>declare a template</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -3090,7 +3021,8 @@
 <li><code>non-type template parameters(定值，float,int类型的定值，例如1.0f，值参数)</code></li>
 </ol>
 <h3 id="template-non-type-parameters">Template-Non-Type-Parameters
-</h3><p>模板的非类型参数
+</h3>
+<p>模板的非类型参数
 此处相当于在编译时就要确定矩阵有多少行多少列，而不是动态申请
 因为不需要动态申请，也就没有必要析构的时候删除</p>
 <div class="highlight"><div class="chroma">
@@ -3150,7 +3082,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="class-template-specialization">Class-template-specialization
-</h3><p>类模板的特化</p>
+</h3>
+<p>类模板的特化</p>
 <p>一个<code>MyVector</code>的类模板</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3253,7 +3186,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="std-classes">std-classes
-</h3><p><code>std::string</code>
+</h3>
+<p><code>std::string</code>
 <img src="/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;C&#43;&#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-std%E5%B8%B8%E7%94%A8%E7%9A%84%E6%A8%A1%E6%9D%BF%E7%B1%BB.png"
 	width="805"
 	height="440"
@@ -3305,8 +3239,10 @@
 	
 ></p>
 <h2 id="error-handling">Error-Handling
-</h2><h3 id="standard-output-stream-and-standard-error-stream">Standard-Output-Stream-and-Standard-Error-Stream
-</h3><p>标准输出流与标准错误流
+</h2>
+<h3 id="standard-output-stream-and-standard-error-stream">Standard-Output-Stream-and-Standard-Error-Stream
+</h3>
+<p>标准输出流与标准错误流
 <code>C&amp;C++</code>的输出流与错误流
 <img src="/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;C&#43;&#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-C&amp;C&#43;&#43;%E8%BE%93%E5%87%BA%E6%B5%81%E4%B8%8E%E9%94%99%E8%AF%AF%E6%B5%81.png"
 	width="673"
@@ -3322,7 +3258,8 @@
 >
 标准输出流的内容可以通过管道输出到其他文件，而标准错误流不会</p>
 <h3 id="重定向">重定向
-</h3><p><img src="/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;C&#43;&#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81.png"
+</h3>
+<p><img src="/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;C&#43;&#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81.png"
 	width="490"
 	height="242"
 	srcset="/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;C&#43;&#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81_hu1019439950282887564.png 480w, /p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/C&amp;C&#43;&#43;%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81_hu3431468540221987376.png 1024w"
@@ -3356,9 +3293,11 @@
 </div>
 </div><p>由此可以看出关于日志的重要性，以及日志是什么</p>
 <h3 id="assert">assert
-</h3><p>在编译过程中，方便<code>debug</code>的工具</p>
+</h3>
+<p>在编译过程中，方便<code>debug</code>的工具</p>
 <h3 id="exceptions">Exceptions
-</h3><p><code>catch</code>，<code>try</code>与<code>throw</code></p>
+</h3>
+<p><code>catch</code>，<code>try</code>与<code>throw</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3412,8 +3351,10 @@
 </div>
 </div><p><code>throw</code>可以扔一个类，<code>std</code>标准可有提供<code>std::exception</code>的类</p>
 <h2 id="nested-classes-and-rtti">Nested-Classes-and-RTTI
-</h2><h3 id="friend-classes">Friend-Classes
-</h3><p>复习一下友元函数，注意有顺序问题</p>
+</h2>
+<h3 id="friend-classes">Friend-Classes
+</h3>
+<p>复习一下友元函数，注意有顺序问题</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3466,7 +3407,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="friend-member-functions">Friend-Member-Functions
-</h3><p>可以用来实现最小授权，另一个类的某一个成员函数可以访问</p>
+</h3>
+<p>可以用来实现最小授权，另一个类的某一个成员函数可以访问</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3501,7 +3443,8 @@
 </div>
 </div><p>注意顺序问题以及先声明再实现的处理方法</p>
 <h3 id="nested-types">Nested-Types
-</h3><p>内部类型，此处的<code>enum DataTYpe</code>即是内部类型，作用是这个枚举类型仅<code>Mat</code>类能用</p>
+</h3>
+<p>内部类型，此处的<code>enum DataTYpe</code>即是内部类型，作用是这个枚举类型仅<code>Mat</code>类能用</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3539,7 +3482,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="nested-classes">Nested-Classes
-</h3><p>与内部类型的类似，不用过多赘述，著需要注意在使用时加上前缀</p>
+</h3>
+<p>与内部类型的类似，不用过多赘述，著需要注意在使用时加上前缀</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -3549,7 +3493,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="runtime-type-identificationrtti">Runtime-Type-Identification(RTTI)
-</h3><p>运行时的类型鉴别</p>
+</h3>
+<p>运行时的类型鉴别</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3637,7 +3582,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="more-type-cast-operations">More-Type-Cast-Operations
-</h4><p><code>const_cast</code>:Type cast for const or volatile value .</p>
+</h4>
+<p><code>const_cast</code>:Type cast for const or volatile value .</p>
 <p><code>static_cast</code>:如果两类型能够隐式转换，则发生转换，否则不能转</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3665,17 +3611,21 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="code-optimization">Code-Optimization
-</h2><h3 id="register-and-cache">Register-and-Cache
-</h3><p>三级，<code>Register</code>,<code>Cache</code>,<code>Memory</code>
+</h2>
+<h3 id="register-and-cache">Register-and-Cache
+</h3>
+<p>三级，<code>Register</code>,<code>Cache</code>,<code>Memory</code>
 一般通过<code>Latency延迟</code>,<code>Bandwidth带宽</code>这两个指标来衡量</p>
 <p>在访问内存中连续数据的情况下，访问速度会更快
 现代多核的<code>CPU</code>在缓冲区的设置上会更复杂，会分为专门存放指令的区域和专门存放数据的区域，同时多核会有共享的缓存区</p>
 <h3 id="locality-of-reference">Locality-of-Reference
-</h3><p>局部性主要有时间局部性和空间局部性，局部性是观察程序的运行得出的
+</h3>
+<p>局部性主要有时间局部性和空间局部性，局部性是观察程序的运行得出的
 时间局部性是指同一块内存在一两个指令周期后很有可能会被再次访问
 空间局部性是指被访问的一块内存，其周围也会很有可能被访问</p>
 <h3 id="计算cpu优化效率">计算<code>CPU</code>优化效率
-</h3><p><code>Peak_FLOPS=2*Frequency*cores*每周期发送的指令*(指令宽度/数据宽度)</code></p>
+</h3>
+<p><code>Peak_FLOPS=2*Frequency*cores*每周期发送的指令*(指令宽度/数据宽度)</code></p>
 <p>3G<code>Hz</code>，<code>24</code>核，每周期发送2指令，指令宽度512比特
 假设算的是<code>double</code>（64比特）</p>
 <p><code>FLOPS=2*3G*24*2*(512/64)</code></p>
@@ -3685,8 +3635,10 @@
 <p>衡量优化效率
 <code>Efficiency=Eddected_Performance/Peak_Performance</code></p>
 <h2 id="个人的补充与总结">个人的补充与总结
-</h2><h3 id="关于include">关于Include
-</h3><div class="highlight"><div class="chroma">
+</h2>
+<h3 id="关于include">关于Include
+</h3>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -3697,11 +3649,13 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="关于类">关于类
-</h3><ul>
+</h3>
+<ul>
 <li>类内成员函数可在<strong>类内定义（默认内联）</strong> 或类外定义</li>
 </ul>
 <h3 id="关于模板">关于模板
-</h3><p><a class="link" href="https://www.zhihu.com/question/444534843"  target="_blank" rel="noopener"
+</h3>
+<p><a class="link" href="https://www.zhihu.com/question/444534843"  target="_blank" rel="noopener"
     >c++模板编程应该把实现放在头文件中吗，这样写会不会让头文件变得很难看？ - 知乎</a>
 借用其中的一个回答</p>
 <blockquote>
@@ -3752,7 +3706,8 @@
 模板（包括特化）的使用者通常会通过头文件获取完整定义，无需关心实现文件的链接细节。将特化放在头文件中，能让代码结构更清晰，减少外部依赖</li>
 </ol>
 <h4 id="类模板和函数模板的例子">类模板和函数模板的例子
-</h4><div class="highlight"><div class="chroma">
+</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -3853,50 +3808,20 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div>
-</section>
+                </div>
 
-
-    <footer class="article-footer">
+                <footer class="article-reader__footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/cc&#43;&#43;/">C&amp;C&#43;&#43;</a>
-        
-            <a href="/tags/base/">BASE</a>
-        
-    </section>
-
-
-    </footer>
-
-
-    
-        <link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
-            ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
-                defer
-                >
-            </script><script>
-    window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
-    
-</article>
-
+        <div class="article-reader__tags">
+            <p class="section-kicker">FIELD TAGS</p>
+            <ul aria-label="标签">
+                
+                    <li><a href="/tags/cc&#43;&#43;/">C&amp;C&#43;&#43;</a></li>
+                
+                    <li><a href="/tags/base/">BASE</a></li>
+                
+            </ul>
+        </div>
     
 
     
@@ -3975,28 +3900,303 @@
     </div>
 </aside>
 
-     
-    
-        
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2025 - 
-        
-        2026 NomadJoe
-    </section>
-    
-    <section class="powerby">
-        
-            experience <br/>
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
-    </section>
 </footer>
 
+            </div>
+
+            <aside class="article-toc-rail">
+            <p class="section-kicker">ON THIS PAGE</p>
+            <nav id="TableOfContents" class="article-toc" data-testid="article-toc" aria-label="目录">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#程序基本常识">程序基本常识</a>
+          <ol>
+            <li>
+              <ol>
+                <li><a href="#编译与链接">编译与链接</a></li>
+                <li><a href="#编译器与链接器">编译器与链接器</a></li>
+                <li><a href="#错误">错误</a></li>
+                <li><a href="#预处理与宏">预处理与宏</a></li>
+                <li><a href="#初始化">初始化</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#data-types-and-arithmetic-operators">Data-Types-and-Arithmetic-Operators</a>
+          <ol>
+            <li><a href="#integer-numbers">integer-numbers</a>
+              <ol>
+                <li><a href="#int">int</a></li>
+                <li><a href="#sizeof">sizeof()</a></li>
+                <li><a href="#char">char</a></li>
+                <li><a href="#bool">bool</a></li>
+                <li><a href="#cstdint">cstdint</a></li>
+              </ol>
+            </li>
+            <li><a href="#floating-point-numbers">floating-point-numbers</a>
+              <ol>
+                <li><a href="#float">float</a></li>
+                <li><a href="#inf-and-nan">inf and nan</a></li>
+                <li><a href="#double">double</a></li>
+                <li><a href="#long-double">long double</a></li>
+              </ol>
+            </li>
+            <li><a href="#arithmetic-operators">Arithmetic Operators</a>
+              <ol>
+                <li><a href="#constant-numbers">Constant-numbers</a></li>
+                <li><a href="#const类型限定符">const类型限定符</a></li>
+                <li><a href="#heading"></a></li>
+                <li><a href="#类型转换">类型转换</a></li>
+                <li><a href="#data-loss">Data loss</a></li>
+              </ol>
+            </li>
+            <li><a href="#auto">Auto</a></li>
+          </ol>
+        </li>
+        <li><a href="#branching-and-looping-statements">Branching-and-Looping-Statements</a>
+          <ol>
+            <li>
+              <ol>
+                <li><a href="#if-else">if else</a></li>
+                <li><a href="#三目运算符">三目运算符</a></li>
+                <li><a href="#logical-expressions">Logical Expressions</a></li>
+                <li><a href="#while-loop">while loop</a></li>
+                <li><a href="#do-while-loop">do-while loop</a></li>
+                <li><a href="#for-loop">for loop</a></li>
+                <li><a href="#endless-loop">endless-loop</a></li>
+                <li><a href="#goto-and-switch-statement">goto-and-switch Statement</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#data-structures">Data-Structures</a>
+          <ol>
+            <li><a href="#array">Array</a>
+              <ol>
+                <li><a href="#变长数组">变长数组</a></li>
+                <li><a href="#array-of-unkown-size">Array of unkown size</a></li>
+                <li><a href="#二维数组">二维数组</a></li>
+                <li><a href="#const-arrays">const-Arrays</a></li>
+              </ol>
+            </li>
+            <li><a href="#strings">Strings</a>
+              <ol>
+                <li><a href="#array-style-strings">Array-style strings</a></li>
+                <li><a href="#string-class">string class</a></li>
+              </ol>
+            </li>
+            <li><a href="#structunionenum">Struct&amp;Union&amp;Enum</a>
+              <ol>
+                <li><a href="#struct">Struct</a></li>
+                <li><a href="#union">Union</a></li>
+                <li><a href="#enum">Enum</a></li>
+              </ol>
+            </li>
+            <li><a href="#typedef">typedef</a></li>
+          </ol>
+        </li>
+        <li><a href="#memory-and-pointer">Memory and Pointer</a>
+          <ol>
+            <li><a href="#pointers">Pointers</a>
+              <ol>
+                <li><a href="#pointers-of-pointers">Pointers of Pointers</a></li>
+                <li><a href="#const-pointers">const pointers</a></li>
+              </ol>
+            </li>
+            <li><a href="#换行转义符">换行转义符</a></li>
+            <li><a href="#allocate-memoryc-style">Allocate-memory:C-style</a>
+              <ol>
+                <li><a href="#内存泄漏问题">内存泄漏问题</a></li>
+              </ol>
+            </li>
+            <li><a href="#allocate-memoryc-style-1">Allocate-memory:C++-style</a>
+              <ol>
+                <li><a href="#operator-new-and-new">operator <code>new</code> and <code>new[]</code></a></li>
+                <li><a href="#operator-delete-and-delete">operator <code>delete</code> and <code>delete[]</code></a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#basics-of-functions">Basics of Functions</a>
+          <ol>
+            <li><a href="#functions">Functions</a></li>
+            <li><a href="#parameters">Parameters</a>
+              <ol>
+                <li><a href="#值传递">值传递</a></li>
+                <li><a href="#引用传递-reference">引用传递-Reference</a></li>
+                <li><a href="#指针与引用的区别">指针与引用的区别</a></li>
+              </ol>
+            </li>
+            <li><a href="#return-statement">Return-statement</a></li>
+            <li><a href="#inline-functions">Inline-functions</a>
+              <ol>
+                <li><a href="#内联函数宏-的区别">内联函数&amp;宏 的区别</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#advances-in-functions">Advances in Functions</a>
+          <ol>
+            <li>
+              <ol>
+                <li><a href="#default-arguments">Default-arguments</a></li>
+                <li><a href="#function-overloading">Function-Overloading</a></li>
+                <li><a href="#function-templates">Function-templates</a></li>
+                <li><a href="#function-pointers-and-references">Function-Pointers and References</a></li>
+                <li><a href="#recursive-functions">Recursive-Functions</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#speedup-your-program">Speedup-Your-Program</a>
+          <ol>
+            <li><a href="#c-and-cpp-with-arm">C-and-Cpp-with-arm</a></li>
+            <li><a href="#speedup-your-program-1">Speedup-Your-Program</a></li>
+          </ol>
+        </li>
+        <li><a href="#basics-of-classes">Basics of Classes</a>
+          <ol>
+            <li><a href="#classes-and-objects">classes-and-objects</a></li>
+            <li><a href="#constructors-and-destructors">Constructors-and-Destructors</a>
+              <ol>
+                <li></li>
+              </ol>
+            </li>
+            <li><a href="#this-pointer">this-Pointer</a></li>
+            <li><a href="#const-and-static-members">const-and-static-Members</a>
+              <ol>
+                <li></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#advances-in-classes">Advances in Classes</a>
+          <ol>
+            <li><a href="#operator-overloading">Operator-overloading</a></li>
+            <li><a href="#friend-functions">Friend-Functions</a></li>
+            <li><a href="#user-defined-type-conversion">user-defined-type-conversion</a></li>
+            <li><a href="#increment">Increment</a></li>
+          </ol>
+        </li>
+        <li><a href="#dynamic-memory-management-in-classes">Dynamic-Memory-Management-in-Classes</a>
+          <ol>
+            <li><a href="#some-default-operations">Some-default-operations</a>
+              <ol>
+                <li><a href="#default-constructors">Default-Constructors</a></li>
+                <li><a href="#implicitly-defined-destructor">Implicitly-defined-Destructor</a></li>
+                <li><a href="#default-copy-constructors">Default-Copy-Constructors</a></li>
+                <li><a href="#default-copy-assignment">Default-Copy-Assignment</a></li>
+              </ol>
+            </li>
+            <li><a href="#copy-assignment">Copy-Assignment</a></li>
+            <li><a href="#an-example-with-dynamic-memory">An-Example-with-Dynamic-Memory</a></li>
+            <li><a href="#hard-copy">Hard-Copy</a></li>
+            <li><a href="#soft-copy">Soft-Copy</a></li>
+            <li><a href="#smart-pointers">Smart-Pointers</a>
+              <ol>
+                <li><a href="#stdshared_ptr">std::shared_ptr</a></li>
+                <li><a href="#stdunique_ptr">std::unique_ptr</a></li>
+                <li><a href="#how-to-understand-smart-pointers">How-to-Understand-Smart-Pointers</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#class-inheritance">Class-Inheritance</a>
+          <ol>
+            <li><a href="#improve-your-source-code">Improve-your-source-code</a></li>
+            <li><a href="#derived-class">Derived-class</a>
+              <ol>
+                <li><a href="#构造函数与析构函数在子类中的执行">构造函数与析构函数在子类中的执行</a></li>
+              </ol>
+            </li>
+            <li><a href="#acess-control">Acess-Control</a></li>
+            <li><a href="#virtual-functions">Virtual-Functions</a></li>
+            <li><a href="#inheritance-and-dynamic-memory-allocation">Inheritance-and-dynamic-memory-allocation</a></li>
+          </ol>
+        </li>
+        <li><a href="#class-templates-and-std-library">Class-Templates-and-Std-Library</a>
+          <ol>
+            <li><a href="#函数模板回顾">函数模板回顾</a></li>
+            <li><a href="#class-template">class-template</a></li>
+            <li><a href="#模板的参数">模板的参数</a></li>
+            <li><a href="#template-non-type-parameters">Template-Non-Type-Parameters</a></li>
+            <li><a href="#class-template-specialization">Class-template-specialization</a></li>
+            <li><a href="#std-classes">std-classes</a></li>
+          </ol>
+        </li>
+        <li><a href="#error-handling">Error-Handling</a>
+          <ol>
+            <li><a href="#standard-output-stream-and-standard-error-stream">Standard-Output-Stream-and-Standard-Error-Stream</a></li>
+            <li><a href="#重定向">重定向</a></li>
+            <li><a href="#assert">assert</a></li>
+            <li><a href="#exceptions">Exceptions</a></li>
+          </ol>
+        </li>
+        <li><a href="#nested-classes-and-rtti">Nested-Classes-and-RTTI</a>
+          <ol>
+            <li><a href="#friend-classes">Friend-Classes</a></li>
+            <li><a href="#friend-member-functions">Friend-Member-Functions</a></li>
+            <li><a href="#nested-types">Nested-Types</a></li>
+            <li><a href="#nested-classes">Nested-Classes</a></li>
+            <li><a href="#runtime-type-identificationrtti">Runtime-Type-Identification(RTTI)</a>
+              <ol>
+                <li><a href="#more-type-cast-operations">More-Type-Cast-Operations</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#code-optimization">Code-Optimization</a>
+          <ol>
+            <li><a href="#register-and-cache">Register-and-Cache</a></li>
+            <li><a href="#locality-of-reference">Locality-of-Reference</a></li>
+            <li><a href="#计算cpu优化效率">计算<code>CPU</code>优化效率</a></li>
+          </ol>
+        </li>
+        <li><a href="#个人的补充与总结">个人的补充与总结</a>
+          <ol>
+            <li><a href="#关于include">关于Include</a></li>
+            <li><a href="#关于类">关于类</a></li>
+            <li><a href="#关于模板">关于模板</a>
+              <ol>
+                <li><a href="#类模板和函数模板的例子">类模板和函数模板的例子</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </aside>
+        </div>
+
+        
+            <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+        
+    </article>
 
     
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -4076,24 +4276,13 @@
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+        </main><footer class="field-footer">
+    <div class="field-footer__inner">
+        <p><span aria-hidden="true">©</span> 2026 NomadJoe</p>
+    </div>
+</footer>
+<script type="text/javascript" src="/ts/field-notes.bbb1f58da5208060e8df1b4e81dd161355cb9abe0e000402ac419570a346a495.js" integrity="sha256-u7H1jaUggGDo3xtOgd0WE1XLmr4OAAQCrEGVcKNGpJU=" defer></script>
 
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
 
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
+</body>
 </html>

@@ -4,26 +4,29 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="跟着下面的视频，系统梳理复习过往的嵌入式知识，同时也算是 电控成长指南 的一个 部分 实现，能有效且快速的建立一个嵌入式系统和工具链的整体认知\n【《从CPU架构到操作系统实现》系列课程 - Git 开源】https://www.bilibili.com/video/BV1ksNCzXEny?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
 <title>从CPU架构到操作系统实现</title>
 
-<link rel='canonical' href='https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/'>
-
-<link rel="stylesheet" href="/scss/style.min.1d228ea7690a965de9e7d8591cfa3a19afe76b85fa0ec74dcd88180add482f92.css"><meta property='og:title' content="从CPU架构到操作系统实现">
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/'><link rel="stylesheet" href="/scss/field-notes.min.c66b018ab2fe010d4124c4b8cf49707f4ed2bcafc92b5a3e4b33ce5c4a6bec99.css">
+<meta property='og:title' content="从CPU架构到操作系统实现">
 <meta property='og:description' content="跟着下面的视频，系统梳理复习过往的嵌入式知识，同时也算是 电控成长指南 的一个 部分 实现，能有效且快速的建立一个嵌入式系统和工具链的整体认知\n【《从CPU架构到操作系统实现》系列课程 - Git 开源】https://www.bilibili.com/video/BV1ksNCzXEny?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/'>
 <meta property='og:site_name' content='NomadJoe'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='BASE' /><meta property='article:published_time' content='2025-09-04T00:36:07&#43;08:00'/><meta property='article:modified_time' content='2025-09-04T00:36:07&#43;08:00'/>
 <meta name="twitter:title" content="从CPU架构到操作系统实现">
-<meta name="twitter:description" content="跟着下面的视频，系统梳理复习过往的嵌入式知识，同时也算是 电控成长指南 的一个 部分 实现，能有效且快速的建立一个嵌入式系统和工具链的整体认知\n【《从CPU架构到操作系统实现》系列课程 - Git 开源】https://www.bilibili.com/video/BV1ksNCzXEny?vd_source=5a0790755035f26a67935abfbfcdfd5b\n">
+<meta name="twitter:description" content="跟着下面的视频，系统梳理复习过往的嵌入式知识，同时也算是 电控成长指南 的一个 部分 实现，能有效且快速的建立一个嵌入式系统和工具链的整体认知
+【《从CPU架构到操作系统实现》系列课程 - Git 开源】https://www.bilibili.com/video/BV1ksNCzXEny?vd_source=5a0790755035f26a67935abfbfcdfd5b
+">
+    <meta name="twitter:card" content="summary">
+
     <link rel="shortcut icon" href="/favicon.ico" />
+<link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 
     </head>
-    <body class="
-    article-page
-    ">
+    <body class="field-notes article-page">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
             if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
+                localStorage.setItem(colorSchemeKey, "dark");
             }
         })();
     </script><script>
@@ -41,181 +44,35 @@
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
+<a class="skip-link" href="#main-content">跳到主要内容</a><header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-wordmark" href="/" aria-label="NomadJoe 首页">NJ<span aria-hidden="true">/</span>FIELD NOTES</a>
+        <button class="site-menu-toggle" id="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+            <span class="site-menu-toggle__label">菜单</span>
+        </button>
+        <nav class="primary-nav" data-testid="primary-nav" aria-label="主导航">
+            <ul id="primary-menu">
+                <li><a href="/">首页</a></li>
+                <li><a href="/archives/">笔记</a></li>
+                <li><a href="/categories/%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae/">项目</a></li>
+                <li><a href="/%E5%85%B3%E4%BA%8E/">关于</a></li>
+                <li><a href="/search/">搜索</a></li>
+            </ul>
+        </nav>
+        <div class="site-tools" aria-label="站点工具">
             
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hu5250448583294231844.png" width="300"
-                            height="257" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">🍥</span>
-                
-            </figure>
+                <a class="icon-control" href="/index.xml" aria-label="订阅 RSS"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+</a>
             
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">NomadJoe</a></h1>
-            <h2 class="site-description">to feel,to experience</h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://www.bilibili.com/'
-                        target="_blank"
-                        title="Biliili"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://github.com/CaiJimmy/hugo-theme-stack'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>友情链接</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="切换配色" aria-pressed="false">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -223,205 +80,156 @@
 
 
 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>暗色模式</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
+            </button>
         </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#概述">概述</a>
-      <ol>
-        <li><a href="#关于arm架构">关于ARM架构</a>
-          <ol>
-            <li><a href="#cortex-m优点">Cortex-M优点</a></li>
-          </ol>
-        </li>
-        <li><a href="#指令集">指令集</a>
-          <ol>
-            <li><a href="#1cisccomplex-instruction-set-computer">1.CISC（Complex Instruction Set Computer）</a></li>
-            <li><a href="#2riscreduced-instruction-set-computer">2.RISC（Reduced Instruction Set Computer）</a></li>
-          </ol>
-        </li>
-        <li><a href="#开发环境dev">开发环境（DEV）</a></li>
-      </ol>
-    </li>
-    <li><a href="#编译">编译</a>
-      <ol>
-        <li><a href="#编译链工具">编译链工具</a></li>
-        <li><a href="#嵌入式编译烧录流程">嵌入式编译烧录流程</a>
-          <ol>
-            <li><a href="#预编译">预编译</a></li>
-            <li><a href="#编译-1">编译</a></li>
-            <li><a href="#汇编">汇编</a></li>
-            <li><a href="#链接">链接</a></li>
-            <li><a href="#转换">转换</a></li>
-            <li><a href="#烧录">烧录</a></li>
-          </ol>
-        </li>
-        <li><a href="#反汇编">反汇编</a></li>
-      </ol>
-    </li>
-    <li><a href="#启动">启动</a>
-      <ol>
-        <li><a href="#中断向量表">中断向量表</a></li>
-        <li><a href="#启动原理">启动原理</a></li>
-        <li><a href="#存储分布">存储分布</a>
-          <ol>
-            <li><a href="#flash区">Flash区</a></li>
-            <li><a href="#ram区">RAM区</a></li>
-            <li><a href="#内存分配规则">内存分配规则</a></li>
-          </ol>
-        </li>
-        <li><a href="#启动文件详解">启动文件详解</a>
-          <ol>
-            <li><a href="#一stm32f103-启动文件startup_stm32f103xbs核心定位">一、STM32F103 启动文件（startup_stm32f103xb.s）核心定位</a></li>
-            <li><a href="#二启动文件整体结构拆解">二、启动文件整体结构拆解</a></li>
-            <li><a href="#三逐段解析启动文件代码">三、逐段解析启动文件代码</a></li>
-            <li><a href="#四启动文件与链接器脚本ld的配合关系">四、启动文件与链接器脚本（.ld）的配合关系</a></li>
-            <li><a href="#五总结启动文件的核心价值">五、总结：启动文件的核心价值</a></li>
-          </ol>
-        </li>
-        <li><a href="#stm32-启动流程ld-文件作用及示例解析">STM32 启动流程、.ld 文件作用及示例解析</a>
-          <ol>
-            <li><a href="#一stm32-的启动流程从复位到main函数">一、STM32 的启动流程（从复位到<code>main</code>函数）</a></li>
-            <li><a href="#二ld-文件链接器脚本的核心作用">二、.ld 文件（链接器脚本）的核心作用</a></li>
-            <li><a href="#三解析-stm32f103c8tx-的ld-文件">三、解析 STM32F103C8Tx 的.ld 文件</a></li>
-            <li><a href="#四总结启动流程与ld-文件的关联">四、总结：启动流程与.ld 文件的关联</a></li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-    <li><a href="#寄存器">寄存器</a>
-      <ol>
-        <li><a href="#通用寄存器">通用寄存器</a></li>
-        <li><a href="#pc程序计数器程序如何跑起来">PC程序计数器&amp;程序如何跑起来</a></li>
-        <li><a href="#堆栈指针双堆栈指针机制">堆栈指针&amp;双堆栈指针机制</a></li>
-        <li><a href="#lr链接寄存器函数调用的本质">LR链接寄存器&amp;函数调用的本质</a></li>
-      </ol>
-    </li>
-    <li><a href="#地址分配">地址分配</a>
-      <ol>
-        <li><a href="#存储器系统">存储器系统</a></li>
-        <li><a href="#关于内存和编译优化">关于内存和编译优化</a></li>
-      </ol>
-    </li>
-    <li><a href="#中断">中断</a>
-      <ol>
-        <li><a href="#关于中断">关于中断</a></li>
-        <li><a href="#中断返回中断上下文">中断返回&amp;中断上下文</a></li>
-      </ol>
-    </li>
-    <li><a href="#错误处理">错误处理</a></li>
-    <li><a href="#待续">待续</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
+    </div>
+</header>
+<main id="main-content" class="site-main" data-testid="article-main">
+    <div class="reading-progress" data-testid="reading-progress" aria-hidden="true">
+        <span class="reading-progress__line"></span>
+        <span class="reading-progress__stone"></span>
+    </div>
 
-            
-        
-    </aside>
+    <article class="article-reader">
+        <div class="article-reader__layout">
+            <div class="article-reader__document">
+                <header class="article-reader__header">
+    <p class="section-kicker">FIELD NOTE / OPEN LOG</p>
+    <h1 data-testid="article-title">从CPU架构到操作系统实现</h1>
 
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/base-study/" >
-                BASE Study
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/">从CPU架构到操作系统实现</a>
-        </h2>
-    
-        
+    <div class="article-reader__meta">
+        <time datetime="2025-09-04">2025.09.04</time>
+        <span aria-hidden="true">/</span>
+        <time data-testid="article-reading-time" datetime="PT32M">32 分钟阅读</time>
     </div>
 
     
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-09-04</time>
-            </div>
-        
-
-        
-    </footer>
+        <ul class="article-reader__terms" aria-label="分类">
+            
+                <li><a href="/categories/base-study/">BASE Study</a></li>
+            
+        </ul>
     
 
     
-</div>
-
+    
 </header>
 
-    <section class="article-content">
-    
-    
-    <p>跟着下面的视频，系统梳理复习过往的嵌入式知识，同时也算是 电控成长指南 的一个 部分 实现，能有效且快速的建立一个嵌入式系统和工具链的整体认知</p>
+
+                <details class="article-toc-mobile">
+            <summary>目录</summary>
+            <div class="article-toc-mobile__content">
+                <nav id="TableOfContentsMobile" aria-label="目录">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#概述">概述</a>
+          <ol>
+            <li><a href="#关于arm架构">关于ARM架构</a>
+              <ol>
+                <li><a href="#cortex-m优点">Cortex-M优点</a></li>
+              </ol>
+            </li>
+            <li><a href="#指令集">指令集</a>
+              <ol>
+                <li><a href="#1cisccomplex-instruction-set-computer">1.CISC（Complex Instruction Set Computer）</a></li>
+                <li><a href="#2riscreduced-instruction-set-computer">2.RISC（Reduced Instruction Set Computer）</a></li>
+              </ol>
+            </li>
+            <li><a href="#开发环境dev">开发环境（DEV）</a></li>
+          </ol>
+        </li>
+        <li><a href="#编译">编译</a>
+          <ol>
+            <li><a href="#编译链工具">编译链工具</a></li>
+            <li><a href="#嵌入式编译烧录流程">嵌入式编译烧录流程</a>
+              <ol>
+                <li><a href="#预编译">预编译</a></li>
+                <li><a href="#编译-1">编译</a></li>
+                <li><a href="#汇编">汇编</a></li>
+                <li><a href="#链接">链接</a></li>
+                <li><a href="#转换">转换</a></li>
+                <li><a href="#烧录">烧录</a></li>
+              </ol>
+            </li>
+            <li><a href="#反汇编">反汇编</a></li>
+          </ol>
+        </li>
+        <li><a href="#启动">启动</a>
+          <ol>
+            <li><a href="#中断向量表">中断向量表</a></li>
+            <li><a href="#启动原理">启动原理</a></li>
+            <li><a href="#存储分布">存储分布</a>
+              <ol>
+                <li><a href="#flash区">Flash区</a></li>
+                <li><a href="#ram区">RAM区</a></li>
+                <li><a href="#内存分配规则">内存分配规则</a></li>
+              </ol>
+            </li>
+            <li><a href="#启动文件详解">启动文件详解</a>
+              <ol>
+                <li><a href="#一stm32f103-启动文件startup_stm32f103xbs核心定位">一、STM32F103 启动文件（startup_stm32f103xb.s）核心定位</a></li>
+                <li><a href="#二启动文件整体结构拆解">二、启动文件整体结构拆解</a></li>
+                <li><a href="#三逐段解析启动文件代码">三、逐段解析启动文件代码</a></li>
+                <li><a href="#四启动文件与链接器脚本ld的配合关系">四、启动文件与链接器脚本（.ld）的配合关系</a></li>
+                <li><a href="#五总结启动文件的核心价值">五、总结：启动文件的核心价值</a></li>
+              </ol>
+            </li>
+            <li><a href="#stm32-启动流程ld-文件作用及示例解析">STM32 启动流程、.ld 文件作用及示例解析</a>
+              <ol>
+                <li><a href="#一stm32-的启动流程从复位到main函数">一、STM32 的启动流程（从复位到<code>main</code>函数）</a></li>
+                <li><a href="#二ld-文件链接器脚本的核心作用">二、.ld 文件（链接器脚本）的核心作用</a></li>
+                <li><a href="#三解析-stm32f103c8tx-的ld-文件">三、解析 STM32F103C8Tx 的.ld 文件</a></li>
+                <li><a href="#四总结启动流程与ld-文件的关联">四、总结：启动流程与.ld 文件的关联</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#寄存器">寄存器</a>
+          <ol>
+            <li><a href="#通用寄存器">通用寄存器</a></li>
+            <li><a href="#pc程序计数器程序如何跑起来">PC程序计数器&amp;程序如何跑起来</a></li>
+            <li><a href="#堆栈指针双堆栈指针机制">堆栈指针&amp;双堆栈指针机制</a></li>
+            <li><a href="#lr链接寄存器函数调用的本质">LR链接寄存器&amp;函数调用的本质</a></li>
+          </ol>
+        </li>
+        <li><a href="#地址分配">地址分配</a>
+          <ol>
+            <li><a href="#存储器系统">存储器系统</a></li>
+            <li><a href="#关于内存和编译优化">关于内存和编译优化</a></li>
+          </ol>
+        </li>
+        <li><a href="#中断">中断</a>
+          <ol>
+            <li><a href="#关于中断">关于中断</a></li>
+            <li><a href="#中断返回中断上下文">中断返回&amp;中断上下文</a></li>
+          </ol>
+        </li>
+        <li><a href="#错误处理">错误处理</a></li>
+        <li><a href="#待续">待续</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+            </div>
+        </details>
+
+                <div class="article-content">
+                    <p>跟着下面的视频，系统梳理复习过往的嵌入式知识，同时也算是 电控成长指南 的一个 部分 实现，能有效且快速的建立一个嵌入式系统和工具链的整体认知</p>
 <p><code>【《从CPU架构到操作系统实现》系列课程 - Git 开源】https://www.bilibili.com/video/BV1ksNCzXEny?vd_source=5a0790755035f26a67935abfbfcdfd5b</code></p>
 <p>视频中详细且硬核的实例不会出现在此笔记中</p>
 <h2 id="概述">概述
-</h2><h3 id="关于arm架构">关于ARM架构
-</h3><p>目前<code>arm</code>内核主要演变分为<code>Cortex-X</code>，<code>Cortex-A</code>，<code>Cortex-R</code>，<code>Cortex-M</code></p>
+</h2>
+<h3 id="关于arm架构">关于ARM架构
+</h3>
+<p>目前<code>arm</code>内核主要演变分为<code>Cortex-X</code>，<code>Cortex-A</code>，<code>Cortex-R</code>，<code>Cortex-M</code></p>
 <p><code>Cortex-A</code>：应用处理器，设计用来处理复杂应用（例如高端嵌入操作系统<code>Linux</code>，<code>iOS</code>，<code>Android</code>，<code>Windows</code>），对标PC和手机处理器的性能</p>
 <p><code>Cortex-X</code>：比<code>Cortex-M</code>更高的性能</p>
 <p><code>Cortex-R</code>：<code>Real-time</code>，主要用于实时系统</p>
 <p><code>Cortex-M</code>：<code>Microcontrol</code>，微处理器</p>
 <h4 id="cortex-m优点">Cortex-M优点
-</h4><ol>
+</h4>
+<ol>
 <li>低功耗</li>
 <li>高性能</li>
 <li>中断易用</li>
@@ -443,7 +251,8 @@
 ></li>
 </ol>
 <h3 id="指令集">指令集
-</h3><p>多套指令集用于处理不同的场景</p>
+</h3>
+<p>多套指令集用于处理不同的场景</p>
 <p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-ARM%E6%8C%87%E4%BB%A4%E9%9B%86%E6%BC%94%E5%8F%98.png"
 	width="542"
 	height="294"
@@ -457,17 +266,22 @@
 	
 ></p>
 <h4 id="1cisccomplex-instruction-set-computer">1.CISC（Complex Instruction Set Computer）
-</h4><p>复杂指令系统计算机，<code>CISC</code>指令集包含大量复杂的指令，每条指令可以完成多个操作，这种设计使得编程简单，但硬件实现复杂，执行效率低</p>
+</h4>
+<p>复杂指令系统计算机，<code>CISC</code>指令集包含大量复杂的指令，每条指令可以完成多个操作，这种设计使得编程简单，但硬件实现复杂，执行效率低</p>
 <p><code>x86</code>架构（<code>Intel</code>的8086，8088，80286，80386）</p>
 <h4 id="2riscreduced-instruction-set-computer">2.RISC（Reduced Instruction Set Computer）
-</h4><p>精简指令系统计算机，<code>RISC</code>指令集包含较少的简单指令，每条指令只完成一个操作，使得硬件实现更简单，执行效率更高，但编程更复杂</p>
+</h4>
+<p>精简指令系统计算机，<code>RISC</code>指令集包含较少的简单指令，每条指令只完成一个操作，使得硬件实现更简单，执行效率更高，但编程更复杂</p>
 <p><code>ARM</code>架构，<code>RISC-V</code>架构，<code>MIPS</code>架构</p>
 <h3 id="开发环境dev">开发环境（DEV）
-</h3><p><code>GUN-GCC</code>编译器，<code>CMake</code>-&gt;<code>makefile</code>
+</h3>
+<p><code>GUN-GCC</code>编译器，<code>CMake</code>-&gt;<code>makefile</code>
 <code>STM32F103C8（C8T6）</code>经典控制器（<code>Cortex-M3</code>）</p>
 <h2 id="编译">编译
-</h2><h3 id="编译链工具">编译链工具
-</h3><p><code>ARM-Cortex-M</code>处理器的编译器很多，常用的是<code>MDK-ARM</code>(<code>ARM</code>公司自研的)(<code>Keil</code>)，以及<code>GCC</code>(<code>GNU-Compiler-Collection</code>)</p>
+</h2>
+<h3 id="编译链工具">编译链工具
+</h3>
+<p><code>ARM-Cortex-M</code>处理器的编译器很多，常用的是<code>MDK-ARM</code>(<code>ARM</code>公司自研的)(<code>Keil</code>)，以及<code>GCC</code>(<code>GNU-Compiler-Collection</code>)</p>
 <p>编译器之间的最大区别在于汇编伪代码，链接语法，还有使用参数
 <img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%BC%96%E8%AF%91%E9%93%BE%E5%B7%A5%E5%85%B7.png"
 	width="504"
@@ -485,7 +299,8 @@
 <p><code>arm</code>是指<code>arm</code>架构，<code>none</code>是指编译出的可执行文件是运行在硬件上，而不是操作系统上，<code>eabi(The Embedded-Application Binary Interface)</code>嵌入式应用二进制接口</p>
 <p><code>arm-none-eabi-objcopy</code>是一个二进制生成工具</p>
 <h3 id="嵌入式编译烧录流程">嵌入式编译烧录流程
-</h3><p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%BC%96%E8%AF%91%E7%83%A7%E5%BD%95%E5%85%A8%E6%B5%81%E7%A8%8B.png"
+</h3>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%BC%96%E8%AF%91%E7%83%A7%E5%BD%95%E5%85%A8%E6%B5%81%E7%A8%8B.png"
 	width="1641"
 	height="820"
 	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%BC%96%E8%AF%91%E7%83%A7%E5%BD%95%E5%85%A8%E6%B5%81%E7%A8%8B_hu18309702811978085822.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E7%BC%96%E8%AF%91%E7%83%A7%E5%BD%95%E5%85%A8%E6%B5%81%E7%A8%8B_hu7323167174626790360.png 1024w"
@@ -503,36 +318,46 @@
 <p><a class="link" href="https://zhuanlan.zhihu.com/p/671327144"  target="_blank" rel="noopener"
     >一文看懂hex文件、bin文件、axf文件的区别 - 知乎</a></p>
 <h4 id="预编译">预编译
-</h4><p>将所有头文件和宏展开，同时去掉注释，生成<code>.i</code>文件（<code>c</code>中间文件）</p>
+</h4>
+<p>将所有头文件和宏展开，同时去掉注释，生成<code>.i</code>文件（<code>c</code>中间文件）</p>
 <h4 id="编译-1">编译
-</h4><p>将<code>.i</code>文件编译为<code>.s</code>汇编文件，编译优化发生在此处</p>
+</h4>
+<p>将<code>.i</code>文件编译为<code>.s</code>汇编文件，编译优化发生在此处</p>
 <h4 id="汇编">汇编
-</h4><p>将<code>.s</code>文件汇编为<code>.o</code>二进制文件（机器码）
+</h4>
+<p>将<code>.s</code>文件汇编为<code>.o</code>二进制文件（机器码）
 二进制文件中还包含很多的其他信息</p>
 <p>在汇编时，可以指定汇编器的参数来选择指令集</p>
 <h4 id="链接">链接
-</h4><p>链接是将各个二进制文件里面的机器码所在的各个段拼接起来，以形成可执行文件<code>.elf</code>（带有调试信息）</p>
+</h4>
+<p>链接是将各个二进制文件里面的机器码所在的各个段拼接起来，以形成可执行文件<code>.elf</code>（带有调试信息）</p>
 <p>在链接这个阶段才能检测出有不有重复定义和未定义的错误</p>
 <p>对于<code>GNU</code>来说，可以编写<code>.ld</code>链接脚本来编排代码的分区地址</p>
 <h4 id="转换">转换
-</h4><p>通过转换器能将<code>.elf</code>文件转换为<code>.hex</code>和<code>.bin</code>文件，主要用于提取信息</p>
+</h4>
+<p>通过转换器能将<code>.elf</code>文件转换为<code>.hex</code>和<code>.bin</code>文件，主要用于提取信息</p>
 <p><code>.bin</code>文件只包含二进制机器码
 <code>.hex</code>文件是<code>Intel</code>定义的包含地址和二进制数值的<code>ASC</code>码文本文件</p>
 <h4 id="烧录">烧录
-</h4><p>烧录的过程是将编译好的机器码写到<code>CPU</code>存储器中</p>
+</h4>
+<p>烧录的过程是将编译好的机器码写到<code>CPU</code>存储器中</p>
 <h3 id="反汇编">反汇编
-</h3><p><code>GCC</code>中的反汇编工具<code>Disassembler</code>是<code>arm-none-eabi-objdump</code></p>
+</h3>
+<p><code>GCC</code>中的反汇编工具<code>Disassembler</code>是<code>arm-none-eabi-objdump</code></p>
 <h2 id="启动">启动
-</h2><p>主要是讲解<code>STM32</code>的启动流程</p>
+</h2>
+<p>主要是讲解<code>STM32</code>的启动流程</p>
 <h3 id="中断向量表">中断向量表
-</h3><p>中断向量表的构建，根据不同的编译工具，有不同的方式构建</p>
+</h3>
+<p>中断向量表的构建，根据不同的编译工具，有不同的方式构建</p>
 <p>中断向量表的前两项（.woed，4字节）是最关键的
 第一项是堆栈指针的值
 第二项是<code>Reset_Handler</code>函数入口</p>
 <p>在启动时，需要先设置堆栈指针，否则无法进行压栈的操作，从宏观上说，意味着<code>C</code>语言函数体不能调用子函数</p>
 <p>VTOR寄存器，中断向量表偏移寄存器</p>
 <h3 id="启动原理">启动原理
-</h3><p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-stm32%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86.png"
+</h3>
+<p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-stm32%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86.png"
 	width="692"
 	height="193"
 	srcset="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-stm32%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86_hu7308303685142515106.png 480w, /p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-stm32%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86_hu3601764468401878811.png 1024w"
@@ -568,10 +393,12 @@
 （以<code>STM32F103</code>为例）</li>
 </ol>
 <h3 id="存储分布">存储分布
-</h3><p>以stm32f103c8t6为例</p>
+</h3>
+<p>以stm32f103c8t6为例</p>
 <h4 id="flash区">Flash区
-</h4><p><strong>Flash区，起始位置0x8000000</strong></p>
-<div class="table-wrapper"><table>
+</h4>
+<p><strong>Flash区，起始位置0x8000000</strong></p>
+<table>
   <thead>
       <tr>
           <th>段名称</th>
@@ -636,10 +463,11 @@
           <td>初始化变量的初始值</td>
       </tr>
   </tbody>
-</table></div>
+</table>
 <h4 id="ram区">RAM区
-</h4><p><strong>RAM区，起始位置0x20000000</strong></p>
-<div class="table-wrapper"><table>
+</h4>
+<p><strong>RAM区，起始位置0x20000000</strong></p>
+<table>
   <thead>
       <tr>
           <th>段名称</th>
@@ -686,7 +514,7 @@
           <td>栈底</td>
       </tr>
   </tbody>
-</table></div>
+</table>
 <p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-RAM%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.png"
 	width="1269"
 	height="674"
@@ -713,7 +541,8 @@
 	
 ></p>
 <h4 id="内存分配规则">内存分配规则
-</h4><ol>
+</h4>
+<ol>
 <li><strong>全局变量、局部静态变量</strong>：根据是否初始化决定分配在.data段或.bss段</li>
 <li><strong>用const关键字声明的常量</strong>：分配在Flash中</li>
 <li><strong>使用C标准的malloc申请的内存</strong>：分配在系统堆中</li>
@@ -725,10 +554,13 @@
 <li><strong>中断中定义的临时变量</strong>：分配在系统</li>
 </ol>
 <h3 id="启动文件详解">启动文件详解
-</h3><h4 id="一stm32f103-启动文件startup_stm32f103xbs核心定位">一、STM32F103 启动文件（startup_stm32f103xb.s）核心定位
-</h4><p>STM32 的启动文件（如<code>startup_stm32f103xb.s</code>）是<strong>汇编语言编写的底层程序</strong>，是硬件复位后执行的第一段代码，负责衔接 “硬件初始化” 与 “用户 C 代码（<code>main</code>函数）”。其核心功能包括：设置栈指针、构建中断向量表、初始化数据段（<code>.data</code>）、清零未初始化数据段（<code>.bss</code>）、配置系统时钟，最终引导程序进入<code>main</code>函数，是 STM32 程序运行的 “底层基石”。</p>
+</h3>
+<h4 id="一stm32f103-启动文件startup_stm32f103xbs核心定位">一、STM32F103 启动文件（startup_stm32f103xb.s）核心定位
+</h4>
+<p>STM32 的启动文件（如<code>startup_stm32f103xb.s</code>）是<strong>汇编语言编写的底层程序</strong>，是硬件复位后执行的第一段代码，负责衔接 “硬件初始化” 与 “用户 C 代码（<code>main</code>函数）”。其核心功能包括：设置栈指针、构建中断向量表、初始化数据段（<code>.data</code>）、清零未初始化数据段（<code>.bss</code>）、配置系统时钟，最终引导程序进入<code>main</code>函数，是 STM32 程序运行的 “底层基石”。</p>
 <h4 id="二启动文件整体结构拆解">二、启动文件整体结构拆解
-</h4><p>该启动文件按功能可划分为 5 个核心模块，各模块职责明确且环环相扣：</p>
+</h4>
+<p>该启动文件按功能可划分为 5 个核心模块，各模块职责明确且环环相扣：</p>
 <ol>
 <li><strong>汇编环境配置</strong>：指定处理器架构、指令集、浮点模式，确保汇编代码与硬件兼容。</li>
 <li><strong>关键符号声明</strong>：引用链接器脚本（<code>.ld</code>）中定义的内存地址符号，建立启动文件与内存布局的关联。</li>
@@ -737,8 +569,10 @@
 <li><strong>默认中断处理函数（<code>Default_Handler</code>）</strong>：未自定义的中断会默认进入此处，避免系统崩溃。</li>
 </ol>
 <h4 id="三逐段解析启动文件代码">三、逐段解析启动文件代码
-</h4><h5 id="1-汇编环境配置开头基础设置">1. 汇编环境配置（开头基础设置）
-</h5><div class="highlight"><div class="chroma">
+</h4>
+<h5 id="1-汇编环境配置开头基础设置">1. 汇编环境配置（开头基础设置）
+</h5>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -757,7 +591,8 @@
 <li><strong>关键细节</strong>：<code>softvfp</code>对应 STM32F103 的硬件特性 —— 该型号无硬件浮点处理单元（FPU），需通过软件模拟浮点运算，与之前解析的<code>.ld</code>文件中未配置 FPU 参数完全匹配。</li>
 </ul>
 <h5 id="2-关键符号声明与链接器脚本联动">2. 关键符号声明（与链接器脚本联动）
-</h5><div class="highlight"><div class="chroma">
+</h5>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -794,7 +629,8 @@
 </li>
 </ul>
 <h5 id="3-复位处理函数reset_handler启动核心逻辑">3. 复位处理函数（<code>Reset_Handler</code>：启动核心逻辑）
-</h5><p><code>Reset_Handler</code>是复位后执行的第一个函数（由中断向量表指定），对应 STM32 启动流程中的 “软件初始化” 阶段，代码逻辑可分为 5 步：</p>
+</h5>
+<p><code>Reset_Handler</code>是复位后执行的第一个函数（由中断向量表指定），对应 STM32 启动流程中的 “软件初始化” 阶段，代码逻辑可分为 5 步：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -894,14 +730,16 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="关键步骤解读">关键步骤解读：
-</h5><ul>
+</h5>
+<ul>
 <li><strong>系统时钟初始化（<code>SystemInit</code>）</strong>：STM32 复位后默认使用 8MHz 的内部高速时钟（HSI），<code>SystemInit</code>函数会配置外部高速时钟（HSE）和锁相环（PLL），将系统时钟提升到 72MHz（F103 的常用工作频率），确保外设和 CPU 高效运行。</li>
 <li><strong>.data 段复制</strong>：<code>.data</code>段存储 “已初始化的全局 / 静态变量”（如<code>int a = 10;</code>），这些变量需要读写权限，因此运行时必须在 RAM 中；但编译时其初始值会存放在 FLASH（节省 RAM），需通过此步骤复制到 RAM。</li>
 <li><strong>.bss 段清零</strong>：<code>.bss</code>段存储 “未初始化的全局 / 静态变量”（如<code>int b;</code>），C 语言标准要求其初始值为 0，因此无需在 FLASH 中存储初始值，直接将 RAM 对应区域清零即可。</li>
 <li><strong>跳转到<code>main</code></strong>：这是启动文件的 “最终目标”—— 完成所有底层初始化后，将程序控制权交给用户代码，正式进入应用逻辑。</li>
 </ul>
 <h5 id="4-中断向量表g_pfnvectors中断响应的-地址簿">4. 中断向量表（<code>g_pfnVectors</code>：中断响应的 “地址簿”）
-</h5><p>中断向量表是<strong>Cortex-M3 内核复位后访问的第一个数据结构</strong>，存储了所有异常（如复位、硬 fault）和外设中断（如串口、定时器）的处理函数地址。当发生中断 / 异常时，内核会从向量表中找到对应地址，跳转到处理函数执行。</p>
+</h5>
+<p>中断向量表是<strong>Cortex-M3 内核复位后访问的第一个数据结构</strong>，存储了所有异常（如复位、硬 fault）和外设中断（如串口、定时器）的处理函数地址。当发生中断 / 异常时，内核会从向量表中找到对应地址，跳转到处理函数执行。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -971,13 +809,15 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="核心特性">核心特性：
-</h5><ul>
+</h5>
+<ul>
 <li><strong>位置固定</strong>：在<code>.ld</code>文件中，<code>.isr_vector</code>段被强制分配到 FLASH 起始地址（<code>0x8000000</code>），这是 Cortex-M3 内核的硬件规定 —— 复位后内核会自动从<code>0x8000000</code>读取向量表。</li>
 <li><strong>第 0 个元素必为栈顶</strong>：内核复位后做的第一件事是 “初始化栈指针（MSP）”，因此向量表第 0 个元素必须是栈顶地址（<code>_estack</code>，来自.ld 文件），否则后续函数调用、局部变量存储会因栈地址错误崩溃。</li>
 <li><strong>中断优先级隐含</strong>：向量表中元素的顺序对应中断 / 异常的优先级（靠前的优先级更高），例如 “硬 fault”（第 3 个元素）优先级高于 “SysTick”（第 15 个元素）。</li>
 </ul>
 <h5 id="5-默认中断处理函数default_handler中断-兜底-逻辑">5. 默认中断处理函数（<code>Default_Handler</code>：中断 “兜底” 逻辑）
-</h5><p>当用户未为某个中断定义处理函数时，中断向量表会将该中断的地址指向<code>Default_Handler</code>，避免系统因 “找不到中断处理函数” 而进入未知状态。</p>
+</h5>
+<p>当用户未为某个中断定义处理函数时，中断向量表会将该中断的地址指向<code>Default_Handler</code>，避免系统因 “找不到中断处理函数” 而进入未知状态。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -995,7 +835,8 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="弱别名机制用户可重定义中断函数">弱别名机制（用户可重定义中断函数）
-</h5><p>启动文件通过 “弱别名（<code>.weak</code>）” 允许用户在 C 代码中重定义中断处理函数，具体逻辑如下：</p>
+</h5>
+<p>启动文件通过 “弱别名（<code>.weak</code>）” 允许用户在 C 代码中重定义中断处理函数，具体逻辑如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1016,8 +857,9 @@
 </li>
 </ul>
 <h4 id="四启动文件与链接器脚本ld的配合关系">四、启动文件与链接器脚本（.ld）的配合关系
-</h4><p>启动文件与<code>.ld</code>文件是<strong>紧密耦合的 “搭档”</strong>，二者通过 “全局符号” 和 “段分配” 协同工作，缺一不可：</p>
-<div class="table-wrapper"><table>
+</h4>
+<p>启动文件与<code>.ld</code>文件是<strong>紧密耦合的 “搭档”</strong>，二者通过 “全局符号” 和 “段分配” 协同工作，缺一不可：</p>
+<table>
   <thead>
       <tr>
           <th>协作维度</th>
@@ -1047,9 +889,10 @@
           <td>检查堆、栈、数据段总大小是否超过 RAM/FLASH 容量，溢出则报错</td>
       </tr>
   </tbody>
-</table></div>
+</table>
 <h4 id="五总结启动文件的核心价值">五、总结：启动文件的核心价值
-</h4><p>STM32 启动文件是 “从硬件到软件的桥梁”，其核心作用可概括为 3 点：</p>
+</h4>
+<p>STM32 启动文件是 “从硬件到软件的桥梁”，其核心作用可概括为 3 点：</p>
 <ol>
 <li><strong>硬件初始化</strong>：完成栈指针设置、系统时钟配置，为程序运行提供基础硬件环境。</li>
 <li><strong>内存初始化</strong>：通过复制<code>.data</code>段、清零<code>.bss</code>段，确保全局 / 静态变量符合 C 语言标准要求。</li>
@@ -1058,11 +901,14 @@
 简言之：没有启动文件，STM32 复位后无法完成任何初始化，更无法进入<code>main</code>函数 —— 它是 STM32 程序运行的 “第一块拼图”。</li>
 </ol>
 <h3 id="stm32-启动流程ld-文件作用及示例解析">STM32 启动流程、.ld 文件作用及示例解析
-</h3><p>要理解 STM32 的启动流程、<code>.ld</code>文件（链接器脚本）的作用，以及你提供的具体<code>.ld</code>文件内容，我们需要从<strong>宏观启动逻辑</strong>到<strong>链接器脚本细节</strong>逐步拆解，最终建立两者的关联。</p>
+</h3>
+<p>要理解 STM32 的启动流程、<code>.ld</code>文件（链接器脚本）的作用，以及你提供的具体<code>.ld</code>文件内容，我们需要从<strong>宏观启动逻辑</strong>到<strong>链接器脚本细节</strong>逐步拆解，最终建立两者的关联。</p>
 <h4 id="一stm32-的启动流程从复位到main函数">一、STM32 的启动流程（从复位到<code>main</code>函数）
-</h4><p>STM32 的启动流程是<strong>硬件复位→内核初始化→软件初始化→进入<code>main</code></strong> 的过程，核心依赖「中断向量表」和「启动文件」，而<code>.ld</code>文件为这个流程提供了<strong>内存地址映射</strong>和<strong>段分配规则</strong>。</p>
+</h4>
+<p>STM32 的启动流程是<strong>硬件复位→内核初始化→软件初始化→进入<code>main</code></strong> 的过程，核心依赖「中断向量表」和「启动文件」，而<code>.ld</code>文件为这个流程提供了<strong>内存地址映射</strong>和<strong>段分配规则</strong>。</p>
 <h5 id="1-硬件复位pc-指针的初始指向">1. 硬件复位：PC 指针的初始指向
-</h5><p>当 STM32 上电或复位时，Cortex-M 内核会自动执行以下操作：</p>
+</h5>
+<p>当 STM32 上电或复位时，Cortex-M 内核会自动执行以下操作：</p>
 <ul>
 <li>读取<strong>中断向量表的第一个元素</strong>（栈顶地址<code>_estack</code>），初始化主栈指针（MSP）—— 这是内核执行的第一个动作，因为函数调用、局部变量都依赖栈。</li>
 <li>将程序计数器（PC）指向<strong>中断向量表的第二个元素</strong>（<code>Reset_Handler</code>的地址）—— 这是复位后的第一个执行函数（启动流程的入口）。</li>
@@ -1071,7 +917,8 @@
 <p>关键：中断向量表的默认地址是<code>0x8000000</code>（STM32 FLASH 的起始地址），这也是<code>.ld</code>文件中<code>FLASH</code>的<code>ORIGIN</code>（起始地址）设置为<code>0x8000000</code>的原因。</p>
 </blockquote>
 <h5 id="2-执行reset_handler启动文件核心逻辑">2. 执行<code>Reset_Handler</code>（启动文件核心逻辑）
-</h5><p><code>Reset_Handler</code>是启动文件（如<code>startup_stm32f103c8tx.s</code>）中的汇编函数，是软件初始化的核心，其逻辑完全依赖<code>.ld</code>文件定义的<strong>全局符号</strong>（如<code>_sdata</code>、<code>_ebss</code>），具体步骤如下：</p>
+</h5>
+<p><code>Reset_Handler</code>是启动文件（如<code>startup_stm32f103c8tx.s</code>）中的汇编函数，是软件初始化的核心，其逻辑完全依赖<code>.ld</code>文件定义的<strong>全局符号</strong>（如<code>_sdata</code>、<code>_ebss</code>），具体步骤如下：</p>
 <ol>
 <li>
 <p><strong>初始化数据段（.data）</strong>：<br>
@@ -1093,9 +940,11 @@
 </li>
 </ol>
 <h5 id="3-异常--中断的触发补充">3. 异常 / 中断的触发（补充）
-</h5><p>若程序运行中触发中断（如定时器、串口），内核会再次读取「中断向量表」，根据中断号找到对应的中断服务函数（ISR）地址，跳转到 ISR 执行，执行完成后返回断点继续运行。</p>
+</h5>
+<p>若程序运行中触发中断（如定时器、串口），内核会再次读取「中断向量表」，根据中断号找到对应的中断服务函数（ISR）地址，跳转到 ISR 执行，执行完成后返回断点继续运行。</p>
 <h4 id="二ld-文件链接器脚本的核心作用">二、.ld 文件（链接器脚本）的核心作用
-</h4><p><code>.ld</code>文件是<strong>链接器（ld）的配置文件</strong>，其本质是告诉链接器：</p>
+</h4>
+<p><code>.ld</code>文件是<strong>链接器（ld）的配置文件</strong>，其本质是告诉链接器：</p>
 <ol>
 <li><strong>芯片的内存布局</strong>：FLASH（只读、存代码 / 常量）和 RAM（可读写、存变量 / 栈 / 堆）的<strong>起始地址</strong>和<strong>大小</strong>。</li>
 <li><strong>代码 / 数据的段分配规则</strong>：将编译生成的各个「段（Section）」（如<code>.text</code>、<code>.data</code>）分配到对应的内存区域（FLASH/RAM）。</li>
@@ -1104,9 +953,11 @@
 简单说：没有<code>.ld</code>文件，链接器无法知道 “代码该放哪里、变量该放哪里”，无法生成可执行的<code>.elf</code>/<code>.hex</code>文件。</li>
 </ol>
 <h4 id="三解析-stm32f103c8tx-的ld-文件">三、解析 STM32F103C8Tx 的.ld 文件
-</h4><p>以下按文件结构逐段解析，结合 STM32F103C8Tx 的硬件参数（64K FLASH、20K RAM）说明每部分的作用。</p>
+</h4>
+<p>以下按文件结构逐段解析，结合 STM32F103C8Tx 的硬件参数（64K FLASH、20K RAM）说明每部分的作用。</p>
 <h5 id="1-入口点与栈顶定义">1. 入口点与栈顶定义
-</h5><div class="highlight"><div class="chroma">
+</h5>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1134,7 +985,8 @@
 <li><strong>堆 / 栈大小</strong>：<code>_Min_Heap_Size</code>和<code>_Min_Stack_Size</code>是最小要求，若用户代码中堆 / 栈使用超过这个值，链接器会报错（防止 RAM 溢出），可根据需求调整（如栈不够时增大<code>_Min_Stack_Size</code>）。</li>
 </ul>
 <h5 id="2-内存区域定义memory-块">2. 内存区域定义（MEMORY 块）
-</h5><div class="highlight"><div class="chroma">
+</h5>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1170,9 +1022,10 @@
 </li>
 </ul>
 <h5 id="3-段分配规则sections-块">3. 段分配规则（SECTIONS 块）
-</h5><p><code>SECTIONS</code>块是最复杂的部分，定义了「编译生成的段」如何映射到「MEMORY 块定义的物理内存」，每一个子段都对应特定的代码 / 数据类型。</p>
+</h5>
+<p><code>SECTIONS</code>块是最复杂的部分，定义了「编译生成的段」如何映射到「MEMORY 块定义的物理内存」，每一个子段都对应特定的代码 / 数据类型。</p>
 <p><strong>Flash区，起始位置0x8000000</strong></p>
-<div class="table-wrapper"><table>
+<table>
   <thead>
       <tr>
           <th>段名称</th>
@@ -1237,9 +1090,9 @@
           <td>初始化变量的初始值</td>
       </tr>
   </tbody>
-</table></div>
+</table>
 <p><strong>RAM区，起始位置0x20000000</strong></p>
-<div class="table-wrapper"><table>
+<table>
   <thead>
       <tr>
           <th>段名称</th>
@@ -1286,9 +1139,10 @@
           <td>栈底</td>
       </tr>
   </tbody>
-</table></div>
+</table>
 <h6 id="1isr_vector中断向量表放-flash">（1）.isr_vector：中断向量表（放 FLASH）
-</h6><div class="highlight"><div class="chroma">
+</h6>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1312,7 +1166,8 @@
 <li><strong><code>&gt;FLASH</code></strong>：明确将该段分配到<code>MEMORY</code>块定义的<code>FLASH</code>区域（符合硬件要求，向量表默认在 FLASH 起始地址）。</li>
 </ul>
 <h6 id="2text代码段放-flash">（2）.text：代码段（放 FLASH）
-</h6><div class="highlight"><div class="chroma">
+</h6>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1353,7 +1208,8 @@
 <li><strong><code>_etext = .</code></strong>：<code>.</code>代表当前地址，<code>_etext</code>是全局符号，标记<code>.text</code>段的结束地址 —— 后续的<code>.rodata</code>段会从<code>_etext</code>之后的地址开始分配，避免段重叠。</li>
 </ul>
 <h6 id="3rodata只读常量段放-flash">（3）.rodata：只读常量段（放 FLASH）
-</h6><div class="highlight"><div class="chroma">
+</h6>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1378,7 +1234,8 @@
 <li><strong>示例</strong>：<code>const char str[] = &quot;STM32&quot;;</code>会被编译到<code>.rodata</code>段，运行时直接从 FLASH 读取，不会复制到 RAM。</li>
 </ul>
 <h6 id="4armextabarmarm-架构兼容段放-flash">（4）.ARM.extab/.ARM：ARM 架构兼容段（放 FLASH）
-</h6><div class="highlight"><div class="chroma">
+</h6>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1419,7 +1276,8 @@
 <li><strong><code>READONLY</code></strong>：标记为只读，与 FLASH 的权限匹配（GCC11 + 支持，低版本需删除）。</li>
 </ul>
 <h6 id="5preinit_arrayinit_arrayfini_array初始化--结束函数数组放-flash">（5）.preinit_array/.init_array/.fini_array：初始化 / 结束函数数组（放 FLASH）
-</h6><div class="highlight"><div class="chroma">
+</h6>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1491,7 +1349,8 @@
 <li><strong><code>PROVIDE_HIDDEN</code></strong>：若用户代码未定义<code>__init_array_start</code>等符号，链接器自动提供（隐藏符号，避免冲突）；<code>KEEP</code>确保这些段不被优化删除。</li>
 </ul>
 <h6 id="6data初始化数据段放-ram加载地址在-flash">（6）.data：初始化数据段（放 RAM，加载地址在 FLASH）
-</h6><div class="highlight"><div class="chroma">
+</h6>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1538,7 +1397,8 @@
 <li><strong><code>.RamFunc</code></strong>：某些对执行速度要求高的函数（如高频中断服务函数），可通过<code>__attribute__((section(&quot;.RamFunc&quot;)))</code>标记，链接时会放到 RAM 中执行（RAM 访问速度比 FLASH 快）。</li>
 </ul>
 <h6 id="7bss未初始化数据段放-ram">（7）.bss：未初始化数据段（放 RAM）
-</h6><div class="highlight"><div class="chroma">
+</h6>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1574,7 +1434,8 @@
 <li><strong><code>COMMON</code></strong>：对应未声明但外部引用的全局变量（如<code>extern int c;</code>），链接时会分配到.bss 段。</li>
 </ul>
 <h6 id="8_user_heap_stack堆和栈的占位段放-ram">（8）._user_heap_stack：堆和栈的占位段（放 RAM）
-</h6><div class="highlight"><div class="chroma">
+</h6>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1635,7 +1496,8 @@
 	
 ></p>
 <h6 id="9discard丢弃无用段减小可执行文件大小">（9）/DISCARD/：丢弃无用段（减小可执行文件大小）
-</h6><div class="highlight"><div class="chroma">
+</h6>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1658,14 +1520,16 @@
 <li><strong>注意</strong>：若项目需要使用标准库功能（如<code>printf</code>、<code>sqrt</code>），需删除对应行，否则会出现 “未定义引用” 错误（需搭配<code>newlib-nano</code>等嵌入式精简库）。</li>
 </ul>
 <h4 id="四总结启动流程与ld-文件的关联">四、总结：启动流程与.ld 文件的关联
-</h4><ol>
+</h4>
+<ol>
 <li><strong>硬件复位</strong> → 内核读取<code>FLASH</code>起始地址（<code>0x8000000</code>）的<code>.isr_vector</code>段 → 找到<code>Reset_Handler</code>地址。</li>
 <li><strong>执行<code>Reset_Handler</code></strong> → 利用<code>.ld</code>定义的<code>_sdata</code>/<code>_sidata</code>/<code>_edata</code>复制<code>.data</code>段 → 利用<code>_sbss</code>/<code>_ebss</code>清零<code>.bss</code>段。</li>
 <li><strong>调用<code>main</code></strong> → 用户代码中的变量（.data/.bss）已在 RAM 中初始化，函数（.text）在 FLASH 中执行，堆 / 栈在 RAM 中预留空间。
 可以说：<strong>.ld 文件是 STM32 启动流程的 “地图”</strong>，没有它，启动文件不知道如何初始化内存，链接器不知道如何分配代码和数据，程序无法正常运行。</li>
 </ol>
 <h2 id="寄存器">寄存器
-</h2><p>认识一个<code>CPU</code>最直接的是去认识它的寄存器组
+</h2>
+<p>认识一个<code>CPU</code>最直接的是去认识它的寄存器组
 （Register bank）
 <img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-Cortex-M%E7%9A%84%E5%86%85%E6%A0%B8%E6%A1%86%E5%9B%BE.png"
 	width="790"
@@ -1719,14 +1583,17 @@
 	
 ></p>
 <h3 id="通用寄存器">通用寄存器
-</h3><p>通用寄存器通用性强，常用于存储临时的数据
+</h3>
+<p>通用寄存器通用性强，常用于存储临时的数据
 其中<code>R0-R7</code>是低组寄存器，<code>R8-R12</code>是高组寄存器，高组寄存器部分指令无法访问</p>
 <h3 id="pc程序计数器程序如何跑起来">PC程序计数器&amp;程序如何跑起来
-</h3><p><code>arm</code>架构中的<code>R15</code>寄存器，是程序计数器（program counter），该寄存器可读可写</p>
+</h3>
+<p><code>arm</code>架构中的<code>R15</code>寄存器，是程序计数器（program counter），该寄存器可读可写</p>
 <p>在<code>arm cortex-M</code>的<code>CPU</code>内，每一次<code>PC</code>自增4（即向下移动了4个字节），但是在使用<code>thumb</code>指令集时，<code>thumb</code>指令集的部分指令是2个字节，这与处理器的执行流水线<code>pipeline</code>的特性有关，实际取址的时候是一次去4字节，也就是对于2字节的指令是一次取两条</p>
 <p><code>CPU</code>在不断执行程序，本质就是程序计数器的不断更新，<code>PC</code>指向的就是当前要执行的指令的地址</p>
 <h3 id="堆栈指针双堆栈指针机制">堆栈指针&amp;双堆栈指针机制
-</h3><p>栈是高址向低址方向生长，堆是低址向高址方向生长</p>
+</h3>
+<p>栈是高址向低址方向生长，堆是低址向高址方向生长</p>
 <p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E5%A0%86%E6%A0%88.png"
 	width="333"
 	height="305"
@@ -1745,7 +1612,8 @@
 <p>双堆栈指针-<code>MSP</code>主堆栈指针，<code>PSP</code>进程堆栈指针
 可以用来实现隔离系统内核和应用程序任务</p>
 <h3 id="lr链接寄存器函数调用的本质">LR链接寄存器&amp;函数调用的本质
-</h3><p>函数调用的本质是<strong>程序执行流的动态转移与上下文管理</strong>，其核心在于通过 栈 来实现代码模块化执行和状态的保存与恢复</p>
+</h3>
+<p>函数调用的本质是<strong>程序执行流的动态转移与上下文管理</strong>，其核心在于通过 栈 来实现代码模块化执行和状态的保存与恢复</p>
 <p><code>arm</code>架构的<code>CPU</code>有专门设立一个寄存器<code>R14(link register)</code>，用于存放子函数的返回地址</p>
 <p>以<code>arm</code>的<code>bl</code>指令为例（用于函数调用）
 <code>bl &lt;label&gt;</code>是跳转到标签地址，同时将返回地址存入<code>LR</code>寄存器</p>
@@ -1753,8 +1621,10 @@
 <p>在多级函数调用时，<code>lr</code>寄存器的值会被压入栈中</p>
 <p>另外<code>lr</code>寄存器还能记录异常返回值。当处理器进入中断时，链接寄存器会更新为异常返回值，用来实现异常返回机制，用来记录区分一些工作模式现场，这些信息是恢复中断上下文需要的</p>
 <h2 id="地址分配">地址分配
-</h2><h3 id="存储器系统">存储器系统
-</h3><p><code>cortex-M</code>处理器是32位地址，因此会有
+</h2>
+<h3 id="存储器系统">存储器系统
+</h3>
+<p><code>cortex-M</code>处理器是32位地址，因此会有
 4<code>GB</code>的地址空间，所有的指令和数据通过这个地址访问</p>
 <p>硬件资源都是通过地址映射的方式访问
 另外<code>cortex-M</code>架构没有设置<code>MMU</code>内存管理单元，所以没有<code>MMU</code>内存管理单元，一般也不会搭载<code>Linux,Windows</code>这种通用类型的系统</p>
@@ -1827,13 +1697,16 @@
 	
 ></p>
 <h3 id="关于内存和编译优化">关于内存和编译优化
-</h3><p>指针是内存地址的容器
+</h3>
+<p>指针是内存地址的容器
 关于<code>i++</code>与<code>++i</code>执行效率的问题，在<code>O0</code>优化的情况下，不同编译器的具体实现是不一样的，执行效率是不能直接比较的</p>
 <p>编译优化会使汇编的指令在执行速度上提高，例如会使用<code>mov</code>去代替<code>ldr</code>，或者将一些简单的函数改为内嵌，以减少函数调用带来的开销</p>
 <h2 id="中断">中断
-</h2><p>在微机原理中已有涉及，后面只做简单回顾用</p>
+</h2>
+<p>在微机原理中已有涉及，后面只做简单回顾用</p>
 <h3 id="关于中断">关于中断
-</h3><p>中断的事件一般由硬件触发（实际有硬中断和软中断），会改变程序执行流</p>
+</h3>
+<p>中断的事件一般由硬件触发（实际有硬中断和软中断），会改变程序执行流</p>
 <p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E4%B8%AD%E6%96%AD%E7%9A%84%E6%A1%86%E6%9E%B6.png"
 	width="604"
 	height="308"
@@ -1863,7 +1736,8 @@
 <p>处理器具有向量表重定位功能，通过向量表偏移寄存器(<code>VTOR</code>)来获取向量表的起始地址</p>
 <p>中断触发时，处理器通过中断向量表去获取中断处理函数的入口地址</p>
 <h3 id="中断返回中断上下文">中断返回&amp;中断上下文
-</h3><p><a class="link" href="https://www.bilibili.com/video/BV1PwpgzGEmV/?vd_source=5a0790755035f26a67935abfbfcdfd5b"  target="_blank" rel="noopener"
+</h3>
+<p><a class="link" href="https://www.bilibili.com/video/BV1PwpgzGEmV/?vd_source=5a0790755035f26a67935abfbfcdfd5b"  target="_blank" rel="noopener"
     >电脑为什么能边玩游戏边聊天？CPU这个骚操作，99%的程序员都说不清！| CPU / 多任务 / 进程上下文 / 中断机制_哔哩哔哩_bilibili</a></p>
 <p>该视频中最后讲解的就类似于<code>arm</code>架构采用的方式</p>
 <p>在阅读中断的汇编时，会发现中断没有保存和恢复上下文的代码，实际上是硬件帮忙实现上述功能</p>
@@ -1884,7 +1758,8 @@
 选择保存上述8个寄存器主要是根据<code>arm</code>架构的过程调用标准，<code>C</code>语言的函数实现会改动这些寄存器，为例能让<code>C</code>函数能作为异常（中断）处理函数，中断（异常）机制需要能自动地保存这些寄存器，这些寄存器也被称之为调用者保存寄存器</p>
 <p>处理器恢复上下文，回到原执行流，需要<code>lr</code>寄存器存储异常返回值来记录区分一些工作模式现场，这些信息是恢复中断上下文需要的</p>
 <h2 id="错误处理">错误处理
-</h2><p>介绍<code>arm cortex-M</code>处理器架构如何捕获和记录错误故障</p>
+</h2>
+<p>介绍<code>arm cortex-M</code>处理器架构如何捕获和记录错误故障</p>
 <p>有专门的寄存器去记录故障，通过查找其对应的地址查看寄存器的位来获取错误信息</p>
 <p><img src="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/%E4%BB%8ECPU%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0-%E6%95%85%E9%9A%9C%E8%AE%B0%E5%BD%95%E5%AF%84%E5%AD%98%E5%99%A8.png"
 	width="635"
@@ -1902,48 +1777,19 @@
 <p>程序执行非法指令操作导致系统进入不可恢复的故障状态，系统软件就会介入终止程序执行流，其实现机制是中断</p>
 <h2 id="待续">待续
 </h2>
-</section>
 
+                </div>
 
-    <footer class="article-footer">
+                <footer class="article-reader__footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/base/">BASE</a>
-        
-    </section>
-
-
-    </footer>
-
-
-    
-        <link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
-            ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
-                defer
-                >
-            </script><script>
-    window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
-    
-</article>
-
+        <div class="article-reader__tags">
+            <p class="section-kicker">FIELD TAGS</p>
+            <ul aria-label="标签">
+                
+                    <li><a href="/tags/base/">BASE</a></li>
+                
+            </ul>
+        </div>
     
 
     
@@ -2009,28 +1855,133 @@
     </div>
 </aside>
 
-     
-    
-        
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2025 - 
-        
-        2026 NomadJoe
-    </section>
-    
-    <section class="powerby">
-        
-            experience <br/>
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
-    </section>
 </footer>
 
+            </div>
+
+            <aside class="article-toc-rail">
+            <p class="section-kicker">ON THIS PAGE</p>
+            <nav id="TableOfContents" class="article-toc" data-testid="article-toc" aria-label="目录">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#概述">概述</a>
+          <ol>
+            <li><a href="#关于arm架构">关于ARM架构</a>
+              <ol>
+                <li><a href="#cortex-m优点">Cortex-M优点</a></li>
+              </ol>
+            </li>
+            <li><a href="#指令集">指令集</a>
+              <ol>
+                <li><a href="#1cisccomplex-instruction-set-computer">1.CISC（Complex Instruction Set Computer）</a></li>
+                <li><a href="#2riscreduced-instruction-set-computer">2.RISC（Reduced Instruction Set Computer）</a></li>
+              </ol>
+            </li>
+            <li><a href="#开发环境dev">开发环境（DEV）</a></li>
+          </ol>
+        </li>
+        <li><a href="#编译">编译</a>
+          <ol>
+            <li><a href="#编译链工具">编译链工具</a></li>
+            <li><a href="#嵌入式编译烧录流程">嵌入式编译烧录流程</a>
+              <ol>
+                <li><a href="#预编译">预编译</a></li>
+                <li><a href="#编译-1">编译</a></li>
+                <li><a href="#汇编">汇编</a></li>
+                <li><a href="#链接">链接</a></li>
+                <li><a href="#转换">转换</a></li>
+                <li><a href="#烧录">烧录</a></li>
+              </ol>
+            </li>
+            <li><a href="#反汇编">反汇编</a></li>
+          </ol>
+        </li>
+        <li><a href="#启动">启动</a>
+          <ol>
+            <li><a href="#中断向量表">中断向量表</a></li>
+            <li><a href="#启动原理">启动原理</a></li>
+            <li><a href="#存储分布">存储分布</a>
+              <ol>
+                <li><a href="#flash区">Flash区</a></li>
+                <li><a href="#ram区">RAM区</a></li>
+                <li><a href="#内存分配规则">内存分配规则</a></li>
+              </ol>
+            </li>
+            <li><a href="#启动文件详解">启动文件详解</a>
+              <ol>
+                <li><a href="#一stm32f103-启动文件startup_stm32f103xbs核心定位">一、STM32F103 启动文件（startup_stm32f103xb.s）核心定位</a></li>
+                <li><a href="#二启动文件整体结构拆解">二、启动文件整体结构拆解</a></li>
+                <li><a href="#三逐段解析启动文件代码">三、逐段解析启动文件代码</a></li>
+                <li><a href="#四启动文件与链接器脚本ld的配合关系">四、启动文件与链接器脚本（.ld）的配合关系</a></li>
+                <li><a href="#五总结启动文件的核心价值">五、总结：启动文件的核心价值</a></li>
+              </ol>
+            </li>
+            <li><a href="#stm32-启动流程ld-文件作用及示例解析">STM32 启动流程、.ld 文件作用及示例解析</a>
+              <ol>
+                <li><a href="#一stm32-的启动流程从复位到main函数">一、STM32 的启动流程（从复位到<code>main</code>函数）</a></li>
+                <li><a href="#二ld-文件链接器脚本的核心作用">二、.ld 文件（链接器脚本）的核心作用</a></li>
+                <li><a href="#三解析-stm32f103c8tx-的ld-文件">三、解析 STM32F103C8Tx 的.ld 文件</a></li>
+                <li><a href="#四总结启动流程与ld-文件的关联">四、总结：启动流程与.ld 文件的关联</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li><a href="#寄存器">寄存器</a>
+          <ol>
+            <li><a href="#通用寄存器">通用寄存器</a></li>
+            <li><a href="#pc程序计数器程序如何跑起来">PC程序计数器&amp;程序如何跑起来</a></li>
+            <li><a href="#堆栈指针双堆栈指针机制">堆栈指针&amp;双堆栈指针机制</a></li>
+            <li><a href="#lr链接寄存器函数调用的本质">LR链接寄存器&amp;函数调用的本质</a></li>
+          </ol>
+        </li>
+        <li><a href="#地址分配">地址分配</a>
+          <ol>
+            <li><a href="#存储器系统">存储器系统</a></li>
+            <li><a href="#关于内存和编译优化">关于内存和编译优化</a></li>
+          </ol>
+        </li>
+        <li><a href="#中断">中断</a>
+          <ol>
+            <li><a href="#关于中断">关于中断</a></li>
+            <li><a href="#中断返回中断上下文">中断返回&amp;中断上下文</a></li>
+          </ol>
+        </li>
+        <li><a href="#错误处理">错误处理</a></li>
+        <li><a href="#待续">待续</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </aside>
+        </div>
+
+        
+            <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+        
+    </article>
 
     
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -2110,24 +2061,13 @@
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+        </main><footer class="field-footer">
+    <div class="field-footer__inner">
+        <p><span aria-hidden="true">©</span> 2026 NomadJoe</p>
+    </div>
+</footer>
+<script type="text/javascript" src="/ts/field-notes.bbb1f58da5208060e8df1b4e81dd161355cb9abe0e000402ac419570a346a495.js" integrity="sha256-u7H1jaUggGDo3xtOgd0WE1XLmr4OAAQCrEGVcKNGpJU=" defer></script>
 
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
 
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
+</body>
 </html>

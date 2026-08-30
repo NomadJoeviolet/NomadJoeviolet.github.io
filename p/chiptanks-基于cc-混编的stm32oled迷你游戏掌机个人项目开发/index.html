@@ -4,26 +4,29 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前言 非常适合集成各类库后去雕琢，练习 C&amp;C++混编和设计模式，C++动态内存分配等，很爽的练手项目\n仓库：NomadJoeviolet/ChipTanks: OLED屏幕的Rouglike弹幕射击游戏\n">
 <title>ChipTanks-基于C&amp;C&#43;&#43;混编的STM32OLED迷你游戏掌机个人项目开发</title>
 
-<link rel='canonical' href='https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/'>
-
-<link rel="stylesheet" href="/scss/style.min.1d228ea7690a965de9e7d8591cfa3a19afe76b85fa0ec74dcd88180add482f92.css"><meta property='og:title' content="ChipTanks-基于C&C++混编的STM32OLED迷你游戏掌机个人项目开发">
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/'><link rel="stylesheet" href="/scss/field-notes.min.c66b018ab2fe010d4124c4b8cf49707f4ed2bcafc92b5a3e4b33ce5c4a6bec99.css">
+<meta property='og:title' content="ChipTanks-基于C&C++混编的STM32OLED迷你游戏掌机个人项目开发">
 <meta property='og:description' content="前言 非常适合集成各类库后去雕琢，练习 C&amp;C++混编和设计模式，C++动态内存分配等，很爽的练手项目\n仓库：NomadJoeviolet/ChipTanks: OLED屏幕的Rouglike弹幕射击游戏\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/'>
 <meta property='og:site_name' content='NomadJoe'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&amp;C&#43;&#43;' /><meta property='article:tag' content='个人项目' /><meta property='article:published_time' content='2025-11-27T18:23:07&#43;08:00'/><meta property='article:modified_time' content='2025-11-27T18:23:07&#43;08:00'/>
-<meta name="twitter:title" content="ChipTanks-基于C&C++混编的STM32OLED迷你游戏掌机个人项目开发">
-<meta name="twitter:description" content="前言 非常适合集成各类库后去雕琢，练习 C&amp;C++混编和设计模式，C++动态内存分配等，很爽的练手项目\n仓库：NomadJoeviolet/ChipTanks: OLED屏幕的Rouglike弹幕射击游戏\n">
+<meta name="twitter:title" content="ChipTanks-基于C&amp;C&#43;&#43;混编的STM32OLED迷你游戏掌机个人项目开发">
+<meta name="twitter:description" content="前言 非常适合集成各类库后去雕琢，练习 C&amp;C&#43;&#43;混编和设计模式，C&#43;&#43;动态内存分配等，很爽的练手项目
+仓库：NomadJoeviolet/ChipTanks: OLED屏幕的Rouglike弹幕射击游戏
+">
+    <meta name="twitter:card" content="summary">
+
     <link rel="shortcut icon" href="/favicon.ico" />
+<link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 
     </head>
-    <body class="
-    article-page
-    ">
+    <body class="field-notes article-page">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
             if(!localStorage.getItem(colorSchemeKey)){
-                localStorage.setItem(colorSchemeKey, "auto");
+                localStorage.setItem(colorSchemeKey, "dark");
             }
         })();
     </script><script>
@@ -41,181 +44,35 @@
         }
     })();
 </script>
-<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
-        <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
-        </span>
-    </button>
-
-    <header>
-        
+<a class="skip-link" href="#main-content">跳到主要内容</a><header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-wordmark" href="/" aria-label="NomadJoe 首页">NJ<span aria-hidden="true">/</span>FIELD NOTES</a>
+        <button class="site-menu-toggle" id="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+            <span class="site-menu-toggle__label">菜单</span>
+        </button>
+        <nav class="primary-nav" data-testid="primary-nav" aria-label="主导航">
+            <ul id="primary-menu">
+                <li><a href="/">首页</a></li>
+                <li><a href="/archives/">笔记</a></li>
+                <li><a href="/categories/%e4%b8%aa%e4%ba%ba%e9%a1%b9%e7%9b%ae/">项目</a></li>
+                <li><a href="/%E5%85%B3%E4%BA%8E/">关于</a></li>
+                <li><a href="/search/">搜索</a></li>
+            </ul>
+        </nav>
+        <div class="site-tools" aria-label="站点工具">
             
-            <figure class="site-avatar">
-                <a href="/">
-                
-                    
-                    
-                    
-                        
-                        <img src="/img/avatar_hu5250448583294231844.png" width="300"
-                            height="257" class="site-logo" loading="lazy" alt="Avatar">
-                    
-                
-                </a>
-                
-                    <span class="emoji">🍥</span>
-                
-            </figure>
+                <a class="icon-control" href="/index.xml" aria-label="订阅 RSS"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+</a>
             
-        
-        
-        <div class="site-meta">
-            <h1 class="site-name"><a href="/">NomadJoe</a></h1>
-            <h2 class="site-description">to feel,to experience</h2>
-        </div>
-    </header><ol class="menu-social">
-            
-                <li>
-                    <a 
-                        href='https://www.bilibili.com/'
-                        target="_blank"
-                        title="Biliili"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z"></path> <path d="M8 3l2 3"></path> <path d="M16 3l-2 3"></path> <path d="M9 13v-2"></path> <path d="M15 11v2"></path> </svg> 
-                        
-                    </a>
-                </li>
-            
-                <li>
-                    <a 
-                        href='https://github.com/CaiJimmy/hugo-theme-stack'
-                        target="_blank"
-                        title="GitHub"
-                        rel="me"
-                    >
-                        
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-</svg>
-
-
-
-                        
-                    </a>
-                </li>
-            
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <polyline points="5 12 3 12 12 3 21 12 19 12" />
-  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-</svg>
-
-
-
-                
-                <span>主页</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%85%B3%E4%BA%8E/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="7" r="4" />
-  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-</svg>
-
-
-
-                
-                <span>关于</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
-</svg>
-
-
-
-                
-                <span>归档</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/search/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                
-                <span>搜索</span>
-            </a>
-        </li>
-        
-        
-        <li >
-            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-</svg>
-
-
-
-                
-                <span>友情链接</span>
-            </a>
-        </li>
-        
-        <li class="menu-bottom-section">
-            <ol class="menu">
-
-                
-                    <li id="dark-mode-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="切换配色" aria-pressed="false">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
   <rect x="2" y="6" width="20" height="12" rx="6" />
@@ -223,150 +80,97 @@
 
 
 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="16" cy="12" r="2" />
-  <rect x="2" y="6" width="20" height="12" rx="6" />
-</svg>
-
-
-
-                        <span>暗色模式</span>
-                    </li>
-                
-            </ol>
-        </li>
-    </ol>
-</aside>
-
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
+            </button>
         </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
+    </div>
+</header>
+<main id="main-content" class="site-main" data-testid="article-main">
+    <div class="reading-progress" data-testid="reading-progress" aria-hidden="true">
+        <span class="reading-progress__line"></span>
+        <span class="reading-progress__stone"></span>
+    </div>
+
+    <article class="article-reader">
+        <div class="article-reader__layout">
+            <div class="article-reader__document">
+                <header class="article-reader__header">
+    <p class="section-kicker">FIELD NOTE / OPEN LOG</p>
+    <h1 data-testid="article-title">ChipTanks-基于C&amp;C&#43;&#43;混编的STM32OLED迷你游戏掌机个人项目开发</h1>
+
+    <div class="article-reader__meta">
+        <time datetime="2025-11-27">2025.11.27</time>
+        <span aria-hidden="true">/</span>
+        <time data-testid="article-reading-time" datetime="PT30M">30 分钟阅读</time>
+    </div>
+
+    
+        <ul class="article-reader__terms" aria-label="分类">
+            
+                <li><a href="/categories/cc&#43;&#43;-study/">C&amp;C&#43;&#43; Study</a></li>
+            
+                <li><a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/">个人项目</a></li>
+            
+        </ul>
+    
+
+    
+    
+</header>
+
+
+                <details class="article-toc-mobile">
+            <summary>目录</summary>
+            <div class="article-toc-mobile__content">
+                <nav id="TableOfContentsMobile" aria-label="目录">
   <ol>
-    <li><a href="#前言">前言</a></li>
-    <li><a href="#游戏设计">游戏设计</a></li>
-    <li><a href="#硬件选型">硬件选型</a></li>
-    <li><a href="#开发工具链">开发工具链</a></li>
-    <li><a href="#第三方库引入">第三方库引入</a></li>
-    <li><a href="#代码实现">代码实现</a>
+    <li>
       <ol>
-        <li><a href="#动态内存分配在嵌入式平台上的解决">动态内存分配在嵌入式平台上的解决</a></li>
-        <li><a href="#项目文件结构">项目文件结构</a>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#游戏设计">游戏设计</a></li>
+        <li><a href="#硬件选型">硬件选型</a></li>
+        <li><a href="#开发工具链">开发工具链</a></li>
+        <li><a href="#第三方库引入">第三方库引入</a></li>
+        <li><a href="#代码实现">代码实现</a>
           <ol>
-            <li><a href="#整体结构">整体结构</a></li>
-            <li><a href="#app结构">App结构</a></li>
-          </ol>
-        </li>
-        <li><a href="#架构与设计思路">架构与设计思路</a>
-          <ol>
-            <li><a href="#硬件抽象层">硬件抽象层</a></li>
-            <li><a href="#核心数据层">核心数据层</a></li>
-            <li><a href="#游戏实体层">游戏实体层</a></li>
-            <li><a href="#管理器层">管理器层</a></li>
-            <li><a href="#应用逻辑层">应用逻辑层</a></li>
-          </ol>
-        </li>
-        <li><a href="#各层级和功能的代码实现与解析">各层级和功能的代码实现与解析</a>
-          <ol>
-            <li><a href="#硬件抽象层-1">硬件抽象层</a></li>
-            <li><a href="#核心数据层-1">核心数据层</a></li>
-            <li><a href="#游戏实体层-1">游戏实体层</a></li>
-            <li><a href="#管理器层-1">管理器层</a></li>
-            <li><a href="#应用逻辑层-1">应用逻辑层</a></li>
-            <li><a href="#timer定时器的设计">timer定时器的设计</a></li>
+            <li><a href="#动态内存分配在嵌入式平台上的解决">动态内存分配在嵌入式平台上的解决</a></li>
+            <li><a href="#项目文件结构">项目文件结构</a>
+              <ol>
+                <li><a href="#整体结构">整体结构</a></li>
+                <li><a href="#app结构">App结构</a></li>
+              </ol>
+            </li>
+            <li><a href="#架构与设计思路">架构与设计思路</a>
+              <ol>
+                <li><a href="#硬件抽象层">硬件抽象层</a></li>
+                <li><a href="#核心数据层">核心数据层</a></li>
+                <li><a href="#游戏实体层">游戏实体层</a></li>
+                <li><a href="#管理器层">管理器层</a></li>
+                <li><a href="#应用逻辑层">应用逻辑层</a></li>
+              </ol>
+            </li>
+            <li><a href="#各层级和功能的代码实现与解析">各层级和功能的代码实现与解析</a>
+              <ol>
+                <li><a href="#硬件抽象层-1">硬件抽象层</a></li>
+                <li><a href="#核心数据层-1">核心数据层</a></li>
+                <li><a href="#游戏实体层-1">游戏实体层</a></li>
+                <li><a href="#管理器层-1">管理器层</a></li>
+                <li><a href="#应用逻辑层-1">应用逻辑层</a></li>
+                <li><a href="#timer定时器的设计">timer定时器的设计</a></li>
+              </ol>
+            </li>
           </ol>
         </li>
       </ol>
     </li>
   </ol>
 </nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
-            <main class="main full-width">
-    <article class="main-article">
-    <header class="article-header">
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="/categories/cc&#43;&#43;-study/" >
-                C&amp;C&#43;&#43; Study
-            </a>
-        
-            <a href="/categories/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" >
-                个人项目
-            </a>
-        
-    </header>
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/">ChipTanks-基于C&amp;C&#43;&#43;混编的STM32OLED迷你游戏掌机个人项目开发</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">2025-11-27</time>
             </div>
-        
+        </details>
 
-        
-    </footer>
-    
-
-    
-</div>
-
-</header>
-
-    <section class="article-content">
-    
-    
-    <h2 id="前言">前言
-</h2><p>非常适合集成各类库后去雕琢，练习 C&amp;C++混编和设计模式，C++动态内存分配等，很爽的练手项目</p>
+                <div class="article-content">
+                    <h2 id="前言">前言
+</h2>
+<p>非常适合集成各类库后去雕琢，练习 C&amp;C++混编和设计模式，C++动态内存分配等，很爽的练手项目</p>
 <p>仓库：<a class="link" href="https://github.com/NomadJoeviolet/ChipTanks"  target="_blank" rel="noopener"
     >NomadJoeviolet/ChipTanks: OLED屏幕的Rouglike弹幕射击游戏</a></p>
 <p>项目代码状况</p>
@@ -403,16 +207,19 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="游戏设计">游戏设计
-</h2><p>玩法介绍：<a class="link" href="https://nomadjoeviolet.github.io/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/"  target="_blank" rel="noopener"
+</h2>
+<p>玩法介绍：<a class="link" href="https://nomadjoeviolet.github.io/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/"  target="_blank" rel="noopener"
     >ChipTanks-玩法介绍</a></p>
 <p>游戏设计：<a class="link" href="https://nomadjoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/"  target="_blank" rel="noopener"
     >ChipTanks-游戏设计</a></p>
 <h2 id="硬件选型">硬件选型
-</h2><p>使用的OLED屏的显示驱动为SSD1306
+</h2>
+<p>使用的OLED屏的显示驱动为SSD1306
 主控板为stm32f103c8t6
 使用4 * 4 矩阵键盘</p>
 <h2 id="开发工具链">开发工具链
-</h2><p>使用 VSCode+Intellisence+CubeMX+CMake+Ninja+arm-none-eabi+Ozone+Jlink的高自定义开发工具链</p>
+</h2>
+<p>使用 VSCode+Intellisence+CubeMX+CMake+Ninja+arm-none-eabi+Ozone+Jlink的高自定义开发工具链</p>
 <p>代码编辑器采用VSCode，语言服务器使用VSCode的Intellisence来实现智能代码补全和理解功能，用CubeMX生成硬件抽象层代码，CMake和Ninja作为项目构建工具，使用arm-none-eabi编译器，烧录和调试使用Ozone，硬件烧录器使用Jlink</p>
 <p>CubeMX使用的版本为<code>6.15.0</code>
 CMake使用的版本为<code>4.1.0</code>
@@ -469,11 +276,14 @@ CMake使用的版本为<code>4.1.0</code>
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="第三方库引入">第三方库引入
-</h2><p>引入FreeRTOS和dsp库以及etl库</p>
+</h2>
+<p>引入FreeRTOS和dsp库以及etl库</p>
 <p>引入FreeRTOS用来处理多线程任务，引入dsp库用来加速部分运算（主要想用来加速 游戏实体 碰撞检测）（实际基本上没用，当做练手了），引入etl库来做到 零开销的使用 C++ 容器 提高开发效率，其确定性内存管理 (Deterministic Memory)在<strong>栈上</strong>或<strong>静态区</strong>分配固定大小的内存，而不是在堆上动态扩容，能完全避免了内存碎片问题，且内存占用在编译期就是已知的，非常适合 RAM 有限的 STM32，同时有容器去实现设计模式等会更加高效。</p>
 <h2 id="代码实现">代码实现
-</h2><h3 id="动态内存分配在嵌入式平台上的解决">动态内存分配在嵌入式平台上的解决
-</h3><p>因嵌入式平台的内存资源非常有限，同时还要保证FreeRTOS的线程安全，需要对C++的动态内存分配（<code>new</code>和<code>delete</code>）进行重载，重载为<code>pvPortMalloc(size)</code>和<code>vPortFree(ptr)</code>，FreeRTOS线程安全的分配方式，从FreeRTOS的堆里面分配</p>
+</h2>
+<h3 id="动态内存分配在嵌入式平台上的解决">动态内存分配在嵌入式平台上的解决
+</h3>
+<p>因嵌入式平台的内存资源非常有限，同时还要保证FreeRTOS的线程安全，需要对C++的动态内存分配（<code>new</code>和<code>delete</code>）进行重载，重载为<code>pvPortMalloc(size)</code>和<code>vPortFree(ptr)</code>，FreeRTOS线程安全的分配方式，从FreeRTOS的堆里面分配</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -598,8 +408,10 @@ CMake使用的版本为<code>4.1.0</code>
 ></p>
 <p>由此可以直接看出重载后动态内存分配可以保证系统栈和线程的安全</p>
 <h3 id="项目文件结构">项目文件结构
-</h3><h4 id="整体结构">整体结构
-</h4><div class="highlight"><div class="chroma">
+</h3>
+<h4 id="整体结构">整体结构
+</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -668,7 +480,8 @@ CMake使用的版本为<code>4.1.0</code>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="app结构">App结构
-</h4><div class="highlight"><div class="chroma">
+</h4>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -733,7 +546,8 @@ CMake使用的版本为<code>4.1.0</code>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="架构与设计思路">架构与设计思路
-</h3><p>主要采用 <strong>面向对象（OOP）</strong> 的设计思路，结合FreeRTOS实时操作系统，构建简单的嵌入式游戏框架。</p>
+</h3>
+<p>主要采用 <strong>面向对象（OOP）</strong> 的设计思路，结合FreeRTOS实时操作系统，构建简单的嵌入式游戏框架。</p>
 <p>主要分为5各层级：</p>
 <ol>
 <li>硬件抽象层：基于HAL库的对底层硬件的抽象，对外设硬件操作进行再次封装</li>
@@ -743,7 +557,8 @@ CMake使用的版本为<code>4.1.0</code>
 <li>应用逻辑层（App Logic）：多线程任务处理，游戏业务逻辑</li>
 </ol>
 <h4 id="硬件抽象层">硬件抽象层
-</h4><p>在HAL库基础上，对外设进行面向对象的进一步封装</p>
+</h4>
+<p>在HAL库基础上，对外设进行面向对象的进一步封装</p>
 <p><strong>OLED</strong>(使用的keysking的开源库):
 提供OLED_DrawImage，OLED_PrintString 等绘图 API。
 包含字库 (<code>font.c</code>)，支持文本显示。
@@ -752,19 +567,23 @@ CMake使用的版本为<code>4.1.0</code>
 提供按键扫描逻辑。
 作为游戏的<strong>输入设备</strong>，将物理按键映射为游戏内的控制信号</p>
 <h4 id="核心数据层">核心数据层
-</h4><p>定义了所有游戏实体共用的数据结构，如 <code>HealthData</code>（血量）、<code>AttackData</code>（攻击）、<code>SpatialData</code>（位置与大小）、<code>HeatData</code>（热量）等。
+</h4>
+<p>定义了所有游戏实体共用的数据结构，如 <code>HealthData</code>（血量）、<code>AttackData</code>（攻击）、<code>SpatialData</code>（位置与大小）、<code>HeatData</code>（热量）等。
 使用 <code>struct</code> 组合数据，便于在不同类之间传递和管理状态。
 定义了 <code>RoleIdentity</code>（身份）、（子弹类型）等关键枚举。</p>
 <h4 id="游戏实体层">游戏实体层
-</h4><p>这是游戏逻辑的核心部分，采用了<strong>继承与多态</strong>的设计。</p>
+</h4>
+<p>这是游戏逻辑的核心部分，采用了<strong>继承与多态</strong>的设计。</p>
 <h5 id="基类设计"><strong>基类设计</strong>:
-</h5><p><strong><code>IRole</code> （role.hpp</strong>）: 所有角色（玩家和敌人）的基类。包含 <code>RoleData</code> 指针，管理角色的所有属性。
+</h5>
+<p><strong><code>IRole</code> （role.hpp</strong>）: 所有角色（玩家和敌人）的基类。包含 <code>RoleData</code> 指针，管理角色的所有属性。
 定义了虚函数接口：<code>init()</code>, <code>think()</code>, <code>doAction()</code>, <code>drawRole()</code>, <code>die()</code>, <code>shoot()</code>。
 实现了通用的物理逻辑：<code>move()</code>（移动与边界检查）、<code>update()</code>（状态更新）、<code>createBullet()</code>。</p>
 <p><strong><code>IBullet</code> (bullet.hpp)</strong>: 所有子弹的基类。
 定义了 <code>move()</code>, <code>update()</code>, <code>drawBullet()</code>, <code>die()</code> 等接口。</p>
 <h5 id="派生类设计"><strong>派生类设计</strong>:
-</h5><p><strong><code>LeadingRole</code> (<code>leadingRole.cpp</code>)</strong>: 玩家控制的主角。
+</h5>
+<p><strong><code>LeadingRole</code> (<code>leadingRole.cpp</code>)</strong>: 玩家控制的主角。
 实现了复杂的升级逻辑 (<code>levelUp</code>)、热量控制和多武器切换。
 单例模式或全局对象管理（通常作为唯一主角存在）。</p>
 <p><strong><code>EnemyRole</code> (<code>enemyRole.hpp</code>)</strong>: 各种敌人的实现。
@@ -773,8 +592,10 @@ CMake使用的版本为<code>4.1.0</code>
 <strong><code>XiangliuEnemy</code></strong> (BOSS): 召唤与全屏弹幕。</p>
 <p><strong><code>BasicBullet</code> / <code>FireBallBullet</code> / <code>LightningLineBullet</code></strong>: 不同类型的子弹实现，具有不同的伤害逻辑和特效。</p>
 <h4 id="管理器层">管理器层
-</h4><h5 id="1gameentitymanager-gameentitymanagerhpp">1.<strong><code>GameEntityManager</code> (<code>gameEntityManager.hpp</code>)</strong>:
-</h5><p>核心职责:
+</h4>
+<h5 id="1gameentitymanager-gameentitymanagerhpp">1.<strong><code>GameEntityManager</code> (<code>gameEntityManager.hpp</code>)</strong>:
+</h5>
+<p>核心职责:
 维护所有活跃的角色和子弹容器，使用固定容量的嵌入式向量。包含角色池（最多20个）和子弹池（最多100个），以及游戏结束标记。提供注册新增实体、分阶段的行为与状态更新、碰撞与范围伤害检测、统一渲染、失效实体清理、获取主角指针和经验投递等功能。行为与状态分离，更新顺序通常为：角色行为、子弹行为、角色状态、子弹状态、清理、渲染。碰撞使用轴对齐包围盒，子弹碰撞允许穿透；范围伤害使用圆形距离判定。所有容器操作使用临界区保护以确保一致性。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -797,7 +618,8 @@ CMake使用的版本为<code>4.1.0</code>
 <li><code>getPlayerRole()</code>：获取主角的指针</li>
 </ol>
 <h5 id="2gameperkcardmanagergameperkcardmanagerhpp">2.<code>GamePerkCardManager</code> (<code>gamePerkCardManager.hpp</code>)
-</h5><p>核心职责：
+</h5>
+<p>核心职责：
 管理 Rogue-like 的随机强化流程，包括卡片仓库管理、抽取待选卡、选择应用以及未选卡回库。使用两个固定容量的嵌入式向量存储卡片仓库与选卡槽，并维护选卡状态、选中索引与数量。初始化时按配置表生成卡片；触发选卡会随机抽取最多三张并进入选卡状态；选择后将效果应用到玩家（如提高生命、攻击、攻速、移动速度、散热效率，或解锁火球与闪电，或提升范围与伤害倍率），随后将未选卡退回仓库并退出选卡状态。选卡界面显示卡名并有选中指示器。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -817,7 +639,8 @@ CMake使用的版本为<code>4.1.0</code>
 <li><code>drawSelectionUI</code>：绘制选卡界面的UI</li>
 </ol>
 <h5 id="3gameprogressmanagergameprogressmanagerhpp">3.<code>GameProgressManager</code> (<code>gameProgressManager.hpp</code>)
-</h5><p>核心职责：
+</h5>
+<p>核心职责：
 控制游戏整体流程，包括关卡推进、波次刷新、Boss 触发与展示、胜利/失败判定，以及开场/通关/警告等过场的展示与计时。与实体管理器和卡片管理器协作，驱动每一波敌人生成与选卡节点的触发。
 功能</p>
 <ol>
@@ -829,14 +652,18 @@ CMake使用的版本为<code>4.1.0</code>
 <li><code>drawShowBoss()</code>：绘制 Boss 海报或挑战警告</li>
 </ol>
 <h4 id="应用逻辑层">应用逻辑层
-</h4><p><code>threads.cpp</code>: 有三个核心任务线程来驱动整体逻辑</p>
+</h4>
+<p><code>threads.cpp</code>: 有三个核心任务线程来驱动整体逻辑</p>
 <p><code>oledTaskThread</code>: 负责渲染时序。根据状态（开场、通关、Boss 展示、选卡、正常战斗）选择对应绘制路径；最终输出帧并控制刷新频率。
 <code>keyScanThread</code>: 负责输入采集与分发。非选卡状态下更新玩家动作（上下左右）；选卡状态下移动 UI 光标并执行选中操作；根据游戏/过场状态决定是否响应按键。
 <code>gameControlThread</code>: 负责主控流程与核心时序。Game Over 时重置游戏；正常状态下在非选卡与非过场时推进进度、执行实体行为与状态更新、清理无效实体。</p>
 <h3 id="各层级和功能的代码实现与解析">各层级和功能的代码实现与解析
-</h3><h4 id="硬件抽象层-1">硬件抽象层
-</h4><h5 id="key">KEY
-</h5><p>当前按键采用“左右各 4 独立键，低电平按下”方案，不再是 4x4 矩阵。CubeMX 已将引脚配置为上拉输入，扫描直接读电平即可。左右各有独立状态缓存，方向枚举在上层做映射。</p>
+</h3>
+<h4 id="硬件抽象层-1">硬件抽象层
+</h4>
+<h5 id="key">KEY
+</h5>
+<p>当前按键采用“左右各 4 独立键，低电平按下”方案，不再是 4x4 矩阵。CubeMX 已将引脚配置为上拉输入，扫描直接读电平即可。左右各有独立状态缓存，方向枚举在上层做映射。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -986,9 +813,11 @@ CMake使用的版本为<code>4.1.0</code>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="oled">OLED
-</h5><p>使用的是keysking的开源，该代码中提供OLED的驱动和绘画渲染的API，直接使用即可</p>
+</h5>
+<p>使用的是keysking的开源，该代码中提供OLED的驱动和绘画渲染的API，直接使用即可</p>
 <h4 id="核心数据层-1">核心数据层
-</h4><p><strong>概览</strong>
+</h4>
+<p><strong>概览</strong>
 定义了游戏所需的基础数据类型：身份、子弹类型、动作/移动/攻击/死亡/空间等数据结构，以及角色与子弹的数据聚合体。
 “纯数据载体”，不含行为方法；行为由上层实体类与管理器驱动。
 时间与数值单位采用“毫秒 + 小整型”为主，满足嵌入式 MCU 资源约束。
@@ -1563,7 +1392,8 @@ Perk 卡片直接修改 <code>RoleData</code>内子段（例如血量上限、�
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="游戏实体层-1">游戏实体层
-</h4><p>实体层以抽象的角色基类为核心，所有角色共享一套数据驱动的状态与行为流程：初始化、决策、执行、推进与渲染。</p>
+</h4>
+<p>实体层以抽象的角色基类为核心，所有角色共享一套数据驱动的状态与行为流程：初始化、决策、执行、推进与渲染。</p>
 <p>玩家与敌人分别在其派生类中实现具体的思考与行动——玩家由输入驱动，敌人由定时与模式切换驱动。当角色需要开火时，通过角色基类提供的子弹工厂按类型生成不同机制的弹药：普通弹以基础伤害直击，火球弹在直击之外叠加范围溅射，闪电链以倍数加成的穿透伤害形成压制。</p>
 <p>角色推进采用“参考位置 + 碰撞回退”的模式：先根据移动意图计算参考坐标，再用轴对齐包围盒检测并按碰撞方向和连续碰撞次数逐步回退，避免卡边。</p>
 <p>数值系统围绕冷却、热量和回血三条独立的时序通道运行：冷却按步长与速度递减至零方可再次射击，热量每固定周期按散热速率衰减，回血以计时器触发离散恢复。</p>
@@ -1822,7 +1652,8 @@ Perk 卡片直接修改 <code>RoleData</code>内子段（例如血量上限、�
 </div>
 </div><p>其余代码就不展示了，基本就是复制，只需根据需求对虚接口进行重写即可</p>
 <h4 id="管理器层-1">管理器层
-</h4><p><strong>该层级的设计主要是针对整个游戏运行的职责进行划分解耦</strong>，<code>GameEntityManager</code>,<code>GameProgressManager</code>,<code>GamePerkCardManager</code>三者协作的关键在于清晰的职责边界与状态门控：进度与选卡控制何时推进逻辑或暂停到过场/选卡，实体管理器提供确定性更新与资源回收，卡片管理器以数据驱动改变玩家的RoleData</p>
+</h4>
+<p><strong>该层级的设计主要是针对整个游戏运行的职责进行划分解耦</strong>，<code>GameEntityManager</code>,<code>GameProgressManager</code>,<code>GamePerkCardManager</code>三者协作的关键在于清晰的职责边界与状态门控：进度与选卡控制何时推进逻辑或暂停到过场/选卡，实体管理器提供确定性更新与资源回收，卡片管理器以数据驱动改变玩家的RoleData</p>
 <p><code>GameEntityManager</code>统一掌控角色与子弹的生命周期与时序，采用固定容量的嵌入式向量存储多态指针，所有增删与遍历在临界区内执行，按“行动→状态→清理→渲染”的分阶段流程驱动：行动阶段调用角色/子弹的思考与动作，状态阶段推进位置与AABB碰撞、伤害与范围伤害并对玩家执行升级检查，清理阶段删除失效实体并向玩家结算经验，渲染阶段输出图像。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2883,7 +2714,8 @@ Perk 卡片直接修改 <code>RoleData</code>内子段（例如血量上限、�
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="应用逻辑层-1">应用逻辑层
-</h4><p>按“主循环驱动、输入分发、渲染输出”三类职责拆分成独立的 FreeRTOS 任务，全局状态作为门控，保证在过场、选卡、战斗三种模式之间平滑切换。</p>
+</h4>
+<p>按“主循环驱动、输入分发、渲染输出”三类职责拆分成独立的 FreeRTOS 任务，全局状态作为门控，保证在过场、选卡、战斗三种模式之间平滑切换。</p>
 <p>核心数据与行为推进集中在 <code>gameControlThread</code>，输入解析与状态写入在 <code>keyScanThread</code>，画面组合与输出在 <code>oledTaskThread</code>。</p>
 <p>给出伪代码如下：</p>
 <div class="highlight"><div class="chroma">
@@ -2987,7 +2819,8 @@ Perk 卡片直接修改 <code>RoleData</code>内子段（例如血量上限、�
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="timer定时器的设计">timer定时器的设计
-</h4><p>代码比较重点一个设计在于timer计时器，每一帧增加或减少帧间隔的时间（相当于决定多少帧触发某一个动作，可以用此来作为一个门控）</p>
+</h4>
+<p>代码比较重点一个设计在于timer计时器，每一帧增加或减少帧间隔的时间（相当于决定多少帧触发某一个动作，可以用此来作为一个门控）</p>
 <ul>
 <li>shootCooldownTimer：射击冷却倒计时，归零前禁止再次开火。</li>
 <li>heatCoolDownTimer：热量冷却触发间隔计时，累计到阈值（200ms）降低一次热量。</li>
@@ -3002,50 +2835,20 @@ Perk 卡片直接修改 <code>RoleData</code>内子段（例如血量上限、�
 增加每一帧的<code>controlDelayTime</code>，用统一帧步长驱动一组简单的线性计时器，以门槛触发和双重约束塑造节奏与资源循环</p>
 <p><strong>核心作用</strong>：<strong>解耦时间进程和行为</strong>，计时器只管理时间进程，不直接耦合行为；行为在触发点读取状态执行。</p>
 
-</section>
+                </div>
 
-
-    <footer class="article-footer">
+                <footer class="article-reader__footer">
     
-    <section class="article-tags">
-        
-            <a href="/tags/cc&#43;&#43;/">C&amp;C&#43;&#43;</a>
-        
-            <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/">个人项目</a>
-        
-    </section>
-
-
-    </footer>
-
-
-    
-        <link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
-            ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
-                defer
-                >
-            </script><script>
-    window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
-    
-</article>
-
+        <div class="article-reader__tags">
+            <p class="section-kicker">FIELD TAGS</p>
+            <ul aria-label="标签">
+                
+                    <li><a href="/tags/cc&#43;&#43;/">C&amp;C&#43;&#43;</a></li>
+                
+                    <li><a href="/tags/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/">个人项目</a></li>
+                
+            </ul>
+        </div>
     
 
     
@@ -3124,28 +2927,84 @@ Perk 卡片直接修改 <code>RoleData</code>内子段（例如血量上限、�
     </div>
 </aside>
 
-     
-    
-        
-    
-
-    <footer class="site-footer">
-    <section class="copyright">
-        &copy; 
-        
-            2025 - 
-        
-        2026 NomadJoe
-    </section>
-    
-    <section class="powerby">
-        
-            experience <br/>
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
-    </section>
 </footer>
 
+            </div>
+
+            <aside class="article-toc-rail">
+            <p class="section-kicker">ON THIS PAGE</p>
+            <nav id="TableOfContents" class="article-toc" data-testid="article-toc" aria-label="目录">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#前言">前言</a></li>
+        <li><a href="#游戏设计">游戏设计</a></li>
+        <li><a href="#硬件选型">硬件选型</a></li>
+        <li><a href="#开发工具链">开发工具链</a></li>
+        <li><a href="#第三方库引入">第三方库引入</a></li>
+        <li><a href="#代码实现">代码实现</a>
+          <ol>
+            <li><a href="#动态内存分配在嵌入式平台上的解决">动态内存分配在嵌入式平台上的解决</a></li>
+            <li><a href="#项目文件结构">项目文件结构</a>
+              <ol>
+                <li><a href="#整体结构">整体结构</a></li>
+                <li><a href="#app结构">App结构</a></li>
+              </ol>
+            </li>
+            <li><a href="#架构与设计思路">架构与设计思路</a>
+              <ol>
+                <li><a href="#硬件抽象层">硬件抽象层</a></li>
+                <li><a href="#核心数据层">核心数据层</a></li>
+                <li><a href="#游戏实体层">游戏实体层</a></li>
+                <li><a href="#管理器层">管理器层</a></li>
+                <li><a href="#应用逻辑层">应用逻辑层</a></li>
+              </ol>
+            </li>
+            <li><a href="#各层级和功能的代码实现与解析">各层级和功能的代码实现与解析</a>
+              <ol>
+                <li><a href="#硬件抽象层-1">硬件抽象层</a></li>
+                <li><a href="#核心数据层-1">核心数据层</a></li>
+                <li><a href="#游戏实体层-1">游戏实体层</a></li>
+                <li><a href="#管理器层-1">管理器层</a></li>
+                <li><a href="#应用逻辑层-1">应用逻辑层</a></li>
+                <li><a href="#timer定时器的设计">timer定时器的设计</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </aside>
+        </div>
+
+        
+            <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+        
+    </article>
 
     
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -3225,24 +3084,13 @@ Perk 卡片直接修改 <code>RoleData</code>内子段（例如血量上限、�
                 href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
             >
 
-            </main>
-        </div>
-        <script 
-                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
-                
-                >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
-<script>
-    (function () {
-        const customFont = document.createElement('link');
-        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+        </main><footer class="field-footer">
+    <div class="field-footer__inner">
+        <p><span aria-hidden="true">©</span> 2026 NomadJoe</p>
+    </div>
+</footer>
+<script type="text/javascript" src="/ts/field-notes.bbb1f58da5208060e8df1b4e81dd161355cb9abe0e000402ac419570a346a495.js" integrity="sha256-u7H1jaUggGDo3xtOgd0WE1XLmr4OAAQCrEGVcKNGpJU=" defer></script>
 
-        customFont.type = "text/css";
-        customFont.rel = "stylesheet";
 
-        document.head.appendChild(customFont);
-    }());
-</script>
-
-    </body>
+</body>
 </html>
