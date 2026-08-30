@@ -4,7 +4,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
 <title>归档</title>
 
-<link rel='canonical' href='https://NomadJoeviolet.github.io/archives/'><link rel="stylesheet" href="/scss/field-notes.min.f4bfbcf6691eba914ca99763124c1196eec34e7ef7c7a08e1a5a4716dad7a2a6.css">
+<link rel='canonical' href='https://NomadJoeviolet.github.io/archives/'><link rel="stylesheet" href="/scss/field-notes.min.923b290983e00a2e80da64051260e1ee1f5249f98b71e293518af2a972834ad9.css">
 <meta property='og:title' content="归档">
 <meta property='og:description' content="">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/archives/'>
@@ -89,23 +89,40 @@
         </header>
 
         <div class="archive-filter" data-testid="archive-filters">
-            <div class="archive-filter__controls" role="group" aria-label="按笔记索引筛选" aria-controls="archive-timeline">
-                <button class="archive-filter__button" type="button" data-archive-filter="all" data-archive-label="全部" data-archive-count="15" aria-pressed="true">
+            <div class="archive-filter__controls" role="group" aria-label="按文章分类筛选" aria-controls="archive-timeline">
+                <button class="archive-filter__button" type="button" data-archive-all data-archive-label="全部" data-archive-count="15" aria-pressed="true">
                     <span>全部</span>
                     <span class="archive-filter__count">15 篇</span>
                 </button>
-                <button class="archive-filter__button" type="button" data-archive-filter="technical" data-archive-label="嵌入式与 C++" data-archive-count="12" aria-pressed="false">
-                    <span>嵌入式与 C++</span>
-                    <span class="archive-filter__count">12 篇</span>
-                </button>
-                <button class="archive-filter__button" type="button" data-archive-filter="projects" data-archive-label="个人项目" data-archive-count="3" aria-pressed="false">
-                    <span>个人项目</span>
-                    <span class="archive-filter__count">3 篇</span>
-                </button>
-                <button class="archive-filter__button" type="button" data-archive-filter="growth" data-archive-label="成长与观察" data-archive-count="2" aria-pressed="false">
-                    <span>成长与观察</span>
-                    <span class="archive-filter__count">2 篇</span>
-                </button>
+                <button class="archive-filter__button" type="button" data-archive-filter="BASE Study" data-archive-label="BASE Study" data-archive-count="5" aria-pressed="false">
+                        <span>BASE Study</span>
+                        <span class="archive-filter__count">5 篇</span>
+                    </button>
+                <button class="archive-filter__button" type="button" data-archive-filter="C&amp;C&#43;&#43; Study" data-archive-label="C&amp;C&#43;&#43; Study" data-archive-count="7" aria-pressed="false">
+                        <span>C&amp;C&#43;&#43; Study</span>
+                        <span class="archive-filter__count">7 篇</span>
+                    </button>
+                <button class="archive-filter__button" type="button" data-archive-filter="成长" data-archive-label="成长" data-archive-count="1" aria-pressed="false">
+                        <span>成长</span>
+                        <span class="archive-filter__count">1 篇</span>
+                    </button>
+                <button class="archive-filter__button" type="button" data-archive-filter="个人简介" data-archive-label="个人简介" data-archive-count="1" aria-pressed="false">
+                        <span>个人简介</span>
+                        <span class="archive-filter__count">1 篇</span>
+                    </button>
+                <button class="archive-filter__button" type="button" data-archive-filter="个人项目" data-archive-label="个人项目" data-archive-count="3" aria-pressed="false">
+                        <span>个人项目</span>
+                        <span class="archive-filter__count">3 篇</span>
+                    </button>
+                <button class="archive-filter__button" type="button" data-archive-filter="基于HAL库的STM32开发" data-archive-label="基于HAL库的STM32开发" data-archive-count="1" aria-pressed="false">
+                        <span>基于HAL库的STM32开发</span>
+                        <span class="archive-filter__count">1 篇</span>
+                    </button>
+                <button class="archive-filter__button" type="button" data-archive-filter="自动化课程学习" data-archive-label="自动化课程学习" data-archive-count="1" aria-pressed="false">
+                        <span>自动化课程学习</span>
+                        <span class="archive-filter__count">1 篇</span>
+                    </button>
+                
             </div>
             <p class="archive-filter__status" data-testid="archive-filter-status" role="status" aria-live="polite" aria-atomic="true">全部：15 篇</p>
         </div>
@@ -118,19 +135,19 @@
                         <span data-archive-year-count>4 篇</span>
                     </header>
                     <ul class="taxonomy-list archive-year__entries">
-                        <li class="article-index__item" data-archive-item data-archive-groups="technical">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;基于HAL库的STM32开发&#34;]">
                                 <time datetime="2026-04-09">04.09</time>
                                 <a href="/p/%E5%9F%BA%E4%BA%8Ecubemx%E7%9A%84stm32%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">基于CubeMX的STM32学习笔记</a>
                             </li>
-                        <li class="article-index__item" data-archive-item data-archive-groups="technical">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;C\u0026C&#43;&#43; Study&#34;,&#34;BASE Study&#34;]">
                                 <time datetime="2026-04-09">04.09</time>
                                 <a href="/p/c-%E7%AC%94%E8%AE%B0%E5%90%88%E8%AE%A2%E6%9C%AC/">C&#43;&#43;笔记合订本</a>
                             </li>
-                        <li class="article-index__item" data-archive-item data-archive-groups="technical">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;C\u0026C&#43;&#43; Study&#34;]">
                                 <time datetime="2026-04-06">04.06</time>
                                 <a href="/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/">现代C&#43;&#43;学习</a>
                             </li>
-                        <li class="article-index__item" data-archive-item data-archive-groups="projects">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;个人项目&#34;]">
                                 <time datetime="2026-02-12">02.12</time>
                                 <a href="/p/chiptanks-%E7%8E%A9%E6%B3%95%E4%BB%8B%E7%BB%8D/">ChipTanks-玩法介绍</a>
                             </li>
@@ -144,47 +161,47 @@
                         <span data-archive-year-count>11 篇</span>
                     </header>
                     <ul class="taxonomy-list archive-year__entries">
-                        <li class="article-index__item" data-archive-item data-archive-groups="projects">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;个人项目&#34;]">
                                 <time datetime="2025-12-27">12.27</time>
                                 <a href="/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/">ChipTanks-游戏设计</a>
                             </li>
-                        <li class="article-index__item" data-archive-item data-archive-groups="technical projects">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;C\u0026C&#43;&#43; Study&#34;,&#34;个人项目&#34;]">
                                 <time datetime="2025-11-27">11.27</time>
                                 <a href="/p/chiptanks-%E5%9F%BA%E4%BA%8Ecc-%E6%B7%B7%E7%BC%96%E7%9A%84stm32oled%E8%BF%B7%E4%BD%A0%E6%B8%B8%E6%88%8F%E6%8E%8C%E6%9C%BA%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91/">ChipTanks-基于C&amp;C&#43;&#43;混编的STM32OLED迷你游戏掌机个人项目开发</a>
                             </li>
-                        <li class="article-index__item" data-archive-item data-archive-groups="growth">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;个人简介&#34;]">
                                 <time datetime="2025-11-07">11.07</time>
                                 <a href="/p/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5/">个人项目和工程实践</a>
                             </li>
-                        <li class="article-index__item" data-archive-item data-archive-groups="technical growth">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;成长&#34;,&#34;BASE Study&#34;]">
                                 <time datetime="2025-09-17">09.17</time>
                                 <a href="/p/%E7%94%B5%E6%8E%A7%E6%88%90%E9%95%BF%E6%8C%87%E5%8D%97/">电控成长指南</a>
                             </li>
-                        <li class="article-index__item" data-archive-item data-archive-groups="technical">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;C\u0026C&#43;&#43; Study&#34;,&#34;BASE Study&#34;]">
                                 <time datetime="2025-09-17">09.17</time>
                                 <a href="/p/cc-%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/">C&amp;C&#43;&#43; 系统学习</a>
                             </li>
-                        <li class="article-index__item" data-archive-item data-archive-groups="technical">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;BASE Study&#34;]">
                                 <time datetime="2025-09-04">09.04</time>
                                 <a href="/p/%E4%BB%8Ecpu%E6%9E%B6%E6%9E%84%E5%88%B0%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0/">从CPU架构到操作系统实现</a>
                             </li>
-                        <li class="article-index__item" data-archive-item data-archive-groups="technical">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;C\u0026C&#43;&#43; Study&#34;]">
                                 <time datetime="2025-06-26">06.26</time>
                                 <a href="/p/cc-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E6%9E%81%E7%AE%80%E7%89%88/">C&amp;C&#43;&#43; 内存对齐（极简版）</a>
                             </li>
-                        <li class="article-index__item" data-archive-item data-archive-groups="technical">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;BASE Study&#34;]">
                                 <time datetime="2025-06-26">06.26</time>
                                 <a href="/p/%E5%B7%A5%E5%85%B7%E9%93%BE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%9D%82%E7%9F%A5%E8%AF%86/">工具链的一些杂知识</a>
                             </li>
-                        <li class="article-index__item" data-archive-item data-archive-groups="technical">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;自动化课程学习&#34;]">
                                 <time datetime="2025-06-24">06.24</time>
                                 <a href="/p/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/">微机原理</a>
                             </li>
-                        <li class="article-index__item" data-archive-item data-archive-groups="technical">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;C\u0026C&#43;&#43; Study&#34;]">
                                 <time datetime="2025-06-24">06.24</time>
                                 <a href="/p/cc-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/">C&amp;C&#43;&#43; 编译过程</a>
                             </li>
-                        <li class="article-index__item" data-archive-item data-archive-groups="technical">
+                        <li class="article-index__item" data-archive-item data-archive-categories="[&#34;C\u0026C&#43;&#43; Study&#34;]">
                                 <time datetime="2025-01-13">01.13</time>
                                 <a href="/p/c-%E7%9A%84%E5%90%8D%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%8F%B7%E4%BF%AE%E9%A5%B0/">C&#43;&#43; 的名字修饰（符号修饰）</a>
                             </li>
@@ -200,7 +217,7 @@
         <p><span aria-hidden="true">©</span> 2026 NomadJoe</p>
     </div>
 </footer>
-<script type="text/javascript" src="/ts/field-notes.5fcb23b09fffd3d589dcf5bd7cde039f11219adf4ee80728d127f6f7e25c8e29.js" integrity="sha256-X8sjsJ//09WJ3PW9fN4DnxEhmt9O6Aco0Sf29&#43;Jcjik=" defer></script>
+<script type="text/javascript" src="/ts/field-notes.314f7466d290173fe328fa9bd6abba8bd9391985c5c750247e2971c21c888152.js" integrity="sha256-MU90ZtKQFz/jKPqb1qu6i9k5GYXFx1AkfilxwhyIgVI=" defer></script>
 
 
 </body>
