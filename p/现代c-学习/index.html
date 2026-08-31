@@ -4,7 +4,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="类和对象 类的基本知识 类的构造函数 构造函数的名字和类名相同，没有返回类型。对象创建时会自动调用，用来保证对象一出生就是“可用状态”。\n常见形式：\n默认构造函数（无参） 带参构造函数 委托构造函数（构造函数里调用同类其他构造函数，C++11） 1 2 3 4 5 6 7 8 9 10 class Person { private: std::string name; int age; public: Person() : name(&#34;unknown&#34;), age(0) {} Person(std::string n, int a) : name(std::move(n)), age(a) {} Person(std::string n) : Person(std::move(n), 18) {} }; 常见坑：\n">
 <title>现代C&#43;&#43;学习</title>
 
-<link rel='canonical' href='https://NomadJoeviolet.github.io/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/'><link rel="stylesheet" href="/scss/field-notes.min.2ef3a8366c5eafd293e1c66b892f210701316846bc5b8393017fbabdc14720f3.css">
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/'><link rel="stylesheet" href="/scss/field-notes.min.ef868c7856b3673cb7e867fa12b646fa5f7f71d38ea85531858d475883c4244e.css">
 <meta property='og:title' content="现代C++学习">
 <meta property='og:description' content="类和对象 类的基本知识 类的构造函数 构造函数的名字和类名相同，没有返回类型。对象创建时会自动调用，用来保证对象一出生就是“可用状态”。\n常见形式：\n默认构造函数（无参） 带参构造函数 委托构造函数（构造函数里调用同类其他构造函数，C++11） 1 2 3 4 5 6 7 8 9 10 class Person { private: std::string name; int age; public: Person() : name(&#34;unknown&#34;), age(0) {} Person(std::string n, int a) : name(std::move(n)), age(a) {} Person(std::string n) : Person(std::move(n), 18) {} }; 常见坑：\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/%E7%8E%B0%E4%BB%A3c-%E5%AD%A6%E4%B9%A0/'>
