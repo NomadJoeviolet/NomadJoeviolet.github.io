@@ -3,11 +3,11 @@
 
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>BASE on NomadJoe</title>
+        <title>NomadJoe 的BASE</title>
         <link>https://NomadJoeviolet.github.io/tags/base/</link>
-        <description>Recent content in BASE on NomadJoe</description>
+        <description>NomadJoe 上 BASE 的最新内容</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
+        <language>zh-CN</language>
         <copyright>NomadJoe</copyright>
         <lastBuildDate>Thu, 09 Apr 2026 16:21:07 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/tags/base/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>C&#43;&#43;笔记合订本</title>

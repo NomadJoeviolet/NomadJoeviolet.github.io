@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="/rss.xsl"?>
+
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Tags on NomadJoe</title>
+        <link>https://NomadJoeviolet.github.io/en/tags/</link>
+        <description>Recent content in Tags on NomadJoe</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>NomadJoe</copyright>
+        <lastBuildDate>Thu, 26 Jun 2025 15:35:46 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/en/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>C&amp;C&#43;&#43;</title>
+        <link>https://NomadJoeviolet.github.io/en/tags/cc&#43;&#43;/</link>
+        <pubDate>Thu, 26 Jun 2025 15:35:46 +0800</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/en/tags/cc&#43;&#43;/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="zh-CN" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一文轻松理解内存对齐 - 知乎\n结构体（struct）对齐 规则 1：成员地址 =\u00a0min(自身对齐值, 有效对齐值)\u00a0的倍数\n规则 2：结构体总大小 = 最大成员对齐值的整数倍\n">
 <title>C&amp;C&#43;&#43; 内存对齐（极简版）</title>
 
-<link rel='canonical' href='https://NomadJoeviolet.github.io/p/cc-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E6%9E%81%E7%AE%80%E7%89%88/'><link rel="stylesheet" href="/scss/field-notes.min.9c48ca647d17fd8327dc634b3e9d9291dbdb4283a6ffb5ae664dc2e5fc3ea245.css">
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/cc-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E6%9E%81%E7%AE%80%E7%89%88/'><link rel="stylesheet" href="/scss/field-notes.min.37278cc9267e57c95469c88068ddb74467ab1779acdc6a2278b7169163e45802.css">
 <meta property='og:title' content="C&C++ 内存对齐（极简版）">
 <meta property='og:description' content="一文轻松理解内存对齐 - 知乎\n结构体（struct）对齐 规则 1：成员地址 =\u00a0min(自身对齐值, 有效对齐值)\u00a0的倍数\n规则 2：结构体总大小 = 最大成员对齐值的整数倍\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/cc-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E6%9E%81%E7%AE%80%E7%89%88/'>
@@ -20,6 +20,13 @@
     <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<link rel="alternate" hreflang="zh-CN" href="https://NomadJoeviolet.github.io/p/cc-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E6%9E%81%E7%AE%80%E7%89%88/">
+<link rel="alternate" hreflang="x-default" href="https://NomadJoeviolet.github.io/p/cc-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E6%9E%81%E7%AE%80%E7%89%88/">
+<link rel="alternate" hreflang="en" href="https://NomadJoeviolet.github.io/en/p/c-cpp-memory-alignment-quick-guide/">
+
 
     </head>
     <body class="field-notes article-page">
@@ -61,6 +68,8 @@
             </ul>
         </nav>
         <div class="site-tools" aria-label="站点工具">
+            <nav class="language-switch" data-testid="language-switch" aria-label="语言"><span lang="zh-CN" aria-current="page">中文</span><span class="language-switch__separator" aria-hidden="true">/</span><a lang="en" hreflang="en" href="/en/p/c-cpp-memory-alignment-quick-guide/">EN</a></nav>
+
             
                 <a class="icon-control" href="/index.xml" aria-label="订阅 RSS"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -72,7 +81,7 @@
 
 </a>
             
-            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="切换配色" aria-pressed="false">
+            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="切换为浅色配色" aria-pressed="false">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
@@ -117,28 +126,7 @@
 </header>
 
 
-                <details class="article-toc-mobile">
-            <summary>目录</summary>
-            <div class="article-toc-mobile__content">
-                <nav id="TableOfContentsMobile" aria-label="目录">
-  <ol>
-    <li>
-      <ol>
-        <li>
-          <ol>
-            <li>
-              <ol>
-                <li></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-            </div>
-        </details>
+                
 
                 <div class="article-content">
                     <p><a class="link" href="https://zhuanlan.zhihu.com/p/140063999"  target="_blank" rel="noopener"
@@ -181,7 +169,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="c1">//输出的结果是什么？
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">S1</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
@@ -198,11 +186,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#pragma pack(push, 1)</span><span class="c1">//设置默认对齐数为1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">MyStruct</span> <span class="p">{</span> 
-</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">a</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">b</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	<span class="kt">double</span> <span class="n">c</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	<span class="p">};</span> 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">MyStruct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">double</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#pragma pack(pop)</span><span class="c1">//取消设置的默认对齐数，还原为默认
 </span></span></span></code></pre></td></tr></table>
 </div>
@@ -215,10 +203,10 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">MyStruct</span> <span class="p">{</span> 
-</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">a</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">b</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	<span class="kt">double</span> <span class="n">c</span><span class="p">;</span> 
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">MyStruct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">double</span> <span class="n">c</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="nf">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">));</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -317,26 +305,7 @@
 
             </div>
 
-            <aside class="article-toc-rail">
-            <p class="section-kicker">ON THIS PAGE</p>
-            <nav id="TableOfContents" class="article-toc" data-testid="article-toc" aria-label="目录">
-  <ol>
-    <li>
-      <ol>
-        <li>
-          <ol>
-            <li>
-              <ol>
-                <li></li>
-              </ol>
-            </li>
-          </ol>
-        </li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </aside>
+            
         </div>
 
         
@@ -449,7 +418,8 @@
         <p><span aria-hidden="true">©</span> 2026 NomadJoe</p>
     </div>
 </footer>
-<script type="text/javascript" src="/ts/field-notes.314f7466d290173fe328fa9bd6abba8bd9391985c5c750247e2971c21c888152.js" integrity="sha256-MU90ZtKQFz/jKPqb1qu6i9k5GYXFx1AkfilxwhyIgVI=" defer></script>
+<script id="field-notes-runtime-messages" type="application/json">{"archive":{"itemCount":{"one":"{count} 篇","other":"{count} 篇"},"status":{"one":"{label}：{count} 篇","other":"{label}：{count} 篇"}},"copy":{"failure":"复制失败","idle":"复制","label":"复制代码","success":"已复制"},"lightbox":{"close":"关闭","dialogLabel":"图片预览","preview":"预览图片：{label}"},"search":{"count":{"one":"{count} 个结果","other":"{count} 个结果"},"error":"搜索暂时不可用","idle":"搜索结果","loading":"正在搜索…","untitled":"无标题"},"theme":{"toDark":"切换为深色配色","toLight":"切换为浅色配色"}}</script>
+<script type="text/javascript" src="/ts/field-notes.4b562398ba3576831354f6c9cf5af69271d5ccf45a468569668604ba525fe8a1.js" integrity="sha256-S1YjmLo1doMTVPbJz1r2knHVzPRaRoVpZoYEulJf6KE=" defer></script>
 
 
 </body>

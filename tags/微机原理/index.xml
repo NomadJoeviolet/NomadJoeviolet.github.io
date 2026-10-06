@@ -3,11 +3,11 @@
 
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>微机原理 on NomadJoe</title>
+        <title>NomadJoe 的微机原理</title>
         <link>https://NomadJoeviolet.github.io/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/</link>
-        <description>Recent content in 微机原理 on NomadJoe</description>
+        <description>NomadJoe 上 微机原理 的最新内容</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
+        <language>zh-CN</language>
         <copyright>NomadJoe</copyright>
         <lastBuildDate>Tue, 24 Jun 2025 23:16:11 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>微机原理</title>

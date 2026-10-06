@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="A Simple Guide to Understanding Memory Alignment\nStructure (struct) alignment Rule 1: A member&rsquo;s address is a multiple of min(its alignment value, the effective alignment value).\nRule 2: The total size of a structure is an integer multiple of its largest member alignment value.\nRule 3: Member order affects the final size.\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 #pragma pack(1)//设置默认对齐数为1 struct S1 { char c1; int i; char c2; }; #pragma pack()//取消设置的默认对齐数，还原为默认 int main() { //输出的结果是什么？ printf(&#34;%d\\n&#34;, sizeof(struct S1)); return 0; } 1 2 3 4 5 6 7 #pragma pack(push, 1)//设置默认对齐数为1 struct MyStruct { char a; int b; double c; }; #pragma pack(pop)//取消设置的默认对齐数，还原为默认 1 2 3 4 5 struct MyStruct { char a; int b; double c; } __attribute__((packed)); ">
+<title>C&amp;C&#43;&#43; Memory Alignment (Quick Guide)</title>
+
+<link rel='canonical' href='https://NomadJoeviolet.github.io/en/p/c-cpp-memory-alignment-quick-guide/'><link rel="stylesheet" href="/scss/field-notes.min.37278cc9267e57c95469c88068ddb74467ab1779acdc6a2278b7169163e45802.css">
+<meta property='og:title' content="C&C++ Memory Alignment (Quick Guide)">
+<meta property='og:description' content="A Simple Guide to Understanding Memory Alignment\nStructure (struct) alignment Rule 1: A member&rsquo;s address is a multiple of min(its alignment value, the effective alignment value).\nRule 2: The total size of a structure is an integer multiple of its largest member alignment value.\nRule 3: Member order affects the final size.\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 #pragma pack(1)//设置默认对齐数为1 struct S1 { char c1; int i; char c2; }; #pragma pack()//取消设置的默认对齐数，还原为默认 int main() { //输出的结果是什么？ printf(&#34;%d\\n&#34;, sizeof(struct S1)); return 0; } 1 2 3 4 5 6 7 #pragma pack(push, 1)//设置默认对齐数为1 struct MyStruct { char a; int b; double c; }; #pragma pack(pop)//取消设置的默认对齐数，还原为默认 1 2 3 4 5 struct MyStruct { char a; int b; double c; } __attribute__((packed)); ">
+<meta property='og:url' content='https://NomadJoeviolet.github.io/en/p/c-cpp-memory-alignment-quick-guide/'>
+<meta property='og:site_name' content='NomadJoe'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&amp;C&#43;&#43;' /><meta property='article:published_time' content='2025-06-26T15:35:46&#43;08:00'/><meta property='article:modified_time' content='2025-06-26T15:35:46&#43;08:00'/>
+<meta name="twitter:title" content="C&amp;C&#43;&#43; Memory Alignment (Quick Guide)">
+<meta name="twitter:description" content="A Simple Guide to Understanding Memory Alignment
+Structure (struct) alignment Rule 1: A member&rsquo;s address is a multiple of min(its alignment value, the effective alignment value).
+Rule 2: The total size of a structure is an integer multiple of its largest member alignment value.
+Rule 3: Member order affects the final size.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 #pragma pack(1)//设置默认对齐数为1 struct S1 { char c1; int i; char c2; }; #pragma pack()//取消设置的默认对齐数，还原为默认 int main() { //输出的结果是什么？ printf(&#34;%d\n&#34;, sizeof(struct S1)); return 0; } 1 2 3 4 5 6 7 #pragma pack(push, 1)//设置默认对齐数为1 struct MyStruct { char a; int b; double c; }; #pragma pack(pop)//取消设置的默认对齐数，还原为默认 1 2 3 4 5 struct MyStruct { char a; int b; double c; } __attribute__((packed)); ">
+    <meta name="twitter:card" content="summary">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+<link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<link rel="alternate" hreflang="zh-CN" href="https://NomadJoeviolet.github.io/p/cc-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E6%9E%81%E7%AE%80%E7%89%88/">
+<link rel="alternate" hreflang="x-default" href="https://NomadJoeviolet.github.io/p/cc-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E6%9E%81%E7%AE%80%E7%89%88/">
+<link rel="alternate" hreflang="en" href="https://NomadJoeviolet.github.io/en/p/c-cpp-memory-alignment-quick-guide/">
+
+
+    </head>
+    <body class="field-notes article-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<a class="skip-link" href="#main-content">Skip to main content</a><header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-wordmark" href="/en/" aria-label="NomadJoe home">NJ<span aria-hidden="true">/</span>FIELD NOTES</a>
+        <button class="site-menu-toggle" id="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+            <span class="site-menu-toggle__label">Menu</span>
+        </button>
+        <nav class="primary-nav" data-testid="primary-nav" aria-label="Primary navigation">
+            <ul id="primary-menu">
+                <li><a href="/en/">Home</a></li>
+                <li><a href="/en/archives/">Notes</a></li>
+                <li><a href="/en/#projects">Projects</a></li>
+                <li><a href="/en/about/">About</a></li>
+                <li><a href="/en/search/">Search</a></li>
+            </ul>
+        </nav>
+        <div class="site-tools" aria-label="Site tools">
+            <nav class="language-switch" data-testid="language-switch" aria-label="Language"><a lang="zh-CN" hreflang="zh-CN" href="/p/cc-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E6%9E%81%E7%AE%80%E7%89%88/">中文</a><span class="language-switch__separator" aria-hidden="true">/</span><span lang="en" aria-current="page">EN</span></nav>
+
+            
+                <a class="icon-control" href="/en/index.xml" aria-label="Subscribe via RSS"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+</a>
+            
+            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light color scheme" aria-pressed="false">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+            </button>
+        </div>
+    </div>
+</header>
+<main id="main-content" class="site-main" data-testid="article-main">
+    <div class="reading-progress" data-testid="reading-progress" aria-hidden="true">
+        <span class="reading-progress__line"></span>
+        <span class="reading-progress__stone"></span>
+    </div>
+
+    <article class="article-reader">
+        <div class="article-reader__layout">
+            <div class="article-reader__document">
+                <header class="article-reader__header">
+    <p class="section-kicker">FIELD NOTE / OPEN LOG</p>
+    <h1 data-testid="article-title">C&amp;C&#43;&#43; Memory Alignment (Quick Guide)</h1>
+
+    <div class="article-reader__meta">
+        <time datetime="2025-06-26">2025.06.26</time>
+        <span aria-hidden="true">/</span>
+        <time data-testid="article-reading-time" datetime="PT1M">1 min read</time>
+    </div>
+
+    
+        <ul class="article-reader__terms" aria-label="Categories">
+            
+                <li><a href="/en/archives/?category=C%26C%2B%2B&#43;Study">C&amp;C&#43;&#43; Study</a></li>
+            
+        </ul>
+    
+
+    
+    
+</header>
+
+
+                
+
+                <div class="article-content">
+                    <p><a class="link" href="https://zhuanlan.zhihu.com/p/140063999"  target="_blank" rel="noopener"
+    >A Simple Guide to Understanding Memory Alignment</a></p>
+<h5 id="structure-struct-alignment"><strong>Structure (<code>struct</code>) alignment</strong>
+</h5>
+<p><strong>Rule 1</strong>: A member&rsquo;s address is a multiple of <code>min(its alignment value, the effective alignment value)</code>.</p>
+<p><strong>Rule 2</strong>: The total size of a structure is an integer multiple of its largest member alignment value.</p>
+<p><strong>Rule 3</strong>: Member order affects the final size.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#pragma pack(1)</span><span class="c1">//设置默认对齐数为1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">S1</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">c1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">c2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#pragma pack()</span><span class="c1">//取消设置的默认对齐数，还原为默认
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//输出的结果是什么？
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">S1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#pragma pack(push, 1)</span><span class="c1">//设置默认对齐数为1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="n">MyStruct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">double</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#pragma pack(pop)</span><span class="c1">//取消设置的默认对齐数，还原为默认
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">MyStruct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">double</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="nf">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+                </div>
+
+                <footer class="article-reader__footer">
+    
+        <div class="article-reader__tags">
+            <p class="section-kicker">FIELD TAGS</p>
+            <ul aria-label="Tags">
+                
+                    <li><a href="/en/tags/cc&#43;&#43;/">C&amp;C&#43;&#43;</a></li>
+                
+            </ul>
+        </div>
+    
+
+    
+
+</footer>
+
+            </div>
+
+            
+        </div>
+
+        
+            <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+        
+    </article>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+        </main><footer class="field-footer">
+    <div class="field-footer__inner">
+        <p><span aria-hidden="true">©</span> 2026 NomadJoe</p>
+    </div>
+</footer>
+<script id="field-notes-runtime-messages" type="application/json">{"archive":{"itemCount":{"one":"{count} note","other":"{count} notes"},"status":{"one":"{label}: {count} note","other":"{label}: {count} notes"}},"copy":{"failure":"Copy failed","idle":"Copy","label":"Copy code","success":"Copied"},"lightbox":{"close":"Close","dialogLabel":"Image preview","preview":"Preview image: {label}"},"search":{"count":{"one":"{count} result","other":"{count} results"},"error":"Search is temporarily unavailable","idle":"Search results","loading":"Searching…","untitled":"Untitled"},"theme":{"toDark":"Switch to dark color scheme","toLight":"Switch to light color scheme"}}</script>
+<script type="text/javascript" src="/ts/field-notes.4b562398ba3576831354f6c9cf5af69271d5ccf45a468569668604ba525fe8a1.js" integrity="sha256-S1YjmLo1doMTVPbJz1r2knHVzPRaRoVpZoYEulJf6KE=" defer></script>
+
+
+</body>
+</html>

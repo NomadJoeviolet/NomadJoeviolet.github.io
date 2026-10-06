@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="/rss.xsl"?>
+
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Pages on NomadJoe</title>
+        <link>https://NomadJoeviolet.github.io/en/page/</link>
+        <description>Recent content in Pages on NomadJoe</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>NomadJoe</copyright>
+        <lastBuildDate>Tue, 28 May 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/en/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Archives</title>
+        <link>https://NomadJoeviolet.github.io/en/archives/</link>
+        <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/en/archives/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>About</title>
+        <link>https://NomadJoeviolet.github.io/en/about/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/en/about/</guid>
+        <description>&lt;p&gt;Sharing study notes and recording personal experiences.&lt;/p&gt;
+&lt;h2 id=&#34;personal-note&#34;&gt;Personal note
+&lt;/h2&gt;
+&lt;p&gt;NomadJoe needs to add this section.&lt;/p&gt;
+&lt;h2 id=&#34;what-i-am-working-on&#34;&gt;What I am working on
+&lt;/h2&gt;
+&lt;p&gt;NomadJoe needs to add this section.&lt;/p&gt;
+&lt;h2 id=&#34;project-index&#34;&gt;Project index
+&lt;/h2&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://NomadJoeviolet.github.io/en/#projects&#34; &gt;Projects&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;reading-and-watching&#34;&gt;Reading and watching
+&lt;/h2&gt;
+&lt;p&gt;NomadJoe needs to add this section.&lt;/p&gt;
+&lt;h2 id=&#34;contact&#34;&gt;Contact
+&lt;/h2&gt;
+&lt;p&gt;NomadJoe needs to add this section.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Search</title>
+        <link>https://NomadJoeviolet.github.io/en/search/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://NomadJoeviolet.github.io/en/search/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>

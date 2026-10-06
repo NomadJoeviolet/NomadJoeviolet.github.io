@@ -3,11 +3,11 @@
 
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Projects on NomadJoe</title>
+        <title>NomadJoe 的Projects</title>
         <link>https://NomadJoeviolet.github.io/categories/projects/</link>
-        <description>Recent content in Projects on NomadJoe</description>
+        <description>NomadJoe 上 Projects 的最新内容</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
+        <language>zh-CN</language>
         <copyright>NomadJoe</copyright>
         <lastBuildDate>Thu, 12 Feb 2026 18:23:07 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/categories/projects/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>ChipTanks-玩法介绍</title>

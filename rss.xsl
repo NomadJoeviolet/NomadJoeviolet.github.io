@@ -8,7 +8,68 @@
     <xsl:output method="html" encoding="UTF-8" doctype-system="about:legacy-compat" />
 
     <xsl:template match="/">
-        <html lang="zh-CN">
+        <xsl:variable name="page-language">
+            <xsl:choose>
+                <xsl:when test="starts-with(rss/channel/language, 'en')">en</xsl:when>
+                <xsl:otherwise>zh-CN</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="feed-eyebrow">
+            <xsl:choose>
+                <xsl:when test="starts-with(rss/channel/language, 'en')">FIELD TRANSMISSION / RSS</xsl:when>
+                <xsl:otherwise>现场传输 / RSS</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="feed-title">
+            <xsl:choose>
+                <xsl:when test="starts-with(rss/channel/language, 'en')">RSS feed</xsl:when>
+                <xsl:otherwise>订阅源</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="feed-statement">
+            <xsl:choose>
+                <xsl:when test="starts-with(rss/channel/language, 'en')">FIELD NOTES FROM THE LONG ASCENT</xsl:when>
+                <xsl:otherwise>漫长攀登中的现场笔记</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="record-count-suffix">
+            <xsl:choose>
+                <xsl:when test="starts-with(rss/channel/language, 'en')">FIELD RECORDS</xsl:when>
+                <xsl:otherwise>篇现场记录</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="feed-guide">
+            <xsl:choose>
+                <xsl:when test="starts-with(rss/channel/language, 'en')">This is NomadJoe's RSS feed. Add the address below to your RSS reader to receive new field notes.</xsl:when>
+                <xsl:otherwise>这是 NomadJoe 的 RSS 订阅源。将下方地址添加到你的 RSS 阅读器，即可持续接收新的现场笔记。</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="feed-address-label">
+            <xsl:choose>
+                <xsl:when test="starts-with(rss/channel/language, 'en')">FEED ADDRESS</xsl:when>
+                <xsl:otherwise>订阅地址</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="return-label">
+            <xsl:choose>
+                <xsl:when test="starts-with(rss/channel/language, 'en')">Return to website ↗</xsl:when>
+                <xsl:otherwise>返回网站 ↗</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="records-label">
+            <xsl:choose>
+                <xsl:when test="starts-with(rss/channel/language, 'en')">Latest feed entries</xsl:when>
+                <xsl:otherwise>最新订阅条目</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="footer-label">
+            <xsl:choose>
+                <xsl:when test="starts-with(rss/channel/language, 'en')">XML / SYNDICATION CHANNEL</xsl:when>
+                <xsl:otherwise>XML / 订阅频道</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
+        <html lang="{$page-language}">
             <head>
                 <meta charset="UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -351,24 +412,24 @@
 
                     <section class="feed-header" aria-labelledby="feed-title">
                         <div>
-                            <p class="eyebrow">FIELD TRANSMISSION / RSS</p>
-                            <h1 id="feed-title">订阅源</h1>
-                            <p class="feed-header__statement">FIELD NOTES FROM THE LONG ASCENT</p>
+                            <p class="eyebrow"><xsl:value-of select="$feed-eyebrow" /></p>
+                            <h1 id="feed-title"><xsl:value-of select="$feed-title" /></h1>
+                            <p class="feed-header__statement"><xsl:value-of select="$feed-statement" /></p>
                         </div>
                         <div class="feed-header__guide">
                             <span class="feed-header__count">
-                                <xsl:value-of select="format-number(count(rss/channel/item), '00')" /> FIELD RECORDS
+                                <xsl:value-of select="format-number(count(rss/channel/item), '00')" /> <xsl:value-of select="$record-count-suffix" />
                             </span>
-                            <p>这是 NomadJoe 的 RSS 订阅源。将下方地址添加到你的 RSS 阅读器，即可持续接收新的现场笔记。</p>
+                            <p><xsl:value-of select="$feed-guide" /></p>
                             <div class="feed-address">
-                                <span class="feed-address__label">FEED ADDRESS</span>
+                                <span class="feed-address__label"><xsl:value-of select="$feed-address-label" /></span>
                                 <code><xsl:value-of select="rss/channel/atom:link/@href" /></code>
-                                <a class="feed-address__return" href="{rss/channel/link}">返回网站 ↗</a>
+                                <a class="feed-address__return" href="{rss/channel/link}"><xsl:value-of select="$return-label" /></a>
                             </div>
                         </div>
                     </section>
 
-                    <ol class="records" aria-label="最新订阅条目">
+                    <ol class="records" aria-label="{$records-label}">
                         <xsl:for-each select="rss/channel/item">
                             <li class="record">
                                 <span class="record__folio"><xsl:value-of select="format-number(position(), '00')" /></span>
@@ -382,7 +443,7 @@
 
                     <footer class="feed-footer">
                         <span><xsl:value-of select="rss/channel/title" /></span>
-                        <span>XML / SYNDICATION CHANNEL</span>
+                        <span><xsl:value-of select="$footer-label" /></span>
                     </footer>
                 </main>
             </body>

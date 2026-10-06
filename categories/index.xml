@@ -3,11 +3,11 @@
 
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Categories on NomadJoe</title>
+        <title>NomadJoe 的Categories</title>
         <link>https://NomadJoeviolet.github.io/categories/</link>
-        <description>Recent content in Categories on NomadJoe</description>
+        <description>NomadJoe 上 Categories 的最新内容</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
+        <language>zh-CN</language>
         <copyright>NomadJoe</copyright>
         <lastBuildDate>Thu, 09 Apr 2026 19:44:59 +0800</lastBuildDate><atom:link href="https://NomadJoeviolet.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Embedded Development</title>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="zh-CN" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="设计思路简介 游戏类型设计 嵌入式平台上的“山海经”题材 Rougelite 弹幕射击游戏（STG）\n横版/竖版射击 (Shoot &rsquo;em up / STG)： 游戏的核心玩法是控制主角在 OLED 屏幕上移动，发射子弹消灭源源不断的敌人。\n">
 <title>ChipTanks-游戏设计</title>
 
-<link rel='canonical' href='https://NomadJoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/'><link rel="stylesheet" href="/scss/field-notes.min.9c48ca647d17fd8327dc634b3e9d9291dbdb4283a6ffb5ae664dc2e5fc3ea245.css">
+<link rel='canonical' href='https://NomadJoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/'><link rel="stylesheet" href="/scss/field-notes.min.37278cc9267e57c95469c88068ddb74467ab1779acdc6a2278b7169163e45802.css">
 <meta property='og:title' content="ChipTanks-游戏设计">
 <meta property='og:description' content="设计思路简介 游戏类型设计 嵌入式平台上的“山海经”题材 Rougelite 弹幕射击游戏（STG）\n横版/竖版射击 (Shoot &rsquo;em up / STG)： 游戏的核心玩法是控制主角在 OLED 屏幕上移动，发射子弹消灭源源不断的敌人。\n">
 <meta property='og:url' content='https://NomadJoeviolet.github.io/p/chiptanks-%E6%B8%B8%E6%88%8F%E8%AE%BE%E8%AE%A1/'>
@@ -19,6 +19,9 @@
     <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+
+<meta property="og:locale" content="zh_CN">
+
 
     </head>
     <body class="field-notes article-page">
@@ -60,6 +63,8 @@
             </ul>
         </nav>
         <div class="site-tools" aria-label="站点工具">
+            <nav class="language-switch" data-testid="language-switch" aria-label="语言"><span lang="zh-CN" aria-current="page">中文</span><span class="language-switch__separator" aria-hidden="true">/</span><span lang="en" aria-disabled="true">EN</span></nav>
+
             
                 <a class="icon-control" href="/index.xml" aria-label="订阅 RSS"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -71,7 +76,7 @@
 
 </a>
             
-            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="切换配色" aria-pressed="false">
+            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="切换为浅色配色" aria-pressed="false">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="8" cy="12" r="2" />
@@ -998,7 +1003,8 @@ NewPos=CurrentPos+(Direction×Speed)NewPos=CurrentPos+(Direction×Speed)</li>
         <p><span aria-hidden="true">©</span> 2026 NomadJoe</p>
     </div>
 </footer>
-<script type="text/javascript" src="/ts/field-notes.314f7466d290173fe328fa9bd6abba8bd9391985c5c750247e2971c21c888152.js" integrity="sha256-MU90ZtKQFz/jKPqb1qu6i9k5GYXFx1AkfilxwhyIgVI=" defer></script>
+<script id="field-notes-runtime-messages" type="application/json">{"archive":{"itemCount":{"one":"{count} 篇","other":"{count} 篇"},"status":{"one":"{label}：{count} 篇","other":"{label}：{count} 篇"}},"copy":{"failure":"复制失败","idle":"复制","label":"复制代码","success":"已复制"},"lightbox":{"close":"关闭","dialogLabel":"图片预览","preview":"预览图片：{label}"},"search":{"count":{"one":"{count} 个结果","other":"{count} 个结果"},"error":"搜索暂时不可用","idle":"搜索结果","loading":"正在搜索…","untitled":"无标题"},"theme":{"toDark":"切换为深色配色","toLight":"切换为浅色配色"}}</script>
+<script type="text/javascript" src="/ts/field-notes.4b562398ba3576831354f6c9cf5af69271d5ccf45a468569668604ba525fe8a1.js" integrity="sha256-S1YjmLo1doMTVPbJz1r2knHVzPRaRoVpZoYEulJf6KE=" defer></script>
 
 
 </body>
