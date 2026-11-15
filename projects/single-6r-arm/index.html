@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="构建分层控制链路，覆盖逆解、轨迹、重力补偿与安全处理的协作路径。通过 SystemView 与 Cache/ITCM 观测定位性能行为，并持续推进架构与算法优化。\n">
+<title>单 6 轴机械臂工程机器人</title>
+
+<link rel='canonical' href='https://NomadJoeviolet.github.io/projects/single-6r-arm/'><link rel="stylesheet" href="/scss/field-notes.min.7cc5149cd85e0aa2c97f1990c4f5a0306c295c6e4094756944fb6cd1bf69bfcb.css">
+<meta property='og:title' content="单 6 轴机械臂工程机器人">
+<meta property='og:description' content="构建分层控制链路，覆盖逆解、轨迹、重力补偿与安全处理的协作路径。通过 SystemView 与 Cache/ITCM 观测定位性能行为，并持续推进架构与算法优化。\n">
+<meta property='og:url' content='https://NomadJoeviolet.github.io/projects/single-6r-arm/'>
+<meta property='og:site_name' content='NomadJoe'>
+<meta property='og:type' content='article'><meta property='article:section' content='Projects' /><meta property='og:image' content='https://NomadJoeviolet.github.io/img/projects/single-6r-arm/cover.jpg' />
+<meta name="twitter:title" content="单 6 轴机械臂工程机器人">
+<meta name="twitter:description" content="构建分层控制链路，覆盖逆解、轨迹、重力补偿与安全处理的协作路径。通过 SystemView 与 Cache/ITCM 观测定位性能行为，并持续推进架构与算法优化。
+">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://NomadJoeviolet.github.io/img/projects/single-6r-arm/cover.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+<link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<link rel="alternate" hreflang="zh-CN" href="https://NomadJoeviolet.github.io/projects/single-6r-arm/">
+<link rel="alternate" hreflang="x-default" href="https://NomadJoeviolet.github.io/projects/single-6r-arm/">
+<link rel="alternate" hreflang="en" href="https://NomadJoeviolet.github.io/en/projects/single-6r-arm/">
+
+
+    </head>
+    <body class="field-notes project-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<a class="skip-link" href="#main-content">跳到主要内容</a><header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-wordmark" href="/" aria-label="NomadJoe 首页">NJ<span aria-hidden="true">/</span>FIELD NOTES</a>
+        <button class="site-menu-toggle" id="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+            <span class="site-menu-toggle__label">菜单</span>
+        </button>
+        <nav class="primary-nav" data-testid="primary-nav" aria-label="主导航">
+            <ul id="primary-menu">
+                <li><a href="/">首页</a></li>
+                <li><a href="/archives/">笔记</a></li>
+                <li><a href="/#projects">项目</a></li>
+                <li><a href="/%E5%85%B3%E4%BA%8E/">关于</a></li>
+                <li><a href="/search/">搜索</a></li>
+            </ul>
+        </nav>
+        <div class="site-tools" aria-label="站点工具">
+            <nav class="language-switch" data-testid="language-switch" aria-label="语言"><span lang="zh-CN" aria-current="page">中文</span><span class="language-switch__separator" aria-hidden="true">/</span><a lang="en" hreflang="en" href="/en/projects/single-6r-arm/">EN</a></nav>
+
+            
+                <a class="icon-control" href="/index.xml" aria-label="订阅 RSS"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+</a>
+            
+            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="切换为浅色配色" aria-pressed="false">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+            </button>
+        </div>
+    </div>
+</header>
+<main id="main-content" class="site-main">
+    
+    
+    
+        
+        <article class="project-dossier" data-project-player>
+            <header class="project-dossier__header">
+                <a class="text-link project-dossier__back" href="/#projects">返回项目合集</a>
+                <p class="section-kicker">PROJECT LEDGER</p>
+                <h1>单 6 轴机械臂工程机器人</h1>
+                <div class="project-dossier__meta"><span>2025.08—2026.07</span><span>嵌入式负责人 · 代码架构设计、算法研发与性能优化</span></div>
+            </header>
+            <div class="project-dossier__player-grid">
+                <div class="project-dossier__stage">
+                    <video data-project-video controls playsinline preload="none" src="/projects/single-6r-arm/videos/assembly.mp4" poster="/projects/single-6r-arm/posters/assembly.jpg" width="1280" height="540" aria-label="单 6 轴机械臂工程机器人"></video>
+                    <div class="project-dossier__caption">
+                        <h2 data-clip-title>快速装配</h2>
+                        <p data-clip-description>快速装配算法驱动的连续操作过程。</p>
+                        <p class="project-dossier__status" data-player-status role="status" aria-live="polite"></p>
+                    </div>
+                </div>
+                <nav class="project-dossier__directory" aria-label="视频目录">
+                    <h2>视频目录 <span>05</span></h2>
+                    
+                        <a class="project-dossier__clip" data-project-clip data-clip-id="assembly" data-video-src="/projects/single-6r-arm/videos/assembly.mp4" data-video-poster="/projects/single-6r-arm/posters/assembly.jpg" data-video-title="快速装配" data-video-description="快速装配算法驱动的连续操作过程。" href="/projects/single-6r-arm/videos/assembly.mp4" aria-current="true">
+                            <span class="project-dossier__clip-index">01</span>
+                            <span class="project-dossier__clip-title">快速装配</span>
+                            <span class="project-dossier__clip-duration">0:32</span>
+                        </a>
+                    
+                        <a class="project-dossier__clip" data-project-clip data-clip-id="step-climb" data-video-src="/projects/single-6r-arm/videos/step-climb.mp4" data-video-poster="/projects/single-6r-arm/posters/step-climb.jpg" data-video-title="上台阶 · 片段一" data-video-description="机器人上台阶过程的第一段记录。" href="/projects/single-6r-arm/videos/step-climb.mp4">
+                            <span class="project-dossier__clip-index">02</span>
+                            <span class="project-dossier__clip-title">上台阶 · 片段一</span>
+                            <span class="project-dossier__clip-duration">0:05</span>
+                        </a>
+                    
+                        <a class="project-dossier__clip" data-project-clip data-clip-id="step-climb-2" data-video-src="/projects/single-6r-arm/videos/step-climb-2.mp4" data-video-poster="/projects/single-6r-arm/posters/step-climb-2.jpg" data-video-title="上台阶 · 片段二" data-video-description="机器人上台阶过程的另一段记录。" href="/projects/single-6r-arm/videos/step-climb-2.mp4">
+                            <span class="project-dossier__clip-index">03</span>
+                            <span class="project-dossier__clip-title">上台阶 · 片段二</span>
+                            <span class="project-dossier__clip-duration">0:05</span>
+                        </a>
+                    
+                        <a class="project-dossier__clip" data-project-clip data-clip-id="auto-reset" data-video-src="/projects/single-6r-arm/videos/auto-reset.mp4" data-video-poster="/projects/single-6r-arm/posters/auto-reset.jpg" data-video-title="自动复位" data-video-description="机械臂自动回到预设姿态的过程。" href="/projects/single-6r-arm/videos/auto-reset.mp4">
+                            <span class="project-dossier__clip-index">04</span>
+                            <span class="project-dossier__clip-title">自动复位</span>
+                            <span class="project-dossier__clip-duration">0:07</span>
+                        </a>
+                    
+                        <a class="project-dossier__clip" data-project-clip data-clip-id="ore-handling" data-video-src="/projects/single-6r-arm/videos/ore-handling.mp4" data-video-poster="/projects/single-6r-arm/posters/ore-handling.jpg" data-video-title="自动存取矿" data-video-description="机械臂自动完成矿石存放与取出的动作流程。" href="/projects/single-6r-arm/videos/ore-handling.mp4">
+                            <span class="project-dossier__clip-index">05</span>
+                            <span class="project-dossier__clip-title">自动存取矿</span>
+                            <span class="project-dossier__clip-duration">0:19</span>
+                        </a>
+                    
+                </nav>
+            </div>
+            <div class="project-dossier__summary"><p>构建分层控制链路，覆盖逆解、轨迹、重力补偿与安全处理的协作路径。通过 SystemView 与 Cache/ITCM 观测定位性能行为，并持续推进架构与算法优化。</p>
+</div>
+            <div class="project-dossier__resources">
+                <ul class="project-record__stack" aria-label="技术栈"><li>STM32H723</li><li>C&#43;&#43;17</li><li>FreeRTOS</li><li>SystemView</li><li>ITCM</li></ul>
+                <div class="project-record__links"></div>
+            </div>
+        </article>
+    
+
+        </main><footer class="field-footer">
+    <div class="field-footer__inner">
+        <p><span aria-hidden="true">©</span> 2026 NomadJoe</p>
+    </div>
+</footer>
+<script id="field-notes-runtime-messages" type="application/json">{"archive":{"itemCount":{"one":"{count} 篇","other":"{count} 篇"},"status":{"one":"{label}：{count} 篇","other":"{label}：{count} 篇"}},"copy":{"failure":"复制失败","idle":"复制","label":"复制代码","success":"已复制"},"lightbox":{"close":"关闭","dialogLabel":"图片预览","preview":"预览图片：{label}"},"search":{"count":{"one":"{count} 个结果","other":"{count} 个结果"},"error":"搜索暂时不可用","idle":"搜索结果","loading":"正在搜索…","untitled":"无标题"},"theme":{"toDark":"切换为深色配色","toLight":"切换为浅色配色"},"video":{"clipSelected":"已选择视频：{title}","playerFailed":"视频暂不可用，请选择其他片段或打开视频直链。","previewFailed":"预览暂不可用，请重试。","previewIdle":"播放片段","previewLabel":"播放片段：{title}，时长 10 秒","previewLoading":"正在加载预览…","previewPlaying":"正在预览：{title}","previewStop":"停止预览"}}</script>
+<script type="text/javascript" src="/ts/field-notes.5043a8681384a37e9e91ed49a90e638cb3eb804c1e987a03ca90821a20b48950.js" integrity="sha256-UEOoaBOEo36eke1JqQ5jjLPrgEwemHoDypCCGiC0iVA=" defer></script>
+
+
+</body>
+</html>

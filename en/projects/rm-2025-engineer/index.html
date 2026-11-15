@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Contributed to later iterations of the engineering robot&rsquo;s arm and control system. My main responsibilities were optimizing gravity compensation and six-axis inverse kinematics, refactoring arm-control code, and building the initial arm components. I also reorganized and optimized the vehicle wiring.\n">
+<title>RoboMaster 2025 Engineering Robot</title>
+
+<link rel='canonical' href='https://NomadJoeviolet.github.io/en/projects/rm-2025-engineer/'><link rel="stylesheet" href="/scss/field-notes.min.7cc5149cd85e0aa2c97f1990c4f5a0306c295c6e4094756944fb6cd1bf69bfcb.css">
+<meta property='og:title' content="RoboMaster 2025 Engineering Robot">
+<meta property='og:description' content="Contributed to later iterations of the engineering robot&rsquo;s arm and control system. My main responsibilities were optimizing gravity compensation and six-axis inverse kinematics, refactoring arm-control code, and building the initial arm components. I also reorganized and optimized the vehicle wiring.\n">
+<meta property='og:url' content='https://NomadJoeviolet.github.io/en/projects/rm-2025-engineer/'>
+<meta property='og:site_name' content='NomadJoe'>
+<meta property='og:type' content='article'><meta property='article:section' content='Projects' /><meta property='og:image' content='https://NomadJoeviolet.github.io/img/projects/rm-2025-engineer/cover.jpg' />
+<meta name="twitter:title" content="RoboMaster 2025 Engineering Robot">
+<meta name="twitter:description" content="Contributed to later iterations of the engineering robot&rsquo;s arm and control system. My main responsibilities were optimizing gravity compensation and six-axis inverse kinematics, refactoring arm-control code, and building the initial arm components. I also reorganized and optimized the vehicle wiring.
+">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://NomadJoeviolet.github.io/img/projects/rm-2025-engineer/cover.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+<link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<link rel="alternate" hreflang="zh-CN" href="https://NomadJoeviolet.github.io/projects/rm-2025-engineer/">
+<link rel="alternate" hreflang="x-default" href="https://NomadJoeviolet.github.io/projects/rm-2025-engineer/">
+<link rel="alternate" hreflang="en" href="https://NomadJoeviolet.github.io/en/projects/rm-2025-engineer/">
+
+
+    </head>
+    <body class="field-notes project-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<a class="skip-link" href="#main-content">Skip to main content</a><header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-wordmark" href="/en/" aria-label="NomadJoe home">NJ<span aria-hidden="true">/</span>FIELD NOTES</a>
+        <button class="site-menu-toggle" id="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+            <span class="site-menu-toggle__label">Menu</span>
+        </button>
+        <nav class="primary-nav" data-testid="primary-nav" aria-label="Primary navigation">
+            <ul id="primary-menu">
+                <li><a href="/en/">Home</a></li>
+                <li><a href="/en/archives/">Notes</a></li>
+                <li><a href="/en/#projects">Projects</a></li>
+                <li><a href="/en/about/">About</a></li>
+                <li><a href="/en/search/">Search</a></li>
+            </ul>
+        </nav>
+        <div class="site-tools" aria-label="Site tools">
+            <nav class="language-switch" data-testid="language-switch" aria-label="Language"><a lang="zh-CN" hreflang="zh-CN" href="/projects/rm-2025-engineer/">中文</a><span class="language-switch__separator" aria-hidden="true">/</span><span lang="en" aria-current="page">EN</span></nav>
+
+            
+                <a class="icon-control" href="/en/index.xml" aria-label="Subscribe via RSS"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+</a>
+            
+            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light color scheme" aria-pressed="false">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+            </button>
+        </div>
+    </div>
+</header>
+<main id="main-content" class="site-main">
+    
+    
+    
+        
+        <article class="project-dossier" data-project-player>
+            <header class="project-dossier__header">
+                <a class="text-link project-dossier__back" href="/en/#projects">Back to projects</a>
+                <p class="section-kicker">PROJECT LEDGER</p>
+                <h1>RoboMaster 2025 Engineering Robot</h1>
+                <div class="project-dossier__meta"><span>2025.05—2025.11</span><span>Project Member · Arm Algorithm Optimization, Code Refactoring, and Vehicle Wiring Optimization</span></div>
+            </header>
+            <div class="project-dossier__player-grid">
+                <div class="project-dossier__stage">
+                    <video data-project-video controls playsinline preload="none" src="/projects/rm-2025-engineer/videos/overview.mp4" poster="/projects/rm-2025-engineer/posters/overview.jpg" width="2560" height="1080" aria-label="RoboMaster 2025 Engineering Robot"></video>
+                    <div class="project-dossier__caption">
+                        <h2 data-clip-title>Robot demonstration</h2>
+                        <p data-clip-description>A full-robot operation demonstration from the 2025 season.</p>
+                        <p class="project-dossier__status" data-player-status role="status" aria-live="polite"></p>
+                    </div>
+                </div>
+                <nav class="project-dossier__directory" aria-label="Video directory">
+                    <h2>Video directory <span>02</span></h2>
+                    
+                        <a class="project-dossier__clip" data-project-clip data-clip-id="overview" data-video-src="/projects/rm-2025-engineer/videos/overview.mp4" data-video-poster="/projects/rm-2025-engineer/posters/overview.jpg" data-video-title="Robot demonstration" data-video-description="A full-robot operation demonstration from the 2025 season." href="/projects/rm-2025-engineer/videos/overview.mp4" aria-current="true">
+                            <span class="project-dossier__clip-index">01</span>
+                            <span class="project-dossier__clip-title">Robot demonstration</span>
+                            <span class="project-dossier__clip-duration">0:20</span>
+                        </a>
+                    
+                        <a class="project-dossier__clip" data-project-clip data-clip-id="gravity-compensation" data-video-src="/projects/rm-2025-engineer/videos/gravity-compensation.mp4" data-video-poster="/projects/rm-2025-engineer/posters/gravity-compensation.jpg" data-video-title="Gravity compensation" data-video-description="Arm poses and the effect of gravity compensation." href="/projects/rm-2025-engineer/videos/gravity-compensation.mp4">
+                            <span class="project-dossier__clip-index">02</span>
+                            <span class="project-dossier__clip-title">Gravity compensation</span>
+                            <span class="project-dossier__clip-duration">0:14</span>
+                        </a>
+                    
+                </nav>
+            </div>
+            <div class="project-dossier__summary"><p>Contributed to later iterations of the engineering robot&rsquo;s arm and control system. My main responsibilities were optimizing gravity compensation and six-axis inverse kinematics, refactoring arm-control code, and building the initial arm components. I also reorganized and optimized the vehicle wiring.</p>
+</div>
+            <div class="project-dossier__resources">
+                <ul class="project-record__stack" aria-label="Technology stack"><li>STM32</li><li>C&#43;&#43;</li><li>FreeRTOS</li><li>CAN/FDCAN</li><li>Robot-Arm Kinematics</li><li>Gravity Compensation</li></ul>
+                <div class="project-record__links"></div>
+            </div>
+        </article>
+    
+
+        </main><footer class="field-footer">
+    <div class="field-footer__inner">
+        <p><span aria-hidden="true">©</span> 2026 NomadJoe</p>
+    </div>
+</footer>
+<script id="field-notes-runtime-messages" type="application/json">{"archive":{"itemCount":{"one":"{count} note","other":"{count} notes"},"status":{"one":"{label}: {count} note","other":"{label}: {count} notes"}},"copy":{"failure":"Copy failed","idle":"Copy","label":"Copy code","success":"Copied"},"lightbox":{"close":"Close","dialogLabel":"Image preview","preview":"Preview image: {label}"},"search":{"count":{"one":"{count} result","other":"{count} results"},"error":"Search is temporarily unavailable","idle":"Search results","loading":"Searching…","untitled":"Untitled"},"theme":{"toDark":"Switch to dark color scheme","toLight":"Switch to light color scheme"},"video":{"clipSelected":"Selected video: {title}","playerFailed":"Video unavailable. Try another clip or open its direct link.","previewFailed":"Preview unavailable. Try again.","previewIdle":"Play preview","previewLabel":"Play preview: {title}, 10 seconds","previewLoading":"Loading preview…","previewPlaying":"Playing preview: {title}","previewStop":"Stop preview"}}</script>
+<script type="text/javascript" src="/ts/field-notes.5043a8681384a37e9e91ed49a90e638cb3eb804c1e987a03ca90821a20b48950.js" integrity="sha256-UEOoaBOEo36eke1JqQ5jjLPrgEwemHoDypCCGiC0iVA=" defer></script>
+
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Led development of the onboard control system for a humanoid dual seven-axis arm. Built input routing, task scheduling, and a highly portable layered arm-control framework, with independent 1 kHz control for the left and right arms plus analytical and iterative numerical solutions for 7-axis inverse kinematics. Identified and compensated gravity parameters from multi-pose samples, and adapted the system to the arms&rsquo; mirrored structures and joint-to-motor mapping.\n">
+<title>Humanoid Dual 7R-Arm Engineering Robot</title>
+
+<link rel='canonical' href='https://NomadJoeviolet.github.io/en/projects/double-7r-arm/'><link rel="stylesheet" href="/scss/field-notes.min.7cc5149cd85e0aa2c97f1990c4f5a0306c295c6e4094756944fb6cd1bf69bfcb.css">
+<meta property='og:title' content="Humanoid Dual 7R-Arm Engineering Robot">
+<meta property='og:description' content="Led development of the onboard control system for a humanoid dual seven-axis arm. Built input routing, task scheduling, and a highly portable layered arm-control framework, with independent 1 kHz control for the left and right arms plus analytical and iterative numerical solutions for 7-axis inverse kinematics. Identified and compensated gravity parameters from multi-pose samples, and adapted the system to the arms&rsquo; mirrored structures and joint-to-motor mapping.\n">
+<meta property='og:url' content='https://NomadJoeviolet.github.io/en/projects/double-7r-arm/'>
+<meta property='og:site_name' content='NomadJoe'>
+<meta property='og:type' content='article'><meta property='article:section' content='Projects' /><meta property='og:image' content='https://NomadJoeviolet.github.io/img/projects/double-7r-arm/cover.jpg' />
+<meta name="twitter:title" content="Humanoid Dual 7R-Arm Engineering Robot">
+<meta name="twitter:description" content="Led development of the onboard control system for a humanoid dual seven-axis arm. Built input routing, task scheduling, and a highly portable layered arm-control framework, with independent 1 kHz control for the left and right arms plus analytical and iterative numerical solutions for 7-axis inverse kinematics. Identified and compensated gravity parameters from multi-pose samples, and adapted the system to the arms&rsquo; mirrored structures and joint-to-motor mapping.
+">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://NomadJoeviolet.github.io/img/projects/double-7r-arm/cover.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+<link rel="preload" href="/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<link rel="alternate" hreflang="zh-CN" href="https://NomadJoeviolet.github.io/projects/double-7r-arm/">
+<link rel="alternate" hreflang="x-default" href="https://NomadJoeviolet.github.io/projects/double-7r-arm/">
+<link rel="alternate" hreflang="en" href="https://NomadJoeviolet.github.io/en/projects/double-7r-arm/">
+
+
+    </head>
+    <body class="field-notes project-page">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<a class="skip-link" href="#main-content">Skip to main content</a><header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-wordmark" href="/en/" aria-label="NomadJoe home">NJ<span aria-hidden="true">/</span>FIELD NOTES</a>
+        <button class="site-menu-toggle" id="site-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">
+            <span class="site-menu-toggle__label">Menu</span>
+        </button>
+        <nav class="primary-nav" data-testid="primary-nav" aria-label="Primary navigation">
+            <ul id="primary-menu">
+                <li><a href="/en/">Home</a></li>
+                <li><a href="/en/archives/">Notes</a></li>
+                <li><a href="/en/#projects">Projects</a></li>
+                <li><a href="/en/about/">About</a></li>
+                <li><a href="/en/search/">Search</a></li>
+            </ul>
+        </nav>
+        <div class="site-tools" aria-label="Site tools">
+            <nav class="language-switch" data-testid="language-switch" aria-label="Language"><a lang="zh-CN" hreflang="zh-CN" href="/projects/double-7r-arm/">中文</a><span class="language-switch__separator" aria-hidden="true">/</span><span lang="en" aria-current="page">EN</span></nav>
+
+            
+                <a class="icon-control" href="/en/index.xml" aria-label="Subscribe via RSS"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+</a>
+            
+            <button class="icon-control" data-testid="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light color scheme" aria-pressed="false">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+            </button>
+        </div>
+    </div>
+</header>
+<main id="main-content" class="site-main">
+    
+    
+    
+        
+        <article class="project-dossier" data-project-player>
+            <header class="project-dossier__header">
+                <a class="text-link project-dossier__back" href="/en/#projects">Back to projects</a>
+                <p class="section-kicker">PROJECT LEDGER</p>
+                <h1>Humanoid Dual 7R-Arm Engineering Robot</h1>
+                <div class="project-dossier__meta"><span>2026.03—2026.08</span><span>Embedded Lead · Architecture Design and Algorithm Development</span></div>
+            </header>
+            <div class="project-dossier__player-grid">
+                <div class="project-dossier__stage">
+                    <video data-project-video controls playsinline preload="none" src="/projects/double-7r-arm/videos/competition.mp4" poster="/projects/double-7r-arm/posters/competition.jpg" width="1756" height="1098" aria-label="Humanoid Dual 7R-Arm Engineering Robot"></video>
+                    <div class="project-dossier__caption">
+                        <h2 data-clip-title>Competition demonstration</h2>
+                        <p data-clip-description>Dual-arm robot operation in a competition setting.</p>
+                        <p class="project-dossier__status" data-player-status role="status" aria-live="polite"></p>
+                    </div>
+                </div>
+                <nav class="project-dossier__directory" aria-label="Video directory">
+                    <h2>Video directory <span>05</span></h2>
+                    
+                        <a class="project-dossier__clip" data-project-clip data-clip-id="competition" data-video-src="/projects/double-7r-arm/videos/competition.mp4" data-video-poster="/projects/double-7r-arm/posters/competition.jpg" data-video-title="Competition demonstration" data-video-description="Dual-arm robot operation in a competition setting." href="/projects/double-7r-arm/videos/competition.mp4" aria-current="true">
+                            <span class="project-dossier__clip-index">01</span>
+                            <span class="project-dossier__clip-title">Competition demonstration</span>
+                            <span class="project-dossier__clip-duration">0:27</span>
+                        </a>
+                    
+                        <a class="project-dossier__clip" data-project-clip data-clip-id="gravity-compensation" data-video-src="/projects/double-7r-arm/videos/gravity-compensation.mp4" data-video-poster="/projects/double-7r-arm/posters/gravity-compensation.jpg" data-video-title="Dual-arm gravity compensation" data-video-description="Gravity compensation across different poses of both arms." href="/projects/double-7r-arm/videos/gravity-compensation.mp4">
+                            <span class="project-dossier__clip-index">02</span>
+                            <span class="project-dossier__clip-title">Dual-arm gravity compensation</span>
+                            <span class="project-dossier__clip-duration">0:36</span>
+                        </a>
+                    
+                        <a class="project-dossier__clip" data-project-clip data-clip-id="assembly" data-video-src="/projects/double-7r-arm/videos/assembly.mp4" data-video-poster="/projects/double-7r-arm/posters/assembly.jpg" data-video-title="Assembly sequence" data-video-description="A demonstration of the dual-arm assembly sequence." href="/projects/double-7r-arm/videos/assembly.mp4">
+                            <span class="project-dossier__clip-index">03</span>
+                            <span class="project-dossier__clip-title">Assembly sequence</span>
+                            <span class="project-dossier__clip-duration">0:23</span>
+                        </a>
+                    
+                        <a class="project-dossier__clip" data-project-clip data-clip-id="vision" data-video-src="/projects/double-7r-arm/videos/vision.mp4" data-video-poster="/projects/double-7r-arm/posters/vision.jpg" data-video-title="Visual recognition" data-video-description="Visual recognition and the resulting robot response." href="/projects/double-7r-arm/videos/vision.mp4">
+                            <span class="project-dossier__clip-index">04</span>
+                            <span class="project-dossier__clip-title">Visual recognition</span>
+                            <span class="project-dossier__clip-duration">0:16</span>
+                        </a>
+                    
+                        <a class="project-dossier__clip" data-project-clip data-clip-id="dance" data-video-src="/projects/double-7r-arm/videos/dance.mp4" data-video-poster="/projects/double-7r-arm/posters/dance.jpg" data-video-title="Coordinated arm motion" data-video-description="A sequence of coordinated movements of both arms." href="/projects/double-7r-arm/videos/dance.mp4">
+                            <span class="project-dossier__clip-index">05</span>
+                            <span class="project-dossier__clip-title">Coordinated arm motion</span>
+                            <span class="project-dossier__clip-duration">0:13</span>
+                        </a>
+                    
+                </nav>
+            </div>
+            <div class="project-dossier__summary"><p>Led development of the onboard control system for a humanoid dual seven-axis arm. Built input routing, task scheduling, and a highly portable layered arm-control framework, with independent 1 kHz control for the left and right arms plus analytical and iterative numerical solutions for 7-axis inverse kinematics. Identified and compensated gravity parameters from multi-pose samples, and adapted the system to the arms&rsquo; mirrored structures and joint-to-motor mapping.</p>
+</div>
+            <div class="project-dossier__resources">
+                <ul class="project-record__stack" aria-label="Technology stack"><li>STM32H723</li><li>C&#43;&#43;17</li><li>FreeRTOS</li><li>FDCAN</li><li>MATLAB</li></ul>
+                <div class="project-record__links"><a class="text-link" href="https://github.com/NomadJoeviolet/Double7RArm" rel="noopener noreferrer">View code <span aria-hidden="true">↗</span></a><a class="text-link" href="https://github.com/NomadJoeviolet/Double7RArmSim" rel="noopener noreferrer">Kinematics reference <span aria-hidden="true">↗</span></a></div>
+            </div>
+        </article>
+    
+
+        </main><footer class="field-footer">
+    <div class="field-footer__inner">
+        <p><span aria-hidden="true">©</span> 2026 NomadJoe</p>
+    </div>
+</footer>
+<script id="field-notes-runtime-messages" type="application/json">{"archive":{"itemCount":{"one":"{count} note","other":"{count} notes"},"status":{"one":"{label}: {count} note","other":"{label}: {count} notes"}},"copy":{"failure":"Copy failed","idle":"Copy","label":"Copy code","success":"Copied"},"lightbox":{"close":"Close","dialogLabel":"Image preview","preview":"Preview image: {label}"},"search":{"count":{"one":"{count} result","other":"{count} results"},"error":"Search is temporarily unavailable","idle":"Search results","loading":"Searching…","untitled":"Untitled"},"theme":{"toDark":"Switch to dark color scheme","toLight":"Switch to light color scheme"},"video":{"clipSelected":"Selected video: {title}","playerFailed":"Video unavailable. Try another clip or open its direct link.","previewFailed":"Preview unavailable. Try again.","previewIdle":"Play preview","previewLabel":"Play preview: {title}, 10 seconds","previewLoading":"Loading preview…","previewPlaying":"Playing preview: {title}","previewStop":"Stop preview"}}</script>
+<script type="text/javascript" src="/ts/field-notes.5043a8681384a37e9e91ed49a90e638cb3eb804c1e987a03ca90821a20b48950.js" integrity="sha256-UEOoaBOEo36eke1JqQ5jjLPrgEwemHoDypCCGiC0iVA=" defer></script>
+
+
+</body>
+</html>
